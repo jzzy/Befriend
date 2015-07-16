@@ -15,6 +15,9 @@
 		</action>
 
 
+	<!-- 添加用户反馈 -->
+		<action name="webSaveFeedback" class="appupAction" method="webSaveFeedback">
+		</action>
 		<!-- 添加用户反馈 -->
 		<action name="SaveFeedback" class="appupAction" method="SaveFeedback">
 		</action>

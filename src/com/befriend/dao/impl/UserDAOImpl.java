@@ -148,13 +148,14 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int getUsertime(String timeq, String timeh) {
+	public List<User> getUsertime(String timeq, String timeh) {
 		Query query = entityManager
 				.createQuery("select u from User u where u.time>=:timeq and u.time<=:timeh  order"
 						+ " by u.time desc ");
 		query.setParameter("timeq", timeq);
 		query.setParameter("timeh", timeh);
-		return query.getResultList().size();
+		query.setMaxResults(200);
+		return query.getResultList();
 	}
 
 	@Override
@@ -476,6 +477,18 @@ public class UserDAOImpl implements UserDAO {
 		query.setParameter("os", os);
 		query.setParameter("province", province);
 		return query.getResultList();
+	}
+
+	@Override
+	public int getUsertimeCount(String timeq, String timeh) {
+		Query query = entityManager
+				.createQuery("select count(u) from User u where u.time>=:timeq and u.time<=:timeh  order"
+						+ " by u.time desc ");
+		query.setParameter("timeq", timeq);
+		query.setParameter("timeh", timeh);
+		
+		return (int)(long)query.getSingleResult();
+		
 	}
 
 	

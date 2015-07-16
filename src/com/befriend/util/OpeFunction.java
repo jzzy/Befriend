@@ -35,7 +35,7 @@ import com.opensymphony.xwork2.ActionContext;
 /**
  * π§æﬂ¿‡
  * 
- * @author Administrator
+ * @author gyn
  *
  */
 public class OpeFunction {

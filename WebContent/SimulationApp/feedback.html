@@ -9,11 +9,16 @@
 </head>
 
 <body class="bgcolor">
+<form action="webSaveFeedback" method="post">
 <div class="cont">
-<h1 class="tit tit5"><span class="fl">&lt; 反馈至家长天地</span><a href="set.html" class="fr"><img src="images/fanhui.png" width="25"></a></h1>
+<h1 class="tit tit5"><span class="fl"><a href="javascript:history.back(-1);" class="fr">&lt; 反馈至家长天地</a></span><a href="javascript:history.back(-1);" class="fr"><img src="images/fanhui.png" width="25"></a></h1>
+
+
+
+
 <div class="relycont relycont2">
-   <div><textarea>您的意见将改变我们的服务！</textarea></div>
-   <div class="fasong"><a class="btn03" data-toggle="modal" href="#forgetform"><input type="button" value="发送" /></a></div>
+   <div><textarea name="information"></textarea></div>
+   <div class="fasong"><!--  <a class="btn03" data-toggle="modal" href="#forgetform">--><input type="submit" value="发送" /><!--</a>--></div>
 </div>
 <!--recont-->
 <div class="modal" id="forgetform">
@@ -21,6 +26,7 @@
 	<h1>发送成功</h1>
     <div class="mocont"><p><img src="images/tt_03.jpg" /></p>感谢您的反馈，我们会做的更好！</div>
 </div>
+
 </div>
 <!--cont-->
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
@@ -41,7 +47,7 @@ $(document).ready(function(){
 	
 });
 </script>
- <br/><input type="button" name="Submit" onclick="javascript:history.back(-1);" value="返回">
 
+</form>
 </body>
 </html>

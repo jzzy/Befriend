@@ -14,7 +14,7 @@ public class ForumThree {
 
 
 	/**
-	 * 小板留言
+	 * 用户回复用户
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id

@@ -71,7 +71,8 @@ public interface UserDAO
 	//按省查询管理
 	public List<User> getUseradmin(String area);
 	//查询什么时间到什么时间注册的用户
-	public int getUsertime(String timeq,String timeh);
+	public List<User> getUsertime(String timeq,String timeh);
+	public int getUsertimeCount(String timeq,String timeh);
 	//查询全部用户
 	public List<User> getUserAll();
 	//查询全部用户

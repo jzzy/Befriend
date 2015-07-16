@@ -205,11 +205,11 @@ return true;
      
      
      <form action="webForumthreesappadd" method="post" >
-     <div class="hui">
+     <div  class="hui">
      
     
          <p class="htan"><span class="blue">
-         <a id="showtext<%=ri%><%=ft.getId() %><%=fa.get(a).getId() %>" onClick="showdiv('contentid<%=ri%><%=ft.getId() %><%=fa.get(a).getId() %>','showtext<%=ri%><%=ft.getId() %><%=fa.get(a).getId() %>')">
+         <a  onClick="showdiv('contentid<%=ri %><%=ft.getId() %><%=fa.get(a).getId() %>','showtext<%=ri %><%=ft.getId() %><%=fa.get(a).getId() %>')">
           <%=fua.get(a).getNickname() %>
           </a>
           
@@ -219,17 +219,18 @@ return true;
          
          
           <!-- 回复n楼的评论 下面的回复信息 -->
-        
-        <div class="pingnum pingnum2" id="contentid<%=ri%><%=ft.getId() %><%=fa.get(a).getId() %>" style="display: none">
+        </div>
+        <div id="contentid<%=ri %><%=ft.getId() %><%=fa.get(a).getId() %>"  class="pingnum pingnum2"  style="display: none">
 			<!-- 获取要回复的用户id -->
 			<input type="text" name="touserid" value="<%=fua.get(a).getId()%>" style="display: none""/>
 			<!-- 获取评论内容的id -->
 			<input type="text" name="forumtwoid" value="<%=ft.getId() %>" style="display: none""/>
 			<!-- 获取论坛的id -->
 			<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none""/>
-			<!-- 获取回复信息 -->
-  			<input type="text" class="shuru" id="reply" name="reply"  /><input class="btijiao2" type="submit"  value="回复<%=fua.get(a).getNickname() %>" />
+			<!-- 获取回复信息 -->			
+  			<input type="text" class="shuru" id="reply" name="reply"  /><input class="btijiao2" type="submit"  value="回复<%=fua.get(a).getNickname() %>" />		
 		</div>    
+		
 
 			
 </form>

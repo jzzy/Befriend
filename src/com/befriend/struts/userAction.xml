@@ -15,10 +15,7 @@
 		</action>
 		<!-- 同步账号 -->
 		<action name="synSave" class="userAction" method="synSave">
-		</action>
-		<!-- 同步资料 -->
-		<action name="synModification" class="userAction" method="synModification">
-		</action>
+		</action>		
 		<!-- sha1 -->
 		<action name="sha1" class="userAction" method="sha1">
 		</action>

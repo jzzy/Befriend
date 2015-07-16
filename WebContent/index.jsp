@@ -27,6 +27,8 @@
 	<hr></hr>
 	<a href="<%=request.getContextPath()%>/weiXniBDN">3.1微信新闻首页</a><br>
 	<a href="<%=request.getContextPath()%>/SimulationApp/login.html">3.2WEB用户登入</a><br>
+	<a href="<%=request.getContextPath()%>/webNewsA10">3.2.1WEB主页</a><br>
+	
 	<hr></hr>
 	<a href="<%=request.getContextPath()%>/weixin/Wonderful.html">3.3精彩互动</a><br>	
 	<a href="<%=request.getContextPath()%>/weixin/Local_info.html">3.4本地资讯</a><br>

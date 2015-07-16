@@ -697,11 +697,43 @@ public class ApputilAction {
 			f.setInformation(information);
 			f.setTime(OpeFunction.getNowTime());
 			audao.Save(f);
-			String Email = "781369549@qq.com";
+			String Email = "";
 			String sg = u.getPhone() + " 用户的反馈:" + information;
 			Email = "user@jiazhangtd.net";
 			OpeFunction.Email(Email, sg);
 			OpeFunction.Out().print(true);
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+		}
+	}
+	/**
+	 * 用户添加 反馈
+	 */
+	public void webSaveFeedback() {
+		try {
+
+			System.out.println("进入了  webSaveFeedback" + "," + username + ","
+					+ information);		
+			User u = userdao.byUsernameAccnumnoPhone(username);
+			if (u == null) {
+				
+				username="匿名用户";
+			}
+			Feedback f = new Feedback();
+			f.setUsername(username);
+			f.setInformation(information);
+			f.setTime(OpeFunction.getNowTime());
+			audao.Save(f);
+			if(u!=null){
+				username=u.getPhone();
+			}
+			String Email = "";
+			String sg = username+ " 用户的反馈:" + information;
+			Email = "user@jiazhangtd.net";
+			OpeFunction.Email(Email, sg);
+			
+			OpeFunction.Out().print("反馈成功");
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());
