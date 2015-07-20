@@ -731,9 +731,11 @@ public class ApputilAction {
 			String Email = "";
 			String sg = username+ " 用户的反馈:" + information;
 			Email = "user@jiazhangtd.net";
-			OpeFunction.Email(Email, sg);
-			
-			OpeFunction.Out().print("反馈成功");
+			//OpeFunction.Email(Email, sg);
+
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/webNewsA10");
+			//OpeFunction.Out().print("反馈成功");
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());

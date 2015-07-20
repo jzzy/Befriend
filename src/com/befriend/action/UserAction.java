@@ -2053,11 +2053,13 @@ public class UserAction {
 				u.setOs("syn");
 				u.setAccnumno(accnumno);				
 				u.setStage("Î´ÌîĞ´");
-				if (address == null) {
+				if (address == null||address.length()<2) {
 					u.setAddress("ºşÄÏ");
 				} else {
 					u.setAddress(address);
+					
 				}
+				
 				u.setAddcity(addcity);
 				u.setFinaltime(time);
 				u.setSchool("Î´ÌîĞ´");

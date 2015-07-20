@@ -702,6 +702,7 @@ public class NewsAction {
 	 * 
 	 */
 	public String weiXniBDN() throws IOException, InterruptedException {
+		/**
 		System.out.println("province" + province);
 		System.out.println("city" + city);
 		
@@ -736,7 +737,13 @@ public class NewsAction {
 
 		}
 
-		
+		*/
+		if(area==null){
+			area="ºþÄÏ";
+		}else{
+			area=area.substring(0, area.length()-1);
+			session.setAttribute("province", area);
+		}
 		nl = ndao.Hotarea(8, area);
 		request.setAttribute("nl", nl);
 		request.setAttribute("Address", area);

@@ -51,13 +51,15 @@ Object city=request.getAttribute("city");
    <%
    if(province==null||province.equals("省份名")){
    %>
+    <!--
    <h1 class="tit8"><span class="fl">本地新闻</span>
-   <span class="fr">湖南 常德<a href="<%=request.getContextPath()%>/weixin/change_city.html" title="切换城市">
+   
+   <span class="fr">湖南 常德<a href="<%=request.getContextPath()%>/weixin/change_city.html" title="切换城市"> 
    <img src="<%=request.getContextPath()%>/weixin/images/ez-switch-user.png" width="23">
    </a>
    </span>
    </h1>
-  
+  -->
    <%
    }else{
 	   
@@ -77,7 +79,7 @@ Object city=request.getAttribute("city");
 		   %>
 		    <h1 class="tit8"><span class="fl">本地新闻</span>
    <span class="fr"><%=province+""+city %><a href="<%=request.getContextPath()%>/weixin/change_city.html" title="切换城市">
-   <img src="<%=request.getContextPath()%>/weixin/images/ez-switch-user.png" width="23">
+   <!--  <img src="<%=request.getContextPath()%>/weixin/images/ez-switch-user.png" width="23">-->
    </a>
    </span>
    </h1>
@@ -147,7 +149,7 @@ Object city=request.getAttribute("city");
      <dl>
       <dt><a href="<%=request.getContextPath()%>/webWeiXinHotarea"><img src="<%=request.getContextPath()%>/weixin/images/xia.png" width="23"></a></dt>
       <dd><a href="<%=request.getContextPath()%>/webWeiXinHotarea">查看更多</a></dd>
-      <a  href="#getLocation">地理位置接口</a>
+      
     </dl>
   </div>
   <!--more4-->
