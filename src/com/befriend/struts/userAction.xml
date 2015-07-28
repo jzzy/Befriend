@@ -3,11 +3,19 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="User" extends="struts-default">
-
-
+<!-- 查看源码 -->	
+		<action name="source" class="userAction" >		
+			<result type="plainText">
+				<param name="charSet">utf-8</param>
+				<param name="location">/index.jsp</param>
+			</result>
+		</action>
+<!-- 同步用户登入 -->
+		<action name="bbtSave" class="userAction" method="bbtSave">
+		</action>
 		<!-- 查看统计信息 -->
 		<action name="ViewStatistics" class="userAction" method="ViewStatistics">
-		<result name="success">/SuperAdmin/AdminNews/ViewStatistics.jsp</result>
+		<result name="success">/SuperAdmin/AdminNews/Statis/ViewStatistics.jsp</result>
 		</action>
 		
 		<!-- 同步用户登入 -->
@@ -127,13 +135,13 @@
 		<!-- 按照时间查询用户 -->
 		<action name="GetUsertime" class="userAction" method="GetUsertime">
 			<!-- 查看用户信息-->
-			<result name="success">/SuperAdmin/AdminNews/users.jsp</result>
+			<result name="success">/SuperAdmin/AdminNews/news/users.jsp</result>
 		</action>	
 		
 		<!-- 查看全部用户-->
 		<action name="GetUserAll" class="userAction" method="GetUserAll">
 			<!-- 查看用户-->
-			<result name="success">/SuperAdmin/AdminNews/usera.jsp</result>
+			<result name="success">/SuperAdmin/AdminNews/news/usera.jsp</result>
 		</action>
 		
 		<!-- 客户端上传图片-->

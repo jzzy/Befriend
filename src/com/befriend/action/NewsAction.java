@@ -1943,7 +1943,7 @@ public class NewsAction {
 	 */
 	public void Rsave() throws IOException {
 		try {
-			username="gyn781369549";
+			//username="gyn781369549";
 			System.out.println("进入添加评论Rsave"+username);
 
 			

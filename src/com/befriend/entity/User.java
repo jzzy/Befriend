@@ -44,6 +44,8 @@ public class User implements Serializable
 	private String addcity;
 	@Column(name="phone")//电话
 	private String phone;
+	@Column(name="lookphone")//电话
+	private String lookphone;
 	@Column(name="school")//学校
 	private String school;
 	
@@ -55,6 +57,12 @@ public class User implements Serializable
 	@Column(name="loginnum")//用户登入次数
 	private int loginnum;
 	
+	public String getLookphone() {
+		return lookphone;
+	}
+	public void setLookphone(String lookphone) {
+		this.lookphone = lookphone;
+	}
 	@Column(name="finaltime")//用户最后登入时间
 	private String finaltime;
 	@Column(name="ip")//用户ip

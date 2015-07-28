@@ -32,6 +32,14 @@
 	<hr></hr>
 	<a href="<%=request.getContextPath()%>/weixin/Wonderful.html">3.3精彩互动</a><br>	
 	<a href="<%=request.getContextPath()%>/weixin/Local_info.html">3.4本地资讯</a><br>
+	<hr></hr>
+	<a href="<%=request.getContextPath()%>/SimulationApp/laigao/laigao.html">家长投稿</a><br>
+	
+	<a href="<%=request.getContextPath()%>/SimulationApp/laigao/erro.html">没有搜索到</a><br>
+	<a href="<%=request.getContextPath()%>/selectwxHouseallzh">搜索</a><br>
+	<a href="<%=request.getContextPath()%>/source">查看源码</a><br>
+	
+	
 </div>
 
 

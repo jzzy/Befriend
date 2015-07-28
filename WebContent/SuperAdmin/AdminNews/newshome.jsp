@@ -20,10 +20,15 @@ if(admin==null){
 	当前那用户是:<%=admin.getAdmin()%><br>
 	<br>
 	<a href="<%=request.getContextPath()%>/GetUserAll">查看用户信息</a><br>
-	<a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/ViewStatistics">查询统计信息</a><br>
+	<a href="<%=request.getContextPath()%>/ViewStatistics">查询统计信息</a><br>
 	<a href="<%=request.getContextPath()%>/Newsget">管理新闻</a><br>
 	<a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/kindeditor/jsp/AU.jsp">八大类新闻上传</a><br>
 	<a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/kindeditor/jsp/AUB.jsp">本地新闻上传</a><br>
+	<a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/house/SaveHouse.jsp">学区房上传</a><br>
+<a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/house/selectHouse">查看学区房</a><br>
+<a href="<%=request.getContextPath()%>/selectjzfk">查看家长反馈</a><br>
+<a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/ParentsLetter/SavePL.jsp">添加家长来稿</a><br>
+<a href="<%=request.getContextPath()%>/selectParentsLetter">查看家长来稿</a><br>
 
 </body>
 </html>

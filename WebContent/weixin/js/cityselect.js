@@ -59,4 +59,3 @@ length = loca3.length;
 for(l=0;l<length;l++) { options[l].text = loca3[l]; options[l].value = loca3[l]; }
 options[selectedIndex].text = loca3[0]; options[selectedIndex].value = loca3[0];
 }} //欢迎来到站长特效网，我们的网址是www.zzjs.net，很好记，zz站长，js就是js特效，本站收集大量高质量js代码，还有许多广告代码下载。
--->

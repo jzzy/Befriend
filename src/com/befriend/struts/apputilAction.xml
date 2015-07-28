@@ -2,8 +2,94 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="appp" extends="struts-default">
-
+	<package name="appp" extends="struts-default" >
+	
+	<!-- app端学区房前 -->
+		<action name="appSelectHouseallZh" class="appupAction" method="appSelectHouseallZh">
+			
+		
+		</action>
+	<!-- app添加家长来稿 -->
+		<action name="appSavePL" class="appupAction" method="appSavePL">
+			
+		
+		</action>
+	<!-- app搜索学区房 -->
+		<action name="appselectHouseall" class="appupAction" method="appselectHouseall">
+			
+		
+		</action>
+	<!-- 最火的学区房 -->
+		<action name="selectwxHouseallzh" class="appupAction" method="selectwxHouseallzh">
+			<result  name="success">/SimulationApp/laigao/sousou.jsp</result>
+		
+		</action>
+	<!-- 通过id删除家长来信 -->
+		<action name="RemoveParentsLetterone" class="appupAction" method="RemoveParentsLetterone">
+			
+		</action>
+	<!-- 通过id查看家长来信 -->
+		<action name="selectParentsLetterone" class="appupAction" method="selectParentsLetterone">
+			<result name="success">/SuperAdmin/AdminNews/ParentsLetter/selectPlone.jsp</result>
+		
+		</action>
+	<!-- 查看家长来信 -->
+		<action name="selectParentsLetter" class="appupAction" method="selectParentsLetter">
+			<result name="success">/SuperAdmin/AdminNews/ParentsLetter/selectpl.jsp</result>
+		
+		</action>
+		<!--web 添加家长来信 -->
+		<action name="SaveParentsL" class="appupAction" method="SaveParentsL">
+			
+		
+		</action>
+		<!-- 后台添加家长来信 -->
+		<action name="SaveParentsLetter" class="appupAction" method="SaveParentsLetter">
+			<result name="success">/SuperAdmin/AdminNews/ParentsLetter/SavePL.jsp</result>
+		
+		</action>
+	<!-- 删除家长反馈 -->
+		<action name="Removejzfkid" class="appupAction" method="Removejzfkid">
+		
+		</action>
+	<!-- 查看家长反馈 -->
+		<action name="selectjzfkid" class="appupAction" method="selectjzfkid">
+			<result name="success">/SuperAdmin/AdminNews/Feedback/selectFlone.jsp</result>
+		</action>
+	<!-- 查看家长反馈 -->
+		<action name="selectjzfk" class="appupAction" method="selectjzfk">
+			<result name="success">/SuperAdmin/AdminNews/Feedback/selectFl.jsp</result>
+		</action>
+		<!--web 搜所学区房 -->
+		<action name="selectwxHouseall" class="appupAction" method="selectwxHouseall">
+			<result name="success">/SimulationApp/laigao/right.jsp</result>
+			
+		</action>
+	<!-- 搜所学区房 -->
+		<action name="selectHouseall" class="appupAction" method="selectHouseall">
+			<result name="success">/SuperAdmin/AdminNews/house/selectLikeHouse.jsp</result>
+		</action>
+<!-- 查看学区房 -->
+		<action name="selectHousenoe" class="appupAction" method="selectHousenoe">
+			<result name="success">/SuperAdmin/AdminNews/house/UpHouse.jsp</result>
+		</action>
+<!-- 更新学区房 -->
+		<action name="upHouse" class="appupAction" method="upHouse">
+			<result name="success">/SuperAdmin/AdminNews/house/UpHouse.jsp</result>
+		</action>
+<!-- 删除学区房 -->
+		<action name="RemovetHouse" class="appupAction" method="RemovetHouse">
+			
+		</action>
+<!-- 分页查看学区房 -->
+		<action name="selectHouse" class="appupAction" method="selectHouse">
+			<result name="success">/SuperAdmin/AdminNews/house/selectHouse.jsp</result>
+		</action>
+	<!--添加学区房 -->
+		<action name="Addschooldistrict" class="appupAction" method="Addschooldistrict">
+			<result name="success">/SuperAdmin/AdminNews/house/SaveHouse.jsp</result>
+			
+		</action>
 		<!-- 统计 -->
 		<action name="aStas" class="appupAction" method="aStas">
 		</action>

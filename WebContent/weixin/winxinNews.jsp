@@ -34,7 +34,7 @@ if(nl.size()<8||nj.size()<2){
    <div class="address"><span class="currad"><%=Address %></span><a href="#">[切换城市]</a></div>
    <!--nav-->
    <!-- <a href="news_more.html" class="more">></a> -->
-   <h1 class="tit"><span>本地新闻</span></h1>
+   <h1 class="tit"><span>本地资讯</span></h1>
    <div  id="slideBox"  class="slideBox">
 			  <div  class="bd">
 					<div  class="tempWrap"  style="overflow:hidden; position:relative;">

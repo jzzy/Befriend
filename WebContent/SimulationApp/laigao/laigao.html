@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>家长来稿</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript"> 
+function check()
+{
+   
+	  var content = document.getElementById("content").value;
+	  var title = document.getElementById("title").value;
+	
+	  if (title==""||title==null||title.length>30||title.length<2){
+  		alert("请正确填写标题 2字以上30字之间！");
+  		return false;
+		}
+	  
+	  if (content==""||content==null||content.length<10){
+    		alert("请正确填写内容 10字以上");
+    		return false;
+    	}
+	  
+	  alert("投稿成功");
+	  return true;
+}
+
+
+
+
+</script> 
+</head>
+
+<body>
+
+<div class="cont">
+<h1 class="tit tit5"><span class="fl"><a style="float:left;" href="javascript:history.back(-1);">&lt; 家长来稿</a></span>
+<!-- 
+<a href="set.html" class="fr"><img src="images/fanhui.png" width="25"></a>
+ -->
+</h1>
+<div class="shangchuan">
+  <p class="stit">上传图片</p>
+  <p>请提供一张不小于720*360像素的图片<br />大小不超过2MB</p>
+  <div class="sv">
+  <script> 
+function setImagePreview() { 
+var docObj=document.getElementById("doc"); 
+var imgObjPreview=document.getElementById("preview"); 
+if(docObj.files && docObj.files[0]){ 
+//火狐下，直接设img属性 
+imgObjPreview.style.display = 'block'; 
+imgObjPreview.style.width = '300px'; 
+imgObjPreview.style.height = '120px'; 
+//imgObjPreview.src = docObj.files[0].getAsDataURL(); 
+//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式 
+if (window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1) { 
+imgObjPreview.src = window.webkitURL.createObjectURL(docObj.files[0]); 
+} 
+else { 
+imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]); 
+} 
+//imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]); 
+
+}else{ 
+//IE下，使用滤镜 
+docObj.select(); 
+var imgSrc = document.selection.createRange().text; 
+var localImagId = document.getElementById("localImag"); 
+//必须设置初始大小 
+localImagId.style.width = "250px"; 
+localImagId.style.height = "200px"; 
+//图片异常的捕捉，防止用户修改后缀来伪造图片 
+try{ 
+localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+locem("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc; 
+}catch(e){ 
+alert("您上传的图片格式不正确，请重新选择!"); 
+return false; 
+} 
+localImagId.style.display = 'block'; 
+imgObjPreview.style.display = 'none'; 
+document.selection.empty(); 
+} 
+return true; 
+} 
+
+function fn_browse() 
+{ 
+document.form1.imgFile.click(); 
+} 
+</script> 
+
+<p><div id="localImag"><img src="images/sc.jpg" id="preview" onclick="javascript:document.form1.imgFile.click();"  /></div></p>
+
+ <form id="form1" name="form1" method="post" action="SaveParentsL"  enctype="multipart/form-data"  onsubmit="alert(document.test_form.browse.value);">
+<input type=file name="imgFile" id="doc" style="display:none;" onchange="javascript:setImagePreview();">
+</div>
+</div>
+
+
+
+<!--shangchuan-->
+<div class="biaoti2">
+    <p class="stit">标题：</p>
+    <div class="biaoticont">
+    <textarea style="width: 200px;height: 50px" id ="title"name="title"></textarea>
+   </div>
+</div>
+<!--biaoti2-->
+<div class="relycont relycont2" style="margin-bottom:20px;">
+   <p class="stit">内容：</p>
+   <div><textarea id="content"
+   name="content"
+   ></textarea></div>
+</div>
+<!--recont-->
+<div class="dmyGD"><table width="100%" height="36" border="0" align="center" cellpadding="0" cellspacing="0" id="Table_01">
+<tr>
+<td width="100%" height="36" valign="bottom"><input onclick="return check();" type="submit" value="立即投稿" class="tougao" /></td>
+</tr>
+</table>
+</div>
+<!--cont-->
+
+</form>
+</body>
+</html>

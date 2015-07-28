@@ -27,7 +27,7 @@ if(nl==null||currentPage<=0){
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>本地新闻</title>
+<title>本地资讯</title>
 <link href="SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="SimulationApp/js/jquery-1.2.6.pack.js"></script>
 

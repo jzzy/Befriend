@@ -12,6 +12,8 @@ import com.befriend.dao.ApputilDAO;
 import com.befriend.entity.Admin;
 import com.befriend.entity.AppUp;
 import com.befriend.entity.Feedback;
+import com.befriend.entity.House;
+import com.befriend.entity.ParentsLetter;
 import com.befriend.entity.Stas;
 import com.befriend.entity.User;
 import com.befriend.entity.Visitor;
@@ -40,8 +42,8 @@ public class ApputilDAOImpl implements ApputilDAO {
 	}
 
 	@Override
-	public List<Feedback> All() {
-		Query query = entityManager.createQuery("select u from Feedback u"
+	public List<Feedback> FeedbackAll() {
+		Query query = entityManager.createQuery("select u from Feedback u "
 				+ "order by u.time desc ");
 
 		return query.getResultList();
@@ -216,6 +218,159 @@ public class ApputilDAOImpl implements ApputilDAO {
 		//query.setMaxResults(7);
 		
 		return query.getResultList();
+	}
+
+	@Override
+	public void Save(House house) {
+		// TODO Auto-generated method stub\
+		entityManager.persist(house);
+		
+	}
+
+	@Override
+	public void Update(House house) {
+		// TODO Auto-generated method stub
+		entityManager.merge(house);
+		
+	}
+
+	@Override
+	public House byid(int id) {
+		Query query = entityManager
+				.createQuery("select u from House u where u.id=:id");
+		query.setParameter("id", id);
+		List<House> hou=query.getResultList();
+		if(hou.size()>0){
+			return hou.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public void Remove(House house) {
+		// TODO Auto-generated method stub
+		entityManager.remove(house);
+	}
+
+	@Override
+	public List<House> bylikeshoolname(String schoolname) {
+		Query query = entityManager
+				.createQuery("select u from House u where u.schoolname like :schoolname or u.property like :schoolname order by u.time");
+		query.setParameter("schoolname","%"+schoolname+"%");
+		query.setMaxResults(20);
+		
+		return query.getResultList();
+	}
+
+	
+
+	@Override
+	public List<House> HouseAll(int currentPage, int pageSize) {
+		Query query = entityManager
+				.createQuery("select u from House u  order by u.time desc");
+		
+		int startRow = (currentPage-1)*pageSize;
+		if(startRow<0){
+			startRow=0;
+		}
+		//第几页
+		query.setFirstResult(startRow);
+		//每页显示几条数据
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public int HouseAll() {
+		Query query = entityManager.createQuery("select count(u) from House u");
+		//int count = new Long((long)query.getSingleResult()).intValue();
+		int count =(int)(long)query.getSingleResult();
+		return count;
+	}
+
+	@Override
+	public void Remove(Feedback f) {
+		// TODO Auto-generated method stub
+		entityManager.remove(f);
+	}
+
+	@Override
+	public Feedback FeedbackByid(int id) {
+		Query query = entityManager.createQuery("select u from Feedback u "
+				+ "where u.id=:id");
+				query.setParameter("id", id);
+				query.setMaxResults(1);
+		List<Feedback> fl= query.getResultList();
+		if(fl.size()>0){
+			
+			return fl.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public void Save(ParentsLetter ParentsLetter) {
+		// TODO Auto-generated method stub
+		entityManager.persist(ParentsLetter);
+	}
+
+	@Override
+	public void Update(ParentsLetter ParentsLetter) {
+		// TODO Auto-generated method stub
+		entityManager.merge(ParentsLetter);
+		
+	}
+
+	@Override
+	public ParentsLetter Plbyid(int id) {
+		Query query = entityManager.createQuery("select u from ParentsLetter u "
+				+ "where u.id=:id");
+				query.setParameter("id", id);
+				query.setMaxResults(1);
+		List<ParentsLetter> fl= query.getResultList();
+		if(fl.size()>0){
+			
+			return fl.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public List<ParentsLetter> PlAll() {
+		Query query = entityManager.createQuery("select u from ParentsLetter u order by u.time desc");
+				
+				
+		return query.getResultList();
+		
+	}
+
+	@Override
+	public void Remove(ParentsLetter p) {
+		// TODO Auto-generated method stub
+		entityManager.remove(p);
+	}
+
+	@Override
+	public List<House> HouseZh(int num) {
+		Query query = entityManager
+				.createQuery("select u from House u  order by u.count desc");
+		
+		
+		query.setMaxResults(num);
+		return query.getResultList();
+	}
+
+	@Override
+	public House byshoolname(String schoolname) {
+		Query query = entityManager
+				.createQuery("select u from House u where u.schoolname like :schoolname or u.property like :schoolname order by u.time");
+		query.setParameter("schoolname","%"+schoolname+"%");
+		query.setMaxResults(1);
+		List<House> hl=query.getResultList();
+		if(hl.size()>0){
+			return hl.get(0);
+		}
+		return null;
 	}
 
 	

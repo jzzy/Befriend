@@ -1,107 +1,571 @@
 package com.befriend.action;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.Session;
 
 import com.befriend.dao.AppDAO;
 import com.befriend.dao.ApputilDAO;
 import com.befriend.dao.UserDAO;
+import com.befriend.entity.Admin;
 import com.befriend.entity.App;
 import com.befriend.entity.AppUp;
 import com.befriend.entity.Feedback;
+import com.befriend.entity.House;
+import com.befriend.entity.ParentsLetter;
 import com.befriend.entity.Stas;
 import com.befriend.entity.User;
 import com.befriend.entity.Visitor;
+import com.befriend.util.Message;
 import com.befriend.util.OpeFunction;
 import com.befriend.wechat.WechatKit;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 
 public class ApputilAction {
-	public OpeFunction util;// ������
+	public OpeFunction util;// 锟斤拷锟斤拷锟斤拷
 	private ApputilDAO audao;// ApputilDAO
-	private UserDAO userdao;// �û�dao
+	private UserDAO userdao;// 锟矫伙拷dao
 	private AppDAO adao;// appdao
-	private String username;// �û���
+	private String username;// 锟矫伙拷锟斤拷
 	private String information;//
 
-	private File imgFile;// logoͼƬ
-	private String imgFileFileName;// �ļ���
-	private String imgFileContentType;// �ļ�����
+	private File imgFile;// logo图片
+	private File xlsxFile;// xlsx锟侥硷拷
+	
+	private String xlsxFileFileName;// 锟侥硷拷锟斤拷
+	private String imgFileFileName;// 锟侥硷拷锟斤拷
+	private String imgFileContentType;// 锟侥硷拷锟斤拷锟斤拷
 
-	private File imgFile1;// Ӧ�ý�ͼ1
-	private String imgFile1FileName;// �ļ���
-	private String imgFile1ContentType;// �ļ�����
+	private File imgFile1;// 应锟矫斤拷图1
+	private String imgFile1FileName;// 锟侥硷拷锟斤拷
+	private String imgFile1ContentType;// 锟侥硷拷锟斤拷锟斤拷
 
-	private File imgFile2;// Ӧ�ý�ͼ2
-	private String imgFile2FileName;// �ļ���
-	private String imgFile2ContentType;// �ļ�����
+	private File imgFile2;// 应锟矫斤拷图2
+	private String imgFile2FileName;// 锟侥硷拷锟斤拷
+	private String imgFile2ContentType;// 锟侥硷拷锟斤拷锟斤拷
 
-	private File imgFile3;// Ӧ�ý�ͼ3
-	private String imgFile3FileName;// �ļ���
-	private String imgFile3ContentType;// �ļ�����
+	private File imgFile3;// 应锟矫斤拷图3
+	private String imgFile3FileName;// 锟侥硷拷锟斤拷
+	private String imgFile3ContentType;// 锟侥硷拷锟斤拷锟斤拷
 
-	private String savePath;// Ŀ¼
+	private String savePath;// 目录
 
-	private File appFile;// app�ļ�
-	private String appFileFileName;// �ļ���
-	private String appFileContentType;// �ļ�����
+	private File appFile;// app锟侥硷拷
+	private String appFileFileName;// 锟侥硷拷锟斤拷
+	private String appFileContentType;// 锟侥硷拷锟斤拷锟斤拷
 
-	private String vnum;// app�汾��
-	private String type;// app���
-	private String dpt;// Ӧ������
-	private String summary;// Ӧ�ø�Ҫ
+	private String vnum;// app锟芥本锟斤拷
+	private String type;// app锟斤拷锟�
+	private String dpt;// 应锟斤拷锟斤拷锟斤拷
+	private String summary;// 应锟矫革拷要
 
-	private String name;// app����
-	private int num = 0;// app�Ƽ�ָ��
+	private String name;// app锟斤拷锟斤拷
+	private int num = 0;// app锟狡硷拷指锟斤拷
 
-	private int currentPage = 1;// ҳ��
+	private int currentPage = 1;// 页锟斤拷
 	private int id = 0;// id
-	private int pageSize = 4;// ����
+	private int pageSize = 4;// 锟斤拷锟斤拷
 
-	private int downloads = 0;// app���ش���
+	private int downloads = 0;// app锟斤拷锟截达拷锟斤拷
 
-	private int apptv = 0;// �汾��
-	private String updates;// ��������
+	private int apptv = 0;// 锟芥本锟斤拷
+	private String updates;// 锟斤拷锟斤拷锟斤拷锟斤拷
 
-	AppUp au = new AppUp();// appupʵ���� �ҳ�֮�Ѹ����õ���
-	App app = new App();// appʵ����
-	Visitor vor = new Visitor();// �ο���
-	public HttpServletRequest request = ServletActionContext.getRequest();// ��ȡrequest
+	AppUp au = new AppUp();// appup实锟斤拷锟斤拷 锟揭筹拷之锟窖革拷锟斤拷锟矫碉拷锟斤拷
+	App app = new App();// app实锟斤拷锟斤拷
+	Visitor vor = new Visitor();// 锟轿匡拷锟斤拷
+	public HttpServletRequest request = ServletActionContext.getRequest();// 锟斤拷取request
 	private String Mac;//
-	private String os;// ϵͳ
+	private String os;// 系统
 	private String time = util.getNowTime();
-	private String province = "all";// ʡ��
-	private int synlogin;// �������
-	private int downloaded;// ���ش���
-	private int usersyned;// ͬʱ������
-	private int vored;// ���������ο���
-	private int usersaved;// ����ע������
-
-	// ����ע������
+	private String province = "all";// 省锟斤拷
+	private int synlogin;// 锟斤拷锟斤拷锟斤拷锟�
+	private int downloaded;// 锟斤拷锟截达拷锟斤拷
+	private int usersyned;// 同时锟斤拷锟斤拷锟斤拷
+	private int vored;// 锟斤拷锟斤拷锟斤拷锟斤拷锟轿匡拷锟斤拷
+	private int usersaved;// 锟斤拷锟斤拷注锟斤拷锟斤拷锟斤拷
+	private String schoolname;// 学校锟斤拷锟斤拷
+	private String address;// 学校锟斤拷址
+	private String scope;// 锟斤拷锟斤拷围
+	private String property;// 楼锟斤拷
+	private String content;//锟斤拷锟斤拷
+	private String img;//图片
+	private String title;//锟斤拷锟斤拷
+	HttpSession session = ServletActionContext.getRequest().getSession();
 	/**
-	 * ��¼ͳ�Ʊ仯 ��ʼ��
+	 * 通锟斤拷id删锟斤拷锟揭筹拷锟斤拷锟斤拷
+	 */
+	public void RemoveParentsLetterone() throws IOException {
+		ParentsLetter p=audao.Plbyid(id);
+		if(p!=null){
+		audao.Remove(p);
+		}
+		((HttpServletResponse) util.response()).sendRedirect(request
+				.getContextPath() + "/selectParentsLetter");
+		
+	}
+	/**
+	 * 通锟斤拷id锟介看锟揭筹拷锟斤拷锟斤拷
+	 */
+	public String selectParentsLetterone() throws IOException {
+		ParentsLetter p=audao.Plbyid(id);
+		request.setAttribute("p", p);
+		return Action.SUCCESS;
+		
+	}
+	/**
+	 * 锟介看锟揭筹拷锟斤拷锟斤拷
+	 */
+	public String selectParentsLetter() throws IOException {
+		List<ParentsLetter> pl=audao.PlAll();
+		request.setAttribute("pl", pl);
+		return Action.SUCCESS;
+		
+	}
+	/**
+	 * 锟斤拷台 锟斤拷蛹页锟斤拷锟斤拷锟�
+	 */
+	public String SaveParentsLetter() throws IOException {
+		System.out.println("SaveParentsLetter");
+		ParentsLetter p=new ParentsLetter();
+		p.setContent(content);
+		String path="/ParentsLetter/img";
+		if(imgFile!=null){
+			img=util.ufileToServer(path, imgFile, "", "jpg", true);
+			p.setImg(img);
+		}
+		
+		p.setTitle(title);
+		p.setTime(time);
+		audao.Save(p);
+		return Action.SUCCESS;
+	}
+	public void appSavePL() throws IOException {
+		ParentsLetter p=new ParentsLetter();
+		Message mge=new Message();
+		if(util.isEmpty(content)||util.isEmpty(title)){
+			mge.setCode(mge.NULL);
+			mge.setStatement("图片或者标题为空!");
+			util.Out().print(util.ToJson(mge));
+			return;
+		}
+		p.setContent(content);
+		String path="/ParentsLetter/img";
+		System.out.println("imgFile-"+imgFile);
+		if(imgFile!=null){
+			img=util.ufileToServer(path, imgFile, "", "jpg", true);
+			p.setImg(img);
+		}else{
+			System.out.println("imgFile-null");
+		}
+		
+		p.setTitle(title);
+		p.setTime(time);
+		audao.Save(p);
+		
+		mge.setCode(mge.SUCCESS);
+		mge.setStatement("成功!");
+		mge.setContent("true");
+		util.Out().print(util.ToJson(mge));
+		
+	}
+	/**
+	 * web 锟斤拷蛹页锟斤拷锟斤拷锟�
+	 */
+	public void SaveParentsL() throws IOException {
+		ParentsLetter p=new ParentsLetter();
+		p.setContent(content);
+		String path="/ParentsLetter/img";
+		if(imgFile!=null){
+			/**
+			BufferedImage sourceImg = ImageIO
+					.read(new FileInputStream(imgFile));
+			if (sourceImg.getWidth() < 720 || sourceImg.getHeight() <360) {
+				util.Out().print("图片锟竭达拷锟斤拷要锟斤拷锟斤拷720*360 锟斤拷锟斤拷锟斤拷锟铰硷拷锟斤拷拢锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷裕锟�");
+				return ;
+			}
+			float fimg = util.fileSize(imgFile);
+			if (fimg > 2048.00) {
+				util.Out().print("锟斤拷图片锟斤拷要锟斤拷小为 2MB 锟斤拷锟铰ｏ拷锟斤拷锟斤拷锟斤拷锟铰硷拷锟斤拷拢锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷裕锟�");
+				return ;
+			}
+			*/
+			
+			img=util.ufileToServer(path, imgFile, "", "jpg", true);
+			p.setImg(img);
+		}
+		
+		p.setTitle(title);
+		p.setTime(time);
+		audao.Save(p);
+		//util.outjS("/Befriend/webNewsA10","Thank you!");
+		((HttpServletResponse) util.response()).sendRedirect(request
+				.getContextPath() + "/webNewsA10");
+		return ;
+	}
+	
+	/**
+	 * 通锟斤拷id删锟斤拷锟揭筹拷锟斤拷锟斤拷锟斤拷息
+	 */
+	public void Removejzfkid() throws IOException {
+		Feedback f=audao.FeedbackByid(id);
+		if(f!=null){
+		audao.Remove(f);
+		}
+		((HttpServletResponse) util.response()).sendRedirect(request
+				.getContextPath() + "/selectjzfk");
+		
+		
+	}
+	/**
+	 * 通锟斤拷id锟介看锟揭筹拷锟斤拷锟斤拷锟斤拷息
+	 */
+	public String selectjzfkid() throws IOException {
+		Feedback f=audao.FeedbackByid(id);
+		request.setAttribute("f", f);
+		return Action.SUCCESS;
+		
+	}
+	/**
+	 * 锟介看锟揭筹拷锟斤拷锟斤拷锟斤拷息
+	 */
+	public String selectjzfk() throws IOException {
+		List<Feedback> fl=audao.FeedbackAll();
+		request.setAttribute("fl", fl);
+		return Action.SUCCESS;
+		
+	}
+	/**
+	 * web模锟斤拷锟斤拷询学锟斤拷锟斤拷锟斤拷息
+	 */
+	public String selectwxHouseallzh() throws IOException {
+		System.out.println("selectwxHouseallzhh");
+		
+		List<House> hl=audao.HouseZh(6);
+		
+		for(int i=0;i<hl.size();i++){
+			House h=hl.get(i);
+			h.setCount((h.getCount()+1));
+			audao.Update(h);
+			
+		}
+		System.out.println("锟斤拷:"+hl.size());
+		request.setAttribute("hl", hl);
+		
+		return Action.SUCCESS;
+		
+	}
+	/**
+	 * 
+	 */
+	public void appSelectHouseallZh() throws IOException {
+		System.out.println("appSelectHouseallZh"+num);
+		if(num<=0){
+			num=6;
+		}
+		List<House> hl=audao.HouseZh(num);
+		
+		for(int i=0;i<hl.size();i++){
+			House h=hl.get(i);
+			h.setCount((h.getCount()+1));
+			audao.Update(h);
+			
+		}
+		util.Out().print(util.ToJson(hl));
+		
+		
+	}
+	/**
+	 * web模锟斤拷锟斤拷询学锟斤拷锟斤拷锟斤拷息
+	 */
+	public String selectwxHouseall() throws IOException {
+		
+		if(util.isEmpty(schoolname)){
+			System.out.println("schoolname锟角空碉拷");
+		}
+		List<House> hl=audao.bylikeshoolname(schoolname);
+		
+		for(int i=0;i<hl.size();i++){
+			House h=hl.get(i);
+			h.setCount((h.getCount()+1));
+			audao.Update(h);
+			
+		}
+		request.setAttribute("hl", hl);
+		request.setAttribute("name", schoolname);
+		return Action.SUCCESS;
+		
+	}
+	/**
+	 * app模锟斤拷锟斤拷询学锟斤拷锟斤拷锟斤拷息
+	 */
+	public void appselectHouseall() throws IOException {
+		System.out.println("schoolname锟斤拷:"+schoolname);	
+		Message mge=new Message();
+		if(util.isEmpty(schoolname)){
+			mge.setCode(mge.NULL);
+			mge.setStatement("锟斤拷锟斤拷锟斤拷锟斤拷为锟斤拷");
+			util.Out().print(util.ToJson(mge));
+			return;
+		}
+		List<House> hl=audao.bylikeshoolname(schoolname);
+		
+		for(int i=0;i<hl.size();i++){
+			House h=hl.get(i);
+			h.setCount((h.getCount()+1));
+			audao.Update(h);
+			
+		}
+		mge.setCode(mge.SUCCESS);
+		mge.setContent(hl);
+		mge.setStatement("锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷");
+		util.Out().print(util.ToJson(mge));
+		
+	}
+	/**
+	 * 锟斤拷台模锟斤拷锟斤拷询学锟斤拷锟斤拷锟斤拷息
+	 */
+	public String selectHouseall() throws IOException {
+		System.out.println("schoolname锟斤拷:"+schoolname);	
+		if(util.isEmpty(schoolname)){
+			System.out.println("schoolname锟秸碉拷");
+			return Action.SUCCESS;
+		}
+		List<House> hl=audao.bylikeshoolname(schoolname);
+		
+		for(int i=0;i<hl.size();i++){
+			House h=hl.get(i);
+			h.setCount((h.getCount()+1));
+			audao.Update(h);
+			
+		}
+		request.setAttribute("hl", hl);
+		return Action.SUCCESS;
+		
+	}
+	/**
+	 * 学锟斤拷锟斤拷锟斤拷息锟睫革拷
+	 */
+	public String upHouse() throws IOException {
+		House house=audao.byid(id);
+		System.out.println("锟斤拷锟斤拷upHouse"+id);
+		if(house!=null){
+			house.setAddress(address);
+			house.setProperty(property);
+			house.setSchoolname(schoolname);
+			house.setScope(scope);
+			house.setTime(time);
+			audao.Update(house);
+			System.out.println("锟睫改成癸拷");
+			request.setAttribute("h", house);
+			request.setAttribute("hh", "锟睫改成癸拷!");
+			return Action.SUCCESS;
+		}
+		System.out.println("为锟斤拷!");
+		return null;
+	}
+	/**
+	 * 锟介看学锟斤拷锟斤拷锟斤拷息
+	 */
+	public String selectHousenoe() throws IOException {
+		House house=audao.byid(id);
+		System.out.println("锟斤拷锟斤拷selectHousenoe");
+		if(house!=null){
+			request.setAttribute("h", house);
+			return Action.SUCCESS;
+		}
+		return null;
+	}
+	/**
+	 * 锟斤拷台删锟斤拷学锟斤拷锟斤拷
+	 * @throws IOException 
+	 */
+	public void RemovetHouse() throws IOException {
+		House house=audao.byid(id);
+		System.out.println("锟斤拷锟斤拷RemovetHouse");
+		if(house!=null){
+		audao.Remove(house);
+		System.out.println("删锟斤拷锟斤拷house");
+		}
+		((HttpServletResponse) util.response()).sendRedirect(request
+				.getContextPath() + "/selectHouse?currentPage="+currentPage);
+		
+		
+
+	}
+
+	/**
+	 * 锟斤拷台锟斤拷页锟介看学锟斤拷锟斤拷
+	 */
+	public String selectHouse() {
+		pageSize = 20;
+		if (currentPage <= 0) {
+			currentPage = 1;
+		}
+
+		int n = audao.HouseAll();
+		if (n % 20 == 0) {
+			n = n / 20;
+		} else {
+			n = n / 20 + 1;
+		}
+		if (currentPage > n) {
+			currentPage = n;
+		}
+		List<House> hl = audao.HouseAll(currentPage, pageSize);
+		request.setAttribute("n", n);
+		request.setAttribute("hl", hl);
+		request.setAttribute("currentPage", currentPage);
+		return Action.SUCCESS;
+
+	}
+
+	/**
+	 * 锟斤拷锟窖э拷锟斤拷锟�
+	 * 
+	 * @throws IOException
+	 * @throws InvalidFormatException 
+	 */
+	public String Addschooldistrict() throws IOException, InvalidFormatException {
+		System.out.println("锟斤拷锟斤拷锟斤拷锟窖э拷锟斤拷锟�");
+		Admin admin = (Admin) session.getAttribute("admin");
+		if (admin == null) {
+			util.Out().print("没锟叫碉拷锟斤拷");
+			return null;
+		}
+		
+		if(xlsxFile!=null){
+			System.out.println("xlsxFileFileName锟斤拷:"+xlsxFileFileName);
+			
+			XSSFWorkbook xssfWorkbook = new XSSFWorkbook(xlsxFile);
+
+			// 循锟斤拷锟斤拷锟斤拷锟斤拷Sheet
+			for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
+				XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
+				if (xssfSheet == null) {
+					continue;
+				}
+				
+				// 循锟斤拷锟斤拷Row
+				for (int rowNum = 0; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
+					XSSFRow xssfRow = xssfSheet.getRow(rowNum);
+					if (xssfRow == null) {
+						continue;
+					}
+					//锟斤拷一锟轿诧拷锟斤拷 锟角憋拷锟斤拷
+					if(rowNum<1){
+						//System.out.println("锟叫ｏ拷"+xssfRow.getCell(0));
+						System.out.println("学校锟斤拷锟狡ｏ拷"+xssfRow.getCell(1));
+						System.out.println("学校锟斤拷址锟斤拷"+xssfRow.getCell(2));
+						System.out.println("学锟斤拷锟斤拷围锟斤拷"+xssfRow.getCell(3));
+						System.out.println("学锟斤拷锟斤拷围锟斤拷锟斤拷要锟街碉拷锟斤拷小锟斤拷锟斤拷楼锟教★拷锟斤拷位锟斤拷锟结："+xssfRow.getCell(4));
+						System.out.println("锟斤拷"+numSheet+"锟斤拷锟斤拷锟斤拷锟斤拷Sheet,锟侥碉拷"+rowNum+"锟斤拷");
+						}
+					System.out.println("学校锟斤拷锟狡ｏ拷"+xssfRow.getCell(1));
+					System.out.println("学校锟斤拷址锟斤拷"+xssfRow.getCell(2));
+					System.out.println("学锟斤拷锟斤拷围锟斤拷"+xssfRow.getCell(3));
+					System.out.println("学锟斤拷锟斤拷围锟斤拷锟斤拷要锟街碉拷锟斤拷小锟斤拷锟斤拷楼锟教★拷锟斤拷位锟斤拷锟结："+xssfRow.getCell(4));
+					System.out.println("锟斤拷"+numSheet+"锟斤拷锟斤拷锟斤拷锟斤拷Sheet,锟侥碉拷"+rowNum+"锟斤拷");
+					System.out.println("准锟斤拷锟斤拷锟�!");
+					
+					if(xssfRow.getCell(1)!=null){
+						schoolname=xssfRow.getCell(1).toString();
+						}
+					if(schoolname==null){
+						System.out.println("锟窖撅拷锟斤拷庸锟�");
+						continue;
+					}
+					if(audao.byshoolname(schoolname)!=null){
+						System.out.println("锟窖撅拷锟斤拷庸锟�");
+						continue;
+					}
+					//锟斤拷锟揭拷娲拷锟斤拷锟较�
+					House h = new House();
+					h.setSchoolname(schoolname);
+					if(xssfRow.getCell(2)!=null){
+					h.setAddress(xssfRow.getCell(2).toString());
+					}
+					if(xssfRow.getCell(4)!=null){
+					h.setProperty(xssfRow.getCell(4).toString());
+					}
+					if(xssfRow.getCell(3)!=null){
+					h.setScope(xssfRow.getCell(3).toString());
+					}
+					
+				
+					
+					h.setTime(time);
+					h.setAdmin(admin.getAdmin());
+					audao.Save(h);
+										
+				}
+			}
+			System.out.println("xlsx锟斤拷锟斤拷锟斤拷");
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/selectHouse");
+			return null;
+		}
+		House h = new House();
+		h.setAddress(address);
+		h.setProperty(property);
+		h.setScope(scope);
+		h.setSchoolname(schoolname);
+		h.setTime(time);
+		h.setAdmin(admin.getAdmin());
+		audao.Save(h);
+		System.out.println("锟斤拷锟斤拷锟斤拷");
+		return Action.SUCCESS;
+
+	}
+
+	public String getXlsxFileFileName() {
+		return xlsxFileFileName;
+	}
+	public void setXlsxFileFileName(String xlsxFileFileName) {
+		this.xlsxFileFileName = xlsxFileFileName;
+	}
+	public File getXlsxFile() {
+		return xlsxFile;
+	}
+	public void setXlsxFile(File xlsxFile) {
+		this.xlsxFile = xlsxFile;
+	}
+	// 锟斤拷锟斤拷注锟斤拷锟斤拷锟斤拷
+	/**
+	 * 锟斤拷录统锟狡变化 锟斤拷始锟斤拷
 	 */
 	public void aStas() {
-		System.out.println("province"+province);
-		// ���������û�����
+		System.out.println("province" + province);
+		// 锟斤拷锟斤拷锟斤拷锟斤拷锟矫伙拷锟斤拷锟斤拷
 		time = util.getNumTime(0);
-	
-		
-		// ��ʼ��3��ϵͳͳ����
+
+		// 锟斤拷始锟斤拷3锟斤拷系统统锟斤拷锟斤拷
 		String sys = "";
-		for (int i = 0; i < 4; i++) {
-			if(province.equals("all")||province==null||province.equals("null")){
+		for (int i = 0; i < 5; i++) {
+			if (province.equals("all") || province == null
+					|| province.equals("null")) {
 				continue;
-			}		
+			}
 			switch (i) {
 			case 0:
 				sys = "web";
@@ -115,6 +579,9 @@ public class ApputilAction {
 			case 3:
 				sys = "syn";
 				break;
+			case 4:
+				sys = "bbt";
+				break;
 
 			default:
 				sys = null;
@@ -123,69 +590,69 @@ public class ApputilAction {
 			if (sys == null) {
 				continue;
 			}
-			Stas sta = audao.StasTimeDay(time, sys,province);
-			// ��ȡ����ע���û�����
-			usersaved = userdao.getSaveTime(time, sys,province).size();
-			//��ȡ���������ο�
-			vored=audao.VisitorTime(time, sys,province).size();
-			System.out.println("11111111111111111"+vored+province+sys);
-			// ��ȡ���������û�����
-			synlogin = userdao.getFinaltime(time, sys,province).size();
-			if(synlogin!=0){
-				if(synlogin%3==0){
-					usersyned=synlogin/3;
-				}else{
-					usersyned=synlogin/3+1;
+			Stas sta = audao.StasTimeDay(time, sys, province);
+			// 锟斤拷取锟斤拷锟斤拷注锟斤拷锟矫伙拷锟斤拷锟斤拷
+			usersaved = userdao.getSaveTime(time, sys, province).size();
+			// 锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷锟轿匡拷
+			vored = audao.VisitorTime(time, sys, province).size();
+			System.out.println("11111111111111111" + vored + province + sys);
+			// 锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷锟矫伙拷锟斤拷锟斤拷
+			synlogin = userdao.getFinaltime(time, sys, province).size();
+			if (synlogin != 0) {
+				if (synlogin % 3 == 0) {
+					usersyned = synlogin / 3;
+				} else {
+					usersyned = synlogin / 3 + 1;
 				}
-				}else{
-					usersyned=0;
-				}
-			// ��ȡ�����û�
-			//usersyned = userdao.getOnline(sys,province).size();
+			} else {
+				usersyned = 0;
+			}
+			// 锟斤拷取锟斤拷锟斤拷锟矫伙拷
+			// usersyned = userdao.getOnline(sys,province).size();
 			if (sta == null) {
 				sta = new Stas();
-				sta.setProvince(province);// ����
-				sta.setTime(time);// ͳ��ʱ��
-				sta.setUserlogined(synlogin);// �������
-				if(downloads!=0){
-				sta.setDownloaded(1);
-				}else{
+				sta.setProvince(province);// 锟斤拷锟斤拷
+				sta.setTime(time);// 统锟斤拷时锟斤拷
+				sta.setUserlogined(synlogin);// 锟斤拷锟斤拷锟斤拷锟�
+				if (downloads != 0) {
+					sta.setDownloaded(1);
+				} else {
 					sta.setDownloaded(0);
-				}// ��������
-				sta.setOs(sys);// ���Ե�ϵͳ
-				sta.setUsersyned(usersyned);// ͬʱ������
-				sta.setUsersaved(usersaved);// ����ע������				
-				sta.setVored(vored);// ���������ο���
-				
+				}// 锟斤拷锟斤拷锟斤拷锟斤拷
+				sta.setOs(sys);// 锟斤拷锟皆碉拷系统
+				sta.setUsersyned(usersyned);// 同时锟斤拷锟斤拷锟斤拷
+				sta.setUsersaved(usersaved);// 锟斤拷锟斤拷注锟斤拷锟斤拷锟斤拷
+				sta.setVored(vored);// 锟斤拷锟斤拷锟斤拷锟斤拷锟轿匡拷锟斤拷
+
 				audao.Save(sta);
 				continue;
 			}
-			sta = audao.StasTimeDay(time, sys,province);
-			
-			if (sta==null) {
+			sta = audao.StasTimeDay(time, sys, province);
+
+			if (sta == null) {
 				continue;
 			}
-			// sta.setProvince(province);//ͳ��ȫ��
-			// sta.setTime(time);// ͳ��ʱ��
+			// sta.setProvince(province);//统锟斤拷全锟斤拷
+			// sta.setTime(time);// 统锟斤拷时锟斤拷
 
-			sta.setUserlogined(synlogin);// �������
-			if (downloaded != 0&&sys.equals(os)) {
-				sta.setDownloaded(sta.getDownloaded() + 1);// ��������
+			sta.setUserlogined(synlogin);// 锟斤拷锟斤拷锟斤拷锟�
+			if (downloaded != 0 && sys.equals(os)) {
+				sta.setDownloaded(sta.getDownloaded() + 1);// 锟斤拷锟斤拷锟斤拷锟斤拷
 			}
-			// sta.setOs(os);//���Ե�ϵͳ
+			// sta.setOs(os);//锟斤拷锟皆碉拷系统
 			if (usersyned > sta.getUsersyned()) {
-				sta.setUsersyned(usersyned);// ͬʱ������
+				sta.setUsersyned(usersyned);// 同时锟斤拷锟斤拷锟斤拷
 			}
-			sta.setUsersaved(usersaved);// ����ע������
-			
-			sta.setVored(vored);// ���������ο���
-			
+			sta.setUsersaved(usersaved);// 锟斤拷锟斤拷注锟斤拷锟斤拷锟斤拷
+
+			sta.setVored(vored);// 锟斤拷锟斤拷锟斤拷锟斤拷锟轿匡拷锟斤拷
+
 			audao.Update(sta);
 
 		}
 
-		for (int i = 0; i < 4; i++) {
-		
+		for (int i = 0; i < 5; i++) {
+
 			switch (i) {
 			case 0:
 				sys = "web";
@@ -199,6 +666,9 @@ public class ApputilAction {
 			case 3:
 				sys = "syn";
 				break;
+			case 4:
+				sys = "bbt";
+				break;
 
 			default:
 				sys = null;
@@ -207,77 +677,74 @@ public class ApputilAction {
 			if (sys == null) {
 				continue;
 			}
-		
-			Stas sta = audao.StasTimeDay(time, sys,"all");
-			// ��ȡ����ע���û�����
+
+			Stas sta = audao.StasTimeDay(time, sys, "all");
+			// 锟斤拷取锟斤拷锟斤拷注锟斤拷锟矫伙拷锟斤拷锟斤拷
 			usersaved = userdao.getSaveTime(time, sys).size();
-			System.out.println("����ע����"+usersaved+sys);
-			//��ȡ���������ο�
-			vored=audao.VisitorTime(time, sys).size();
-			System.out.println(vored+"vored"+sys+time);
-			// ��ȡ���������û�����
+			System.out.println("锟斤拷锟斤拷注锟斤拷锟斤拷" + usersaved + sys);
+			// 锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷锟轿匡拷
+			vored = audao.VisitorTime(time, sys).size();
+			System.out.println(vored + "vored" + sys + time);
+			// 锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷锟矫伙拷锟斤拷锟斤拷
 			synlogin = userdao.getFinaltime(time, sys).size();
-			// ��ȡ�����û�
-			//usersyned = userdao.getOnline(sys).size();
-			if(synlogin!=0){
-			if(synlogin%3==0){
-				usersyned=synlogin/3;
-			}else{
-				usersyned=synlogin/3+1;
-			}
-			}else{
-				usersyned=0;
+			// 锟斤拷取锟斤拷锟斤拷锟矫伙拷
+			// usersyned = userdao.getOnline(sys).size();
+			if (synlogin != 0) {
+				if (synlogin % 3 == 0) {
+					usersyned = synlogin / 3;
+				} else {
+					usersyned = synlogin / 3 + 1;
+				}
+			} else {
+				usersyned = 0;
 			}
 			if (sta == null) {
 				sta = new Stas();
-				sta.setProvince(province);// ����
-				sta.setTime(time);// ͳ��ʱ��
-				sta.setUserlogined(synlogin);// �������
-				if (downloaded != 0&&sys.equals(os)) {
-					sta.setDownloaded(1);// ��������
-				}else{
-					sta.setDownloaded(0);// ��������
+				sta.setProvince(province);// 锟斤拷锟斤拷
+				sta.setTime(time);// 统锟斤拷时锟斤拷
+				sta.setUserlogined(synlogin);// 锟斤拷锟斤拷锟斤拷锟�
+				if (downloaded != 0 && sys.equals(os)) {
+					sta.setDownloaded(1);// 锟斤拷锟斤拷锟斤拷锟斤拷
+				} else {
+					sta.setDownloaded(0);// 锟斤拷锟斤拷锟斤拷锟斤拷
 				}
-				sta.setOs(sys);// ���Ե�ϵͳ
-				sta.setUsersyned(usersyned);// ͬʱ������
-				sta.setUsersaved(usersaved);// ����ע������
-				sta.setVored(vored);// ���������ο���
+				sta.setOs(sys);// 锟斤拷锟皆碉拷系统
+				sta.setUsersyned(usersyned);// 同时锟斤拷锟斤拷锟斤拷
+				sta.setUsersaved(usersaved);// 锟斤拷锟斤拷注锟斤拷锟斤拷锟斤拷
+				sta.setVored(vored);// 锟斤拷锟斤拷锟斤拷锟斤拷锟轿匡拷锟斤拷
 				audao.Save(sta);
 				continue;
 			}
-			sta = audao.StasTimeDay(time, sys,"all");			
-			// sta.setProvince(province);//ͳ��ȫ��
-			// sta.setTime(time);// ͳ��ʱ��
+			sta = audao.StasTimeDay(time, sys, "all");
+			// sta.setProvince(province);//统锟斤拷全锟斤拷
+			// sta.setTime(time);// 统锟斤拷时锟斤拷
 
-			sta.setUserlogined(synlogin);// �������
-			if (downloaded != 0&&sys.equals(os)) {
-				sta.setDownloaded(sta.getDownloaded() + 1);// ��������
+			sta.setUserlogined(synlogin);// 锟斤拷锟斤拷锟斤拷锟�
+			if (downloaded != 0 && sys.equals(os)) {
+				sta.setDownloaded(sta.getDownloaded() + 1);// 锟斤拷锟斤拷锟斤拷锟斤拷
 			}
-			// sta.setOs(os);//���Ե�ϵͳ
-			
-				sta.setUsersyned(usersyned);// ͬʱ������
-			
-			sta.setUsersaved(usersaved);// ����ע������
-			
-			
-			sta.setVored(vored);// ���������ο���
-			
+			// sta.setOs(os);//锟斤拷锟皆碉拷系统
+
+			sta.setUsersyned(usersyned);// 同时锟斤拷锟斤拷锟斤拷
+
+			sta.setUsersaved(usersaved);// 锟斤拷锟斤拷注锟斤拷锟斤拷锟斤拷
+
+			sta.setVored(vored);// 锟斤拷锟斤拷锟斤拷锟斤拷锟轿匡拷锟斤拷
+
 			audao.Update(sta);
 
 		}
 
 	}
 
-	/**
-	 * ��¼���� �ο� appmac
-	 */
+	
 	public void visitorMac() throws IOException {
 		if (Mac == null) {
 			util.Out().print(false);
 			return;
 		}
 		vor = audao.sVisitor(Mac);
-		if(os==null){
+		if (os == null) {
 			util.Out().print("null");
 			return;
 		}
@@ -293,10 +760,8 @@ public class ApputilAction {
 		}
 
 		if (vor == null) {
-			/**
-			 * ��¼ÿ�������ο�
-			 */
 			
+
 			vor = new Visitor();
 			vor.setAppmac(Mac);
 			vor.setNickname(Mac);
@@ -305,7 +770,7 @@ public class ApputilAction {
 			vor.setTime(util.getNowTime());
 			audao.Save(vor);
 			String url = "http://127.0.0.1/Befriend/aStas?os=" + os
-					+ "&province="+province;
+					+ "&province=" + province;
 			WechatKit.sendGet(url);
 			util.Out().print(true);
 			return;
@@ -313,11 +778,7 @@ public class ApputilAction {
 		util.Out().print(false);
 	}
 
-	/**
-	 * �޸İ汾�� ���� ֹͣ����ʹ��
-	 * 
-	 * @throws IOException
-	 */
+	
 	public void JztdAppm() throws IOException {
 		au = audao
 				.select("http://182.92.100.235/Befriend/AppUp/FamilyGroup.apk");
@@ -333,34 +794,30 @@ public class ApputilAction {
 			}
 
 			audao.Update(au);
-			OpeFunction.Out().print("�޸ĳɹ�");
+			OpeFunction.Out().print("Is Ok");
 		} else {
-			OpeFunction.Out().print("�޸�ʧ��");
+			OpeFunction.Out().print("Is False");
 		}
 	}
 
-	/**
-	 * ���ڼҳ���ؿͻ��˵ĸ��� ���� ���� ɾ��ԭ���� ���µ� ��������Ǻ㶨�� FamilyGroup.apk
-	 * 
-	 * @throws IOException
-	 */
+
 
 	public void JztdApp() throws IOException {
 		try {
 
 			if (appFile == null) {
-				OpeFunction.Out().print("FamilyGroup.apkΪnull");
+				OpeFunction.Out().print("FamilyGroup.apk为null");
 				return;
 			}
 			if (!appFileFileName.equals("FamilyGroup.apk")) {
-				OpeFunction.Out().print("���ֱ���Ϊ'FamilyGroup.apk'");
+				OpeFunction.Out().print("锟斤拷锟街憋拷锟斤拷为'FamilyGroup.apk'");
 				return;
 			}
 			System.out.println(appFileFileName);
 			au = audao
 					.select("http://182.92.100.235/Befriend/AppUp/FamilyGroup.apk");
 			Boolean b = false;
-			// ���ڿ� ˵�� û�� �Ͳ���Ҫɾ��
+		
 			if (au != null) {
 				File file1 = new File(ServletActionContext.getServletContext()
 						.getRealPath("/AppUp/FamilyGroup.apk"));
@@ -374,7 +831,7 @@ public class ApputilAction {
 			String upth = "http://182.92.100.235/Befriend/"
 					+ OpeFunction.fileToServer(savePath, appFile,
 							appFileFileName, appFileContentType, false);
-			// ����һ��
+			
 			savePath = "AppUp/Past";
 			OpeFunction.fileToServer(savePath, appFile, appFileFileName,
 					appFileContentType, true);
@@ -385,28 +842,24 @@ public class ApputilAction {
 			ap.setPath(upth);
 			audao.Save(ap);
 
-			OpeFunction.Out().print("���³ɹ� ɾ���ɰ汾�ɹ�?" + b);
+			OpeFunction.Out().print("UP OK" + b);
 		} catch (Exception e) {
 			OpeFunction.Out().print(e.getMessage());
 		}
 
 	}
 
-	/**
-	 * �����ж� ���� �ҳ���� ����Դ�� ��׿ ���� ƻ�� ��׿����Ӧ�ñ�
-	 *
-	 * @throws IOException
-	 */
+	
 	public void weixinJzFoIosAndAndroid() throws IOException {
 		boolean b = false;
 		try {
 
-			System.out.println("����html");
+			
 			HttpServletRequest request = OpeFunction.request();
 			HttpServletResponse response = OpeFunction.response();
 			String sUA = request.getHeader("user-agent");
 			System.out.println(sUA);
-			// pc�汾����
+			
 			List<String> al = new ArrayList<String>();
 
 			al.add("Mac OS X");
@@ -414,7 +867,7 @@ public class ApputilAction {
 			for (int i = 0; i < al.size(); i++) {
 				if (sUA.indexOf(al.get(i)) != -1) {
 					b = true;
-					System.out.println("��ʲôλ�ó��ֵ�!" + sUA.indexOf(al.get(i)));
+					System.out.println("OS:" + sUA.indexOf(al.get(i)));
 					break;
 				}
 			}
@@ -427,13 +880,12 @@ public class ApputilAction {
 			String url = "http://127.0.0.1/Befriend/aStas?os=" + "ios"
 					+ "&downloaded=1";
 			WechatKit.sendGet(url);
-			// ת��
+			
 			((HttpServletResponse) util.response())
 					.sendRedirect("https://itunes.apple.com/cn/app/jia-zhang-zhi-you/id995642623?mt=8");
 
 		} else {
-			// ת��
-			System.out.println("������");
+			
 			String url = "http://127.0.0.1/Befriend/aStas?os=" + "android"
 					+ "&downloaded=1";
 			WechatKit.sendGet(url);
@@ -444,21 +896,17 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * �����ж� ���� �ҳ���� ����Դ�� ��׿ ���� ƻ��
-	 *
-	 * @throws IOException
-	 */
+
 	public void JzFoIosAndAndroid() throws IOException {
 		boolean b = false;
 		try {
 
-			System.out.println("����html");
+		
 			HttpServletRequest request = OpeFunction.request();
 			HttpServletResponse response = OpeFunction.response();
 			String sUA = request.getHeader("user-agent");
 			System.out.println(sUA);
-			// pc�汾����
+		
 			List<String> al = new ArrayList<String>();
 
 			al.add("Mac OS X");
@@ -466,7 +914,7 @@ public class ApputilAction {
 			for (int i = 0; i < al.size(); i++) {
 				if (sUA.indexOf(al.get(i)) != -1) {
 					b = true;
-					System.out.println("��ʲôλ�ó��ֵ�!" + sUA.indexOf(al.get(i)));
+					System.out.println("OS:" + sUA.indexOf(al.get(i)));
 					break;
 				}
 			}
@@ -476,27 +924,23 @@ public class ApputilAction {
 		}
 
 		if (b == true) {
-			/**
-			 * ��¼ÿ�����ش���ios
-			 */
+			
 			String url = "http://127.0.0.1/Befriend/aStas?os=" + "ios"
 					+ "&downloaded=1";
 			WechatKit.sendGet(url);
 			System.out.println("Mac OS X");
-			// ת��
+		
 			((HttpServletResponse) util.response())
 					.sendRedirect("https://itunes.apple.com/cn/app/jia-zhang-zhi-you/id995642623?mt=8");
 
 		} else {
-			/**
-			 * ��¼ÿ�����ش���Android
-			 */
+			
 			String url = "http://127.0.0.1/Befriend/aStas?os=" + "android"
 					+ "&downloaded=1";
 			WechatKit.sendGet(url);
 
-			// ת��
-			System.out.println("������");
+			// 转锟斤拷
+		
 			((HttpServletResponse) util.response())
 					.sendRedirect("http://182.92.100.235/Befriend/AppUp/FamilyGroup.apk");
 
@@ -505,19 +949,19 @@ public class ApputilAction {
 	}
 
 	/**
-	 * �����ж� ���� �ҳ���� ����Դ�� �ֻ� ���� pc
+	 * 
 	 *
 	 * @throws IOException
 	 */
 	public void Jwebandwap() throws IOException {
 		try {
 
-			System.out.println("����html");
+			System.out.println("Jwebandwap");
 			HttpServletRequest request = OpeFunction.request();
 			HttpServletResponse response = OpeFunction.response();
 			String sUA = request.getHeader("user-agent");
 			System.out.println(sUA);
-			// pc�汾����
+			
 			List<String> al = new ArrayList<String>();
 			al.add("Windows 98");
 			al.add("Windows ME");
@@ -533,7 +977,7 @@ public class ApputilAction {
 						&& sUA.indexOf(al.get(i)) == 13) {
 					b = true;
 					System.out
-							.println("�ж� 13λ�� ʲôϵͳ!" + sUA.indexOf(al.get(i)));
+							.println("OS:" + sUA.indexOf(al.get(i)));
 					break;
 				}
 			}
@@ -556,7 +1000,7 @@ public class ApputilAction {
 	}
 
 	/**
-	 * 8���Ƽ� app �Ĺ��� ��ʾ
+	 * 8 app 
 	 * 
 	 * @return
 	 */
@@ -585,7 +1029,7 @@ public class ApputilAction {
 	}
 
 	/**
-	 * ɾ��app ͨ��id
+	 * 删锟斤拷app 通锟斤拷id
 	 * 
 	 * @throws IOException
 	 */
@@ -595,7 +1039,7 @@ public class ApputilAction {
 			System.out.println("id:" + id);
 			app = adao.byid(id);
 			if (app == null) {
-				util.Out().print("ɾ��ʧ�� û��Ҫɾ����app��");
+				util.Out().print("App Is Null");
 				return;
 			}
 			System.out.println("app" + app);
@@ -625,15 +1069,13 @@ public class ApputilAction {
 	}
 
 	/**
-	 * ͳ��app���ش���
+	 * 
 	 */
 	public void AppDs() {
 
 		app = adao.byid(id);
 		int iz = app.getRealds() + 1;
 		int i = app.getDownloads() + 1;
-		System.out.println(app.getName() + "��ʵ���ش�����" + iz);
-		System.out.println(app.getName() + "���ش�����" + i);
 		app.setRealds(iz);
 		app.setDownloads(i);
 		adao.Ds(app);
@@ -641,15 +1083,13 @@ public class ApputilAction {
 	}
 
 	/**
-	 * �жϼҳ�����Ƿ� �и���
+	 * 
 	 * 
 	 * @throws IOException
 	 */
 	public void Appup() throws IOException {
 		try {
 			au = audao.UP();
-
-			System.out.println("������Appup ������" + au.getUpdates());
 			OpeFunction.Out().print(OpeFunction.ToJson(au));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -657,7 +1097,7 @@ public class ApputilAction {
 	}
 
 	/**
-	 * �������ʱʹ�� ������´���
+	 * Appupnum
 	 * 
 	 * @throws IOException
 	 */
@@ -679,17 +1119,17 @@ public class ApputilAction {
 	}
 
 	/**
-	 * �û����� ����
+	 * SaveFeedback
 	 */
 	public void SaveFeedback() {
 		try {
 
-			System.out.println("������  SaveFeedback" + "," + username + ","
+			System.out.println("SaveFeedback" + "," + username + ","
 					+ information);
 			User u = userdao.byUsernameAccnumnoPhone(username);
 			if (u == null) {
 				OpeFunction.Out().print(false);
-				System.out.println("�û�������!");
+				System.out.println("username Is Null");
 				return;
 			}
 			Feedback f = new Feedback();
@@ -698,7 +1138,7 @@ public class ApputilAction {
 			f.setTime(OpeFunction.getNowTime());
 			audao.Save(f);
 			String Email = "";
-			String sg = u.getPhone() + " �û��ķ���:" + information;
+			String sg = u.getPhone() + " information:" + information;
 			Email = "user@jiazhangtd.net";
 			OpeFunction.Email(Email, sg);
 			OpeFunction.Out().print(true);
@@ -707,35 +1147,36 @@ public class ApputilAction {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	/**
-	 * �û����� ����
+	 * Feedback
 	 */
 	public void webSaveFeedback() {
 		try {
 
-			System.out.println("������  webSaveFeedback" + "," + username + ","
-					+ information);		
+			System.out.println(" webSaveFeedback" + "," + username + ","
+					+ information);
 			User u = userdao.byUsernameAccnumnoPhone(username);
 			if (u == null) {
-				
-				username="�����û�";
+
+				username = "username Is Null";
 			}
 			Feedback f = new Feedback();
 			f.setUsername(username);
 			f.setInformation(information);
 			f.setTime(OpeFunction.getNowTime());
 			audao.Save(f);
-			if(u!=null){
-				username=u.getPhone();
+			if (u != null) {
+				username = u.getPhone();
 			}
 			String Email = "";
-			String sg = username+ " �û��ķ���:" + information;
+			String sg = username + " information:" + information;
 			Email = "user@jiazhangtd.net";
-			//OpeFunction.Email(Email, sg);
+			// OpeFunction.Email(Email, sg);
 
 			((HttpServletResponse) util.response()).sendRedirect(request
 					.getContextPath() + "/webNewsA10");
-			//OpeFunction.Out().print("�����ɹ�");
+			
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());
@@ -743,7 +1184,7 @@ public class ApputilAction {
 	}
 
 	/**
-	 * �ϴ� �Ƽ� app
+	 * save app
 	 */
 	public void AUP() throws IOException {
 
@@ -751,14 +1192,7 @@ public class ApputilAction {
 		System.out.println(type);
 		System.out.println(summary);
 		System.out.println(name);
-		System.out.println(imgFile);
-		System.out.println(imgFile1);
-		System.out.println(imgFile2);
-		System.out.println(imgFile3);
-		System.out.println(appFile);
-		System.out.println(imgFile1FileName);
-		System.out.println(imgFile2FileName);
-		System.out.println(imgFile3FileName);
+		
 		savePath = "/appimg";
 		if (imgFile == null) {
 			OpeFunction.Out().print("logoNULL");
@@ -769,15 +1203,15 @@ public class ApputilAction {
 			return;
 		}
 		if (imgFile1 == null) {
-			OpeFunction.Out().print("Ӧ�ý�ͼ1NULL");
+			OpeFunction.Out().print("imgFile1 Is NULL");
 			return;
 		}
 		if (imgFile2 == null) {
-			OpeFunction.Out().print("Ӧ�ý�ͼ2NULL");
+			OpeFunction.Out().print("imgFile2 Is NULL");
 			return;
 		}
 		if (imgFile3 == null) {
-			OpeFunction.Out().print("Ӧ�ý�ͼ3NULL");
+			OpeFunction.Out().print("imgFile3 Is NULL");
 			return;
 		}
 
@@ -797,7 +1231,7 @@ public class ApputilAction {
 				appFileFileName, appFileContentType, false);
 		float fl = 0;
 		fl = OpeFunction.fileSizem(appFile);
-		System.out.println("app��С" + fl);
+		System.out.println("appFile path" + fl);
 		App app = new App();
 		app.setName(name);
 		app.setPathapk(apk);
@@ -837,7 +1271,7 @@ public class ApputilAction {
 	}
 
 	/**
-	 * ͨ��id��ѯapp��Ϣ
+	 * 通锟斤拷id锟斤拷询app锟斤拷息
 	 * 
 	 * @throws IOException
 	 */
@@ -855,11 +1289,11 @@ public class ApputilAction {
 	}
 
 	/**
-	 * ���ظ� �ͻ��� ��8��app
+	 * 锟斤拷锟截革拷 锟酵伙拷锟斤拷 锟斤拷8锟斤拷app
 	 */
 	public void getapp() {
 		try {
-			// num����0 ����Ĭ��ֵ
+			// num锟斤拷锟斤拷0 锟斤拷锟斤拷默锟斤拷值
 			if (num == 0) {
 				num = 8;
 			}
@@ -872,15 +1306,15 @@ public class ApputilAction {
 	}
 
 	/**
-	 * ���ظ� web���� ��n��app
+	 * 锟斤拷锟截革拷 web锟斤拷锟斤拷 锟斤拷n锟斤拷app
 	 */
 	public String webGetapp() {
 		try {
-			// num����0 ����Ĭ��ֵ
+			// num锟斤拷锟斤拷0 锟斤拷锟斤拷默锟斤拷值
 			if (num == 0) {
 				num = 8;
 			}
-			// ��ѯapp��Ϣ
+			// 锟斤拷询app锟斤拷息
 			List<App> la = adao.All(0);
 			request.setAttribute("la", la);
 		} catch (Exception e) {
@@ -1206,6 +1640,56 @@ public class ApputilAction {
 
 	public void setUsersaved(int usersaved) {
 		this.usersaved = usersaved;
+	}
+
+	public String getSchoolname() {
+		return schoolname;
+	}
+
+	public void setSchoolname(String schoolname) {
+		this.schoolname = schoolname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getScope() {
+		return scope;
+	}
+
+	public void setScope(String scope) {
+		this.scope = scope;
+	}
+
+	public String getProperty() {
+		return property;
+	}
+
+	public void setProperty(String property) {
+		this.property = property;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

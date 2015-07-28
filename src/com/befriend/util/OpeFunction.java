@@ -1,6 +1,7 @@
 package com.befriend.util;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,15 +16,25 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 
 import com.befriend.email.MailSenderInfo;
@@ -31,6 +42,18 @@ import com.befriend.email.SimpleMailSender;
 import com.befriend.entity.User;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
+import com.sun.rowset.internal.Row;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.Key;
+
+import javax.crypto.Cipher;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESedeKeySpec;
+import javax.crypto.spec.IvParameterSpec;
 
 /**
  * 工具类
@@ -39,6 +62,52 @@ import com.opensymphony.xwork2.ActionContext;
  *
  */
 public class OpeFunction {
+	/**
+	 * js返回到html
+	 * 
+	 * @throws IOException
+	 */
+	public static void outjS(String URL, String string) throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		String loginPage = URL;
+		StringBuilder builder = new StringBuilder();
+		builder.append("<script type=\"text/javascript\">");
+		builder.append("alert('" + string + "');");
+		builder.append("window.top.location.href='");
+		builder.append(loginPage);
+		builder.append("';");
+		builder.append("</script>");
+		out.print(builder.toString());
+	}
+
+	/**
+	 * 
+	 * 空 返回 true
+	 * 
+	 * 不空 返回 false
+	 * 
+	 * @param rstart
+	 * @param rend
+	 * @return
+	 */
+	public static boolean isEmpty(String string) {
+
+		if (string != null) {
+			if (StringUtils.isEmpty(string.trim())) {
+				System.out.println("空");
+				return true;
+			} else {
+				System.out.println("不空");
+				return false;
+			}
+		} else {
+			System.out.println("空");
+			return true;
+		}
+	}
 
 	// private static final int FIRST_DAY_OF_WEEK = 0;
 	/**
@@ -97,7 +166,7 @@ public class OpeFunction {
 		return map.get(name);
 
 	}
-	
+
 	/**
 	 * 进行sha1加密
 	 * 
@@ -256,6 +325,7 @@ public class OpeFunction {
 		return matter1.format(dt);
 
 	}
+
 	/**
 	 * 获得本地时间
 	 * 
@@ -268,7 +338,6 @@ public class OpeFunction {
 		return matter1.format(dt);
 
 	}
-
 
 	/**
 	 * +1 获得昨天 -1获取明天
@@ -430,7 +499,7 @@ public class OpeFunction {
 	 * 向手机号发送信息
 	 */
 	public static void setphone(String phone, String textp) {
-		try {	
+		try {
 			String account = "cf_wcsk_jztd";// 用户名 cf_wcsk_jztd
 			String pwd = "wcsk1212";// 密码 wcsk1212
 			String postUrl = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";// 地址
@@ -467,6 +536,84 @@ public class OpeFunction {
 			System.out.println(e.getMessage());
 		}
 
+	}
+
+	/**
+	 * public static final byte[] Key = "abcdefgh".getBytes(); private static
+	 * final String Algorithm = "DES"; //定义 加密算法,可用 DES,DESede,Blowfish
+	 * 
+	 * // 加密字符串 public static byte[] encryptMode(byte[] keybyte, byte[] src) {
+	 * try { // 生成密钥 SecretKey deskey = new SecretKeySpec(keybyte, Algorithm);
+	 * // 加密 Cipher c1 = Cipher.getInstance(Algorithm);
+	 * c1.init(Cipher.ENCRYPT_MODE, deskey); return c1.doFinal(src); } catch
+	 * (java.security.NoSuchAlgorithmException e1) { e1.printStackTrace(); }
+	 * catch (javax.crypto.NoSuchPaddingException e2) { e2.printStackTrace(); }
+	 * catch (java.lang.Exception e3) { e3.printStackTrace(); } return null; }
+	 * 
+	 * // 解密字符串 public static byte[] decryptMode(byte[] keybyte, byte[] src) {
+	 * try { // 生成密钥 SecretKey deskey = new SecretKeySpec(keybyte, Algorithm);
+	 * // 解密 Cipher c1 = Cipher.getInstance(Algorithm);
+	 * c1.init(Cipher.DECRYPT_MODE, deskey); return c1.doFinal(src); } catch
+	 * (java.security.NoSuchAlgorithmException e1) { e1.printStackTrace(); }
+	 * catch (javax.crypto.NoSuchPaddingException e2) { e2.printStackTrace(); }
+	 * catch (java.lang.Exception e3) { e3.printStackTrace(); } return null; }
+	 * 
+	 * public static void main(String[] args) { // 添加新安全算法,如果用JCE就要把它添加进去
+	 * Security.addProvider(new com.sun.crypto.provider.SunJCE()); final byte[]
+	 * keyBytes = Key; //8字节的密钥 String szSrc = "这是一个测试abcd";
+	 * System.out.println("加密前的字符串:" + szSrc); byte[] encoded =
+	 * encryptMode(keyBytes, szSrc.getBytes()); System.out.println("加密后的字符串:" +
+	 * new String(encoded)); byte[] srcBytes = decryptMode(keyBytes, encoded);
+	 * System.out.println("解密后的字符串:" + (new String(srcBytes))); }
+	 * 
+	 * @throws IOException
+	 */
+
+	public static void main(String[] args) throws IOException {
+		String fileName = "E:\\xiaoxue.xlsx";
+
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileName);
+
+		// 循环工作表Sheet
+		for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
+			XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
+			if (xssfSheet == null) {
+				continue;
+			}
+
+			// 循环行Row
+			for (int rowNum = 0; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
+				XSSFRow xssfRow = xssfSheet.getRow(rowNum);
+				if (xssfRow == null) {
+					continue;
+				}
+				// 第一次不读 是标题
+				if (rowNum < 1) {
+					// System.out.println("列："+xssfRow.getCell(0));
+					System.out.println("学校名称：" + xssfRow.getCell(1));
+					System.out.println("学校地址：" + xssfRow.getCell(2));
+					System.out.println("学区范围：" + xssfRow.getCell(3));
+					System.out.println("学区范围内主要街道、小区、楼盘、单位宿舍："
+							+ xssfRow.getCell(4));
+					System.out.println("第" + numSheet + "个工作表Sheet,的第" + rowNum
+							+ "行");
+				}
+
+			}
+		}
+	}
+
+	private static String getValue(XSSFCell xssfCell) {
+		if (xssfCell.getCellType() == xssfCell.CELL_TYPE_BOOLEAN) {
+
+			return String.valueOf(xssfCell.getBooleanCellValue());
+		} else if (xssfCell.getCellType() == xssfCell.CELL_TYPE_NUMERIC) {
+
+			return String.valueOf(xssfCell.getNumericCellValue());
+		} else {
+
+			return String.valueOf(xssfCell.getStringCellValue());
+		}
 	}
 
 }

@@ -4,6 +4,7 @@
 <struts>
 	<package name="News" extends="struts-default">
 
+	
 		<!-- 查看新闻是否更新 -->
 		<action name="newNewsId" class="newsAction" method="newNewsId">
 		</action>
@@ -83,7 +84,7 @@
 		
 		<!--编辑查看新闻  -->
 		<action name="Newsget" class="newsAction" method="Newsget">
-		<result name="success">/SuperAdmin/AdminNews/News.jsp</result>
+		<result name="success">/SuperAdmin/AdminNews/news/News.jsp</result>
 		
 		
 		</action>
@@ -128,7 +129,7 @@
 		
 		<!--管理通过id查询 新闻-->
 		<action name="adminNewsId" class="newsAction" method="adminNewsId">
-		<result name="success">/SuperAdmin/AdminNews/news_cont.jsp</result>
+		<result name="success">/SuperAdmin/AdminNews/news/news_cont.jsp</result>
 		</action>
 		
 		
@@ -142,7 +143,7 @@
 		
 			<!--通过id查询新闻-->
 		<action name="webNewsId" class="newsAction" method="webNewsId">
-		<result name="success">/SimulationApp/news_cont.jsp</result>
+		<result  name="success">/SimulationApp/news_cont.jsp</result>
 		</action>
 		
 			<!--分页 查询八大类新闻-->

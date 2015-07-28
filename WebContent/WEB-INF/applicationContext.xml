@@ -20,13 +20,28 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<!-- 本地 -->
+		<!-- 本地 
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property>
 		<property name="password" value="root"></property>
 		<property name="username" value="root"></property>
-		
+		-->
 	
+		<!--测试服数据库 
+		
+		<property name="url" value="jdbc:mysql://123.56.45.164:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property> 
+			<property name="username" value="root"></property> <property name="password" 
+			value="admin"></property> 
+			-->
+			 
+		<!--家长之友正式服数据库	
+		
+  	-->
+		
+		
+		<property name="url" value="jdbc:mysql://182.92.100.235:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property> 
+			<property name="username" value="root"></property> <property name="password" 
+			value="admin"></property> 
 		
 	</bean>
 	
@@ -38,12 +53,17 @@
 		<property name="database" value="MYSQL"></property>
 		<property name="showSql" value="false"></property>
 	</bean>
+	<!-- 事务管理器配置, Hibernate单数据源事务 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory">
 		</property>
 	</bean>
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 使用annotation定义事务 
+	"proxy-target-class" 属值被设置为 "true"，那么基于类的代理将起作用
+	proxy-target-class" 属值被设置为 "false"，那么基于接口的代理将起作用
+	-->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false" />
+	
 	
 	
 	
