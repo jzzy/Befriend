@@ -324,7 +324,7 @@ public class ApputilAction {
 		Message mge=new Message();
 		if(util.isEmpty(schoolname)){
 			mge.setCode(mge.NULL);
-			mge.setStatement("锟斤拷锟斤拷锟斤拷锟斤拷为锟斤拷");
+			mge.setStatement("null");
 			util.Out().print(util.ToJson(mge));
 			return;
 		}
@@ -338,7 +338,7 @@ public class ApputilAction {
 		}
 		mge.setCode(mge.SUCCESS);
 		mge.setContent(hl);
-		mge.setStatement("锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷");
+		mge.setStatement("Is Null");
 		util.Out().print(util.ToJson(mge));
 		
 	}
