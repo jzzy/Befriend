@@ -399,6 +399,9 @@ public class NewsAction {
 		}
 		
 		nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage);
+		if(nl.size()<=0){
+			nl=ndao.Hotarea("北京", pageSize, currentPage);
+			}
 		System.out.println(" -有" + a + "页");
 		System.out.println("每页多少条-" + pageSize);
 		System.out.println("第-" + currentPage + "-页");

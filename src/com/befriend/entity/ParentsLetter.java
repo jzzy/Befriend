@@ -1,5 +1,7 @@
 package com.befriend.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,10 +11,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "letter")
-public class ParentsLetter {
+public class ParentsLetter  implements Serializable {
 
 	/**
-	 * 学区房
+	 * 家长来稿
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id

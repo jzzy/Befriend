@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="visitor")
-public class Visitor {
+public class Visitor  implements Serializable {
 
 	
 		/**

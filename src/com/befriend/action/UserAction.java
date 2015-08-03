@@ -2232,13 +2232,13 @@ public class UserAction extends ActionSupport{
 		u.setOs("bbt");
 		u.setAccnumno(accnumno);
 		u.setStage("Œ¥ÃÓ–¥");
-		if (address == null || address.length() < 2) {
-			u.setAddress("∫”ƒœ");
-
-		} else {
-			u.setAddress(address);
-			u.setAddcity(addcity);
+		if(!util.isEmpty(address)){
+		u.setAddress(address);
 		}
+		if(!util.isEmpty(addcity)){
+		u.setAddcity(addcity);
+		}
+		
 
 		u.setFinaltime(time);
 		u.setSchool("Œ¥ÃÓ–¥");

@@ -1,5 +1,7 @@
 package com.befriend.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 //论坛留言信息表
 @Entity
 @Table(name = "forumtwo")
-public class ForumTwo {
+public class ForumTwo  implements Serializable {
 
     /**
      * 主板论坛留言 tow
