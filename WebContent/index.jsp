@@ -8,36 +8,38 @@
 
 <div style="background:#abc">
 <hr></hr>
-<a href="SuperAdmin/SuperAdmin.jsp">1.1系统管理员登入</a>
-<a href="SuperAdmin/UserAdminForum.jsp">1.2用户论坛管理员登入</a>
-<a href="SuperAdmin/UserAdminInformation.jsp">1.3查看用户注册信息</a>
+<a href="SuperAdmin/SuperAdmin.jsp">系统管理员登入</a>
+<a href="SuperAdmin/UserAdminForum.jsp">用户论坛管理员登入</a>
+<a href="SuperAdmin/UserAdminInformation.jsp">查看用户注册信息</a>
 <hr></hr>
 
 </div>
 <div style="background:#adc">
-	<a href="<%=request.getContextPath()%>/Newsget">2.1管理新闻</a><br>
+	<a href="<%=request.getContextPath()%>/Newsget">管理新闻</a><br>
 	<hr></hr>
-	<a href="<%=request.getContextPath()%>/Appset">2.2App管理</a><br>
+	<a href="<%=request.getContextPath()%>/Appset">App管理</a><br>
 	
-	<a href="<%=request.getContextPath()%>/SuperAdmin/SuperAdmin/App/JZTDUP.jsp">2.3.家长天地App更新</a><br>	
+	<a href="<%=request.getContextPath()%>/SuperAdmin/SuperAdmin/App/JZTDUP.jsp">家长天地App更新</a><br>	
 	<hr></hr>
-	<a href="<%=request.getContextPath()%>/SuperAdmin/AdminForum/Forumsave.jsp">2.4.添加论坛</a><br>	
-	<a href="<%=request.getContextPath()%>/getUser">2.5.新增各地论坛管理员</a><br>
-	<a href="<%=request.getContextPath()%>/getUseradmin">2.6.查询论坛管理员</a><br>
+	<a href="<%=request.getContextPath()%>/SuperAdmin/AdminForum/Forumsave.jsp">添加论坛</a><br>	
+	<a href="<%=request.getContextPath()%>/getUser">新增各地论坛管理员</a><br>
+	<a href="<%=request.getContextPath()%>/getUseradmin">查询论坛管理员</a><br>
 	<hr></hr>
-	<a href="<%=request.getContextPath()%>/weiXniBDN">3.1微信新闻首页</a><br>
-	<a href="<%=request.getContextPath()%>/SimulationApp/login.html">3.2WEB用户登入</a><br>
-	<a href="<%=request.getContextPath()%>/webNewsA10">3.2.1WEB主页</a><br>
+	<a href="<%=request.getContextPath()%>/weiXniBDN">微信新闻首页</a><br>
+	<a href="<%=request.getContextPath()%>/SimulationApp/login.html">WEB用户登入</a><br>
+	<a href="<%=request.getContextPath()%>/webNewsA10">WEB主页</a><br>
 	
 	<hr></hr>
-	<a href="<%=request.getContextPath()%>/weixin/Wonderful.html">3.3精彩互动</a><br>	
-	<a href="<%=request.getContextPath()%>/weixin/Local_info.html">3.4本地资讯</a><br>
+	<a href="<%=request.getContextPath()%>/weixin/Wonderful.html">精彩互动</a><br>	
+	<a href="<%=request.getContextPath()%>/weixin/Local_info.html">本地资讯</a><br>
 	<hr></hr>
 	<a href="<%=request.getContextPath()%>/SimulationApp/laigao/laigao.html">家长投稿</a><br>
 	
 	<a href="<%=request.getContextPath()%>/SimulationApp/laigao/erro.html">没有搜索到</a><br>
 	<a href="<%=request.getContextPath()%>/selectwxHouseallzh">搜索</a><br>
 	<a href="<%=request.getContextPath()%>/source">查看源码</a><br>
+	
+	<a href="<%=request.getContextPath()%>/SimulationApp/exchangebook.jsp">教育部推荐用书</a><br>
 	
 	
 </div>

@@ -2,6 +2,7 @@ package com.befriend.dao.impl;
 
 import java.util.List;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -9,7 +10,9 @@ import javax.persistence.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.befriend.dao.NewsDAO;
+import com.befriend.entity.Book;
 import com.befriend.entity.News;
+@SuppressWarnings("all")
 @Transactional
 public class NewsDAOImpl implements NewsDAO
 {
@@ -369,6 +372,80 @@ public class NewsDAOImpl implements NewsDAO
 		    
 		    return query.getResultList();
 			
+	}
+
+	@Override
+	public void rm(Book book) {
+		// TODO Auto-generated method stub
+		entityManager.remove(book);
+	}
+
+	@Override
+	public void Upnews(Book book) {
+		// TODO Auto-generated method stub
+		entityManager.merge(book);
+	}
+	
+
+	@Override
+	public Book byIdBook(int id) {
+		// TODO 防止sql注入
+
+		Query query = entityManager
+				.createQuery("select u from Book u where u.id=:id");
+		query.setParameter("id", id);
+		List<Book> news = query.getResultList();
+		if (news.size() > 0)
+			return news.get(0);
+
+		return null;
+	}
+
+	@Override
+	public void Save(Book book) {
+		// TODO Auto-generated method stub
+		entityManager.persist(book);
+	}
+
+	@Override
+	public List<Book> paging(int pageSize, int currentPage,int type) {
+		// TODO 防止sql注入
+		Query query = entityManager.createQuery("select u from Book u where u.type=:type order"
+				 + " by u.time desc");
+		query.setParameter("type", type);
+		// 每页显示几条数据
+		query.setMaxResults(pageSize);
+		int startRow = (currentPage - 1) * pageSize;
+		if (startRow < 0) {
+			startRow = 0;
+		}
+		// 第几页
+		query.setFirstResult(startRow);
+
+		return query.getResultList();
+	}
+
+	@Override
+	public int countBools(int type) {
+		// TODO 防止sql注入
+		Query query = entityManager.createQuery("select count(u) from Book u  where u.type=:type");
+		query.setParameter("type", type);
+		return (int)(long)query.getSingleResult();
+	}
+
+	@Override
+	public Book byTitleBook(String title) {
+		// TODO 防止sql注入
+
+		Query query = entityManager
+				.createQuery("select u from Book u where u.title=:title");
+		query.setParameter("title", title);
+
+		List<Book> news = query.getResultList();
+		if (news.size() > 0)
+			return news.get(0);
+
+		return null;
 	}
 
 	

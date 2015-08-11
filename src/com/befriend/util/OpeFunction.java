@@ -471,7 +471,7 @@ public class OpeFunction {
 		// 发送的地址
 		mailInfo.setToAddress(Email);
 		// 标题
-		mailInfo.setSubject("家长天地用户体验反馈信息");
+		mailInfo.setSubject("家长之友用户体验反馈信息");
 		// 时间
 
 		mailInfo.setContent("<h1 style='color: red;'>" + getNowTime() + "<br>"

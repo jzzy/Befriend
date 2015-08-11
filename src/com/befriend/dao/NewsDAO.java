@@ -2,6 +2,7 @@ package com.befriend.dao;
 
 import java.util.List;
 
+import com.befriend.entity.Book;
 import com.befriend.entity.News;
 
 /**
@@ -15,7 +16,7 @@ public interface NewsDAO {
 	public List<News> n2ews(int newsid);
 	// 删除新闻
 	public void rm(News n);
-
+	public void rm(Book book);
 	// 分页查询
 	public List<News> Pagination(int pageSize, int currentPage);
 
@@ -44,16 +45,17 @@ public interface NewsDAO {
 	
 	// 更新新闻被收藏的次数
 	public void Upnews(News news);
-
+	public void Upnews(Book book);
 	// 通过newsid查询 新闻
 	public News byid(int newsid);
-
+	public Book byIdBook(int id);
+	public Book byTitleBook(String title);
 	// 获取 时间最新的 新闻
 	public List<News> news(int num);
 
 	// 添加新闻
 	public void Save(News n);
-
+	public void Save(Book book);
 	// 按照8大类查询
 	public List<News> type(int num, String type);
 
@@ -69,7 +71,8 @@ public interface NewsDAO {
 
 	// 新闻按点击数 +收藏数 时间 排序 分页查询
 	public List<News> cah(int pageSize, int currentPage);
-
+	public List<Book> paging(int pageSize, int currentPage,int type);
+	public int countBools(int type);
 	// 新闻按照 省 查询
 	public List<News> area(String area, int num);
 	// 新闻按照 省 查询 本省的 专家新闻

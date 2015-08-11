@@ -741,12 +741,13 @@ public class ForumAction {
 		System.out.println(" web用户按类型 查看全国论坛");
 		System.out.println();
 		User user = (User) session.getAttribute("u");
-		if (user == null) {
-			 ((HttpServletResponse) util.response())
-			  .sendRedirect(request.getContextPath()+
-			  "/SimulationApp/login.html");
-			return null;
-		}
+		
+//		if (user == null) {
+//			 ((HttpServletResponse) util.response())
+//			  .sendRedirect(request.getContextPath()+
+//			  "/SimulationApp/login.html");
+//			return null;
+//		}
 		if (model <= 0) {
 			System.out.println("请重新登入!");
 			util.Out().print("model <= 0");
@@ -756,7 +757,7 @@ public class ForumAction {
 			return null;
 		}
 		cpe = forumdao.gettypeForumOneALL(model).size();
-		System.out.println("类型type是 ：" + model+user.getAddress()+"有" + cpe + "个论坛");
+		System.out.println("类型type是 ：" + model+"有" + cpe + "个论坛");
 
 		if (pageSize <= 0) {
 			pageSize = 10;

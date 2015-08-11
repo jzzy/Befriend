@@ -5,6 +5,27 @@
 	<package name="News" extends="struts-default">
 
 	
+		<!-- 通过id查看书籍 -->
+		<action name="webLookBookById" class="newsAction" method="webLookBookById">
+		<result name="success">/SimulationApp/book_cont.jsp</result>
+		
+		</action>
+		<!-- 通过类型分页看书籍 -->
+		<action name="webLookBook" class="newsAction" method="webLookBook">
+			<result name="success">/SimulationApp/famous_book.jsp</result>
+		
+		</action>
+		
+		<!-- 上传文件书籍 -->
+		<action name="upBookxmls" class="newsAction" method="upBookxmls">
+		
+	
+		</action>
+		<!-- 上传书籍 -->
+		<action name="upBook" class="newsAction" method="upBook">
+		
+		<result name="success">/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp</result>
+		</action>
 		<!-- 查看新闻是否更新 -->
 		<action name="newNewsId" class="newsAction" method="newNewsId">
 		</action>

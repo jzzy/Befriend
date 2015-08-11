@@ -4,40 +4,39 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.mail.search.DateTerm;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.Session;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.befriend.dao.CollectDAO;
 import com.befriend.dao.NewsDAO;
 import com.befriend.dao.ReviewDAO;
 import com.befriend.dao.UserDAO;
 import com.befriend.entity.Admin;
-import com.befriend.entity.App;
+import com.befriend.entity.Book;
 import com.befriend.entity.Collect;
 import com.befriend.entity.News;
 import com.befriend.entity.Review;
 import com.befriend.entity.User;
 import com.befriend.util.OpeFunction;
 import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ActionContext;
-
-public class NewsAction {
-	private static final List<App> Map = null;// Map集合
+@SuppressWarnings("all")
+public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	private OpeFunction util;// 自建的工具类
 
 	private UserDAO userdao;// 用户dao
@@ -84,15 +83,140 @@ public class NewsAction {
 	private int currentPage = 1;// 这是第多少页
 	private int id;// id
 	private String username;// 评论的用户名
-	Map Mapsession = (Map) ActionContext.getContext().get("session");
-	 HttpServletRequest request = ServletActionContext.getRequest();
-	// httpsession
-	 HttpSession session = ServletActionContext.getRequest()
+	private HttpServletRequest request;
+	@SuppressWarnings("unused")
+	private HttpServletResponse response;
+
+	private HttpSession session = ServletActionContext.getRequest()
 			.getSession();
 
 	private String province;// 省级
-
+	
+	
 	private String city;// 市级
+	private String author;
+	private String time=OpeFunction.getNowTime();
+	Book book=new Book();
+	List<Book> bookl=new ArrayList<Book>();
+	private int itype=0;
+	private String house;
+	private File xlsxFile;
+	public String webLookBookById() throws IOException {
+		
+		book=ndao.byIdBook(id);
+		request.setAttribute("book", book);
+		return Action.SUCCESS;
+		
+	}
+	public String webLookBook() throws IOException {
+		int count=ndao.countBools(itype);
+		int max=count;
+		
+		if(count%pageSize==0){
+			count=count/pageSize;
+		}else{
+			count=count/pageSize+1;
+		}
+		if(currentPage>count){
+			currentPage=count;
+		}
+		if(currentPage<=0){
+			currentPage=1;
+		}
+		bookl=ndao.paging(pageSize, currentPage,itype);
+		request.setAttribute("bookl", bookl);
+		request.setAttribute("type", itype);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("max", max);
+		return Action.SUCCESS;
+		
+	}
+
+	
+	public void upBookxmls() throws IOException, InvalidFormatException {
+		Admin admin = (Admin) session.getAttribute("admin");
+		if(xlsxFile==null||admin==null){
+			OpeFunction.outjS(request.getContextPath()+"/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "null");
+			return;
+		}
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(xlsxFile);
+
+		for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
+			XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
+			if (xssfSheet == null) {
+				continue;
+			}
+
+			for (int rowNum = 1; rowNum <=xssfSheet.getLastRowNum(); rowNum++) {
+
+				XSSFRow xssfRow = xssfSheet.getRow(rowNum);
+				if (xssfRow == null) {
+					continue;
+				}
+				if (xssfRow.getCell(0) != null) {
+					
+					try {
+					title = xssfRow.getCell(0)==null?null:xssfRow.getCell(0).toString();
+					author = xssfRow.getCell(1)==null?null:xssfRow.getCell(1).toString();
+					house = xssfRow.getCell(2)==null?null:xssfRow.getCell(2).toString();
+					summary = xssfRow.getCell(3)==null?null:xssfRow.getCell(3).toString();
+					review = xssfRow.getCell(4)==null?null:xssfRow.getCell(4).toString();
+					double bou=Double.parseDouble(xssfRow.getCell(5)==null?null:xssfRow.getCell(5).toString());
+					itype=(int)bou;
+					
+					
+					} catch (Exception e) {
+						e.printStackTrace();
+						
+						continue;
+					}
+					System.out.println(title+itype);
+					book=new Book();
+					if (ndao.byTitleBook(title) != null||itype<=0) {
+						continue;
+					} else {
+						book.setTitle(title);
+						book.setAuthor(author);
+						book.setSummary(summary);
+						book.setReview(review);
+						book.setTime(time);
+						book.setType(itype);
+						book.setHouse(house);
+						book.setAdmin(admin.getAdmin());
+						ndao.Save(book);
+
+					}
+				}
+		}
+		}
+		
+		OpeFunction.outjS(request.getContextPath()+"/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "ok");
+		
+
+		
+
+	}
+	public String upBook() throws IOException, InvalidFormatException {
+		Admin admin = (Admin) session.getAttribute("admin");
+		if (admin != null && title != null && author != null && summary != null
+				&& review != null&&itype>0&&house!=null) {
+			book.setTitle(title);
+			book.setAuthor(author);
+			book.setSummary(summary);
+			book.setReview(review);
+			book.setTime(time);
+			book.setType(itype);
+			book.setHouse(house);
+			book.setAdmin(admin.getAdmin());
+			ndao.Save(book);
+			return Action.SUCCESS;
+		}else{
+			OpeFunction.outjS(request.getContextPath()+"/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "no");
+			return null;
+		}
+		
+		
+	}
 	/**
 	 * 通过id查询新闻 看是否有更新
 	 * 
@@ -301,6 +425,7 @@ public class NewsAction {
 	 * 
 	 * @throws IOException
 	 */
+	
 	public void webRsave() throws IOException {
 		try {
 			
@@ -2358,5 +2483,46 @@ public class NewsAction {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public int getItype() {
+		return itype;
+	}
+	public void setItype(int itype) {
+		this.itype = itype;
+	}
+	public String getHouse() {
+		return house;
+	}
+	public void setHouse(String house) {
+		this.house = house;
+	}
+	@Override
+	public void setServletResponse(HttpServletResponse arg0) {
+		// TODO Auto-generated method stub
+		this.response=arg0;
+	}
+	@Override
+	public void setServletRequest(HttpServletRequest arg0) {
+		// TODO Auto-generated method stub
+		this.request=arg0;
+	}
+	public File getXlsxFile() {
+		return xlsxFile;
+	}
+	public void setXlsxFile(File xlsxFile) {
+		this.xlsxFile = xlsxFile;
+	}
+	
 
 }
