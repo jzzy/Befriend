@@ -111,7 +111,7 @@ return true;
 
 				</tr>
 				<tr>
-					<td>选择xlsx格式文件批量上传</td>
+					<td>选择xlsx格式文件批量上传 从B列开始读</td>
 					<td><input type="file" id="xlsxFile" name="xlsxFile"
 						/></td>
 
@@ -119,7 +119,7 @@ return true;
 				
 				<tr>
 					<td><br /> <input type="submit" name="button"
-						onclick="return check(picForm);" value="确定发布" /></td>
+						 value="确定发布" /></td>
 				</tr>
 
 			</table>

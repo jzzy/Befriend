@@ -79,16 +79,16 @@ Object name=request.getAttribute("name");
    <div class="xinxi1">
    
      <div class="heihei">
-      <p class="bluetit">学校信息：</p>
-      <p class="boldtit"><%=l.get(i).getSchoolname() %></p>
-      <p>学校地址：<%=l.get(i).getAddress() %></p>
+      <b class="bluetit" style="font-size: 18px">学校信息：</b>
+      <p class="boldtit"><b style="font-size: 17px"><%=l.get(i).getSchoolname() %></b></p>
+      <p>学校地址：</b><%=l.get(i).getAddress() %></p>
      </div>
      <!--heihei-->
      <div class="heihei">
       <%
       if(l.get(i).getScope()!=null){
       %>
-      <p class="boldtit2">服务范围：</p>
+      <p class="boldtit2"><b  style="font-size: 16px">服务范围：</b></p>
       <p><%=l.get(i).getScope() %></p>
       <%
       }

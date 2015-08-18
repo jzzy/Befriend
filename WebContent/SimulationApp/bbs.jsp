@@ -89,15 +89,15 @@ return true;
           
       <dd>    
        <p class="ctit5"><b>
-       <a id="showtext<%=f.getId() %>" onClick="showdiv('contentid<%=f.getId() %>','showtext<%=f.getId() %>')">
+       <a style="font-size: 16px;" id="showtext<%=f.getId() %>" onClick="showdiv('contentid<%=f.getId() %>','showtext<%=f.getId() %>')">
        <%=uu.getNickname()%>
        </a>
        <img src="SimulationApp/images/louzhu.png" width="41" /></b></p>
        <p class="date"><%=f.getTime()%></p>
      </dd>
  </dl>
- <h6 class="bbtit"><%=f.getTitle()%></h6>
- <p><%=f.getContent()%></p>
+ <h6 class="bbtit" style="font-size: 18px"><%=f.getTitle()%></h6>
+ <p style="font-size: 16px;color: black;"><%=f.getContent()%></p>
  
  
       <!-- 判断是否有图片论坛帖子图片 -->
@@ -157,7 +157,7 @@ return true;
           
          <dd>  
           
-          <a id="showtext<%=ri %><%=ft.getId() %>" onClick="showdiv('contentid<%=ri %><%=ft.getId() %>','showtext<%=ri %><%=ft.getId() %>')"><%=u.getNickname()%></a>
+          <a id="showtext<%=ri %><%=ft.getId() %>" onClick="showdiv('contentid<%=ri %><%=ft.getId() %>','showtext<%=ri %><%=ft.getId() %>')"><b><%=u.getNickname()%></b></a>
            <p class="date" ><%=ft.getTime()%><a  style="float:right;" class="huiff fr" id="showtext<%=ri %><%=ft.getId() %>" onClick="showdiv('contentid<%=ri %><%=ft.getId() %>','showtext<%=ri %><%=ft.getId() %>')"><img src="<%=request.getContextPath()%>/SimulationApp/images/huifu2.png" width="70"></a></p>
          </dd>
      </dl>

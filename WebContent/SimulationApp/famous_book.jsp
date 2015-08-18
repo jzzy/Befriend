@@ -70,8 +70,8 @@ default:
  	<img src="SimulationApp/images/book_back.png" style="margin-left: 10px;margin-top: 5px;" height="20px" alt="" />
  	</a>
  	</div>
- 	<div style="width:80%; float:left; text-align: center; ">
- 	<h2 style="color: #c0c0c0;"><%=title+" 共"+max %>本</h2>
+ 	<div style="width:90%; float:left; text-align: center; ">
+ 	<h3  style="font-size:5vw;color: #c0c0c0;margin-top: 6px;"><%=title+" 共"+max %>本</h3>
  	</div>
  	</div>
  	
@@ -83,11 +83,11 @@ default:
       <li class="book_item">
       	<h2>
       		
-      			<span><%=bookl.get(i).getTitle()%>
+      			<span style="font-size: 18px;"><%=bookl.get(i).getTitle()%>
       			</span>
       		
       	</h2><br />
-      	<p><%=bookl.get(i).getSummary()%>
+      	<p style="color: #666;"><%=bookl.get(i).getSummary()%>
       	<br />出版社：<%=bookl.get(i).getHouse()%>
       	</p>
      </li>

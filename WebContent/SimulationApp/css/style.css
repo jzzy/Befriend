@@ -3,7 +3,7 @@
 
 body,div,p,form,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6{ margin:0; padding:0;}
 body{ background:#fff; font-size:14px; color:#b9b9b8; font-family:"微软雅黑"}
-a{ text-decoration:none; color:#b9b9b8;}
+a{ text-decoration:none; color:#666;}
 a:hover{ text-decoration:underline;}
 a img{ border:0;}
 .fl{ float:left;}
@@ -127,14 +127,14 @@ ul{ list-style:none;}
 .tneitong img{ vertical-align:middle; margin-right:5px; width:40px; height:40px;}
 .guanzhu,.guanzhu2{ width:50px; height:25px; background:#3074c1; border:solid 1px #2864a8;border-radius:5px; float:right; color:#FFF; text-align:center; line-height:25px; margin-top:3px;}
 .guanzhu2{ background:#FFF; color:#3074c1}
-.other { overflow:hidden; zoom:1; margin-bottom:5px;}
+.other { overflow:hidden; zoom:1; margin-bottom:5px;font-size: 20px;}
 .other a{ color:#666; float:left; width:90%;overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
 .other span{ float:right; width:20%; text-align:right;}
 .other span img{ width:18px;vertical-align:middle; margin-right:3px;}
 .other span a{ color:#b9b9b8}
 .huifunierong{ color:#666; height:60px; overflow:hidden;}
 .huifu{padding:5px; clear:both; }
-.date{ color:#d8d8d8;/* font-size:12px;*/}
+.date{ color:#666;font-size: 12px;}
 .date img{ width:23px; vertical-align:middle;}
 .my{ height:35px; color:#FFF; font-size:14px; line-height:35px; background:#3074c1; text-align:center; margin-top:20px;}
 .my a{ color:#FFF;}
@@ -435,3 +435,4 @@ _top:expression(documentElement.scrollTop + documentElement.clientHeight-this.of
 .book_item p{color: #c0c0c0;width: 95%; display:block;overflow:hidden;word-break:keep-all;white-space:nowrap;text-overflow:ellipsis; }
 .book_detail{ padding:10px 20px; border-bottom:#CCC solid 1px;}
 .book_detail .book{background: url("../images/book_detail_right.png") no-repeat;background-size: 5px,50px;})
+.title_b{color: blue;}

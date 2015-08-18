@@ -3,7 +3,6 @@ package com.befriend.action;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -24,7 +23,7 @@ import com.befriend.entity.ForumTwo;
 import com.befriend.entity.User;
 import com.befriend.util.OpeFunction;
 import com.opensymphony.xwork2.Action;
-
+@SuppressWarnings("all")
 public class ForumAction {
 	private OpeFunction util;// 自建工具类
 	// Map session = (Map) util.getsession();// 创建 sessionmap
@@ -756,8 +755,14 @@ public class ForumAction {
 			 
 			return null;
 		}
-		cpe = forumdao.gettypeForumOneALL(model).size();
-		System.out.println("类型type是 ：" + model+"有" + cpe + "个论坛");
+		area=area==null?"北京":area;
+		if(model==5){
+			cpe =forumdao.getForumOneareaALL(area, model).size();
+		}else{
+			
+			cpe = forumdao.gettypeForumOneALL(model).size();
+		}
+		System.out.println("类型type是 ：" + model+"有" + cpe + "个论坛"+area);
 
 		if (pageSize <= 0) {
 			pageSize = 10;
@@ -775,9 +780,13 @@ public class ForumAction {
 			currentPage = cpe;
 		}
 		System.out.println("currentPage" + currentPage);
-
-		fones = forumdao.getForumOneALL(pageSize, currentPage, model);
-
+		
+		if(model==5){
+		fones = forumdao.getForumOneareaALL(pageSize, currentPage, area, model);
+		}else{
+			fones = forumdao.getForumOneALL(pageSize, currentPage, model);
+		
+		}
 		List<ForumTwo> ftwosa = new ArrayList<ForumTwo>();
 
 		for (int i = 0; i < fones.size(); i++) {
@@ -810,7 +819,8 @@ public class ForumAction {
 		request.setAttribute("us", us);
 
 		request.setAttribute("cpe", cpe);
-
+		request.setAttribute("area", area);
+		
 		request.setAttribute("currentPage", currentPage);
 		return Action.SUCCESS;
 

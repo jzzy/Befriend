@@ -830,54 +830,24 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 * 
 	 */
 	public String weiXniBDN() throws IOException, InterruptedException {
-		/**
-		System.out.println("province" + province);
-		System.out.println("city" + city);
-		
-		if (province != null && !province.equals("省份名")) {
-			
-			area = province;
-			
-			session.setAttribute("province", province);
-			if (city != null) {
-				
-				session.setAttribute("city", city);
+		if(province==null){
+			Object pro=session.getAttribute("province");
+			if(pro==null){
+				province="湖南";
+			}else{
+				province=pro.toString();
 			}
-		}
-
-		System.out.println("微信本地新闻首页");
-		if (area == null || area == "") {
-			area = "湖南";
-		}
 		
-		Object oprovince = session.getAttribute("province");
-		
-		Object ocity = session.getAttribute("city");
-
-		if (oprovince != null) {
-			
-			province = oprovince.toString();
-			area = province;
-		}
-		if (ocity != null) {
-		
-			city = ocity.toString();
-
-		}
-
-		*/
-		if(area==null){
-			area="湖南";
 		}else{
-			area=area.substring(0, area.length()-1);
-			session.setAttribute("province", area);
+			//province=province.substring(0, province.length()-1);
+			
 		}
-		nl = ndao.Hotarea(8, area);
+		session.setAttribute("province", province);
+		nl = ndao.Hotarea(8, province);
 		request.setAttribute("nl", nl);
-		request.setAttribute("Address", area);
 		request.setAttribute("province", province);
 		request.setAttribute("city", city);
-		System.out.println("" + area + nl.size() + "新闻");
+		System.out.println("" + province + nl.size() + "新闻");
 		return Action.SUCCESS;
 	}
 
@@ -1257,6 +1227,10 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public String webNewsA10() throws IOException {
 		try {
 			User u = (User) session.getAttribute("u");
+			Object pro=session.getAttribute("province");
+			if(pro!=null){
+				area=pro.toString();
+			}
 			if (u != null) {
 
 				System.out.println("获取到用户信息了");
@@ -1265,6 +1239,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 				// 市级
 				areas = u.getAddcity();
 			}
+			
 			System.out.println("时间是" + util.getNowTime());
 			System.out.println("进入了webNewsA10!!");
 			int day = 14;

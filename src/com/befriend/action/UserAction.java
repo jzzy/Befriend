@@ -1610,7 +1610,7 @@ public class UserAction extends ActionSupport{
 	 * @throws IOException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public String webLogin() throws IOException, NoSuchAlgorithmException {
+	public void webLogin() throws IOException, NoSuchAlgorithmException {
 
 		System.out.println("进入webLogin");
 
@@ -1620,14 +1620,14 @@ public class UserAction extends ActionSupport{
 		u = userdao.byUsernameAccnumnoPhone(username);
 		if (u == null) {
 			System.out.println("账户为空");
-			util.Out().print("账户为空");
-			return null;
+			util.Out().print(false);
+			return ;
 		}
 		Password pd = userdao.login(u.getId(), password);
 		if (pd == null) {
 			System.out.println("密码不对!");
-			util.Out().print("密码不对");
-			return null;
+			util.Out().print(false);
+			return ;
 		}
 
 		if (u != null) {
@@ -1652,8 +1652,8 @@ public class UserAction extends ActionSupport{
 
 			session.setAttribute("u", u);
 
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+//			((HttpServletResponse) util.response()).sendRedirect(request
+//					.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 			String url = "";
 			if (u.getAddress() != null) {
@@ -1663,9 +1663,8 @@ public class UserAction extends ActionSupport{
 				url = "http://127.0.0.1/Befriend/aStas?os=" + os;
 			}
 			WechatKit.sendGet(url);
+			util.Out().print(true);
 		}
-
-		return null;
 
 	}
 

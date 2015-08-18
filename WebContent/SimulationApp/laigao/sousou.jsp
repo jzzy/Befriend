@@ -56,14 +56,14 @@ return true;
    <h1 class="tit tit8"><a href="Special_Columns.html" class="fl"><a style="float:left;" href="javascript:history.back(-1);">&lt; 搜寻学区房</a></a><b></b></h1>
    <div class="relycont2">
       <div class="sss"><input type="text" id="schoolname" name="schoolname" class="scon" /><input onclick="return check();" type="submit" value="" class="sbut" /></div>
-      <ul class="slist">
+      <ul style="color: black; font-size: 16px;" class="slist">
          <li>输入要查找的学校获得对应学区房信息</li>
          <li>输入学区房小区名称获得周围学校信息</li>
       </ul>
    </div>
    <!--relycont2-->
    <div class="dasou">
-      <p class="stit">大家都在搜：</p>
+      <p class="stit" style="color: #666; font-size: 18px;">大家都在搜：</p>
       <ul>
       	<%
 		
@@ -87,7 +87,7 @@ return true;
 	 for(int i=0;i<l.size();i++){
 		
 	%>
-         <li><a href="<%=request.getContextPath()%>/selectwxHouseall?schoolname=<%=l.get(i).getSchoolname() %>"><%=l.get(i).getSchoolname() %></a></li>
+         <li "><a style="color: black; font-size: 14px;" href="<%=request.getContextPath()%>/selectwxHouseall?schoolname=<%=l.get(i).getSchoolname() %>"><%=l.get(i).getSchoolname() %></a></li>
          <%
 	 }
          %>

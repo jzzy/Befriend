@@ -25,7 +25,7 @@
 	<a href="<%=request.getContextPath()%>/getUser">新增各地论坛管理员</a><br>
 	<a href="<%=request.getContextPath()%>/getUseradmin">查询论坛管理员</a><br>
 	<hr></hr>
-	<a href="<%=request.getContextPath()%>/weiXniBDN">微信新闻首页</a><br>
+	<a href="<%=request.getContextPath()%>/weixin/weixin.html">微信新闻首页</a><br>
 	<a href="<%=request.getContextPath()%>/SimulationApp/login.html">WEB用户登入</a><br>
 	<a href="<%=request.getContextPath()%>/webNewsA10">WEB主页</a><br>
 	

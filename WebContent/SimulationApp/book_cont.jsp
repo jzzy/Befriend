@@ -54,28 +54,28 @@ default:
  	</a>
  	</div>
  	<div style="width:80%; float:left; text-align: center; ">
- 	<h2 style="color: #000000;">《<%=title %>》</h2>
+ 	<h2 style="color: #000000;margin-top: 6px;font-size: 5vw;">《<%=title %>》</h2>
  	</div>
  	</div>
    <!--top-->
  <div class="book_detail">
  
  <div class="book">
-  	<p style="padding:0px 10px;color: #000000;"><span style="font-size: 18px;font-weight: bold;">书名:<%=book.getTitle() %></span><br />作者:<%=book.getAuthor() %><br /><%=book.getHouse()%></p>
+  	<p style="padding:0px 10px;color: #000000;"><span style="font-size: 18px;font-weight: bold;">书名:<%=book.getTitle() %></span ><span style="font-size: 16px"><br />作者:<%=book.getAuthor() %><br /><%=book.getHouse()%></span></p>
    </div>
    
    <br />
    <br />
    
    <div class="book">
-  	<p style="padding:0px 10px;color: #000000;"><span style="font-size: 20px;font-weight: bold;">简介:</span><%=book.getSummary() %></p>
+  	<p style="padding:0px 10px;color: #000000;"><span style="font-size: 20px;font-weight: bold;">简介:</span><span style="font-size: 16px"><%=book.getSummary() %></p>
    </div>
    
    <br />
    <br />
    
    <div class="book">
-  	<p style="padding:0px 10px;color: #000000;"><span style="font-size: 20px;font-weight: bold;">书评:</span><%=book.getReview() %></p>
+  	<p style="padding:0px 10px;color: #000000;"><span style="font-size: 20px;font-weight: bold;">书评:</span><span style="font-size: 16px"><%=book.getReview() %></p>
    </div>
    </div>
    </div>

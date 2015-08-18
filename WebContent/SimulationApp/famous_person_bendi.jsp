@@ -43,7 +43,7 @@ if(nl==null||currentPage<=0){
    <%
    for(int i=0;i<nl.size();i++){
    %>
-      <li><a href="<%=request.getContextPath()%>/webNewsId?id=<%=nl.get(i).getId()%>"><span><%=nl.get(i).getTitle() %></span><b><%=nl.get(i).getTime() %><img src="SimulationApp/images/xing.png" /><%=nl.get(i).getHits()%></b></a></li>
+      <li><a href="<%=request.getContextPath()%>/webNewsId?id=<%=nl.get(i).getId()%>"><span style="color: black; font-size: 16px;"> <%=nl.get(i).getTitle() %></span><b><%=nl.get(i).getTime() %><img src="SimulationApp/images/xing.png" /><%=nl.get(i).getHits()%></b></a></li>
     <%
    }
     %> 

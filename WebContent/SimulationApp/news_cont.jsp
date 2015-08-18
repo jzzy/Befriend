@@ -28,25 +28,25 @@ if(n==null){
 <div class="cont"><!--top-->
  <h1 class="tit tit5"><a style="float:left;" href="javascript:history.back(-1);"><span>&lt; 新闻详情</span></a></h1>
  <div class="newtit">
-       <h2 class="ntit"><%=n.getTitle() %></h2>
+       <h2 class="ntit" style="color:black; font-size: 21px;"><%=n.getTitle() %></h2>
        
       <%
        if(n.getArea()!=null&&n.getAreas()!=null){
        %>
        
-       <div class="date"><%="发布日期:"+n.getTime()+"   "+n.getArea()+n.getAreas() %></div>
+       <div class="date" style="color: #666;"><%="发布日期:"+n.getTime()+"   "+n.getArea()+n.getAreas() %></div>
 		<% 
        }else if(n.getTypes()!=null){
 		%>
-		 <div class="date"><%="发布日期:"+n.getTime()+"   "+n.getType() +" "+n.getTypes()%></div>
+		 <div class="date" style="color: #666;"><%="发布日期:"+n.getTime()+"   "+n.getType() +" "+n.getTypes()%></div>
 		<%
 		}else if(n.getType()!=null){
        %>
-        <div class="date"><%="发布日期:"+n.getTime()+"   "+n.getType()%></div>
+        <div class="date" style="color: #666;"><%="发布日期:"+n.getTime()+"   "+n.getType()%></div>
        <%
        }else{
        %>
-        <div class="date"><%="发布日期:"+n.getTime()%></div>
+        <div class="date" style="color: #666;" style="color: #666;"><%="发布日期:"+n.getTime()%></div>
        <%
        }
        %>
@@ -57,7 +57,7 @@ if(n==null){
    <!--  <div class="zhaiyao"><b><%=n.getSummary() %></div>-->
    <!--zhaiyao-->
    <div class="contimg" style="text-align:center"><p><img src="<%=request.getContextPath()+n.getImgmax() %>"  width="90%"></p></div>
-   <p class="nditail"><%=n.getContent() %></p>
+   <p class="nditail" style="color: black;font-size: 16px"><%=n.getContent() %></p>
     <% 
    	if(rl!=null&&ul!=null){
    		%>
@@ -84,12 +84,12 @@ if(n==null){
        }
        %>
        
-     <p style="clear:both;"><%=rl.get(i).getReview() %></p>   
+     <p style="clear:both;color: black;"><%=rl.get(i).getReview() %></p>   
        </p>
-       <p class="nate"><span><!-- <img src="<%=request.getContextPath()%>/SimulationApp/images/time.png" />--></span>
+       <p class="nate" style="color: #666;"><span><!-- <img src="<%=request.getContextPath()%>/SimulationApp/images/time.png" />--></span>
        </p>
        <br>
-       <p class="nate"><span><%=rl.get(i).getTime() %></span>
+       <p class="nate" style="color: #666;"><span><%=rl.get(i).getTime() %></span>
        </p>
       
        </p>

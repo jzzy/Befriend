@@ -6,7 +6,7 @@
 <%
   
 //按照时间排序  11个
-
+@SuppressWarnings("all")
 List<News> Hottime=(List)request.getAttribute("Hottime");
 //最热3
 
@@ -72,18 +72,18 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
 							{
 						%>
    <dl class="list">
-      <dt><a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hottime.get(i).getId()%>"><img src="<%=request.getContextPath()%><%=Hottime.get(i).getImgmax()%>"/></a></dt>
+      <dt><a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hottime.get(i).getId()%>"><img src="<%=request.getContextPath()%><%=Hottime.get(i).getImg()%>"/></a></dt>
       <a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hottime.get(i).getId()%>">
       <dd>
       <%
       if(i<=5){
       %>
-           <b style="color:#666"><img width="16px" src="<%=request.getContextPath()%>/SimulationApp/images/new-30-.png"/><%=Hottime.get(i).getTitle()%></b>
+           <b style="color:#666;font-size: 18px;"><img width="16px" src="<%=request.getContextPath()%>/SimulationApp/images/new-30-.png"/><%=Hottime.get(i).getTitle()%></b>
           
           <%
       }else{
           %>
-          <b style="color:#666"><%=Hottime.get(i).getTitle()%></b>
+          <b style="color:#666;font-size: 18px;"  ><%=Hottime.get(i).getTitle()%></b>
           
           <%
           } 
@@ -107,12 +107,12 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
    <dl class="list">
       <dt>
       <a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hotarea.get(i).getId()%>">
-      <img src="<%=request.getContextPath()%><%=Hotarea.get(i).getImgmax() %>" />
+      <img src="<%=request.getContextPath()%><%=Hotarea.get(i).getImg() %>" />
       </a>
       </dt>
      <a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hotarea.get(i).getId()%>">
       <dd>
-           <b style="color:#666"><%=Hotarea.get(i).getTitle() %></b>
+           <b style="color:#666;font-size: 18px;"><%=Hotarea.get(i).getTitle() %></b>
           <p><%=Hotarea.get(i).getSummary() %></p>
       </dd>
       </a>
@@ -132,10 +132,10 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
 							{
 						%>
    <dl class="list border0">
-      <dt><a href="<%=request.getContextPath()%>/webNewsId?id=<%=typejk.get(i).getId()%>"><img src="<%=request.getContextPath()%><%=typejk.get(i).getImgmax() %>" /></a></dt>
+      <dt><a href="<%=request.getContextPath()%>/webNewsId?id=<%=typejk.get(i).getId()%>"><img src="<%=request.getContextPath()%><%=typejk.get(i).getImg() %>" /></a></dt>
       <a href="<%=request.getContextPath()%>/webNewsId?id=<%=typejk.get(i).getId()%>">
       <dd>
-          <b style="color:#666"><%=typejk.get(i).getTitle() %></b>
+          <b style="color:#666;font-size: 18px;"><%=typejk.get(i).getTitle() %></b>
           <p><%=typejk.get(i).getSummary() %></p>
       </dd>
       </a>
@@ -153,11 +153,11 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
 						%>
    						
    <dl class="list border0">
-      <dt><a href="<%=request.getContextPath()%>/webNewsId?id=<%=typeqs.get(i).getId()%>"><img src="<%=request.getContextPath()%><%=typeqs.get(i).getImgmax()%>" /></a></dt>
+      <dt><a href="<%=request.getContextPath()%>/webNewsId?id=<%=typeqs.get(i).getId()%>"><img src="<%=request.getContextPath()%><%=typeqs.get(i).getImg()%>" /></a></dt>
      <a href="<%=request.getContextPath()%>/webNewsId?id=<%=typeqs.get(i).getId()%>">
      
       <dd>
-        <b style="color:#666"><%=typeqs.get(i).getTitle() %></b>
+        <b style="color:#666;font-size: 18px;"><%=typeqs.get(i).getTitle() %></b>
           <p><%=typeqs.get(i).getSummary() %></p>
       </dd>
       </a>
@@ -176,10 +176,10 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
 							
 						%>
    <dl class="list">
-      <dt><a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hottest.get(i).getId()%>"><img src="<%=request.getContextPath()%><%=Hottest.get(i).getImgmax() %>" /></a></dt>
+      <dt><a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hottest.get(i).getId()%>"><img src="<%=request.getContextPath()%><%=Hottest.get(i).getImg() %>" /></a></dt>
      <a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hottest.get(i).getId()%>">
       <dd>
-         <b style="color:#666"><%=Hottest.get(i).getTitle() %></b>
+         <b style="color:#666;font-size: 18px;"><%=Hottest.get(i).getTitle() %></b>
           <p><%=Hottest.get(i).getSummary() %></p>
       </dd>
       </a>
