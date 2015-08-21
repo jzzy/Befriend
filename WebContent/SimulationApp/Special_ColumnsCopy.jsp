@@ -18,20 +18,28 @@ List<App> la=(List)request.getAttribute("la");
 <script  src="<%=request.getContextPath()%>SimulationApp/js/TouchSlide.1.1.js"></script>
 </head>
 
-<body style="background-color:#35b67a">
-<div class="cont">
-   <div class="top">
+<body style="background-color: white;">
+<div  class="cont">
+   <div  class="top">
        <a href="<%=request.getContextPath()%>/webNewsA10" class="fl"><img src="<%=request.getContextPath()%>/SimulationApp/images/xw_03.png" height="40" /></a>
       <p class="set fr"><a href="<%=request.getContextPath()%>/SimulationApp/about.html"></a><a href="<%=request.getContextPath()%>/SimulationApp/about.html"><img src="SimulationApp/images/xw_07.png" height="40" /></a></p>
          </div>
    <!--top-->
    <ul class="nav">
       <li><a href="<%=request.getContextPath()%>/webNewsA10">今日必读</a></li>
-      <li><a href="<%=request.getContextPath()%>/SimulationApp/exchange2.jsp">社区互动</a></li>
+      <li><a href="<%=request.getContextPath()%>/webForumApptype">社区互动</a></li>
       <li class="current"><a href="<%=request.getContextPath()%>/webGetapp">精彩内容</a></li>
       <li><a href="<%=request.getContextPath()%>/SimulationApp/personal_information.jsp">我的信息</a></li>
    </ul>
+     <a href="<%=request.getContextPath()%>/SimulationApp/laigao/laigao.html"><img height="60px" width="350px" src="<%=request.getContextPath()%>/SimulationApp/images/08201_01.png" /></a><br>
+   <a href="<%=request.getContextPath()%>/selectwxHouseallzh"><img height="60px" width="350px" src="<%=request.getContextPath()%>/SimulationApp/images/08201_02.png" /></a><br>
+   <a href="<%=request.getContextPath()%>/SimulationApp/exchangebook.jsp"><img height="60px" width="353px" src="<%=request.getContextPath()%>/SimulationApp/images/08201_03.png" /></a><br>
+    <a href="<%=request.getContextPath()%>/SimulationApp/feedback.html"><img height="60px" width="353px" src="<%=request.getContextPath()%>/SimulationApp/images/08201_04.png" /></a>
+   
+   
+   
    <!--nav <a href="/Befriend/JzFoIosAndAndroid"></a>-->
+   <!--  
 <div   id="slideBox" class="slideBox slideBox2">
 <div class="jing">
 <img src="<%=request.getContextPath()%>/SimulationApp/images/imma_02.png" width="100%" />
@@ -47,6 +55,7 @@ List<App> la=(List)request.getAttribute("la");
              
    </div>
    <!--slideBox-->
+   
    <!--  
    <div class="applist">
        <ul>

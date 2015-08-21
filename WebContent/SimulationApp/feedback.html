@@ -11,13 +11,13 @@
 <body class="bgcolor">
 <form action="webSaveFeedback" method="post">
 <div class="cont">
-<h1 class="tit tit5"><span class="fl"><a href="javascript:history.back(-1);" class="fr">&lt; 反馈至家长之友</a></span><a href="javascript:history.back(-1);" class="fr"><img src="images/fanhui.png" width="25"></a></h1>
+<h1 class="tit tit5"><span class="fl"><a href="javascript:history.back(-1);" class="fr">&lt; 反馈至家长之友</a></span><a href="javascript:history.back(-1);" class="fr"></a></h1>
 
 
 
 
 <div class="relycont relycont2">
-   <div><textarea name="information"></textarea></div>
+   <div><textarea id="information" name="information"></textarea></div>
    <div class="fasong"><!--  <a class="btn03" data-toggle="modal" href="#forgetform">--><input type="submit" onclick="return cka()" value="发送" /><!--</a>--></div>
 </div>
 <!--recont-->
@@ -48,9 +48,16 @@ $(document).ready(function(){
 });
 function cka()
 {
- 
-  alert("反馈成功!");
-  return true;
+	 var information = document.getElementById("information").value;
+	 if(information.length<2){
+		 alert("请填写内容!");
+		  return false;
+	 }else{
+		 alert("反馈成功!");
+		  return true;
+	 }
+  
+
   
  
  

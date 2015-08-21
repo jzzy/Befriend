@@ -306,7 +306,7 @@ public class ForumDAOImpl implements ForumDAO {
 	@Override
 	public List<ForumOne> getForumOneALL234(int pageSize, int currentPage) {
 		Query query = entityManager.createQuery("select f from ForumOne f"
-				+ " where f.type=2 or f.type=3 or f.type=4 order"
+				+ " where f.type!=1 order"
 				+ " by f.time desc");
 
 		int startRow = (currentPage - 1) * pageSize;

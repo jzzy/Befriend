@@ -26,37 +26,39 @@ if(n==null){
 <%}else{ %>
 <body>
 <div class="cont"><!--top-->
+ <h1 class="tit tit5"><a style="float:left;" href="javascript:history.back(-1);"><span>&lt; 新闻详情</span></a></h1>
  <div class="newtit">
-       <h2 class="ntit"><%=n.getTitle() %></h2>
+       <h2 class="ntit" style="color:black; font-size: 21px;"><%=n.getTitle() %></h2>
        
       <%
        if(n.getArea()!=null&&n.getAreas()!=null){
        %>
        
-       <div class="date"><%="发布日期:"+n.getTime()+"   "+n.getArea()+n.getAreas() %></div>
+       <div class="date" style="color: #666;"><%="发布日期:"+n.getTime()+"   "+n.getArea()+n.getAreas() %></div>
 		<% 
        }else if(n.getTypes()!=null){
 		%>
-		 <div class="date"><%="发布日期:"+n.getTime()+"   "+n.getType() +" "+n.getTypes()%></div>
+		 <div class="date" style="color: #666;"><%="发布日期:"+n.getTime()+"   "+n.getType() +" "+n.getTypes()%></div>
 		<%
 		}else if(n.getType()!=null){
        %>
-        <div class="date"><%="发布日期:"+n.getTime()+"   "+n.getType()%></div>
+        <div class="date" style="color: #666;"><%="发布日期:"+n.getTime()+"   "+n.getType()%></div>
        <%
        }else{
        %>
-        <div class="date"><%="发布日期:"+n.getTime()%></div>
+        <div class="date" style="color: #666;" style="color: #666;"><%="发布日期:"+n.getTime()%></div>
        <%
        }
        %>
-   <a href="<%=request.getContextPath()%>/webCsave?newsid=<%=n.getId()%>">收藏</a>
+  <!--  <a href="<%=request.getContextPath()%>/webCsave?newsid=<%=n.getId()%>">收藏</a>--> 
    </div>
    <!--newtit-->
 
-   <div class="zhaiyao"><b><%=n.getSummary() %></div>
+   <!--  <div class="zhaiyao"><b><%=n.getSummary() %></div>-->
    <!--zhaiyao-->
-   <div class="contimg"><p><img src="<%=request.getContextPath()+n.getImgmax() %>" width="100%"></p></div>
-   <p class="nditail"><%=n.getContent() %></p>
+   <div class="contimg" style="text-align:center"><p><img src="<%=request.getContextPath()+n.getImgmax() %>"  width="90%"></p></div>
+   <div style="color: black;font-size: 16px;"><p class="nditail" style="color: black;font-size: 16px;"><%=n.getContent() %></p>
+    </div>
     <% 
    	if(rl!=null&&ul!=null){
    		%>
@@ -69,7 +71,8 @@ if(n==null){
   
    <div class="post">
        <h2 class="ntit2"><%=ul.get(i).getNickname() %></h2>
-       <div class="myname"><p class="rlyname rlyname2">
+       <div class="myname">
+       <p class="rlyname rlyname2">
        <%
        if(ul.get(i).getImg()!=null){
        %>
@@ -81,8 +84,17 @@ if(n==null){
        <%
        }
        %>
-       <%=rl.get(i).getReview() %> 
-       <p class="nate"><span><img src="<%=request.getContextPath()%>/SimulationApp/images/time.png" /><%=rl.get(i).getTime() %></span></p></div> 
+       
+     <p style="clear:both;color: black;"><%=rl.get(i).getReview() %></p>   
+       </p>
+       <p class="nate" style="color: #666;"><span><!-- <img src="<%=request.getContextPath()%>/SimulationApp/images/time.png" />--></span>
+       </p>
+       <br>
+       <p class="nate" style="color: #666;"><span><%=rl.get(i).getTime() %></span>
+       </p>
+      
+       </p>
+       </div> 
          </div>
   
      <% 
@@ -95,7 +107,7 @@ if(n==null){
     <%
    	}
     %>
-    <br/><input type="button" name="Submit" onclick="javascript:history.back(-1);" value="返回">
+   
    <!--  
    <h1 class="tit tit3"><span>更多热点</span><a href="#" class="more">></a></h1>
    <ul class="hot">
@@ -106,7 +118,20 @@ if(n==null){
    -->
    <!--hot-->
  <!--hot-->
-   <div class="pingnum">
+   <p style="height: 300px;"></p>
+   <!-- 回复楼主-->
+ <form action="webRsave" method="post" >
+ 	<div class="pingnum pingnum3">	
+	<!-- 获取论坛的id -->
+	<input type="text" value="<%=n.getId() %>" name="newsid" style="display: none"/>
+	
+	<!-- 获取回复信息 -->
+  <input type="text" id="review" class="shuru"  name="review" /><input type="submit" class="btijiao"  value="评论" />
+
+	</div>
+   
+ </form>
+ <!-- 
    <form action="webRsave">
    <table>
    <tr>
@@ -119,8 +144,9 @@ if(n==null){
    </tr>
    </table>
    </form>
+    -->
      
-   </div>
+  
 </div>
 <!--cont-->
 

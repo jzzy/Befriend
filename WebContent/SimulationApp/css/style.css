@@ -114,7 +114,7 @@ ul{ list-style:none;}
 .zhaiyao{ padding:10px 20px; border-bottom:solid 1px #ccc;}
 .zhaiyao b{ color:#666}
 .contimg{ padding:10px 20px;}
-.nditail{ color:#666; text-indent:2em; padding:0 20px 10px 20px;}
+.nditail{ color: black;font-size: 16px; padding:0px 20px 10px 20px;}
 .hot{ padding:10px 20px; list-style:circle; list-style:inside; border-bottom:solid 1px #CCC}
 .hot li{ margin-bottom:3px;}
 .pingnum{ padding:10px 0px 10px 10px; background:#efefef;overflow:hidden; zoom:1; margin-top:10px;}

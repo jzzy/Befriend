@@ -53,7 +53,7 @@ return true;
 <body>
 <form action="selectwxHouseall" method="post" enctype="application/x-www-form-urlencoded">
 <div class="cont">
-   <h1 class="tit tit8"><a href="Special_Columns.html" class="fl"><a style="float:left;" href="javascript:history.back(-1);">&lt; 搜寻学区房</a></a><b></b></h1>
+   <h1 class="tit tit5"><a href="Special_Columns.html" class="fl"><a style="float:left;" href="javascript:history.back(-1);">&lt; 搜寻学区房</a></a><b></b></h1>
    <div class="relycont2">
       <div class="sss"><input type="text" id="schoolname" name="schoolname" class="scon" /><input onclick="return check();" type="submit" value="" class="sbut" /></div>
       <ul style="color: black; font-size: 16px;" class="slist">

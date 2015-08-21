@@ -15,30 +15,8 @@ int cpe=(Integer)request.getAttribute("cpe");
 Object area=request.getAttribute("area");
 //获取类型
 int id=(Integer)request.getAttribute("id");
-String type=null;
-switch (id) {
-case 1:
-	type="专家答疑";
-	break;
-
-case 2:
-	type="学前";
-	break;
-case 3:
-	type="小学";
-	break;
-case 4:
-	type="中学";
-	break;
-case 5:
-	type="同城家长";	
-	break;
-default:
-	System.out.println("请重新登入!");
-	((HttpServletResponse) OpeFunction.response())
-			.sendRedirect("/Befriend/SimulationApp/login.html");
-	return ;			
-}
+id=0;
+String type="全国论坛";
 //获取当前页数
 int currentPage=(Integer)request.getAttribute("currentPage");
 if(fone==null||us==null){
@@ -54,14 +32,28 @@ if(fone==null||us==null){
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>查看论坛</title>
-<link href="SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/jquery.js"></script>
+<title>社区互动</title>
+<link href="<%=request.getContextPath()%>/SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=request.getContextPath()%>/SimulationApp/js/jquery.js"></script>
 <script type="text/javascript" src="js/style.js"></script>
 </head>
 
 <body>
-<div class="cont">
+<div class="topfixed"  style="position: static ;">
+   <div class="top">
+       <a href="<%=request.getContextPath()%>/webNewsA10" class="fl"><img src="<%=request.getContextPath()%>/SimulationApp/images/xw_03.png" height="40" /></a>
+     <p class="set fr"><a href="<%=request.getContextPath()%>/SimulationApp/about.html"></a><a href="<%=request.getContextPath()%>/SimulationApp/about.html"><img src="<%=request.getContextPath()%>/SimulationApp/images/xw_07.png" height="40" /></a></p>
+        </div>
+   <!--top-->
+   <ul class="nav">
+     <li><a href="<%=request.getContextPath()%>/webNewsA10">今日必读</a></li>
+      <li class="current"><a href="<%=request.getContextPath()%>/webForumApptype">社区互动</a></li>
+      <li><a href="<%=request.getContextPath()%>/webGetapp">精彩内容</a></li>
+      <li ><a href="<%=request.getContextPath()%>/SimulationApp/personal_information.jsp">我的信息</a></li>
+    </ul>
+   <!--nav-->
+ </div>
+<div class="cont" >
 <script type="text/javascript">  
 	function initcity() {
 		var obj = document.getElementById("select");
@@ -79,7 +71,7 @@ if(fone==null||us==null){
   
  <!--topfixed-->
  <div class="tname tit1">
-    <a style="float: left;" href="<%=request.getContextPath()%>/SimulationApp/post_publish.jsp"><b><span><%=type %>讨论社区</span></b></a>
+    <a style="float: left;" href="<%=request.getContextPath()%>/SimulationApp/post_publish.jsp"></a><b style="float: left;"><span><%=type %>讨论社区</span></b>
    <%
    if(id==5){
    %>
@@ -171,7 +163,18 @@ if(fone==null||us==null){
                    <div class="huifu3">
                       <p class="other"><a href="<%=request.getContextPath()%>/webForumLook?id=<%=fone.get(i).getId() %>"><b><%=fone.get(i).getTitle() %></b></a></p>
                       <p class="huifunierong"><a href="<%=request.getContextPath()%>/webForumLook?id=<%=fone.get(i).getId() %>"><%=fone.get(i).getContent() %></a></p>
-                      <p class="date"><span class="fl">来源：<%=fone.get(i).getArea()+fone.get(i).getAreas() %></span><span class="fr"><img src="SimulationApp/images/pinglun.png" /><%=fone.get(i).getFrs() %><img src="SimulationApp/images/huif.png" /><%=fone.get(i).getfHits() %></span></p>
+                      <p class="date"><span class="fl">来源：
+                      <%
+                      String are="";
+                      if(fone.get(i).getArea()!=null){
+                    	  are+=fone.get(i).getArea();
+                      }
+                      if(fone.get(i).getAreas()!=null){
+                    	  are+=" "+fone.get(i).getAreas();
+                      }
+                      %>
+                      <%=are %>
+                      </span><span class="fr"><img src="SimulationApp/images/pinglun.png" /><%=fone.get(i).getFrs() %><img src="SimulationApp/images/huif.png" /><%=fone.get(i).getfHits() %></span></p>
                   
                   <!--  <br />
                   <hr />
@@ -203,7 +206,7 @@ if(fone==null||us==null){
    
    <p align="center">一共<%=cpe %>页 当前是第<%=currentPage %>页</p>
    <ul class="page page2">
-<li><a href="<%=request.getContextPath()%>/SimulationApp/exchange2.jsp">主页</a></li>
+<li><a href="<%=request.getContextPath()%>/webForumApptype">主页</a></li>
 <li><a href="<%=request.getContextPath()%>/webForumApptype?model=<%=id%>&pageSize=10&currentPage=1&area=<%=area %>">首页</a></li>
 <li><a href="<%=request.getContextPath()%>/webForumApptype?model=<%=id%>&pageSize=10&currentPage=<%=currentPage-1%>&area=<%=area %>">上一页</a></li>
 <li><a href="<%=request.getContextPath()%>/webForumApptype?model=<%=id%>&pageSize=10&currentPage=<%=currentPage+1%>&area=<%=area %>">下一页</a></li>

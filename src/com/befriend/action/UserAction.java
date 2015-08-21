@@ -34,7 +34,7 @@ import com.befriend.wechat.RefreshAccessToken;
 import com.befriend.wechat.WechatKit;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
-
+@SuppressWarnings("all")
 public class UserAction extends ActionSupport{
 	private User u = new User();
 	public OpeFunction util;
@@ -649,115 +649,118 @@ public class UserAction extends ActionSupport{
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public String webRegistration() throws IOException, JSONException {
+	public synchronized String webRegistration() throws IOException, JSONException {
+		
 
-		phone = request.getParameter("phone");
-		password = request.getParameter("password");
-		username = request.getParameter("username");
+			phone = request.getParameter("phone");
+			password = request.getParameter("password");
+			username = request.getParameter("username");
 
-		if (password == null) {
-			System.out.println("密码为空");
-			util.Out().print("密码为空");
-			return null;
-		}
-		if (phone == null) {
-			System.out.println("手机号为空");
-			util.Out().print("手机号为空");
-			return null;
-		}
-		// 验证用户名
-		String reg = "^[A-Za-z_][A-Za-z0-9]{5,17}";
-		System.out.println(username);
-		System.out.println(password);
-		if (username != null) {
-			if (!username.matches(reg)) {
-				System.out.println("用户名格式不对！");
-				util.Out().print("用户名格式不对！");
+			if (password == null) {
+				System.out.println("密码为空");
+				util.Out().print("密码为空");
 				return null;
 			}
+			if (phone == null) {
+				System.out.println("手机号为空");
+				util.Out().print("手机号为空");
+				return null;
+			}
+			// 验证用户名
+			String reg = "^[A-Za-z_][A-Za-z0-9]{5,17}";
+			System.out.println(username);
+			System.out.println(password);
+			if (username != null) {
+				if (!username.matches(reg)) {
+					System.out.println("用户名格式不对！");
+					util.Out().print("用户名格式不对！");
+					return null;
+				}
 
-		}
-		// 验证密码
-		reg = "[A-Za-z0-9_]{6,18}";
-		if (!password.matches(reg)) {
-			System.out.println("密码格式不对！");
-			util.Out().print("密码格式不对！");
-			return null;
-		}
-		// 验证手机号
-		String regp = "[0-9]{11}";
-		if (!phone.matches(regp)) {
-			System.out.println("密码格式不对！");
-			util.Out().print("密码格式不对！");
-			return null;
-		}
-		System.out.println("进入web用户注册手机号为:" + phone);
-		System.out.println("进入时间" + util.getNowTime());
-		System.out.println("手机号" + phone);
-		System.out.println("用户名" + username);
-		boolean b = true;
+			}
+			// 验证密码
+			reg = "[A-Za-z0-9_]{6,18}";
+			if (!password.matches(reg)) {
+				System.out.println("密码格式不对！");
+				util.Out().print("密码格式不对！");
+				return null;
+			}
+			// 验证手机号
+			String regp = "[0-9]{11}";
+			if (!phone.matches(regp)) {
+				System.out.println("密码格式不对！");
+				util.Out().print("密码格式不对！");
+				return null;
+			}
+			System.out.println("进入web用户注册手机号为:" + phone);
+			System.out.println("进入时间" + util.getNowTime());
+			System.out.println("手机号" + phone);
+			System.out.println("用户名" + username);
+			boolean b = true;
 
-		while (b) {
+			while (b) {
 
-			accnumno = String
-					.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
-			if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
-				b = false;
+				accnumno = String
+						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
+					b = false;
+				}
+
+			}
+			// 判断手机号是否注册过
+			if (userdao.byUsernameAccnumnoPhone(phone) != null) {
+				System.out.println("此手机号  已经注册过");
+				request.setAttribute("ph", phone);
+				return Action.ERROR;
 			}
 
-		}
-		// 判断手机号是否注册过
-		if (userdao.byUsernameAccnumnoPhone(phone) != null) {
-			System.out.println("此手机号  已经注册过");
-			request.setAttribute("ph", phone);
-			return Action.ERROR;
-		}
+			u.setAccnumno(accnumno);
+			if (username != null) {
+				u.setUsername(username);
+			}
+			u.setPhone(phone);
+			u.setStage("未填写");
+			u.setAddress("北京");
+			u.setAddcity("海淀区");
+			u.setNickname(username);// 没有设置过显示用户名
+			u.setSchool("未填写");
+			u.setTime(util.getNowTime());
+			u.setCompetence(0);// 普通用户
+			u.setGag(0);// 可以创建论坛
+			if (userdao.byUsernameAccnumnoPhone(username) != null) {
+				System.out.println("此用户名  已经注册过");
+				request.setAttribute("ue", username);
+				return Action.ERROR;
+			}
+			userdao.save(u);
+			u = userdao.byUsernameAccnumnoPhone(accnumno);
+			if (u == null) {
+				util.Out().print("异常请重新注册");
+				return null;
+			}
+			pd.setUid(u.getId());
+			pd.setPassword(password);
+			userdao.save(pd);
+			session.setAttribute("u", u);
+			System.out.println("注册成功" + "username:" + username + ",pw:"
+					+ password);
 
-		u.setAccnumno(accnumno);
-		if (username != null) {
-			u.setUsername(username);
-		}
-		u.setPhone(phone);
-		u.setStage("未填写");
-		u.setAddress("北京");
-		u.setAddcity("海淀区");
-		u.setNickname(username);// 没有设置过显示用户名
-		u.setSchool("未填写");
-		u.setTime(util.getNowTime());
-		u.setCompetence(0);// 普通用户
-		u.setGag(0);// 可以创建论坛
-		if (userdao.byUsernameAccnumnoPhone(username) != null) {
-			System.out.println("此用户名  已经注册过");
-			request.setAttribute("ue", username);
-			return Action.ERROR;
-		}
-		userdao.save(u);
-		u = userdao.byUsernameAccnumnoPhone(accnumno);
-		if (u == null) {
-			util.Out().print("异常请重新注册");
-			return null;
-		}
-		pd.setUid(u.getId());
-		pd.setPassword(password);
-		userdao.save(pd);
-		session.setAttribute("u", u);
-		System.out.println("注册成功" + "username:" + username + ",pw:" + password);
+			// 注册环信
+			u = userdao.byUsernameAccnumnoPhone(phone);
+			if (u != null) {
+				// 封装个json
+				// 获取token的
+				JSONObject json = new JSONObject();
+				json.put("username", u.getId());
+				// 用户id
+				json.put("password", "123456"); // 用户密码
+				String w = WechatKit.post(url, json,
+						RefreshAccessToken.access_token);
+			}
 
-		// 注册环信
-		u = userdao.byUsernameAccnumnoPhone(phone);
-		if (u != null) {
-			// 封装个json
-			// 获取token的
-			JSONObject json = new JSONObject();
-			json.put("username", u.getId());
-			// 用户id
-			json.put("password", "123456"); // 用户密码
-			String w = WechatKit.post(url, json,
-					RefreshAccessToken.access_token);
-		}
+			return Action.SUCCESS;
 
-		return Action.SUCCESS;
-
+		
 	}
 
 	/**
@@ -1813,7 +1816,8 @@ public class UserAction extends ActionSupport{
 	 * 
 	 * @throws IOException
 	 */
-	public void save() throws IOException {
+	public synchronized void save() throws IOException {
+		
 		try {
 			// 验证用户名
 			String reg = "^[A-Za-z_][A-Za-z0-9]{5,17}";
@@ -1944,6 +1948,7 @@ public class UserAction extends ActionSupport{
 
 		} catch (Exception e) {
 		}
+		
 	}
 
 	/**
@@ -1951,7 +1956,9 @@ public class UserAction extends ActionSupport{
 	 * 
 	 * @throws IOException
 	 */
-	public void synSave() throws IOException {
+	public synchronized void synSave() throws IOException {
+	
+
 		try {
 			String key = request.getParameter("key");
 			System.out.println("key==" + key);
@@ -2120,7 +2127,6 @@ public class UserAction extends ActionSupport{
 			util.Out().print("异常" + e.getMessage());
 			return;
 		}
-
 	}
 
 	/**
@@ -2130,8 +2136,11 @@ public class UserAction extends ActionSupport{
 	 * @throws JSONException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public void bbtSave() throws IOException, JSONException,
+	public  void bbtSave() throws IOException, JSONException,
 			NoSuchAlgorithmException {
+synchronized (this) {
+	
+
 		try {
 
 			Vcom_3DES vcom3DES = new Vcom_3DES();
@@ -2286,6 +2295,7 @@ public class UserAction extends ActionSupport{
 			System.out.println("转发走了");
 			return;
 		}
+}
 
 	}
 

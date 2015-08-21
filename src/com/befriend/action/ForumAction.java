@@ -414,10 +414,7 @@ public class ForumAction {
 		}
 
 		if (model <= 0) {
-			System.out.println("model <= 0");
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/SimulationApp/login.html");
-			return;
+			model=2;
 		}
 		area = u.getAddress();
 		areas = u.getAddcity();
@@ -747,21 +744,23 @@ public class ForumAction {
 //			  "/SimulationApp/login.html");
 //			return null;
 //		}
-		if (model <= 0) {
-			System.out.println("请重新登入!");
-			util.Out().print("model <= 0");
-			
-			
-			 
-			return null;
-		}
-		area=area==null?"北京":area;
-		if(model==5){
-			cpe =forumdao.getForumOneareaALL(area, model).size();
-		}else{
-			
-			cpe = forumdao.gettypeForumOneALL(model).size();
-		}
+//		if (model <= 0) {
+//			System.out.println("请重新登入!");
+//			util.Out().print("model <= 0");
+//			
+//			
+//			 
+//			return null;
+//		}
+		fones=forumdao.getForumOneALL234();
+		cpe=fones.size();
+//		area=area==null?"北京":area;
+//		if(model==5){
+//			cpe =forumdao.getForumOneareaALL(area, model).size();
+//		}else{
+//			
+//			cpe = forumdao.gettypeForumOneALL(model).size();
+//		}
 		System.out.println("类型type是 ：" + model+"有" + cpe + "个论坛"+area);
 
 		if (pageSize <= 0) {
@@ -780,13 +779,13 @@ public class ForumAction {
 			currentPage = cpe;
 		}
 		System.out.println("currentPage" + currentPage);
-		
-		if(model==5){
-		fones = forumdao.getForumOneareaALL(pageSize, currentPage, area, model);
-		}else{
-			fones = forumdao.getForumOneALL(pageSize, currentPage, model);
-		
-		}
+		fones=forumdao.getForumOneALL234(pageSize, currentPage);
+//		if(model==5){
+//		fones = forumdao.getForumOneareaALL(pageSize, currentPage, area, model);
+//		}else{
+//			fones = forumdao.getForumOneALL(pageSize, currentPage, model);
+//		
+//		}
 		List<ForumTwo> ftwosa = new ArrayList<ForumTwo>();
 
 		for (int i = 0; i < fones.size(); i++) {

@@ -62,16 +62,16 @@ if (u == null) {
 <div class="publish">
 <form action="webForumonesaveapp" method="post" enctype="multipart/form-data" name="picForm">   
     <div><label>标题：</label><input type="text" id="title" name="title"  class="shuru biaoti" /></div>
-  
+  <!-- 
  	类别:
    <select name="model" id="model" >
-							<!--  <option value="1">专家答疑</option>-->
+						 <option value="1">专家答疑</option>
 							<option value="2">学前</option>
 							<option value="3">小学</option>							
 							<option value="4">中学</option>
 							<option value="5">同城家长</option>	
 					</select>
-<
+-->
     <div><label>内容：</label><textarea name="content" id="content" class="shuru"></textarea></div>
     <div><label>上传图片：<input id="file" type="file" name="file" /></label></div>
     <div class="twobut"><input type="button" value="取消" /><input type="submit" onclick="return check(picForm);" value="确定" /></div>

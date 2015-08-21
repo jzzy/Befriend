@@ -2,9 +2,18 @@
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<body>Hello <%=request.getContextPath()%>!
-</body>
+<script type="text/javascript" src="weixin/js/jquery.js"></script>
+  <script type="text/javascript" >
+    $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js',function(){  
+    	document.getElementById('div').innerHTML = "根据IP 地址为:"+remote_ip_info.country+"-"+remote_ip_info.province+"-"+remote_ip_info.city;
+    	//  alert("地址为:"+remote_ip_info.country+"-"+remote_ip_info.province+"-"+remote_ip_info.city);//国家省份城市
+    	 
+         
+    	});  
+   
 
+    </script>
+<body>Hello <%=request.getContextPath()%>!
 
 <div style="background:#abc">
 <hr></hr>
@@ -14,6 +23,7 @@
 <hr></hr>
 
 </div>
+
 <div style="background:#adc">
 	<a href="<%=request.getContextPath()%>/Newsget">管理新闻</a><br>
 	<hr></hr>
@@ -38,11 +48,13 @@
 	<a href="<%=request.getContextPath()%>/SimulationApp/laigao/erro.html">没有搜索到</a><br>
 	<a href="<%=request.getContextPath()%>/selectwxHouseallzh">搜索</a><br>
 	<a href="<%=request.getContextPath()%>/source">查看源码</a><br>
+		<a href="<%=request.getContextPath()%>/SimulationApp/feedback.html">意见反馈</a><br>
 	
 	<a href="<%=request.getContextPath()%>/SimulationApp/exchangebook.jsp">教育部推荐用书</a><br>
 	
 	
 </div>
-
+<div id="div" style="color: blue;" ></div>
+</body>
 
 </html>

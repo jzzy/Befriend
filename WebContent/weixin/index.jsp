@@ -22,18 +22,6 @@ Object city=request.getAttribute("city");
 <link href="<%=request.getContextPath()%>/weixin/css/style.css" rel="stylesheet" type="text/css" />
 <script  src="<%=request.getContextPath()%>/weixin/js/TouchSlide.1.1.js"></script>
 <script src="<%=request.getContextPath()%>/weixin/js/jweixin-1.0.0.js"></script>    
-<script>  
-  document.querySelector('#getLocation').onclick = function () {
-    wx.getLocation({
-      success: function (res) {
-        alert(JSON.stringify(res));
-      },
-      cancel: function (res) {
-        alert('用户拒绝授权获取地理位置');
-      }
-    });
-  };
-  </script>
 </head>
 
 <body>
@@ -43,33 +31,23 @@ Object city=request.getAttribute("city");
        <p class="set fr"><a href="<%=request.getContextPath()%>/webNewsA10" title="返回主页"><img src="<%=request.getContextPath()%>/weixin/images/xw_07s.png" height="40" /></a></p>
    </div>
    <!--top-->
-
-   
-   <%
-   if(province==null||province.equals("省份名")){
-   %>
-    <!--
-   <h1 class="tit8"><span class="fl">本地新闻</span>
-   
-   <span class="fr">湖南 常德<a href="<%=request.getContextPath()%>/weixin/change_city.html" title="切换城市"> 
-   <img src="<%=request.getContextPath()%>/weixin/images/ez-switch-user.png" width="23">
-   </a>
-   </span>
-   </h1>
-  -->
-   <%
-   }else{
-	   
-   if(nl.size()==0){
-	   %>
-	   <!--  
-	 <h1 class="tit8"><span class="fl">本地新闻</span>
-   <span class="fr"><%=province+""+city %><a href="<%=request.getContextPath()%>/weixin/change_city.html" title="切换城市">
+   <!--  
+<h1 class="tit8"><span class="fl">本地资讯</span>
+   <span class="fr"><%=province %><a href="<%=request.getContextPath()%>/weixin/change_city.html" title="切换城市">
    <img src="<%=request.getContextPath()%>/weixin/images/ez-switch-user.png" width="23">
    </a>
    </span>
    </h1>
    -->
+   
+  
+
+   <%	   
+   if(nl.size()==0){
+	   %>
+	     
+	 
+   
    <h1>该地区尚未上传新闻!</h1>
 	   <%
 	   return;
@@ -79,14 +57,15 @@ Object city=request.getAttribute("city");
 		
 		   <%
 	   }
-   }
+   
    %>
    
    
    <%
    if(nl.size()>4){
    %>
- 
+ 	    
+
    <div  id="slideBox"  class="slideBox">
 			  <div  class="bd">
 					<div  class="tempWrap"  style="overflow:hidden; position:relative;">
