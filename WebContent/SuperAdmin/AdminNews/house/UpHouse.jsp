@@ -132,7 +132,14 @@ return true;
 
 					</td>
 				</tr>
-				
+				<tr>
+					<td>关键词：</td>
+					<td colspan="2"><textarea name="Keywords" id="Keywords"
+							cols="100" rows="8"
+							style="width:300px; height: 200px;"><%=h.getKeywords() %></textarea>
+
+					</td>
+				</tr>
 				
 				
 				
@@ -151,12 +158,14 @@ return true;
 				Object hh=request.getAttribute("hh");
 				if(hh!=null){
 				%>
+				<!-- 
 				<tr>
 					<td></td>
 					<td style="color: red;"><%=hh %>
 						</td>
 
 				</tr>
+				 -->
 				<%
 				
 				}

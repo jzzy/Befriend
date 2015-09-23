@@ -150,10 +150,10 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<User> getUsertime(String timeq, String timeh) {
 		Query query = entityManager
-				.createQuery("select u from User u where u.time>=:timeq and u.time<=:timeh  order"
+				.createQuery("select u from User u where u.time>:timeq and u.time<=:timeh  order"
 						+ " by u.time desc ");
 		query.setParameter("timeq", timeq);
-		query.setParameter("timeh", timeh);
+		query.setParameter("timeh", timeh+" 23:59:59");
 		query.setMaxResults(200);
 		return query.getResultList();
 	}
@@ -413,9 +413,10 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int getCountSyn() {
+	public int getCount(String come) {
 		
-		 Query query = entityManager.createQuery("select count(u) from User u where u.come is not null");
+		 Query query = entityManager.createQuery("select count(u) from User u where u.come=:come ");
+		 query.setParameter("come", come);		
 			 //count = new Long((long)query.getSingleResult()).intValue();
 			 int count =(int)(long)query.getSingleResult();
 			return count;
@@ -480,13 +481,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int getUsertimeCount(String timeq, String timeh) {
+	public int getUsertimeCount(String timeq, String timeh,String os) {
 		Query query = entityManager
-				.createQuery("select count(u) from User u where u.time>=:timeq and u.time<=:timeh  order"
+				.createQuery("select count(u) from User u where u.come=:come and u.time>:timeq and u.time<=:timeh  order"
 						+ " by u.time desc ");
-		query.setParameter("timeq", timeq);
-		query.setParameter("timeh", timeh);
-		
+		query.setParameter("timeq", timeq+" 23:59:59");
+		query.setParameter("timeh", timeh+" 23:59:59");
+		query.setParameter("come", os);
 		return (int)(long)query.getSingleResult();
 		
 	}

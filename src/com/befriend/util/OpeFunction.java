@@ -31,6 +31,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpVersion;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.params.ConnManagerParams;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -40,6 +53,7 @@ import org.apache.struts2.ServletActionContext;
 import com.befriend.email.MailSenderInfo;
 import com.befriend.email.SimpleMailSender;
 import com.befriend.entity.User;
+import com.befriend.wechat.WechatKit;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.sun.rowset.internal.Row;
@@ -567,40 +581,79 @@ public class OpeFunction {
 	 * System.out.println("解密后的字符串:" + (new String(srcBytes))); }
 	 * 
 	 * @throws IOException
+	 * @throws InterruptedException 
 	 */
-
-	public static void main(String[] args) throws IOException {
-		String fileName = "E:\\xiaoxue.xlsx";
-
-		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileName);
-
-		// 循环工作表Sheet
-		for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
-			XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
-			if (xssfSheet == null) {
-				continue;
-			}
-
-			// 循环行Row
-			for (int rowNum = 0; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
-				XSSFRow xssfRow = xssfSheet.getRow(rowNum);
-				if (xssfRow == null) {
-					continue;
-				}
-				// 第一次不读 是标题
-				if (rowNum < 1) {
-					// System.out.println("列："+xssfRow.getCell(0));
-					System.out.println("学校名称：" + xssfRow.getCell(1));
-					System.out.println("学校地址：" + xssfRow.getCell(2));
-					System.out.println("学区范围：" + xssfRow.getCell(3));
-					System.out.println("学区范围内主要街道、小区、楼盘、单位宿舍："
-							+ xssfRow.getCell(4));
-					System.out.println("第" + numSheet + "个工作表Sheet,的第" + rowNum
-							+ "行");
-				}
-
-			}
-		}
+	/**
+	 * 
+	 * 
+	 * 
+	 *  System.out.println("这些挖过来而又没有用上的内存:"+Runtime.getRuntime().freeMemory()/1024/1024 + " M");
+	        System.out.println("java虚拟机现在已经从操作系统那里挖过来的内存大小:"+Runtime.getRuntime().totalMemory()/1024/1024 + " M");
+	        System.out.println("能构从操作系统那里挖到的最大的内存:"+Runtime.getRuntime().maxMemory()/1024/1024 + " M");
+	 * 
+	 * @param args
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
+	
+	
+	public static void main(String[] args) throws IOException, InterruptedException {
+		
+	
+//		while (true) {
+//			Thread.sleep(1000);
+//			System.out.println((int) ((Math.random() * 9 + 1) * 1)+" "+getNowTime());
+//			
+//		}
+		   System.out.println("这些挖过来而又没有用上的内存:"+Runtime.getRuntime().freeMemory()/1024/1024 + " M");
+	        System.out.println("java虚拟机现在已经从操作系统那里挖过来的内存大小:"+Runtime.getRuntime().totalMemory()/1024/1024 + " M");
+	        System.out.println("能构从操作系统那里挖到的最大的内存:"+Runtime.getRuntime().maxMemory()/1024/1024 + " M");
+//		String fileName = "E:\\xiaoxue.xlsx";
+//
+//		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileName);
+//
+//		// 循环工作表Sheet
+//		for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
+//			XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
+//			if (xssfSheet == null) {
+//				continue;
+//			}
+//
+//			// 循环行Row
+//			for (int rowNum = 0; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
+//				XSSFRow xssfRow = xssfSheet.getRow(rowNum);
+//				if (xssfRow == null) {
+//					continue;
+//				}
+//				// 第一次不读 是标题
+//				if (rowNum < 1) {
+//					// System.out.println("列："+xssfRow.getCell(0));
+//					System.out.println("学校名称：" + xssfRow.getCell(1));
+//					System.out.println("学校地址：" + xssfRow.getCell(2));
+//					System.out.println("学区范围：" + xssfRow.getCell(3));
+//					System.out.println("学区范围内主要街道、小区、楼盘、单位宿舍："
+//							+ xssfRow.getCell(4));
+//					System.out.println("第" + numSheet + "个工作表Sheet,的第" + rowNum
+//							+ "行");
+//				}
+//
+//			}
+//		}
+	        int n = 25;
+	        int a=3;
+	        int b=4;
+	        
+	        //开平方
+	        System.out.println(Math.sqrt(b*b+a*a));
+	        //2的4次幂
+	        System.out.println(Math.pow(4, 10));
+	        //绝对值
+	        System.out.println(Math.abs(-1));
+	        //
+	        System.out.println(Math.log10(10));
+	      String aity=WechatKit.sendGet("http://int.dpool.sina.com.cn/iplookup/iplookup.php");
+	       //aity="12345";
+	       System.out.println("地区 "+aity.length()+aity.substring(10, aity.length()));
 	}
 
 	private static String getValue(XSSFCell xssfCell) {

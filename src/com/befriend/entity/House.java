@@ -39,11 +39,21 @@ public class House  implements Serializable {
 	@Column(name = "admin")
 	// 发布时间
 	private String admin;
+	@Column(name = "keywords")
+	// 关键词
+	private String keywords;
+	
 	@Column(name = "count")
 	// 被搜索次数
 	private int count;
 	
 	
+	public String getKeywords() {
+		return keywords;
+	}
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
+	}
 	public int getCount() {
 		return count;
 	}

@@ -3,7 +3,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import com.befriend.wechat.RefreshAccessToken;
 public class WechaToken  implements ServletContextListener{
-	public final static int Second=518400;
+	public final static int Second=432000;//以秒为单位
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
@@ -18,7 +18,7 @@ public class WechaToken  implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 			/**
-			 * 开始 向环信 获取 token 518400秒  6day
+			 * 开始 向环信 获取 token 432000秒  6day
 			 */
 			System.out.println("开始WechaTolen....");
 			new RefreshAccessToken(Second);

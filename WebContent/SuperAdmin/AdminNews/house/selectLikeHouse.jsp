@@ -55,6 +55,7 @@ function cka()
 		<td  width="163"><h4>上传日期</h4></td>
 		<td  width="163"><h4>上传者ID</h4></td>
 		<td  width="163"><h4>操作</h4></td>
+	
 	</tr>
 		
 		
@@ -94,6 +95,7 @@ function cka()
 		<td  width="163"><h4><%=l.get(i).getTime()%></h4></td>
 		<td  width="163"><h4><%=l.get(i).getAdmin()%></h4></td>
 		<td  width="163"><h4>
+		
 		<a onclick="return ck();" href="<%=request.getContextPath()%>/RemovetHouse?id=<%=l.get(i).getId() %>">删除</a>
 		</h4></td>
 	</tr>

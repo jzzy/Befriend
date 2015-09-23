@@ -753,10 +753,9 @@ public class GroupAction {
 
 			try {
 
-				String url = "http://" + util.getLIP()
-						+ util.request().getContextPath()
+				String url = "http://"+ util.request().getContextPath()
 						+ "/onlineUserSend?id=" + user.getId();
-				WechatKit.sendGet(url);
+				//WechatKit.sendGet(url);
 
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -797,7 +796,7 @@ public class GroupAction {
 						String url = "http://" + util.getLIP()
 								+ util.request().getContextPath()
 								+ "/onlineUserSend?id=" + u.getId();
-						WechatKit.sendGet(url);
+						//WechatKit.sendGet(url);
 
 					} catch (Exception e) {
 						// TODO: handle exception

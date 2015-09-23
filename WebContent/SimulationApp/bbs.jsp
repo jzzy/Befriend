@@ -70,6 +70,11 @@ return true;
 <!-- <%=f.getType() %>论坛 -->
 <h1 class="tit tit5"><a style="float:left;" href="javascript:history.back(-1);"><span>&lt; 论坛详情</span></a></h1>
 
+
+
+
+
+<!-- 主贴&楼主信息 -->
 <form action="webForumtwosaveapp" method="post">
 <div class="bbs">
  <dl class="bbs1">
@@ -122,6 +127,17 @@ return true;
 </div> 
 
  </form>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <!-- 评论信息 -->
  <%
  //楼层
  int r=0;
@@ -169,7 +185,8 @@ return true;
     
       <!-- 回复n楼的评论 -->
       
-      
+    
+  </div>  
 <div class="pingnum pingnum2"  id="contentid<%=ri %><%=ft.getId() %>" style="display: none">
 	<!-- 获取要回复的用户id -->
 	<input type="text" name="touserid" value="<%=u.getId()%>" style="display: none""/>
@@ -184,10 +201,22 @@ return true;
 </div>    
 </form>
 
-  <!显示各个楼层的用户互相回复信息>
+
+
+
+
+
+
+
+
+
+<!--显示各个楼层的用户互相回复信息-->
 <%	
 //回复信息不为空进入
 	if(fl.get(i)!=null){
+		%>
+		<br />
+		<%
 		//获取回复信息
 		List<ForumThree> fa=(List)fl.get(i);
 		//获取 回复信息的用户
@@ -205,21 +234,23 @@ return true;
      
      
      <form action="webForumthreesappadd" method="post" >
-     <div  class="hui">
      
-    
+    	 <div  class="hui">
+    	 
          <p class="htan"><span class="blue">
          <a  onClick="showdiv('contentid<%=ri %><%=ft.getId() %><%=fa.get(a).getId() %>','showtext<%=ri %><%=ft.getId() %><%=fa.get(a).getId() %>')">
           <%=fua.get(a).getNickname() %>
-          </a>
-          
+          </a>          
           </span>回复 <span><%=futa.get(a).getNickname() %></span> :</p>
-         <p class="hcont"> <%=fa.get(a).getReply() %></p>
-         <p class="date"><%=fa.get(a).getTime() %></p>
+         <p class="hcont">
          
-         
+        
+         <%=fa.get(a).getReply() %> <br />
+         <%=fa.get(a).getTime()%>
+         </p>
           <!-- 回复n楼的评论 下面的回复信息 -->
         </div>
+        
         <div id="contentid<%=ri %><%=ft.getId() %><%=fa.get(a).getId() %>"  class="pingnum pingnum2"  style="display: none">
 			<!-- 获取要回复的用户id -->
 			<input type="text" name="touserid" value="<%=fua.get(a).getId()%>" style="display: none""/>
@@ -233,9 +264,8 @@ return true;
 		
 
 			
-</form>
-         </div>
-     </div>
+	</form>
+        
       <%
 		}
 		}		
@@ -244,29 +274,36 @@ return true;
  
      %>
      
-     <!--hui-->
- </div>
- <!--huifu2-->
-  <p style="height: 300px;"></p>
-  <!-- 回复楼主-->
- <form action="webForumtwosaveapp" method="post" >
- 	<div class="pingnum pingnum3">	
-	<!-- 获取论坛的id -->
-	<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none""/>
-	
-	<!-- 获取回复信息 -->
-  <input type="text" id="reply" class="shuru"  name="reply" /><input type="submit" class="btijiao"  value="回复楼主" />
 
-	</div>
+
+
+
+
+
+
+
+
+ 
+  	<p style="height: 100px;"></p>
+  	<!-- 回复楼主-->
+ 	<form action="webForumtwosaveapp" method="post" >
+ 		<div class="pingnum pingnum3">	
+			<!-- 获取论坛的id -->
+			<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none""/>
+	
+			<!-- 获取回复信息 -->
+ 			 <input type="text" id="reply" class="shuru"  name="reply" /><input type="submit" class="btijiao"  value="回复楼主" />
+
+		</div>
    
- </form>
-</div>
-<!--bbs
-<div class="pingnum pingnum2" style="display: none">
-    
-</div>
--->
-<!--pingnum-->
+ 	</form>
+ 
+ 
+ 
+ 
+ 
+ 
+	</div>
 </div>
 <!--cont-->
 </body>

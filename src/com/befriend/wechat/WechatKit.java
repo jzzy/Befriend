@@ -1,48 +1,103 @@
 package com.befriend.wechat;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
-import org.springframework.http.HttpStatus;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.params.ConnManagerParams;
+import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import com.befriend.util.OpeFunction;
 
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-
+@SuppressWarnings("all")
 public class WechatKit {
-
+	private static final Log log = LogFactory.getLog(WechatKit.class);
 	private static CloseableHttpClient Client = null;
 	private static CloseableHttpResponse resp = null;
-	private static HttpClient client=null;
+	private static HttpClient client = null;
 
 	/**
-	 * ����get����
+	 * 适合多线程的HttpClient,用httpClient4.2.1实现
+	 * 
+	 * @return DefaultHttpClient
+	 */
+	public static DefaultHttpClient getHttpClient() {
+		// 设置组件参数, HTTP协议的版本,1.1/1.0/0.9
+		HttpParams params = new BasicHttpParams();
+
+		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+		HttpProtocolParams.setUserAgent(params, "HttpComponents/1.1");
+		HttpProtocolParams.setUseExpectContinue(params, true);
+
+		// 设置连接超时时间
+		final int REQUEST_TIMEOUT = 10 * 1000; // 设置请求超时2秒钟
+		final int SO_TIMEOUT = 10 * 1000; // 设置等待数据超时时间2秒钟
+//		final Long CONN_MANAGER_TIMEOUT = 500L; // 该值就是连接不够用的时候等待超时时间，一定要设置，而且不能太大
+												// 
+
+		 HttpConnectionParams.setConnectionTimeout(params, REQUEST_TIMEOUT);
+		 HttpConnectionParams.setSoTimeout(params, SO_TIMEOUT);
+		params.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
+				REQUEST_TIMEOUT);
+		params.setParameter(CoreConnectionPNames.SO_TIMEOUT, SO_TIMEOUT);
+	//	params.setLongParameter(ClientPNames.CONN_MANAGER_TIMEOUT, CONN_MANAGER_TIMEOUT);
+		params.setBooleanParameter(CoreConnectionPNames.STALE_CONNECTION_CHECK,
+				true);// 在提交请求之前 测试连接是否可用
+		// 设置访问协议
+		SchemeRegistry schreg = new SchemeRegistry();
+		schreg.register(new Scheme("http", 80, PlainSocketFactory
+				.getSocketFactory()));
+		schreg.register(new Scheme("https", 443, SSLSocketFactory
+				.getSocketFactory()));
+
+		// 多连接的线程安全的管理器
+		PoolingClientConnectionManager pccm = new PoolingClientConnectionManager(
+				schreg);
+		pccm.setMaxTotal(200); // 客户端总并行链接最大数 MaxtTotal是整个池子的大小；
+		pccm.setDefaultMaxPerRoute(200); // 每个主机的最大并行链接数
+
+		DefaultHttpClient httpClient = new DefaultHttpClient(pccm, params);
+		httpClient
+				.setHttpRequestRetryHandler(new DefaultHttpRequestRetryHandler(
+						0, false));// 另外设置http
+									// client的重试次数，默认是3次；当前是禁用掉（如果项目量不到，这个默认即可）
+		return httpClient;
+	}
+
+	/**
+	 * 发送get请求
 	 * 
 	 * @param url
 	 * @return
@@ -53,27 +108,22 @@ public class WechatKit {
 			String cont = null;
 
 			if (Client == null) {
-				// �õ� Client
-				Client = HttpClients.createDefault();
+				Client = getHttpClient();
 			}
-			// ָ�� url
+			
 			HttpGet get = new HttpGet(url);
-			try {
+			resp=null;
 
-				// ��ȡ resp
-				resp = Client.execute(get);
-			} catch (Exception e) {
-				System.out.println("http resp��ȡ�쳣!" + e.getMessage());
-			}
-			// ��ȡ code >=200 <300������
+				
+			resp = Client.execute(get);
+			
+		
 			int code = resp.getStatusLine().getStatusCode();
-			System.out.println(code);
+			System.out.println(OpeFunction.getNowTime()+",124row WechatKit.sendGet code:" + code+",URL "+url);
 			if (code >= 200 && code < 300) {
-				System.out.println("code����" + code);
-				// ��ȡʵ��
+				
 				HttpEntity entity = resp.getEntity();
 				if (entity != null) {
-					// ת��String
 					cont = EntityUtils.toString(entity);
 					System.out.println(cont);
 					return cont;
@@ -81,9 +131,7 @@ public class WechatKit {
 
 			}
 		} catch (Exception e) {
-
-			System.out.println("HttpClient�쳣:" + e.getMessage());
-			return null;
+			e.printStackTrace();
 		} finally {
 			if (resp != null) {
 				resp.close();
@@ -91,38 +139,42 @@ public class WechatKit {
 		}
 		return null;
 	}
+
 	/**
-	 * ͨ��post����!
+	 * 通过post发送!
+	 * 
 	 * @param url
 	 * @param json
 	 * @return
 	 */
-	public static String post(String url, JSONObject json,String token) {
-		
+	public static String post(String url, JSONObject json, String token) {
+
 		client = getClient(true);
-		
+
 		HttpPost post = new HttpPost(url);
-		int code =0;
+		int code = 0;
 		try {
 			StringEntity s = new StringEntity(json.toString());
 			s.setContentEncoding("UTF-8");
-			s.setContentType("application/json");//: {��Content-Type��:��application/json��,��Authorization��:��Bearer ${token}��}
-			//post.addHeader("Content-Type", "application/json");
-			if(token!=null){
-			post.addHeader("Authorization", "Bearer "+token);
+			s.setContentType("application/json");// :
+													// {“Content-Type”:”application/json”,”Authorization”:”Bearer
+													// ${token}”}
+			// post.addHeader("Content-Type", "application/json");
+			if (token != null) {
+				post.addHeader("Authorization", "Bearer " + token);
 			}
 			post.setEntity(s);
 
 			HttpResponse res = client.execute(post);
 			code = res.getStatusLine().getStatusCode();
-			System.out.println("postcode:"+code);
+			System.out.println("postcode:" + code);
 			if (code >= 200 && code < 300) {
 				HttpEntity entity = res.getEntity();
 				String charset = EntityUtils.toString(entity);
-				System.out.println("post���صĶ���:" +charset);
+				System.out.println("post返回的东西:" + charset);
 				return charset;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -131,7 +183,7 @@ public class WechatKit {
 	}
 
 	/**
-	 * ���� ��װ��HttpClient
+	 * 环信 封装的HttpClient
 	 * 
 	 * @param isSSL
 	 * @return

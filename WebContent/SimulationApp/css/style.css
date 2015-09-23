@@ -342,9 +342,9 @@ _top:expression(documentElement.scrollTop + documentElement.clientHeight-this.of
 .scont span{ display:block; text-indent:2em; margin:20px 10px 5px 10px;}
 .specil_list{/* height:370px; overflow:scroll; overflow-x:hidden;*/}
 .specil_list li{ overflow:hidden; zoom:1; border-bottom:solid 1px #999; padding:10px;}
-.specil_list span{ float:left; width:60%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; color:#666;} 
-.specil_list b{ float:right; width:39%; font-weight:normal; text-align:right; padding-right:1%; font-size:12px;}
-.specil_list b img{ width:20px; vertical-align:bottom; margin-left:5px;}
+.specil_list span{  overflow:hidden; white-space:nowrap; text-overflow:ellipsis; color:#666;} 
+.specil_list b{  font-weight:normal; text-align:left; font-size:12px;}
+.specil_list img{ width:20px; vertical-align:bottom; margin-left:5px;}
 
 .margin45{ overflow:hidden; clear:both; margin:45px auto 0 auto;}
 .margin75{ overflow:hidden; clear:both; margin:75px auto 0 auto;}
@@ -381,7 +381,7 @@ _top:expression(documentElement.scrollTop + documentElement.clientHeight-this.of
 .bbtit{ clear:both; overflow:hidden; zoom:1;}
 .bbtit{ color:#333; font-size:14px;}
 .bbimg img{ width:120px; margin:5px 0;}
-.huifu2{ padding:10px 0 5px 0; border-bottom:solid 1px #ccc; overflow:hidden; zoom:1}
+.huifu2{ padding:10px 0 5px 0; overflow:hidden; zoom:1} 
 .bbs2{ width:95%; float:left;}
 .bbs2 dt img{ width:35px; height:35px;}
 .bbs2 dd img{ width:38px; vertical-align:middle; margin-right:2px;}
@@ -391,7 +391,7 @@ _top:expression(documentElement.scrollTop + documentElement.clientHeight-this.of
 .ctit6{ font-size:12px; color:#333;}
 .hfcont,.hui{ margin-left:40px; color:#333; clear:both; overflow:hidden;zoom:1;}
 .hcont{ font-size:12px; margin-top:5px;}
-.hui{ margin-bottom:5px; border-bottom:#CCC solid 1px; padding-bottom:5px;}
+.hui{ margin-bottom:5px; padding-bottom:5px;}
 .hui.border0{ border:none}
 .blue{ color:#426ab3;}
 .htan{ cursor:pointer;}

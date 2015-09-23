@@ -7,12 +7,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>查看新闻详情</title>
-<link href="weixin/css/style.css" rel="stylesheet" type="text/css" />
+
+<link href="SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.news{
+color: black;
+font-size: 16px;
+padding:0px 20px 10px 20px;
+}
+.news p{
+margin-bottom: 15px;
+}
+
+</style>
+<script type="text/javascript">
+function islogin(){
+	    if(<%=session.getAttribute("u")%>==null){
+	    	<!--跳到登入页-->
+	    	location.href="/Befriend/SimulationApp/login.html";
+	  	       
+	    }
+	  
+}
+</script>
 
 </head>
+
 <%
 //获取新闻
 News n=(News)request.getAttribute("n");
@@ -57,9 +80,11 @@ if(n==null){
    <!--  <div class="zhaiyao"><b><%=n.getSummary() %></div>-->
    <!--zhaiyao-->
    <div class="contimg" style="text-align:center"><p><img src="<%=request.getContextPath()+n.getImgmax() %>"  width="90%"></p></div>
-   <div style="color: black;font-size: 16px;padding:0px 20px 10px 20px;">
+   
+   <div class="news">
    <%=n.getContent() %>
     </div>
+    
     <% 
    	if(rl!=null&&ul!=null){
    		%>
@@ -119,7 +144,7 @@ if(n==null){
    -->
    <!--hot-->
  <!--hot-->
-   <p style="height: 300px;"></p>
+   <p style="height: 65px;"></p>
    <!-- 回复楼主-->
  <form action="webRsave" method="post" >
  	<div class="pingnum pingnum3">	
@@ -127,7 +152,7 @@ if(n==null){
 	<input type="text" value="<%=n.getId() %>" name="newsid" style="display: none"/>
 	
 	<!-- 获取回复信息 -->
-  <input type="text" id="review" class="shuru"  name="review" /><input type="submit" class="btijiao"  value="评论" />
+  <input type="text" id="review" class="shuru"  onclick="islogin()"  name="review" /><input type="submit" onclick="islogin()" class="btijiao" value="评论" />
 
 	</div>
    

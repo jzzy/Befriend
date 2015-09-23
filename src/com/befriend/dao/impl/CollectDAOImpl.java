@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import org.springframework.transaction.annotation.Transactional;
 import com.befriend.dao.CollectDAO;
 import com.befriend.entity.Collect;
+@SuppressWarnings("all")
 @Transactional
 public class CollectDAOImpl implements CollectDAO
 {

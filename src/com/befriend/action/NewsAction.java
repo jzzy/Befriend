@@ -35,8 +35,9 @@ import com.befriend.entity.Review;
 import com.befriend.entity.User;
 import com.befriend.util.OpeFunction;
 import com.opensymphony.xwork2.Action;
+
 @SuppressWarnings("all")
-public class NewsAction implements ServletRequestAware,ServletResponseAware{
+public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	private OpeFunction util;// 自建的工具类
 
 	private UserDAO userdao;// 用户dao
@@ -91,52 +92,55 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			.getSession();
 
 	private String province;// 省级
-	
-	
+
 	private String city;// 市级
 	private String author;
-	private String time=OpeFunction.getNowTime();
-	Book book=new Book();
-	List<Book> bookl=new ArrayList<Book>();
-	private int itype=0;
+	private String time = OpeFunction.getNowTime();
+	Book book = new Book();
+	List<Book> bookl = new ArrayList<Book>();
+	private int itype = 0;
 	private String house;
 	private File xlsxFile;
+
 	public String webLookBookById() throws IOException {
-		
-		book=ndao.byIdBook(id);
+
+		book = ndao.byIdBook(id);
 		request.setAttribute("book", book);
 		return Action.SUCCESS;
-		
+
 	}
+
 	public String webLookBook() throws IOException {
-		int count=ndao.countBools(itype);
-		int max=count;
-		
-		if(count%pageSize==0){
-			count=count/pageSize;
-		}else{
-			count=count/pageSize+1;
+		int count = ndao.countBools(itype);
+		int max = count;
+
+		if (count % pageSize == 0) {
+			count = count / pageSize;
+		} else {
+			count = count / pageSize + 1;
 		}
-		if(currentPage>count){
-			currentPage=count;
+		if (currentPage > count) {
+			currentPage = count;
 		}
-		if(currentPage<=0){
-			currentPage=1;
+		if (currentPage <= 0) {
+			currentPage = 1;
 		}
-		bookl=ndao.paging(pageSize, currentPage,itype);
+		bookl = ndao.paging(pageSize, currentPage, itype);
 		request.setAttribute("bookl", bookl);
 		request.setAttribute("type", itype);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("max", max);
 		return Action.SUCCESS;
-		
+
 	}
 
-	
 	public void upBookxmls() throws IOException, InvalidFormatException {
 		Admin admin = (Admin) session.getAttribute("admin");
-		if(xlsxFile==null||admin==null){
-			OpeFunction.outjS(request.getContextPath()+"/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "null");
+		if (xlsxFile == null || admin == null) {
+			OpeFunction
+					.outjS(request.getContextPath()
+							+ "/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp",
+							"null");
 			return;
 		}
 		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(xlsxFile);
@@ -147,32 +151,38 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 				continue;
 			}
 
-			for (int rowNum = 1; rowNum <=xssfSheet.getLastRowNum(); rowNum++) {
+			for (int rowNum = 1; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
 
 				XSSFRow xssfRow = xssfSheet.getRow(rowNum);
 				if (xssfRow == null) {
 					continue;
 				}
 				if (xssfRow.getCell(0) != null) {
-					
+
 					try {
-					title = xssfRow.getCell(0)==null?null:xssfRow.getCell(0).toString();
-					author = xssfRow.getCell(1)==null?null:xssfRow.getCell(1).toString();
-					house = xssfRow.getCell(2)==null?null:xssfRow.getCell(2).toString();
-					summary = xssfRow.getCell(3)==null?null:xssfRow.getCell(3).toString();
-					review = xssfRow.getCell(4)==null?null:xssfRow.getCell(4).toString();
-					double bou=Double.parseDouble(xssfRow.getCell(5)==null?null:xssfRow.getCell(5).toString());
-					itype=(int)bou;
-					
-					
+						title = xssfRow.getCell(0) == null ? null : xssfRow
+								.getCell(0).toString();
+						author = xssfRow.getCell(1) == null ? null : xssfRow
+								.getCell(1).toString();
+						house = xssfRow.getCell(2) == null ? null : xssfRow
+								.getCell(2).toString();
+						summary = xssfRow.getCell(3) == null ? null : xssfRow
+								.getCell(3).toString();
+						review = xssfRow.getCell(4) == null ? null : xssfRow
+								.getCell(4).toString();
+						double bou = Double
+								.parseDouble(xssfRow.getCell(5) == null ? null
+										: xssfRow.getCell(5).toString());
+						itype = (int) bou;
+
 					} catch (Exception e) {
 						e.printStackTrace();
-						
+
 						continue;
 					}
-					System.out.println(title+itype);
-					book=new Book();
-					if (ndao.byTitleBook(title) != null||itype<=0) {
+					System.out.println(title + itype);
+					book = new Book();
+					if (ndao.byTitleBook(title) != null || itype <= 0) {
 						continue;
 					} else {
 						book.setTitle(title);
@@ -187,19 +197,18 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 
 					}
 				}
+			}
 		}
-		}
-		
-		OpeFunction.outjS(request.getContextPath()+"/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "ok");
-		
 
-		
+		OpeFunction.outjS(request.getContextPath()
+				+ "/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "ok");
 
 	}
+
 	public String upBook() throws IOException, InvalidFormatException {
 		Admin admin = (Admin) session.getAttribute("admin");
 		if (admin != null && title != null && author != null && summary != null
-				&& review != null&&itype>0&&house!=null) {
+				&& review != null && itype > 0 && house != null) {
 			book.setTitle(title);
 			book.setAuthor(author);
 			book.setSummary(summary);
@@ -210,24 +219,25 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			book.setAdmin(admin.getAdmin());
 			ndao.Save(book);
 			return Action.SUCCESS;
-		}else{
-			OpeFunction.outjS(request.getContextPath()+"/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "no");
+		} else {
+			OpeFunction.outjS(request.getContextPath()
+					+ "/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "no");
 			return null;
 		}
-		
-		
+
 	}
+
 	/**
 	 * 通过id查询新闻 看是否有更新
 	 * 
 	 * @throws IOException
 	 */
 	public void newNewsId() throws IOException {
-		nl=ndao.n2ews(newsid);
-		if(nl.size()>0){
-			
+		nl = ndao.n2ews(newsid);
+		if (nl.size() > 0) {
+
 			util.Out().print(nl.get(0).getId());
-		}else{
+		} else {
 			util.Out().print(0);
 		}
 	}
@@ -246,7 +256,6 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 		}
 
 		int a = 0;
-	
 
 		Object Oprovince = session.getAttribute("province");
 		if (Oprovince != null) {
@@ -266,17 +275,16 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 		if (currentPage > a) {
 			currentPage = a;
 		}
-		
 
 		nl = ndao.Hotarea(province, pageSize, currentPage);
 		System.out.println(" -有" + a + "页");
 		System.out.println("每页多少条-" + pageSize);
 		System.out.println("第-" + currentPage + "-页");
-		
+
 		request.setAttribute("currentPage", currentPage);
-		
+
 		request.setAttribute("nl", nl);
-		
+
 		request.setAttribute("a", a);
 		return Action.SUCCESS;
 	}
@@ -289,23 +297,22 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public String webReviewsusername() throws IOException {
 		try {
 
-			
 			User u = (User) session.getAttribute("u");
-			
+
 			if (u == null) {
-				
-				((HttpServletResponse) util.response())
-						.sendRedirect(request.getContextPath()+ "/SimulationApp/login.html");
+
+				((HttpServletResponse) util.response()).sendRedirect(request
+						.getContextPath() + "/SimulationApp/login.html");
 				return null;
 			}
-			
+
 			username = u.getUsername();
-			
+
 			List<Integer> rn = new ArrayList<Integer>();// 收藏 List
 			for (Review r1 : rdao.Allu(username)) {
-				
+
 				Boolean b = true;
-				
+
 				for (int i = 0; i < rn.size(); i++) {
 
 					if (rn.get(i) == r1.getNewsid()) {
@@ -314,14 +321,14 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 					}
 
 				}
-				
+
 				if (b) {
 					System.out.println("我评论过的新闻  用户名和新闻id" + username + "+"
 							+ r1.getNewsid() + "时间是：" + r1.getTime());
 					rl.add(rdao.unid(username, r1.getNewsid()).get(0));
 					nl.add(ndao.byid(r1.getNewsid()));
 				}
-			
+
 				rn.add(r1.getNewsid());
 
 			}
@@ -339,26 +346,24 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 */
 	public String webSearchBookmark() throws IOException {
 
-	
 		User u = (User) session.getAttribute("u");
-		
+
 		if (u == null) {
-			
-			((HttpServletResponse) util.response())
-					.sendRedirect(request.getContextPath()+ "/SimulationApp/login.html");
+
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/SimulationApp/login.html");
 			return null;
 		}
 		userid = u.getId();
 		System.out.println("进入了webSearchBookmark");
 
-		
 		for (Collect c : cdao.Allu(userid)) {
 			n = ndao.byid(c.getNewsid());
 			nl.add(n);
 
 		}
 		request.setAttribute("nl", nl);
-		System.out.println("用户"+u.getUsername()+"收藏了" + nl.size() + "个文章");
+		System.out.println("用户" + u.getUsername() + "收藏了" + nl.size() + "个文章");
 		return Action.SUCCESS;
 
 	}
@@ -371,13 +376,13 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public void webCsave() throws IOException {
 		try {
 			System.out.println("webCsave你还没有登入!");
-			
+
 			User u = (User) session.getAttribute("u");
-			
+
 			if (u == null) {
-				
-				((HttpServletResponse) util.response())
-						.sendRedirect(request.getContextPath()+ "/SimulationApp/login.html");
+
+				((HttpServletResponse) util.response()).sendRedirect(request
+						.getContextPath() + "/SimulationApp/login.html");
 				System.out.println("你还没有登入!");
 				return;
 			}
@@ -391,7 +396,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 				c.setUserid(userid);
 				c.setTime(util.getNowTime());
 				cdao.save(c);
-				
+
 				n = ndao.byid(newsid);
 
 				System.out.println("newsid是" + n.getId());
@@ -411,7 +416,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 
 				System.out.println("2该文章被收藏" + n1);
 				n.setCollectnum(n1);
-				
+
 				ndao.Upnews(n);
 				util.Out().print("收藏成功");
 			}
@@ -425,42 +430,40 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 * 
 	 * @throws IOException
 	 */
-	
+
 	public void webRsave() throws IOException {
 		try {
-			
+
 			User u = (User) session.getAttribute("u");
-			
+
 			if (u == null) {
-				
-				((HttpServletResponse) util.response())
-						.sendRedirect(request.getContextPath()+ "/SimulationApp/login.html");
+
+				((HttpServletResponse) util.response()).sendRedirect(request
+						.getContextPath() + "/SimulationApp/login.html");
 				System.out.println("你还没登入!");
 				return;
 			}
 			System.out.println("进入添加评论Rsave");
 
-			
 			if (newsid <= 0) {
 				util.Out().print("null");
 				return;
 
 			}
-			if (review == null || review.equals("")) {
+			if (OpeFunction.isEmpty(review)) {
 				util.Out().print("请填写评论内容");
 				return;
-			}				
-			if(u.getUsername()==null){
+			}
+			if (u.getUsername() == null) {
 				util.Out().print("请设置用户名!");
 				return;
-			}			
+			}
 			r.setNewsid(newsid);
 			r.setUsername(u.getUsername());
 			r.setTime(util.getNowTime());
-			r.setReview(review);		
+			r.setReview(review);
 			rdao.save(r);
-			
-			
+
 			n = ndao.byid(newsid);
 			//
 			if (n == null) {
@@ -474,11 +477,11 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			System.out.println("newsid是" + n.getId());
 			System.out.println("该文章被评论" + a);
 			n.setReviews(a);
-			
+
 			ndao.Upnews(n);
-			
-			((HttpServletResponse) util.response())
-					.sendRedirect(request.getContextPath()+ "/webNewsId?id=" + newsid + "");
+
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/webNewsId?id=" + newsid + "");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -492,12 +495,13 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 * @throws IOException
 	 */
 	public String webHotareaf() throws IOException {
-		
+
 		User u = (User) session.getAttribute("u");
+		 session.setAttribute("province",province);
 		if (u == null) {
-		
-			((HttpServletResponse) util.response())
-					.sendRedirect(request.getContextPath()+ "/SimulationApp/login.html");
+
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/SimulationApp/login.html");
 			System.out.println("你还没登入!");
 
 			return null;
@@ -509,32 +513,37 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 		if (currentPage <= 0) {
 			currentPage = 1;
 		}
-
 		int a = 0;
-		
+		if(u!=null){
+		System.out.println("用户来自："+u.getAddress());
 		a = ndao.area(u.getAddress(), 0).size();
+		nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage);
+		}
+		if (nl.size() == 0) {
+			a = ndao.area(province, 0).size();
+			nl = ndao.Hotarea(province, pageSize, currentPage);
+
+			if (nl.size() == 0) {
+				a = ndao.area("北京", 0).size();
+				nl = ndao.Hotarea("北京", pageSize, currentPage);
+
+			}
+		}
 
 		if (a % pageSize == 0) {
 			a = a / pageSize;
 		} else {
 			a = a / pageSize + 1;
 		}
-		if (currentPage > a) {
-			currentPage = a;
-		}
-		
-		nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage);
-		if(nl.size()<=0){
-			nl=ndao.Hotarea("北京", pageSize, currentPage);
-			}
-		System.out.println(" -有" + a + "页");
+		System.out.println(" 有-" + a + "-页");
 		System.out.println("每页多少条-" + pageSize);
 		System.out.println("第-" + currentPage + "-页");
+		System.out.println("用户ip来自："+province);
 		
 		request.setAttribute("currentPage", currentPage);
-		
+
 		request.setAttribute("nl", nl);
-		
+
 		request.setAttribute("a", a);
 		return Action.SUCCESS;
 	}
@@ -545,7 +554,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public String webHottest() {
 		try {
 			int a = 0;
-			
+
 			a = ndao.Hottest(0).size();
 
 			if (a % pageSize == 0) {
@@ -562,13 +571,13 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 
 			System.out.println("每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
-			
+
 			nl = ndao.Hottest(pageSize, currentPage);
-			
+
 			request.setAttribute("currentPage", currentPage);
-			
+
 			request.setAttribute("nl", nl);
-			
+
 			request.setAttribute("a", a);
 
 		} catch (Exception e) {
@@ -623,18 +632,17 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			System.out.println(type + " -有" + a + "页");
 			System.out.println("每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
-			
+
 			nl = ndao.types(type, pageSize, currentPage);
-			
+
 			request.setAttribute("currentPage", currentPage);
 
-			
 			request.setAttribute("type", type);
-			
+
 			request.setAttribute("nl", nl);
-			
+
 			request.setAttribute("tp", tp);
-			
+
 			request.setAttribute("a", a);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -651,7 +659,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public String webNewtype() throws IOException {
 		try {
 			if (pageSize <= 0) {
-				
+
 				pageSize = 10;
 			}
 			if (tp <= 0) {
@@ -661,7 +669,6 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			if (currentPage <= 0) {
 				currentPage = 1;
 			}
-		
 
 			System.out.println("进入webnewtype");
 			System.out.println("传的" + tp);
@@ -721,19 +728,16 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 
 			System.out.println(type);
 
-			
 			nl = ndao.type(0, type, pageSize, currentPage);
 
-			
 			request.setAttribute("currentPage", currentPage);
 
-			
 			request.setAttribute("type", type);
-			
+
 			request.setAttribute("nl", nl);
-			
+
 			request.setAttribute("tp", tp);
-			
+
 			request.setAttribute("a", a);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -759,7 +763,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 		if (rl.size() != 0) {
 			System.out.println("有评论");
 			for (int i = 0; i < rl.size(); i++) {
-				
+
 				ul.add(userdao.byUsernameAccnumnoPhone(rl.get(i).getUsername()));
 			}
 			System.out.println("评论" + rl.size());
@@ -768,16 +772,15 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			request.setAttribute("rl", rl);
 		}
 
-		
 		n = ndao.byid(id);
-		
+
 		n.setHits(n.getHits() + 1);
-	
+
 		n.setCah(n.getCah() + 1);
 
 		System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah()
 				+ "收藏数:" + n.getCollectnum());
-		
+
 		ndao.Upnews(n);
 		request.setAttribute("n", n);
 
@@ -797,12 +800,12 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			System.out.println("没有获取到新闻id");
 			return null;
 		}
-		
+
 		rl = rdao.Alln(id);
 		if (rl.size() != 0) {
 			System.out.println("有评论");
 			for (int i = 0; i < rl.size(); i++) {
-				
+
 				ul.add(userdao.byUsernameAccnumnoPhone(rl.get(i).getUsername()));
 			}
 			System.out.println("评论" + rl.size());
@@ -811,11 +814,10 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			request.setAttribute("rl", rl);
 		}
 
-		
 		n = ndao.byid(id);
-		
+
 		n.setHits(n.getHits() + 1);
-		
+
 		n.setCah(n.getCah() + 1);
 		request.setAttribute("n", n);
 
@@ -830,17 +832,17 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 * 
 	 */
 	public String weiXniBDN() throws IOException, InterruptedException {
-		if(province==null){
-			Object pro=session.getAttribute("province");
-			if(pro==null){
-				province="湖南";
-			}else{
-				province=pro.toString();
+		if (province == null) {
+			Object pro = session.getAttribute("province");
+			if (pro == null) {
+				province = "湖南";
+			} else {
+				province = pro.toString();
 			}
-		
-		}else{
-			//province=province.substring(0, province.length()-1);
-			
+
+		} else {
+			// province=province.substring(0, province.length()-1);
+
 		}
 		session.setAttribute("province", province);
 		nl = ndao.Hotarea(8, province);
@@ -858,7 +860,6 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 */
 	public void Newsexpert() throws IOException {
 
-		
 		nl = ndao.area(area);
 		int ext = nl.size();
 		System.out.println(area + " 专家新闻有" + ext);
@@ -878,13 +879,13 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 * @throws IOException
 	 */
 	public void Hotareaf() throws IOException {
-		
+
 		if (pageSize <= 0) {
-			pageSize=10;
+			pageSize = 10;
 		}
 
 		if (currentPage <= 0) {
-			currentPage=1;
+			currentPage = 1;
 		}
 		if (area == null) {
 			util.Out().print("省级为空！");
@@ -925,11 +926,11 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public void cah() throws IOException {
 
 		if (pageSize <= 0) {
-			pageSize=10;
+			pageSize = 10;
 		}
 
 		if (currentPage <= 0) {
-			currentPage=10;
+			currentPage = 10;
 		}
 		nl = ndao.cah(0);
 		int a = 0;
@@ -966,15 +967,13 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public void newtype() throws IOException {
 		try {
 			if (pageSize <= 0) {
-				pageSize=10;
-				
+				pageSize = 10;
+
 			}
 			if (tp <= 0) {
 				util.Out().print("tp==null！");
 				return;
 			}
-			
-		
 
 			System.out.println("进入newtype");
 			System.out.println("传的" + tp);
@@ -1024,10 +1023,10 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			if (currentPage > a) {
 				currentPage = a;
 			}
-			if(currentPage<=0){
+			if (currentPage <= 0) {
 				currentPage = 1;
 			}
-			
+
 			System.out.println(type + " -有" + a + "页");
 			System.out.println("每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
@@ -1059,20 +1058,18 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 		n = ndao.byid(newsid);
 
 		if (n != null) {
-			
+
 			cl = cdao.Alln(newsid);
-			
+
 			rl = rdao.Alln(newsid);
-			
+
 			for (int i = 0; i < cl.size(); i++) {
 
-				
 				cdao.remove(cl.get(i));
 			}
-		
+
 			for (int i = 0; i < rl.size(); i++) {
 
-			
 				rdao.remove(rl.get(i));
 			}
 			boolean b = true;
@@ -1090,8 +1087,8 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			}
 			ndao.rm(n);
 
-			((HttpServletResponse) util.response())
-					.sendRedirect(request.getContextPath()+ "/Newsget");
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/Newsget");
 		} else {
 			util.Out().print("删除失败 没有要删除的新闻！");
 
@@ -1143,13 +1140,11 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			List<News> nt = new ArrayList<News>();
 			num = 11;
 
-			
 			nt = ndao.Hottime(num);
 
 			List<News> nh = new ArrayList<News>();
 			num = 3;
 
-			
 			String htime = util.getMondayOfWeek1();
 			String time = util.getMondayOfWeek7();
 			System.out.println("上周1是" + htime + "上周日是" + time);
@@ -1227,19 +1222,19 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public String webNewsA10() throws IOException {
 		try {
 			User u = (User) session.getAttribute("u");
-			Object pro=session.getAttribute("province");
-			if(pro!=null){
-				area=pro.toString();
+			Object pro = session.getAttribute("province");
+			if (pro != null) {
+				area = pro.toString();
 			}
 			if (u != null) {
 
 				System.out.println("获取到用户信息了");
-				
+
 				area = u.getAddress();
 				// 市级
 				areas = u.getAddcity();
 			}
-			
+
 			System.out.println("时间是" + util.getNowTime());
 			System.out.println("进入了webNewsA10!!");
 			int day = 14;
@@ -1282,7 +1277,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			List<News> n4 = new ArrayList<News>();
 
 			num = 2;
-			
+
 			if (ndao.area(area, num).size() < 2) {
 
 				System.out.println("本省新闻小于2条");
@@ -1311,15 +1306,15 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			System.out.println("时间排序" + nt.size() + "热门新闻" + nh.size() + "本地新闻"
 					+ n4.size() + "轻松导航是1--" + n5.get(0).getType()
 					+ "--健康导航是1---" + n8.get(0).getType());
-		
+
 			request.setAttribute("Hottime", nt);
-			
+
 			request.setAttribute("Hottest", nh);
-			
+
 			request.setAttribute("Hotarea", n4);
-			
+
 			request.setAttribute("typeqs", n5);
-			
+
 			request.setAttribute("typejk", n8);
 
 		} catch (Exception e) {
@@ -1376,11 +1371,11 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			System.out.println("进入了NewsA");
 			List<News> nt = new ArrayList<News>();
 			num = 4;
-			
+
 			nt = ndao.Hottime(num);
 			List<News> nh = new ArrayList<News>();
 			num = 3;
-			
+
 			String htime = util.getMondayOfWeek1();
 			String time = util.getMondayOfWeek7();
 			System.out.println("上周1是" + htime + "上周日是" + time);
@@ -1405,7 +1400,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 
 			List<News> n4 = new ArrayList<News>();
 			num = 2;
-			
+
 			if (ndao.area(area, num).size() < 2) {
 				System.out.println("本省新闻小于2条");
 				n4 = ndao.type(2, "轻松驿站");
@@ -1440,7 +1435,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 */
 	public void Hotarea() {
 		try {
-			
+
 			nl = ndao.Hotarea(0, area);
 			if (nl.size() == 0) {
 				util.Out().print("null");
@@ -1456,7 +1451,6 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 */
 	public void Hottest() {
 		try {
-			
 
 			nl = ndao.Hottest(0);
 
@@ -1561,8 +1555,8 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 
 			int a = ndao.types(type).size();
 
-			if(pageSize<=0){
-				pageSize=10;
+			if (pageSize <= 0) {
+				pageSize = 10;
 			}
 			if (a % pageSize == 0) {
 				a = a / pageSize;
@@ -1605,7 +1599,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 
 	public String UPtext() throws IOException {
 		try {
-			//HttpSession Httpsession = request.getSession();
+			// HttpSession Httpsession = request.getSession();
 			HttpServletRequest request = ServletActionContext.getRequest();
 			request.setCharacterEncoding("UTF-8");
 			htmlData = request.getParameter("content1");
@@ -1636,16 +1630,15 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 				util.Out().print("您没有上传大图！请您返回重试！");
 				return null;
 			}
-		
+
 			BufferedImage sourceImg = ImageIO
 					.read(new FileInputStream(imgFile));
 			BufferedImage sourceImgmax = ImageIO.read(new FileInputStream(
 					imgFilemax));
 
-			
 			float fimg = util.fileSize(imgFile);
 			float fimgmax = util.fileSize(imgFilemax);
-			
+
 			if (sourceImgmax.getWidth() != 720
 					|| sourceImgmax.getHeight() != 360) {
 				util.Out().print("大图尺寸为 720*360 请您重新检查下！请您返回重试！");
@@ -1672,7 +1665,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			String img = util.fileToServer(savePath, imgFile, imgFileFileName,
 					imgFileContentType, true);
 			News n = new News();
-			
+
 			n.setTitle(title);
 			n.setSummary(summary);
 			n.setContent(htmlData);
@@ -1762,7 +1755,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 				System.out.println("点击数为" + nn);
 
 				n.setHits(nn);
-				
+
 				if (n.getCollectnum() != null) {
 					n.setCah(n.getCollectnum() * 2 + nn);
 				} else {
@@ -1790,14 +1783,14 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			System.out.println("进入了NewsAll");
 			List<News> nt = new ArrayList<News>();
 			num = 3;
-			
+
 			for (News n2 : ndao.Hottime(num)) {
 				nt.add(n2);
 				System.out.println("全国最新新闻id-" + n2.getId());
 			}
 			List<News> nn = new ArrayList<News>();
 			num = 2;
-			
+
 			for (News n : ndao.Hottest(num)) {
 				System.out.println("最热新闻id-" + n.getId());
 				nn.add(n);
@@ -1816,7 +1809,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 
 			System.out.println("全国最新有-" + nt.size() + ",全国最热-" + nn.size()
 					+ "本地新闻-" + n4.size());
-			
+
 			String result = "{\"Hottime\":" + util.ToJson(nt) + ",\"Hottest\":"
 					+ util.ToJson(nn) + ",\"Hotarea\":" + util.ToJson(n4) + "}";
 			util.Out().print(result);
@@ -1834,13 +1827,13 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 */
 	public void Csave() throws IOException {
 		try {
-			System.out.println("进入新闻收藏userid:"+userid+"newsid:"+newsid);
+			System.out.println("进入新闻收藏userid:" + userid + "newsid:" + newsid);
 			if (cdao.unid(userid, newsid) != null) {
 				System.out.println("已经收藏过!");
 				util.Out().print(false);
 			} else {
 				User u = userdao.byid(userid);
-				if (u == null||newsid<=0) {
+				if (u == null || newsid <= 0) {
 					util.Out().print(false);
 					return;
 				}
@@ -1848,27 +1841,25 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 				c.setUserid(userid);
 				c.setTime(util.getNowTime());
 				cdao.save(c);
-			
+
 				n = ndao.byid(newsid);
 
-				
 				int n1;
-				
+
 				if (n.getCollectnum() != null) {
 					n1 = n.getCollectnum() + 1;
 				} else {
 					n1 = 1;
 				}
-				
+
 				if (n.getHits() != null) {
 					n.setCah(n1 * 2 + n.getHits());
 				} else {
 					n.setCah(n1 * 2);
 				}
 
-			
 				n.setCollectnum(n1);
-				
+
 				ndao.Upnews(n);
 				System.out.println("收藏成功!");
 				util.Out().print(true);
@@ -1891,12 +1882,12 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			System.out.println("没有获取到新闻id");
 			return null;
 		}
-		
+
 		rl = rdao.Alln(id);
 		if (rl.size() != 0) {
 			System.out.println("有评论");
 			for (int i = 0; i < rl.size(); i++) {
-				
+
 				ul.add(userdao.byUsernameAccnumnoPhone(rl.get(i).getUsername()));
 			}
 			System.out.println("评论" + rl.size());
@@ -1905,16 +1896,15 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			request.setAttribute("rl", rl);
 		}
 
-		
 		n = ndao.byid(id);
-		
+
 		n.setHits(n.getHits() + 1);
-		
+
 		n.setCah(n.getCah() + 1);
 
 		System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah()
 				+ "收藏数:" + n.getCollectnum());
-		
+
 		ndao.Upnews(n);
 		request.setAttribute("n", n);
 
@@ -1957,7 +1947,7 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 */
 	public void Whether() {
 		try {
-			
+
 			if (cdao.unid(userid, newsid) == null) {
 				util.Out().print(false);
 			} else {
@@ -1975,8 +1965,8 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public void SearchBookmark() throws IOException {
 		try {
 			System.out.println("进入了SearchBookmark");
-			User u=userdao.byid(userid);
-			if(u==null){
+			User u = userdao.byid(userid);
+			if (u == null) {
 				util.Out().print("null");
 				return;
 			}
@@ -1985,7 +1975,8 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 				nl.add(n);
 
 			}
-			System.out.println("用户"+u.getUsername()+"收藏了" + nl.size() + "个文章");
+			System.out.println("用户" + u.getUsername() + "收藏了" + nl.size()
+					+ "个文章");
 			if (nl.size() == 0) {
 				util.Out().print("null");
 			} else {
@@ -2046,17 +2037,16 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 */
 	public void Rsave() throws IOException {
 		try {
-			//username="gyn781369549";
-			System.out.println("进入添加评论Rsave"+username);
+			// username="gyn781369549";
+			System.out.println("进入添加评论Rsave" + username);
 
-			
 			if (newsid <= 0 || username == null) {
 				util.Out().print("null");
 				return;
 
 			}
-			
-			if(username==null){
+
+			if (username == null) {
 				util.Out().print("null");
 				return;
 			}
@@ -2068,8 +2058,8 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 			r.setNewsid(newsid);
 			r.setUsername(username);
 			r.setTime(util.getNowTime());
-			r.setReview(review);			
-			rdao.save(r);		
+			r.setReview(review);
+			rdao.save(r);
 			// 查询该文章被评论多少次 重新写入
 			n = ndao.byid(newsid);
 			if (n == null) {
@@ -2130,12 +2120,14 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 		if (rl.size() > 0) {
 			System.out.println("有评论");
 			for (int i = 0; i < rl.size(); i++) {
-				User u1 = userdao.byUsernameAccnumnoPhone(rl.get(i).getUsername());
-				
+				User u1 = userdao.byUsernameAccnumnoPhone(rl.get(i)
+						.getUsername());
+
 				ul.add(u1);
 			}
-			System.out.println("有评论");		
-			String result = "{\"rl\":" + util.ToJson(rl) + ",\"ul\":" +util.ToJson(ul)+"}";
+			System.out.println("有评论");
+			String result = "{\"rl\":" + util.ToJson(rl) + ",\"ul\":"
+					+ util.ToJson(ul) + "}";
 			util.Out().print(result);
 
 		} else {
@@ -2152,12 +2144,12 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	 */
 	public void Reviewsusername() throws IOException {
 		try {
-			
+
 			List<Integer> rn = new ArrayList<Integer>();// 收藏 List
 			for (Review r1 : rdao.Allu(username)) {
-				
+
 				Boolean b = true;
-				
+
 				for (int i = 0; i < rn.size(); i++) {
 
 					if (rn.get(i) == r1.getNewsid()) {
@@ -2167,16 +2159,15 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 					}
 
 				}
-				
+
 				if (b) {
 					System.out.println("我评论过的新闻  用户名和新闻id" + username + "+"
 							+ r1.getNewsid() + "时间是：" + r1.getTime());
 					rl.add(rdao.unid(username, r1.getNewsid()).get(0));
 					nl.add(ndao.byid(r1.getNewsid()));
-					
+
 					rn.add(r1.getNewsid());
 				}
-				
 
 			}
 			String result = "{\"news\":" + util.ToJson(nl) + ",\"review\":"
@@ -2458,46 +2449,57 @@ public class NewsAction implements ServletRequestAware,ServletResponseAware{
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 	public String getAuthor() {
 		return author;
 	}
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
 	public String getTime() {
 		return time;
 	}
+
 	public void setTime(String time) {
 		this.time = time;
 	}
+
 	public int getItype() {
 		return itype;
 	}
+
 	public void setItype(int itype) {
 		this.itype = itype;
 	}
+
 	public String getHouse() {
 		return house;
 	}
+
 	public void setHouse(String house) {
 		this.house = house;
 	}
+
 	@Override
 	public void setServletResponse(HttpServletResponse arg0) {
 		// TODO Auto-generated method stub
-		this.response=arg0;
+		this.response = arg0;
 	}
+
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub
-		this.request=arg0;
+		this.request = arg0;
 	}
+
 	public File getXlsxFile() {
 		return xlsxFile;
 	}
+
 	public void setXlsxFile(File xlsxFile) {
 		this.xlsxFile = xlsxFile;
 	}
-	
 
 }

@@ -40,19 +40,22 @@ $(document).ready(function(){
  </script>
 </head>
 <body>
+<label >开始日期：</label><input id="timeq" type="date" name="timeq" value=<%=OpeFunction.getNumTime(1)+" 00:00:00"%>/>
+<label >结束日期：</label><input id="timeh" type="date" name="timeh" value=<%=OpeFunction.getNowTime() %>/>
 
-请输入开始日期:<input type="text"id="timeq" value="<%=OpeFunction.getNowTime() %>" name="timeq"  />请输入截止日期: <input type="text"id="timeh"  value="<%=OpeFunction.getNowTime() %>" name="timeh" />
 
-<button id="b01" type="button">搜索</button>
+<button style="width: 120px;height: 35px;" id="b01" type="button">搜索</button>
 <div id="myDiv"></div>
 <div style="background: #adc">
 <%
-int a=Integer.parseInt(request.getAttribute("a").toString());//获取 共有多少用户
-int a2=Integer.parseInt(request.getAttribute("syn").toString());//获取 共有多少用户
+int all=Integer.parseInt(request.getAttribute("all").toString());//获取 共有多少用户
+int syn=Integer.parseInt(request.getAttribute("syn").toString());//获取 共有多少用户
+int bbt=Integer.parseInt(request.getAttribute("bbt").toString());//获取 共有多少用户
 %>
-<h3>syn有<%=a2 %>个用户</h3>
-<h3>家长之友有<%=a-a2 %>个用户</h3>
-<h3>共有<%=a %>个用户</h3>
+<h3>优教通有<%=syn %>个用户</h3>
+<h3>斑斑通有<%=bbt %>个用户</h3>
+<h3>家长之友有<%=all-syn-bbt %>个用户</h3>
+<h3>共有<%=all %>个用户</h3>
 <form action="">
 <table >
 <tr>

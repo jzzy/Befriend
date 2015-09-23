@@ -47,7 +47,7 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
    <ul class="nav">
        <li class="current"><a href="<%=request.getContextPath()%>/webNewsA10">今日必读</a></li>
       <li><a href="<%=request.getContextPath()%>/webForumApptype">社区互动</a></li>
-      <li><a href="<%=request.getContextPath()%>/webGetapp">精彩内容</a></li>
+      <li><a href="<%=request.getContextPath()%>/webGetapp">贴心服务</a></li>
       <li ><a href="<%=request.getContextPath()%>/SimulationApp/personal_information.jsp">我的信息</a></li>   </ul>
    <!--nav-->
 
@@ -97,7 +97,7 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
                          }
                          %>
     <!--list-->
-   <h1 class="tit"><span>本地资讯</span><a href="<%=request.getContextPath()%>/webHotareaf" class="more">更多></a></h1>
+   <h1 class="tit"><span>本地资讯</span><a href="<%=request.getContextPath()%>/SimulationApp/LocateforIp/Locate.html" class="more">更多></a></h1>
    
       <%
 						for(int i=0;i<Hotarea.size();i++){

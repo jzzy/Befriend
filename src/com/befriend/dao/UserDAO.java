@@ -72,13 +72,13 @@ public interface UserDAO
 	public List<User> getUseradmin(String area);
 	//查询什么时间到什么时间注册的用户
 	public List<User> getUsertime(String timeq,String timeh);
-	public int getUsertimeCount(String timeq,String timeh);
+	public int getUsertimeCount(String timeq,String timeh,String os);
 	//查询全部用户
 	public List<User> getUserAll();
 	//查询全部用户
 	public int getCount();
 	//查询全部用户
-	public int getCountSyn();
+	public int getCount(String os);
 		
 	//查询syn全部用户
 	public List<User> getUsersynAll();

@@ -74,7 +74,8 @@ public interface ApputilDAO {
 
 	// 查询统计 输入当前日期 返回七天内的
 	public List<Stas> StasTime(String province, String os);
-
+	// 查询统计
+	public List<Stas> StasTime(String all, String os,String timeq,String timeh);
 	// 查询统计 输入当前日期 返回七天内的
 	public List<Stas> StasTimeother(String province);
 

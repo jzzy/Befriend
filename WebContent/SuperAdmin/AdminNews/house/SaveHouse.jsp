@@ -98,7 +98,12 @@ return true;
 
 					</td>
 				</tr>
-				
+				<tr>
+					<td>关键词：</td>
+					<td><textarea name="keywords" id="keywords"
+							cols="100" rows="8"
+							style="width: 300px; height: 50px;"></textarea></td>
+				</tr>
 				
 				
 				

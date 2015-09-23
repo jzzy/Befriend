@@ -15,9 +15,8 @@ import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
 import com.befriend.entity.ParentsLetter;
 import com.befriend.entity.Stas;
-import com.befriend.entity.User;
 import com.befriend.entity.Visitor;
-
+@SuppressWarnings("all")
 @Transactional
 public class ApputilDAOImpl implements ApputilDAO {
 	@PersistenceContext
@@ -255,7 +254,7 @@ public class ApputilDAOImpl implements ApputilDAO {
 	@Override
 	public List<House> bylikeshoolname(String schoolname) {
 		Query query = entityManager
-				.createQuery("select u from House u where u.schoolname like :schoolname or u.property like :schoolname order by u.time");
+				.createQuery("select u from House u where u.schoolname like :schoolname or u.keywords like :schoolname  or u.property like :schoolname order by u.time");
 		query.setParameter("schoolname","%"+schoolname+"%");
 		query.setMaxResults(20);
 		
@@ -371,6 +370,20 @@ public class ApputilDAOImpl implements ApputilDAO {
 			return hl.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public List<Stas> StasTime(String all, String os, String timeq,
+			String timeh) {
+		Query query = entityManager
+				.createQuery("select u from Stas u where u.os=:os and u.province=:all "
+						+ " and u.time>:timeq and u.time<=:timeh "
+						+ " order by u.time desc,u.os desc");
+		query.setParameter("os", os);
+		query.setParameter("timeq", timeq);
+		query.setParameter("all", all);
+		query.setParameter("timeh", timeh);
+		return query.getResultList();
 	}
 
 	

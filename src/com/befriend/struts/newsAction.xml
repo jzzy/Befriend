@@ -150,7 +150,7 @@
 		
 		<!--管理通过id查询 新闻-->
 		<action name="adminNewsId" class="newsAction" method="adminNewsId">
-		<result name="success">/SuperAdmin/AdminNews/news/news_cont.jsp</result>
+		<result name="success">/SimulationApp/news_cont.jsp</result>
 		</action>
 		
 		

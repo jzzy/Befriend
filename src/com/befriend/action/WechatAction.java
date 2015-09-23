@@ -29,8 +29,8 @@ public class WechatAction {
 	 */
 	public void wechattest() throws IOException{
 		url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+WechatAction.APPID+"&secret="+WechatAction.APPSECRET;
-		String jsonstr=kit.sendGet(url);
-		System.out.println(jsonstr);
+		//String jsonstr=kit.sendGet(url);
+		//System.out.println(jsonstr);
 	}
 	
 	/**

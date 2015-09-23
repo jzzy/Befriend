@@ -35,16 +35,42 @@ if(nl==null||currentPage<=0){
 
 <body>
 <div class="cont">
-   <h1 class="tit tit6"><a href="<%=request.getContextPath()%>/webNewsA10" class="fl">&lt; 返回</a></h1>
+   <h1 class="tit tit6"><a href="<%=request.getContextPath()%>/webNewsA10" class="fl">&lt; 今日必读</a></h1>
    <div class="sstop">
-  
+   <p class="simg"><img src="SimulationApp/images/zrpmlog.png" height="120" /></p><p class="scont"><span>热文排名是以真实家长用户的关注程度总结出的近期教育新闻排名。意在让各位家长能够看多更多其他家长关注的内容。</span></p>
    </div>
    <ul class="specil_list">
    <%
    for(int i=0;i<nl.size();i++){
    %>
-      <li><a href="<%=request.getContextPath()%>/webNewsId?id=<%=nl.get(i).getId()%>"><span style="color: black; font-size: 16px;"><%=nl.get(i).getTitle() %></span><b><%=nl.get(i).getTime() %><img src="SimulationApp/images/xing.png" /><%=nl.get(i).getHits()%></b></a></li>
-    <%
+     <style type="text/css">
+.main{width:100%;height:auto;}
+.left{width:80%;height:auto;float:left;}
+.right{width:20%;height:auto;float:left;}
+</style>
+      
+      <li>
+      <div class="main">
+      	 <div class="left">
+      	 <a href="<%=request.getContextPath()%>/webNewsId?id=<%=nl.get(i).getId()%>">
+      	 	<span style="color: black; font-size: 16px;"><strong><%=nl.get(i).getTitle() %></strong></span>
+      	 	<br />
+      	 	<b> <%=nl.get(i).getTime() %></b>
+      	 	</a>
+      	 </div>
+    	<div class="right">
+    		<a href="<%=request.getContextPath()%>/webNewsId?id=<%=nl.get(i).getId()%>">
+      			<b style="float:right;margin-top: 6px;"><img src="SimulationApp/images/xing.png" /><%=nl.get(i).getHits()%></b>
+	       	</a>
+    	</div>
+      </div>
+      
+      
+      
+      
+       
+     
+      </li>    <%
    }
     %> 
    </ul>

@@ -13,7 +13,7 @@ List<App> la=(List)request.getAttribute("la");
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>精彩内容</title>
+<title>贴心服务</title>
 <link href="<%=request.getContextPath()%>/SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
 <script  src="<%=request.getContextPath()%>SimulationApp/js/TouchSlide.1.1.js"></script>
 </head>
@@ -28,7 +28,7 @@ List<App> la=(List)request.getAttribute("la");
    <ul class="nav">
       <li><a href="<%=request.getContextPath()%>/webNewsA10">今日必读</a></li>
       <li><a href="<%=request.getContextPath()%>/webForumApptype">社区互动</a></li>
-      <li class="current"><a href="<%=request.getContextPath()%>/webGetapp">精彩内容</a></li>
+      <li class="current"><a href="<%=request.getContextPath()%>/webGetapp">贴心服务</a></li>
       <li><a href="<%=request.getContextPath()%>/SimulationApp/personal_information.jsp">我的信息</a></li>
    </ul>
      <a href="<%=request.getContextPath()%>/SimulationApp/laigao/laigao.html"><img height="60px" width="350px" src="<%=request.getContextPath()%>/SimulationApp/images/08201_01.png" /></a><br>
