@@ -39,7 +39,7 @@ if(nl==null||currentPage<=0||type==null){
 
 <body>
 <div class="cont">
-   <h1 class="tit tit6"><a href="<%=request.getContextPath()%>/webNewsA10" class="fl">&lt; 今日必读</a></h1>
+   <h1 class="tit tit5"><a style="float:left;" href="<%=request.getContextPath()%>/webNewsA10" class="fl"><span>&lt; 今日必读</span></a></h1>
    <div class="sstop">
    
    <%

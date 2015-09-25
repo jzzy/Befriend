@@ -49,7 +49,7 @@ if(n==null){
 <%}else{ %>
 <body>
 <div class="cont"><!--top-->
- <h1 class="tit tit5"><a style="float:left;" href="javascript:history.back(-1);"><span>&lt; 新闻详情</span></a></h1>
+ <h1 class="tit tit5"><a style="float:left;" href="javascript:history.back(-1);"><span>&lt; 返回前页</span></a></h1>
  <div class="newtit">
        <h2 class="ntit" style="color:black; font-size: 21px;"><%=n.getTitle() %></h2>
        

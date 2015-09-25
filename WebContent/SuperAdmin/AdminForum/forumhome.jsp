@@ -18,6 +18,7 @@ if(admin==null){
 %>
 	当前那用户是:<%=admin.getAdmin()%><br>
 	<br>
+		<H3><a href="<%=request.getContextPath()%>/ForumLookalltype?model=6">查看管理修改过的论坛</a><br></H3>
 	<H3><a href="<%=request.getContextPath()%>/SuperAdmin/AdminForum/Forumsave.jsp">添加论坛</a><br></H3>
 		<!-- <H3><a href="<%=request.getContextPath()%>/ForumLookall">查看普通论坛</a><br></H3> -->
 		<H3><a href="<%=request.getContextPath()%>/ForumLookalltype?model=1">查看专家答疑论坛</a><br></H3>

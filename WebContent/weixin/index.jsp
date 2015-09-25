@@ -105,14 +105,19 @@ Object city=request.getAttribute("city");
     			}
 				for(;i<nl.size();i++){
 			%>
+						<a href="<%=request.getContextPath()%>/webNewsId?id=<%=nl.get(i).getId()%>">
 				<dl class="list">
-    				<dt><a href="<%=request.getContextPath()%>/webNewsId?id=<%=nl.get(i).getId()%>"><img src="<%=request.getContextPath()+nl.get(i).getImg() %>"/></a></dt>
+    				<dt >
+    	<img src="<%=request.getContextPath()+nl.get(i).getImg() %>"/>
+    				
+    				</dt>
      			    <dd>
-     			    <p class="subtit"> <a  class="pic" href="<%=request.getContextPath()%>/webNewsId?id=<%=nl.get(i).getId()%>"> <b style="color:#666;font-size: 18px;"  ><%=nl.get(i).getTitle() %></b></a></p>
+     			    <p>  <b style="color:#666;font-size: 18px;"  ><%=nl.get(i).getTitle() %></b></p>
        				
-        		      <p><%=nl.get(i).getSummary() %></p>
+        		     <p  class="subtit" style="color: #666;"><%=nl.get(i).getSummary() %></p>
      		       </dd>
   				 </dl>	
+  				 </a>
 							
            <%
 			}

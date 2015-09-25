@@ -35,7 +35,8 @@ if(nl==null||currentPage<=0){
 
 <body>
 <div class="cont">
-   <h1 class="tit tit6"><a href="<%=request.getContextPath()%>/webNewsA10" class="fl">&lt; 今日必读</a></h1>
+    <h1 class="tit tit5"><a style="float:left;" href="<%=request.getContextPath()%>/webNewsA10" class="fl"><span>&lt; 今日必读</span></a></h1>
+
    <div class="sstop">
    <p class="simg"><img src="SimulationApp/images/bdzxlog.png" height="120" /></p><p class="scont"><span>本地资讯是按照地区划分，重点提供本地区的相关教育新闻及政策，让家长方便的了解本地相关的教育资讯。</span></p>
   

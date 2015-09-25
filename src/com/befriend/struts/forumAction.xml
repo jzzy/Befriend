@@ -25,7 +25,10 @@
 		
 		<!-- 超级管理员 和论坛总管理员  通过id -->
 		<action name="ForumLook" class="forumAction" method="ForumLook">	
-		<result name="success">/SuperAdmin/AdminForum/Forumlookone.jsp</result>
+		<result name="success">/SuperAdmin/AdminForum/UpForumlookone.jsp</result>
+		</action>
+		<!-- 超级管理员 和论坛总管理员  通过id 修改论坛 -->
+		<action name="upFone" class="forumAction" method="upFone">	
 		</action>
 		
 

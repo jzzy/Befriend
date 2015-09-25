@@ -639,21 +639,23 @@ public class OpeFunction {
 //
 //			}
 //		}
-	        int n = 25;
-	        int a=3;
-	        int b=4;
-	        
-	        //开平方
-	        System.out.println(Math.sqrt(b*b+a*a));
-	        //2的4次幂
-	        System.out.println(Math.pow(4, 10));
-	        //绝对值
-	        System.out.println(Math.abs(-1));
-	        //
-	        System.out.println(Math.log10(10));
-	      String aity=WechatKit.sendGet("http://int.dpool.sina.com.cn/iplookup/iplookup.php");
-	       //aity="12345";
-	       System.out.println("地区 "+aity.length()+aity.substring(10, aity.length()));
+//	        int n = 25;
+//	        int a=3;
+//	        int b=4;
+//	        
+//	        //开平方
+//	        System.out.println(Math.sqrt(b*b+a*a));
+//	        //2的4次幂
+//	        System.out.println(Math.pow(4, 10));
+//	        //绝对值
+//	        System.out.println(Math.abs(-1));
+//	        //
+//	        System.out.println(Math.log10(10));
+//	      String aity=WechatKit.sendGet("http://int.dpool.sina.com.cn/iplookup/iplookup.php");
+//	       //aity="12345";
+//	       System.out.println("地区 "+aity.length()+aity.substring(10, aity.length()));
+	        System.out.println("123".substring(0, "123".length()-1));
+	       
 	}
 
 	private static String getValue(XSSFCell xssfCell) {

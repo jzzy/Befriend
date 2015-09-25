@@ -97,7 +97,7 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
                          }
                          %>
     <!--list-->
-   <h1 class="tit"><span>本地资讯</span><a href="<%=request.getContextPath()%>/SimulationApp/LocateforIp/Locate.html" class="more">更多></a></h1>
+   <h1 class="tit"><span>本地资讯</span><a href="<%=request.getContextPath()%>/webHotareaf" class="more">更多></a></h1>
    
       <%
 						for(int i=0;i<Hotarea.size();i++){
@@ -113,7 +113,7 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
      <a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hotarea.get(i).getId()%>">
       <dd>
            <b style="color:#666;font-size: 18px;"><%=Hotarea.get(i).getTitle() %></b>
-          <p><%=Hotarea.get(i).getSummary() %></p>
+          <p class="subtit"><%=Hotarea.get(i).getSummary() %></p>
       </dd>
       </a>
    </dl>
@@ -136,7 +136,7 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
       <a href="<%=request.getContextPath()%>/webNewsId?id=<%=typejk.get(i).getId()%>">
       <dd>
           <b style="color:#666;font-size: 18px;"><%=typejk.get(i).getTitle() %></b>
-          <p><%=typejk.get(i).getSummary() %></p>
+          <p class="subtit"><%=typejk.get(i).getSummary() %></p>
       </dd>
       </a>
    </dl>
@@ -158,7 +158,7 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
      
       <dd>
         <b style="color:#666;font-size: 18px;"><%=typeqs.get(i).getTitle() %></b>
-          <p><%=typeqs.get(i).getSummary() %></p>
+          <p class="subtit"><%=typeqs.get(i).getSummary() %></p>
       </dd>
       </a>
    </dl>
@@ -180,7 +180,7 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
      <a href="<%=request.getContextPath()%>/webNewsId?id=<%=Hottest.get(i).getId()%>">
       <dd>
          <b style="color:#666;font-size: 18px;"><%=Hottest.get(i).getTitle() %></b>
-          <p><%=Hottest.get(i).getSummary() %></p>
+          <p class="subtit"><%=Hottest.get(i).getSummary() %></p>
       </dd>
       </a>
    </dl>

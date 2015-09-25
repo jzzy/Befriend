@@ -63,8 +63,19 @@ public class ForumOne  implements Serializable {
 	@Column(name = "frs")
 	// 论坛被回复次数
 	private int frs;
+	@Column(name = "admin")
+	// 论坛被回复次数
+	private String admin;
 
 
+
+	public String getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
 
 	public int getType() {
 		return type;

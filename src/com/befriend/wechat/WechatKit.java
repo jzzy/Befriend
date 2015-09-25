@@ -1,6 +1,7 @@
 package com.befriend.wechat;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
@@ -13,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
+import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -44,10 +46,10 @@ import com.befriend.util.OpeFunction;
 @SuppressWarnings("all")
 public class WechatKit {
 	private static final Log log = LogFactory.getLog(WechatKit.class);
-	private static CloseableHttpClient Client = null;
-	private static CloseableHttpResponse resp = null;
-	private static HttpClient client = null;
-
+	private static HttpClient httpClient = null;
+	private static HttpClient postClient = null;
+	private static HttpResponse httpResponse = null;
+	
 	/**
 	 * 适合多线程的HttpClient,用httpClient4.2.1实现
 	 * 
@@ -64,15 +66,17 @@ public class WechatKit {
 		// 设置连接超时时间
 		final int REQUEST_TIMEOUT = 10 * 1000; // 设置请求超时2秒钟
 		final int SO_TIMEOUT = 10 * 1000; // 设置等待数据超时时间2秒钟
-//		final Long CONN_MANAGER_TIMEOUT = 500L; // 该值就是连接不够用的时候等待超时时间，一定要设置，而且不能太大
-												// 
+		// final Long CONN_MANAGER_TIMEOUT = 500L; //
+		// 该值就是连接不够用的时候等待超时时间，一定要设置，而且不能太大
+		//
 
-		 HttpConnectionParams.setConnectionTimeout(params, REQUEST_TIMEOUT);
-		 HttpConnectionParams.setSoTimeout(params, SO_TIMEOUT);
+		HttpConnectionParams.setConnectionTimeout(params, REQUEST_TIMEOUT);
+		HttpConnectionParams.setSoTimeout(params, SO_TIMEOUT);
 		params.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
 				REQUEST_TIMEOUT);
 		params.setParameter(CoreConnectionPNames.SO_TIMEOUT, SO_TIMEOUT);
-	//	params.setLongParameter(ClientPNames.CONN_MANAGER_TIMEOUT, CONN_MANAGER_TIMEOUT);
+		// params.setLongParameter(ClientPNames.CONN_MANAGER_TIMEOUT,
+		// CONN_MANAGER_TIMEOUT);
 		params.setBooleanParameter(CoreConnectionPNames.STALE_CONNECTION_CHECK,
 				true);// 在提交请求之前 测试连接是否可用
 		// 设置访问协议
@@ -104,40 +108,48 @@ public class WechatKit {
 	 * @throws IOException
 	 */
 	public static String sendGet(String url) throws IOException {
+		int code = 0;
+		HttpGet get = new HttpGet(url);
 		try {
+
 			String cont = null;
 
-			if (Client == null) {
-				Client = getHttpClient();
+			if (httpClient == null) {
+				httpClient = getHttpClient();
 			}
-			
-			HttpGet get = new HttpGet(url);
-			resp=null;
 
-				
-			resp = Client.execute(get);
 			
-		
-			int code = resp.getStatusLine().getStatusCode();
-			System.out.println(OpeFunction.getNowTime()+",124row WechatKit.sendGet code:" + code+",URL "+url);
+			httpResponse = httpClient.execute(get);
+
+			code = httpResponse.getStatusLine().getStatusCode();
+			System.out.println(OpeFunction.getNowTime()
+					+ ",124row WechatKit.sendGet code:" + code + ",URL " + url);
 			if (code >= 200 && code < 300) {
-				
-				HttpEntity entity = resp.getEntity();
+
+				HttpEntity entity = httpResponse.getEntity();
 				if (entity != null) {
 					cont = EntityUtils.toString(entity);
 					System.out.println(cont);
 					return cont;
+				} else {
+					return Integer.toString(code);
 				}
 
+			} else {
+				return Integer.toString(code);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (resp != null) {
-				resp.close();
+//			if(get!=null){
+//				get.reset();
+//			}
+			if (httpResponse != null) {
+				EntityUtils.consume(httpResponse.getEntity());
 			}
 		}
-		return null;
+		return Integer.toString(code);
+
 	}
 
 	/**
@@ -146,14 +158,19 @@ public class WechatKit {
 	 * @param url
 	 * @param json
 	 * @return
+	 * @throws IOException
+	 * @throws ParseException
 	 */
-	public static String post(String url, JSONObject json, String token) {
-
-		client = getClient(true);
-
+	public static String post(String url, JSONObject json, String token)
+			throws ParseException, IOException {
 		HttpPost post = new HttpPost(url);
 		int code = 0;
 		try {
+
+			if (postClient == null) {
+				postClient = getClient(true);
+			}
+
 			StringEntity s = new StringEntity(json.toString());
 			s.setContentEncoding("UTF-8");
 			s.setContentType("application/json");// :
@@ -165,21 +182,44 @@ public class WechatKit {
 			}
 			post.setEntity(s);
 
-			HttpResponse res = client.execute(post);
-			code = res.getStatusLine().getStatusCode();
+			httpResponse = postClient.execute(post);
+			code = httpResponse.getStatusLine().getStatusCode();
 			System.out.println("postcode:" + code);
 			if (code >= 200 && code < 300) {
-				HttpEntity entity = res.getEntity();
+				HttpEntity entity = httpResponse.getEntity();
+				if(entity!=null){
 				String charset = EntityUtils.toString(entity);
 				System.out.println("post返回的东西:" + charset);
 				return charset;
+				}else{
+					return null;
+				}
+			} else {
+				return null;
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+		} finally {
+			if (httpResponse!=null) {
+				EntityUtils.consume(httpResponse.getEntity());
+			}                                          
+			
+			if (post != null) { // 不要忘记释放，尽量通过该方法实现，
+
+				post.releaseConnection();
+
+				// 存在风险，不要用
+
+				// postMethod.setParameter("Connection", "close");
+
+				// InputStream is = postMethod.getResponseBodyAsStream();
+
+				// is.clsoe();也会关闭并释放连接的
+
+			}
 		}
 		return null;
+
 	}
 
 	/**
@@ -190,7 +230,7 @@ public class WechatKit {
 	 */
 	public static HttpClient getClient(boolean isSSL) {
 
-		HttpClient httpClient = new DefaultHttpClient();
+		HttpClient httpClient = getHttpClient();
 		if (isSSL) {
 			X509TrustManager xtm = new X509TrustManager() {
 				public void checkClientTrusted(X509Certificate[] chain,

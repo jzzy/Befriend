@@ -23,7 +23,7 @@ if(u==null){
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/style.js"></script>
 <script type="text/javascript" src="js/jquery.cityselect.js"></script> 
-<script type="text/javascript" src="js/city.min.js"></script> 
+<script type="text/javascript" src="js/cityselect.js"></script> 
 <script type="text/javascript" >
 	function check(creator)
 {

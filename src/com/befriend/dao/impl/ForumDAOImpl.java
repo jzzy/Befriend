@@ -362,4 +362,21 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 	}
 
+
+	@Override
+	public List<ForumOne> getForumOneUpALL(int pageSize, int currentPage) {
+		// TODO 防止sql注入
+		Query query = entityManager.createQuery("select f from ForumOne f"
+				+ " where f.admin is not null order" + " by f.time desc");
+		int startRow = (currentPage - 1) * pageSize;
+		if (startRow < 0) {
+			startRow = 0;
+		}
+		// 第几页
+		query.setFirstResult(startRow);
+		// 每页显示几条数据
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
 }

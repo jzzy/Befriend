@@ -30,6 +30,8 @@ public interface ForumDAO {
 		//查询所有 论坛   按照类别查询
 		
 		public List<ForumOne> getForumOneALL(int pageSize, int currentPage,int type);
+		//查看管理员修过的论坛
+		public List<ForumOne> getForumOneUpALL(int pageSize, int currentPage);
 		//查询所有 论坛
 		public List<ForumOne> getForumOneALL();
 		//查询所有 论坛 不包括type类型

@@ -54,7 +54,7 @@ ul{ list-style:none;}
 .list dt img{ width:90px;}
 .list dd{ width:70%; height:77px; overflow:hidden;zoom:1; margin-top:-75px; margin-left:100px;} 
 .list2 dd p{ margin-top:15px;}
-.subtit{ width:100%;overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+.subtit{ width:100%;overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
 .subtit a{ color:#666;}
 .border0{ border:none;}
 .bodel{ padding-bottom:20px;}

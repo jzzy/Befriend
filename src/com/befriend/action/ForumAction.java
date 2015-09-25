@@ -76,6 +76,26 @@ public class ForumAction {
 	private int cpe = 0;// 共有多少页
 
 	/**
+	 * 修改论坛参数
+	 * @throws IOException 
+	 */
+	public void upFone() throws IOException{
+		Admin admin=(Admin)session.getAttribute("admin");
+		if(admin!=null){
+		fone=forumdao.getForumOne(id);
+		fone.setfHits(pageSize);	// 论坛被点击次数
+		fone.setTotal(total);// 论坛总回复数
+		fone.setFollectnum(currentPage);// 论坛被收藏次数
+		fone.setAdmin(admin.getAdmin());
+		forumdao.update(fone);
+		}
+		
+		//转发
+		((HttpServletResponse) util.response()).sendRedirect(request
+				.getContextPath() + "/ForumLookalltype?model=6");
+		
+	}
+	/**
 	 * 模糊查询 根据title 搜索论坛
 	 */
 	public void likeTitle() throws IOException {
@@ -166,6 +186,7 @@ public class ForumAction {
 				+ forumid);
 
 		if (fone != null) {
+			//转发
 			((HttpServletResponse) util.response()).sendRedirect(request
 					.getContextPath() + "/ForumLook?id=" + fone.getId());
 		} else {
@@ -463,7 +484,10 @@ public class ForumAction {
 					.getContextPath() + "/SimulationApp/login.html");
 			return;
 		}
-
+		if (OpeFunction.isEmpty(reply)) {
+			util.Out().print("请填写回复内容!");
+			return ;
+		}
 		userid = u.getId();
 		/**
 		 * if(userid==touserid){ System.out.println("阻止了  自己回复自己的评论");
@@ -530,6 +554,10 @@ public class ForumAction {
 			((HttpServletResponse) util.response()).sendRedirect(request
 					.getContextPath() + "/SimulationApp/login.html");
 			return;
+		}
+		if (OpeFunction.isEmpty(reply)) {
+			util.Out().print("请填写回复内容!");
+			return ;
 		}
 
 		userid = u.getId();
@@ -1723,7 +1751,9 @@ public class ForumAction {
 		}
 
 		fones = forumdao.getForumOneALL(pageSize, currentPage, model);
-
+		if(model==6){
+			fones = forumdao.getForumOneUpALL(pageSize, currentPage);
+		}
 		for (int i = 0; i < fones.size(); i++) {
 
 			us.add(userdao.byid(fones.get(i).getUserid()));
@@ -1737,7 +1767,7 @@ public class ForumAction {
 		return Action.SUCCESS;
 
 	}
-
+	
 	/**
 	 * admin 和 论坛超级管理员 通过id查看论坛
 	 * 

@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import com.befriend.util.OpeFunction;
 
 public class RefreshAccessToken {
-	public static String access_token ="YXA6OhW1URHjHtAbX_R0ocltSfiWNLQ";
+	public static String access_token ="YWMtkvqI-mJpEeWmHWM9KfQewAAAAVEyULKkcoThtUNYEYm9zyNKr60dHfj3bjc";
 	public static int Second=0;
 	public final static  String url = "https://a1.easemob.com/topLong/wcfriend/token";
 	public RefreshAccessToken(int second) {
@@ -27,18 +27,16 @@ public class RefreshAccessToken {
 			// 环信
 			
 			try {
-				/**
-				 * NameValuePair[] param = { new NameValuePair("client_id",
-				 * "YXA6MHPlMALGEeWyhu9dNjM0XA"), new
-				 * NameValuePair("grant_type", "toplong#parentsfriend"), new
-				 * NameValuePair("client_secret",
-				 * "YXA6nk6uU_DPp-jP3NSYQzwYS4FQhx4")};
-				 */
+				
 				// 封装个json  获取token的
 				JSONObject json = new JSONObject();
-				json.put("client_id", "YXA6MHPlMALGEeWyhu9dNjM0XA");
-				json.put("grant_type", "client_credentials");
-				json.put("client_secret", "YXA6OhW1URHjHtAbX_R0ocltSfiWNLQ");
+//				json.put("client_id", "YXA6MHPlMALGEeWyhu9dNjM0XA");
+//				json.put("grant_type", "client_credentials");
+//				json.put("client_secret", "YXA6OhW1URHjHtAbX_R0ocltSfiWNLQ");
+				
+				
+				
+				
 				 //json.put("username", "topLong");
 				 //json.put("password", "toplong!");
 
@@ -50,19 +48,22 @@ public class RefreshAccessToken {
 
 				String jn = null;
 				
-				//jn=WechatKit.post(url, json,null);
+				jn=WechatKit.post(url, json,null);
 				 System.out.println("jn:"+jn);
 				
 				if (jn != null) {
+					if( OpeFunction.getJsonKey(jn, "access_token")!=null){
 					// 获取access_token
 					access_token = OpeFunction.getJsonKey(jn, "access_token");
+					}
 				}
 				System.out.println("access_token:"+access_token);
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("异常:" + e.getMessage());
+				
 			}
+			
 			System.out.println("每个"+Second+"s执行" + OpeFunction.getNowTime());
 
 		}

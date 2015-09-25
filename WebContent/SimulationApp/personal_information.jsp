@@ -41,7 +41,7 @@ if(u==null){
    <ul class="nav">
       <li><a href="<%=request.getContextPath()%>/webNewsA10">今日必读</a></li>
       <li><a href="<%=request.getContextPath()%>/webForumApptype">社区互动</a></li>
-      <li><a href="<%=request.getContextPath()%>/webGetapp">精彩内容</a></li>
+      <li><a href="<%=request.getContextPath()%>/webGetapp">贴心服务</a></li>
       <li class="current"><a href="<%=request.getContextPath()%>/SimulationApp/personal_information.jsp">我的信息</a></li>
    </ul>
    <!--nav-->

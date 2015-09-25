@@ -296,8 +296,8 @@ public class UserAction extends ActionSupport {
 			}
 			String w = WechatKit.post(URL, json,
 					RefreshAccessToken.access_token);
-			util.Out().println("第" + (i + 1) + "个用户注册 返回:" + w);
-			System.out.println("第" + (i + 1) + "个用户注册 返回:" + w);
+			util.Out().println("第" + (i + 1) + "用户id-"+us.get(i).getId()+"-注册 返回:" + w+"=400已注册");
+			System.out.println("第" + (i + 1) + "用户id-"+us.get(i).getId()+"-注册 返回:" + w+"=400已注册");
 		}
 		util.Out().print("同步完成!");
 

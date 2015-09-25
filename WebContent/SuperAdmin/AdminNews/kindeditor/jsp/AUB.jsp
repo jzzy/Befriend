@@ -12,7 +12,8 @@
 <script charset="utf-8" src="../kindeditor.js"></script>
 <script charset="utf-8" src="../lang/zh_CN.js"></script>
 <script charset="utf-8" src="../plugins/code/prettify.js"></script>
-
+<script type="text/javascript" src="../jsp/js/jquery.cityselect.js"></script> 
+<script language="javascript" src="../jsp/js/cityselect.js"></script>
 
 <script type="text/javascript">
 	function cka(){
@@ -28,17 +29,17 @@
 
 	
 
-	function check(picForm)
+	function check(creator)
 	{
-		 var imgFile=picForm.imgFile.value;   
-		 var imgFilemax=picForm.imgFilemax.value;   
+		 var imgFile=creator.imgFile.value;   
+		 var imgFilemax=creator.imgFilemax.value;   
 		  var title = document.getElementById("title").value;
 		  var summary = document.getElementById("summary").value;
 		  var imgFilemax = document.getElementById("imgFilemax").value;
 		  var img = document.getElementById("imgFile").value;
 		
-		  var area = document.getElementById("area").value;
-		  var areas = document.getElementById("areas").value;
+		  var area = document.getElementById("province").value;
+		  var areas = document.getElementById("city").value;
 		  var timet = document.getElementById("timet").value;
 		  var point = imgFile.lastIndexOf(".");
 		  var type = imgFile.substr(point);
@@ -112,11 +113,11 @@ return true;
 		
 	</script>
 </head>
-<body>
+<body topmargin=0 leftmargin=0 onload="init()">
 
 	<div style="background: #adc; width: 1500px; height: 1000px;">
 		<h2>本地新闻上传</h2>
-		<form action="UPtext" method="post" name="picForm"
+		<form action="UPtext" method="post" name=creator
 			enctype="multipart/form-data">
 			<table cellpadding="0" cellspacing="0" style="width: 1500px">
 				<p></p>
@@ -154,17 +155,10 @@ return true;
 					<td></td>
 				</tr>
 				<p></p>
-
-
 				<tr>
-					<td>文章地区省(例如：省份写为 "山东"," 河北" 直辖市写为 "北京"，"上海"）</td>
-					<td><input type="text" id="area" name="area" value="北京" /></td>
-				</tr>
-
-				<tr>
-					<td>文章地区市(例如：省份的市写为 "长春"," 青岛" 直辖市的区写为: "海淀区" , "朝阳区"）</td>
-					<td><input type="text" id="areas" name="areas" value="海淀区" />
-					</td>
+				<td width="600px">所在城市：<select id="province" name="province" onChange = "select()">
+				</select> <select id="city" name="city" onChange = "select()"></select>
+    			 </td>
 				</tr>
 
 				<tr>
@@ -182,7 +176,7 @@ return true;
 				</tr>
 				<tr>
 					<td><br /> <input type="submit" name="button"
-						onclick="return check(picForm);" value="OK" />---------<h3><a href="<%=request.getContextPath()%><%=OpeFunction.request().getSession().getAttribute("home") %>" onclick="return cka();">返回主页</a></h3></td>
+						onclick="return check(creator);" value="OK" />---------<h3><a href="<%=request.getContextPath()%><%=OpeFunction.request().getSession().getAttribute("home") %>" onclick="return cka();">返回主页</a></h3></td>
 				</tr>
 
 			</table>

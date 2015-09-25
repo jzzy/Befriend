@@ -91,7 +91,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	private HttpSession session = ServletActionContext.getRequest()
 			.getSession();
 
-	private String province;// 省级
+	private String province=null;// 省级
 
 	private String city;// 市级
 	private String author;
@@ -497,48 +497,60 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	public String webHotareaf() throws IOException {
 
 		User u = (User) session.getAttribute("u");
-		 session.setAttribute("province",province);
-		if (u == null) {
-
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/SimulationApp/login.html");
-			System.out.println("你还没登入!");
-
-			return null;
-		}
+//		if (province!=null) {
+//			 session.setAttribute("province",province);
+//		}
+//		
+//		if (u == null) {
+//
+//			((HttpServletResponse) util.response()).sendRedirect(request
+//					.getContextPath() + "/SimulationApp/login.html");
+//			System.out.println("你还没登入!");
+//
+//			return null;
+//		}
 		if (pageSize <= 0) {
 			pageSize = 10;
 		}
 
-		if (currentPage <= 0) {
-			currentPage = 1;
-		}
+		
 		int a = 0;
-		if(u!=null){
+	if(u!=null){
 		System.out.println("用户来自："+u.getAddress());
 		a = ndao.area(u.getAddress(), 0).size();
-		nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage);
-		}
-		if (nl.size() == 0) {
-			a = ndao.area(province, 0).size();
-			nl = ndao.Hotarea(province, pageSize, currentPage);
-
-			if (nl.size() == 0) {
-				a = ndao.area("北京", 0).size();
-				nl = ndao.Hotarea("北京", pageSize, currentPage);
-
-			}
-		}
-
 		if (a % pageSize == 0) {
 			a = a / pageSize;
 		} else {
 			a = a / pageSize + 1;
 		}
+		if(currentPage>a){
+			currentPage=a;
+		}
+		if (currentPage <= 0) {
+			currentPage = 1;
+		}
+		nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage);
+	}
+		
+		if (nl.size() == 0) {
+			Object obj=session.getAttribute("province");
+			System.out.println("百度定位 :"+obj);
+			if(obj!=null){
+				province=obj.toString();
+			}
+			a = ndao.area(province, 0).size();
+			nl = ndao.Hotarea(province, pageSize, currentPage);
+
+//			if (nl.size() == 0) {
+//				a = ndao.area("北京", 0).size();
+//				nl = ndao.Hotarea("北京", pageSize, currentPage);
+//
+//			}
+		}
 		System.out.println(" 有-" + a + "-页");
 		System.out.println("每页多少条-" + pageSize);
 		System.out.println("第-" + currentPage + "-页");
-		System.out.println("用户ip来自："+province);
+		System.out.println("用户来自："+province);
 		
 		request.setAttribute("currentPage", currentPage);
 
@@ -825,7 +837,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	}
 
 	/**
-	 * 微信公众号 本地新闻
+	 * 微信公众号 本地新闻 按时间排序
 	 * 
 	 * @throws IOException
 	 * @throws InterruptedException
@@ -840,10 +852,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				province = pro.toString();
 			}
 
-		} else {
-			// province=province.substring(0, province.length()-1);
-
-		}
+		} 
 		session.setAttribute("province", province);
 		nl = ndao.Hotarea(8, province);
 		request.setAttribute("nl", nl);
@@ -1222,9 +1231,14 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	public String webNewsA10() throws IOException {
 		try {
 			User u = (User) session.getAttribute("u");
+			if(!OpeFunction.isEmpty(province)){
+				session.setAttribute("province", province);
+			}
+			
 			Object pro = session.getAttribute("province");
+			System.out.println("百度定位 :"+pro);
 			if (pro != null) {
-				area = pro.toString();
+				area = pro.toString();			
 			}
 			if (u != null) {
 
@@ -1233,6 +1247,10 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				area = u.getAddress();
 				// 市级
 				areas = u.getAddcity();
+			}else if(pro==null){
+				
+				((HttpServletResponse) util.response()).sendRedirect(request
+						.getContextPath() + "/SimulationApp/baidugps.html");
 			}
 
 			System.out.println("时间是" + util.getNowTime());
@@ -1281,7 +1299,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (ndao.area(area, num).size() < 2) {
 
 				System.out.println("本省新闻小于2条");
-				n4 = ndao.area("湖南", num);
+				n4 = ndao.area("北京", num);
 
 			} else {
 				num = 2;
@@ -1702,8 +1720,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			} else {
 
 				// A是null就是 本地 上传 界面
-				n.setArea(area);
-				n.setAreas(areas);
+				n.setArea(province);
+				n.setAreas(city);
 
 			}
 

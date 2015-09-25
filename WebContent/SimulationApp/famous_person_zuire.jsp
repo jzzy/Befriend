@@ -35,7 +35,7 @@ if(nl==null||currentPage<=0){
 
 <body>
 <div class="cont">
-   <h1 class="tit tit6"><a href="<%=request.getContextPath()%>/webNewsA10" class="fl">&lt; 今日必读</a></h1>
+    <h1 class="tit tit5"><a style="float:left;" href="<%=request.getContextPath()%>/webNewsA10" class="fl"><span>&lt; 今日必读</span></a></h1>
    <div class="sstop">
    <p class="simg"><img src="SimulationApp/images/zrpmlog.png" height="120" /></p><p class="scont"><span>热文排名是以真实家长用户的关注程度总结出的近期教育新闻排名。意在让各位家长能够看多更多其他家长关注的内容。</span></p>
    </div>
