@@ -95,6 +95,8 @@
 	<bean id="groupDAO" class="com.befriend.dao.impl.GroupDAOImpl"></bean>
 	<!-- 统计用户注册数量dao -->
 	<bean id="registrationDAO" class="com.befriend.dao.impl.RegistrationDAOImpl"></bean>
+	
+	<bean id="eduServicesDAO" class="com.befriend.dao.impl.EduServicesDAOImpl"></bean>
 
 	<!-- Action start here -->
 	
@@ -154,6 +156,10 @@
 		
 		
 		
+	</bean>
+	
+	<bean id="eduAction" class="com.befriend.action.EduServicesAction" scope="prototype">
+	    <constructor-arg ref="eduServicesDAO"></constructor-arg>
 	</bean>
 	
 	<!-- 在java普通类中调用 dao-->
