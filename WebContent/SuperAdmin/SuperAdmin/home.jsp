@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>家长天地后台</title>
+<title>家长之友后台</title>
 </head>
 <body>
 <%

@@ -64,19 +64,18 @@ public class WechatKit {
 		HttpProtocolParams.setUseExpectContinue(params, true);
 
 		// 设置连接超时时间
-		final int REQUEST_TIMEOUT = 10 * 1000; // 设置请求超时2秒钟
-		final int SO_TIMEOUT = 10 * 1000; // 设置等待数据超时时间2秒钟
+		final int REQUEST_TIMEOUT = 6 * 1000; // 设置请求超时2秒钟
+		final int SO_TIMEOUT = 6 * 1000; // 设置等待数据超时时间2秒钟
 		// final Long CONN_MANAGER_TIMEOUT = 500L; //
 		// 该值就是连接不够用的时候等待超时时间，一定要设置，而且不能太大
 		//
 
 		HttpConnectionParams.setConnectionTimeout(params, REQUEST_TIMEOUT);
 		HttpConnectionParams.setSoTimeout(params, SO_TIMEOUT);
-		params.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
-				REQUEST_TIMEOUT);
+		params.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,REQUEST_TIMEOUT);
 		params.setParameter(CoreConnectionPNames.SO_TIMEOUT, SO_TIMEOUT);
 		// params.setLongParameter(ClientPNames.CONN_MANAGER_TIMEOUT,
-		// CONN_MANAGER_TIMEOUT);
+		// CONN_MANAGER_TIMEOUT);vnnnnnnn
 		params.setBooleanParameter(CoreConnectionPNames.STALE_CONNECTION_CHECK,
 				true);// 在提交请求之前 测试连接是否可用
 		// 设置访问协议
@@ -120,7 +119,7 @@ public class WechatKit {
 
 			
 			httpResponse = httpClient.execute(get);
-
+			
 			code = httpResponse.getStatusLine().getStatusCode();
 			System.out.println(OpeFunction.getNowTime()
 					+ ",124row WechatKit.sendGet code:" + code + ",URL " + url);
@@ -138,6 +137,7 @@ public class WechatKit {
 			} else {
 				return Integer.toString(code);
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

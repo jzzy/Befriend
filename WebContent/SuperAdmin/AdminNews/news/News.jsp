@@ -56,6 +56,7 @@ function cka()
  </script>
 <body>
 <div style="background: #ada;">
+<h2><a href="Newsget?tp=1">查看已经发布新闻</a><br><br><a href="Newsget">查看全部新闻</a></h2>
 <table>
 		
 		<td width="320"><h4>文章名字</h4></td>

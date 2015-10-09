@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.befriend.dao.UserDAO;
 import com.befriend.entity.Password;
 import com.befriend.entity.User;
-
+@SuppressWarnings("all")
 @Transactional
 public class UserDAOImpl implements UserDAO {
 	@PersistenceContext

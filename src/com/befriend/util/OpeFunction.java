@@ -598,77 +598,33 @@ public class OpeFunction {
 	
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
-		
-	
-//		while (true) {
-//			Thread.sleep(1000);
-//			System.out.println((int) ((Math.random() * 9 + 1) * 1)+" "+getNowTime());
-//			
-//		}
+
 		   System.out.println("这些挖过来而又没有用上的内存:"+Runtime.getRuntime().freeMemory()/1024/1024 + " M");
 	        System.out.println("java虚拟机现在已经从操作系统那里挖过来的内存大小:"+Runtime.getRuntime().totalMemory()/1024/1024 + " M");
 	        System.out.println("能构从操作系统那里挖到的最大的内存:"+Runtime.getRuntime().maxMemory()/1024/1024 + " M");
-//		String fileName = "E:\\xiaoxue.xlsx";
-//
-//		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileName);
-//
-//		// 循环工作表Sheet
-//		for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
-//			XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
-//			if (xssfSheet == null) {
-//				continue;
-//			}
-//
-//			// 循环行Row
-//			for (int rowNum = 0; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
-//				XSSFRow xssfRow = xssfSheet.getRow(rowNum);
-//				if (xssfRow == null) {
-//					continue;
-//				}
-//				// 第一次不读 是标题
-//				if (rowNum < 1) {
-//					// System.out.println("列："+xssfRow.getCell(0));
-//					System.out.println("学校名称：" + xssfRow.getCell(1));
-//					System.out.println("学校地址：" + xssfRow.getCell(2));
-//					System.out.println("学区范围：" + xssfRow.getCell(3));
-//					System.out.println("学区范围内主要街道、小区、楼盘、单位宿舍："
-//							+ xssfRow.getCell(4));
-//					System.out.println("第" + numSheet + "个工作表Sheet,的第" + rowNum
-//							+ "行");
-//				}
-//
-//			}
-//		}
-//	        int n = 25;
-//	        int a=3;
-//	        int b=4;
-//	        
-//	        //开平方
-//	        System.out.println(Math.sqrt(b*b+a*a));
-//	        //2的4次幂
-//	        System.out.println(Math.pow(4, 10));
-//	        //绝对值
-//	        System.out.println(Math.abs(-1));
-//	        //
-//	        System.out.println(Math.log10(10));
-//	      String aity=WechatKit.sendGet("http://int.dpool.sina.com.cn/iplookup/iplookup.php");
-//	       //aity="12345";
-//	       System.out.println("地区 "+aity.length()+aity.substring(10, aity.length()));
-	        System.out.println("123".substring(0, "123".length()-1));
+	     
+	        long startT=fromDateStringTLong("2004-03-07 14:51:23"); //定义xia机时间
+	        long endT=fromDateStringTLong("2004-03-03 14:50:23");  //定义上机时间
+	        long ss=(startT-endT)/(1000); //共计秒数
+	        int MM = (int)ss/60;   //共计分钟数
+	        int hh=(int)ss/3600;  //共计小时数
+	        int dd=(int)hh/24;   //共计天数
+	        System.err.println(ss);
+	        System.out.println(hh);
+	        System.out.println(dd);
+	       // System.out.println("123".substring(0, "123".length()-1));
 	       
 	}
+	        public static long fromDateStringTLong(String inVal) { //此方法计算时间毫秒
+	        	  Date date = null;   //定义时间类型       
+	        	  SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-mm-dd hh:ss"); 
+	        	  try { 
+	        	  date = inputFormat.parse(inVal); //将字符型转换成日期型
+	        	  } catch (Exception e) { 
+	        	  e.printStackTrace(); 
+	        	  } 
+	        	  return date.getTime();   //返回毫秒数
+	        	  } 
 
-	private static String getValue(XSSFCell xssfCell) {
-		if (xssfCell.getCellType() == xssfCell.CELL_TYPE_BOOLEAN) {
-
-			return String.valueOf(xssfCell.getBooleanCellValue());
-		} else if (xssfCell.getCellType() == xssfCell.CELL_TYPE_NUMERIC) {
-
-			return String.valueOf(xssfCell.getNumericCellValue());
-		} else {
-
-			return String.valueOf(xssfCell.getStringCellValue());
-		}
-	}
 
 }

@@ -62,7 +62,20 @@ function check(picForm)
 return true;
 }
 
+
+function islogin(){
+    if(<%=session.getAttribute("u")%>==null){
+    	<!--跳到登入页-->
+    	location.href="/Befriend/SimulationApp/login.html";
+  	       
+    }
+  
+}
+
 </script>
+
+
+
 </head>
 
 <body>
@@ -123,7 +136,7 @@ return true;
 	<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none""/>
 	<!-- 获取回复信息 -->
 		
-  <input type="text"  id="reply" class="shuru" name="reply"  /><input class="btijiao2"  type="submit"   value="回复楼主<%=uu.getNickname()%>" />
+  <input type="text"  id="reply" class="shuru" name="reply"  onclick="islogin()" /><input class="btijiao2"  type="submit"    value="回复楼主<%=uu.getNickname()%>" />
 </div> 
 
  </form>
@@ -196,7 +209,7 @@ return true;
 	<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none""/>
 	
 	<!-- 获取回复信息 -->
-  <input type="text" id="reply" class="shuru" name="reply" /><input type="submit"  class="btijiao2" value="回复<%=u.getNickname() %>" />
+  <input type="text" onclick="islogin()" id="reply" class="shuru" name="reply" /><input type="submit"  class="btijiao2" value="回复<%=u.getNickname() %>" />
 	
 </div>    
 </form>
@@ -259,7 +272,7 @@ return true;
 			<!-- 获取论坛的id -->
 			<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none""/>
 			<!-- 获取回复信息 -->			
-  			<input type="text" class="shuru" id="reply" name="reply"  /><input class="btijiao2" type="submit"  value="回复<%=fua.get(a).getNickname() %>" />		
+  			<input type="text" class="shuru" id="reply" onclick="islogin()" name="reply"  /><input class="btijiao2" type="submit"  value="回复<%=fua.get(a).getNickname() %>" />		
 		</div>    
 		
 
@@ -292,7 +305,7 @@ return true;
 			<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none""/>
 	
 			<!-- 获取回复信息 -->
- 			 <input type="text" id="reply" class="shuru"  name="reply" /><input type="submit" class="btijiao"  value="回复楼主" />
+ 			 <input type="text" id="reply" class="shuru" onclick="islogin()" name="reply" /><input type="submit" class="btijiao"  value="回复楼主" />
 
 		</div>
    

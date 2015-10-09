@@ -27,7 +27,7 @@ public class Book implements Serializable
 	private String review;
 	@Column(name="time")
 	private String time;
-	@Column(name="admin")
+	@Column(name="admin") 
 	private String admin;
 	@Column(name="type")
 	private int type;

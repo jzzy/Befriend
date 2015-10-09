@@ -42,11 +42,11 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 
 public class ApputilAction {
-	public OpeFunction util;// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
-	private ApputilDAO audao;// ApputilDAO
-	private UserDAO userdao;// 閿熺煫浼欐嫹dao
-	private AppDAO adao;// appdao
-	private String username;// 閿熺煫浼欐嫹閿熸枻鎷�
+	public OpeFunction util;
+	private ApputilDAO audao;
+	private UserDAO userdao;
+	private AppDAO adao;
+	private String username;
 	private String information;//
 	private File imgFile;// logo鍥剧墖
 	private File xlsxFile;// xlsx閿熶茎纭锋嫹
