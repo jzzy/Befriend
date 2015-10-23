@@ -8,13 +8,43 @@
 	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=NGU08xlYQGRsO82MC0504B84"></script>
 	<title>浏览器定位</title>
+	<script  src="js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//alert("cookie:"+document.cookie);
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"	
+	});
+});
+
+</script>
 </head>
 <body>
 	<!-- <div id="allmap" style="display:none"></div> -->
+	<div  align="center">
+	
+	<img  alt="" src="/Befriend/weixin/images/u=1757624993,1534874476&fm=15&gp=0.jpg">
+	
+	</div>
+	<div  align="center"><b>正在定位中...</b></div>
 </body>
 </html>
 <script type="text/javascript">
-	$(document).ready(function(){
+	 $(document).ready(function(){
+		setTimeout(getLocationByIp,4000);
+		function getLocationByIp(){
+			   $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js',function(){  
+			    	 // alert(remote_ip_info.country);//国家  
+			    	  //alert(remote_ip_info.province);//省份  
+			    	  //alert(remote_ip_info.city);//城市  
+			    	  //alert("您所在的省份为:" + remote_ip_info.province);
+			          location.href="/Befriend/weiXniBDN?province="+remote_ip_info.province;
+			    	});  
+
+		}
+		
 		var geolocation = new BMap.Geolocation();
 		geolocation.getCurrentPosition(function(r){
 			if(this.getStatus() == BMAP_STATUS_SUCCESS){
@@ -26,15 +56,23 @@
 					var addComp = rs.addressComponents;
 					//alert(addComp.province + ", " + addComp.city );
 					//alert(addComp.province.substring(0, addComp.province.length-1));
+					//alert("gps");
 					location.href="/Befriend/weiXniBDN?province="+addComp.province.substring(0, addComp.province.length-1);
 					//return;
 				});   
 			}
 			else {
-				alert('failed'+this.getStatus());
+				//alert("通过ip定位 " );
+				location.href="/Befriend/weixin/byip.html";
 			}        
-		},{enableHighAccuracy: true})
-	});
+		},
+		{maximumAge:600000, timeout:500, enableHighAccuracy: false})
+	}); 
+	 
+	 
+	 
+	 
+	 
 	/* // 百度地图API功能
 	var map = new BMap.Map("allmap");
 	var point = new BMap.Point(116.331398,39.897445);

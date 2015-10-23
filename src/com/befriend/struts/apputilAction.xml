@@ -4,6 +4,11 @@
 <struts>
 	<package name="appp" extends="struts-default" >
 	
+	<!-- 统计PV IP UV -->
+		<action name="statisticsPVIP" class="appupAction" method="statisticsPVIP">
+			
+		
+		</action>
 	<!-- app端学区房前 -->
 		<action name="appSelectHouseallZh" class="appupAction" method="appSelectHouseallZh">
 			

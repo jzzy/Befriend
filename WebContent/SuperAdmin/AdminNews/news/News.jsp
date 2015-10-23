@@ -52,11 +52,27 @@ function cka()
 	   }
 	
   }
+  
+  $(document).ready(function(){
+
+	  $("#b01").click(function(){
+		  
+	  htmlobj=$.ajax({url:"/Befriend/searchNews?title="+$("#txt").val(),async:true});
+	  $("#myDiv").html(htmlobj.responseText);
+	  });
+	});
+
 
  </script>
 <body>
-<div style="background: #ada;">
-<h2><a href="Newsget?tp=1">查看已经发布新闻</a><br><br><a href="Newsget">查看全部新闻</a></h2>
+<div id="myDiv" style="background: #ada;">
+<h2><a href="Newsget?tp=1">查看已经发布新闻</a><br><br><a href="Newsget">查看未发布新闻</a><br></h2>
+
+<form  action="searchNews" method="post">
+<input id="txt" type="text" name="title"/>
+<input type="submit" style="width: 100px;height: 25px;" value="搜索"/>
+</form>
+
 <table>
 		
 		<td width="320"><h4>文章名字</h4></td>
@@ -129,7 +145,7 @@ function cka()
 		<td width="210"><%=a.getTime()%></td>
 		
 		<td width="150"><a href="NewsRM?newsid=<%=a.getId() %>" onclick="return ck()">删除</a></td>
-		<td  width="163"><h4 ><input type="button" value="修改"  onclick="k(this.picForm);"></h4></td>
+		<td  width="163"><h4 ><a href="adminNewsById?newsid=<%=a.getId() %>"><input type="button" value="修改" ></a></h4></td>
 		</tr>
 		<hr>
 		
@@ -161,20 +177,21 @@ function cka()
 		%>
 
 		<%
-    	int currentPage=0;
+    	int currentPage=1;
     	int n=0;
-    	currentPage=Integer.parseInt(request.getAttribute("currentPage").toString());//当前页码
-    	n=Integer.parseInt(request.getAttribute("n").toString());//获取 共有多少页
     	
+    	currentPage=Integer.parseInt((request.getAttribute("currentPage")==null?"0":request.getAttribute("currentPage")).toString());//当前页码
+    	n=Integer.parseInt((request.getAttribute("n")==null?"0":request.getAttribute("n")).toString());//获取 共有多少页
+    	int tp=Integer.parseInt((request.getAttribute("tp")==null?"0":request.getAttribute("tp")).toString());//
      %>
 
 
 
 		<br>共<%=n%>页</br> <br>第<%=currentPage%>页</br> <a
-			href="Newsget?currentPage=1">首页</a> <a
-			href="Newsget?currentPage=<%=currentPage-1%>">上一页</a> <a
-			href="Newsget?currentPage=<%=currentPage+1%>">下一页</a> <a
-			href="Newsget?currentPage=<%=n%>">末页</a>
+			href="Newsget?currentPage=1&tp=<%=tp%>">首页</a> <a
+			href="Newsget?currentPage=<%=currentPage-1%>&tp=<%=tp%>">上一页</a> <a
+			href="Newsget?currentPage=<%=currentPage+1%>&tp=<%=tp%>">下一页</a> <a
+			href="Newsget?currentPage=<%=n%>&tp=<%=tp%>">末页</a>
 			
 		---------<h3><a href="<%=request.getContextPath()%><%=OpeFunction.request().getSession().getAttribute("home") %>" onclick="return cka();">返回主页</a></h3>
 

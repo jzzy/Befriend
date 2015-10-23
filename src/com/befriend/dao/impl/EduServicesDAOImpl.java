@@ -42,16 +42,15 @@ public class EduServicesDAOImpl implements EduServicesDAO
 			{
 				if(i == 0)
 				{
-					sql += "u." + entry.getKey() + " = '" +entry.getValue() +"' ";
+					sql += "u." + entry.getKey() + " like '%" +entry.getValue() +"%' ";
 				}
 				else
 				{
-					sql += "and u." + entry.getKey() + " = '" +entry.getValue() + "' ";
+					sql += "and u." + entry.getKey() + " like '%" +entry.getValue() + "%' ";
 				}
 				i++;
 			}
 		}
-		System.out.println(sql);
 		Query query = entityManger.createQuery(sql);
 		query.setFirstResult((currentPage-1)*pageSize);
 		query.setMaxResults(pageSize);

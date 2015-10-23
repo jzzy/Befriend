@@ -5,17 +5,28 @@
 	<package name="News" extends="struts-default">
 
 	
+	<!-- 模糊查询新闻 -->
+		<action name="searchNews" class="newsAction" method="searchNews">
+		<result name="success">/SuperAdmin/AdminNews/news/News.jsp</result>
+	
+		
+		</action>
 		<!-- 通过id查看书籍 -->
 		<action name="webLookBookById" class="newsAction" method="webLookBookById">
 		<result name="success">/SimulationApp/book_cont.jsp</result>
 		
+		</action>
+			<!-- app通过id查看书籍 -->
+		<action name="LookBookById" class="newsAction" method="LookBookById">
 		</action>
 		<!-- 通过类型分页看书籍 -->
 		<action name="webLookBook" class="newsAction" method="webLookBook">
 			<result name="success">/SimulationApp/famous_book.jsp</result>
 		
 		</action>
-		
+		<!-- app通过类型分页看书籍 -->
+		<action name="LookBook" class="newsAction" method="LookBook">
+		</action>
 		<!-- 上传文件书籍 -->
 		<action name="upBookxmls" class="newsAction" method="upBookxmls">
 		
@@ -73,6 +84,16 @@
 		<action name="UPtext" class="newsAction" method="UPtext">
 			<result name="A">AU.jsp</result>
 			<result name="B">AUB.jsp</result>
+		</action>
+		<!-- 查询新闻 -->
+		<action name="adminNewsById" class="newsAction" method="adminNewsById">
+		<result name="success">SuperAdmin/AdminNews/kindeditor/jsp/upNews.jsp</result>
+				
+		</action>
+		<!-- 修改新闻 -->
+		<action name="upAdminNews" class="newsAction" method="upAdminNews">
+			<result name="success">SuperAdmin/AdminNews/kindeditor/jsp/upNews.jsp</result>
+			
 		</action>
 		
 		<!-- 根据八大类查询 -->

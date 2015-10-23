@@ -326,7 +326,7 @@ public class ForumDAOImpl implements ForumDAO {
 				.createQuery("select f from ForumOne f where f.title LIKE :title order"
 						+ " by f.time desc");
 		query.setParameter("title", "%" + title + "%");
-
+		query.setMaxResults(20);
 		return query.getResultList();
 	}
 

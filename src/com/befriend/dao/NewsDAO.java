@@ -13,18 +13,22 @@ import com.befriend.entity.News;
  */
 public interface NewsDAO {
 	// 1 查询 看有多少条更新
-	public List<News> n2ews(int newsid);
+	public List<News> likeNews(String title);
+	// 1 查询 看有多少条更新
+	public int maxNewsId();
 	// 删除新闻
 	public void rm(News n);
 	public void rm(Book book);
 	// 分页查询
-	public List<News> Pagination(int pageSize, int currentPage);
+	public List<News> Pagination(String time,int pageSize, int currentPage);
 	// 分页查询
 	public List<News> Pagination(int pageSize, int currentPage,String time);
 	// 1 查询num 按照时间排序
 	public List<News> Hottimes(int num);
-	// 1 查询num 按照时间排序
-		public List<News> Hottimes(int num,String time);
+	// 获取小于等于当前时间的新闻
+	public List<News> Hottimes(int num,String time);
+	//获取大于当前时间的新闻
+	public List<News> Hottimes(String time,int num);
 	// 2 查询num 按照时间排序 不包括 轻松驿站 健康导航 类
 	public List<News> Hottime(int num,String time);
 
@@ -32,7 +36,7 @@ public interface NewsDAO {
 	public List<News> All();
 
 	// 2 按热点查询 num条新闻按照 收藏 评论数 发布时间 排序
-	public List<News> Hottest(int num);
+	public List<News> Hottest(int num,String time);
 	// 2 按热点查询 num条新闻按照 收藏 评论数 发布时间 排序 分页查询
 	public List<News> Hottest(int pageSize,int currentPage,String time);
 	

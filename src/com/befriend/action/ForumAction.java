@@ -74,7 +74,17 @@ public class ForumAction {
 	private int pageSize = 0;// 每页显示的数据
 	private int currentPage = 0;// 当前页数
 	private int cpe = 0;// 共有多少页
-
+	public String upFonelikeTitle() throws IOException{
+		if(!util.isEmpty(title)){
+		fones=forumdao.likeTitle(title);
+		for (ForumOne f : fones) {
+			us.add(userdao.byid(f.getUserid()));
+		}
+		}
+		request.setAttribute("fones", fones);
+		request.setAttribute("us", us);
+		return Action.SUCCESS;
+	}
 	/**
 	 * 修改论坛参数
 	 * @throws IOException 

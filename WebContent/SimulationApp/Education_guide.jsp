@@ -20,6 +20,15 @@ $(function(){
 	
 
 </script>
+<script  src="js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"
+	});
+});
+</script>
 </head>
 
 <body>

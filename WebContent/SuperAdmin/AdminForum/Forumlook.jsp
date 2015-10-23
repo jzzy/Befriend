@@ -21,7 +21,11 @@ function cka(){
 	 		}
 }
 </script>
-<body>
+<body  style="background:#adc">
+<form  action="upFonelikeTitle" method="post">
+<input id="txt" type="text" name="title"/>
+<input type="submit" style="width: 100px;height: 25px;" value="搜索"/>
+</form>
 
 <% 
 List<List> fones=(List)request.getAttribute("fones");
@@ -56,7 +60,8 @@ if(u!=null&&f!=null){
 		break;			
 	}
 %>
-<div style="background:#adc">
+
+<div>
 <h3>第<%=lc %>个</h3>
 
 <form action="ForumLook" method="post" enctype="multipart/form-data">

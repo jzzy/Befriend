@@ -24,7 +24,13 @@ function ck()
 	   return false;
  }
 }
-
+function fk(){
+	//alert("开始刷新");
+	$.ajax({
+		type:"post",
+		url:"aStas.action"	
+	});
+}
 $(document).ready(function(){
 
   $("#b01").click(function(){
@@ -45,6 +51,7 @@ $(document).ready(function(){
 
 
 <button style="width: 120px;height: 35px;" id="b01" type="button">搜索</button>
+<input  style="width: 120px;height: 35px;" onclick="fk()" type="button" value="更新">
 <div id="myDiv"></div>
 <div style="background: #adc">
 <%
@@ -53,7 +60,7 @@ int syn=Integer.parseInt(request.getAttribute("syn").toString());//获取 共有
 int bbt=Integer.parseInt(request.getAttribute("bbt").toString());//获取 共有多少用户
 %>
 <h3>优教通有<%=syn %>个用户</h3>
-<h3>斑斑通有<%=bbt %>个用户</h3>
+<h3>掌中校园有<%=bbt %>个用户</h3>
 <h3>家长之友有<%=all-syn-bbt %>个用户</h3>
 <h3>共有<%=all %>个用户</h3>
 <form action="">

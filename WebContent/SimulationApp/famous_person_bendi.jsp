@@ -30,7 +30,16 @@ if(nl==null||currentPage<=0){
 <title>本地资讯</title>
 <link href="SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="SimulationApp/js/jquery-1.2.6.pack.js"></script>
-
+<script type="text/javascript" src="SimulationApp/js/style.js"></script>
+<script  src="SimulationApp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"
+	});
+});
+</script>
 </head>
 
 <body>

@@ -14,6 +14,7 @@ import com.befriend.entity.AppUp;
 import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
 import com.befriend.entity.ParentsLetter;
+import com.befriend.entity.SetIp;
 import com.befriend.entity.Stas;
 import com.befriend.entity.Visitor;
 @SuppressWarnings("all")
@@ -384,6 +385,47 @@ public class ApputilDAOImpl implements ApputilDAO {
 		query.setParameter("all", all);
 		query.setParameter("timeh", timeh);
 		return query.getResultList();
+	}
+
+	@Override
+	public void Save(SetIp SetIp) {
+		// TODO Auto-generated method stub
+		entityManager.persist(SetIp);
+	}
+
+	@Override
+	public void Update(SetIp SetIp) {
+		// TODO Auto-generated method stub
+		entityManager.merge(SetIp);
+	}
+
+	@Override
+	public int byTimeConut(String time, String os) {
+		Query query = entityManager
+				.createQuery("select count(u) from SetIp u where u.os=:os and u.time=:time order by u.id desc");
+		query.setParameter("os", os);
+		query.setParameter("time", time);
+		int count =(int)(long)query.getSingleResult();
+		return count;
+	}
+
+	@Override
+	public void Remove(SetIp SetIp) {
+		// TODO Auto-generated method stub
+		entityManager.remove(SetIp);
+	}
+
+	@Override
+	public SetIp byTimeIp(String time, String ip,String os) {
+		Query query = entityManager
+				.createQuery("select u from SetIp u where u.ip=:ip and u.time=:time and u.os=:os order by u.id desc");
+		query.setParameter("ip", ip);
+		query.setParameter("os", os);
+		query.setParameter("time", time);
+		List<SetIp> sep=query.getResultList();
+		if(sep.size()>0)
+			return sep.get(0);
+		return null;
 	}
 
 	

@@ -48,6 +48,15 @@ return true;
 	
 		
 	</script>
+	<script  src="SimulationApp/laigao/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"
+	});
+});
+</script>
 </head>
 
 <body>

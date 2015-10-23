@@ -24,7 +24,7 @@ public class Stas  implements Serializable {
 	private int vored;
 	@Column(name="usersaved")//每天新增用户数量
 	private int usersaved;
-	@Column(name="userlogined")//每天登入用户数量
+	@Column(name="userlogined")//每天活跃的用户数量
 	private int userlogined;
 	@Column(name="usersyned")//每天同时在线(巅峰)用户数量
 	private int usersyned;
@@ -36,7 +36,33 @@ public class Stas  implements Serializable {
 	private String os;
 	@Column(name="province")// 来自的的省
 	private String province;
+	@Column(name="pv")//浏览次数
+	private int pv;
+	@Column(name="uv")//当天的访问的客户端
+	private int uv;
+	@Column(name="ip")//当天访问过的ip次数
+	private int ip;
 	
+	
+	
+	public int getPv() {
+		return pv;
+	}
+	public void setPv(int pv) {
+		this.pv = pv;
+	}
+	public int getUv() {
+		return uv;
+	}
+	public void setUv(int uv) {
+		this.uv = uv;
+	}
+	public int getIp() {
+		return ip;
+	}
+	public void setIp(int ip) {
+		this.ip = ip;
+	}
 	public String getProvince() {
 		return province;
 	}

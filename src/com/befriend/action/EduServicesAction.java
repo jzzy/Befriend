@@ -24,6 +24,7 @@ public class EduServicesAction extends ActionSupport
 	
 	private String province;
 	private String city;
+	private String county;
 	private String merchantId;
 	private String classFirst;
 	private String classSecond;
@@ -46,6 +47,11 @@ public class EduServicesAction extends ActionSupport
 		if(!StringUtils.isEmpty(province))
 		{
 			map.put("province", province);
+		}
+		
+		if(!StringUtils.isEmpty(county))
+		{
+			map.put("county", county);
 		}
 		
 		if(!StringUtils.isEmpty(city))
@@ -186,6 +192,18 @@ public class EduServicesAction extends ActionSupport
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+
+
+	public String getCounty() {
+		return county;
+	}
+
+
+
+	public void setCounty(String county) {
+		this.county = county;
 	}
 	
 	

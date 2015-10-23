@@ -9,9 +9,18 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>查看新闻详情</title>
+<title>教育部推荐用书</title>
 <link href="SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
-
+<script type="text/javascript" src="SimulationApp/js/style.js"></script>
+<script type="text/javascript" src="SimulationApp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"
+	});
+});
+</script>
 </head>
 <%
 Book book=(Book)request.getAttribute("book");

@@ -15,7 +15,17 @@ List<App> la=(List)request.getAttribute("la");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>贴心服务</title>
 <link href="<%=request.getContextPath()%>/SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
-<script  src="<%=request.getContextPath()%>SimulationApp/js/TouchSlide.1.1.js"></script>
+<script  src="<%=request.getContextPath()%>/SimulationApp/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="SimulationApp/js/style.js"></script>
+<script  src="SimulationApp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"
+	});
+});
+</script>
 </head>
 
 <body style="background-color: white;">

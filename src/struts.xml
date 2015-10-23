@@ -6,8 +6,8 @@
 	<constant name="struts.objectFactory" value="spring" />
 	
 	<!-- 打开调试模式 
-	<constant name="struts.devMode" value="true" />
-	-->
+	<constant name="struts.devMode" value="true" />-->
+	
 	<!-- 关闭调试模式 -->
 	<constant name="struts.devMode" value="false" />
 		<!-- 设置struts后缀名  -->

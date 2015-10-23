@@ -32,6 +32,7 @@ import com.befriend.entity.AppUp;
 import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
 import com.befriend.entity.ParentsLetter;
+import com.befriend.entity.SetIp;
 import com.befriend.entity.Stas;
 import com.befriend.entity.User;
 import com.befriend.entity.Visitor;
@@ -41,6 +42,7 @@ import com.befriend.wechat.WechatKit;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 
+@SuppressWarnings("all")
 public class ApputilAction {
 	public OpeFunction util;
 	private ApputilDAO audao;
@@ -69,7 +71,7 @@ public class ApputilAction {
 
 	private String savePath;// 鐩綍
 	private String Keywords;
-	
+
 	private File appFile;// app閿熶茎纭锋嫹
 	private String appFileFileName;// 閿熶茎纭锋嫹閿熸枻鎷�
 	private String appFileContentType;// 閿熶茎纭锋嫹閿熸枻鎷烽敓鏂ゆ嫹
@@ -165,12 +167,13 @@ public class ApputilAction {
 		return Action.SUCCESS;
 	}
 
+	@SuppressWarnings("static-access")
 	public void appSavePL() throws IOException {
 		ParentsLetter p = new ParentsLetter();
 		Message mge = new Message();
 		if (util.isEmpty(content) || util.isEmpty(title)) {
 			mge.setCode(mge.NULL);
-			mge.setStatement("鍥剧墖鎴栬�呮爣棰樹负绌�!");
+			mge.setStatement("!");
 			util.Out().print(util.ToJson(mge));
 			return;
 		}
@@ -189,7 +192,7 @@ public class ApputilAction {
 		audao.Save(p);
 
 		mge.setCode(mge.SUCCESS);
-		mge.setStatement("鎴愬姛!");
+		mge.setStatement("!");
 		mge.setContent("true");
 		util.Out().print(util.ToJson(mge));
 
@@ -331,7 +334,7 @@ public class ApputilAction {
 		Message mge = new Message();
 		if (util.isEmpty(schoolname)) {
 			mge.setCode(mge.NULL);
-			mge.setStatement("null");
+			mge.setStatement("schoolname Is Null");
 			util.Out().print(util.ToJson(mge));
 			return;
 		}
@@ -345,7 +348,7 @@ public class ApputilAction {
 		}
 		mge.setCode(mge.SUCCESS);
 		mge.setContent(hl);
-		mge.setStatement("Is Null");
+		mge.setStatement("Good");
 		util.Out().print(util.ToJson(mge));
 
 	}
@@ -458,7 +461,7 @@ public class ApputilAction {
 	 */
 	public String Addschooldistrict() throws IOException,
 			InvalidFormatException {
-	
+
 		Admin admin = (Admin) session.getAttribute("admin");
 		if (admin == null) {
 			((HttpServletResponse) util.response()).sendRedirect(request
@@ -467,41 +470,39 @@ public class ApputilAction {
 		}
 
 		if (xlsxFile != null) {
-			
 
 			XSSFWorkbook xssfWorkbook = new XSSFWorkbook(xlsxFile);
 
-			
 			for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
 				XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
 				if (xssfSheet == null) {
 					continue;
 				}
 
-				
 				for (int rowNum = 0; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
 					XSSFRow xssfRow = xssfSheet.getRow(rowNum);
 					if (xssfRow == null) {
 						continue;
 					}
-					
+
 					if (rowNum < 1) {
-					
+
 					}
 
 					if (xssfRow.getCell(1) != null) {
 						schoolname = xssfRow.getCell(1).toString();
 					}
-					System.out.println("1:"+xssfRow.getCell(1)+"2:"+xssfRow.getCell(2)+
-							"3:"+xssfRow.getCell(3)+"4:"+xssfRow.getCell(4)+
-							"5:"+xssfRow.getCell(5));
+					System.out.println("1:" + xssfRow.getCell(1) + "2:"
+							+ xssfRow.getCell(2) + "3:" + xssfRow.getCell(3)
+							+ "4:" + xssfRow.getCell(4) + "5:"
+							+ xssfRow.getCell(5));
 					if (schoolname == null) {
 						continue;
 					}
-					House h=audao.byshoolname(schoolname);
-					
-					//更新
-					if ( h!= null) {
+					House h = audao.byshoolname(schoolname);
+
+					// 更新
+					if (h != null) {
 						if (xssfRow.getCell(2) != null) {
 							h.setAddress(xssfRow.getCell(2).toString());
 						}
@@ -511,14 +512,14 @@ public class ApputilAction {
 						if (xssfRow.getCell(3) != null) {
 							h.setScope(xssfRow.getCell(3).toString());
 						}
-						if(xssfRow.getCell(5) != null){
+						if (xssfRow.getCell(5) != null) {
 							h.setKeywords(xssfRow.getCell(5).toString());
 						}
 						audao.Update(h);
-					
+
 						continue;
 					}
-					
+
 					h = new House();
 					h.setSchoolname(schoolname);
 					if (xssfRow.getCell(2) != null) {
@@ -530,7 +531,7 @@ public class ApputilAction {
 					if (xssfRow.getCell(3) != null) {
 						h.setScope(xssfRow.getCell(3).toString());
 					}
-					if(xssfRow.getCell(5) != null){
+					if (xssfRow.getCell(5) != null) {
 						h.setKeywords(xssfRow.getCell(5).toString());
 					}
 
@@ -540,7 +541,7 @@ public class ApputilAction {
 
 				}
 			}
-		
+
 			((HttpServletResponse) util.response()).sendRedirect(request
 					.getContextPath() + "/selectHouse");
 			return null;
@@ -554,7 +555,7 @@ public class ApputilAction {
 		h.setKeywords(Keywords);
 		h.setAdmin(admin.getAdmin());
 		audao.Save(h);
-		
+
 		return Action.SUCCESS;
 
 	}
@@ -575,55 +576,131 @@ public class ApputilAction {
 		this.xlsxFile = xlsxFile;
 	}
 
-	// 閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-	/**
-	 * 閿熸枻鎷峰綍缁熼敓鐙″彉鍖� 閿熸枻鎷峰閿熸枻鎷�
-	 */
-	public  void aStas() {
-	
-		// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺煫浼欐嫹閿熸枻鎷烽敓鏂ゆ嫹
+	public void statisticsPVIP() {
+		
 		time = util.getNumTime(0);
-		System.out.println("province" + province+time);
-		// 閿熸枻鎷峰閿熸枻鎷�3閿熸枻鎷风郴缁熺粺閿熸枻鎷烽敓鏂ゆ嫹
-		String sys = "";
-		for (int i = 0; i < 5; i++) {
-			if (province.equals("all") || province == null
-					|| province.equals("null")) {
-				continue;
-			}
-			switch (i) {
-			case 0:
-				sys = "web";
-				break;
-			case 1:
-				sys = "android";
-				break;
-			case 2:
-				sys = "ios";
-				break;
-			case 3:
-				sys = "syn";
-				break;
-			case 4:
-				sys = "bbt";
-				break;
+		User u = (User) session.getAttribute("u");
+		String ip = request.getRemoteAddr();
+		
 
-			default:
-				sys = null;
-				break;
-			}
-			if (sys == null) {
-				continue;
-			}
-			Stas sta = audao.StasTimeDay(time, sys, province);
-			// 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熺煫浼欐嫹閿熸枻鎷烽敓鏂ゆ嫹
-			usersaved = userdao.getSaveTime(time, sys, province).size();
-			System.out.println("注册用户数量"+usersaved+sys);
-			// 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹
-			vored = audao.VisitorTime(time, sys, province).size();
-			System.out.println("11111111111111111" + vored + province + sys);
-			// 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺煫浼欐嫹閿熸枻鎷烽敓鏂ゆ嫹
-			synlogin = userdao.getFinaltime(time, sys, province).size();
+		if (u == null) {
+			u = new User();
+			u.setOs(User.WECHAT);
+		}
+		System.out.println("进入statisticsPVIP"+util.getNowTime()+"用户来自:"+u.getOs());
+		
+		SetIp sp = audao.byTimeIp(time, ip,u.getOs());
+		if (sp == null) {
+			sp = new SetIp();
+			sp.setIp(ip);
+			sp.setOs(u.getOs());
+			sp.setTime(time);
+			audao.Save(sp);
+		}
+		Stas sta = audao.StasTimeDay(time, u.getOs(), User.ALL);
+		if (sta == null) {
+			sta = new Stas();
+			sta.setTime(time);
+			sta.setProvince(User.ALL);
+			sta.setOs(u.getOs());
+
+			sta.setPv(sta.getPv() + 1);
+			sta.setIp(audao.byTimeConut(time, u.getOs()));
+
+			audao.Save(sta);
+			return;
+		}
+		sta.setPv(sta.getPv() + 1);
+		sta.setIp(audao.byTimeConut(time, u.getOs()));
+		audao.Update(sta);
+
+	}
+
+	// for (int i = 0; i < l.size(); i++) {
+	// if (province.equals("all") || province == null
+	// || province.equals("null")) {
+	// continue;
+	// }
+	//
+	// Stas sta = audao.StasTimeDay(time, l.get(i), province);
+	// usersaved = userdao.getSaveTime(time, l.get(i), province).size();
+	// System.out.println("注册用户数量" + usersaved + l.get(i));
+	//
+	// vored = audao.VisitorTime(time, l.get(i), province).size();
+	//
+	// synlogin = userdao.getFinaltime(time, l.get(i), province).size();
+	// if (synlogin != 0) {
+	// if (synlogin % 3 == 0) {
+	// usersyned = synlogin / 3;
+	// } else {
+	// usersyned = synlogin / 3 + 1;
+	// }
+	// } else {
+	// usersyned = 0;
+	// }
+	// // 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熺煫浼欐嫹
+	// // usersyned = userdao.getOnline(sys,province).size();
+	// if (sta == null) {
+	// sta = new Stas();
+	// sta.setProvince(province);// 閿熸枻鎷烽敓鏂ゆ嫹
+	// sta.setTime(time);// 缁熼敓鏂ゆ嫹鏃堕敓鏂ゆ嫹
+	// sta.setUserlogined(synlogin);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�
+	// if (downloads != 0) {
+	// sta.setDownloaded(1);
+	// } else {
+	// sta.setDownloaded(0);
+	// }// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+	// sta.setOs(l.get(i));// 閿熸枻鎷烽敓鐨嗙鎷风郴缁�
+	// sta.setUsersyned(usersyned);// 鍚屾椂閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
+	// sta.setUsersaved(usersaved);// 閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+	// sta.setVored(vored);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹閿熸枻鎷�
+	// sta.setUv(synlogin);
+	// sta.setIp(audao.byTimeConut(time, l.get(i)));
+	// audao.Save(sta);
+	// continue;
+	// }
+	// sta = audao.StasTimeDay(time, l.get(i), province);
+	//
+	// if (sta == null) {
+	// continue;
+	// }
+	// // sta.setProvince(province);//缁熼敓鏂ゆ嫹鍏ㄩ敓鏂ゆ嫹
+	// // sta.setTime(time);// 缁熼敓鏂ゆ嫹鏃堕敓鏂ゆ嫹
+	//
+	// sta.setUserlogined(synlogin);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�
+	// if (downloaded != 0 && l.get(i).equals(os)) {
+	// sta.setDownloaded(sta.getDownloaded() + 1);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+	// }
+	// // sta.setOs(os);//閿熸枻鎷烽敓鐨嗙鎷风郴缁�
+	// if (usersyned > sta.getUsersyned()) {
+	// sta.setUsersyned(usersyned);// 鍚屾椂閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
+	// }
+	// sta.setUsersaved(usersaved);// 閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+	//
+	// sta.setVored(vored);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹閿熸枻鎷�
+	// sta.setUv(synlogin);
+	// audao.Update(sta);
+	//
+	// }
+
+	public void aStas() {
+
+		time = util.getNumTime(0);
+		List<String> l = new ArrayList<String>();
+		l.add(User.WEB);
+		l.add(User.IOS);
+		l.add(User.ANDROID);
+		l.add(User.SYN);
+		l.add(User.BBT);
+		l.add(User.WECHAT);
+		province = User.ALL;
+		for (int i = 0; i < l.size(); i++) {
+			System.out.println("look aStas:" + l.get(i));
+
+			Stas sta = audao.StasTimeDay(time, l.get(i), province);
+			usersaved = userdao.getSaveTime(time, l.get(i)).size();
+			vored = audao.VisitorTime(time, l.get(i)).size();
+			synlogin = userdao.getFinaltime(time, l.get(i)).size();
 			if (synlogin != 0) {
 				if (synlogin % 3 == 0) {
 					usersyned = synlogin / 3;
@@ -633,131 +710,37 @@ public class ApputilAction {
 			} else {
 				usersyned = 0;
 			}
-			// 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熺煫浼欐嫹
-			// usersyned = userdao.getOnline(sys,province).size();
 			if (sta == null) {
 				sta = new Stas();
-				sta.setProvince(province);// 閿熸枻鎷烽敓鏂ゆ嫹
-				sta.setTime(time);// 缁熼敓鏂ゆ嫹鏃堕敓鏂ゆ嫹
-				sta.setUserlogined(synlogin);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�
-				if (downloads != 0) {
+				sta.setProvince(province);
+				sta.setTime(time);
+				sta.setUserlogined(synlogin);
+				if (downloaded != 0 && l.get(i).equals(os)) {
 					sta.setDownloaded(1);
 				} else {
 					sta.setDownloaded(0);
-				}// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-				sta.setOs(sys);// 閿熸枻鎷烽敓鐨嗙鎷风郴缁�
-				sta.setUsersyned(usersyned);// 鍚屾椂閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
-				sta.setUsersaved(usersaved);// 閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-				sta.setVored(vored);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹閿熸枻鎷�
-
+				}
+				sta.setOs(l.get(i));
+				sta.setUsersyned(usersyned);
+				sta.setUsersaved(usersaved);
+				sta.setVored(vored);
+				sta.setUv(synlogin);
+				sta.setIp(audao.byTimeConut(time, l.get(i)));
 				audao.Save(sta);
 				continue;
 			}
-			sta = audao.StasTimeDay(time, sys, province);
-
-			if (sta == null) {
-				continue;
-			}
-			// sta.setProvince(province);//缁熼敓鏂ゆ嫹鍏ㄩ敓鏂ゆ嫹
-			// sta.setTime(time);// 缁熼敓鏂ゆ嫹鏃堕敓鏂ゆ嫹
-
-			sta.setUserlogined(synlogin);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�
-			if (downloaded != 0 && sys.equals(os)) {
-				sta.setDownloaded(sta.getDownloaded() + 1);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-			}
-			// sta.setOs(os);//閿熸枻鎷烽敓鐨嗙鎷风郴缁�
-			if (usersyned > sta.getUsersyned()) {
-				sta.setUsersyned(usersyned);// 鍚屾椂閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
-			}
-			sta.setUsersaved(usersaved);// 閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-
-			sta.setVored(vored);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹閿熸枻鎷�
-
-			audao.Update(sta);
-
-		}
-System.out.println("????????????????????????????????????????????????????");
-		for (int i = 0; i < 5; i++) {
-
-			switch (i) {
-			case 0:
-				sys = "web";
-				break;
-			case 1:
-				sys = "android";
-				break;
-			case 2:
-				sys = "ios";
-				break;
-			case 3:
-				sys = "syn";
-				break;
-			case 4:
-				sys = "bbt";
-				break;
-
-			default:
-				sys = null;
-				break;
-			}
-			if (sys == null) {
-				continue;
+			sta.setUserlogined(synlogin);
+			if (downloaded != 0 && l.get(i).equals(os)) {
+				sta.setDownloaded(sta.getDownloaded() + 1);
 			}
 
-			Stas sta = audao.StasTimeDay(time, sys, "all");
-			province="all";
-			// 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熺煫浼欐嫹閿熸枻鎷烽敓鏂ゆ嫹
-			usersaved = userdao.getSaveTime(time, sys).size();
-			System.out.println("閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熸枻鎷�" + usersaved + sys);
-			// 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹
-			vored = audao.VisitorTime(time, sys).size();
-			System.out.println(vored + "vored" + sys + time);
-			// 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺煫浼欐嫹閿熸枻鎷烽敓鏂ゆ嫹
-			synlogin = userdao.getFinaltime(time, sys).size();
-			// 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熺煫浼欐嫹
-			// usersyned = userdao.getOnline(sys).size();
-			if (synlogin != 0) {
-				if (synlogin % 3 == 0) {
-					usersyned = synlogin / 3;
-				} else {
-					usersyned = synlogin / 3 + 1;
-				}
-			} else {
-				usersyned = 0;
-			}
-			if (sta == null) {
-				sta = new Stas();
-				sta.setProvince(province);// 閿熸枻鎷烽敓鏂ゆ嫹
-				sta.setTime(time);// 缁熼敓鏂ゆ嫹鏃堕敓鏂ゆ嫹
-				sta.setUserlogined(synlogin);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�
-				if (downloaded != 0 && sys.equals(os)) {
-					sta.setDownloaded(1);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-				} else {
-					sta.setDownloaded(0);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-				}
-				sta.setOs(sys);// 閿熸枻鎷烽敓鐨嗙鎷风郴缁�
-				sta.setUsersyned(usersyned);// 鍚屾椂閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
-				sta.setUsersaved(usersaved);// 閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-				sta.setVored(vored);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹閿熸枻鎷�
-				audao.Save(sta);
-				continue;
-			}
-			sta = audao.StasTimeDay(time, sys, "all");
-			// sta.setProvince(province);//缁熼敓鏂ゆ嫹鍏ㄩ敓鏂ゆ嫹
-			// sta.setTime(time);// 缁熼敓鏂ゆ嫹鏃堕敓鏂ゆ嫹
+			sta.setUsersyned(usersyned);
 
-			sta.setUserlogined(synlogin);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�
-			if (downloaded != 0 && sys.equals(os)) {
-				sta.setDownloaded(sta.getDownloaded() + 1);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-			}
-			// sta.setOs(os);//閿熸枻鎷烽敓鐨嗙鎷风郴缁�
+			sta.setUsersaved(usersaved);
 
-			sta.setUsersyned(usersyned);// 鍚屾椂閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
-
-			sta.setUsersaved(usersaved);// 閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-
-			sta.setVored(vored);// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹閿熸枻鎷�
-
+			sta.setVored(vored);
+			sta.setUv(synlogin);
+			sta.setIp(audao.byTimeConut(time, l.get(i)));
 			audao.Update(sta);
 
 		}
@@ -774,10 +757,10 @@ System.out.println("????????????????????????????????????????????????????");
 			util.Out().print("null");
 			return;
 		}
-		if (os.equals("android")) {
-			os = "android";
-		} else if (os.equals("ios")) {
-			os = "ios";
+		if (os.equals(User.ANDROID)) {
+			os = User.ANDROID;
+		} else if (os.equals(User.IOS)) {
+			os = User.IOS;
 		} else {
 
 			os = null;

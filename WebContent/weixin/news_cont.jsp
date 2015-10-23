@@ -11,7 +11,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>查看新闻详情</title>
 <link href="weixin/css/style.css" rel="stylesheet" type="text/css" />
+<script  src="SimulationApp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//alert("cookie:"+document.cookie);
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"	
+	});
+});
 
+</script>
 </head>
 <%
 //获取新闻

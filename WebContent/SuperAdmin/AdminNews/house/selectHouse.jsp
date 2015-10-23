@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>查看文章</title>
+<title>查看</title>
 </head>
 <script type="text/javascript" src="/Befriend/Jquery/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" language="javascript">
@@ -67,6 +67,7 @@ function cka()
 		<td  width="163"><h4>上传日期</h4></td>
 		<td  width="163"><h4>上传者ID</h4></td>
 		<td  width="163"><h4>操作</h4></td>
+		<td  width="163"><h4>被搜索次数</h4></td>
 	</tr>
 		
 		
@@ -99,6 +100,7 @@ function cka()
 		<td  width="163"><h4>
 		<a onclick="return ck();" href="<%=request.getContextPath()%>/RemovetHouse?id=<%=l.get(i).getId() %>&currentPage=<%=currentPage%>">删除</a>
 		</h4></td>
+		<td  width="163"><h4><%=l.get(i).getCount()%></h4></td>
 	</tr>
 		
 		

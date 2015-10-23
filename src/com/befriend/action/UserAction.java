@@ -116,10 +116,10 @@ public class UserAction extends ActionSupport {
 		request.setAttribute("web", web);
 		request.setAttribute("other", other);
 		request.setAttribute("syn", syn);
-		return Action.SUCCESS; 
+		return Action.SUCCESS;
 
 	}
-	
+
 	/**
 	 * sha1 加密
 	 * 
@@ -296,8 +296,11 @@ public class UserAction extends ActionSupport {
 			}
 			String w = WechatKit.post(URL, json,
 					RefreshAccessToken.access_token);
-			util.Out().println("第" + (i + 1) + "用户id-"+us.get(i).getId()+"-注册 返回:" + w+"=400已注册");
-			System.out.println("第" + (i + 1) + "用户id-"+us.get(i).getId()+"-注册 返回:" + w+"=400已注册");
+			util.Out().println(
+					"第" + (i + 1) + "用户id-" + us.get(i).getId() + "-注册 返回:" + w
+							+ "=400已注册");
+			System.out.println("第" + (i + 1) + "用户id-" + us.get(i).getId()
+					+ "-注册 返回:" + w + "=400已注册");
 		}
 		util.Out().print("同步完成!");
 
@@ -731,8 +734,8 @@ public class UserAction extends ActionSupport {
 		u.setTime(util.getNowTime());
 		u.setCompetence(0);// 普通用户
 		u.setGag(0);// 可以创建论坛
-		u.setCome("own");// 来自家长之友
-		u.setOs(os);
+		u.setCome(User.OWN);// 来自家长之友
+		u.setOs(User.WEB);
 		if (userdao.byUsernameAccnumnoPhone(username) != null) {
 			System.out.println("此用户名  已经注册过");
 			request.setAttribute("ue", username);
@@ -1236,7 +1239,7 @@ public class UserAction extends ActionSupport {
 	 */
 	public String getUsermh() throws IOException {
 
-		if (username.length() >= 1) {
+		if (!OpeFunction.isEmpty(username)) {
 			us = userdao.likeusername(username);
 		}
 		List<Password> pl = new ArrayList<Password>();
@@ -1246,7 +1249,7 @@ public class UserAction extends ActionSupport {
 				pd = userdao.select(u.getId());
 				pl.add(pd);
 			} else {
-				pl.add(null);
+				pl.add(new Password());
 
 			}
 		}
@@ -1475,7 +1478,12 @@ public class UserAction extends ActionSupport {
 			} else {
 				u.setLoginnum(1);
 			}
-			//u.setOs(os);
+			if (os.equals(User.ANDROID)) {
+				u.setOs(User.ANDROID);
+			}
+			if (os.equals(User.IOS)) {
+				u.setOs(User.IOS);
+			}
 			u.setFinaltime(time);
 			u.setOnline(1);
 			userdao.update(u);
@@ -1490,7 +1498,7 @@ public class UserAction extends ActionSupport {
 			} else {
 				url = "http://127.0.0.1/Befriend/aStas?os=" + os;
 			}
-			//WechatKit.sendGet(url);
+			// WechatKit.sendGet(url);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1588,15 +1596,13 @@ public class UserAction extends ActionSupport {
 			u.setOnline(1);
 			u.setFinaltime(time);
 			u.setIp(request.getRemoteAddr());
-			u.setOs("syn");
 
 			userdao.update(u);
-			// u.setPassword(pd.getPassword());
 			// 更新在线用户数量
 			time = util.getNumTime(0);
 
 			session.setAttribute("u", u);
-
+			session.setAttribute("sys", u.getOs());
 			((HttpServletResponse) util.response()).sendRedirect(request
 					.getContextPath() + "/webNewsA10");
 			String url = "";
@@ -1606,7 +1612,7 @@ public class UserAction extends ActionSupport {
 			} else {
 				url = "http://127.0.0.1/Befriend/aStas?os=" + os;
 			}
-			//WechatKit.sendGet(url);
+			// WechatKit.sendGet(url);
 		}
 
 	}
@@ -1650,15 +1656,12 @@ public class UserAction extends ActionSupport {
 			u.setOnline(1);
 			u.setFinaltime(time);
 			u.setIp(request.getRemoteAddr());
-			
-			//u.setOs(os);
 			userdao.update(u);
 			// u.setPassword(pd.getPassword());
 			// 更新在线用户数量
 			time = util.getNumTime(0);
-
+			u.setOs(User.WEB);
 			session.setAttribute("u", u);
-
 			// ((HttpServletResponse) util.response()).sendRedirect(request
 			// .getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
@@ -1669,7 +1672,7 @@ public class UserAction extends ActionSupport {
 			} else {
 				url = "http://127.0.0.1/Befriend/aStas?os=" + os;
 			}
-			//WechatKit.sendGet(url);
+			// WechatKit.sendGet(url);
 			util.Out().print(true);
 		}
 
@@ -1895,10 +1898,10 @@ public class UserAction extends ActionSupport {
 
 			u.setFinaltime(time);
 			u.setSchool("未填写");
-			if(os==null||os.equals("web")){
+			if (os == null || os.equals("web")) {
 				u.setOs("android");
-			}else{
-			u.setOs(os);
+			} else {
+				u.setOs(os);
 			}
 			u.setOnline(1);
 			u.setTime(time);
@@ -1948,7 +1951,7 @@ public class UserAction extends ActionSupport {
 				util.Out().print(util.ToJson(u));
 				String url = "http://127.0.0.1/Befriend/aStas?province="
 						+ address + "&os=" + os;
-				//WechatKit.sendGet(url);
+				// WechatKit.sendGet(url);
 				return;
 			} else {
 				util.Out().print("null");
@@ -2197,7 +2200,6 @@ public class UserAction extends ActionSupport {
 			} else {
 				u.setLoginnum(1);
 			}
-
 			u.setFinaltime(time);
 			u.setIp(request.getRemoteAddr());
 
@@ -2237,8 +2239,8 @@ public class UserAction extends ActionSupport {
 				u.setNickname(nickname);
 			}
 
-			u.setCome("bbt");
-			u.setOs("bbt");
+			u.setCome(User.BBT);
+			u.setOs(User.BBT);
 			u.setAccnumno(accnumno);
 			u.setStage("未填写");
 			if (!util.isEmpty(address)) {
@@ -2516,114 +2518,155 @@ public class UserAction extends ActionSupport {
 
 		System.out.println(timeq);
 		System.out.println(timeh);
-		List<Stas> lios = adao.StasTime("all", "ios",timeq, timeh);
-		Stas sta=new Stas();
+		List<Stas> lios = adao.StasTime("all", User.IOS, timeq, timeh);
+		Stas sta = new Stas();
 		for (int i = 0; i < lios.size(); i++) {
-			System.out.println("日期"+lios.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()+lios.get(i).getUserlogined());
-			sta.setUsersaved(sta.getUsersaved()+lios.get(i).getUsersaved());
-			sta.setDownloaded(sta.getDownloaded()+lios.get(i).getDownloaded());
-			if(lios.get(i).getUsersyned()>sta.getUsersyned()){
-			sta.setUsersyned(lios.get(i).getUsersyned());
-		}
-			sta.setVored(sta.getVored()+lios.get(i).getVored());
+			System.out.println("日期" + lios.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lios.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lios.get(i).getUsersaved());
+			sta.setDownloaded(sta.getDownloaded() + lios.get(i).getDownloaded());
+			if (lios.get(i).getUsersyned() > sta.getUsersyned()) {
+				sta.setUsersyned(lios.get(i).getUsersyned());
+			}
+			sta.setPv(sta.getPv() + lios.get(i).getPv());
+			sta.setIp(sta.getIp() + lios.get(i).getIp());
+			sta.setVored(sta.getVored() + lios.get(i).getVored());
 		}
 		request.setAttribute("iossta", sta);
-		System.out.println("ios统计天数"+lios.size());
-		System.out.println("ios登入总和  "+sta.getUserlogined());
-		System.out.println("ios注册总和  "+sta.getUsersaved());
-		System.out.println("ios下载总和  "+sta.getDownloaded());
-		System.out.println("ios最高在线总和  "+sta.getUsersyned());
-		System.out.println("ios新增游客总和  "+sta.getVored());
-		List<Stas> landroid = adao.StasTime("all", "android",timeq, timeh);
-		sta=new Stas();
+		System.out.println("ios统计天数" + lios.size());
+		System.out.println("ios登入总和  " + sta.getUserlogined());
+		System.out.println("ios注册总和  " + sta.getUsersaved());
+		System.out.println("ios下载总和  " + sta.getDownloaded());
+		System.out.println("ios最高在线总和  " + sta.getUsersyned());
+		System.out.println("ios新增游客总和  " + sta.getVored());
+		List<Stas> landroid = adao.StasTime("all", User.ANDROID, timeq, timeh);
+		sta = new Stas();
 		for (int i = 0; i < landroid.size(); i++) {
-			System.out.println("日期"+landroid.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()+landroid.get(i).getUserlogined());
-			sta.setUsersaved(sta.getUsersaved()+landroid.get(i).getUsersaved());
-			sta.setDownloaded(sta.getDownloaded()+landroid.get(i).getDownloaded());
-			if(landroid.get(i).getUsersyned()>sta.getUsersyned()){
+			System.out.println("日期" + landroid.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ landroid.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved()
+					+ landroid.get(i).getUsersaved());
+			sta.setDownloaded(sta.getDownloaded()
+					+ landroid.get(i).getDownloaded());
+			if (landroid.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(landroid.get(i).getUsersyned());
 			}
-			sta.setVored(sta.getVored()+landroid.get(i).getVored());
+			sta.setPv(sta.getPv() + landroid.get(i).getPv());
+			sta.setIp(sta.getIp() + landroid.get(i).getIp());
+			sta.setVored(sta.getVored() + landroid.get(i).getVored());
 		}
 		request.setAttribute("androidsta", sta);
-		System.out.println("android统计天数"+landroid.size());
-		System.out.println("android登入总和  "+sta.getUserlogined());
-		System.out.println("android注册总和  "+sta.getUsersaved());
-		System.out.println("android下载总和  "+sta.getDownloaded());
-		System.out.println("android最高在线总和  "+sta.getUsersyned());
-		System.out.println("android新增游客总和  "+sta.getVored());
-		List<Stas> lweb = adao.StasTime("all", "web",timeq, timeh);
-		sta=new Stas();
+		System.out.println("android统计天数" + landroid.size());
+		System.out.println("android登入总和  " + sta.getUserlogined());
+		System.out.println("android注册总和  " + sta.getUsersaved());
+		System.out.println("android下载总和  " + sta.getDownloaded());
+		System.out.println("android最高在线总和  " + sta.getUsersyned());
+		System.out.println("android新增游客总和  " + sta.getVored());
+		List<Stas> lweb = adao.StasTime("all", User.WEB, timeq, timeh);
+		sta = new Stas();
 		for (int i = 0; i < lweb.size(); i++) {
-			System.out.println("日期"+lweb.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()+lweb.get(i).getUserlogined());
-			sta.setUsersaved(sta.getUsersaved()+lweb.get(i).getUsersaved());
-			sta.setDownloaded(sta.getDownloaded()+lweb.get(i).getDownloaded());
-			if(lweb.get(i).getUsersyned()>sta.getUsersyned()){
+			System.out.println("日期" + lweb.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lweb.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lweb.get(i).getUsersaved());
+			sta.setDownloaded(sta.getDownloaded() + lweb.get(i).getDownloaded());
+			if (lweb.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(lweb.get(i).getUsersyned());
 			}
-			sta.setVored(sta.getVored()+lweb.get(i).getVored());
+			sta.setVored(sta.getVored() + lweb.get(i).getVored());
+			sta.setPv(sta.getPv() + lweb.get(i).getPv());
+			sta.setIp(sta.getIp() + lweb.get(i).getIp());
 		}
 		request.setAttribute("websta", sta);
-		System.out.println("web统计天数"+lweb.size());
-		System.out.println("web登入总和  "+sta.getUserlogined());
-		System.out.println("web注册总和  "+sta.getUsersaved());
-		System.out.println("web下载总和  "+sta.getDownloaded());
-		System.out.println("web最高在线总和  "+sta.getUsersyned());
-		System.out.println("web新增游客总和  "+sta.getVored());
-		List<Stas> lsyn = adao.StasTime("all", "syn",timeq, timeh);
-		sta=new Stas();
+		System.out.println("web统计天数" + lweb.size());
+		System.out.println("web登入总和  " + sta.getUserlogined());
+		System.out.println("web注册总和  " + sta.getUsersaved());
+		System.out.println("web下载总和  " + sta.getDownloaded());
+		System.out.println("web最高在线总和  " + sta.getUsersyned());
+		System.out.println("web新增游客总和  " + sta.getVored());
+		List<Stas> lsyn = adao.StasTime("all", User.SYN, timeq, timeh);
+		sta = new Stas();
 		for (int i = 0; i < lsyn.size(); i++) {
-			System.out.println("日期"+lsyn.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()+lsyn.get(i).getUserlogined());
-			sta.setUsersaved(sta.getUsersaved()+lsyn.get(i).getUsersaved());
-			//sta.setDownloaded(sta.getDownloaded()+lsyn.get(i).getDownloaded());
-			if(lsyn.get(i).getUsersyned()>sta.getUsersyned()){
+			System.out.println("日期" + lsyn.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lsyn.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lsyn.get(i).getUsersaved());
+			// sta.setDownloaded(sta.getDownloaded()+lsyn.get(i).getDownloaded());
+			if (lsyn.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(lsyn.get(i).getUsersyned());
 			}
-			//sta.setVored(sta.getVored()+lsyn.get(i).getVored());
+			sta.setPv(sta.getPv() + lsyn.get(i).getPv());
+			sta.setIp(sta.getIp() + lsyn.get(i).getIp());
+			// sta.setVored(sta.getVored()+lsyn.get(i).getVored());
 		}
 		request.setAttribute("synsta", sta);
-		System.out.println("优教通统计天数"+lsyn.size());
-		System.out.println("优教通登入总和  "+sta.getUserlogined());
-		System.out.println("优教通注册总和  "+sta.getUsersaved());
-		System.out.println("优教通下载总和  "+sta.getDownloaded());
-		System.out.println("优教通最高在线总和  "+sta.getUsersyned());
-		System.out.println("优教通新增游客总和  "+sta.getVored());
-		List<Stas> lbbt = adao.StasTime("all", "bbt",timeq, timeh);
-		sta=new Stas();
+		System.out.println("优教通统计天数" + lsyn.size());
+		System.out.println("优教通登入总和  " + sta.getUserlogined());
+		System.out.println("优教通注册总和  " + sta.getUsersaved());
+		System.out.println("优教通下载总和  " + sta.getDownloaded());
+		System.out.println("优教通最高在线总和  " + sta.getUsersyned());
+		System.out.println("优教通新增游客总和  " + sta.getVored());
+		List<Stas> lbbt = adao.StasTime("all", User.BBT, timeq, timeh);
+		sta = new Stas();
 		for (int i = 0; i < lbbt.size(); i++) {
-			System.out.println("日期"+lbbt.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()+lbbt.get(i).getUserlogined());
-			sta.setUsersaved(sta.getUsersaved()+lbbt.get(i).getUsersaved());
-			//sta.setDownloaded(sta.getDownloaded()+lbbt.get(i).getDownloaded());
-			if(lbbt.get(i).getUsersyned()>sta.getUsersyned()){
+			System.out.println("日期" + lbbt.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lbbt.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lbbt.get(i).getUsersaved());
+			// sta.setDownloaded(sta.getDownloaded()+lbbt.get(i).getDownloaded());
+			if (lbbt.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(lbbt.get(i).getUsersyned());
 			}
-			//sta.setVored(sta.getVored()+lbbt.get(i).getVored());
+			sta.setPv(sta.getPv() + lbbt.get(i).getPv());
+			sta.setIp(sta.getIp() + lbbt.get(i).getIp());
+			// sta.setVored(sta.getVored()+lbbt.get(i).getVored());
 		}
 		request.setAttribute("bbtsta", sta);
-		System.out.println("斑斑通统计天数"+lbbt.size());
-		System.out.println("斑斑通登入总和  "+sta.getUserlogined());
-		System.out.println("斑斑通注册总和  "+sta.getUsersaved());
-		System.out.println("斑斑通下载总和  "+sta.getDownloaded());
-		System.out.println("斑斑通最高在线总和  "+sta.getUsersyned());
-		System.out.println("斑斑通新增游客总和  "+sta.getVored());
-		
-		request.setAttribute("lbbt", lbbt);
-		request.setAttribute("lios", lios);
-		request.setAttribute("landroid", landroid);
-		request.setAttribute("lweb", lweb);
-		request.setAttribute("lsyn", lsyn);
-			
-		int own = userdao.getUsertimeCount(timeq, timeh, "own");
-		int bbt = userdao.getUsertimeCount(timeq, timeh, "bbt");
-		int syn = userdao.getUsertimeCount(timeq, timeh, "syn");
+		System.out.println("斑斑通统计天数" + lbbt.size());
+		System.out.println("斑斑通登入总和  " + sta.getUserlogined());
+		System.out.println("斑斑通注册总和  " + sta.getUsersaved());
+		System.out.println("斑斑通下载总和  " + sta.getDownloaded());
+		System.out.println("斑斑通最高在线总和  " + sta.getUsersyned());
+		System.out.println("斑斑通新增游客总和  " + sta.getVored());
+
+		List<Stas> lwechat = adao.StasTime("all", User.WECHAT, timeq, timeh);
+		sta = new Stas();
+		for (int i = 0; i < lwechat.size(); i++) {
+			System.out.println("日期" + lwechat.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lwechat.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lwechat.get(i).getUsersaved());
+
+			if (lwechat.get(i).getUsersyned() > sta.getUsersyned()) {
+				sta.setUsersyned(lwechat.get(i).getUsersyned());
+			}
+			sta.setPv(sta.getPv() + lwechat.get(i).getPv());
+			sta.setIp(sta.getIp() + lwechat.get(i).getIp());
+			// sta.setVored(sta.getVored()+lbbt.get(i).getVored());
+		}
+		request.setAttribute("wechatsta", sta);
+		System.out.println("lwechat统计天数" + lwechat.size());
+		System.out.println("lwechat登入总和  " + sta.getUserlogined());
+		System.out.println("lwechat注册总和  " + sta.getUsersaved());
+		System.out.println("lwechat下载总和  " + sta.getDownloaded());
+		System.out.println("lwechat最高在线总和  " + sta.getUsersyned());
+		System.out.println("lwechat新增游客总和  " + sta.getVored());
+
+		// request.setAttribute("lbbt", lbbt);
+		// request.setAttribute("lios", lios);
+		// request.setAttribute("landroid", landroid);
+		// request.setAttribute("lweb", lweb);
+		// request.setAttribute("lsyn", lsyn);
+
+		int own = userdao.getUsertimeCount(timeq, timeh, User.OWN);
+		int bbt = userdao.getUsertimeCount(timeq, timeh, User.BBT);
+		int syn = userdao.getUsertimeCount(timeq, timeh, User.SYN);
 		us = userdao.getUsertime(timeq, timeh);
-		for(int i=0;i<us.size();i++){
-			System.out.println("yonghuming:"+us.get(i).getUsername()+":"+us.get(i).getCome()+":"+us.get(i).getOs());
+		for (int i = 0; i < us.size(); i++) {
+			System.out.println("yonghuming:" + us.get(i).getUsername() + ":"
+					+ us.get(i).getCome() + ":" + us.get(i).getOs());
 		}
 		System.out.println("own有" + own + "个用户");
 		System.out.println("bbt有" + bbt + "个用户");

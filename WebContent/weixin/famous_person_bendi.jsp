@@ -27,6 +27,18 @@ if(nl==null||currentPage<=0){
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script  src="SimulationApp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//alert("cookie:"+document.cookie);
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"	
+	});
+});
+
+</script>
 <title>本地资讯</title>
 <link href="SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="SimulationApp/js/jquery-1.2.6.pack.js"></script>
@@ -35,7 +47,7 @@ if(nl==null||currentPage<=0){
 
 <body>
 <div class="cont">
-   <h1 class="tit tit5"><a style="float:left;" href="<%=request.getContextPath()%>/weixin/weixin.html"><span>&lt; 本地资讯</span></a></h1>
+   <h1 class="tit tit5"><a style="float:left;" href="<%=request.getContextPath()%>/weiXniBDN"><span>&lt; 本地资讯</span></a></h1>
    <div class="sstop">
    <p class="simg"><img src="SimulationApp/images/bdzxlog.png" height="120" /></p><p class="scont"><span>本地资讯是按照地区划分，重点提供本地区的相关教育新闻及政策，让家长方便的了解本地相关的教育资讯。</span></p>
   

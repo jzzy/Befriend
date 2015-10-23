@@ -54,19 +54,74 @@ for(int i=0;i<ush.size();i++){
 <table>
 <tr>
 <td>
-<a href="userLogout?id=<%=ush.get(i).getId() %>" onclick="return ck()"><input type="button" value="注销手机号" ></a>
 </td>
 </tr>
 <tr>
-<td><a href="getUserin?id=<%=ush.get(i).getId() %>" >用户名是:<%=ush.get(i).getUsername() %>----------密码为是:<%=pl.get(i).getPassword() %>手机号是:<%=ush.get(i).getPhone() %>用户账号是:<%=ush.get(i).getAccnumno() %>-----------</a></td>
+<td>头像:<img height="70" width="100" src="<%=request.getContextPath()+(ush.get(i).getImg()==null?"/SimulationApp/images/logod.png":ush.get(i).getImg()) %>" />
+<a href="userLogout?id=<%=ush.get(i).getId() %>" onclick="return ck()"><input type="button" value="注销手机号" ></a>
 
-<td>头像是<img
-			height="70" width="100"
-			src="<%=request.getContextPath()+ush.get(i).getImg() %>" /></td>
+</td>
+</tr>
+<tr>
+<td>
+
+用户:<%=ush.get(i).getUsername() %>
+
+</td>
+</tr>
+<tr>
+<td>昵称:<%=ush.get(i).getNickname()==null?"无":ush.get(i).getNickname() %>
+</td>
+</tr>
+<tr>
+<td>密码:<%=pl.get(i).getPassword() %>
+</td>
+</tr>
+<tr>
+<td>手机:<%=ush.get(i).getPhone()==null?"无":ush.get(i).getPhone() %>
+</td>
+</tr>
+<tr>
+<td>
+编号:<a href="getUserin?id=<%=ush.get(i).getId() %>" ><%=ush.get(i).getAccnumno() %></a>
+</td>
 </tr>
 
+<tr>
+<td>注册时间:<%=ush.get(i).getTime()%>
+</td>
+</tr>
+<tr>
+<td>登入次数:<%=ush.get(i).getLoginnum()%>
+</td>
+</tr>
+<tr>
+<td>最后登入时间:<%=ush.get(i).getFinaltime()==null?"无":ush.get(i).getFinaltime()%>
+</td>
+</tr>
+<tr>
+<td>最后登入时间:<%=ush.get(i).getFinaltime()==null?"无":ush.get(i).getFinaltime()%>
+</td>
+</tr>
+<%
+String come="";
+
+if(ush.get(i).getCome().equals("syn")){
+	come="优教通";
+}else if(ush.get(i).getCome().equals("own")){
+	come="家长之友";
+}else if(ush.get(i).getCome().equals("bbt")){
+	come="掌中校园";
+}else if(ush.get(i).getCome().equals("zdx")){
+	come="电信";
+}
+%>
+<tr>
+<td>来自:<%=come %>
+</td>
+</tr>
 </table>
-<hr>
+
 </form>
 
 <%

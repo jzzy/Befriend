@@ -603,16 +603,16 @@ public class OpeFunction {
 	        System.out.println("java虚拟机现在已经从操作系统那里挖过来的内存大小:"+Runtime.getRuntime().totalMemory()/1024/1024 + " M");
 	        System.out.println("能构从操作系统那里挖到的最大的内存:"+Runtime.getRuntime().maxMemory()/1024/1024 + " M");
 	     
-	        long startT=fromDateStringTLong("2004-03-07 14:51:23"); //定义xia机时间
-	        long endT=fromDateStringTLong("2004-03-03 14:50:23");  //定义上机时间
-	        long ss=(startT-endT)/(1000); //共计秒数
-	        int MM = (int)ss/60;   //共计分钟数
-	        int hh=(int)ss/3600;  //共计小时数
-	        int dd=(int)hh/24;   //共计天数
-	        System.err.println(ss);
-	        System.out.println(hh);
-	        System.out.println(dd);
-	       // System.out.println("123".substring(0, "123".length()-1));
+//	        long startT=fromDateStringTLong("2004-03-07 14:51:23"); //定义xia机时间
+//	        long endT=fromDateStringTLong("2004-03-03 14:50:23");  //定义上机时间
+//	        long ss=(startT-endT)/(1000); //共计秒数
+//	        int MM = (int)ss/60;   //共计分钟数
+//	        int hh=(int)ss/3600;  //共计小时数
+//	        int dd=(int)hh/24;   //共计天数
+//	        System.err.println(ss);
+//	        System.out.println(hh);
+//	        System.out.println(dd);
+//	       // System.out.println("123".substring(0, "123".length()-1));
 	       
 	}
 	        public static long fromDateStringTLong(String inVal) { //此方法计算时间毫秒

@@ -7,6 +7,7 @@ import com.befriend.entity.AppUp;
 import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
 import com.befriend.entity.ParentsLetter;
+import com.befriend.entity.SetIp;
 import com.befriend.entity.Stas;
 import com.befriend.entity.Visitor;
 
@@ -74,8 +75,10 @@ public interface ApputilDAO {
 
 	// 查询统计 输入当前日期 返回七天内的
 	public List<Stas> StasTime(String province, String os);
+
 	// 查询统计
-	public List<Stas> StasTime(String all, String os,String timeq,String timeh);
+	public List<Stas> StasTime(String all, String os, String timeq, String timeh);
+
 	// 查询统计 输入当前日期 返回七天内的
 	public List<Stas> StasTimeother(String province);
 
@@ -87,8 +90,10 @@ public interface ApputilDAO {
 
 	// 查询指定天数的 按省 系统
 	public Stas StasTimeDay(String time, String os, String province);
+
 	/**
 	 * 学区房
+	 * 
 	 * @param house
 	 */
 
@@ -106,20 +111,24 @@ public interface ApputilDAO {
 
 	// 通过学校名称 楼盘名称 模糊查询
 	public List<House> bylikeshoolname(String schoolname);
+
 	// 通过学校名称 楼盘名称 不模糊查询
 	public House byshoolname(String schoolname);
 
 	// 分页
 	public List<House> HouseAll(int currentPage, int pageSize);
+
 	// 查询最火
 	public List<House> HouseZh(int num);
 
 	// 查询一共多少
 	public int HouseAll();
-/**
- * 家长来稿
- * @param ParentsLetter
- */
+
+	/**
+	 * 家长来稿
+	 * 
+	 * @param ParentsLetter
+	 */
 	// 添加家长来信
 	public void Save(ParentsLetter ParentsLetter);
 
@@ -128,7 +137,24 @@ public interface ApputilDAO {
 
 	// 通过id查家长来信
 	public ParentsLetter Plbyid(int id);
-	//查看所有家长来信
+
+	// 查看所有家长来信
 	public List<ParentsLetter> PlAll();
+
 	public void Remove(ParentsLetter p);
+
+	/**
+	 * 记录用户访问量ip
+	 */
+	// 添加新ip
+	public void Save(SetIp SetIp);
+
+	// 修改ip
+	public void Update(SetIp SetIp);
+	// 查看指定日期 和端 记录的ip个数
+	public SetIp byTimeIp(String time, String ip,String os);
+	// 查看指定日期 和端 记录的ip个数
+	public int byTimeConut(String time, String os);
+	//删除
+	public void Remove(SetIp SetIp);
 }

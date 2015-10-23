@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>家长之友</title>
+    <script  src="js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//alert("cookie:"+document.cookie);
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"	
+	});
+});
+
+</script>
 <style type="text/css">
 body{ font-size:14px; font-family:微软雅黑; line-height:150%; background:#aec9e6}
 *{ margin:0; padding:0;}

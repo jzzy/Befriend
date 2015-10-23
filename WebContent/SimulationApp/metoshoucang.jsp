@@ -16,6 +16,16 @@ List<News> nl=(List)request.getAttribute("nl");
 <title>我的收藏</title>
 <link href="SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
 <script  src="SimulationApp/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="SimulationApp/js/style.js"></script>
+<script  src="SimulationApp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"
+	});
+});
+</script>
 </head>
 
 <body>

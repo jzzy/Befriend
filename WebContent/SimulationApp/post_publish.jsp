@@ -44,6 +44,15 @@
 return true;
 }
 </script>
+<script type="text/javascript" src="SimulationApp/js/style.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"
+	});
+});
+</script>
 </head>
 <%
 // 获取当前登入的用户

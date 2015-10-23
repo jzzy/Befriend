@@ -21,6 +21,15 @@ if(u==null){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>个人资料</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+<script  src="js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"
+	});
+});
+</script>
 </head>
 
 <body>

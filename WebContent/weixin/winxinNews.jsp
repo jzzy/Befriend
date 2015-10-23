@@ -14,6 +14,18 @@
 <title>新闻</title>
 <link href="weixin/css/style.css" rel="stylesheet" type="text/css" />
 <script  src="weixin/js/TouchSlide.1.1.js"></script>
+<script  src="SimulationApp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//alert("cookie:"+document.cookie);
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"	
+	});
+});
+
+</script>
 </head>
 <%
 //获取前8个新闻

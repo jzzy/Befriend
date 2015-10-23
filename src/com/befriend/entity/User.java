@@ -16,6 +16,21 @@ public class User implements Serializable
 	 * 用户 
 	 */
 	private static final long serialVersionUID = 1L;
+	///来源
+	public static final String BBT="bbt";//掌中校园
+	public static final String SYN="syn";//优教通
+	public static final String DX="dx";//电信
+	public static final String OWN="own";// 家长之友
+	
+	//家长之友内部分类
+	public static final String WEB="web";//网页
+	public static final String ANDROID="android";//安卓
+	public static final String IOS="ios";//苹果
+	
+	//未登入用户算微信的
+	public static final String WECHAT="wechat";//微信
+	
+	public static final String ALL="all";//all
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -73,7 +88,7 @@ public class User implements Serializable
 	private int online;
 	@Column(name="accnumno")//用户账号 8位的
 	private String accnumno;
-	@Column(name="come")// 等于null 是我们自己的用户 
+	@Column(name="come")// own 是家长之友 syn 是 优教通 bbt 是 掌中校园
 	private String come;
 	@Column(name="os")// 
 	private String os;

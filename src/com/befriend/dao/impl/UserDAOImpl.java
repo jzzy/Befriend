@@ -120,10 +120,14 @@ public class UserDAOImpl implements UserDAO {
 	public List<User> likeusername(String username) {
 		System.out.println(username);
 		Query query = entityManager
-				.createQuery("select u from User u where u.username LIKE :username or  u.phone LIKE :username or u.accnumno LIKE :username");
+				.createQuery("select u from User u where u.username "
+				+ "LIKE :username or u.nickname LIKE :username or  "
+				+ "u.phone LIKE :username or u.accnumno LIKE :username"
+				+ " or u.id LIKE :username order"
+						+ " by u.time desc");
 		query.setParameter("username", "%" + username + "%");
 
-		query.setMaxResults(10);
+		query.setMaxResults(20);
 
 		return query.getResultList();
 

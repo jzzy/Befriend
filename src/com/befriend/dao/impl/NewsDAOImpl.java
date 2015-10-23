@@ -30,11 +30,11 @@ public class NewsDAOImpl implements NewsDAO {
 
 	// 查询num新闻按照 收藏 评论数 发布时间 排序
 	@Override
-	public List<News> Hottest(int num) {
+	public List<News> Hottest(int num,String time) {
 		// TODO 防止sql注入
-		Query query = entityManager.createQuery("select u from News u order"
+		Query query = entityManager.createQuery("select u from News u where u.time<=:time order"
 				+ " by u.collectnum desc,u.reviews desc,u.time desc");
-
+		query.setParameter("time", time);
 		if (num != 0) {
 			query.setMaxResults(num);
 		}
@@ -179,10 +179,10 @@ public class NewsDAOImpl implements NewsDAO {
 	}
 
 	@Override
-	public List<News> Pagination(int pageSize, int currentPage) {
+	public List<News> Pagination(String time,int pageSize, int currentPage) {
 		Query query = entityManager
-				.createQuery("select u from News u order by u.time desc");
-		// query.setMaxResults(4);
+				.createQuery("select u from News u where u.time>:time order by u.time desc");
+		query.setParameter("time", time);
 		// currentPage页数
 		int startRow = (currentPage - 1) * pageSize;
 		if (startRow < 0) {
@@ -367,14 +367,12 @@ public class NewsDAOImpl implements NewsDAO {
 	}
 
 	@Override
-	public List<News> n2ews(int newsid) {
+	public int maxNewsId() {
 		Query query = entityManager.createQuery("select u from News u order"
 				+ " by u.id desc");
-
-		// query.setParameter("newsid",newsid);
 		query.setMaxResults(1);
-
-		return query.getResultList();
+		News n=(News) query.getResultList().get(0);
+		return n.getId();
 
 	}
 
@@ -480,6 +478,30 @@ public class NewsDAOImpl implements NewsDAO {
 		if (num != 0) {
 			query.setMaxResults(num);
 		}
+		return query.getResultList();
+	}
+
+	@Override
+	public List<News> Hottimes(String time, int num) {
+		Query query = entityManager
+				.createQuery("select u from News u  where u.time>:time  order"
+						+ " by u.time desc");
+		query.setParameter("time", time);
+		if (num != 0) {
+			query.setMaxResults(num);
+		}
+		return query.getResultList();
+	}
+
+	@Override
+	public List<News> likeNews(String title) {
+		Query query = entityManager
+				.createQuery("select u from News u  where u.title like :title or u.summary like :title"
+						+ " or u.content like :title or u.time like :title"
+						+ " order by u.time desc");
+		query.setParameter("title","%"+ title+"%");
+		query.setMaxResults(20);
+		
 		return query.getResultList();
 	}
 

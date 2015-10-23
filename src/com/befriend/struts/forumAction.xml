@@ -46,6 +46,10 @@
 		<action name="ForumLookalltype" class="forumAction" method="ForumLookalltype">
 		<result name="success">/SuperAdmin/AdminForum/Forumlook.jsp</result>
 		</action>
+		<!-- 管理员模糊查询论坛 -->
+		<action name="upFonelikeTitle" class="forumAction" method="upFonelikeTitle">
+		<result name="success">/SuperAdmin/AdminForum/Forumlook.jsp</result>
+		</action>
 		
 		<!-- 用户管理员查看 地区 全部论坛 -->
 		<action name="ForumLookuser" class="forumAction" method="ForumLookuser">

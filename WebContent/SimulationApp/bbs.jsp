@@ -21,15 +21,23 @@ if(f==null){
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>查看论坛</title>
 <link href="SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="SimulationApp/js/jquery.js"></script>
 <script type="text/javascript" src="SimulationApp/js/style.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action"
+	});
+});
+</script>
+<script type="text/javascript">
 function showdiv(targetid,objN){
-	   
+	  
     var target=document.getElementById(targetid);
     var clicktext=document.getElementById(objN)
 
@@ -64,7 +72,8 @@ return true;
 
 
 function islogin(){
-    if(<%=session.getAttribute("u")%>==null){
+
+    if(<%=session.getAttribute("u")==null?null:"u"%>==null){
     	<!--跳到登入页-->
     	location.href="/Befriend/SimulationApp/login.html";
   	       
@@ -107,7 +116,7 @@ function islogin(){
           
       <dd>    
        <p class="ctit5"><b>
-       <a style="font-size: 16px;" id="showtext<%=f.getId() %>" onClick="showdiv('contentid<%=f.getId() %>','showtext<%=f.getId() %>')">
+       <a style="font-size: 16px;" id="showtext<%=f.getId() %>" href="javascript:showdiv('contentid<%=f.getId() %>','showtext<%=f.getId() %>');">
        <%=uu.getNickname()%>
        </a>
        <img src="SimulationApp/images/louzhu.png" width="41" /></b></p>
@@ -138,14 +147,7 @@ function islogin(){
 		
   <input type="text"  id="reply" class="shuru" name="reply"  onclick="islogin()" /><input class="btijiao2"  type="submit"    value="回复楼主<%=uu.getNickname()%>" />
 </div> 
-
  </form>
- 
- 
- 
- 
- 
- 
  
  
  
@@ -186,7 +188,7 @@ function islogin(){
           
          <dd>  
           
-          <a id="showtext<%=ri %><%=ft.getId() %>" onClick="showdiv('contentid<%=ri %><%=ft.getId() %>','showtext<%=ri %><%=ft.getId() %>')"><b><%=u.getNickname()%></b></a>
+          <a id="showtext<%=ri %><%=ft.getId() %>" onclick="showdiv('contentid<%=ri %><%=ft.getId() %>','showtext<%=ri %><%=ft.getId() %>')"><b><%=u.getNickname()%></b></a>
            <p class="date" ><%=ft.getTime()%><a  style="float:right;" class="huiff fr" id="showtext<%=ri %><%=ft.getId() %>" onClick="showdiv('contentid<%=ri %><%=ft.getId() %>','showtext<%=ri %><%=ft.getId() %>')"><img src="<%=request.getContextPath()%>/SimulationApp/images/huifu2.png" width="70"></a></p>
          </dd>
      </dl>

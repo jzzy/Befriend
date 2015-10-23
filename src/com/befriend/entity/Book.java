@@ -18,21 +18,21 @@ public class Book implements Serializable
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name="title")
-	private String title;
+	private String title;//标题
 	@Column(name="author")
-	private String author;
+	private String author;//作者
 	@Column(name="summary")
-	private String summary;
+	private String summary;//简介
 	@Column(name="review")
-	private String review;
+	private String review;//书评
 	@Column(name="time")
 	private String time;
 	@Column(name="admin") 
 	private String admin;
 	@Column(name="type")
-	private int type;
+	private int type;//类型
 	@Column(name="house")
-	private String house;
+	private String house;//出版社
 	
 	
 	public String getHouse() {
