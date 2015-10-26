@@ -1,0 +1,37 @@
+--<ScriptOptions statementTerminator=";"/>
+
+CREATE TABLE activity (
+	id INT NOT NULL,
+	merchant_id VARCHAR(32) NOT NULL,
+	is_v VARCHAR(16),
+	is_coop VARCHAR(16),
+	is_stop VARCHAR(16),
+	province VARCHAR(64),
+	city VARCHAR(64),
+	county VARCHAR(32),
+	class_one VARCHAR(32),
+	class_two VARCHAR(32),
+	class_three VARCHAR(32),
+	class_four VARCHAR(32),
+	price DOUBLE,
+	place VARCHAR(64),
+	type VARCHAR(64),
+	title VARCHAR(255),
+	alias VARCHAR(255),
+	photo VARCHAR(255),
+	age VARCHAR(64),
+	time VARCHAR(64),
+	phone VARCHAR(255),
+	address VARCHAR(255),
+	introduce TEXT,
+	summary TEXT,
+	sight TEXT,
+	set VARCHAR(255),
+	label VARCHAR(255),
+	score VARCHAR(32),
+	map_type VARCHAR(8),
+	latitude VARCHAR(32),
+	longitude VARCHAR(32),
+	PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
