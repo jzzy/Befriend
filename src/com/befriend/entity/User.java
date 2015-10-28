@@ -1,10 +1,13 @@
 package com.befriend.entity;
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -92,6 +95,9 @@ public class User implements Serializable
 	private String come;
 	@Column(name="os")// 
 	private String os;
+	
+	@OneToMany(mappedBy="user")
+	private List<EduComment> eduComment;
 	
 	
 	public String getOs() {
@@ -237,6 +243,14 @@ public class User implements Serializable
 	public void setNickname(String nickname)
 	{
 		this.nickname = nickname;
+	}
+	public List<EduComment> getEduComment()
+	{
+		return eduComment;
+	}
+	public void setEduComment(List<EduComment> eduComment)
+	{
+		this.eduComment = eduComment;
 	}
 	
 
