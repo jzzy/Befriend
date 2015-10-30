@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name="users")
 public class User implements Serializable
@@ -39,12 +41,15 @@ public class User implements Serializable
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name="username")//用户名
+	@Expose
 	private String username;
 	@Column(name="nickname")//昵称
+	@Expose
 	private String nickname;
 	@Column(name="password")//密码
 	private String password;
 	@Column(name="img")//用户头像地址
+	@Expose
 	private String img;
 	
 	
@@ -53,14 +58,17 @@ public class User implements Serializable
 	@Column(name="time")//注册时间
 	private String time;
 	@Column(name="address")//地址 省级
+	@Expose
 	/**
 	 * 地址 省级
 	 */
 	private String address;
 	
 	@Column(name="addcity")//地址 市级
+	@Expose
 	private String addcity;
 	@Column(name="phone")//电话
+	@Expose
 	private String phone;
 	@Column(name="lookphone")//电话
 	private String lookphone;
@@ -88,8 +96,10 @@ public class User implements Serializable
 	@Column(name="port")//用户port
 	private int port;
 	@Column(name="online")//用户 用户上线状态 0不在线 1在线
+	@Expose
 	private int online;
 	@Column(name="accnumno")//用户账号 8位的
+	@Expose
 	private String accnumno;
 	@Column(name="come")// own 是家长之友 syn 是 优教通 bbt 是 掌中校园
 	private String come;
@@ -98,6 +108,9 @@ public class User implements Serializable
 	
 	@OneToMany(mappedBy="user")
 	private List<EduComment> eduComment;
+	
+	@OneToMany(mappedBy="reply")
+	private List<EduComment> replyComment;
 	
 	
 	public String getOs() {
@@ -251,6 +264,14 @@ public class User implements Serializable
 	public void setEduComment(List<EduComment> eduComment)
 	{
 		this.eduComment = eduComment;
+	}
+	public List<EduComment> getReplyComment()
+	{
+		return replyComment;
+	}
+	public void setReplyComment(List<EduComment> replyComment)
+	{
+		this.replyComment = replyComment;
 	}
 	
 

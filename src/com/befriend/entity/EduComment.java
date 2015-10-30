@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 
 @Entity
 @Table(name="edu_comment")
@@ -20,25 +22,41 @@ public class EduComment
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
+	@Expose
 	private Integer id;
 	
-	@Column(name="merchan_id",nullable=false)
+	@Column(name="merchant_id",nullable=false)
+	@Expose
 	private String merchantId;
 	
 	@JoinColumn(name="user_id")
 	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@Expose
 	private User user;
 	
-	@Column(name="conten")
+	@JoinColumn(name="reply_id")
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@Expose
+	private User reply;
+	
+	@Column(name="score")
+	@Expose
+	private int score;
+	
+	@Column(name="content")
+	@Expose
 	private String content;
 	
 	@Column(name="time")
+	@Expose
 	private String time;
 	
 	@Column(name="pictures")
+	@Expose
 	private String pictures;
 	
 	@Column(name="father_id")
+	@Expose
 	private int fatherId;
 
 	public Integer getId()
@@ -109,6 +127,26 @@ public class EduComment
 	public void setFatherId(int fatherId)
 	{
 		this.fatherId = fatherId;
+	}
+
+	public int getScore()
+	{
+		return score;
+	}
+
+	public void setScore(int score)
+	{
+		this.score = score;
+	}
+
+	public User getReply()
+	{
+		return reply;
+	}
+
+	public void setReply(User reply)
+	{
+		this.reply = reply;
 	}
 	
 }
