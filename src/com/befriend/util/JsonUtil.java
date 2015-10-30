@@ -22,7 +22,8 @@ public class JsonUtil
 	{
 		String result = "";
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		result = gson.toJson(entity);
+		if(entity != null)
+			result = gson.toJson(entity);
 		return result;
 	}
 	

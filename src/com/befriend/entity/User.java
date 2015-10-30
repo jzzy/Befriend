@@ -7,11 +7,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 import com.google.gson.annotations.Expose;
 
@@ -43,18 +45,19 @@ public class User implements Serializable
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-	@Column(name="username")//用户名
-	@Expose
-	private String username;
-	@Column(name="nickname")//昵称
-	@Expose
-	private String nickname;
+	@Expose private Integer id;
+	
+	@Column(name="username")
+	@Expose private String username;
+	
+	@Column(name="nickname")
+	@Expose private String nickname;
+	
 	@Column(name="password")//密码
 	private String password;
-	@Column(name="img")//用户头像地址
-	@Expose
-	private String img;
+	
+	@Column(name="img")
+	@Expose private String img;
 	
 	
 	@Column(name="stage")//阶段
@@ -62,17 +65,11 @@ public class User implements Serializable
 	@Column(name="time")//注册时间
 	private String time;
 	@Column(name="address")//地址 省级
-	@Expose
-	/**
-	 * 地址 省级
-	 */
 	private String address;
 	
 	@Column(name="addcity")//地址 市级
-	@Expose
 	private String addcity;
 	@Column(name="phone")//电话
-	@Expose
 	private String phone;
 	@Column(name="lookphone")//电话
 	private String lookphone;
@@ -100,20 +97,18 @@ public class User implements Serializable
 	@Column(name="port")//用户port
 	private int port;
 	@Column(name="online")//用户 用户上线状态 0不在线 1在线
-	@Expose
 	private int online;
 	@Column(name="accnumno")//用户账号 8位的
-	@Expose
 	private String accnumno;
 	@Column(name="come")// own 是家长之友 syn 是 优教通 bbt 是 掌中校园
 	private String come;
 	@Column(name="os")// 
 	private String os;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user",fetch=FetchType.LAZY)
 	private List<EduComment> eduComment;
 	
-	@OneToMany(mappedBy="reply")
+	@OneToMany(mappedBy="reply",fetch=FetchType.LAZY)
 	private List<EduComment> replyComment;
 	
 	

@@ -3,6 +3,7 @@ package com.befriend.action;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import com.befriend.dao.UserDAO;
 import com.befriend.entity.EduComment;
 import com.befriend.entity.User;
 import com.befriend.util.JsonUtil;
+import com.google.gson.annotations.Expose;
 
 public class EduCommentAction
 {
@@ -39,6 +41,20 @@ public class EduCommentAction
 	private int currentPage		= 1;
 	private int pageSize 		= 10;
 	
+	public static void main(String [] args)
+	{
+		User u = new User();
+		u.setId(2);
+		u.setUsername("dddd");
+		u.setOnline(1);
+		EduComment e = new EduComment();
+		e.setId(6);
+		e.setUser(u);
+		List<EduComment> es = new ArrayList<>();
+		es.add(e);
+		es.add(e);
+		System.out.println(JsonUtil.toJsonExpose(es));
+	}
 	/**
 	 * @describe get merchant comments
 	 * @param merchantId necessary
@@ -61,6 +77,12 @@ public class EduCommentAction
 		response = ServletActionContext.getResponse();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
+		for (EduComment eduComment : eduComments)
+		{
+			User u = eduComment.getUser();
+			System.out.println(JsonUtil.toJsonExpose(u)+"   " +eduComment.getUser().getEduComment().size());
+		}
+		System.out.println(JsonUtil.toJsonExpose(eduComments));
 		response.getWriter().println(JsonUtil.toJsonExpose(eduComments));
 	}
 	
@@ -91,10 +113,11 @@ public class EduCommentAction
 				String picStr = "";
 				if(pictures != null && pictures.length >0)
 				{
-					String path = File.separator + "file" + File.separator + user.getId() + File.separator 
-								+ "EduComment" + File.separator + merchantId + File.separator;
-					String relPath = ServletActionContext.getServletContext().getRealPath(path);
-					File saveDir = new File(relPath);
+					System.out.println("upload");
+					String path = "/file/" + user.getId() + "/EduComment/" + merchantId + "/";
+					String realPath = ServletActionContext.getServletContext().getRealPath(path).replace("Befriend", "");
+					System.out.println("realPath:"+realPath);
+					File saveDir = new File(realPath);
 					if(!saveDir.exists())
 					{
 						saveDir.mkdirs();
@@ -104,9 +127,12 @@ public class EduCommentAction
 					{
 						try
 						{
-							File saveFile = new File(saveDir, picturesFileName[i]);
+							int index = picturesFileName[i].indexOf(".");
+							String suffix = picturesFileName[i].substring(index);
+							String fileName = String.valueOf(new Date().getTime())+suffix;
+							File saveFile = new File(saveDir, fileName);
 							FileUtils.copyFile(pictures[i], saveFile);
-							picStr += path + picturesFileName[i] + "!#";
+							picStr += path + fileName + "!#";
 						}
 						catch ( IOException e )
 						{
