@@ -24,7 +24,7 @@
 		<!-- 本地 		
 	-->
 		<property name="url" 
-		value="jdbc:mysql://localhost:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property>
+		value="jdbc:mysql://192.168.1.240:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property>
 		<property name="password" value="root"></property>
 		<property name="username" value="root"></property>
 		
@@ -96,6 +96,7 @@
 	<bean id="registrationDAO" class="com.befriend.dao.impl.RegistrationDAOImpl"></bean>
 	
 	<bean id="eduServicesDAO" class="com.befriend.dao.impl.EduServicesDAOImpl"></bean>
+	<bean id="eduCommentDAO" class="com.befriend.dao.impl.EduCommentDAOImpl"></bean>
 
 	<!-- Action start here -->
 	
@@ -160,6 +161,12 @@
 	<bean id="eduAction" class="com.befriend.action.EduServicesAction" scope="prototype">
 	    <constructor-arg ref="eduServicesDAO"></constructor-arg>
 	</bean>
+	<bean id="eduCommentAction" class="com.befriend.action.EduCommentAction" scope="prototype">
+		<constructor-arg ref="eduCommentDAO"></constructor-arg>
+		<constructor-arg ref="userDAO"></constructor-arg>
+	</bean>
+	
+	<bean id="uploadAction" class="com.befriend.action.UploadAction" scope="prototype"></bean>
 	
 	<!-- 在java普通类中调用 dao-->
 	<bean id="app" class="com.befriend.util.ApplicationUtil">
