@@ -166,6 +166,8 @@
 		<constructor-arg ref="userDAO"></constructor-arg>
 	</bean>
 	
+	<bean id="uploadAction" class="com.befriend.action.UploadAction" scope="prototype"></bean>
+	
 	<!-- 在java普通类中调用 dao-->
 	<bean id="app" class="com.befriend.util.ApplicationUtil">
 	</bean>
