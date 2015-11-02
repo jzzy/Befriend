@@ -33,7 +33,16 @@ public class Book implements Serializable
 	private int type;//类型
 	@Column(name="house")
 	private String house;//出版社
+	@Column(name = "hits")
+	// 点击次数
+	private int hits;
 	
+	public int getHits() {
+		return hits;
+	}
+	public void setHits(int hits) {
+		this.hits = hits;
+	}
 	
 	public String getHouse() {
 		return house;

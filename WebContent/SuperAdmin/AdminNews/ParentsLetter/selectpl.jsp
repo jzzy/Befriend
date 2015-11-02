@@ -50,13 +50,20 @@ function cka()
   
 
  </script>
-<body>
+<body style="background: #adc">
+	<%
+		
+	
+	List<ParentsLetter> l=(List)request.getAttribute("pl");
+		if(l==null){
+			return;
+		}
+			%>
 
 
-
-<div style="background: #adc">
+<div >
 <h3><a href="<%=request.getContextPath()%><%=OpeFunction.request().getSession().getAttribute("home") %>" onclick="return cka();">返回主页</a></h3>
-
+<h3>来稿次数<%=l.size() %></h3>
 <form action="">
 <table>
 		<tr>
@@ -64,6 +71,7 @@ function cka()
 		<td width="600"><h4>图片</h4></td>
 		<td  width="163"><h4>投稿时间</h4></td>
 		<td  width="163"><h4>操作</h4></td>
+	<td  width="163"><h4>点击次数</h4></td>
 	</tr>
 		
 		
@@ -71,17 +79,13 @@ function cka()
 		</table> 
 		</form>
 
-		<%
-		
 	
-	List<ParentsLetter> l=(List)request.getAttribute("pl");
-		if(l==null){
-			return;
-		}
+			<%
+		
 	 for(int i=0;i<l.size();i++){
 		
 	%>
-		<form id="<%=i %>" action="" name="picForm">
+		<form id="<%=i %>" action="#" name="picForm">
 		<table>
 		<tr>
 		<td width="320"><h4><a href="<%=request.getContextPath()%>/selectParentsLetterone?id=<%=l.get(i).getId() %>"><%=l.get(i).getTitle() %></a>		
@@ -101,6 +105,7 @@ function cka()
 		<td  width="163"><h4>
 		<a onclick="return ck();" href="<%=request.getContextPath()%>/RemoveParentsLetterone?id=<%=l.get(i).getId() %>">删除</a>
 		</h4></td>
+		<td  width="163"><h4><%=l.get(i).getHits() %></h4></td>
 	</tr>
 		
 		

@@ -34,6 +34,17 @@ public class ParentsLetter  implements Serializable {
 	@Column(name = "time")
 	// 发布时间
 	private String time;
+	@Column(name = "hits")
+	// 点击次数
+	private int hits;
+
+	public int getHits() {
+		return hits;
+	}
+
+	public void setHits(int hits) {
+		this.hits = hits;
+	}
 
 	public Integer getId() {
 		return id;

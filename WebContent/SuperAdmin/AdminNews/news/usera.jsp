@@ -45,14 +45,14 @@ $(document).ready(function(){
   
  </script>
 </head>
-<body>
+<body >
 <label >开始日期：</label><input id="timeq" type="date" name="timeq" value=<%=OpeFunction.getNumTime(1)+" 00:00:00"%>/>
 <label >结束日期：</label><input id="timeh" type="date" name="timeh" value=<%=OpeFunction.getNowTime() %>/>
 
 
 <button style="width: 120px;height: 35px;" id="b01" type="button">搜索</button>
 <input  style="width: 120px;height: 35px;" onclick="fk()" type="button" value="更新">
-<div id="myDiv"></div>
+<div  id="myDiv"></div>
 <div style="background: #adc">
 <%
 int all=Integer.parseInt(request.getAttribute("all").toString());//获取 共有多少用户

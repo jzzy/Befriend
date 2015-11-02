@@ -40,7 +40,7 @@ if(fone==null||us==null){
 $(document).ready(function(){
 	$.ajax({
 		type:"post",
-		url:"statisticsPVIP.action"
+		url:"statisticsPVIP.action?id=2"
 	});
 });
 </script>

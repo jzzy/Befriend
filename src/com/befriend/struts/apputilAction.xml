@@ -4,6 +4,46 @@
 <struts>
 	<package name="appp" extends="struts-default" >
 	
+		
+			<!-- 查看更新广告 -->
+		<action name="byidLookAdv" class="appupAction" method="byidLookAdv">
+		<result>/SuperAdmin/AdminNews/Adv/upAdv.jsp</result>
+		
+		</action>
+			<!-- 统计点击率 -->
+		<action name="aClicktoRate" class="appupAction" method="aClicktoRate">
+		
+		
+		</action>
+		<!-- 管理修改广告 -->
+		<action name="updateAdv" class="appupAction" method="updateAdv">
+		<result type="redirectAction" name="success">getAdv</result> 
+		
+		</action>
+		<!-- 管理修改广告 -->
+		<action name="onlineAdv" class="appupAction" method="onlineAdv">
+		<result type="redirectAction" name="success">
+		getAdv
+	
+		</result> 
+		
+		</action>
+		
+		<!-- 管理上传广告 -->
+		<action name="saveAdv" class="appupAction" method="saveAdv">
+			<result type="redirectAction" name="success">getAdv</result> 
+		
+		</action>
+		<!-- 管理查看广告 -->
+		<action name="getAdv" class="appupAction" method="getAdv">
+				<result>/SuperAdmin/AdminNews/Adv/lookAdv.jsp</result>
+		
+		</action>
+	<!-- 统计用户登入次数 -->
+		<action name="staLoginCount" class="appupAction" method="staLoginCount">
+			
+		
+		</action>
 	<!-- 统计PV IP UV -->
 		<action name="statisticsPVIP" class="appupAction" method="statisticsPVIP">
 			

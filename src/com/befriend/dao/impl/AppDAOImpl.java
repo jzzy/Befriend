@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.befriend.dao.AppDAO;
+import com.befriend.entity.Adv;
 import com.befriend.entity.App;
 import com.befriend.entity.AppUp;
 import com.befriend.entity.Feedback;
@@ -78,9 +79,50 @@ public class AppDAOImpl implements AppDAO {
 	}
 
 	@Override
-	public void Ds(App app) {
+	public void Update(App app) {
 		entityManager.merge(app);
 		
+	}
+
+	@Override
+	public void Save(Adv adv) {
+		// TODO Auto-generated method stub
+		entityManager.persist(adv);
+	}
+
+	@Override
+	public void Update(Adv adv) {
+		// TODO Auto-generated method stub
+		entityManager.merge(adv);
+	}
+
+	@Override
+	public Adv byAdvid(int id) {
+		Query query = entityManager.createQuery("select u from Adv u where u.id=:id");	
+		query.setParameter("id",id);
+		@SuppressWarnings("unchecked")
+		List<Adv> app = query.getResultList();
+		if (app.size() > 0)
+				return app.get(0);
+			return null;
+	}
+
+	@Override
+	public void remove(Adv adv) {
+		// TODO Auto-generated method stub
+		entityManager.remove(adv);
+	}
+
+	@Override
+	public List<Adv> getAdvnum(int num,int Online) {
+		Query query = entityManager.createQuery("select u from Adv u where u.online=:Online order"
+			      + " by u.sequence asc,u.time desc");	
+		if(num>0){
+		query.setMaxResults(num);
+		}
+		query.setParameter("Online", Online);
+		return query.getResultList();
+	
 	}
 
 

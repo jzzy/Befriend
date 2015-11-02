@@ -92,7 +92,7 @@
 		</action>
 		<!-- 修改新闻 -->
 		<action name="upAdminNews" class="newsAction" method="upAdminNews">
-			<result name="success">SuperAdmin/AdminNews/kindeditor/jsp/upNews.jsp</result>
+			  <result type="redirectAction" name="success">Newsget</result>
 			
 		</action>
 		

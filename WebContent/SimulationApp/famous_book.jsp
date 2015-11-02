@@ -8,6 +8,23 @@
 
 List<Book> bookl=(List)request.getAttribute("bookl");
 int type=request.getAttribute("type")==null?0:(Integer)request.getAttribute("type");
+switch(type){
+case 1:
+	type=331;
+	break;
+case 2:
+	type=332;
+	break;
+case 3:
+	type=333;
+	break;
+case 4:
+	type=334;
+	break;
+default:
+	type=331;
+	break;
+}
 int currentPage=(Integer)request.getAttribute("currentPage");
 int max=request.getAttribute("max")==null?0:(Integer)request.getAttribute("max");
 if(bookl.size()==0){
@@ -51,7 +68,7 @@ default:
 $(document).ready(function(){
 	$.ajax({
 		type:"post",
-		url:"statisticsPVIP.action"
+		url:"statisticsPVIP.action?id="+<%=type%>
 	});
 });
 </script>

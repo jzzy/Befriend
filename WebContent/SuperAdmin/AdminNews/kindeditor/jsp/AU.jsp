@@ -69,9 +69,9 @@ function cka(){
 		 
 
 		
-		   if (title==""||title==null||title.length>20)
+		   if (title==""||title==null||title.length>30)
 	    	{
-	    		alert("请填写20个汉字以内标题！");
+	    		alert("请填写30个汉字以内标题！");
 	    	
 	    		return false;
 	  	}

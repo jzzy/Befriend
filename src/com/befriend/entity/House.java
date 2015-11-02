@@ -47,7 +47,16 @@ public class House  implements Serializable {
 	// 被搜索次数
 	private int count;
 	
+	@Column(name = "hits")
+	// 点击次数
+	private int hits;
 	
+	public int getHits() {
+		return hits;
+	}
+	public void setHits(int hits) {
+		this.hits = hits;
+	}
 	public String getKeywords() {
 		return keywords;
 	}

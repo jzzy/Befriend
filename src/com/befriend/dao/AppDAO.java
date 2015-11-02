@@ -2,6 +2,7 @@ package com.befriend.dao;
 
 import java.util.List;
 
+import com.befriend.entity.Adv;
 import com.befriend.entity.App;
 import com.befriend.entity.AppUp;
 
@@ -22,6 +23,17 @@ public interface AppDAO {
 	//查询全部app
 	public List<App> ALL();
 	//统计app下载次数
-	public void Ds(App app);
+	public void Update(App app);
+	
+	//添加adv
+	public void Save(Adv adv);
+	//跟新adv
+	public void Update(Adv adv);
+	//通过id查询adv
+	public Adv byAdvid(int id);
+	//删除adv
+	public void remove(Adv adv);
+	//查询num个  adv
+	public List<Adv> getAdvnum(int num,int Online);
 	
 }

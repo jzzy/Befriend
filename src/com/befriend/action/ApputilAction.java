@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -27,6 +29,7 @@ import com.befriend.dao.AppDAO;
 import com.befriend.dao.ApputilDAO;
 import com.befriend.dao.UserDAO;
 import com.befriend.entity.Admin;
+import com.befriend.entity.Adv;
 import com.befriend.entity.App;
 import com.befriend.entity.AppUp;
 import com.befriend.entity.Feedback;
@@ -133,6 +136,10 @@ public class ApputilAction {
 	 */
 	public String selectParentsLetterone() throws IOException {
 		ParentsLetter p = audao.Plbyid(id);
+		if (p != null) {
+			p.setHits(p.getHits() + 1);
+			audao.Update(p);
+		}
 		request.setAttribute("p", p);
 		return Action.SUCCESS;
 
@@ -317,6 +324,7 @@ public class ApputilAction {
 		for (int i = 0; i < hl.size(); i++) {
 			House h = hl.get(i);
 			h.setCount((h.getCount() + 1));
+			h.setHits(h.getHits() + 1);
 			audao.Update(h);
 
 		}
@@ -343,6 +351,7 @@ public class ApputilAction {
 		for (int i = 0; i < hl.size(); i++) {
 			House h = hl.get(i);
 			h.setCount((h.getCount() + 1));
+			h.setHits(h.getHits() + 1);
 			audao.Update(h);
 
 		}
@@ -576,20 +585,54 @@ public class ApputilAction {
 		this.xlsxFile = xlsxFile;
 	}
 
+	private int userid;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public void staLoginCount() {
+		time = util.getNumTime(0);
+		System.out.println("进入staLoginCount id=" + id);
+		User u = userdao.byid(id);
+		if (u != null) {
+			Stas sta = audao.StasTimeDay(time, u.getOs(), User.ALL);
+			if (sta == null) {
+				sta = new Stas();
+				sta.setTime(time);
+				sta.setProvince(User.ALL);
+				sta.setOs(u.getOs());
+
+				sta.setUserlogined(sta.getUserlogined() + 1);
+				audao.Save(sta);
+				return;
+			}
+			sta.setUserlogined(sta.getUserlogined() + 1);
+			audao.Update(sta);
+		}
+	}
+
 	public void statisticsPVIP() {
-		
+
 		time = util.getNumTime(0);
 		User u = (User) session.getAttribute("u");
 		String ip = request.getRemoteAddr();
-		
 
 		if (u == null) {
-			u = new User();
-			u.setOs(User.WECHAT);
+			u = userdao.byid(userid);
+			if (u == null) {
+				u = new User();
+				u.setOs(User.WECHAT);
+			}
 		}
-		System.out.println("进入statisticsPVIP"+util.getNowTime()+"用户来自:"+u.getOs());
-		
-		SetIp sp = audao.byTimeIp(time, ip,u.getOs());
+		System.out.println("进入statisticsPVIP" + util.getNowTime() + "用户来自:"
+				+ u.getOs() + "id来自:" + id);
+
+		SetIp sp = audao.byTimeIp(time, ip, u.getOs());
 		if (sp == null) {
 			sp = new SetIp();
 			sp.setIp(ip);
@@ -612,6 +655,46 @@ public class ApputilAction {
 		}
 		sta.setPv(sta.getPv() + 1);
 		sta.setIp(audao.byTimeConut(time, u.getOs()));
+
+		switch (id) {
+		case 1:
+			sta.setHome1(sta.getHome1() + 1);
+			break;
+		case 2:
+			sta.setHome2(sta.getHome2() + 1);
+			break;
+		case 3:
+			sta.setHome3(sta.getHome3() + 1);
+			break;
+		case 31:
+			sta.setHome31(sta.getHome31() + 1);
+			break;
+		case 32:
+			sta.setHome32(sta.getHome32() + 1);
+			break;
+		case 33:
+			sta.setHome33(sta.getHome33() + 1);
+			break;
+		case 34:
+			sta.setHome34(sta.getHome34() + 1);
+			break;
+		case 331:
+			sta.setHome331(sta.getHome331() + 1);
+			break;
+		case 332:
+			sta.setHome332(sta.getHome332() + 1);
+			break;
+		case 333:
+			sta.setHome333(sta.getHome333() + 1);
+			break;
+		case 334:
+			sta.setHome334(sta.getHome334() + 1);
+			break;
+
+		default:
+			System.out.println("没有id无法统计!");
+			break;
+		}
 		audao.Update(sta);
 
 	}
@@ -714,7 +797,6 @@ public class ApputilAction {
 				sta = new Stas();
 				sta.setProvince(province);
 				sta.setTime(time);
-				sta.setUserlogined(synlogin);
 				if (downloaded != 0 && l.get(i).equals(os)) {
 					sta.setDownloaded(1);
 				} else {
@@ -729,15 +811,11 @@ public class ApputilAction {
 				audao.Save(sta);
 				continue;
 			}
-			sta.setUserlogined(synlogin);
 			if (downloaded != 0 && l.get(i).equals(os)) {
 				sta.setDownloaded(sta.getDownloaded() + 1);
 			}
-
 			sta.setUsersyned(usersyned);
-
 			sta.setUsersaved(usersaved);
-
 			sta.setVored(vored);
 			sta.setUv(synlogin);
 			sta.setIp(audao.byTimeConut(time, l.get(i)));
@@ -1078,7 +1156,7 @@ public class ApputilAction {
 		int i = app.getDownloads() + 1;
 		app.setRealds(iz);
 		app.setDownloads(i);
-		adao.Ds(app);
+		adao.Update(app);
 
 	}
 
@@ -1299,9 +1377,6 @@ public class ApputilAction {
 		}
 	}
 
-	/**
-	 * 閿熸枻鎷烽敓鎴潻鎷� web閿熸枻鎷烽敓鏂ゆ嫹 閿熸枻鎷穘閿熸枻鎷穉pp
-	 */
 	public String webGetapp() {
 		try {
 			// num閿熸枻鎷烽敓鏂ゆ嫹0 閿熸枻鎷烽敓鏂ゆ嫹榛橀敓鏂ゆ嫹鍊�
@@ -1315,6 +1390,149 @@ public class ApputilAction {
 			System.out.println(e.getMessage());
 		}
 		return Action.SUCCESS;
+	}
+
+	Adv adv = new Adv();
+	private List<Adv> advl;
+	private int sequence;// 排序
+	private int Online = 0;// 0未发布 1发布
+	private String href;// 广告连接
+
+	public String saveAdv() throws IOException {
+		img = "/IMG/Advimg/" + OpeFunction.getNameDayTime();
+		img = OpeFunction.fileToServer(img, imgFile1, imgFile1FileName,
+				imgFile1ContentType, true);
+		adv.setName(name);
+		adv.setSummary(summary);
+		if(sequence>0){
+		adv.setSequence(sequence);
+		}else{
+			adv.setSequence(1);
+		}
+		adv.setPathimg(img);
+		adv.setTime(time);
+		adv.setType(type);
+		adv.setHref(href);
+		adao.Save(adv);
+		System.out.println("saveAdv ok!");
+		return Action.SUCCESS;
+	}
+
+	public String byidLookAdv() throws IOException {
+		adv = adao.byAdvid(id);
+		request.setAttribute("adv", adv);
+		return Action.SUCCESS;
+
+	}
+
+	public void aClicktoRate() throws IOException {
+		User u = (User) session.getAttribute("u");
+		if (u == null) {
+			u = userdao.byid(userid);
+		}
+		adv = adao.byAdvid(id);
+		if (u != null && adv != null) {
+			switch (u.getOs()) {
+			case User.BBT:
+				adv.setBbt(adv.getBbt() + 1);
+				break;
+			case User.SYN:
+				adv.setSyn(adv.getSyn() + 1);
+				break;
+			case User.WEB:
+				adv.setWeb(adv.getWeb() + 1);
+				break;
+			case User.ANDROID:
+				adv.setAndroid(adv.getAndroid() + 1);
+				break;
+			case User.IOS:
+				adv.setIos(adv.getIos() + 1);
+				break;
+
+			default:
+				break;
+			}
+			adao.Update(adv);
+		} else if (u == null && adv != null) {
+			adv.setWechat(adv.getWechat() + 1);
+			adao.Update(adv);
+		}
+		
+	}
+
+	public String onlineAdv() throws IOException {
+		time=OpeFunction.getNowTime();
+		adv = adao.byAdvid(id);
+		if (adv != null) {
+			if (Online == 0) {
+				adv.setCalculatingTime(OpeFunction.calculatingTime(adv.getTime(), time));
+				adv.setFinaltime(time);
+			}
+			System.out.println( OpeFunction.calculatingTime(adv.getTime(), time));
+			adv.setOnline(Online);
+			adao.Update(adv);
+			System.out.println("修改广告状态成功!" + Online);
+		}
+		return Action.SUCCESS;
+	}
+
+	public String updateAdv() throws IOException {
+		adv = adao.byAdvid(id);
+		if (adv != null) {
+			if (!OpeFunction.isEmpty(name)) {
+				adv.setName(name);
+			}
+			if (!OpeFunction.isEmpty(href)) {
+				adv.setHref(href);
+			}
+			if (!OpeFunction.isEmpty(summary)) {
+				adv.setSummary(summary);
+			}
+			if (imgFile1 != null) {
+				img = "/IMG/Advimg/" + OpeFunction.getNameDayTime();
+				img = OpeFunction.fileToServer(img, imgFile1, imgFile1FileName,
+						imgFile1ContentType, true);
+				OpeFunction.fileRemove(adv.getPathimg());
+				adv.setPathimg(img);
+
+			}
+			if(sequence>0){
+			adv.setSequence(sequence);
+			}
+			adao.Update(adv);
+			System.out.println("修改广告成功!");
+		}
+		return Action.SUCCESS;
+	}
+
+	public String getAdv() {
+		advl = adao.getAdvnum(num, Online);
+		request.setAttribute("advl", advl);
+		return Action.SUCCESS;
+	}
+
+	public int getOnline() {
+		return Online;
+	}
+
+	public void setOnline(int online) {
+		Online = online;
+	}
+
+	public String getHref() {
+		return href;
+	}
+
+	public void setHref(String href) {
+		this.href = href;
+	}
+
+	public int getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
 	}
 
 	public int getNum() {

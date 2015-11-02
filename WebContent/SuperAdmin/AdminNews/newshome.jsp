@@ -29,7 +29,11 @@ if(admin==null){
 <a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/house/selectHouse">查看学区房</a><br>
 <a href="<%=request.getContextPath()%>/selectjzfk">查看家长反馈</a><br>
 <a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/ParentsLetter/SavePL.jsp">添加家长来稿</a><br>
+
 <a href="<%=request.getContextPath()%>/selectParentsLetter">查看家长来稿</a><br>
+
+<a href="<%=request.getContextPath()%>/getAdv">管理广告图</a><br>
+
 
 </body>
 </html>

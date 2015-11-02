@@ -41,7 +41,7 @@ $(document).ready(function(){
 	//alert("cookie:"+document.cookie);
 	$.ajax({
 		type:"post",
-		url:"statisticsPVIP.action"	
+		url:"statisticsPVIP.action?id=1"	
 	});
 });
 

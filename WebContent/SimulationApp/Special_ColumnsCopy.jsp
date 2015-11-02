@@ -22,7 +22,7 @@ List<App> la=(List)request.getAttribute("la");
 $(document).ready(function(){
 	$.ajax({
 		type:"post",
-		url:"statisticsPVIP.action"
+		url:"statisticsPVIP.action?id=3"
 	});
 });
 </script>

@@ -50,12 +50,10 @@ function cka()
   
 
  </script>
-<body>
-<div style="background: #ada;">
-<body>
 
+<body style="background: #adc">
 
-<div style="background: #adc">
+<div >
 <h3><a href="<%=request.getContextPath()%><%=OpeFunction.request().getSession().getAttribute("home") %>" onclick="return cka();">返回主页</a></h3>
 
 <form action="">

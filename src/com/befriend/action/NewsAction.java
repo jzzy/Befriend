@@ -95,8 +95,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	private String city;// 市级
 	private String author;
 	private String time = OpeFunction.getNowTime();
-	Book book = new Book();
-	List<Book> bookl = new ArrayList<Book>();
+	 Book book=new Book();
+	private List<Book> bookl;
 	private int itype = 0;
 	private String house;
 	private String content1;// 新闻主要内容
@@ -110,6 +110,15 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		return Action.SUCCESS;
 
 	}
+	private int hits;
+	
+	public int getHits() {
+		return hits;
+	}
+
+	public void setHits(int hits) {
+		this.hits = hits;
+	}
 
 	public String upAdminNews() throws IOException {
 		n = ndao.byid(newsid);
@@ -117,6 +126,10 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			n.setTitle(title);
 			n.setSummary(summary);
 			n.setContent(content1);
+			if(hits>0){
+				n.setHits(hits);
+			}
+			
 			if (num > 0) {
 				n.setCollectnum(num);
 			}
@@ -124,7 +137,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			ndao.Upnews(n);
 
 		}
-		request.setAttribute("n", n);
+		//request.setAttribute("n", n);
 		return Action.SUCCESS;
 
 	}
@@ -138,14 +151,21 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	}
 
 	public void LookBookById() throws IOException {
-
-		util.Out().print(util.ToJson(ndao.byIdBook(id)));
+		book = ndao.byIdBook(id);
+		if (book != null) {
+			book.setHits(book.getHits() + 1);
+			ndao.Upnews(book);
+		}
+		util.Out().print(util.ToJson(book));
 
 	}
 
 	public String webLookBookById() throws IOException {
-
 		book = ndao.byIdBook(id);
+		if (book != null) {
+			book.setHits(book.getHits() + 1);
+			ndao.Upnews(book);
+		}
 		request.setAttribute("book", book);
 		return Action.SUCCESS;
 

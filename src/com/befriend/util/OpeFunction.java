@@ -581,50 +581,111 @@ public class OpeFunction {
 	 * System.out.println("解密后的字符串:" + (new String(srcBytes))); }
 	 * 
 	 * @throws IOException
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	/**
 	 * 
 	 * 
 	 * 
-	 *  System.out.println("这些挖过来而又没有用上的内存:"+Runtime.getRuntime().freeMemory()/1024/1024 + " M");
-	        System.out.println("java虚拟机现在已经从操作系统那里挖过来的内存大小:"+Runtime.getRuntime().totalMemory()/1024/1024 + " M");
-	        System.out.println("能构从操作系统那里挖到的最大的内存:"+Runtime.getRuntime().maxMemory()/1024/1024 + " M");
+	 * System.out.println("这些挖过来而又没有用上的内存:"+Runtime.getRuntime().freeMemory()/
+	 * 1024/1024 + " M");
+	 * System.out.println("java虚拟机现在已经从操作系统那里挖过来的内存大小:"+Runtime
+	 * .getRuntime().totalMemory()/1024/1024 + " M");
+	 * System.out.println("能构从操作系统那里挖到的最大的内存:"
+	 * +Runtime.getRuntime().maxMemory()/1024/1024 + " M");
 	 * 
 	 * @param args
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	
-	
-	public static void main(String[] args) throws IOException, InterruptedException {
+	/**
+	 * 
+	 * 
+	 * @param 年月日
+	 *            /时分秒 20150824/024326 命名
+	 */
+	public static String getNameDayTime() {
+		Calendar cal = Calendar.getInstance();
+		String name = "";
+		name = Integer.valueOf(cal.get(Calendar.YEAR)).toString();
+		name += "/";
+		if (cal.get(Calendar.MONTH) + 1 < 10) {
+			name = name + "0"
+					+ Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
+		} else {
+			name = name
+					+ Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
+		}
+		name += "/";
+		if (cal.get(Calendar.DAY_OF_MONTH) < 10) {
+			name = name
+					+ "0"
+					+ Integer.valueOf(cal.get(Calendar.DAY_OF_MONTH))
+							.toString();
+		} else {
+			name = name
+					+ Integer.valueOf(cal.get(Calendar.DAY_OF_MONTH))
+							.toString();
+		}
+		name += "/";
+		if (cal.get(Calendar.HOUR) + 1 < 10) {
+			name = name + "0"
+					+ Integer.valueOf(cal.get(Calendar.HOUR)).toString();
+		} else {
+			name = name
+					+ Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
+		}
+		name += "/";
+		if (cal.get(Calendar.MINUTE) < 10) {
+			name = name + "0"
+					+ Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
+		} else {
+			name = name + Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
+		}
+		if (cal.get(Calendar.SECOND) < 10) {
+			name = name + "0"
+					+ Integer.valueOf(cal.get(Calendar.SECOND)).toString();
+		} else {
+			name = name + Integer.valueOf(cal.get(Calendar.SECOND)).toString();
+		}
 
-		   System.out.println("这些挖过来而又没有用上的内存:"+Runtime.getRuntime().freeMemory()/1024/1024 + " M");
-	        System.out.println("java虚拟机现在已经从操作系统那里挖过来的内存大小:"+Runtime.getRuntime().totalMemory()/1024/1024 + " M");
-	        System.out.println("能构从操作系统那里挖到的最大的内存:"+Runtime.getRuntime().maxMemory()/1024/1024 + " M");
-	     
-//	        long startT=fromDateStringTLong("2004-03-07 14:51:23"); //定义xia机时间
-//	        long endT=fromDateStringTLong("2004-03-03 14:50:23");  //定义上机时间
-//	        long ss=(startT-endT)/(1000); //共计秒数
-//	        int MM = (int)ss/60;   //共计分钟数
-//	        int hh=(int)ss/3600;  //共计小时数
-//	        int dd=(int)hh/24;   //共计天数
-//	        System.err.println(ss);
-//	        System.out.println(hh);
-//	        System.out.println(dd);
-//	       // System.out.println("123".substring(0, "123".length()-1));
-	       
+		return name;
 	}
-	        public static long fromDateStringTLong(String inVal) { //此方法计算时间毫秒
-	        	  Date date = null;   //定义时间类型       
-	        	  SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-mm-dd hh:ss"); 
-	        	  try { 
-	        	  date = inputFormat.parse(inVal); //将字符型转换成日期型
-	        	  } catch (Exception e) { 
-	        	  e.printStackTrace(); 
-	        	  } 
-	        	  return date.getTime();   //返回毫秒数
-	        	  } 
 
+	/**
+	 * 计算时间相减
+	 * 
+	 * @param StartingTime
+	 * @param EndTime
+	 * @return
+	 */
+	public static int calculatingTime(String StartingTime, String EndTime) {
+		long startT = fromDateStringTLong(EndTime); // 定义结束时间
+		long endT = fromDateStringTLong(StartingTime); // 定义开始时间
+		long ss = (startT - endT) / (1000); // 共计秒数
+		int MM = (int) ss / 60; // 共计分钟数
+		int hh = (int) ss / 3600; // 共计小时数
+		int dd = (int) hh / 24; // 共计天数
+		return hh;
+
+	}
+
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
+		System.out.println(calculatingTime("2015-11-01 14:49:00", "2015-12-03 14:49:00"));
+		// // System.out.println("123".substring(0, "123".length()-1));
+
+	}
+
+	public static long fromDateStringTLong(String inVal) { // 此方法计算时间毫秒
+		Date date = null; // 定义时间类型
+		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			date = inputFormat.parse(inVal); // 将字符型转换成日期型
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return date.getTime(); // 返回毫秒数
+	}
 
 }

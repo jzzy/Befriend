@@ -1,5 +1,8 @@
 package com.befriend.entity;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +34,7 @@ public class User implements Serializable
 	public static final String WECHAT="wechat";//н╒пе
 	
 	public static final String ALL="all";//all
+	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
