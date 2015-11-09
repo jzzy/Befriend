@@ -159,7 +159,7 @@ public class ApputilAction {
 		System.out.println("SaveParentsLetter");
 		ParentsLetter p = new ParentsLetter();
 		p.setContent(content);
-		String path =  "IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
+		String path =  "/IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
 		if (imgFile != null) {
 			img = util.ufileToServer(path, imgFile, "", "jpg", true);
 			p.setImg(img);
@@ -183,10 +183,10 @@ public class ApputilAction {
 			return;
 		}
 		p.setContent(content);
-		String path = "IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
+		String path = "/IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
 		System.out.println("imgFile-" + imgFile);
 		if (imgFile != null) {
-			img = util.ufileToServer(path, imgFile, "", "jpg", true);
+			img=util.fileToServer(path, imgFile, imgFileFileName, imgFileContentType, true);
 			p.setImg(img);
 		} else {
 			System.out.println("imgFile is null");
@@ -208,7 +208,7 @@ public class ApputilAction {
 	public void SaveParentsL() throws IOException {
 		ParentsLetter p = new ParentsLetter();
 		p.setContent(content);
-		String path = "IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
+		String path = "/IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
 		if (imgFile != null) {
 			/**
 			 * BufferedImage sourceImg = ImageIO .read(new
