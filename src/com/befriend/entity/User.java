@@ -1,9 +1,8 @@
 package com.befriend.entity;
 import java.io.Serializable;
-<<<<<<< HEAD
+
 import java.util.ArrayList;
-=======
->>>>>>> 2f2b21bf69581a55db6c6374117d4ba3776e27e7
+
 import java.util.List;
 
 import javax.persistence.Column;
