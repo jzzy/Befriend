@@ -453,7 +453,7 @@ public class ForumAction {
 
 		if (file != null) {
 
-			img = "/IMG/Forumimg/"+userid;
+			img = "/IMG/Forumimg/"+OpeFunction.getNameDayTime();
 			img = util.ufileToServer(img, file, fileFileName, "jpg", true);
 			System.out.println(img);
 			fone.setImg(img);
@@ -1572,7 +1572,7 @@ public class ForumAction {
 
 		if (file != null) {
 
-			img = "/IMG/Forumimg/"+userid;
+			img = "/IMG/Forumimg/"+OpeFunction.getNameDayTime();
 			img = util.ufileToServer(img, file, fileFileName, "jpg", true);
 			System.out.println(img);
 			fone.setImg(img);
@@ -1630,7 +1630,7 @@ public class ForumAction {
 		fone.setContent(content);
 		if (file != null) {
 
-			img = "/IMG/Forumimg/"+userid;
+			img = "/IMG/Forumimg/"+OpeFunction.getNameDayTime();
 			img = util.ufileToServer(img, file, fileFileName, "jpg", true);
 			System.out.println(img);
 			fone.setImg(img);

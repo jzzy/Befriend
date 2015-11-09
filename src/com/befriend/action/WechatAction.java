@@ -11,7 +11,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.befriend.util.OpeFunction;
 import com.befriend.wechat.WechatKit;
-
+@SuppressWarnings("all")
 public class WechatAction {
 	//π§æﬂ¿‡
 	public OpeFunction util;

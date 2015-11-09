@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>家长天地新闻管理后台</title>
+<title>新闻管理后台</title>
 </head>
 <body>
 <%
@@ -20,7 +20,7 @@ if(admin==null){
 	当前那用户是:<%=admin.getAdmin()%><br>
 	<br>
 	<a href="<%=request.getContextPath()%>/GetUserAll">查看用户信息</a><br>
-	<a href="<%=request.getContextPath()%>/ViewStatistics">查询统计信息</a><br>
+	<!--  <a href="<%=request.getContextPath()%>/ViewStatistics">查询统计信息</a><br>-->
 	<a href="<%=request.getContextPath()%>/Newsget">管理新闻</a><br>
 	<a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp">书籍上传</a><br>
 	<a href="<%=request.getContextPath()%>/SuperAdmin/AdminNews/kindeditor/jsp/AU.jsp">八大类新闻上传</a><br>

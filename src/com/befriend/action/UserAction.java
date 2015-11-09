@@ -566,7 +566,7 @@ public class UserAction extends ActionSupport {
 			if (file != null) {
 
 				util.fileRemove(path);
-				path = "/IMG/Userimg/" + u.getId();
+				path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
 				String pah = util.ufileToServer(path, file, fileFileName,
 						"jpg", true);
 				u.setImg(pah);
@@ -1177,7 +1177,7 @@ public class UserAction extends ActionSupport {
 			System.out.println("username=" + username);
 			if (file != null && u != null) {
 
-				path = "/IMG/Userimg/" + u.getId();
+				path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
 				String pah = util.ufileToServer(path, file, fileFileName,
 						"jpg", true);
 				System.out.println(pah);
@@ -1493,12 +1493,12 @@ public class UserAction extends ActionSupport {
 			time = util.getNumTime(0);
 			String url = "";
 			if (province != null) {
-				
+
 			} else {
 				url = "http://127.0.0.1/Befriend/aStas?os=" + os;
 			}
 			url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
-		    WechatKit.sendGet(url);
+			WechatKit.sendGet(url);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1672,7 +1672,7 @@ public class UserAction extends ActionSupport {
 				url = "http://127.0.0.1/Befriend/aStas?os=" + os;
 			}
 			url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
-		    WechatKit.sendGet(url);
+			WechatKit.sendGet(url);
 			util.Out().print(true);
 		}
 
@@ -1927,7 +1927,8 @@ public class UserAction extends ActionSupport {
 			if (u != null) {
 				if (file != null) {
 
-					String path = "/IMG/Userimg/" + u.getId();
+					String path = "/IMG/Userimg/"
+							+ OpeFunction.getNameDayTime();
 					String pah = util.ufileToServer(path, file, fileFileName,
 							"jpg", true);
 					u.setImg(pah);
@@ -1952,7 +1953,7 @@ public class UserAction extends ActionSupport {
 				String url = "http://127.0.0.1/Befriend/aStas?province="
 						+ address + "&os=" + os;
 				url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
-			    WechatKit.sendGet(url);
+				WechatKit.sendGet(url);
 				return;
 			} else {
 				util.Out().print("null");
@@ -2105,7 +2106,8 @@ public class UserAction extends ActionSupport {
 				if (u != null) {
 					if (file != null) {
 
-						String path = "/IMG/Userimg/" + u.getId();
+						String path = "/IMG/Userimg/"
+								+ OpeFunction.getNameDayTime();
 						String pah = util.ufileToServer(path, file,
 								fileFileName, "jpg", true);
 						u.setImg(pah);
@@ -2206,8 +2208,9 @@ public class UserAction extends ActionSupport {
 			u.setOs(User.BBT);
 			userdao.update(u);
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
-		    WechatKit.sendGet(url);
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
+					+ u.getId();
+			WechatKit.sendGet(url);
 			((HttpServletResponse) util.response()).sendRedirect(request
 					.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
@@ -2273,7 +2276,7 @@ public class UserAction extends ActionSupport {
 		if (u != null) {
 			if (file != null) {
 
-				String path = "/IMG/Userimg/" + u.getId();
+				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
 				String pah = util.ufileToServer(path, file, fileFileName,
 						"jpg", true);
 				u.setImg(pah);
@@ -2533,20 +2536,20 @@ public class UserAction extends ActionSupport {
 			}
 			sta.setPv(sta.getPv() + lios.get(i).getPv());
 			sta.setIp(sta.getIp() + lios.get(i).getIp());
-			sta.setUv(sta.getUv()+ lios.get(i).getUv());
+			sta.setUv(sta.getUv() + lios.get(i).getUv());
 			sta.setVored(sta.getVored() + lios.get(i).getVored());
-			
-			sta.setHome1(sta.getHome1()+lios.get(i).getHome1());
-			sta.setHome2(sta.getHome2()+lios.get(i).getHome2());
-			sta.setHome3(sta.getHome3()+lios.get(i).getHome3());
-			sta.setHome31(sta.getHome31()+lios.get(i).getHome31());
-			sta.setHome32(sta.getHome32()+lios.get(i).getHome32());
-			sta.setHome33(sta.getHome33()+lios.get(i).getHome33());
-			sta.setHome34(sta.getHome34()+lios.get(i).getHome34());
-			sta.setHome331(sta.getHome331()+lios.get(i).getHome331());
-			sta.setHome332(sta.getHome332()+lios.get(i).getHome332());
-			sta.setHome333(sta.getHome333()+lios.get(i).getHome333());
-			sta.setHome334(sta.getHome334()+lios.get(i).getHome334());
+
+			sta.setHome1(sta.getHome1() + lios.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lios.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lios.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lios.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lios.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lios.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lios.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lios.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lios.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lios.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lios.get(i).getHome334());
 		}
 		request.setAttribute("iossta", sta);
 		System.out.println("ios统计天数" + lios.size());
@@ -2568,22 +2571,22 @@ public class UserAction extends ActionSupport {
 			if (landroid.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(landroid.get(i).getUsersyned());
 			}
-			sta.setUv(sta.getUv()+ landroid.get(i).getUv());
+			sta.setUv(sta.getUv() + landroid.get(i).getUv());
 			sta.setPv(sta.getPv() + landroid.get(i).getPv());
 			sta.setIp(sta.getIp() + landroid.get(i).getIp());
 			sta.setVored(sta.getVored() + landroid.get(i).getVored());
-			
-			sta.setHome1(sta.getHome1()+landroid.get(i).getHome1());
-			sta.setHome2(sta.getHome2()+landroid.get(i).getHome2());
-			sta.setHome3(sta.getHome3()+landroid.get(i).getHome3());
-			sta.setHome31(sta.getHome31()+landroid.get(i).getHome31());
-			sta.setHome32(sta.getHome32()+landroid.get(i).getHome32());
-			sta.setHome33(sta.getHome33()+landroid.get(i).getHome33());
-			sta.setHome34(sta.getHome34()+landroid.get(i).getHome34());
-			sta.setHome331(sta.getHome331()+landroid.get(i).getHome331());
-			sta.setHome332(sta.getHome332()+landroid.get(i).getHome332());
-			sta.setHome333(sta.getHome333()+landroid.get(i).getHome333());
-			sta.setHome334(sta.getHome334()+landroid.get(i).getHome334());
+
+			sta.setHome1(sta.getHome1() + landroid.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + landroid.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + landroid.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + landroid.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + landroid.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + landroid.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + landroid.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + landroid.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + landroid.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + landroid.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + landroid.get(i).getHome334());
 		}
 		request.setAttribute("androidsta", sta);
 		System.out.println("android统计天数" + landroid.size());
@@ -2606,19 +2609,19 @@ public class UserAction extends ActionSupport {
 			sta.setVored(sta.getVored() + lweb.get(i).getVored());
 			sta.setPv(sta.getPv() + lweb.get(i).getPv());
 			sta.setIp(sta.getIp() + lweb.get(i).getIp());
-			sta.setUv(sta.getUv()+ lweb.get(i).getUv());
-			
-			sta.setHome1(sta.getHome1()+lweb.get(i).getHome1());
-			sta.setHome2(sta.getHome2()+lweb.get(i).getHome2());
-			sta.setHome3(sta.getHome3()+lweb.get(i).getHome3());
-			sta.setHome31(sta.getHome31()+lweb.get(i).getHome31());
-			sta.setHome32(sta.getHome32()+lweb.get(i).getHome32());
-			sta.setHome33(sta.getHome33()+lweb.get(i).getHome33());
-			sta.setHome34(sta.getHome34()+lweb.get(i).getHome34());
-			sta.setHome331(sta.getHome331()+lweb.get(i).getHome331());
-			sta.setHome332(sta.getHome332()+lweb.get(i).getHome332());
-			sta.setHome333(sta.getHome333()+lweb.get(i).getHome333());
-			sta.setHome334(sta.getHome334()+lweb.get(i).getHome334());
+			sta.setUv(sta.getUv() + lweb.get(i).getUv());
+
+			sta.setHome1(sta.getHome1() + lweb.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lweb.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lweb.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lweb.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lweb.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lweb.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lweb.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lweb.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lweb.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lweb.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lweb.get(i).getHome334());
 		}
 		request.setAttribute("websta", sta);
 		System.out.println("web统计天数" + lweb.size());
@@ -2641,18 +2644,18 @@ public class UserAction extends ActionSupport {
 			sta.setPv(sta.getPv() + lsyn.get(i).getPv());
 			sta.setIp(sta.getIp() + lsyn.get(i).getIp());
 			// sta.setVored(sta.getVored()+lsyn.get(i).getVored());
-			sta.setUv(sta.getUv()+ lsyn.get(i).getUv());
-			sta.setHome1(sta.getHome1()+lsyn.get(i).getHome1());
-			sta.setHome2(sta.getHome2()+lsyn.get(i).getHome2());
-			sta.setHome3(sta.getHome3()+lsyn.get(i).getHome3());
-			sta.setHome31(sta.getHome31()+lsyn.get(i).getHome31());
-			sta.setHome32(sta.getHome32()+lsyn.get(i).getHome32());
-			sta.setHome33(sta.getHome33()+lsyn.get(i).getHome33());
-			sta.setHome34(sta.getHome34()+lsyn.get(i).getHome34());
-			sta.setHome331(sta.getHome331()+lsyn.get(i).getHome331());
-			sta.setHome332(sta.getHome332()+lsyn.get(i).getHome332());
-			sta.setHome333(sta.getHome333()+lsyn.get(i).getHome333());
-			sta.setHome334(sta.getHome334()+lsyn.get(i).getHome334());
+			sta.setUv(sta.getUv() + lsyn.get(i).getUv());
+			sta.setHome1(sta.getHome1() + lsyn.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lsyn.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lsyn.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lsyn.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lsyn.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lsyn.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lsyn.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lsyn.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lsyn.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lsyn.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lsyn.get(i).getHome334());
 		}
 		request.setAttribute("synsta", sta);
 		System.out.println("优教通统计天数" + lsyn.size());
@@ -2675,18 +2678,18 @@ public class UserAction extends ActionSupport {
 			sta.setPv(sta.getPv() + lbbt.get(i).getPv());
 			sta.setIp(sta.getIp() + lbbt.get(i).getIp());
 			// sta.setVored(sta.getVored()+lbbt.get(i).getVored());
-			sta.setUv(sta.getUv()+ lbbt.get(i).getUv());
-			sta.setHome1(sta.getHome1()+lbbt.get(i).getHome1());
-			sta.setHome2(sta.getHome2()+lbbt.get(i).getHome2());
-			sta.setHome3(sta.getHome3()+lbbt.get(i).getHome3());
-			sta.setHome31(sta.getHome31()+lbbt.get(i).getHome31());
-			sta.setHome32(sta.getHome32()+lbbt.get(i).getHome32());
-			sta.setHome33(sta.getHome33()+lbbt.get(i).getHome33());
-			sta.setHome34(sta.getHome34()+lbbt.get(i).getHome34());
-			sta.setHome331(sta.getHome331()+lbbt.get(i).getHome331());
-			sta.setHome332(sta.getHome332()+lbbt.get(i).getHome332());
-			sta.setHome333(sta.getHome333()+lbbt.get(i).getHome333());
-			sta.setHome334(sta.getHome334()+lbbt.get(i).getHome334());
+			sta.setUv(sta.getUv() + lbbt.get(i).getUv());
+			sta.setHome1(sta.getHome1() + lbbt.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lbbt.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lbbt.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lbbt.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lbbt.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lbbt.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lbbt.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lbbt.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lbbt.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lbbt.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lbbt.get(i).getHome334());
 		}
 		request.setAttribute("bbtsta", sta);
 		System.out.println("斑斑通统计天数" + lbbt.size());
@@ -2710,18 +2713,18 @@ public class UserAction extends ActionSupport {
 			sta.setPv(sta.getPv() + lwechat.get(i).getPv());
 			sta.setIp(sta.getIp() + lwechat.get(i).getIp());
 			// sta.setVored(sta.getVored()+lbbt.get(i).getVored());
-			sta.setUv(sta.getUv()+ lwechat.get(i).getUv());
-			sta.setHome1(sta.getHome1()+lwechat.get(i).getHome1());
-			sta.setHome2(sta.getHome2()+lwechat.get(i).getHome2());
-			sta.setHome3(sta.getHome3()+lwechat.get(i).getHome3());
-			sta.setHome31(sta.getHome31()+lwechat.get(i).getHome31());
-			sta.setHome32(sta.getHome32()+lwechat.get(i).getHome32());
-			sta.setHome33(sta.getHome33()+lwechat.get(i).getHome33());
-			sta.setHome34(sta.getHome34()+lwechat.get(i).getHome34());
-			sta.setHome331(sta.getHome331()+lwechat.get(i).getHome331());
-			sta.setHome332(sta.getHome332()+lwechat.get(i).getHome332());
-			sta.setHome333(sta.getHome333()+lwechat.get(i).getHome333());
-			sta.setHome334(sta.getHome334()+lwechat.get(i).getHome334());
+			sta.setUv(sta.getUv() + lwechat.get(i).getUv());
+			sta.setHome1(sta.getHome1() + lwechat.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lwechat.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lwechat.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lwechat.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lwechat.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lwechat.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lwechat.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lwechat.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lwechat.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lwechat.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lwechat.get(i).getHome334());
 		}
 		request.setAttribute("wechatsta", sta);
 		System.out.println("lwechat统计天数" + lwechat.size());

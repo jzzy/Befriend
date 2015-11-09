@@ -1741,7 +1741,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				return null;
 			}
 			System.out.println("进入了上传新闻UPtext");
-			savePath = "/Newsimg";
+			savePath = "/IMG/Newsimg/"+OpeFunction.getNameDayTime();
 
 			Admin admin = (Admin) session.getAttribute("admin");
 			if (admin == null) {

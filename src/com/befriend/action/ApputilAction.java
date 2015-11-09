@@ -15,9 +15,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
-
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -108,7 +105,7 @@ public class ApputilAction {
 	private int downloaded;// 閿熸枻鎷烽敓鎴揪鎷烽敓鏂ゆ嫹
 	private int usersyned;// 鍚屾椂閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
 	private int vored;// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹閿熸枻鎷�
-	private int usersaved;// 閿熸枻鎷烽敓鏂ゆ嫹娉ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+	private int usersaved;// 
 	private String schoolname;// 瀛︽牎閿熸枻鎷烽敓鏂ゆ嫹
 	private String address;// 瀛︽牎閿熸枻鎷峰潃
 	private String scope;// 閿熸枻鎷烽敓鏂ゆ嫹鍥�
@@ -162,7 +159,7 @@ public class ApputilAction {
 		System.out.println("SaveParentsLetter");
 		ParentsLetter p = new ParentsLetter();
 		p.setContent(content);
-		String path = "/ParentsLetter/img";
+		String path =  "IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
 		if (imgFile != null) {
 			img = util.ufileToServer(path, imgFile, "", "jpg", true);
 			p.setImg(img);
@@ -180,26 +177,26 @@ public class ApputilAction {
 		Message mge = new Message();
 		if (util.isEmpty(content) || util.isEmpty(title)) {
 			mge.setCode(mge.NULL);
-			mge.setStatement("!");
+			mge.setStatement("content||title is null");
+			mge.setContent("false");
 			util.Out().print(util.ToJson(mge));
 			return;
 		}
 		p.setContent(content);
-		String path = "/ParentsLetter/img";
+		String path = "IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
 		System.out.println("imgFile-" + imgFile);
 		if (imgFile != null) {
 			img = util.ufileToServer(path, imgFile, "", "jpg", true);
 			p.setImg(img);
 		} else {
-			System.out.println("imgFile-null");
+			System.out.println("imgFile is null");
+			mge.setStatement("imgFile is null");
 		}
 
 		p.setTitle(title);
 		p.setTime(time);
 		audao.Save(p);
-
-		mge.setCode(mge.SUCCESS);
-		mge.setStatement("!");
+		mge.setCode(mge.SUCCESS);	
 		mge.setContent("true");
 		util.Out().print(util.ToJson(mge));
 
@@ -211,7 +208,7 @@ public class ApputilAction {
 	public void SaveParentsL() throws IOException {
 		ParentsLetter p = new ParentsLetter();
 		p.setContent(content);
-		String path = "/ParentsLetter/img";
+		String path = "IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
 		if (imgFile != null) {
 			/**
 			 * BufferedImage sourceImg = ImageIO .read(new
@@ -1411,6 +1408,7 @@ public class ApputilAction {
 		}
 		adv.setPathimg(img);
 		adv.setTime(time);
+		adv.setTimeo(time);		
 		adv.setType(type);
 		adv.setHref(href);
 		adao.Save(adv);
@@ -1465,9 +1463,12 @@ public class ApputilAction {
 		adv = adao.byAdvid(id);
 		if (adv != null) {
 			if (Online == 0) {
-				adv.setCalculatingTime(OpeFunction.calculatingTime(adv.getTime(), time));
+				adv.setCalculatingTime(adv.getCalculatingTime()+OpeFunction.calculatingTime(adv.getTimeo(), time));
 				adv.setFinaltime(time);
+			}else{
+				adv.setTimeo(time);	
 			}
+				
 			System.out.println( OpeFunction.calculatingTime(adv.getTime(), time));
 			adv.setOnline(Online);
 			adao.Update(adv);

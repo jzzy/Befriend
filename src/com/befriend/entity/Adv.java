@@ -29,7 +29,9 @@ public class Adv  implements Serializable {
 	
 	@Column(name="time")//广告上传时间
 	private String time;
-	@Column(name="finaltime")//广告下架时间
+	@Column(name="timeo")//广告上线时间
+	private String timeo;
+	@Column(name="finaltime")//广告下线时间
 	private String finaltime;
 	
 	@Column(name="pathimg")//广告图片上传地址
@@ -60,6 +62,12 @@ public class Adv  implements Serializable {
 	
 	
 	
+	public String getTimeo() {
+		return timeo;
+	}
+	public void setTimeo(String timeo) {
+		this.timeo = timeo;
+	}
 	public int getOnline() {
 		return online;
 	}

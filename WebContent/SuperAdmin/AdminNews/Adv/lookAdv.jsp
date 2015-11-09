@@ -72,6 +72,7 @@ return true;
 				<td style="width: 100px;">广告连接</td>
 					<td style="width: 200px;">广告图</td>
 					<td style="width: 100px;">操作</td>
+					
 				
 				</tr>
 				
@@ -102,7 +103,13 @@ return true;
 					<td style="width: 200px;">广告图</td>
 					<td style="width: 100px;">操作</td>
 					<td style="width: 200px;">日期</td>
-					<td style="width: 200px;">展示时间</td>
+					<td style="width: 100px;">展示时间</td>
+					<td style="width: 50px;">掌中校园</td>
+					<td style="width: 50px;">优教通</td>
+					<td style="width: 50px;">微信</td>
+					<td style="width: 50px;">网页</td>
+					<td style="width: 50px;">安卓</td>
+					<td style="width: 50px;">苹果</td>
 					 
 				</tr>
 			
@@ -139,8 +146,10 @@ return true;
 					</td>
 					<td >
 					上传时间<br><%=al.get(i).getTime() %><br>
-					下架时间<br>
-					<%if(al.get(i).getFinaltime()!=null){ %>
+					上线时间<br><%=al.get(i).getTimeo() %><br>
+					
+					<%if(al.get(i).getFinaltime()!=null&&al.get(i).getOnline()!=1){ %>
+					下线时间<br>
 					<%=al.get(i).getFinaltime()%>
 					<%
 					}
@@ -149,7 +158,14 @@ return true;
 					<td>
 					<%=al.get(i).getCalculatingTime()%>小时
 					</td>
+					<td style="width: 50px;"><%=al.get(i).getBbt()%></td>
+					<td style="width: 50px;"><%=al.get(i).getSyn()%></td>
+					<td style="width: 50px;"><%=al.get(i).getWechat()%></td>
+					<td style="width: 50px;"><%=al.get(i).getWeb()%></td>
+					<td style="width: 50px;"><%=al.get(i).getAndroid()%></td>
+					<td style="width: 50px;"><%=al.get(i).getIos()%></td>
 				</tr>
+				
 				
 			
 			

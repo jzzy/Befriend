@@ -553,56 +553,9 @@ public class OpeFunction {
 	}
 
 	/**
-	 * public static final byte[] Key = "abcdefgh".getBytes(); private static
-	 * final String Algorithm = "DES"; //定义 加密算法,可用 DES,DESede,Blowfish
-	 * 
-	 * // 加密字符串 public static byte[] encryptMode(byte[] keybyte, byte[] src) {
-	 * try { // 生成密钥 SecretKey deskey = new SecretKeySpec(keybyte, Algorithm);
-	 * // 加密 Cipher c1 = Cipher.getInstance(Algorithm);
-	 * c1.init(Cipher.ENCRYPT_MODE, deskey); return c1.doFinal(src); } catch
-	 * (java.security.NoSuchAlgorithmException e1) { e1.printStackTrace(); }
-	 * catch (javax.crypto.NoSuchPaddingException e2) { e2.printStackTrace(); }
-	 * catch (java.lang.Exception e3) { e3.printStackTrace(); } return null; }
-	 * 
-	 * // 解密字符串 public static byte[] decryptMode(byte[] keybyte, byte[] src) {
-	 * try { // 生成密钥 SecretKey deskey = new SecretKeySpec(keybyte, Algorithm);
-	 * // 解密 Cipher c1 = Cipher.getInstance(Algorithm);
-	 * c1.init(Cipher.DECRYPT_MODE, deskey); return c1.doFinal(src); } catch
-	 * (java.security.NoSuchAlgorithmException e1) { e1.printStackTrace(); }
-	 * catch (javax.crypto.NoSuchPaddingException e2) { e2.printStackTrace(); }
-	 * catch (java.lang.Exception e3) { e3.printStackTrace(); } return null; }
-	 * 
-	 * public static void main(String[] args) { // 添加新安全算法,如果用JCE就要把它添加进去
-	 * Security.addProvider(new com.sun.crypto.provider.SunJCE()); final byte[]
-	 * keyBytes = Key; //8字节的密钥 String szSrc = "这是一个测试abcd";
-	 * System.out.println("加密前的字符串:" + szSrc); byte[] encoded =
-	 * encryptMode(keyBytes, szSrc.getBytes()); System.out.println("加密后的字符串:" +
-	 * new String(encoded)); byte[] srcBytes = decryptMode(keyBytes, encoded);
-	 * System.out.println("解密后的字符串:" + (new String(srcBytes))); }
-	 * 
-	 * @throws IOException
-	 * @throws InterruptedException
-	 */
-	/**
 	 * 
 	 * 
-	 * 
-	 * System.out.println("这些挖过来而又没有用上的内存:"+Runtime.getRuntime().freeMemory()/
-	 * 1024/1024 + " M");
-	 * System.out.println("java虚拟机现在已经从操作系统那里挖过来的内存大小:"+Runtime
-	 * .getRuntime().totalMemory()/1024/1024 + " M");
-	 * System.out.println("能构从操作系统那里挖到的最大的内存:"
-	 * +Runtime.getRuntime().maxMemory()/1024/1024 + " M");
-	 * 
-	 * @param args
-	 * @throws IOException
-	 * @throws InterruptedException
-	 */
-	/**
-	 * 
-	 * 
-	 * @param 年月日
-	 *            /时分秒 20150824/024326 命名
+	 * @param 年/月/日  2015/08/24命名
 	 */
 	public static String getNameDayTime() {
 		Calendar cal = Calendar.getInstance();
@@ -627,27 +580,27 @@ public class OpeFunction {
 					+ Integer.valueOf(cal.get(Calendar.DAY_OF_MONTH))
 							.toString();
 		}
-		name += "/";
-		if (cal.get(Calendar.HOUR) + 1 < 10) {
-			name = name + "0"
-					+ Integer.valueOf(cal.get(Calendar.HOUR)).toString();
-		} else {
-			name = name
-					+ Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
-		}
-		name += "/";
-		if (cal.get(Calendar.MINUTE) < 10) {
-			name = name + "0"
-					+ Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
-		} else {
-			name = name + Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
-		}
-		if (cal.get(Calendar.SECOND) < 10) {
-			name = name + "0"
-					+ Integer.valueOf(cal.get(Calendar.SECOND)).toString();
-		} else {
-			name = name + Integer.valueOf(cal.get(Calendar.SECOND)).toString();
-		}
+//		name += "/";
+//		if (cal.get(Calendar.HOUR) + 1 < 10) {
+//			name = name + "0"
+//					+ Integer.valueOf(cal.get(Calendar.HOUR)).toString();
+//		} else {
+//			name = name
+//					+ Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
+//		}
+		//name += "/";
+//		if (cal.get(Calendar.MINUTE) < 10) {
+//			name = name + "0"
+//					+ Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
+//		} else {
+//			name = name + Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
+//		}
+//		if (cal.get(Calendar.SECOND) < 10) {
+//			name = name + "0"
+//					+ Integer.valueOf(cal.get(Calendar.SECOND)).toString();
+//		} else {
+//			name = name + Integer.valueOf(cal.get(Calendar.SECOND)).toString();
+//		}
 
 		return name;
 	}
@@ -672,8 +625,9 @@ public class OpeFunction {
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
-		System.out.println(calculatingTime("2015-11-01 14:49:00", "2015-12-03 14:49:00"));
+		//System.out.println(calculatingTime("2015-11-01 14:49:00", "2015-12-03 14:49:00"));
 		// // System.out.println("123".substring(0, "123".length()-1));
+		System.out.println(getNameDayTime());
 
 	}
 

@@ -63,6 +63,7 @@ int bbt=Integer.parseInt(request.getAttribute("bbt").toString());//获取 共有
 <h3>掌中校园有<%=bbt %>个用户</h3>
 <h3>家长之友有<%=all-syn-bbt %>个用户</h3>
 <h3>共有<%=all %>个用户</h3>
+<!-- 
 <form action="">
 <table >
 <tr>
@@ -76,7 +77,7 @@ int bbt=Integer.parseInt(request.getAttribute("bbt").toString());//获取 共有
 </tr>
 </table>
 </form>
-
+ -->
 <%
 List<User> ul=(List)request.getAttribute("ul");
 %>
@@ -86,7 +87,7 @@ List<User> ul=(List)request.getAttribute("ul");
 
 <h3>在线用户<%=ul.size() %>个<a href="updateAllXiaxian" onclick="return ck()"><input type="button" value="一键全部下线" ></a></h3>
 <% 
-for(int i=0;i<ul.size();i++){
+for(int i=0;i<0;i++){
 %>
 
 <form action="SetQ"  method="post" enctype="multipart/form-data">
@@ -110,7 +111,7 @@ for(int i=0;i<ul.size();i++){
 
 <%
 List<User> us=(List)request.getAttribute("GetUserAllus");
-for(int i=0;i<us.size();i++){
+for(int i=0;i<0;i++){
 %>
 <form action="SetQ"  method="post" enctype="multipart/form-data">
 <table >
@@ -126,6 +127,7 @@ for(int i=0;i<us.size();i++){
 </tr>
 </table>
 </form>
+
 <%
 }
 %>
@@ -145,7 +147,7 @@ for(int i=0;i<us.size();i++){
 			href="GetUserAll?currentPage=<%=currentPage-1%>">上一页</a> <a
 			href="GetUserAll?currentPage=<%=currentPage+1%>">下一页</a> <a
 			href="GetUserAll?currentPage=<%=n%>">末页</a>
-			
+			<a href=<%=request.getContextPath()%><%=session.getAttribute("home")%>>返回首页</a>
 			
 		
 			<br></br>
@@ -154,7 +156,7 @@ for(int i=0;i<us.size();i++){
 			for(int s=1;s<=n;s++){
 			    
 			%>
-			<a href="GetUserAll?currentPage=<%=s%>"><%=s%>&nbsp&nbsp</a> 
+			<!--  <a href="GetUserAll?currentPage=<%=s%>"><%=s%>&nbsp&nbsp</a> -->
 			<%
 			if(s%20==0){
 				
@@ -166,7 +168,7 @@ for(int i=0;i<us.size();i++){
 			%>
 
  <br>
-<a href=<%=request.getContextPath()%><%=session.getAttribute("home")%>>返回首页</a>
+
 </div>
 
 </body>

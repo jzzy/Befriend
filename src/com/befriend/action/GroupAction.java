@@ -29,7 +29,7 @@ import com.befriend.udp.UDPServer;
 import com.befriend.util.OpeFunction;
 import com.befriend.wechat.RefreshAccessToken;
 import com.befriend.wechat.WechatKit;
-
+@SuppressWarnings("all")
 public class GroupAction {
 	private UDPServer udp;// 自建工具类
 	private OpeFunction util;// 自建工具类
@@ -293,7 +293,7 @@ public class GroupAction {
 			// 上传群头像
 			if (file != null) {
 
-				img = "/IMG/Groupimg/" + groupno;
+				img = "/IMG/Groupimg/" +OpeFunction.getNameDayTime();
 				img = util.ufileToServer(img, file, fileFileName, "jpg", true);
 				System.out.println(img);
 				groupchat.setImg(img);// 群图标
@@ -579,7 +579,7 @@ public class GroupAction {
 				util.fileRemove(img);
 				
 			}
-			img = "/IMG/Groupimg/" + groupchat.getGroupno();
+			img = "/IMG/Groupimg/" +OpeFunction.getNameDayTime();
 			img = util.ufileToServer(img, file, fileFileName, "jpg", true);
 			groupchat.setImg(img);
 			

@@ -45,7 +45,7 @@ return true;
 </script>
 </head>
 <body>
-<div style="background: #adc; width: 690px; height: 320px;">
+<div style="background: #adc; ">
 
 		<form action="JztdApp" method="post" enctype="multipart/form-data">
 			<table cellpadding="0" cellspacing="0" style="width: 350px;">
@@ -79,9 +79,10 @@ return true;
 			</table>
 		</form>
 		</div >
-		<div style="background: #abd; width: 900px; height: 300px;">
+		<div style="background: #abd;">
 		<h2>修改错误信息</h2>
 		<form action="JztdAppm" method="post" enctype="multipart/form-data">
+		<table>
 		<tr>
 		<td>家长之友的版本号:</td>
 		<td><input type="text" name="apptv" id="av"/></td>
@@ -98,10 +99,13 @@ return true;
 		
 		<td><input type="submit" value="确认修改" onclick="return chk();"/></td>
 		</tr>
+		
+		</table>
+		
 		</form>
 
-
-	<a href=<%=request.getContextPath()%><%=session.getAttribute("home")%>>返回首页</a>
+<a href=<%=request.getContextPath()%><%=session.getAttribute("home")%>>返回首页</a>
+	
 	</div>
 </body>
 </html>

@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author STerOTto
  *
  */
+@SuppressWarnings("all")
 public class EduActivityAction extends ActionSupport
 {
 
