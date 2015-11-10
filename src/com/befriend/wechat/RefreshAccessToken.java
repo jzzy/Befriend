@@ -45,7 +45,7 @@ public class RefreshAccessToken {
 
 				String jn = null;
 				
-				jn=WechatKit.post(url, json,null);
+				//jn=WechatKit.post(url, json,null);
 				 System.out.println("jn--:"+jn);
 				
 				if (jn != null) {
