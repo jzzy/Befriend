@@ -75,6 +75,8 @@ import javax.crypto.spec.IvParameterSpec;
  * @author gyn
  *
  */
+
+@SuppressWarnings("all")
 public class OpeFunction {
 	/**
 	 * js·µ»Øµ½html

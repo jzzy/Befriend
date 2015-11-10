@@ -49,75 +49,72 @@ public class ApputilAction {
 	private UserDAO userdao;
 	private AppDAO adao;
 	private String username;
-	private String information;//
-	private File imgFile;// logo鍥剧墖
-	private File xlsxFile;// xlsx閿熶茎纭锋嫹
+	private String information;
+	private File imgFile;
+	private File xlsxFile;
 
-	private String xlsxFileFileName;// 閿熶茎纭锋嫹閿熸枻鎷�
-	private String imgFileFileName;// 閿熶茎纭锋嫹閿熸枻鎷�
-	private String imgFileContentType;// 閿熶茎纭锋嫹閿熸枻鎷烽敓鏂ゆ嫹
+	private String xlsxFileFileName;
+	private String imgFileFileName;
+	private String imgFileContentType;
 
-	private File imgFile1;// 搴旈敓鐭枻鎷峰浘1
-	private String imgFile1FileName;// 閿熶茎纭锋嫹閿熸枻鎷�
-	private String imgFile1ContentType;// 閿熶茎纭锋嫹閿熸枻鎷烽敓鏂ゆ嫹
+	private File imgFile1;
+	private String imgFile1FileName;
+	private String imgFile1ContentType;
 
-	private File imgFile2;// 搴旈敓鐭枻鎷峰浘2
-	private String imgFile2FileName;// 閿熶茎纭锋嫹閿熸枻鎷�
-	private String imgFile2ContentType;// 閿熶茎纭锋嫹閿熸枻鎷烽敓鏂ゆ嫹
+	private File imgFile2;
+	private String imgFile2FileName;
+	private String imgFile2ContentType;
 
-	private File imgFile3;// 搴旈敓鐭枻鎷峰浘3
-	private String imgFile3FileName;// 閿熶茎纭锋嫹閿熸枻鎷�
-	private String imgFile3ContentType;// 閿熶茎纭锋嫹閿熸枻鎷烽敓鏂ゆ嫹
+	private File imgFile3;
+	private String imgFile3FileName;
+	private String imgFile3ContentType;
 
-	private String savePath;// 鐩綍
+	private String savePath;
 	private String Keywords;
 
-	private File appFile;// app閿熶茎纭锋嫹
-	private String appFileFileName;// 閿熶茎纭锋嫹閿熸枻鎷�
-	private String appFileContentType;// 閿熶茎纭锋嫹閿熸枻鎷烽敓鏂ゆ嫹
+	private File appFile;
+	private String appFileFileName;
+	private String appFileContentType;
 
-	private String vnum;// app閿熻姤鏈敓鏂ゆ嫹
-	private String type;// app閿熸枻鎷烽敓锟�
-	private String dpt;// 搴旈敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
-	private String summary;// 搴旈敓鐭潻鎷疯
+	private String vnum;
+	private String type;
+	private String dpt;
+	private String summary;
 
-	private String name;// app閿熸枻鎷烽敓鏂ゆ嫹
-	private int num = 0;// app閿熺嫛纭锋嫹鎸囬敓鏂ゆ嫹
+	private String name;
+	private int num = 0;
 
-	private int currentPage = 1;// 椤甸敓鏂ゆ嫹
-	private int id = 0;// id
-	private int pageSize = 4;// 閿熸枻鎷烽敓鏂ゆ嫹
+	private int currentPage = 1;
+	private int id;
+	private int pageSize = 4;
 
-	private int downloads = 0;// app閿熸枻鎷烽敓鎴揪鎷烽敓鏂ゆ嫹
+	private int downloads;
 
-	private int apptv = 0;// 閿熻姤鏈敓鏂ゆ嫹
-	private String updates;// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+	private int apptv;
+	private String updates;
 
-	AppUp au = new AppUp();// appup瀹為敓鏂ゆ嫹閿熸枻鎷� 閿熸彮绛规嫹涔嬮敓绐栭潻鎷烽敓鏂ゆ嫹閿熺煫纰夋嫹閿熸枻鎷�
-	App app = new App();// app瀹為敓鏂ゆ嫹閿熸枻鎷�
-	Visitor vor = new Visitor();// 閿熻娇鍖℃嫹閿熸枻鎷�
-	public HttpServletRequest request = ServletActionContext.getRequest();// 閿熸枻鎷峰彇request
-	private String Mac;//
-	private String os;// 绯荤粺
+	AppUp au = new AppUp();
+	App app = new App();
+	Visitor vor = new Visitor();
+	public HttpServletRequest request = ServletActionContext.getRequest();
+	private String Mac;
+	private String os;
 	private String time = util.getNowTime();
-	private String province = "all";// 鐪侀敓鏂ゆ嫹
-	private int synlogin;// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�
-	private int downloaded;// 閿熸枻鎷烽敓鎴揪鎷烽敓鏂ゆ嫹
-	private int usersyned;// 鍚屾椂閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
-	private int vored;// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹閿熸枻鎷�
-	private int usersaved;//
-	private String schoolname;// 瀛︽牎閿熸枻鎷烽敓鏂ゆ嫹
-	private String address;// 瀛︽牎閿熸枻鎷峰潃
-	private String scope;// 閿熸枻鎷烽敓鏂ゆ嫹鍥�
-	private String property;// 妤奸敓鏂ゆ嫹
-	private String content;// 閿熸枻鎷烽敓鏂ゆ嫹
-	private String img;// 鍥剧墖
-	private String title;// 閿熸枻鎷烽敓鏂ゆ嫹
+	private String province = "all";
+	private int synlogin;
+	private int downloaded;
+	private int usersyned;
+	private int vored;
+	private int usersaved;
+	private String schoolname;
+	private String address;
+	private String scope;
+	private String property;
+	private String content;
+	private String img;
+	private String title;
 	HttpSession session = ServletActionContext.getRequest().getSession();
 
-	/**
-	 * 閫氶敓鏂ゆ嫹id鍒犻敓鏂ゆ嫹閿熸彮绛规嫹閿熸枻鎷烽敓鏂ゆ嫹
-	 */
 	public void RemoveParentsLetterone() throws IOException {
 		ParentsLetter p = audao.Plbyid(id);
 		if (p != null) {
@@ -128,9 +125,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 閫氶敓鏂ゆ嫹id閿熶粙鐪嬮敓鎻鎷烽敓鏂ゆ嫹閿熸枻鎷�
-	 */
 	public String selectParentsLetterone() throws IOException {
 		ParentsLetter p = audao.Plbyid(id);
 		if (p != null) {
@@ -142,9 +136,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 閿熶粙鐪嬮敓鎻鎷烽敓鏂ゆ嫹閿熸枻鎷�
-	 */
 	public String selectParentsLetter() throws IOException {
 		List<ParentsLetter> pl = audao.PlAll();
 		request.setAttribute("pl", pl);
@@ -152,9 +143,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 閿熸枻鎷峰彴 閿熸枻鎷疯浌椤甸敓鏂ゆ嫹閿熸枻鎷烽敓锟�
-	 */
 	public String SaveParentsLetter() throws IOException {
 		System.out.println("SaveParentsLetter");
 		ParentsLetter p = new ParentsLetter();
@@ -171,7 +159,6 @@ public class ApputilAction {
 		return Action.SUCCESS;
 	}
 
-	@SuppressWarnings("static-access")
 	public void appSavePL() throws IOException {
 		ParentsLetter p = new ParentsLetter();
 		Message mge = new Message();
@@ -203,26 +190,23 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * web 閿熸枻鎷疯浌椤甸敓鏂ゆ嫹閿熸枻鎷烽敓锟�
-	 */
 	public void SaveParentsL() throws IOException {
 		ParentsLetter p = new ParentsLetter();
 		p.setContent(content);
 		String path = "/IMG/ParentsLetter/" + OpeFunction.getNameDayTime();
 		if (imgFile != null) {
 
-//			BufferedImage sourceImg = ImageIO
-//					.read(new FileInputStream(imgFile));
-//			if (sourceImg.getWidth() < 720 || sourceImg.getHeight() < 360) {
-//				util.Out().print("");
-//				return;
-//			}
-//			float fimg = util.fileSize(imgFile);
-//			if (fimg > 2048.00) {
-//				util.Out().print("");
-//				return;
-//			}
+			// BufferedImage sourceImg = ImageIO
+			// .read(new FileInputStream(imgFile));
+			// if (sourceImg.getWidth() < 720 || sourceImg.getHeight() < 360) {
+			// util.Out().print("");
+			// return;
+			// }
+			// float fimg = util.fileSize(imgFile);
+			// if (fimg > 2048.00) {
+			// util.Out().print("");
+			// return;
+			// }
 
 			img = util.fileToServer(path, imgFile, imgFileFileName,
 					imgFileContentType, true);
@@ -238,9 +222,6 @@ public class ApputilAction {
 		return;
 	}
 
-	/**
-	 * 閫氶敓鏂ゆ嫹id鍒犻敓鏂ゆ嫹閿熸彮绛规嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷锋伅
-	 */
 	public void Removejzfkid() throws IOException {
 		Feedback f = audao.FeedbackByid(id);
 		if (f != null) {
@@ -251,9 +232,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 閫氶敓鏂ゆ嫹id閿熶粙鐪嬮敓鎻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鎭�
-	 */
 	public String selectjzfkid() throws IOException {
 		Feedback f = audao.FeedbackByid(id);
 		request.setAttribute("f", f);
@@ -261,9 +239,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 閿熶粙鐪嬮敓鎻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鎭�
-	 */
 	public String selectjzfk() throws IOException {
 		List<Feedback> fl = audao.FeedbackAll();
 		request.setAttribute("fl", fl);
@@ -271,9 +246,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * web妯￠敓鏂ゆ嫹閿熸枻鎷疯瀛﹂敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鎭�
-	 */
 	public String selectwxHouseallzh() throws IOException {
 		System.out.println("selectwxHouseallzhh");
 
@@ -292,9 +264,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 
-	 */
 	public void appSelectHouseallZh() throws IOException {
 		System.out.println("appSelectHouseallZh" + num);
 		if (num <= 0) {
@@ -312,9 +281,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * web妯￠敓鏂ゆ嫹閿熸枻鎷疯瀛﹂敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鎭�
-	 */
 	public String selectwxHouseall() throws IOException {
 
 		if (util.isEmpty(schoolname)) {
@@ -335,9 +301,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * app妯￠敓鏂ゆ嫹閿熸枻鎷疯瀛﹂敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鎭�
-	 */
 	public void appselectHouseall() throws IOException {
 		System.out.println("schoolname閿熸枻鎷�:" + schoolname);
 		Message mge = new Message();
@@ -363,9 +326,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 閿熸枻鎷峰彴妯￠敓鏂ゆ嫹閿熸枻鎷疯瀛﹂敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鎭�
-	 */
 	public String selectHouseall() throws IOException {
 		System.out.println("schoolname閿熸枻鎷�:" + schoolname);
 		if (util.isEmpty(schoolname)) {
@@ -385,12 +345,9 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 瀛﹂敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鎭敓鐫潻鎷�
-	 */
 	public String upHouse() throws IOException {
 		House house = audao.byid(id);
-		System.out.println("閿熸枻鎷烽敓鏂ゆ嫹upHouse" + id);
+
 		if (house != null) {
 			house.setAddress(address);
 			house.setProperty(property);
@@ -403,16 +360,13 @@ public class ApputilAction {
 			request.setAttribute("hh", "ok!");
 			return Action.SUCCESS;
 		}
-		System.out.println("涓洪敓鏂ゆ嫹!");
+
 		return null;
 	}
 
-	/**
-	 * 閿熶粙鐪嬪閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷锋伅
-	 */
 	public String selectHousenoe() throws IOException {
 		House house = audao.byid(id);
-		System.out.println("閿熸枻鎷烽敓鏂ゆ嫹selectHousenoe");
+
 		if (house != null) {
 			request.setAttribute("h", house);
 			return Action.SUCCESS;
@@ -420,26 +374,18 @@ public class ApputilAction {
 		return null;
 	}
 
-	/**
-	 * 閿熸枻鎷峰彴鍒犻敓鏂ゆ嫹瀛﹂敓鏂ゆ嫹閿熸枻鎷�
-	 * 
-	 * @throws IOException
-	 */
 	public void RemovetHouse() throws IOException {
 		House house = audao.byid(id);
-		System.out.println("閿熸枻鎷烽敓鏂ゆ嫹RemovetHouse");
+
 		if (house != null) {
 			audao.Remove(house);
-			System.out.println("鍒犻敓鏂ゆ嫹閿熸枻鎷穐ouse");
+
 		}
 		((HttpServletResponse) util.response()).sendRedirect(request
 				.getContextPath() + "/selectHouse?currentPage=" + currentPage);
 
 	}
 
-	/**
-	 * 閿熸枻鎷峰彴閿熸枻鎷烽〉閿熶粙鐪嬪閿熸枻鎷烽敓鏂ゆ嫹
-	 */
 	public String selectHouse() {
 		pageSize = 20;
 		if (currentPage <= 0) {
@@ -463,12 +409,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 閿熸枻鎷烽敓绐栄嶆嫹閿熸枻鎷烽敓锟�
-	 * 
-	 * @throws IOException
-	 * @throws InvalidFormatException
-	 */
 	public String Addschooldistrict() throws IOException,
 			InvalidFormatException {
 
@@ -1019,8 +959,6 @@ public class ApputilAction {
 					+ "&downloaded=1";
 			WechatKit.sendGet(url);
 
-			// 杞敓鏂ゆ嫹
-
 			((HttpServletResponse) util.response())
 					.sendRedirect("http://182.92.100.235/Befriend/AppUp/FamilyGroup.apk");
 
@@ -1028,11 +966,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 
-	 *
-	 * @throws IOException
-	 */
 	public void Jwebandwap() throws IOException {
 		try {
 
@@ -1073,16 +1006,11 @@ public class ApputilAction {
 						response);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 
 	}
 
-	/**
-	 * 8 app
-	 * 
-	 * @return
-	 */
 	public String Appset() {
 		pageSize = 4;
 
@@ -1107,11 +1035,6 @@ public class ApputilAction {
 		return Action.SUCCESS;
 	}
 
-	/**
-	 * 鍒犻敓鏂ゆ嫹app 閫氶敓鏂ゆ嫹id
-	 * 
-	 * @throws IOException
-	 */
 	public void Deleteapp() throws IOException {
 		try {
 
@@ -1147,9 +1070,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 
-	 */
 	public void AppDs() {
 
 		app = adao.byid(id);
@@ -1161,11 +1081,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 
-	 * 
-	 * @throws IOException
-	 */
 	public void Appup() throws IOException {
 		try {
 			au = audao.UP();
@@ -1175,11 +1090,6 @@ public class ApputilAction {
 		}
 	}
 
-	/**
-	 * Appupnum
-	 * 
-	 * @throws IOException
-	 */
 	public void Appupnum() throws IOException {
 		try {
 			au = audao.UP();
@@ -1197,9 +1107,6 @@ public class ApputilAction {
 		}
 	}
 
-	/**
-	 * SaveFeedback
-	 */
 	public void SaveFeedback() {
 		try {
 
@@ -1227,11 +1134,6 @@ public class ApputilAction {
 		}
 	}
 
-	/**
-	 * Feedback
-	 * 
-	 * @throws IOException
-	 */
 	public void webSaveFeedback() throws IOException {
 
 		System.out.println(" webSaveFeedback" + "," + username + ","
@@ -1256,9 +1158,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * save app
-	 */
 	public void AUP() throws IOException {
 
 		System.out.println(vnum);
@@ -1343,11 +1242,6 @@ public class ApputilAction {
 
 	}
 
-	/**
-	 * 閫氶敓鏂ゆ嫹id閿熸枻鎷疯app閿熸枻鎷锋伅
-	 * 
-	 * @throws IOException
-	 */
 	public void getbyidapp() throws IOException {
 		if (id == 0) {
 			OpeFunction.Out().print(OpeFunction.ToJson("idnull"));
@@ -1361,12 +1255,9 @@ public class ApputilAction {
 		}
 	}
 
-	/**
-	 * 閿熸枻鎷烽敓鎴潻鎷� 閿熼叺浼欐嫹閿熸枻鎷� 閿熸枻鎷�8閿熸枻鎷穉pp
-	 */
 	public void getapp() {
 		try {
-			// num閿熸枻鎷烽敓鏂ゆ嫹0 閿熸枻鎷烽敓鏂ゆ嫹榛橀敓鏂ゆ嫹鍊�
+
 			if (num == 0) {
 				num = 8;
 			}
@@ -1380,11 +1271,11 @@ public class ApputilAction {
 
 	public String webGetapp() {
 		try {
-			// num閿熸枻鎷烽敓鏂ゆ嫹0 閿熸枻鎷烽敓鏂ゆ嫹榛橀敓鏂ゆ嫹鍊�
+
 			if (num == 0) {
 				num = 8;
 			}
-			// 閿熸枻鎷疯app閿熸枻鎷锋伅
+
 			List<App> la = adao.All(0);
 			request.setAttribute("la", la);
 		} catch (Exception e) {
