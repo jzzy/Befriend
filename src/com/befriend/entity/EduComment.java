@@ -1,5 +1,7 @@
 package com.befriend.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +16,14 @@ import javax.persistence.Table;
 import com.google.gson.annotations.Expose;
 
 
+/**
+ * @author SterOtto
+ */
 @Entity
 @Table(name="edu_comment")
-public class EduComment
+public class EduComment implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	public static int ROOT = 0;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,18 +36,18 @@ public class EduComment
 	private String merchantId;
 	
 	@JoinColumn(name="user_id")
-	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	@Expose
 	private User user;
 	
 	@JoinColumn(name="reply_id")
-	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	@Expose
 	private User reply;
 	
 	@Column(name="score")
 	@Expose
-	private int score;
+	private int score	=0;
 	
 	@Column(name="content")
 	@Expose
@@ -78,7 +84,7 @@ public class EduComment
 	{
 		this.merchantId = merchantId;
 	}
-
+	
 	public User getUser()
 	{
 		return user;

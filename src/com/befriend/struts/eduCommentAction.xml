@@ -4,6 +4,6 @@
 <struts>
 	<package name="eduComment" extends="struts-default" >
 		<action name="getCommments" class="eduCommentAction" method="getCommments"></action>
-		<action name="addComments" class="eduCommentAction" method="eduCommentAction"></action>
+		<action name="addComments" class="eduCommentAction" method="addComments"></action>
 	</package>
 </struts>
