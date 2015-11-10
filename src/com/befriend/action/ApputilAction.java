@@ -105,7 +105,7 @@ public class ApputilAction {
 	private int downloaded;// 閿熸枻鎷烽敓鎴揪鎷烽敓鏂ゆ嫹
 	private int usersyned;// 鍚屾椂閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
 	private int vored;// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻娇鍖℃嫹閿熸枻鎷�
-	private int usersaved;// 
+	private int usersaved;//
 	private String schoolname;// 瀛︽牎閿熸枻鎷烽敓鏂ゆ嫹
 	private String address;// 瀛︽牎閿熸枻鎷峰潃
 	private String scope;// 閿熸枻鎷烽敓鏂ゆ嫹鍥�
@@ -159,7 +159,7 @@ public class ApputilAction {
 		System.out.println("SaveParentsLetter");
 		ParentsLetter p = new ParentsLetter();
 		p.setContent(content);
-		String path =  "/IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
+		String path = "/IMG/ParentsLetter/" + OpeFunction.getNameDayTime();
 		if (imgFile != null) {
 			img = util.ufileToServer(path, imgFile, "", "jpg", true);
 			p.setImg(img);
@@ -183,10 +183,11 @@ public class ApputilAction {
 			return;
 		}
 		p.setContent(content);
-		String path = "/IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
+		String path = "/IMG/ParentsLetter/" + OpeFunction.getNameDayTime();
 		System.out.println("imgFile-" + imgFile);
 		if (imgFile != null) {
-			img=util.fileToServer(path, imgFile, imgFileFileName, imgFileContentType, true);
+			img = util.fileToServer(path, imgFile, imgFileFileName,
+					imgFileContentType, true);
 			p.setImg(img);
 		} else {
 			System.out.println("imgFile is null");
@@ -196,7 +197,7 @@ public class ApputilAction {
 		p.setTitle(title);
 		p.setTime(time);
 		audao.Save(p);
-		mge.setCode(mge.SUCCESS);	
+		mge.setCode(mge.SUCCESS);
 		mge.setContent("true");
 		util.Out().print(util.ToJson(mge));
 
@@ -208,20 +209,23 @@ public class ApputilAction {
 	public void SaveParentsL() throws IOException {
 		ParentsLetter p = new ParentsLetter();
 		p.setContent(content);
-		String path = "/IMG/ParentsLetter/"+OpeFunction.getNameDayTime();
+		String path = "/IMG/ParentsLetter/" + OpeFunction.getNameDayTime();
 		if (imgFile != null) {
-			/**
-			 * BufferedImage sourceImg = ImageIO .read(new
-			 * FileInputStream(imgFile)); if (sourceImg.getWidth() < 720 ||
-			 * sourceImg.getHeight() <360) { util.Out().print(
-			 * "鍥剧墖閿熺杈炬嫹閿熸枻鎷疯閿熸枻鎷烽敓鏂ゆ嫹720*360 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓閾扮》鎷烽敓鏂ゆ嫹鎷㈤敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷疯閿燂拷"
-			 * ); return ; } float fimg = util.fileSize(imgFile); if (fimg >
-			 * 2048.00) { util.Out().print(
-			 * "閿熸枻鎷峰浘鐗囬敓鏂ゆ嫹瑕侀敓鏂ゆ嫹灏忎负 2MB 閿熸枻鎷烽敓閾帮綇鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熼摪纭锋嫹閿熸枻鎷锋嫝閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹瑁曢敓锟�"
-			 * ); return ; }
-			 */
 
-			img = util.ufileToServer(path, imgFile, "", "jpg", true);
+//			BufferedImage sourceImg = ImageIO
+//					.read(new FileInputStream(imgFile));
+//			if (sourceImg.getWidth() < 720 || sourceImg.getHeight() < 360) {
+//				util.Out().print("");
+//				return;
+//			}
+//			float fimg = util.fileSize(imgFile);
+//			if (fimg > 2048.00) {
+//				util.Out().print("");
+//				return;
+//			}
+
+			img = util.fileToServer(path, imgFile, imgFileFileName,
+					imgFileContentType, true);
 			p.setImg(img);
 		}
 
@@ -1401,14 +1405,14 @@ public class ApputilAction {
 				imgFile1ContentType, true);
 		adv.setName(name);
 		adv.setSummary(summary);
-		if(sequence>0){
-		adv.setSequence(sequence);
-		}else{
+		if (sequence > 0) {
+			adv.setSequence(sequence);
+		} else {
 			adv.setSequence(1);
 		}
 		adv.setPathimg(img);
 		adv.setTime(time);
-		adv.setTimeo(time);		
+		adv.setTimeo(time);
 		adv.setType(type);
 		adv.setHref(href);
 		adao.Save(adv);
@@ -1455,21 +1459,23 @@ public class ApputilAction {
 			adv.setWechat(adv.getWechat() + 1);
 			adao.Update(adv);
 		}
-		
+
 	}
 
 	public String onlineAdv() throws IOException {
-		time=OpeFunction.getNowTime();
+		time = OpeFunction.getNowTime();
 		adv = adao.byAdvid(id);
 		if (adv != null) {
 			if (Online == 0) {
-				adv.setCalculatingTime(adv.getCalculatingTime()+OpeFunction.calculatingTime(adv.getTimeo(), time));
+				adv.setCalculatingTime(adv.getCalculatingTime()
+						+ OpeFunction.calculatingTime(adv.getTimeo(), time));
 				adv.setFinaltime(time);
-			}else{
-				adv.setTimeo(time);	
+			} else {
+				adv.setTimeo(time);
 			}
-				
-			System.out.println( OpeFunction.calculatingTime(adv.getTime(), time));
+
+			System.out
+					.println(OpeFunction.calculatingTime(adv.getTime(), time));
 			adv.setOnline(Online);
 			adao.Update(adv);
 			System.out.println("修改广告状态成功!" + Online);
@@ -1497,8 +1503,8 @@ public class ApputilAction {
 				adv.setPathimg(img);
 
 			}
-			if(sequence>0){
-			adv.setSequence(sequence);
+			if (sequence > 0) {
+				adv.setSequence(sequence);
 			}
 			adao.Update(adv);
 			System.out.println("修改广告成功!");

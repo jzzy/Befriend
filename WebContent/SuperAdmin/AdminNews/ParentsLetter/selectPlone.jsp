@@ -83,7 +83,7 @@ function cka()
 		<%
 		if(p.getImg()!=null){
 		%>
-		<td width="600"><img width="720px" height="360px" alt="" src="<%=request.getContextPath()%><%=p.getImg()%>"></td>	
+		<td width="600"><img  alt="<%=request.getContextPath()%><%=p.getImg()%>" src="<%=request.getContextPath()%><%=p.getImg()%>"></td>	
 		<%
 		}else{
 		%>

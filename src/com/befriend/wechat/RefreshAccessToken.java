@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import com.befriend.util.OpeFunction;
 
 public class RefreshAccessToken {
-	public static String access_token ="YWMtkvqI-mJpEeWmHWM9KfQewAAAAVEyULKkcoThtUNYEYm9zyNKr60dHfj3bjc";
+	public static String access_token =null;
 	public static int Second=0;
 	public final static  String url = "https://a1.easemob.com/topLong/wcfriend/token";
 	public RefreshAccessToken(int second) {
@@ -30,15 +30,12 @@ public class RefreshAccessToken {
 				
 				// 封装个json  获取token的
 				JSONObject json = new JSONObject();
-//				json.put("client_id", "YXA6MHPlMALGEeWyhu9dNjM0XA");
-//				json.put("grant_type", "client_credentials");
-//				json.put("client_secret", "YXA6OhW1URHjHtAbX_R0ocltSfiWNLQ");
+				json.put("client_id", "YXA6MHPlMALGEeWyhu9dNjM0XA");
+				json.put("grant_type", "client_credentials");
+				json.put("client_secret", "YXA6OhW1URHjHtAbX_R0ocltSfiWNLQ");
 				
-				
-				
-				
-				 //json.put("username", "topLong");
-				 //json.put("password", "toplong!");
+//				 json.put("username", "topLong");
+//				 json.put("password", "toplong!");
 
 				// 获取到json access_token 微信的
 				// access_token=OpeFunction.getJsonKey(WechatKit.sendGet(url),
@@ -49,7 +46,7 @@ public class RefreshAccessToken {
 				String jn = null;
 				
 				jn=WechatKit.post(url, json,null);
-				 System.out.println("jn:"+jn);
+				 System.out.println("jn--:"+jn);
 				
 				if (jn != null) {
 					if( OpeFunction.getJsonKey(jn, "access_token")!=null){

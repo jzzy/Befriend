@@ -84,8 +84,9 @@ List<User> ul=(List)request.getAttribute("ul");
 <h3>同步群<a href="synchrGroup" onclick="return ck()"><input type="button" value="确定" ></a></h3>
 
 <h3>同步用户<a href="huanxinzc" onclick="return ck()"><input type="button" value="确定" ></a></h3>
-
+<!-- 
 <h3>在线用户<%=ul.size() %>个<a href="updateAllXiaxian" onclick="return ck()"><input type="button" value="一键全部下线" ></a></h3>
+ -->
 <% 
 for(int i=0;i<0;i++){
 %>
