@@ -1596,7 +1596,6 @@ public class UserAction extends ActionSupport {
 			u.setOnline(1);
 			u.setFinaltime(time);
 			u.setIp(request.getRemoteAddr());
-			u.setOs(User.SYN);
 			userdao.update(u);
 			// 更新在线用户数量
 			time = util.getNumTime(0);
@@ -2144,6 +2143,134 @@ public class UserAction extends ActionSupport {
 	}
 
 	/**
+	 * 新用户注册 username 不可以为null
+	 * 
+	 * @throws IOException
+	 * @throws JSONException
+	 * @throws NoSuchAlgorithmException
+	 */
+	public void zHzhSave() throws IOException, JSONException {
+		if (OpeFunction.isEmpty(username)) {
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/webNewsA10");
+			return;
+		}
+		username = "zcom" + username;
+		if (nickname == null) {
+			nickname = username.substring(0, (username.length() > 20 ? 20
+					: username.length()));
+		}
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
+				: nickname.length()));
+		u = userdao.byUsernameAccnumnoPhone(username);
+		if (u != null) {
+			System.out.println("ok");
+
+			int ut = u.getLoginnum();
+			if (ut > 0) {
+				ut = ++ut;
+				u.setLoginnum(ut);
+			} else {
+				u.setLoginnum(1);
+			}
+			u.setFinaltime(time);
+			u.setIp(request.getRemoteAddr());
+			userdao.update(u);
+			session.setAttribute("u", u);
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
+					+ u.getId();
+			WechatKit.sendGet(url);
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/webNewsA10");
+			System.out.println("转发走了");
+			return;
+		}
+		synchronized (this) {
+
+			u = new User();
+			// 验证用户名
+			// String reg = "^[A-Za-z_][A-Za-z0-9]{5,17}";
+			boolean b = true;
+			// 判断生成群号 会不会和以前冲突
+			while (b) {
+				// 随机生成8位随机数 作为 群号
+				accnumno = String
+						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
+					b = false;
+				}
+
+			}
+
+			System.out.println("用户名:" + username);
+
+			System.out.println("用户号:" + accnumno);
+
+			u.setUsername(username);
+			u.setNickname(nickname);// 没有设置过显示用户名
+			u.setCome(User.ZHZH);
+			u.setOs(User.ZHZH);
+			u.setAccnumno(accnumno);
+			u.setStage("未填写");
+			if (!util.isEmpty(address)) {
+				u.setAddress(address);
+			}
+			if (!util.isEmpty(addcity)) {
+				u.setAddcity(addcity);
+			}
+
+			u.setFinaltime(time);
+			u.setSchool("未填写");
+			u.setLookphone(phone);
+			u.setTime(time);
+			u.setCompetence(0);// 普通用户
+			u.setGag(0);// 可以创建论坛
+			if (userdao.byUsernameAccnumnoPhone(username) != null) {
+				util.Out().print(false);
+				return;
+
+			}
+			userdao.save(u);
+		}
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
+				+ ",pw:" + password);
+
+		// 注册环信
+		u = userdao.byUsernameAccnumnoPhone(accnumno);
+		if (u != null) {
+			if (file != null) {
+
+				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
+				String pah = util.ufileToServer(path, file, fileFileName,
+						"jpg", true);
+				u.setImg(pah);
+				userdao.update(u);
+			} else {
+				System.out.println("没有获取到头像!");
+			}
+			pd.setUid(u.getId());
+			pd.setPassword("123456");
+			userdao.save(pd);
+			JSONObject json = new JSONObject();
+			json.put("username", u.getId());
+			// 用户id
+			json.put("password", "123456");
+			// 用户密码
+			String w = WechatKit.post(URL, json,
+					RefreshAccessToken.access_token);
+			System.out.println(w);
+
+			session.setAttribute("u", u);
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
+					+ u.getId();
+			WechatKit.sendGet(url);
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/webNewsA10");
+			System.out.println("转发走了");
+		}
+	}
+
+	/**
 	 * 新用户注册 username password phone 不可以为null
 	 * 
 	 * @throws IOException
@@ -2205,7 +2332,6 @@ public class UserAction extends ActionSupport {
 			}
 			u.setFinaltime(time);
 			u.setIp(request.getRemoteAddr());
-			u.setOs(User.BBT);
 			userdao.update(u);
 			session.setAttribute("u", u);
 			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
@@ -2733,16 +2859,41 @@ public class UserAction extends ActionSupport {
 		System.out.println("lwechat下载总和  " + sta.getDownloaded());
 		System.out.println("lwechat最高在线总和  " + sta.getUsersyned());
 		System.out.println("lwechat新增游客总和  " + sta.getVored());
+		List<Stas> lzhzh = adao.StasTime("all", User.ZHZH, timeq, timeh);
+		sta = new Stas();
+		for (int i = 0; i < lzhzh.size(); i++) {
+			System.out.println("日期" + lzhzh.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lzhzh.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lzhzh.get(i).getUsersaved());
+			sta.setDownloaded(sta.getDownloaded()
+					+ lzhzh.get(i).getDownloaded());
+			if (lzhzh.get(i).getUsersyned() > sta.getUsersyned()) {
+				sta.setUsersyned(lzhzh.get(i).getUsersyned());
+			}
+			sta.setUv(sta.getUv() + lzhzh.get(i).getUv());
+			sta.setPv(sta.getPv() + lzhzh.get(i).getPv());
+			sta.setIp(sta.getIp() + lzhzh.get(i).getIp());
+			sta.setVored(sta.getVored() + lzhzh.get(i).getVored());
 
-		// request.setAttribute("lbbt", lbbt);
-		// request.setAttribute("lios", lios);
-		// request.setAttribute("landroid", landroid);
-		// request.setAttribute("lweb", lweb);
-		// request.setAttribute("lsyn", lsyn);
+			sta.setHome1(sta.getHome1() + lzhzh.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lzhzh.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lzhzh.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lzhzh.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lzhzh.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lzhzh.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lzhzh.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lzhzh.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lzhzh.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lzhzh.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lzhzh.get(i).getHome334());
+		}
+		request.setAttribute("zhzhsta", sta);
 
 		int own = userdao.getUsertimeCount(timeq, timeh, User.OWN);
 		int bbt = userdao.getUsertimeCount(timeq, timeh, User.BBT);
 		int syn = userdao.getUsertimeCount(timeq, timeh, User.SYN);
+		int zhzh = userdao.getUsertimeCount(timeq, timeh, User.ZHZH);
 		us = userdao.getUsertime(timeq, timeh);
 		for (int i = 0; i < us.size(); i++) {
 			System.out.println("yonghuming:" + us.get(i).getUsername() + ":"
@@ -2751,12 +2902,14 @@ public class UserAction extends ActionSupport {
 		System.out.println("own有" + own + "个用户");
 		System.out.println("bbt有" + bbt + "个用户");
 		System.out.println("syn有" + syn + "个用户");
+		System.out.println("zhzh有" + zhzh + "个用户");
 		request.setAttribute("timeh", timeh);
 		request.setAttribute("GetUsertimeus", us);
 		request.setAttribute("timeq", timeq);
 		request.setAttribute("own", own);
 		request.setAttribute("bbt", bbt);
 		request.setAttribute("syn", syn);
+		request.setAttribute("zhzh", zhzh);
 		return Action.SUCCESS;
 	}
 

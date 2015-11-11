@@ -717,6 +717,7 @@ public class ApputilAction {
 		l.add(User.SYN);
 		l.add(User.BBT);
 		l.add(User.WECHAT);
+		l.add(User.ZHZH);
 		province = User.ALL;
 		for (int i = 0; i < l.size(); i++) {
 			System.out.println("look aStas:" + l.get(i));

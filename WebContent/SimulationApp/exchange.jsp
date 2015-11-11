@@ -35,7 +35,7 @@ if(fone==null||us==null){
 <title>社区互动</title>
 <link href="<%=request.getContextPath()%>/SimulationApp/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/SimulationApp/js/jquery.js"></script>
-<script type="text/javascript" src="SimulationApp/js/style.js"></script>
+<script type="text/javascript" src="js/style.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$.ajax({
@@ -146,6 +146,7 @@ $(document).ready(function(){
                <%
                     for(int i=0;i<fone.size();i++){
                     %>
+                    
    <ul class="userlist">
       <li>
                 <div class="taoluncont">        

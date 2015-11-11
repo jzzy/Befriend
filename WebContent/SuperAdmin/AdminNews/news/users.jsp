@@ -20,7 +20,7 @@ String timeh=(String)request.getAttribute("timeh");
 Integer own=(Integer)request.getAttribute("own");
 Integer bbt=(Integer)request.getAttribute("bbt");
 Integer syn=(Integer)request.getAttribute("syn");
-
+Integer zhzh=(Integer)request.getAttribute("zhzh");
 
 Stas iossta=(Stas)request.getAttribute("iossta");
 Stas androidsta=(Stas)request.getAttribute("androidsta");
@@ -28,7 +28,7 @@ Stas websta=(Stas)request.getAttribute("websta");
 Stas bbtsta=(Stas)request.getAttribute("bbtsta");
 Stas synsta=(Stas)request.getAttribute("synsta");
 Stas wechatsta=(Stas)request.getAttribute("wechatsta");
-
+Stas zhzhsta=(Stas)request.getAttribute("zhzhsta");
 %>
 <h2 style="color: blue;">
 <b style="color: red;">2015-07-03开始统计</b><br>
@@ -65,7 +65,22 @@ if(bbtsta!=null){
 </tr>
 <%
 } %>
+<%
+if(zhzhsta!=null){
+%>
 
+<tr style="color: red;">
+<td ><h4>翼校通</h4></td>
+<td><h4><%=zhzh %></h4></td>
+<td ><h4><%=zhzhsta.getUserlogined() %></h4></td>
+<td><h4><%=zhzhsta.getUsersyned() %></h4></td>
+
+<td ><h4><%=zhzhsta.getPv() %></h4></td>
+<td ><h4><%=zhzhsta.getUv() %></h4></td>
+<td><h4><%=zhzhsta.getIp() %></h4></td>
+</tr>
+<%
+} %>
 
 <%
 if(synsta!=null){
@@ -162,7 +177,7 @@ if(wechatsta!=null){
 <tr style="color: fuchsia;">
 <td width="200"><h4>-ALL</h4></td>
 <td width="200"><h4>
-<%=androidsta.getUsersaved()+iossta.getUsersaved()+websta.getUsersaved()+wechatsta.getUsersaved()+syn+bbt%>
+<%=androidsta.getUsersaved()+iossta.getUsersaved()+websta.getUsersaved()+wechatsta.getUsersaved()+syn+bbt+zhzh%>
 </h4></td>
 <td width="120"><h4><%=androidsta.getUserlogined()+iossta.getUserlogined()+websta.getUserlogined()+wechatsta.getUserlogined()+synsta.getUserlogined()+bbtsta.getUserlogined() %></h4></td>
 <td width="120"><h4><%=androidsta.getUsersyned()+iossta.getUsersyned()+websta.getUsersyned()+wechatsta.getUsersyned()+synsta.getUsersyned()+bbtsta.getUsersyned()%></h4></td>

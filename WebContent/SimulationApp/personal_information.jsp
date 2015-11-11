@@ -80,8 +80,16 @@ $(document).ready(function(){
          %>
          </dt>
          <dd class="name"><%=u.getNickname() %></dd>
-         <dd><img src="images/adr.png" width="45" /><%=u.getAddress()+u.getAddcity()%>
-         
+         <dd><img src="images/adr.png" width="45" />
+         <%
+         if(u.getAddress()!=null&&u.getAddcity()!=null){
+         %>
+         <%=u.getAddress()+u.getAddcity()%>
+         <%
+         }else{
+         %>
+         	未填写
+         <%} %>
          <img src="images/use.png" width="45" /><%=u.getStage() %></dd>
       </dl>
       <!--pcont-->

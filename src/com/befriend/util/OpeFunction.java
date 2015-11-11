@@ -628,8 +628,10 @@ public class OpeFunction {
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
 		//System.out.println(calculatingTime("2015-11-01 14:49:00", "2015-12-03 14:49:00"));
-		// // System.out.println("123".substring(0, "123".length()-1));
-		System.out.println(getNameDayTime());
+		String str="123456789";
+		System.out.println(str.substring(0, (str.length()>3?3: str.length())));
+		System.out.println(str);
+		//System.out.println(getNameDayTime());
 
 	}
 

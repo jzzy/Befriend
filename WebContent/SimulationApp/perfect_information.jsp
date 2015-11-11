@@ -64,9 +64,29 @@ $(document).ready(function(){
     </div>
    
     <div class="pnum2"> 上传头像：<input id="file" type="file" name="file" /></div>
-    <div class="pnum2">用户名:<%=u.getUsername() %></div>
+    <div class="pnum2">用户名:
+    <%
+    
+    	String username=u.getUsername().substring(0, (u.getUsername().length()>23?23: u.getUsername().length()));
+    
+    
+    %>
+    <%=username %>
+    </div>
     <div class="pnum2">昵称:<input type="text" name="nickname" value="<%=u.getNickname() %>" class="shuru"/></div>
-      <div class="pnum2">所在地区:<%=u.getAddress()+u.getAddcity() %></div>  
+      <div class="pnum2">所在地区:
+      <%
+      if(u.getAddress()==null||u.getAddcity()==null){
+      %>
+   	   未设置
+      <%
+      }else{
+      %>
+      <%=u.getAddress()+u.getAddcity() %>
+      <%
+      }
+      %>
+      </div>  
      <div class="pnum2 pnum2s">修改：<select name="province"  onChange = "select()">
      
      </select> 
