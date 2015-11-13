@@ -4,10 +4,6 @@ import java.util.List;
 
 import com.befriend.entity.Adv;
 import com.befriend.entity.App;
-import com.befriend.entity.AppUp;
-
-
-
 public interface AppDAO {
     	
 	//Ìí¼Óapp

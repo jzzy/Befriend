@@ -5,5 +5,11 @@
 	<package name="eduComment" extends="struts-default" >
 		<action name="getCommments" class="eduCommentAction" method="getCommments"></action>
 		<action name="addComments" class="eduCommentAction" method="addComments"></action>
+		<action name="deleteCommment" class="eduCommentAction" method="deleteCommment"></action>
+		<action name="getAllCommments" class="eduCommentAction" method="getAllCommments">
+		<result name="success">/SuperAdmin/AdminNews/news/News.jsp</result>
+		</action>
+		
+		
 	</package>
 </struts>

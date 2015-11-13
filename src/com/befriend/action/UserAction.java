@@ -782,7 +782,7 @@ public class UserAction extends ActionSupport {
 			util.Out().print("用户管理为空");
 			return null;
 		}
-		if (username.length() >= 1) {
+		if (!OpeFunction.isEmpty(username)) {
 			us = userdao.likeusername(username, ue.getAddress());
 		}
 
@@ -2078,7 +2078,7 @@ public class UserAction extends ActionSupport {
 				u.setOs(User.SYN);
 				u.setAccnumno(accnumno);
 				u.setStage("未填写");
-				if (address == null || address.length() < 2) {
+				if (OpeFunction.isEmpty(address)|| address.length() < 2) {
 					u.setAddress("湖南");
 				} else {
 					u.setAddress(address);
@@ -2158,10 +2158,10 @@ public class UserAction extends ActionSupport {
 		username = "zcom" + username;
 		if (nickname == null) {
 			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length()));
+					: username.length()-1));
 		}
 		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length()));
+				: nickname.length()-1));
 		u = userdao.byUsernameAccnumnoPhone(username);
 		if (u != null) {
 			System.out.println("ok");

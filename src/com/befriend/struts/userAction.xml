@@ -3,7 +3,7 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="User" extends="struts-default">
-<!-- 查看源码 -->	
+		<!-- 查看源码 -->	
 		<action name="source" class="userAction" >		
 			<result type="plainText">
 				<param name="charSet">utf-8</param>
@@ -14,20 +14,23 @@
 		<!-- 同步用户登入 -->
 		<action name="zHzhSave" class="userAction" method="zHzhSave">
 		</action>
-<!-- 同步用户登入 -->
+			<!-- 同步用户登入 -->
 		<action name="bbtSave" class="userAction" method="bbtSave">
 		</action>
-		<!-- 查看统计信息 -->
-		<action name="ViewStatistics" class="userAction" method="ViewStatistics">
-		<result name="success">/SuperAdmin/AdminNews/Statis/ViewStatistics.jsp</result>
-		</action>
-		
 		<!-- 同步用户登入 -->
 		<action name="synLogin" class="userAction" method="synLogin">
 		</action>
 		<!-- 同步账号 -->
 		<action name="synSave" class="userAction" method="synSave">
 		</action>		
+		
+		
+		<!-- 查看统计信息 -->
+		<action name="ViewStatistics" class="userAction" method="ViewStatistics">
+		<result name="success">/SuperAdmin/AdminNews/Statis/ViewStatistics.jsp</result>
+		</action>
+		
+		
 		<!-- sha1 -->
 		<action name="sha1" class="userAction" method="sha1">
 		</action>

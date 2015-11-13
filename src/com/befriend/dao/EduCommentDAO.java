@@ -12,4 +12,7 @@ public interface EduCommentDAO
 	public EduComment find(int id);
 	public List<EduComment> find(String merchantId,int fatherId,int currentPage,int pageSize);
 	public List<EduComment> find(String merchantId);
+	
+	public List<EduComment> find(int currentPage,int pageSize);
+	public List<EduComment> likeFind(String string,int currentPage,int pageSize);
 }

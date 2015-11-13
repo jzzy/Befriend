@@ -6,15 +6,14 @@ import java.util.List;
 import com.befriend.entity.ForumOne;
 import com.befriend.entity.ForumThree;
 import com.befriend.entity.ForumTwo;
-import com.befriend.entity.User;
 
 public interface ForumDAO {
-	/**
-	 * 论坛dao
-	 * @param ForumOne
-	 */
+		
 	
-	
+		/**
+		 * 论坛dao
+		 * @param ForumOne
+		 */
 		//添加新论坛
 		public void save(ForumOne ForumOne);
 		// 通过标题模糊查询
@@ -94,9 +93,6 @@ public interface ForumDAO {
 		public List<ForumThree> getForumThreeALL(int forumid);
 		//Forumthree 查询回复内容
 		public ForumThree getForumThree(int id);
-		
-		
-		
 		
 		
 }

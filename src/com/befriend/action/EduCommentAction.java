@@ -7,25 +7,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.befriend.dao.EduCommentDAO;
 import com.befriend.dao.UserDAO;
 import com.befriend.entity.EduComment;
 import com.befriend.entity.User;
 import com.befriend.util.JsonUtil;
-import com.google.gson.annotations.Expose;
 
-public class EduCommentAction
+public class EduCommentAction implements ServletRequestAware
 {
 	private EduCommentDAO 		eduCommentDAO;
 	private UserDAO				userDAO;
 	private HttpServletResponse response;
-	
+	private HttpServletRequest request;
 	private String 	merchantId;
 	private int 	score		=0;
 	private String 	userId;
@@ -40,7 +41,15 @@ public class EduCommentAction
 	
 	private int currentPage		= 1;
 	private int pageSize 		= 10;
-	
+	public void getAllCommments(){
+		request.setAttribute("el", eduCommentDAO.find(currentPage, pageSize));
+	}
+	public void deleteCommment(){
+		EduComment Ed=eduCommentDAO.find(Integer.valueOf(replyId));
+		if(Ed!=null){
+			eduCommentDAO.delete(Ed);
+		}
+	}
 	public static void main(String [] args)
 	{
 		User u = new User();
@@ -270,6 +279,11 @@ public class EduCommentAction
 	public void setReplyId(String replyId)
 	{
 		this.replyId = replyId;
+	}
+	@Override
+	public void setServletRequest(HttpServletRequest arg0) {
+		// TODO Auto-generated method stub
+		this.request=arg0;
 	}
 	
 }

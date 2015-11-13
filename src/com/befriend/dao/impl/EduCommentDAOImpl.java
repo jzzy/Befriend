@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.befriend.dao.EduCommentDAO;
 import com.befriend.entity.EduComment;
-
+@SuppressWarnings("all")
 @Transactional
 public class EduCommentDAOImpl implements EduCommentDAO
 {
@@ -59,6 +59,26 @@ public class EduCommentDAOImpl implements EduCommentDAO
 	{
 		Query query  = entityManager.createQuery("select u from EduComment u where u.merchantId = :merchantId and u.fatherId != 0 order by u.time desc");
 		query.setParameter("merchantId", merchantId);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<EduComment> likeFind(String string, int currentPage,
+			int pageSize) {
+		Query query  = entityManager.createQuery("select u from EduComment u where u.content like :string order by u.time desc");
+		
+		query.setParameter("string",""+ "%"+string+"%");
+
+		query.setFirstResult((currentPage-1)*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<EduComment> find(int currentPage, int pageSize) {
+		Query query  = entityManager.createQuery("select u from EduComment u  order by u.time desc");
+		query.setFirstResult((currentPage-1)*pageSize);
+		query.setMaxResults(pageSize);
 		return query.getResultList();
 	}
 

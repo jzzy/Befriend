@@ -1,8 +1,6 @@
 package com.befriend.dao;
 
 import java.util.List;
-
-import com.befriend.entity.Collect;
 import com.befriend.entity.Follect;
 
 public interface FollectDAO {
