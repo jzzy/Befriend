@@ -53,8 +53,8 @@ public class EduCommentAction implements ServletRequestAware {
 	}
 
 	public String getAllCommments() {
-		List<EduComment> el=eduCommentDAO.find(currentPage, pageSize);	
-		request.setAttribute("el", el.size()>0?el:null);	
+		List<EduComment> el = eduCommentDAO.find(currentPage, pageSize);
+		request.setAttribute("el", el.size() > 0 ? el : null);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageSize", pageSize);
 		return Action.SUCCESS;
@@ -157,6 +157,7 @@ public class EduCommentAction implements ServletRequestAware {
 
 					for (int i = 0; i < pictures.length; i++) {
 						try {
+
 							int index = picturesFileName[i].indexOf(".");
 							String suffix = picturesFileName[i]
 									.substring(index);
@@ -165,7 +166,9 @@ public class EduCommentAction implements ServletRequestAware {
 							File saveFile = new File(saveDir, fileName);
 							FileUtils.copyFile(pictures[i], saveFile);
 							picStr += path + fileName + "!#";
+
 						} catch (IOException e) {
+							result = false;
 							e.printStackTrace();
 						}
 					}
