@@ -34,6 +34,7 @@ if(admin==null){
 
 <a href="<%=request.getContextPath()%>/getAdv">管理广告图</a><br>
 
+<a href="<%=request.getContextPath()%>/getAllCommments">管理大众点评</a><br>
 
 </body>
 </html>
