@@ -106,12 +106,6 @@ public class EduCommentAction implements ServletRequestAware {
 		response = ServletActionContext.getResponse();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
-		for (EduComment eduComment : eduComments) {
-			User u = eduComment.getUser();
-			System.out.println(JsonUtil.toJsonExpose(u) + "   "
-					+ eduComment.getUser().getEduComment().size());
-		}
-		System.out.println(JsonUtil.toJsonExpose(eduComments));
 		response.getWriter().println(JsonUtil.toJsonExpose(eduComments));
 	}
 

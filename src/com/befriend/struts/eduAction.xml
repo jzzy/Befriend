@@ -4,5 +4,10 @@
 <struts>
 	<package name="edu" extends="struts-default" >
 	    <action name="getEdu" class="eduAction" method="getEdu"></action>
+	    <action name="saveAttention" class="eduAction" method="saveAttention"></action>
+	    <action name="removeAttention" class="eduAction" method="removeAttention"></action>
+	    <action name="userLookAttention" class="eduAction" method="userLookAttention"></action>
+	    
+	    
 	</package>
 </struts>

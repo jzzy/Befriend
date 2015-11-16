@@ -1,8 +1,6 @@
 package com.befriend.entity;
 import java.io.Serializable;
 
-import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,10 +34,7 @@ public class User implements Serializable
 	public static final String WEB="web";//网页
 	public static final String ANDROID="android";//安卓
 	public static final String IOS="ios";//苹果
-	
-	//未登入用户算微信的
 	public static final String WECHAT="wechat";//微信
-	
 	public static final String ALL="all";//all
 	
 	@Id
@@ -54,7 +49,7 @@ public class User implements Serializable
 	@Expose private String nickname;
 	
 	@Column(name="password")//密码
-	private String password;
+	 private String password;
 	
 	@Column(name="img")
 	@Expose private String img;
@@ -106,10 +101,10 @@ public class User implements Serializable
 	private String os;
 	
 	@OneToMany(mappedBy="user",fetch=FetchType.LAZY)
-	private List<EduComment> eduComment;
+	transient private List<EduComment> eduComment;
 	
 	@OneToMany(mappedBy="reply",fetch=FetchType.LAZY)
-	private List<EduComment> replyComment;
+	transient private List<EduComment> replyComment;
 	
 	
 	public String getOs() {
@@ -256,21 +251,19 @@ public class User implements Serializable
 	{
 		this.nickname = nickname;
 	}
-	public List<EduComment> getEduComment()
-	{
-		return eduComment;
-	}
 	public void setEduComment(List<EduComment> eduComment)
 	{
 		this.eduComment = eduComment;
 	}
-	public List<EduComment> getReplyComment()
-	{
-		return replyComment;
-	}
 	public void setReplyComment(List<EduComment> replyComment)
 	{
 		this.replyComment = replyComment;
+	}
+	public List<EduComment> getEduComment() {
+		return eduComment;
+	}
+	public List<EduComment> getReplyComment() {
+		return replyComment;
 	}
 	
 

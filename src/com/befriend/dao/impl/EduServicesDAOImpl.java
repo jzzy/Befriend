@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.befriend.dao.EduServicesDAO;
+import com.befriend.entity.Attention;
 import com.befriend.entity.EduServices;
 
 /**
@@ -55,6 +56,54 @@ public class EduServicesDAOImpl implements EduServicesDAO
 		query.setFirstResult((currentPage-1)*pageSize);
 		query.setMaxResults(pageSize);
 		return query.getResultList();
+	}
+
+	@Override
+	public void save(Attention Attention) {
+		// TODO Auto-generated method stub
+		entityManger.persist(Attention);
+		
+	}
+
+	@Override
+	public void remove(Attention Attention) {
+		// TODO Auto-generated method stub
+		entityManger.remove(Attention);
+		
+	}
+
+	@Override
+	public void update(Attention Attention) {
+		// TODO Auto-generated method stub
+		entityManger.merge(Attention);
+		
+	}
+
+	@Override
+	public Attention byId(int attentionId) {
+		// TODO Auto-generated method stub
+		return entityManger.find(Attention.class, attentionId);
+	}
+
+	@Override
+	public List<Attention> byUserid(int userid, int currentPage, int pageSize,int come) {
+		// TODO Auto-generated method stub
+		Query query = entityManger.createQuery("select u from Attention u where u.userid=:userid and u.come=:come  order"
+			      + " by u.time desc");
+		query.setParameter("userid", userid);
+		query.setParameter("come", come);
+		query.setFirstResult((currentPage-1)*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public int eduServicesCount(int eduServicesId,int come) {
+		Query query = entityManger.createQuery("select u from Attention u where u.objectid=:eduServicesId  and u.come=:come  order"
+			      + " by u.time desc");
+		query.setParameter("eduServicesId", eduServicesId);
+		query.setParameter("come", come);
+		return (int)(long)query.getSingleResult();
 	}
 
 }
