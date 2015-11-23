@@ -46,6 +46,64 @@ $(document).ready(function(){
  </script>
 </head>
 <body >
+<%
+int all=Integer.parseInt(request.getAttribute("all").toString());//获取 共有多少用户
+int syn=Integer.parseInt(request.getAttribute("syn").toString());//获取 共有多少用户
+int bbt=Integer.parseInt(request.getAttribute("bbt").toString());//获取 共有多少用户
+int zhzh=Integer.parseInt(request.getAttribute("zhzh").toString());//获取 共有多少用户
+int xdd=Integer.parseInt(request.getAttribute("xdd").toString());//获取 共有多少用户
+int own=Integer.parseInt(request.getAttribute("own").toString());//获取 共有多少用户
+%>
+<CENTER></CENTER>
+<form   style="width: 60%;"  action="">
+<table style="text-align:center;" border=1 >
+
+<tr>
+<td style="width: 300px;">来源</td>
+<td style="width: 300px;">用户数量</td>
+</tr>
+
+<tr>
+<td>优教通</td>
+<td><%=syn %></td>
+</tr>
+
+<tr>
+<td style="width: 200px;">掌中校园</td>
+<td style="width: 200px;"><%=bbt %></td>
+</tr>
+
+<tr>
+<td style="width: 200px;">电信翼校通</td>
+<td style="width: 200px;"><%=zhzh %></td>
+</tr>
+<tr>
+<td style="width: 200px;">学多多</td>
+<td style="width: 200px;"><%=xdd %></td>
+</tr>
+<tr>
+<td style="width: 200px;">家长之友</td>
+<td style="width: 200px;"><%=own %></td>
+</tr>
+<tr>
+<td style="width: 200px;">合计</td>
+<td style="width: 200px;"><%=all %></td>
+</tr>
+<!--  
+<tr>
+<td>同步群</td>
+<td ><a href="synchrGroup" onclick="return ck()"><input style="width: 200px;" type="button" value="确定" ></a></td>
+</tr>
+<tr>
+<td >同步用户</td>
+<td ><a href="huanxinzc" onclick="return ck()"><input style="width: 200px;" type="button" value="确定" ></a></td>
+</tr>
+-->
+</table>
+</form>
+<br>
+
+
 <label >开始日期：</label><input id="timeq" type="date" name="timeq" value=<%=OpeFunction.getNumTime(1)+" 00:00:00"%>/>
 <label >结束日期：</label><input id="timeh" type="date" name="timeh" value=<%=OpeFunction.getNowTime() %>/>
 
@@ -53,16 +111,9 @@ $(document).ready(function(){
 <button style="width: 120px;height: 35px;" id="b01" type="button">搜索</button>
 <input  style="width: 120px;height: 35px;" onclick="fk()" type="button" value="更新">
 <div  id="myDiv"></div>
-<div style="background: #adc">
-<%
-int all=Integer.parseInt(request.getAttribute("all").toString());//获取 共有多少用户
-int syn=Integer.parseInt(request.getAttribute("syn").toString());//获取 共有多少用户
-int bbt=Integer.parseInt(request.getAttribute("bbt").toString());//获取 共有多少用户
-%>
-<h3>优教通有<%=syn %>个用户</h3>
-<h3>掌中校园有<%=bbt %>个用户</h3>
-<h3>家长之友有<%=all-syn-bbt %>个用户</h3>
-<h3>共有<%=all %>个用户</h3>
+<div >
+
+
 <!-- 
 <form action="">
 <table >
@@ -81,9 +132,6 @@ int bbt=Integer.parseInt(request.getAttribute("bbt").toString());//获取 共有
 <%
 List<User> ul=(List)request.getAttribute("ul");
 %>
-<h3>同步群<a href="synchrGroup" onclick="return ck()"><input type="button" value="确定" ></a></h3>
-
-<h3>同步用户<a href="huanxinzc" onclick="return ck()"><input type="button" value="确定" ></a></h3>
 <!-- 
 <h3>在线用户<%=ul.size() %>个<a href="updateAllXiaxian" onclick="return ck()"><input type="button" value="一键全部下线" ></a></h3>
  -->
@@ -108,7 +156,7 @@ for(int i=0;i<0;i++){
 <%
 }
 %>
-<h3>用户信息</h3>
+
 
 <%
 List<User> us=(List)request.getAttribute("GetUserAllus");
@@ -141,7 +189,7 @@ for(int i=0;i<0;i++){
     	
      %>
 
-
+<!--  
 
 		<br>共<%=n%>页</br> <br>第<%=currentPage%>页</br> <a
 			href="GetUserAll?currentPage=1">首页</a> <a
@@ -152,7 +200,7 @@ for(int i=0;i<0;i++){
 			
 		
 			<br></br>
-			
+	-->		
 			<%
 			for(int s=1;s<=n;s++){
 			    

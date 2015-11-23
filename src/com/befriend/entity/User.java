@@ -27,7 +27,10 @@ public class User implements Serializable
 	///来源
 	public static final String BBT="bbt";//掌中校园
 	public static final String SYN="syn";//优教通
-	public static final String ZHZH="zhzh";//翼校通
+	public static final String ZHZH="zhzh";//翼校通 电信	
+	public static final String XDD="xdd";// 学多多
+	public static final String KUX="kux";// 酷校
+	
 	public static final String OWN="own";// 家长之友
 	
 	//家长之友内部分类

@@ -539,7 +539,11 @@ public class ApputilAction {
 	public void staLoginCount() {
 		time = util.getNumTime(0);
 		System.out.println("进入staLoginCount id=" + id);
-		User u = userdao.byid(id);
+		User u = (User) session.getAttribute("u");
+		if (u == null) {
+			u = userdao.byid(id);			
+		}
+		
 		if (u != null) {
 			Stas sta = audao.StasTimeDay(time, u.getOs(), User.ALL);
 			if (sta == null) {
@@ -718,6 +722,8 @@ public class ApputilAction {
 		l.add(User.BBT);
 		l.add(User.WECHAT);
 		l.add(User.ZHZH);
+		l.add(User.XDD);
+		l.add(User.KUX);
 		province = User.ALL;
 		for (int i = 0; i < l.size(); i++) {
 			System.out.println("look aStas:" + l.get(i));
@@ -728,9 +734,9 @@ public class ApputilAction {
 			synlogin = userdao.getFinaltime(time, l.get(i)).size();
 			if (synlogin != 0) {
 				if (synlogin % 3 == 0) {
-					usersyned = synlogin / 3;
+					usersyned = synlogin / 4;
 				} else {
-					usersyned = synlogin / 3 + 1;
+					usersyned = synlogin / 5;
 				}
 			} else {
 				usersyned = 0;
@@ -745,7 +751,9 @@ public class ApputilAction {
 					sta.setDownloaded(0);
 				}
 				sta.setOs(l.get(i));
+				if(usersyned>sta.getUsersyned()){
 				sta.setUsersyned(usersyned);
+				}
 				sta.setUsersaved(usersaved);
 				sta.setVored(vored);
 				sta.setUv(synlogin);
@@ -756,7 +764,9 @@ public class ApputilAction {
 			if (downloaded != 0 && l.get(i).equals(os)) {
 				sta.setDownloaded(sta.getDownloaded() + 1);
 			}
-			sta.setUsersyned(usersyned);
+			if(usersyned>sta.getUsersyned()){
+				sta.setUsersyned(usersyned);
+				}
 			sta.setUsersaved(usersaved);
 			sta.setVored(vored);
 			sta.setUv(synlogin);

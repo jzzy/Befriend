@@ -11,18 +11,26 @@
 			</result>
 		</action>
 		
-		<!-- 同步用户登入 -->
+		<!-- 同步用户 酷校 登入 -->
+		<action name="kuxSave" class="userAction" method="kuxSave">
+		</action>
+		<!-- 同步用户 学多多 登入 -->
+		<action name="xddSave" class="userAction" method="xddSave">
+		</action>
+		<!-- 同步用户 电信 登入 -->
 		<action name="zHzhSave" class="userAction" method="zHzhSave">
 		</action>
-			<!-- 同步用户登入 -->
+		<!-- 同步用户 班班通 登入 -->
 		<action name="bbtSave" class="userAction" method="bbtSave">
 		</action>
-		<!-- 同步用户登入 -->
+		<!-- 同步用户 优教通 登入 -->
 		<action name="synLogin" class="userAction" method="synLogin">
 		</action>
 		<!-- 同步账号 -->
 		<action name="synSave" class="userAction" method="synSave">
-		</action>		
+		</action>	
+		
+			
 		
 		
 		<!-- 查看统计信息 -->

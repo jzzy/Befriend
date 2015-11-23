@@ -258,6 +258,22 @@ public class OpeFunction {
 		return b;
 
 	}
+	/**
+	 * 查看文件是否存在
+	 * 存在 true 否 false
+	 *
+	 */
+	public static Boolean isEmptyfile(String path) throws IOException {
+		Boolean b = true;
+		File file = new File(ServletActionContext.getServletContext()
+				.getRealPath(path));
+		if(file==null){
+			b=false;
+		}
+
+		return b;
+
+	}
 
 	/**
 	 * 文件上传到服务器
@@ -629,8 +645,10 @@ public class OpeFunction {
 			InterruptedException {
 		//System.out.println(calculatingTime("2015-11-01 14:49:00", "2015-12-03 14:49:00"));
 		String str="123456789";
-		System.out.println(str.substring(0, (str.length()>3?3: 100)));
-		System.out.println(str);
+		String nickname="123456789";
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
+				: nickname.length()));
+		System.out.println(nickname);
 		//System.out.println(getNameDayTime());
 
 	}

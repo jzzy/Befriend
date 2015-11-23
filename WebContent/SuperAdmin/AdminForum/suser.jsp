@@ -99,21 +99,21 @@ for(int i=0;i<ush.size();i++){
 <td>最后登入时间:<%=ush.get(i).getFinaltime()==null?"无":ush.get(i).getFinaltime()%>
 </td>
 </tr>
-<tr>
-<td>最后登入时间:<%=ush.get(i).getFinaltime()==null?"无":ush.get(i).getFinaltime()%>
-</td>
-</tr>
 <%
 String come="";
 
-if(ush.get(i).getCome().equals("syn")){
+if(ush.get(i).getCome().equals(User.SYN)){
 	come="优教通";
-}else if(ush.get(i).getCome().equals("own")){
-	come="家长之友";
-}else if(ush.get(i).getCome().equals("bbt")){
+}else if(ush.get(i).getCome().equals(User.OWN)){
+	
+	come="家长之友-"+ush.get(i).getOs();
+}else if(ush.get(i).getCome().equals(User.BBT)){
 	come="掌中校园";
-}else if(ush.get(i).getCome().equals("zdx")){
-	come="电信";
+}else if(ush.get(i).getCome().equals(User.ZHZH)){
+	come="电信翼校通";
+}
+else if(ush.get(i).getCome().equals(User.XDD)){
+	come="学多多";
 }
 %>
 <tr>

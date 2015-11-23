@@ -15,7 +15,7 @@ public interface NewsDAO {
 	// 1 查询 看有多少条更新
 	public List<News> likeNews(String title);
 	// 1 查询 看有多少条更新
-	public int maxNewsId();
+	public int maxNewsCount();
 	// 删除新闻
 	public void rm(News n);
 	public void rm(Book book);

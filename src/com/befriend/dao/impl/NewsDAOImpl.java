@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.befriend.dao.NewsDAO;
 import com.befriend.entity.Book;
 import com.befriend.entity.News;
+import com.befriend.entity.User;
 
 @SuppressWarnings("all")
 @Transactional
@@ -367,12 +368,16 @@ public class NewsDAOImpl implements NewsDAO {
 	}
 
 	@Override
-	public int maxNewsId() {
-		Query query = entityManager.createQuery("select u from News u order"
-				+ " by u.id desc");
+	public int maxNewsCount() {
+//		Query query = entityManager.createQuery("select count(u) from News u");
+//		return (int)(long)query.getSingleResult();
+		Query query = entityManager.createQuery("select u from News u  order"
+						+ " by u.id desc");
 		query.setMaxResults(1);
-		News n=(News) query.getResultList().get(0);
-		return n.getId();
+		List<News> us=query.getResultList();
+		if(us.size()>0)
+		return (int)us.get(0).getId();
+		return 0;
 
 	}
 

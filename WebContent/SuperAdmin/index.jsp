@@ -17,9 +17,9 @@
 
 <div style="background:#abc">
 <hr></hr>
-<a href="SuperAdmin/SuperAdmin.jsp">系统管理员登入</a>
-<a href="SuperAdmin/UserAdminForum.jsp">用户论坛管理员登入</a>
-<a href="SuperAdmin/UserAdminInformation.jsp">查看用户注册信息</a>
+<a href="<%=request.getContextPath()%>/SuperAdmin/SuperAdmin.jsp">系统管理员登入</a>
+<a href="<%=request.getContextPath()%>/SuperAdmin/UserAdminForum.jsp">用户论坛管理员登入</a>
+<a href="<%=request.getContextPath()%>/SuperAdmin/UserAdminInformation.jsp">查看用户注册信息</a>
 <hr></hr>
 </div>
 

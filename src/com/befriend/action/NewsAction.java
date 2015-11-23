@@ -317,7 +317,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	 */
 	public void newNewsId() throws IOException {
 
-		util.Out().print(ndao.maxNewsId());
+		util.Out().print(ndao.maxNewsCount());
 
 	}
 
@@ -1779,15 +1779,15 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				util.Out().print("小图尺寸为 180*140 请您重新检查下！请您返回重试！");
 				return null;
 			}
-
-			if (fimg > 512.00) {
-				util.Out().print("小图大小为 0.5MB 以下！请您重新检查下！请您返回重试！");
-				return null;
-			}
-			if (fimgmax > 1024.00) {
-				util.Out().print("大图大小为 1MB 以下！请您重新检查下！请您返回重试！");
-				return null;
-			}
+			
+//			if (fimg > 512.00) {
+//				util.Out().print("小图大小为 0.5MB 以下！请您重新检查下！请您返回重试！");
+//				return null;
+//			}
+//			if (fimgmax > 1024.00) {
+//				util.Out().print("大图大小为 1MB 以下！请您重新检查下！请您返回重试！");
+//				return null;
+//			}
 			System.out.println("宽" + sourceImg.getWidth());
 			System.out.println("高" + sourceImg.getHeight());
 			System.out.println("是否是专家 0不是 1是 :" + expert);
@@ -1796,7 +1796,6 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			String img = util.fileToServer(savePath, imgFile, imgFileFileName,
 					imgFileContentType, true);
 			News n = new News();
-
 			n.setTitle(title);
 			n.setSummary(summary);
 			n.setContent(content1);

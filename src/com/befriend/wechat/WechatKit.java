@@ -46,7 +46,7 @@ import com.befriend.util.OpeFunction;
 @SuppressWarnings("all")
 public class WechatKit {
 	private static final Log log = LogFactory.getLog(WechatKit.class);
-	private static HttpClient httpClient = null;
+	private static HttpClient httpClient = getHttpClient();
 	private static HttpClient postClient = null;
 	private static HttpResponse httpResponse = null;
 	
@@ -64,9 +64,9 @@ public class WechatKit {
 		HttpProtocolParams.setUseExpectContinue(params, true);
 
 		// 设置连接超时时间
-		final int REQUEST_TIMEOUT = 6 * 1000; // 设置请求超时2秒钟
-		final int SO_TIMEOUT = 6 * 1000; // 设置等待数据超时时间2秒钟
-		// final Long CONN_MANAGER_TIMEOUT = 500L; //
+		final int REQUEST_TIMEOUT = 15 * 1000; // 设置请求超时2秒钟
+		final int SO_TIMEOUT = 15 * 1000; // 设置等待数据超时时间2秒钟
+		final long CONN_MANAGER_TIMEOUT = 500L; //
 		// 该值就是连接不够用的时候等待超时时间，一定要设置，而且不能太大
 		//
 
@@ -74,8 +74,7 @@ public class WechatKit {
 		HttpConnectionParams.setSoTimeout(params, SO_TIMEOUT);
 		params.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,REQUEST_TIMEOUT);
 		params.setParameter(CoreConnectionPNames.SO_TIMEOUT, SO_TIMEOUT);
-		// params.setLongParameter(ClientPNames.CONN_MANAGER_TIMEOUT,
-		// CONN_MANAGER_TIMEOUT);vnnnnnnn
+		//params.setLongParameter(ClientPNames.CONN_MANAGER_TIMEOUT,CONN_MANAGER_TIMEOUT);
 		params.setBooleanParameter(CoreConnectionPNames.STALE_CONNECTION_CHECK,
 				true);// 在提交请求之前 测试连接是否可用
 		// 设置访问协议

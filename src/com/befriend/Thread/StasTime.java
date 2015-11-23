@@ -15,6 +15,7 @@ public class StasTime implements Runnable {
 		while (true) {
 			String url = "http://127.0.0.1/Befriend/aStas";
 			try {
+				//Thread.sleep(5000);
 				WechatKit.sendGet(url);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
