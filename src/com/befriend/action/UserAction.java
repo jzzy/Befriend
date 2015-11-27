@@ -267,7 +267,7 @@ public class UserAction extends ActionSupport {
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	public void huanxinzc() throws JSONException, InterruptedException,
+	public synchronized void huanxinzc() throws JSONException, InterruptedException,
 			IOException {
 
 		System.out.println("进入huanxinzc");
@@ -1009,7 +1009,6 @@ public class UserAction extends ActionSupport {
 	/**
 	 * 省级与市级 用户管理员 查询用户信息
 	 */
-
 	public String RegionalAdministrator() throws IOException {
 		try {
 
@@ -2413,6 +2412,7 @@ public class UserAction extends ActionSupport {
 		username = "kcom" + username;
 
 		u = userdao.byUsernameAccnumnoPhone(username);
+	
 		if (u != null) {
 			System.out.println("ok");
 
@@ -3117,6 +3117,40 @@ public class UserAction extends ActionSupport {
 		System.out.println("学多多下载总和  " + sta.getDownloaded());
 		System.out.println("学多多最高在线总和  " + sta.getUsersyned());
 		System.out.println("学多多新增游客总和  " + sta.getVored());
+		List<Stas> lkux = adao.StasTime("all", User.KUX, timeq, timeh);
+		sta = new Stas();
+		for (int i = 0; i < lkux.size(); i++) {
+			System.out.println("日期" + lkux.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lkux.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lkux.get(i).getUsersaved());
+			// sta.setDownloaded(sta.getDownloaded()+lbbt.get(i).getDownloaded());
+			if (lkux.get(i).getUsersyned() > sta.getUsersyned()) {
+				sta.setUsersyned(lkux.get(i).getUsersyned());
+			}
+			sta.setPv(sta.getPv() + lkux.get(i).getPv());
+			sta.setIp(sta.getIp() + lkux.get(i).getIp());
+			// sta.setVored(sta.getVored()+lbbt.get(i).getVored());
+			sta.setUv(sta.getUv() + lkux.get(i).getUv());
+			sta.setHome1(sta.getHome1() + lkux.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lkux.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lkux.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lkux.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lkux.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lkux.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lkux.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lkux.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lkux.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lkux.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lkux.get(i).getHome334());
+		}
+		request.setAttribute("kuxsta", sta);
+		System.out.println("酷校统计天数" + lkux.size());
+		System.out.println("酷校登入总和  " + sta.getUserlogined());
+		System.out.println("酷校注册总和  " + sta.getUsersaved());
+		System.out.println("酷校下载总和  " + sta.getDownloaded());
+		System.out.println("酷校最高在线总和  " + sta.getUsersyned());
+		System.out.println("酷校新增游客总和  " + sta.getVored());
 		List<Stas> lwechat = adao.StasTime("all", User.WECHAT, timeq, timeh);
 		sta = new Stas();
 		for (int i = 0; i < lwechat.size(); i++) {
@@ -3187,6 +3221,7 @@ public class UserAction extends ActionSupport {
 		int syn = userdao.getUsertimeCount(timeq, timeh, User.SYN);
 		int zhzh = userdao.getUsertimeCount(timeq, timeh, User.ZHZH);
 		int xdd = userdao.getUsertimeCount(timeq, timeh, User.XDD);
+		int kux = userdao.getUsertimeCount(timeq, timeh, User.KUX);
 		us = userdao.getUsertime(timeq, timeh);
 		for (int i = 0; i < us.size(); i++) {
 			System.out.println("yonghuming:" + us.get(i).getUsername() + ":"
@@ -3197,6 +3232,7 @@ public class UserAction extends ActionSupport {
 		System.out.println("syn有" + syn + "个用户");
 		System.out.println("zhzh有" + zhzh + "个用户");
 		System.out.println("xdd有" + xdd + "个用户");
+		System.out.println("kux有" + kux + "个用户");
 		request.setAttribute("timeh", timeh);
 		request.setAttribute("GetUsertimeus", us);
 		request.setAttribute("timeq", timeq);
@@ -3205,6 +3241,7 @@ public class UserAction extends ActionSupport {
 		request.setAttribute("syn", syn);
 		request.setAttribute("zhzh", zhzh);
 		request.setAttribute("xdd", xdd);
+		request.setAttribute("kux", kux);
 		return Action.SUCCESS;
 	}
 
@@ -3220,6 +3257,7 @@ public class UserAction extends ActionSupport {
 		int zhzh = userdao.getCount(User.ZHZH);// 同步的用户数量
 		int xdd = userdao.getCount(User.XDD);// 同步的用户数量
 		int own = userdao.getCount(User.OWN);// 同步的用户数量
+		int kux= userdao.getCount(User.KUX);// 同步的用户数量
 		List<User> ul = userdao.getOnline();// 查询在线用户
 		int all = competence2;
 		System.out.println("用户数量" + competence2);
@@ -3248,6 +3286,7 @@ public class UserAction extends ActionSupport {
 		request.setAttribute("zhzh", zhzh);
 		request.setAttribute("xdd", xdd);
 		request.setAttribute("own", own);
+		request.setAttribute("kux", kux);
 		return Action.SUCCESS;
 	}
 

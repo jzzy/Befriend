@@ -20,7 +20,7 @@
 <script type="text/javascript">
 
 function cka(){
-	 if(confirm("确定放弃当前操作返回主页？"))
+	 if(confirm("确定？"))
 	 	{
 		
 		  return true;
@@ -54,9 +54,15 @@ function cka(){
 		
 			return false;
 		} 
+	    if(confirm("确定？"))
+	 	{
+		
+		  return true;
+	 	}
+	 		else{
+		   return false;
+	 		}
 		  
-	
-return true;
 	}
 	
 		KindEditor.ready(function(K) {

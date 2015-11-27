@@ -17,6 +17,7 @@ import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,6 +50,8 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
+
+import org.bouncycastle.asn1.cms.Time;
 
 import com.befriend.email.MailSenderInfo;
 import com.befriend.email.SimpleMailSender;
@@ -253,22 +256,27 @@ public class OpeFunction {
 		Boolean b = true;
 		File file = new File(ServletActionContext.getServletContext()
 				.getRealPath(path));
-		b = file.delete();
+		if (file.exists()) {
+			file.delete();
+		} else {
+			b = false;
+		}
 
 		return b;
 
 	}
+
 	/**
-	 * 查看文件是否存在
-	 * 存在 true 否 false
+	 * 查看文件是否存在 存在 true 否 false
 	 *
 	 */
 	public static Boolean isEmptyfile(String path) throws IOException {
 		Boolean b = true;
-		File file = new File(ServletActionContext.getServletContext()
-				.getRealPath(path));
-		if(file==null){
-			b=false;
+		if (new File(ServletActionContext.getServletContext().getRealPath(path))
+				.exists()) {
+			System.out.println("存在");
+		} else {
+			b = false;
 		}
 
 		return b;
@@ -355,6 +363,25 @@ public class OpeFunction {
 		Date dt = new Date();
 		SimpleDateFormat matter1 = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
 		return matter1.format(dt);
+
+	}
+
+	/**
+	 * 改时间格式
+	 * 
+	 * @return
+	 * @throws ParseException
+	 */
+	public static String setTime(String dt1) throws ParseException {
+
+		SimpleDateFormat matter1 = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+
+		// Date或者String转化为时间戳
+		Date date = matter1.parse(dt1);
+
+		System.out.print("时间戳:" + date.getTime());
+
+		return matter1.format(date);
 
 	}
 
@@ -532,6 +559,7 @@ public class OpeFunction {
 	 */
 	public static void setphone(String phone, String textp) {
 		try {
+			
 			String account = "cf_wcsk_jztd";// 用户名 cf_wcsk_jztd
 			String pwd = "wcsk1212";// 密码 wcsk1212
 			String postUrl = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";// 地址
@@ -573,7 +601,8 @@ public class OpeFunction {
 	/**
 	 * 
 	 * 
-	 * @param 年/月/日  2015/08/24命名
+	 * @param 年
+	 *            /月/日 2015/08/24命名
 	 */
 	public static String getNameDayTime() {
 		Calendar cal = Calendar.getInstance();
@@ -598,27 +627,27 @@ public class OpeFunction {
 					+ Integer.valueOf(cal.get(Calendar.DAY_OF_MONTH))
 							.toString();
 		}
-//		name += "/";
-//		if (cal.get(Calendar.HOUR) + 1 < 10) {
-//			name = name + "0"
-//					+ Integer.valueOf(cal.get(Calendar.HOUR)).toString();
-//		} else {
-//			name = name
-//					+ Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
-//		}
-		//name += "/";
-//		if (cal.get(Calendar.MINUTE) < 10) {
-//			name = name + "0"
-//					+ Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
-//		} else {
-//			name = name + Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
-//		}
-//		if (cal.get(Calendar.SECOND) < 10) {
-//			name = name + "0"
-//					+ Integer.valueOf(cal.get(Calendar.SECOND)).toString();
-//		} else {
-//			name = name + Integer.valueOf(cal.get(Calendar.SECOND)).toString();
-//		}
+		// name += "/";
+		// if (cal.get(Calendar.HOUR) + 1 < 10) {
+		// name = name + "0"
+		// + Integer.valueOf(cal.get(Calendar.HOUR)).toString();
+		// } else {
+		// name = name
+		// + Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
+		// }
+		// name += "/";
+		// if (cal.get(Calendar.MINUTE) < 10) {
+		// name = name + "0"
+		// + Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
+		// } else {
+		// name = name + Integer.valueOf(cal.get(Calendar.MINUTE)).toString();
+		// }
+		// if (cal.get(Calendar.SECOND) < 10) {
+		// name = name + "0"
+		// + Integer.valueOf(cal.get(Calendar.SECOND)).toString();
+		// } else {
+		// name = name + Integer.valueOf(cal.get(Calendar.SECOND)).toString();
+		// }
 
 		return name;
 	}
@@ -642,20 +671,23 @@ public class OpeFunction {
 	}
 
 	public static void main(String[] args) throws IOException,
-			InterruptedException {
-		//System.out.println(calculatingTime("2015-11-01 14:49:00", "2015-12-03 14:49:00"));
-		String str="123456789";
-		String nickname="123456789";
-		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length()));
-		System.out.println(nickname);
-		//System.out.println(getNameDayTime());
+			InterruptedException, ParseException {
+		// // System.out.println(calculatingTime("2015-11-01 14:49:00",
+		// // "2015-12-03 14:49:00"));
+		// String str = "123456789";
+		// String nickname = "123456789";
+		// nickname = nickname.substring(0, (nickname.length() > 20 ? 20
+		// : nickname.length()));
+		// System.out.println(nickname);
+		// System.out.println(getNameDayTime());
+		 System.out.println(setTime("1015-11-23  16:38:54"));
 
 	}
 
 	public static long fromDateStringTLong(String inVal) { // 此方法计算时间毫秒
 		Date date = null; // 定义时间类型
-		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat inputFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss");
 		try {
 			date = inputFormat.parse(inVal); // 将字符型转换成日期型
 		} catch (Exception e) {

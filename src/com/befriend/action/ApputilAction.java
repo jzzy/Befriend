@@ -738,7 +738,11 @@ public class ApputilAction {
 				} else {
 					usersyned = synlogin / 5;
 				}
+				if(usersyned==0){
+					usersyned=1;
+				}
 			} else {
+	
 				usersyned = 0;
 			}
 			if (sta == null) {

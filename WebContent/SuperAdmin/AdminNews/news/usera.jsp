@@ -53,6 +53,7 @@ int bbt=Integer.parseInt(request.getAttribute("bbt").toString());//获取 共有
 int zhzh=Integer.parseInt(request.getAttribute("zhzh").toString());//获取 共有多少用户
 int xdd=Integer.parseInt(request.getAttribute("xdd").toString());//获取 共有多少用户
 int own=Integer.parseInt(request.getAttribute("own").toString());//获取 共有多少用户
+int kux=Integer.parseInt(request.getAttribute("kux").toString());//获取 共有多少用户
 %>
 <CENTER></CENTER>
 <form   style="width: 60%;"  action="">
@@ -82,13 +83,19 @@ int own=Integer.parseInt(request.getAttribute("own").toString());//获取 共有
 <td style="width: 200px;"><%=xdd %></td>
 </tr>
 <tr>
+<td style="width: 200px;">酷校</td>
+<td style="width: 200px;"><%=kux %></td>
+</tr>
+<tr>
 <td style="width: 200px;">家长之友</td>
 <td style="width: 200px;"><%=own %></td>
 </tr>
 <tr>
+
 <td style="width: 200px;">合计</td>
 <td style="width: 200px;"><%=all %></td>
 </tr>
+
 <!--  
 <tr>
 <td>同步群</td>

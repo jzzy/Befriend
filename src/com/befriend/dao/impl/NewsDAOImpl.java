@@ -34,7 +34,7 @@ public class NewsDAOImpl implements NewsDAO {
 	public List<News> Hottest(int num,String time) {
 		// TODO ·ÀÖ¹sql×¢Èë
 		Query query = entityManager.createQuery("select u from News u where u.time<=:time order"
-				+ " by u.collectnum desc,u.reviews desc,u.time desc");
+				+ " by u.hits desc,u.collectnum desc,u.time desc,u.hits desc");
 		query.setParameter("time", time);
 		if (num != 0) {
 			query.setMaxResults(num);
@@ -332,7 +332,7 @@ public class NewsDAOImpl implements NewsDAO {
 		// TODO ·ÀÖ¹sql×¢Èë
 		Query query = entityManager
 				.createQuery("select u from News u where u.time<=:time order"
-						+ " by u.collectnum desc,u.reviews desc,u.time desc");
+						+ " by u.hits desc,u.collectnum desc,u.time desc,u.hits desc");
 		query.setParameter("time", time);
 		int startRow = (currentPage - 1) * pageSize;
 		if (startRow < 0) {
@@ -508,6 +508,30 @@ public class NewsDAOImpl implements NewsDAO {
 		query.setMaxResults(20);
 		
 		return query.getResultList();
+	}
+
+	@Override
+	public int HottimesCountLarge(String time, int num) {
+		Query query = entityManager
+				.createQuery("select Count(u) from News u  where u.time>:time  order"
+						+ " by u.time desc");
+		query.setParameter("time", time);
+		if (num != 0) {
+			query.setMaxResults(num);
+		}
+		return (int)(long)query.getSingleResult();
+	}
+
+	@Override
+	public int HottimesCountSmall(String time,int num) {
+		Query query = entityManager
+				.createQuery("select Count(u) from News u  where u.time<=:time  order"
+						+ " by u.time desc");
+		query.setParameter("time", time);
+		if (num != 0) {
+			query.setMaxResults(num);
+		}
+		return (int)(long)query.getSingleResult();
 	}
 
 }

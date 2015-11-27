@@ -95,7 +95,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	private String city;// 市级
 	private String author;
 	private String time = OpeFunction.getNowTime();
-	 Book book=new Book();
+	Book book = new Book();
 	private List<Book> bookl;
 	private int itype = 0;
 	private String house;
@@ -110,8 +110,9 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		return Action.SUCCESS;
 
 	}
+
 	private int hits;
-	
+
 	public int getHits() {
 		return hits;
 	}
@@ -120,24 +121,31 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		this.hits = hits;
 	}
 
-	public String upAdminNews() throws IOException {
+	public String upAdminNews() throws IOException, ParseException {
 		n = ndao.byid(newsid);
 		if (n != null) {
 			n.setTitle(title);
 			n.setSummary(summary);
 			n.setContent(content1);
-			if(hits>0){
+			if (hits > 0) {
 				n.setHits(hits);
 			}
-			
+
 			if (num > 0) {
 				n.setCollectnum(num);
 			}
-			n.setTime(time);
+			try {
+
+				// 确定时间格式正确
+				n.setTime(OpeFunction.setTime(time));
+			} catch (Exception e) {
+				OpeFunction.Out().print("时间格式错误!");
+				return null;
+			}
 			ndao.Upnews(n);
 
 		}
-		//request.setAttribute("n", n);
+		// request.setAttribute("n", n);
 		return Action.SUCCESS;
 
 	}
@@ -217,7 +225,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 	}
 
-	public void upBookxmls() throws IOException, InvalidFormatException {
+	public void upBookxmls() throws IOException, InvalidFormatException,
+			ParseException {
 		Admin admin = (Admin) session.getAttribute("admin");
 		if (xlsxFile == null || admin == null) {
 			OpeFunction
@@ -272,7 +281,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 						book.setAuthor(author);
 						book.setSummary(summary);
 						book.setReview(review);
-						book.setTime(time);
+
+						book.setTime(OpeFunction.setTime(time));
 						book.setType(itype);
 						book.setHouse(house);
 						book.setAdmin(admin.getAdmin());
@@ -288,7 +298,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 	}
 
-	public String upBook() throws IOException, InvalidFormatException {
+	public String upBook() throws IOException, InvalidFormatException,
+			ParseException {
 		Admin admin = (Admin) session.getAttribute("admin");
 		if (admin != null && title != null && author != null && summary != null
 				&& review != null && itype > 0 && house != null) {
@@ -296,7 +307,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			book.setAuthor(author);
 			book.setSummary(summary);
 			book.setReview(review);
-			book.setTime(time);
+			book.setTime(OpeFunction.setTime(time));
 			book.setType(itype);
 			book.setHouse(house);
 			book.setAdmin(admin.getAdmin());
@@ -1215,7 +1226,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		int n = 0;
 		List<News> l;
 		if (tp == 0) {
-			n = ndao.Hottimes(OpeFunction.getNowTime(), 0).size();
+			n = ndao.HottimesCountLarge(OpeFunction.getNowTime(), 0);
 			if (n % 20 == 0) {
 				n = n / 20;
 			} else {
@@ -1226,7 +1237,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			}
 			l = ndao.Pagination(OpeFunction.getNowTime(), pageSize, currentPage);
 		} else {
-			n = ndao.Hottimes(0, OpeFunction.getNowTime()).size();
+			n = ndao.HottimesCountSmall(OpeFunction.getNowTime(), 0);
+			System.out.println("n=" + n);
 			if (n % 20 == 0) {
 				n = n / 20;
 			} else {
@@ -1236,6 +1248,9 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				currentPage = n;
 			}
 			l = ndao.Pagination(pageSize, currentPage, OpeFunction.getNowTime());
+			for (int i = 0; i < l.size(); i++) {
+				System.out.println("时间:" + l.get(i).getTime());
+			}
 		}
 		request.setAttribute("l", l);
 		request.setAttribute("n", n);
@@ -1741,7 +1756,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				return null;
 			}
 			System.out.println("进入了上传新闻UPtext");
-			savePath = "/IMG/Newsimg/"+OpeFunction.getNameDayTime();
+			savePath = "/IMG/Newsimg/" + OpeFunction.getNameDayTime();
 
 			Admin admin = (Admin) session.getAttribute("admin");
 			if (admin == null) {
@@ -1779,15 +1794,15 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				util.Out().print("小图尺寸为 180*140 请您重新检查下！请您返回重试！");
 				return null;
 			}
-			
-//			if (fimg > 512.00) {
-//				util.Out().print("小图大小为 0.5MB 以下！请您重新检查下！请您返回重试！");
-//				return null;
-//			}
-//			if (fimgmax > 1024.00) {
-//				util.Out().print("大图大小为 1MB 以下！请您重新检查下！请您返回重试！");
-//				return null;
-//			}
+
+			// if (fimg > 512.00) {
+			// util.Out().print("小图大小为 0.5MB 以下！请您重新检查下！请您返回重试！");
+			// return null;
+			// }
+			// if (fimgmax > 1024.00) {
+			// util.Out().print("大图大小为 1MB 以下！请您重新检查下！请您返回重试！");
+			// return null;
+			// }
 			System.out.println("宽" + sourceImg.getWidth());
 			System.out.println("高" + sourceImg.getHeight());
 			System.out.println("是否是专家 0不是 1是 :" + expert);
@@ -1806,8 +1821,15 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			type = (String) request.getParameter("type");
 			types = (String) request.getParameter("types");
 			n.setImgmax(imgmax);
+			try {
 
-			n.setTime(timet);
+				// 确定时间格式正确
+				n.setTime(OpeFunction.setTime(timet));
+			} catch (Exception e) {
+				OpeFunction.Out().print("时间格式错误!");
+				return null;
+			}
+
 			// A不是null就是 八大类 上传 界面
 			if (A != null) {
 

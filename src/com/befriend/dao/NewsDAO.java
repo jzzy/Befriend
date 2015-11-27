@@ -29,6 +29,10 @@ public interface NewsDAO {
 	public List<News> Hottimes(int num,String time);
 	//获取大于当前时间的新闻
 	public List<News> Hottimes(String time,int num);
+	//获取大于当前时间的新闻
+	public int HottimesCountLarge(String time,int num);
+	// 获取小于等于当前时间的新闻
+	public int HottimesCountSmall(String time,int num);
 	// 2 查询num 按照时间排序 不包括 轻松驿站 健康导航 类
 	public List<News> Hottime(int num,String time);
 

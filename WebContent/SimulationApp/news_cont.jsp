@@ -35,13 +35,28 @@ margin-bottom: 15px;
 </style>
 <script type="text/javascript">
 function islogin(){
-	    if(<%=session.getAttribute("u")%>==null){
+	    if(<%=session.getAttribute("u")==null?0:1%>==0){
 	    	<!--跳到登入页-->
 	    	location.href="/Befriend/SimulationApp/login.html";
 	  	       
 	    }
-	  
 }
+function ck(){
+		
+		var rw=document.getElementById("review").value;
+		rw = rw.replace(/\s+/g,"");//去掉所有空格
+		
+		if(!rw){
+			alert("请填写评论内容");
+			return false;
+		}
+		return true;
+ 
+	
+}
+	
+	  
+
 </script>
 
 </head>
@@ -162,7 +177,7 @@ if(n==null){
 	<input type="text" value="<%=n.getId() %>" name="newsid" style="display: none"/>
 	
 	<!-- 获取回复信息 -->
-  <input type="text" id="review" class="shuru"  onclick="islogin()"  name="review" /><input type="submit" onclick="islogin()" class="btijiao" value="评论" />
+  <input type="text" id="review" class="shuru"  onclick="islogin()"  name="review" /><input type="submit" onclick="return ck()" class="btijiao" value="评论" />
 
 	</div>
    

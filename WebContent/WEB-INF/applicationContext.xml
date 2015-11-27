@@ -36,7 +36,7 @@
 			 -->
 		<!--家长之友正式服数据库	
 		
-			
+		
   			
 		
 		
@@ -44,7 +44,7 @@
 			<property name="username" value="root"></property> 
 			<property name="password" value="admin"></property> 
 		
--->
+	-->
 	</bean>
 	
 	

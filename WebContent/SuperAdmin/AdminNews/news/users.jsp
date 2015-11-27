@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>查询用户</title>
+<title>查询统计信息</title>
 </head>
 <body >
 
@@ -22,7 +22,7 @@ Integer bbt=(Integer)request.getAttribute("bbt");
 Integer syn=(Integer)request.getAttribute("syn");
 Integer zhzh=(Integer)request.getAttribute("zhzh");
 Integer xdd=(Integer)request.getAttribute("xdd");
-
+Integer kux=(Integer)request.getAttribute("kux");
 Stas iossta=(Stas)request.getAttribute("iossta");
 Stas androidsta=(Stas)request.getAttribute("androidsta");
 Stas websta=(Stas)request.getAttribute("websta");
@@ -31,6 +31,7 @@ Stas synsta=(Stas)request.getAttribute("synsta");
 Stas wechatsta=(Stas)request.getAttribute("wechatsta");
 Stas zhzhsta=(Stas)request.getAttribute("zhzhsta");
 Stas xddsta=(Stas)request.getAttribute("xddsta");
+Stas kuxsta=(Stas)request.getAttribute("kuxsta");
 %>
 <h2 style="color: blue;">
 <b style="color: red;">2015-07-03开始统计</b><br>
@@ -111,6 +112,21 @@ if(synsta!=null){
 <td width="120"><h4><%=synsta.getPv() %></h4></td>
 <td width="120"><h4><%=synsta.getUv() %></h4></td>
 <td ><h4><%=synsta.getIp() %></h4></td>
+</tr>
+
+<%
+} %>
+<%
+if(kuxsta!=null){
+%>
+<tr style="color:green;">
+<td width="200"><h4>酷校</h4></td>
+<td width="200"><h4><%=syn %></h4></td>
+<td width="120"><h4><%=kuxsta.getUserlogined() %></h4></td>
+<td width="190"><h4><%=kuxsta.getUsersyned() %></h4></td>
+<td width="120"><h4><%=kuxsta.getPv() %></h4></td>
+<td width="120"><h4><%=kuxsta.getUv() %></h4></td>
+<td ><h4><%=kuxsta.getIp() %></h4></td>
 </tr>
 
 <%
@@ -200,7 +216,8 @@ if(wechatsta!=null){
 </tr>
 
 <%
-} %>
+} 
+%>
 
 
 </table>
@@ -273,7 +290,48 @@ if(synsta!=null){
 <%
 } 
 %>
+<%
+if(zhzhsta!=null){
+%>
+<tr style="color:green;">
+<td width="200"><h4>电信 翼校通</h4></td>
+<td><h4><%=zhzhsta.getHome1() %></h4></td>
+<td><h4><%=zhzhsta.getHome2() %></h4></td>
+<td ><h4><%=zhzhsta.getHome3()  %></h4></td>
+<td ><h4><%=zhzhsta.getHome31()  %></h4></td>
+<td ><h4><%=zhzhsta.getHome32()  %></h4></td>
+<td><h4><%=zhzhsta.getHome33()  %></h4></td>
+<td ><h4><%=zhzhsta.getHome34()  %></h4></td>
+<td ><h4><%=zhzhsta.getHome331()  %></h4></td>
+<td><h4><%=zhzhsta.getHome332()  %></h4></td>
+<td ><h4><%=zhzhsta.getHome333()  %></h4></td>
+<td ><h4><%=zhzhsta.getHome334()  %></h4></td>
+</tr>
 
+<%
+} 
+%>
+<%
+if(xddsta!=null){
+%>
+<tr style="color:green;">
+<td width="200"><h4>学多多</h4></td>
+<td><h4><%=xddsta.getHome1() %></h4></td>
+<td><h4><%=xddsta.getHome2() %></h4></td>
+<td ><h4><%=xddsta.getHome3()  %></h4></td>
+<td ><h4><%=xddsta.getHome31()  %></h4></td>
+<td ><h4><%=xddsta.getHome32()  %></h4></td>
+<td><h4><%=xddsta.getHome33()  %></h4></td>
+<td ><h4><%=xddsta.getHome34()  %></h4></td>
+<td ><h4><%=xddsta.getHome331()  %></h4></td>
+<td><h4><%=xddsta.getHome332()  %></h4></td>
+<td ><h4><%=xddsta.getHome333()  %></h4></td>
+<td ><h4><%=xddsta.getHome334()  %></h4></td>
+</tr>
+
+<%
+} 
+%>
 
 <tr style="color: blue;">
 <td width="200"><h4>家长之友</h4></td>

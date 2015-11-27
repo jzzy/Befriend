@@ -7,7 +7,7 @@
 		<action name="source" class="userAction" >		
 			<result type="plainText">
 				<param name="charSet">utf-8</param>
-				<param name="location">/index.jsp</param>
+				<param name="location">SuperAdmin/index.jsp</param>
 			</result>
 		</action>
 		
@@ -30,15 +30,11 @@
 		<action name="synSave" class="userAction" method="synSave">
 		</action>	
 		
-			
-		
-		
 		<!-- 查看统计信息 -->
 		<action name="ViewStatistics" class="userAction" method="ViewStatistics">
 		<result name="success">/SuperAdmin/AdminNews/Statis/ViewStatistics.jsp</result>
 		</action>
-		
-		
+				
 		<!-- sha1 -->
 		<action name="sha1" class="userAction" method="sha1">
 		</action>
