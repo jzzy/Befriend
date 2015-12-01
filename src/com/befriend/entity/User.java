@@ -32,6 +32,7 @@ public class User implements Serializable
 	public static final String XDD="xdd";// 学多多
 	public static final String KUX="kux";// 酷校
 	public static final String HCOM="hcom";// 恒谦教育
+	public static final String KDCOM="kdcom";// 阔地教育
 	public static final String OWN="own";// 家长之友
 	
 	//家长之友内部分类
