@@ -38,8 +38,11 @@ function onk(){
 </head>
 <body style="background: #adc" >
 <div>
+<%
+Object c=request.getAttribute("content");
+%>
 <input style="width: 100px;height: 55px;" type="button" onclick="onk()" value="搜索">
-<input id="inp123" style="width: 200px;height: 50px;" type="text" >
+<input id="inp123" style="width: 200px;height: 50px;" value="<%=c==null?"":c.toString() %>" type="text" >
 <a href="getAllCommments">显示全部</a>
 </div>
 <div>
@@ -48,15 +51,19 @@ function onk(){
 <tr>
 <td style="width: 200px;height: 50px;">评论内容</td>
 <td style="width: 200px;height: 50px;">评论时间</td>
+<td style="width: 200px;height: 50px;">教辅机构</td>
 <td style="width: 100px;height: 50px;">操作</td>
 </tr>
 
 <%
 int currentPage=Integer.parseInt(request.getAttribute("currentPage").toString());
 List<EduComment> el=new ArrayList<EduComment>();
+List<EduServices> edusl=new ArrayList<EduServices>();
 Object obj=request.getAttribute("el");
-if(obj!=null){
+Object objl=request.getAttribute("edusl");
+if(obj!=null&&objl!=null){
 el=(List)obj;
+edusl=(List)objl;
 }
 int pageSize=Integer.parseInt(request.getAttribute("pageSize").toString());
 
@@ -68,7 +75,20 @@ for(int i=0;i<el.size();i++){
 <td><textarea style="width: 200px;height: 50px;" readonly="readonly"><%=el.get(i).getContent() %></textarea>
 </td>
 <td ><%=el.get(i).getTime()%></td>
+<td ><%=edusl.get(i)==null?"无":edusl.get(i).getName()%></td>
+<%
+if(c==null){
+%>
 <td><a href="deleteCommment?replyId=<%=el.get(i).getId() %>" onclick="return ck()" >删除</a></td>
+<%
+}else{
+%>
+
+<td><a href="deleteCommment?replyId=<%=el.get(i).getId() %>&content=<%=c %>" onclick="return ck()" >删除</a></td>
+
+<%
+}
+%>
 </tr>
 
 
@@ -91,7 +111,7 @@ for(int i=0;i<el.size();i++){
 		}
 		%>
 		<%
-		System.out.print(obj);
+		//System.out.print(obj);
 		if(obj!=null){
 		%>
 		<a href="getAllCommments?currentPage=<%=currentPage+1%>">下一页</a>

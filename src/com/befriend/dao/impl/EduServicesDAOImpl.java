@@ -106,4 +106,16 @@ public class EduServicesDAOImpl implements EduServicesDAO
 		return (int)(long)query.getSingleResult();
 	}
 
+	@Override
+	public EduServices find(String id) {
+		String sql = "select u from EduServices u where u.merchantId=:merchantId";
+		Query query = entityManger.createQuery(sql);
+		query.setMaxResults(1);
+		query.setParameter("merchantId", id);
+		List<EduServices> edusl=query.getResultList();
+		if(edusl.size()>0)
+			return edusl.get(0);
+		return null;
+	}
+
 }

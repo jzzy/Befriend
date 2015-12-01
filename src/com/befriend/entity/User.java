@@ -1,6 +1,6 @@
 package com.befriend.entity;
 import java.io.Serializable;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 
 import com.google.gson.annotations.Expose;
@@ -30,7 +31,7 @@ public class User implements Serializable
 	public static final String ZHZH="zhzh";//翼校通 电信	
 	public static final String XDD="xdd";// 学多多
 	public static final String KUX="kux";// 酷校
-	
+	public static final String HCOM="hcom";// 恒谦教育
 	public static final String OWN="own";// 家长之友
 	
 	//家长之友内部分类

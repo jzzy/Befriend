@@ -67,12 +67,12 @@ public class WechatAction {
 			util.Out().print(false);
 		}
 		
-		/**
-		CloseableHttpClient client = HttpClients.createDefault();
-		HttpGet Get = new HttpGet("http://targethost/homepage");
-		CloseableHttpResponse cresp=client.execute();
-		int sen=resp.getStatus()
-		*/
+		
+//		CloseableHttpClient client = HttpClients.createDefault();
+//		HttpGet Get = new HttpGet("http://targethost/homepage");
+//		CloseableHttpResponse cresp=client.execute();
+//		int sen=resp.getStatus();
+		
 		
 		   
 	

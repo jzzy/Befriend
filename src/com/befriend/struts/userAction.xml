@@ -11,6 +11,9 @@
 			</result>
 		</action>
 		
+		<!-- 同步用户 恒谦教育 登入 -->
+		<action name="thirdPartyHqSave" class="userAction" method="thirdPartyHqSave">
+		</action>
 		<!-- 同步用户 酷校 登入 -->
 		<action name="kuxSave" class="userAction" method="kuxSave">
 		</action>

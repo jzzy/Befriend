@@ -15,16 +15,22 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.befriend.dao.EduActivityDAO;
 import com.befriend.dao.EduCommentDAO;
+import com.befriend.dao.EduServicesDAO;
 import com.befriend.dao.UserDAO;
+import com.befriend.entity.EduActivity;
 import com.befriend.entity.EduComment;
+import com.befriend.entity.EduServices;
 import com.befriend.entity.User;
 import com.befriend.util.JsonUtil;
 import com.befriend.util.OpeFunction;
 import com.opensymphony.xwork2.Action;
 
 public class EduCommentAction implements ServletRequestAware {
+	
 	private EduCommentDAO eduCommentDAO;
+	private EduServicesDAO eduServicesDAO;
 	private UserDAO userDAO;
 	private HttpServletResponse response;
 	private HttpServletRequest request;
@@ -38,32 +44,53 @@ public class EduCommentAction implements ServletRequestAware {
 	private File[] pictures;
 	private String[] picturesFileName;
 	private String[] picturesContentType;
-
+	
 	private int currentPage = 1;
 	private int pageSize = 10;
-
+	
+	
+	List<EduActivity> eaal=new ArrayList<EduActivity>();
+	List<EduServices> edusl=new ArrayList<EduServices>();
+	List<EduComment> educl=new ArrayList<EduComment>();
 	public String getLikeCommment() {
+		pageSize=100;
 		if (!OpeFunction.isEmpty(content)) {
-			request.setAttribute("el",
-					eduCommentDAO.likeFind(content, currentPage, pageSize));
+			educl=eduCommentDAO.likeFind(content, currentPage, pageSize);
+			request.setAttribute("el",educl);
+			for (EduComment eduComment : educl) {
+				edusl.add(eduServicesDAO.find(eduComment.getMerchantId()));
+			}
+			request.setAttribute("edusl", edusl);
 		}
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("content", content);
 		return Action.SUCCESS;
 	}
 
 	public String getAllCommments() {
-		List<EduComment> el = eduCommentDAO.find(currentPage, pageSize);
-		request.setAttribute("el", el.size() > 0 ? el : null);
+		
+		educl = eduCommentDAO.find(currentPage, pageSize);
+		for (EduComment eduComment : educl) {
+			edusl.add(eduServicesDAO.find(eduComment.getMerchantId()));
+		}
+		request.setAttribute("edusl", edusl);
+		request.setAttribute("el", educl.size() > 0 ? educl : null);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageSize", pageSize);
+		
 		return Action.SUCCESS;
 	}
 
-	public String deleteCommment() {
+	public String deleteCommment() throws IOException {
 		EduComment Ed = eduCommentDAO.find(Integer.valueOf(replyId));
 		if (Ed != null) {
 			eduCommentDAO.delete(Ed);
+		}
+		if(content!=null){
+			((HttpServletResponse) OpeFunction.response()).sendRedirect(request
+					.getContextPath() + "/getLikeCommment?content="+content);
+			return null;
 		}
 		return Action.SUCCESS;
 	}
@@ -198,11 +225,15 @@ public class EduCommentAction implements ServletRequestAware {
 		response.getWriter().println(result);
 	}
 
-	public EduCommentAction(EduCommentDAO eduCommentDAO, UserDAO userDAO) {
+	public EduCommentAction(EduCommentDAO eduCommentDAO,EduServicesDAO eduServicesDAO,
+			UserDAO userDAO) {
 		super();
 		this.eduCommentDAO = eduCommentDAO;
+		this.eduServicesDAO = eduServicesDAO;
 		this.userDAO = userDAO;
 	}
+
+
 
 	public String getMerchantId() {
 		return merchantId;

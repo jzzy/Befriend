@@ -11,19 +11,21 @@
 
 <script type="text/javascript" src="/Befriend/Jquery/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" >
+
 function ck()
 {
  if(confirm("确定"))
  {
 	  
-  return true;
+  		return true;
   
   
+ }else{
+		return false;
  }
- else{
-	   return false;
- }
+ 
 }
+
 function fk(){
 	//alert("开始刷新");
 	$.ajax({

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>贴心服务</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			text-decoration: none;
+		}
+		.intimate_service {
+			width: auto;
+			margin: 30px;
+		}
+		.intimate_service li {
+			list-style: none;
+			padding: 12px;
+			border-bottom: 2px solid #efefef;
+			background: url(images/img-2.png) no-repeat center right;
+		}
+		.intimate_service li:hover {
+			cursor: pointer;
+		}
+		.intimate_service li a {
+			color: #1c1c1c;
+			font-weight: bold;
+		}
+		.intimate_service li span{
+			padding-left: 15px;
+		}
+		.intimate_service img {
+			vertical-align: middle;
+		}
+     </style>
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>贴心服务</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script  src="js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="js/style.js"></script>
+<script  src="js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action?id=3"
+	});
+});
+</script>
+
+</head>
+<body>
+<div  class="top">
+       <a href="<%=request.getContextPath()%>/webNewsA10" class="fl"><img src="images/xw_03.png" height="40" /></a>
+      <p class="set fr"><a href="about.html"></a><a href="about.html"><img src="images/xw_07.png" height="40" /></a></p>
+         </div>
+   <!--top-->
+   <ul class="nav">
+      <li><a href="<%=request.getContextPath()%>/webNewsA10">今日必读</a></li>
+      <li><a href="<%=request.getContextPath()%>/webForumApptype">社区互动</a></li>
+      <li class="current"><a href="<%=request.getContextPath()%>/webGetapp">贴心服务</a></li>
+      <li><a href="personal_information.jsp">我的信息</a></li>
+   </ul>
+	<ul class="intimate_service">
+		<li>
+			<a href="javascript:void(0)">
+				<img src="images/img-1.png">	
+				<span>家长来搞</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0)">
+				<img src="images/img-3.png">	
+				<span>搜学区房</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0)">
+				<img src="images/img-4.png">	
+				<span>教育部推荐用书</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0)">
+				<img src="images/img-5.png">	
+				<span>意见反馈</span>
+			</a>
+		</li>
+	</ul>
+</body>
+</html>
