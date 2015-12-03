@@ -721,11 +721,15 @@ public class ApputilAction {
 		l.add(User.SYN);
 		l.add(User.BBT);
 		l.add(User.WECHAT);
+		
 		l.add(User.ZHZH);
 		l.add(User.XDD);
+		
 		l.add(User.KUX);
+		
 		l.add(User.HCOM);
 		l.add(User.KDCOM);
+		
 		province = User.ALL;
 		for (int i = 0; i < l.size(); i++) {
 			System.out.println("look aStas:" + l.get(i));
@@ -755,6 +759,7 @@ public class ApputilAction {
 					sta.setDownloaded(1);
 				} else {
 					sta.setDownloaded(0);
+					
 				}
 				sta.setOs(l.get(i));
 				if(usersyned>sta.getUsersyned()){

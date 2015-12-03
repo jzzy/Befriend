@@ -95,6 +95,10 @@ public class UserAction extends ActionSupport {
 	private final String URL = "https://a1.easemob.com/topLong/wcfriend/users";
 	private Password pd = new Password();
 
+	private String userName;// 对应nickname
+	private String userPhone;// phone
+	private String userId;// username
+
 	/**
 	 * 查看统计信息
 	 * 
@@ -267,8 +271,8 @@ public class UserAction extends ActionSupport {
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	public synchronized void huanxinzc() throws JSONException, InterruptedException,
-			IOException {
+	public synchronized void huanxinzc() throws JSONException,
+			InterruptedException, IOException {
 
 		System.out.println("进入huanxinzc");
 		Admin admin = (Admin) session.getAttribute("admin");
@@ -1604,7 +1608,7 @@ public class UserAction extends ActionSupport {
 			session.setAttribute("u", u);
 			((HttpServletResponse) util.response()).sendRedirect(request
 					.getContextPath() + "/webNewsA10");
-			
+
 		}
 
 	}
@@ -2145,9 +2149,6 @@ public class UserAction extends ActionSupport {
 	 * @throws JSONException
 	 * @throws NoSuchAlgorithmException
 	 */
-	private String userName;// 对应nickname
-	private String userPhone;// phone
-	private String userId;// username
 
 	public void zHzhSave() throws IOException, JSONException {
 		nickname = userName;
@@ -2185,10 +2186,10 @@ public class UserAction extends ActionSupport {
 		}
 		if (nickname == null) {
 			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length() ));
+					: username.length()));
 		}
 		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length() ));
+				: nickname.length()));
 		synchronized (this) {
 
 			u = new User();
@@ -2273,16 +2274,17 @@ public class UserAction extends ActionSupport {
 			System.out.println("转发走了");
 		}
 	}
+
 	public void thirdPartyHqSave() throws IOException, JSONException {
-//		nickname = userName;
-//		username = userId;
-//		phone = userPhone;
+		// nickname = userName;
+		// username = userId;
+		// phone = userPhone;
 		if (OpeFunction.isEmpty(username)) {
 			((HttpServletResponse) util.response()).sendRedirect(request
 					.getContextPath() + "/webNewsA10");
 			return;
 		}
-		os=User.HCOM;
+		os = User.HCOM;
 		username = os + username;
 
 		u = userdao.byUsernameAccnumnoPhone(username);
@@ -2310,10 +2312,10 @@ public class UserAction extends ActionSupport {
 		}
 		if (nickname == null) {
 			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length() ));
+					: username.length()));
 		}
 		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length() ));
+				: nickname.length()));
 		synchronized (this) {
 
 			u = new User();
@@ -2398,20 +2400,21 @@ public class UserAction extends ActionSupport {
 			System.out.println("转发走了");
 		}
 	}
+
 	public void thirdPartyKdSave() throws IOException, JSONException {
-		//kdSave
-//		nickname = userName;
-//		username = userId;
-//		phone = userPhone;
+		// kdSave
+		// nickname = userName;
+		// username = userId;
+		// phone = userPhone;
 		if (OpeFunction.isEmpty(username)) {
 			((HttpServletResponse) util.response()).sendRedirect(request
 					.getContextPath() + "/webNewsA10");
 			return;
 		}
-		
-		os=User.KDCOM;
-		
-		username =os  + username;
+
+		os = User.KDCOM;
+
+		username = os + username;
 
 		u = userdao.byUsernameAccnumnoPhone(username);
 		if (u != null) {
@@ -2438,10 +2441,10 @@ public class UserAction extends ActionSupport {
 		}
 		if (nickname == null) {
 			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length() ));
+					: username.length()));
 		}
 		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length() ));
+				: nickname.length()));
 		synchronized (this) {
 
 			u = new User();
@@ -2465,10 +2468,10 @@ public class UserAction extends ActionSupport {
 
 			u.setUsername(username);
 			u.setNickname(nickname);// 没有设置过显示用户名
-			
+
 			u.setCome(os);
 			u.setOs(os);
-			
+
 			u.setAccnumno(accnumno);
 			u.setStage("未填写");
 			if (!util.isEmpty(address)) {
@@ -2510,6 +2513,7 @@ public class UserAction extends ActionSupport {
 			pd.setUid(u.getId());
 			pd.setPassword("123456");
 			userdao.save(pd);
+
 			JSONObject json = new JSONObject();
 			json.put("username", u.getId());
 			// 用户id
@@ -2528,7 +2532,6 @@ public class UserAction extends ActionSupport {
 			System.out.println("转发走了");
 		}
 	}
-
 
 	public void xddSave() throws IOException, JSONException {
 		// nickname=userName;
@@ -2668,7 +2671,7 @@ public class UserAction extends ActionSupport {
 		username = "kcom" + username;
 
 		u = userdao.byUsernameAccnumnoPhone(username);
-	
+
 		if (u != null) {
 			System.out.println("ok");
 
@@ -2693,7 +2696,7 @@ public class UserAction extends ActionSupport {
 		}
 		if (nickname == null) {
 			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length() ));
+					: username.length()));
 		}
 		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
 				: nickname.length()));
@@ -3513,7 +3516,7 @@ public class UserAction extends ActionSupport {
 		int zhzh = userdao.getCount(User.ZHZH);// 同步的用户数量
 		int xdd = userdao.getCount(User.XDD);// 同步的用户数量
 		int own = userdao.getCount(User.OWN);// 同步的用户数量
-		int kux= userdao.getCount(User.KUX);// 同步的用户数量
+		int kux = userdao.getCount(User.KUX);// 同步的用户数量
 		List<User> ul = userdao.getOnline();// 查询在线用户
 		int all = competence2;
 		System.out.println("用户数量" + competence2);

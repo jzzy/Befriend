@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import com.befriend.Thread.StasTime;
 import com.befriend.Thread.TCPThread;
 import com.befriend.config.ServerConfig;
+import com.befriend.wechat.RefreshAccessToken;
 
 /**
  * Application Lifecycle Listener implementation class InitListener
@@ -33,7 +34,7 @@ public class InitListener implements ServletContextListener
 	public void contextInitialized(ServletContextEvent event)
 	{
 		//启动  定时任务
-		new Thread(new StasTime()).start();
+		new StasTime(3600);
 		System.out.println("日志启动了");
 		ServerConfig.getServerConfig().initialize(event);
 		logger.debug(ServerConfig.getServerConfig().getRealPath() + "\n"

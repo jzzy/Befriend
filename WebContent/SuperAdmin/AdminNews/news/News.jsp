@@ -39,6 +39,22 @@ function cka()
    }
   
   }
+  
+  function textck(){
+		
+		var rw=document.getElementById("txt").value;
+		rw = rw.replace(/\s+/g,"");//去掉所有空格
+		
+		if(!rw){
+			alert("请填写评论内容");
+			return false;
+		}
+		return true;
+
+	
+}
+  
+  
   function k(picForm){
 	  
 	  if(confirm("确定要修改新闻么？ 该功能尚未推出！请稍后"))
@@ -70,7 +86,7 @@ function cka()
 
 <form  action="searchNews" method="post">
 <input id="txt" type="text" name="title"/>
-<input type="submit" style="width: 100px;height: 25px;" value="搜索"/>
+<input type="submit" style="width: 100px;height: 25px;" value="搜索" onclick="return textck()"/>
 </form>
 
 <table>

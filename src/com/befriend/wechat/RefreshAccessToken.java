@@ -3,17 +3,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 import org.json.JSONObject;
 import com.befriend.util.OpeFunction;
-
+@SuppressWarnings("all")
 public class RefreshAccessToken {
 	public static String access_token =null;
-	public static int Second=0;
+	//public static int Second=0;
 	public final static  String url = "https://a1.easemob.com/topLong/wcfriend/token";
 	public RefreshAccessToken(int second) {
-		Second=second;
 		//
 		Timer timer = new Timer();
 		// 执行类 延迟时间(毫秒) 每隔多久 秒*1000(毫秒)
-		timer.schedule(new RefreshAccessTokenTask(), 0, Second * 1000);
+		timer.schedule(new RefreshAccessTokenTask(), 0, second * 1000);
 
 	}
 
@@ -25,7 +24,7 @@ public class RefreshAccessToken {
 			// 微信
 			// url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+WechatAction.APPID+"&secret="+WechatAction.APPSECRET;
 			// 环信
-			
+
 			try {
 				
 				// 封装个json  获取token的
@@ -61,7 +60,7 @@ public class RefreshAccessToken {
 				
 			}
 			
-			System.out.println("每个"+Second+"s执行" + OpeFunction.getNowTime());
+		//	System.out.println("每个"+Second+"s执行" + OpeFunction.getNowTime());
 
 		}
 
