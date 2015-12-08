@@ -1,6 +1,5 @@
 package com.befriend.entity;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -33,7 +32,10 @@ public class User implements Serializable
 	public static final String KUX="kux";// 酷校
 	public static final String HCOM="hcom";// 恒谦教育
 	public static final String KDCOM="kdcom";// 阔地教育
+	public static final String YGCOM="ygcom";//亿谷
+	
 	public static final String OWN="own";// 家长之友
+	
 	
 	//家长之友内部分类
 	public static final String WEB="web";//网页

@@ -14,8 +14,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
-
-import com.befriend.dao.EduActivityDAO;
 import com.befriend.dao.EduCommentDAO;
 import com.befriend.dao.EduServicesDAO;
 import com.befriend.dao.UserDAO;

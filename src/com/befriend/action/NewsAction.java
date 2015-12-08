@@ -1363,14 +1363,19 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			System.out.println("百度定位 :" + pro);
 			if (pro != null) {
 				area = pro.toString();
+				province=area;
 			}
 			if (u != null) {
 
-				System.out.println("获取到用户信息了");
-
+				System.out.println("获取到用户信息了"+ u.getAddress());
+				if( u.getAddress()!=null){
 				area = u.getAddress();
-				// 市级
-				areas = u.getAddcity();
+				}
+				if(area==null){
+					((HttpServletResponse) util.response()).sendRedirect(request
+							.getContextPath() + "/SimulationApp/baidugps.html");
+				}
+			
 			} else if (pro == null) {
 
 				((HttpServletResponse) util.response()).sendRedirect(request

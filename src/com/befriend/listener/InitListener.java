@@ -7,9 +7,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.befriend.Thread.StasTime;
-import com.befriend.Thread.TCPThread;
 import com.befriend.config.ServerConfig;
-import com.befriend.wechat.RefreshAccessToken;
+
 
 /**
  * Application Lifecycle Listener implementation class InitListener

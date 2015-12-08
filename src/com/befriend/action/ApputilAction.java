@@ -729,6 +729,7 @@ public class ApputilAction {
 		
 		l.add(User.HCOM);
 		l.add(User.KDCOM);
+		l.add(User.YGCOM);
 		
 		province = User.ALL;
 		for (int i = 0; i < l.size(); i++) {
@@ -754,7 +755,7 @@ public class ApputilAction {
 			if (sta == null) {
 				sta = new Stas();
 				sta.setProvince(province);
-				sta.setTime(time);
+				sta.setTime(time);				
 				if (downloaded != 0 && l.get(i).equals(os)) {
 					sta.setDownloaded(1);
 				} else {
