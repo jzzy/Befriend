@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>教辅机构</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="cont">
+	<form action="">
+		<div id="header">
+			<div class="topArea clearfix">
+				<div class="prev">
+					<a href="#" onclick="javascript:history.back(-1);"></a>
+				</div>
+				<h1>写点评</h1>
+				<div class="topTool writeBtn">
+					<a href="#">发送</a>
+				</div>
+			</div>
+		</div>
+		<div id="container">
+			<div class="comment">
+				<div class="rate clearfix">
+					<h2>总体</h2>
+					<ul class="clearfix">
+						<li><img src="images/commentstar_on.png" alt="star" /></li>
+						<li><img src="images/commentstar_on.png" alt="star" /></li>
+						<li><img src="images/commentstar_on.png" alt="star" /></li>
+						<li><img src="images/commentstar_on.png" alt="star" /></li>
+						<li><img src="images/commentstar_off.png" alt="star" /></li>
+					</ul>
+				</div>
+				<div class="write">
+					<p class="textarea">
+						<textarea cols="50" rows="15" id="textarea">亲，课程怎么样，老师好不好，环境如何，学习效果满意吗？</textarea>
+					</p>
+					<p class="info">加油，还差<span>50</span>字！</p>
+				</div>
+				<div class="attach">
+					<p class="info">最多可以提交9张图片(点击删除已选图片)</p>
+					<ul class="attachArea clearfix">
+						<li><img src="images/uploadfile.gif" alt="attachbtn" /></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+   <!--userlist-->
+   </form>
+</div>
+<!--cont-->
+
+<script type="text/javascript">
+$(function(){
+	var textarea = $("#textarea");
+	var no = $(".write .info span");
+
+	textarea.focusin(function(){
+	  // alert(a);
+	  if($(this).text() !== "亲，课程怎么样，老师好不好，环境如何，学习效果满意吗？"){
+		return false;
+	  }else{
+		$(this).text("");
+	  }
+	});
+	textarea.focusout(function(){
+	  if($(this).text() == ""){
+		$(this).text("亲，课程怎么样，老师好不好，环境如何，学习效果满意吗？");
+	  }
+	});
+	textarea.keyup(function(){
+		var cheNo= $(this).val().length
+		if( cheNo > 50){
+			no.text("0");
+		}else if( cheNo < 50){
+			no.text( 50 - cheNo);
+		}
+	});
+});
+
+
+</script>
+ 
+ 
+</body>
+</html>

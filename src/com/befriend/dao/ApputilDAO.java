@@ -41,7 +41,7 @@ public interface ApputilDAO {
 	public List<Feedback> FeedbackAll();
 
 	// 通过 路径查询 App
-	public AppUp select(String Path);
+	public AppUp select();
 
 	// 通过 id查询 App
 	public AppUp appbyid(int id);

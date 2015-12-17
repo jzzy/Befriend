@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -114,7 +116,10 @@ public class ApputilAction {
 	private String img;
 	private String title;
 	HttpSession session = ServletActionContext.getRequest().getSession();
-
+	//private final static String IP="http://123.56.45.164/";//测试服
+	private final static String IP="http://182.92.100.235/";//正式服
+	//private final static String IP="http://192.168.1.240/";//本地
+	
 	public void RemoveParentsLetterone() throws IOException {
 		ParentsLetter p = audao.Plbyid(id);
 		if (p != null) {
@@ -575,7 +580,7 @@ public class ApputilAction {
 			}
 		}
 		System.out.println("进入statisticsPVIP" + util.getNowTime() + "用户来自:"
-				+ u.getOs() + "id来自:" + id);
+				+ u.getOs() + " id来自:" + id+" ip是:"+ip);
 
 		SetIp sp = audao.byTimeIp(time, ip, u.getOs());
 		if (sp == null) {
@@ -829,9 +834,9 @@ public class ApputilAction {
 	}
 
 	public void JztdAppm() throws IOException {
-		au = audao
-				.select("http://182.92.100.235/Befriend/AppUp/FamilyGroup.apk");
-		if (au != null) {
+		
+		au = audao.select();
+		if (au != null&&apptv>0&&!OpeFunction.isEmpty(updates)) {
 			System.out.println(apptv);
 			System.out.println(updates);
 			au.setApptv(apptv);
@@ -853,33 +858,32 @@ public class ApputilAction {
 		try {
 
 			if (appFile == null) {
-				OpeFunction.Out().print("FamilyGroup.apk涓簄ull");
+				OpeFunction.Out().print("FamilyGroup.apk==null");
 				return;
 			}
 			if (!appFileFileName.equals("FamilyGroup.apk")) {
-				OpeFunction.Out().print("閿熸枻鎷烽敓琛楁唻鎷烽敓鏂ゆ嫹涓�'FamilyGroup.apk'");
+				OpeFunction.Out().print("!FamilyGroup.apk");
 				return;
 			}
 			System.out.println(appFileFileName);
-			au = audao
-					.select("http://182.92.100.235/Befriend/AppUp/FamilyGroup.apk");
+			au = audao.select();
 			Boolean b = false;
 
 			if (au != null) {
 				File file1 = new File(ServletActionContext.getServletContext()
 						.getRealPath("/AppUp/FamilyGroup.apk"));
 				b = file1.delete();
-				audao.Remove(au);
+			//	audao.Remove(au);
 			}
 
 			savePath = "AppUp";
 			AppUp ap = new AppUp();
 
-			String upth = "http://182.92.100.235/Befriend/"
+			String upth =IP+"Befriend/"
 					+ OpeFunction.fileToServer(savePath, appFile,
 							appFileFileName, appFileContentType, false);
 
-			savePath = "AppUp/Past";
+			savePath = "AppUp/Past/"+OpeFunction.getNameDayTime();
 			OpeFunction.fileToServer(savePath, appFile, appFileFileName,
 					appFileContentType, true);
 			ap.setApptv(downloads);
@@ -983,7 +987,7 @@ public class ApputilAction {
 			WechatKit.sendGet(url);
 
 			((HttpServletResponse) util.response())
-					.sendRedirect("http://182.92.100.235/Befriend/AppUp/FamilyGroup.apk");
+					.sendRedirect("http://"+OpeFunction.getLIP()+"/Befriend/AppUp/FamilyGroup.apk");
 
 		}
 

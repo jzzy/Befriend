@@ -50,7 +50,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
-
 import org.bouncycastle.asn1.cms.Time;
 
 import com.befriend.email.MailSenderInfo;
@@ -672,15 +671,16 @@ public class OpeFunction {
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException, ParseException {
-		// // System.out.println(calculatingTime("2015-11-01 14:49:00",
-		// // "2015-12-03 14:49:00"));
-		// String str = "123456789";
-		// String nickname = "123456789";
-		// nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-		// : nickname.length()));
-		// System.out.println(nickname);
-		// System.out.println(getNameDayTime());
-		 System.out.println(setTime("1015-11-23  16:38:54"));
+//		  System.out.println(calculatingTime("2015-11-01 14:49:00",
+//		  "2015-12-03 14:49:00"));
+//		 String str = "123456789";
+//		 String nickname = "123456789";
+//		 nickname = nickname.substring(0, (nickname.length() > 20 ? 20
+//		 : nickname.length()));
+//		 System.out.println(nickname);
+//		 System.out.println(getNameDayTime());
+//		 System.out.println(setTime("1015-11-23  16:38:54"));
+		
 
 	}
 

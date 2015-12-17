@@ -56,7 +56,7 @@ public class EduCommentAction implements ServletRequestAware {
 			educl=eduCommentDAO.likeFind(content, currentPage, pageSize);
 			request.setAttribute("el",educl);
 			for (EduComment eduComment : educl) {
-				edusl.add(eduServicesDAO.find(eduComment.getMerchantId()));
+				edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(eduComment.getMerchantId())));
 			}
 			request.setAttribute("edusl", edusl);
 		}
@@ -70,7 +70,7 @@ public class EduCommentAction implements ServletRequestAware {
 		
 		educl = eduCommentDAO.find(currentPage, pageSize);
 		for (EduComment eduComment : educl) {
-			edusl.add(eduServicesDAO.find(eduComment.getMerchantId()));
+			edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(eduComment.getMerchantId())));
 		}
 		request.setAttribute("edusl", edusl);
 		request.setAttribute("el", educl.size() > 0 ? educl : null);

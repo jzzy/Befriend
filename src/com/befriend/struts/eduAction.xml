@@ -4,9 +4,15 @@
 <struts>
 	<package name="edu" extends="struts-default" >
 	    <action name="getEdu" class="eduAction" method="getEdu"></action>
-	    <action name="saveAttention" class="eduAction" method="saveAttention"></action>
-	    <action name="removeAttention" class="eduAction" method="removeAttention"></action>
-	    <action name="userLookAttention" class="eduAction" method="userLookAttention"></action>
+	    
+	    <action name="getEduWeb" class="eduAction" method="getEduWeb">
+   
+	    <result name="success"> /SimulationApp/lihu/jsp/eduserv.jsp</result>
+	    </action>
+	   
+	    <action name="saveEduAttention" class="eduAction" method="saveEduAttention"></action>
+	    <action name="removeEduAttention" class="eduAction" method="removeEduAttention"></action>
+	    <action name="userLookEduAttention" class="eduAction" method="userLookEduAttention"></action>
 	    
 	    
 	</package>

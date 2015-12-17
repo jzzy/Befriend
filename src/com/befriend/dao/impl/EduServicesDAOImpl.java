@@ -107,11 +107,11 @@ public class EduServicesDAOImpl implements EduServicesDAO
 	}
 
 	@Override
-	public EduServices find(String id) {
+	public EduServices findMerchantId(int merchantId) {
 		String sql = "select u from EduServices u where u.merchantId=:merchantId";
 		Query query = entityManger.createQuery(sql);
 		query.setMaxResults(1);
-		query.setParameter("merchantId", id);
+		query.setParameter("merchantId", merchantId);
 		List<EduServices> edusl=query.getResultList();
 		if(edusl.size()>0)
 			return edusl.get(0);

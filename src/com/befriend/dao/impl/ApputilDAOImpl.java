@@ -57,11 +57,11 @@ public class ApputilDAOImpl implements ApputilDAO {
 	}
 
 	@Override
-	public AppUp select(String Path) {
+	public AppUp select() {
 		Query query = entityManager
-				.createQuery("select u from AppUp u where u.path=:Path");
-		// query.setMaxResults(1);
-		query.setParameter("Path", Path);
+				.createQuery("select u from AppUp u  order"
+				+ " by u.time desc");
+		query.setMaxResults(1);
 		@SuppressWarnings("unchecked")
 		List<AppUp> AppUp = query.getResultList();
 		if (AppUp.size() > 0)

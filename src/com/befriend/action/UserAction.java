@@ -50,11 +50,11 @@ public class UserAction extends ActionSupport {
 	HttpServletRequest request = ServletActionContext.getRequest();
 	private String code;// 验证码
 	List<Cis> cis = new ArrayList<Cis>();// 聊天记录
-	// String account = "cf_wcskdxyz";//用户名 cf_wcsk_jztd
-	// String account = "cf_wcsk_jztd";// 用户名 cf_wcsk_jztd
-	// String pwd = "wcsk1212";// 密码 wcsk1212
-	// String postUrl =
-	// "http://106.ihuyi.cn/webservice/sms.php?method=Submit";// 地址
+//	 String account = "cf_wcskdxyz";//用户名 cf_wcsk_jztd
+//	 String account = "cf_wcsk_jztd";// 用户名 cf_wcsk_jztd
+//	 String pwd = "wcsk1212";// 密码 wcsk1212
+//	 String postUrl =
+//	 "http://106.ihuyi.cn/webservice/sms.php?method=Submit";// 地址
 
 	private String phone;// 手机号
 	private String username;// 用户名
@@ -84,7 +84,7 @@ public class UserAction extends ActionSupport {
 	private File file;// logo图片
 	private String fileFileName;// 文件名
 	private String fileContentType;// 文件类型
-
+	
 	private String key;// key
 	private String accnumno;//
 	private int port = 0;//
@@ -1167,24 +1167,22 @@ public class UserAction extends ActionSupport {
 		if (!OpeFunction.isEmpty(username) && file != null) {
 
 			u = userdao.byUsernameAccnumnoPhone(username);
-
 			System.out.println("username=" + username);
 			if (u != null) {
-				String pah = u.getImg();
+				String path = u.getImg();
 				Boolean b = true;
-				if (pah != null) {
-					b = util.fileRemove(pah);
+				if (path != null) {
+					b = util.fileRemove(path);
 				}
 				System.out.println("头像删除是否成功？" + b);
-
-				pah = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				pah = util.ufileToServer(pah, file, fileFileName, "jpg", true);
-				System.out.println(pah);
-				u.setImg(pah);
+				path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
+				path = util.ufileToServer(path, file, fileFileName, "jpg", true);
+				System.out.println(path);
+				u.setImg(path);
 				userdao.update(u);
 				System.out.println("头像上传成功");
 
-				util.Out().print(pah);
+				util.Out().print(path);
 			} else {
 				util.Out().print("nullu");
 				System.out.println("没有获取到图片");
@@ -3601,24 +3599,119 @@ public class UserAction extends ActionSupport {
 			sta.setHome334(sta.getHome334() + lzhzh.get(i).getHome334());
 		}
 		request.setAttribute("zhzhsta", sta);
+		List<Stas> lh = adao.StasTime("all", User.HCOM, timeq, timeh);
+		sta = new Stas();
+		for (int i = 0; i < lh.size(); i++) {
+			System.out.println("日期" + lh.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lh.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lh.get(i).getUsersaved());
+			sta.setDownloaded(sta.getDownloaded()
+					+ lh.get(i).getDownloaded());
+			if (lh.get(i).getUsersyned() > sta.getUsersyned()) {
+				sta.setUsersyned(lh.get(i).getUsersyned());
+			}
+			sta.setUv(sta.getUv() + lh.get(i).getUv());
+			sta.setPv(sta.getPv() + lh.get(i).getPv());
+			sta.setIp(sta.getIp() + lh.get(i).getIp());
+			sta.setVored(sta.getVored() + lh.get(i).getVored());
 
+			sta.setHome1(sta.getHome1() + lh.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lh.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lh.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lh.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lh.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lh.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lh.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lh.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lh.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lh.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lh.get(i).getHome334());
+		}
+		request.setAttribute("hcomsta", sta);
+		List<Stas> lkdcom = adao.StasTime("all", User.KDCOM, timeq, timeh);
+		sta = new Stas();
+		for (int i = 0; i < lkdcom.size(); i++) {
+			System.out.println("日期" + lkdcom.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lkdcom.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lkdcom.get(i).getUsersaved());
+			sta.setDownloaded(sta.getDownloaded()
+					+ lkdcom.get(i).getDownloaded());
+			if (lkdcom.get(i).getUsersyned() > sta.getUsersyned()) {
+				sta.setUsersyned(lkdcom.get(i).getUsersyned());
+			}
+			sta.setUv(sta.getUv() + lkdcom.get(i).getUv());
+			sta.setPv(sta.getPv() + lkdcom.get(i).getPv());
+			sta.setIp(sta.getIp() + lkdcom.get(i).getIp());
+			sta.setVored(sta.getVored() + lkdcom.get(i).getVored());
+
+			sta.setHome1(sta.getHome1() + lkdcom.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lkdcom.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lkdcom.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lkdcom.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lkdcom.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lkdcom.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lkdcom.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lkdcom.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lkdcom.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lkdcom.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lkdcom.get(i).getHome334());
+		}
+		request.setAttribute("kdcomsta", sta);
+		List<Stas> lygcom = adao.StasTime("all", User.YGCOM, timeq, timeh);
+		sta = new Stas();
+		for (int i = 0; i < lygcom.size(); i++) {
+			System.out.println("日期" + lygcom.get(i).getTime());
+			sta.setUserlogined(sta.getUserlogined()
+					+ lygcom.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + lygcom.get(i).getUsersaved());
+			sta.setDownloaded(sta.getDownloaded()
+					+ lygcom.get(i).getDownloaded());
+			if (lygcom.get(i).getUsersyned() > sta.getUsersyned()) {
+				sta.setUsersyned(lygcom.get(i).getUsersyned());
+			}
+			sta.setUv(sta.getUv() + lygcom.get(i).getUv());
+			sta.setPv(sta.getPv() + lygcom.get(i).getPv());
+			sta.setIp(sta.getIp() + lygcom.get(i).getIp());
+			sta.setVored(sta.getVored() + lygcom.get(i).getVored());
+
+			sta.setHome1(sta.getHome1() + lygcom.get(i).getHome1());
+			sta.setHome2(sta.getHome2() + lygcom.get(i).getHome2());
+			sta.setHome3(sta.getHome3() + lygcom.get(i).getHome3());
+			sta.setHome31(sta.getHome31() + lygcom.get(i).getHome31());
+			sta.setHome32(sta.getHome32() + lygcom.get(i).getHome32());
+			sta.setHome33(sta.getHome33() + lygcom.get(i).getHome33());
+			sta.setHome34(sta.getHome34() + lygcom.get(i).getHome34());
+			sta.setHome331(sta.getHome331() + lygcom.get(i).getHome331());
+			sta.setHome332(sta.getHome332() + lygcom.get(i).getHome332());
+			sta.setHome333(sta.getHome333() + lygcom.get(i).getHome333());
+			sta.setHome334(sta.getHome334() + lygcom.get(i).getHome334());
+		}
+		request.setAttribute("ygcomsta", sta);
 		int own = userdao.getUsertimeCount(timeq, timeh, User.OWN);
 		int bbt = userdao.getUsertimeCount(timeq, timeh, User.BBT);
 		int syn = userdao.getUsertimeCount(timeq, timeh, User.SYN);
 		int zhzh = userdao.getUsertimeCount(timeq, timeh, User.ZHZH);
 		int xdd = userdao.getUsertimeCount(timeq, timeh, User.XDD);
 		int kux = userdao.getUsertimeCount(timeq, timeh, User.KUX);
-		us = userdao.getUsertime(timeq, timeh);
-		for (int i = 0; i < us.size(); i++) {
-			System.out.println("yonghuming:" + us.get(i).getUsername() + ":"
-					+ us.get(i).getCome() + ":" + us.get(i).getOs());
-		}
+		int kd = userdao.getUsertimeCount(timeq, timeh, User.KDCOM);
+		int yg = userdao.getUsertimeCount(timeq, timeh, User.YGCOM);
+		int hc = userdao.getUsertimeCount(timeq, timeh, User.HCOM);
+		//us = userdao.getUsertime(timeq, timeh);
+//		for (int i = 0; i < us.size(); i++) {
+//			System.out.println("yonghuming:" + us.get(i).getUsername() + ":"
+//					+ us.get(i).getCome() + ":" + us.get(i).getOs());
+//		}
 		System.out.println("own有" + own + "个用户");
 		System.out.println("bbt有" + bbt + "个用户");
 		System.out.println("syn有" + syn + "个用户");
 		System.out.println("zhzh有" + zhzh + "个用户");
 		System.out.println("xdd有" + xdd + "个用户");
 		System.out.println("kux有" + kux + "个用户");
+		System.out.println("kd有" + kd + "个用户");
+		System.out.println("yg有" + yg + "个用户");
+		System.out.println("hc有" + hc + "个用户");
 		request.setAttribute("timeh", timeh);
 		request.setAttribute("GetUsertimeus", us);
 		request.setAttribute("timeq", timeq);
@@ -3628,6 +3721,10 @@ public class UserAction extends ActionSupport {
 		request.setAttribute("zhzh", zhzh);
 		request.setAttribute("xdd", xdd);
 		request.setAttribute("kux", kux);
+		
+		request.setAttribute("kd", kd);
+		request.setAttribute("yg", yg);
+		request.setAttribute("hc", hc);
 		return Action.SUCCESS;
 	}
 
@@ -3644,6 +3741,10 @@ public class UserAction extends ActionSupport {
 		int xdd = userdao.getCount(User.XDD);// 同步的用户数量
 		int own = userdao.getCount(User.OWN);// 同步的用户数量
 		int kux = userdao.getCount(User.KUX);// 同步的用户数量
+		
+		int kd = userdao.getCount(User.KDCOM);// 同步的用户数量
+		int yg = userdao.getCount(User.YGCOM);// 同步的用户数量
+		int hc = userdao.getCount(User.HCOM);// 同步的用户数量
 		List<User> ul = userdao.getOnline();// 查询在线用户
 		int all = competence2;
 		System.out.println("用户数量" + competence2);
@@ -3673,6 +3774,11 @@ public class UserAction extends ActionSupport {
 		request.setAttribute("xdd", xdd);
 		request.setAttribute("own", own);
 		request.setAttribute("kux", kux);
+		
+		request.setAttribute("kd", kd);
+		request.setAttribute("yg", yg);
+		request.setAttribute("hc", hc);
+		
 		return Action.SUCCESS;
 	}
 

@@ -33,7 +33,6 @@ public class User implements Serializable
 	public static final String HCOM="hcom";// 恒谦教育
 	public static final String KDCOM="kdcom";// 阔地教育
 	public static final String YGCOM="ygcom";//亿谷
-	
 	public static final String OWN="own";// 家长之友
 	
 	
@@ -77,7 +76,6 @@ public class User implements Serializable
 	private String lookphone;
 	@Column(name="school")//学校
 	private String school;
-	
 	@Column(name="competence")//权限  0 普通用户  1 市级管理员 2省级管理员 4是教授
 	private int competence;
 	@Column(name="gag")//创建论坛权限  0 可以创建论坛  1 不可以  

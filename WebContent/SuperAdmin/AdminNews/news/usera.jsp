@@ -56,44 +56,70 @@ int zhzh=Integer.parseInt(request.getAttribute("zhzh").toString());//获取 共�
 int xdd=Integer.parseInt(request.getAttribute("xdd").toString());//获取 共有多少用户
 int own=Integer.parseInt(request.getAttribute("own").toString());//获取 共有多少用户
 int kux=Integer.parseInt(request.getAttribute("kux").toString());//获取 共有多少用户
+
+Integer kd=(Integer)request.getAttribute("kd");
+Integer yg=(Integer)request.getAttribute("yg");
+Integer hc=(Integer)request.getAttribute("hc");
 %>
 <CENTER></CENTER>
 <form   style="width: 60%;"  action="">
 <table style="text-align:center;" border=1 >
 
 <tr>
+<td>序号</td>
 <td style="width: 300px;">来源</td>
 <td style="width: 300px;">用户数量</td>
 </tr>
 
 <tr>
+<td>1</td>
 <td>优教通</td>
 <td><%=syn %></td>
 </tr>
 
 <tr>
+<td>2</td>
 <td style="width: 200px;">掌中校园</td>
 <td style="width: 200px;"><%=bbt %></td>
 </tr>
 
 <tr>
+<td>3</td>
 <td style="width: 200px;">电信翼校通</td>
 <td style="width: 200px;"><%=zhzh %></td>
 </tr>
 <tr>
+<td>4</td>
 <td style="width: 200px;">学多多</td>
 <td style="width: 200px;"><%=xdd %></td>
 </tr>
 <tr>
+<td>5</td>
 <td style="width: 200px;">酷校</td>
 <td style="width: 200px;"><%=kux %></td>
 </tr>
 <tr>
+<td>6</td>
+<td style="width: 200px;">恒谦教育</td>
+<td style="width: 200px;"><%=hc %></td>
+</tr>
+<tr>
+<td>7</td>
+<td style="width: 200px;">阔地教育</td>
+<td style="width: 200px;"><%=kd %></td>
+</tr>
+<tr>
+<td>8</td>
+<td style="width: 200px;">亿谷教育</td>
+<td style="width: 200px;"><%=yg %></td>
+</tr>
+<tr>
+<td>--</td>
 <td style="width: 200px;">家长之友</td>
 <td style="width: 200px;"><%=own %></td>
 </tr>
 <tr>
-
+<td>--</td>
 <td style="width: 200px;">合计</td>
 <td style="width: 200px;"><%=all %></td>
 </tr>
@@ -138,57 +164,6 @@ int kux=Integer.parseInt(request.getAttribute("kux").toString());//获取 共有
 </table>
 </form>
  -->
-<%
-List<User> ul=(List)request.getAttribute("ul");
-%>
-<!-- 
-<h3>在线用户<%=ul.size() %>个<a href="updateAllXiaxian" onclick="return ck()"><input type="button" value="一键全部下线" ></a></h3>
- -->
-<% 
-for(int i=0;i<0;i++){
-%>
-
-<form action="SetQ"  method="post" enctype="multipart/form-data">
-<table >
-<tr>
-
-<td width="200"><%=ul.get(i).getUsername() %></td>
-<td width="200"><%=ul.get(i).getAddress() %><%=ul.get(i).getAddcity()%></td>
-
-<td width="240"><%=ul.get(i).getTime() %></td>
-<td width="70"><%=ul.get(i).getLoginnum()%></td>
-<td width="200"><%=ul.get(i).getFinaltime()%></td>
-<td width=""><h4><%=ul.get(i).getPhone()%></h4></td>
-</tr>
-</table>
-</form>
-<%
-}
-%>
-
-
-<%
-List<User> us=(List)request.getAttribute("GetUserAllus");
-for(int i=0;i<0;i++){
-%>
-<form action="SetQ"  method="post" enctype="multipart/form-data">
-<table >
-<tr>
-
-<td width="200"><%=us.get(i).getUsername() %></td>
-<td width="200"><%=us.get(i).getAddress() %><%=us.get(i).getAddcity()%></td>
-
-<td width="240"><%=us.get(i).getTime() %></td>
-<td width="70"><%=us.get(i).getLoginnum()%></td>
-<td width="200"><%=us.get(i).getFinaltime()%></td>
-<td width=""><h4><%=us.get(i).getPhone()%></h4></td>
-</tr>
-</table>
-</form>
-
-<%
-}
-%>
 <%
     	int currentPage=0;
     	int n=0;
