@@ -52,36 +52,35 @@ public class UserDAOImpl implements UserDAO {
 			return users.get(0);
 		return null;
 	}
-	/**
-	@Override
-	public User byusername(String username) {
-		Query query = entityManager
-				.createQuery("select u from User u where u.username=:username ");
-		query.setParameter("username", username);
+//	
+//	@Override
+//	public User byusername(String username) {
+//		Query query = entityManager
+//				.createQuery("select u from User u where u.username=:username ");
+//		query.setParameter("username", username);
+//
+//		query.setMaxResults(1);
+//		@SuppressWarnings("unchecked")
+//		List<User> users = query.getResultList();
+//		if (users.size() > 0)
+//			return users.get(0);
+//		return null;
+//	}
+//
+//	@Override
+//	public User byphone(String phone) {
+//		Query query = entityManager
+//				.createQuery("select u from User u where u.phone=:phone ");
+//		query.setParameter("phone", phone);
+//
+//		query.setMaxResults(1);
+//		@SuppressWarnings("unchecked")
+//		List<User> users = query.getResultList();
+//		if (users.size() > 0)
+//			return users.get(0);
+//		return null;
+//	}
 
-		query.setMaxResults(1);
-		@SuppressWarnings("unchecked")
-		List<User> users = query.getResultList();
-		if (users.size() > 0)
-			return users.get(0);
-		return null;
-	}
-	*/
-/**
-	@Override
-	public User byphone(String phone) {
-		Query query = entityManager
-				.createQuery("select u from User u where u.phone=:phone ");
-		query.setParameter("phone", phone);
-
-		query.setMaxResults(1);
-		@SuppressWarnings("unchecked")
-		List<User> users = query.getResultList();
-		if (users.size() > 0)
-			return users.get(0);
-		return null;
-	}
-*/
 	@Override
 	public List<User> getUser(int pageSize, int currentPage) {
 		Query query = entityManager

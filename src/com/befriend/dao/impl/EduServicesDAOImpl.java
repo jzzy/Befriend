@@ -1,19 +1,14 @@
 package com.befriend.dao.impl;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import org.springframework.transaction.annotation.Transactional;
-
 import com.befriend.dao.EduServicesDAO;
 import com.befriend.entity.Attention;
 import com.befriend.entity.EduServices;
-
 /**
  * 
  * @author STerOTto

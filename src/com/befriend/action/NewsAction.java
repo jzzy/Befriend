@@ -84,7 +84,6 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	private int id;// id
 	private String username;// 评论的用户名
 	private HttpServletRequest request;
-	@SuppressWarnings("unused")
 	private HttpServletResponse response;
 
 	private HttpSession session = ServletActionContext.getRequest()
