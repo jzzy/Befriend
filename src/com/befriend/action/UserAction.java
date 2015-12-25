@@ -2010,6 +2010,7 @@ public class UserAction extends ActionSupport {
 					if (nickname != null) {
 						u.setNickname(nickname);
 						System.out.println("–ﬁ∏ƒ¡ÀÍ«≥∆!");
+
 					}
 					if (school != null) {
 						u.setSchool(school);

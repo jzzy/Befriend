@@ -9,19 +9,24 @@
 </head>
 <body>
 	<div class="cont">
-		<div id="header">
+		<div id="header" class="resoult">
 			<div class="topArea clearfix">
 				<div class="prev">
 					<a href="#" onclick="javascript:history.back(-1);"></a>
 				</div>
-				<h1>教辅机构</h1>
+				<div class="topSearch">
+					<div class="inner">
+						<!--span class="search_img"><img src="images/search_img.png" alt="" /></span-->
+						<input type="text" name="searchword" id="searchword" alt="搜索窗" value="美术" />
+						<span id="input_x"><img src="images/input_x.png" alt="" /></span>
+					</div>
+				</div>
 				<div class="topTool">
-					<a href="search.html"><img src="images/search_ico.png" alt="搜索" /></a>
-					<a href="location.html"><img src="images/location_ico.png" alt="定位" /></a>
+					<input type="image" name="submit" src="images/search_ico.png"/>
 				</div>
 			</div>
 		</div><!--header-->
-		
+
 		<div id="container">
 			<ul class="navi clearfix" id="jMenu">
 				<li class="district">
@@ -149,9 +154,29 @@
 
 <script type="text/javascript" src="js/jMenu.jquery.js"></script>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#jMenu").jMenu();
-  })
+	$(document).ready(function(){
+	var ori = $("#searchword").val();
+	$("#searchword").focusin(function() {
+		$("#input_x").css("display","block");
+		if($(this).val() == "输入机构名称、科目类型"){
+			$(this).val("");
+		};
+	});
+	$("#searchword").focusout(function() {
+		if($(this).val() == ""){
+			$(this).val(ori);
+			$("#input_x").css("display","none");
+		  };
+	});
+	$("#input_x").click(function() {
+		$("#searchword").val(ori);
+		$("#input_x").css("display","none");
+	});
+	})
+
+	$(document).ready(function(){
+	$("#jMenu").jMenu();
+	})
 </script>
 </body>
 </html>

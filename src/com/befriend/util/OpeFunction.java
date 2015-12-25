@@ -85,7 +85,7 @@ public class OpeFunction {
 	 * 
 	 * @throws IOException
 	 */
-	public static void outjS(String URL, String string) throws IOException {
+	public static void outjS(String URL, String value) throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 
 		response.setCharacterEncoding("UTF-8");
@@ -93,7 +93,7 @@ public class OpeFunction {
 		String loginPage = URL;
 		StringBuilder builder = new StringBuilder();
 		builder.append("<script type=\"text/javascript\">");
-		builder.append("alert('" + string + "');");
+		builder.append("alert('" + value + "');");
 		builder.append("window.top.location.href='");
 		builder.append(loginPage);
 		builder.append("';");

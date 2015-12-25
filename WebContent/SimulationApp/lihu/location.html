@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+	<div class="cont">
+	
+		<ul class="alphabet">
+			<li><a href="#">UP</a></li>
+			<li><a href="#">A</a></li>
+			<li><a href="#">B</a></li>
+			<li><a href="#">C</a></li>
+			<li><a href="#">D</a></li>
+			<li><a href="#">E</a></li>
+			<li><a href="#">F</a></li>
+			<li><a href="#">G</a></li>
+			<li><a href="#">H</a></li>
+			<li><a href="#">I</a></li>
+			<li><a href="#">J</a></li>
+			<li><a href="#">K</a></li>
+			<li><a href="#">L</a></li>
+			<li><a href="#">M</a></li>
+			<li><a href="#">N</a></li>
+			<li><a href="#">O</a></li>
+			<li><a href="#">P</a></li>
+			<li><a href="#">Q</a></li>
+			<li><a href="#">R</a></li>
+			<li><a href="#">S</a></li>
+			<li><a href="#">T</a></li>
+			<li><a href="#">U</a></li>
+			<li><a href="#">V</a></li>
+			<li><a href="#">W</a></li>
+			<li><a href="#">X</a></li>
+			<li><a href="#">Y</a></li>
+			<li><a href="#">Z</a></li>
+		</ul><!--alphabet-->
+		
+		<div id="header">
+			<div class="topArea clearfix">
+				<div class="prev">
+					<a href="#" onclick="javascript:history.back(-1);"></a>
+				</div>
+				<h1>城市的选择</h1>
+			</div>
+		</div><!--header-->
+		
+		<div id="container">
+			<div class="searchLoc">
+				<div class="inner">
+					<input type="text" name="searchword" id="searchword" class="on" alt="搜索窗" value="输入城市名字进行搜索" />
+					<span id="input_x"><img src="images/input_x.png" alt="清空" /></span>
+				</div>
+			</div>
+			<div class="currentLoc clearfix">
+				<div class="leftArea"><a href="#">北京市<span>GPS定位&nbsp;/&nbsp;点击查看详细信息</span></a></div>
+				<div class="rightArea"><img src="images/f5.png" alt="" /></div>
+			</div>
+			<div class="nearbyList">
+				<h2>周边热门城市</h2>
+				<ul class="clearfix">
+					<li><a href="#">济南</a></li>
+					<li><a href="#">天津</a></li>
+					<li><a href="#">保定</a></li>
+					<li><a href="#">廊坊</a></li>
+					<li><a href="#">张家口</a></li>
+					<li><a href="#">石家庄</a></li>
+				</ul>
+			</div>
+			<div class="hotList">
+				<h2>国内热门城市</h2>
+				<ul class="clearfix">
+					<li><a href="#">上海</a></li>
+					<li><a href="#">广州</a></li>
+					<li><a href="#">深圳</a></li>
+					<li><a href="#">北京</a></li>
+					<li><a href="#">海口</a></li>
+					<li><a href="#">杭州</a></li>
+				</ul>
+			</div>
+			<div class="allList">
+				<h2>全部城市</h2>
+				<dl>
+					<dt id="keyA">A</dt>
+					<dd><a href="#">安徽</a></dd>
+					<dt id="keyB">B</dt>
+					<dd><a href="#">北京</a></dd>
+					<dd><a href="#">保定</a></dd>
+					<dd><a href="#">包头</a></dd>
+					<dd><a href="#">白山</a></dd>
+				</dl>
+			</div>
+		</div><!--container-->
+	</div><!--cont-->
+
+<script type="text/javascript">
+
+	$("#searchword").focusin(function() {
+		$("#input_x").css("display","block");
+		if($(this).val() == "输入城市名字进行搜索"){
+			$(this).val("");
+		};
+	});
+	$("#searchword").focusout(function() {
+		if($(this).val() == ""){
+			$(this).val("输入城市名字进行搜索");
+			$("#input_x").css("display","none");
+		  };
+	});
+	$("#input_x").click(function() {
+		$("#searchword").val("输入城市名字进行搜索");
+		$("#input_x").css("display","none");
+	});
+	
+</script>
+</body>
+</html>

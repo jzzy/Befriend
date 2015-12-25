@@ -3,10 +3,9 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>教辅机构</title>
+<title></title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-<link href="css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="cont">
@@ -16,11 +15,12 @@
 				<a href="#" onclick="javascript:history.back(-1);"></a>
 			</div>
 			<div class="topTool">
-				<a href="#"><img src="images/share.png" alt="分享" /></a>
-				<a href="#"><img src="images/dot3.png" alt="附近美食" /></a>
+				<span id="share"><img src="images/share.png" alt="分享" /></span>
+				<span><a href="nearbyinfo.html"><img src="images/dot3.png" alt="附近美食" /></a></span>
 			</div>
 		</div>
-	</div>
+	</div><!--header-->
+	
 	<div id="container">
 		<div class="detail">
 			<div class="clearfix">
@@ -30,7 +30,7 @@
 				<div class="infoArea">
 					<p class="name">我能创未来</p>
 					<p class="rate"><img src="images/detail_star_on.png" alt="" /><img src="images/detail_star_on.png" alt="" /><img src="images/detail_star_on.png" alt="" /><img src="images/detail_star_on.png" alt="" /><img src="images/detail_star_off.png" alt="" /></p>
-					<p class="point"><span>设施:7.0</span><span>环境:1.0</span><span>服务:0.0</span></p>
+					<p class="point"><span>设施&nbsp;:&nbsp;7.0</span><span>环境&nbsp;:&nbsp;1.0</span><span>服务&nbsp;:&nbsp;0.0</span></p>
 				</div>
 			</div>
 			<p class="adress"><a class="clearfix" href="#">望京西园一区134号楼(炫彩嘉轩)商业2楼207室<img src="images/grayarrow.gif" alt="" /></a></p>
@@ -72,24 +72,56 @@
 		<div class="nearby">
 			<h2>在这家店附近找</h2>
 			<ul class="clearfix">
-				<li><a href="#"><img src="images/nearby1.gif" alt="" /></a></li>
-				<li><a href="#"><img src="images/nearby2.gif" alt="" /></a></li>
-				<li><a href="#"><img src="images/nearby3.gif" alt="" /></a></li>
-				<li class="clear"><a href="#"><img src="images/nearby4.gif" alt="" /></a></li>
-				<li><a href="#"><img src="images/nearby5.gif" alt="" /></a></li>
-				<li><a href="#"><img src="images/nearby6.gif" alt="" /></a></li>
+				<li><a href="nearbyinfo.html"><img src="images/nearby1.gif" alt="" /></a></li>
+				<li><a href="nearbyinfo.html"><img src="images/nearby2.gif" alt="" /></a></li>
+				<li><a href="nearbyinfo.html"><img src="images/nearby3.gif" alt="" /></a></li>
+				<li class="clear"><a href="nearbyinfo.html"><img src="images/nearby4.gif" alt="" /></a></li>
+				<li><a href="nearbyinfo.html"><img src="images/nearby5.gif" alt="" /></a></li>
+				<li><a href="nearbyinfo.html"><img src="images/nearby6.gif" alt="" /></a></li>
 			</ul>
 		</div>
-	</div>
+	</div><!--container-->
+	
 	<div id="footer">
 		<ul class="clearfix">
-			<li><a href="#"><img src="images/shoucang.png" alt="我的收藏" /></a></li>
+			<li><a href="myfavorite.html"><img src="images/shoucang.png" alt="我的收藏" /></a></li>
 			<li><a href="comment.html"><img src="images/dianping.png" alt="我要点评" /></a></li>
 		</ul>
-	</div>
-   <!--userlist-->
-</div>
-<!--cont-->
+	</div><!--footer-->
+	
+	<div id="sharing">
+		<div class="inner">
+			<ul class="clearfix">
+				<li><img src="images/fx1.png" alt="微信" /><span>微信好友</span></li>
+				<li><img src="images/fx2.png" alt="朋友圈" /><span>朋友圈</span></li>
+				<li><img src="images/fx3.png" alt="QQ好友" /><span>QQ好友</span></li>
+				<li><img src="images/fx4.png" alt="QQ空间" /><span>QQ空间</span></li>
+				<li><img src="images/fx5.png" alt="微信收藏" /><span>微信收藏</span></li>
+				<li><img src="images/fx6.png" alt="QQ收藏" /><span>QQ收藏</span></li>
+			</ul>
+		</div>
+		<p class="shareCan">取消分享</p>
+	</div><!--sharing-->
+	
+	<div id="bg">bg</div>
+	
+</div><!--cont-->
 
+<script type="text/javascript">
+
+$("#share").click(function(){
+	$("#bg").show();
+	$("#sharing").show();
+});
+$(".shareCan").click(function(){
+	$("#bg").hide();
+	$("#sharing").hide();
+})
+$("#bg").click(function(){
+	$("#bg").hide();
+	$("#sharing").hide();
+})
+
+</script>
 </body>
 </html>

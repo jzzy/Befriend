@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="cont">
+		<div id="header" class="search">
+			<div class="topArea clearfix">
+				<div class="prev">
+					<a href="#" onclick="javascript:history.back(-1);"></a>
+				</div>
+				<div class="topSearch">
+					<div class="inner">
+						<!--span class="search_img"><img src="images/search_img.png" alt="" /></span-->
+						<input type="text" name="searchword" id="searchword" alt="搜索窗" value="输入机构名称、科目类型" />
+						<span id="input_x"><img src="images/input_x.png" alt="清空" /></span>
+					</div>
+				</div>
+				<div class="topTool">
+					<input type="image" name="submit" src="images/search_ico.png"/>
+				</div>
+			</div>
+		</div><!--header-->
+		
+		<div id="container">
+			<div class="everyone_search">
+				<h2>大家都在搜</h2>
+				<ul class="clearfix">
+					<li><a href="#">英语培训</a></li>
+					<li><a href="#">韦博国际英语</a></li>
+					<li><a href="#">绘画</a></li>
+					<li><a href="#">钢琴六级</a></li>
+					<li><a href="#">芭蕾舞</a></li>
+					<li><a href="#">数学</a></li>
+				</ul>
+			</div>
+			<div class="history_search">
+				<h2>搜索历史：</h2>
+				<ul>
+					<li><a href="#">英语</a></li>
+					<li><a href="#">数学</a></li>
+					<li><a href="#">语文</a></li>
+					<li><a href="#">音乐</a></li>
+				</ul>
+				<p><a href="#">清空搜索历史</a></p>
+			</div>
+		</div><!--container-->
+		
+	</div><!--cont-->
+<script type="text/javascript">
+	$("#searchword").focusin(function() {
+		$("#input_x").css("display","block");
+		if($(this).val() == "输入机构名称、科目类型"){
+			$(this).val("");
+		};
+	});
+	$("#searchword").focusout(function() {
+		if($(this).val() == ""){
+			$(this).val("输入机构名称、科目类型");
+			$("#input_x").css("display","none");
+		  };
+	});
+	$("#input_x").click(function() {
+		$("#searchword").val("输入机构名称、科目类型");
+		$("#input_x").css("display","none");
+	});
+</script>
+</body>
+</html>
