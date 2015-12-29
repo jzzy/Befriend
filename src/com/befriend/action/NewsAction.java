@@ -612,7 +612,17 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage,
 					OpeFunction.getNowTime());
 		}
+		if(!OpeFunction.isEmpty(province)){
+			session.setAttribute("province", province);
+			nl = ndao.Hotarea(province, pageSize, currentPage,
+					OpeFunction.getNowTime());
+			request.setAttribute("currentPage", currentPage);
 
+			request.setAttribute("nl", nl);
+
+			request.setAttribute("a", a);
+			return Action.SUCCESS;
+		}
 		if (nl.size() == 0) {
 			Object obj = session.getAttribute("province");
 			System.out.println("百度定位 :" + obj);

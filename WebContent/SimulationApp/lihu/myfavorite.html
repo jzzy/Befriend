@@ -30,37 +30,37 @@
 				</h2>
 				<ul class="localInfo" id="myFavor1">
 					<li>
-						<div class="checkArea"><label for="a1"><img src="images/check_on.png" alt="swich" /></label><input type="checkbox" id="a1" name="check" checked="checked"/></div>
+						<div class="checkArea"><label for="a1"><img src="images/check_off.png" alt="swich" /></label><input type="checkbox" id="a1" name="check"/></div>
 						<p class="info">清华附中丰台校异味跑道停用</p>
 						<p class="time">2015-12-14&nbsp;14:56:47</p>
 						<p class="ratePoint"><img src="images/xing.png" alt="rateicon" />213</p>
 					</li>
 					<li>
-						<div class="checkArea"><label for="a2"><img src="images/check_on.png" alt="swich" /></label><input type="checkbox" id="a2" name="check" checked="checked"/></div>
+						<div class="checkArea"><label for="a2"><img src="images/check_off.png" alt="swich" /></label><input type="checkbox" id="a2" name="check"/></div>
 						<p class="info">清华附中丰台校异味跑道停用</p>
 						<p class="time">2015-12-14&nbsp;14:56:47</p>
 						<p class="ratePoint"><img src="images/xing.png" alt="rateicon" />421</p>
 					</li>
 					<li>
-						<div class="checkArea"><label for="a3"><img src="images/check_on.png" alt="swich" /></label><input type="checkbox" id="a3" name="check" checked="checked"/></div>
+						<div class="checkArea"><label for="a3"><img src="images/check_off.png" alt="swich" /></label><input type="checkbox" id="a3" name="check"/></div>
 						<p class="info">清华附中丰台校异味跑道停用</p>
 						<p class="time">2015-12-14&nbsp;14:56:47</p>
 						<p class="ratePoint"><img src="images/xing.png" alt="rateicon" />12</p>
 					</li>
 					<li>
-						<div class="checkArea"><label for="a4"><img src="images/check_on.png" alt="swich" /></label><input type="checkbox" id="a4" name="check" checked="checked"/></div>
+						<div class="checkArea"><label for="a4"><img src="images/check_off.png" alt="swich" /></label><input type="checkbox" id="a4" name="check"/></div>
 						<p class="info">清华附中丰台校异味跑道停用</p>
 						<p class="time">2015-12-14&nbsp;14:56:47</p>
 						<p class="ratePoint"><img src="images/xing.png" alt="rateicon" />22</p>
 					</li>
 					<li>
-						<div class="checkArea"><label for="a5"><img src="images/check_on.png" alt="swich" /></label><input type="checkbox" id="a5" name="check" checked="checked"/></div>
+						<div class="checkArea"><label for="a5"><img src="images/check_off.png" alt="swich" /></label><input type="checkbox" id="a5" name="check"/></div>
 						<p class="info">清华附中丰台校异味跑道停用</p>
 						<p class="time">2015-12-14&nbsp;14:56:47</p>
 						<p class="ratePoint"><img src="images/xing.png" alt="rateicon" />999</p>
 					</li>
 					<li>
-						<div class="checkArea"><label for="a6"><img src="images/check_on.png" alt="swich" /></label><input type="checkbox" id="a6" name="check" checked="checked"/></div>
+						<div class="checkArea"><label for="a6"><img src="images/check_off.png" alt="swich" /></label><input type="checkbox" id="a6" name="check"/></div>
 						<p class="info">清华附中丰台校异味跑道停用</p>
 						<p class="time">2015-12-14&nbsp;14:56:47</p>
 						<p class="ratePoint"><img src="images/xing.png" alt="rateicon" />44</p>
@@ -68,7 +68,7 @@
 				</ul>
 				<ul class="listPack" id="myFavor2">
 					<li class="list">
-						<div class="checkArea"><label for="b1"><img src="images/check_on.png" alt="swich" /></label><input type="checkbox" id="b1" name="check" checked="checked"/></div>
+						<div class="checkArea"><label for="b1"><img src="images/check_off.png" alt="swich" /></label><input type="checkbox" id="b1" name="check"/></div>
 						<a href="detail.html">
 							<div class="imgArea"><img src="images/xw_15.png" alt="" /></div>
 							<div class="infoArea">
@@ -80,7 +80,7 @@
 						</a>
 					</li>
 					<li class="list">
-						<div class="checkArea"><label for="b2"><img src="images/check_on.png" alt="swich" /></label><input type="checkbox" id="b2" name="check" checked="checked"/></div>
+						<div class="checkArea"><label for="b2"><img src="images/check_off.png" alt="swich" /></label><input type="checkbox" id="b2" name="check"/></div>
 						<a href="detail.html">
 							<div class="imgArea"><img src="images/xw_15.png" alt="" /></div>
 							<div class="infoArea">
@@ -92,7 +92,7 @@
 						</a>
 					</li>
 					<li class="list">
-						<div class="checkArea"><label for="b3"><img src="images/check_on.png" alt="swich" /></label><input type="checkbox" id="b3" name="check" checked="checked"/></div>
+						<div class="checkArea"><label for="b3"><img src="images/check_off.png" alt="swich" /></label><input type="checkbox" id="b3" name="check"/></div>
 						<a href="detail.html">
 							<div class="imgArea"><img src="images/xw_15.png" alt="" /></div>
 							<div class="infoArea">
@@ -109,7 +109,12 @@
 		
 		<div id="footer" class="myfavorite">
 			<div class="favorDel">
-				<span><img src="images/dianping.png" alt="我要点评" /></span>
+				<div class="leftArea">
+					<span id="checkAll">全选</span>
+				</div>
+				<div class="rightArea">
+					<span>删除</span>
+				</div>
 			</div>
 		</div><!--footer-->
 	</div><!--cont-->
@@ -118,10 +123,10 @@
 
 $(".checkArea").click(function(){
 	var favorCheck = $(this).children("input").attr("checked");
-	if( favorCheck == true){
-		$(this).children("label").find("img").attr("src","images/check_on.png")
-	}else if( favorCheck == false ){
+	if( favorCheck == false ){
 		$(this).children("label").find("img").attr("src","images/check_off.png")
+	}else if( favorCheck == true ){
+		$(this).children("label").find("img").attr("src","images/check_on.png")
 	}
 });
 $("#favorEdit").click(function(){
@@ -151,6 +156,9 @@ $(".myFavor1").click(function(){
 	$(".checkArea").hide();
 	$("#footer").hide();
 	$("#container .myFavor .localInfo li").css("padding-left","10px");
+	$("#favorEdit").text("编辑");
+	$("#myFavor2 .checkArea input").attr("checked",false)
+	$("#myFavor2 .checkArea label img").attr("src","images/check_off.png");  
 });
 $(".myFavor2").click(function(){
 	$("#myFavor1").css("display","none");
@@ -160,6 +168,25 @@ $(".myFavor2").click(function(){
 	$(".checkArea").hide();
 	$("#footer").hide();
 	$("#container .myFavor .listPack .list a").css("padding-left","10px");
+	$("#favorEdit").text("编辑");
+	$("#myFavor1 .checkArea input").attr("checked",false)
+	$("#myFavor1 .checkArea label img").attr("src","images/check_off.png");  
+});
+
+$("#checkAll").click(function(){
+	if($(".myFavor1 span").hasClass("on")){
+		/*$("#myFavor1 .checkArea input").each(function(){        
+			if($(this).attr("checked")){                  
+				$(this).attr("checked", false).siblings("label").find("img").attr("src","images/check_off.png");    
+			}   else {                  
+				$(this).attr("checked", "checked").siblings("label").find("img").attr("src","images/check_on.png");                      
+			}      
+			
+		})*/
+		$("#myFavor1 .checkArea input").attr("checked", true).siblings("label").find("img").attr("src","images/check_on.png");
+	}else if($(".myFavor2 span").hasClass("on")){
+		$("#myFavor2 .checkArea input").attr("checked", true).siblings("label").find("img").attr("src","images/check_on.png");
+	}
 });
 
 </script>

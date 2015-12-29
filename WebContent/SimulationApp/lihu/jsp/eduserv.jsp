@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>教辅机构</title>
-<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/SimulationApp/lihu/js/jquery.js"></script>
 <link href="<%=request.getContextPath() %>/SimulationApp/lihu/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath() %>/SimulationApp/lihu/css/common.css" rel="stylesheet" type="text/css" />
 </head>
@@ -120,7 +120,7 @@ List<EduServices> lEduServices=(List)(request.getAttribute("EduServices")==null?
     //]]>
     </script>
 	
-<script type="text/javascript" src="js/jMenu.jquery.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/SimulationApp/lihu/js/jMenu.jquery.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $("#jMenu").jMenu();

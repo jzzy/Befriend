@@ -191,7 +191,9 @@ a:active { text-decoration:none; }
 #container .localInfo .ratePoint img {width:15px;height:15px;}
 
 /* location.html */
-.alphabet {display:none;position:fixed;right:0;top:100px;z-index:99;}
+#showBox {display:none;position:fixed;left:50%;top:50%;margin:-25px 0 0 -25px;width:50px;height:50px;line-height:50px;text-align:center;background:#000;z-index:99;color:#fff;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
+.alphabet {position:fixed;right:5px;top:20%;height:80%;z-index:999;}
+.alphabet li {height:3.3%;font-size:10px;}
 #container .searchLoc {padding:5px 15px;background:#e8e8e8;position:relative;}
 #container .searchLoc .inner {position:relative;padding:0 0 0 15px;height:24px;background:#fff url("images/searchLoc_ico.png") no-repeat 10px center;border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;}
 #container .searchLoc .inner input {width:100%;height:24px;border:none;background:transparent;color:#ccc;}
@@ -242,9 +244,14 @@ a:active { text-decoration:none; }
 #container .localInfo .time {color:#7d7d7d;}
 #container .localInfo .ratePoint {display:inline-block;position:absolute;right:10px;top:50%;margin-top:-10px;width:70px;text-align:right;height:15px;line-height:15px;}
 #container .localInfo .ratePoint img {width:15px;height:15px;}
-#footer.myfavorite {display:none;}
-#footer .favorDel {padding:5px 0;text-align:center;}
-#footer .favorDel img {width:100px;height:25px;}
+#footer.myfavorite {display:none;border:1px solid #ccc;}
+#footer .favorDel {height:38px;line-height:38px;text-align:center;}
+#footer .favorDel .leftArea {float:left;width:50%;}
+#footer .favorDel .rightArea {float:right;width:50%;}
+#footer .favorDel .leftArea span,
+#footer .favorDel .rightArea span {display:block;font-size:16px;}
+#footer .favorDel .leftArea span {border-right:1px solid #ccc;}
+#footer .favorDel .rightArea span {color:#fb2e22;}
 
 /* nearbyinfo.html */
 #container .nearbyInfo {padding:0 0 5px;}

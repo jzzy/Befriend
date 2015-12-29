@@ -6,39 +6,38 @@
 <title></title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-
 </head>
 <body>
 	<div class="cont">
-	
+		<div id="showBox"></div>
 		<ul class="alphabet">
-			<li><a href="#">UP</a></li>
-			<li><a href="#">A</a></li>
-			<li><a href="#">B</a></li>
-			<li><a href="#">C</a></li>
-			<li><a href="#">D</a></li>
-			<li><a href="#">E</a></li>
-			<li><a href="#">F</a></li>
-			<li><a href="#">G</a></li>
-			<li><a href="#">H</a></li>
-			<li><a href="#">I</a></li>
-			<li><a href="#">J</a></li>
-			<li><a href="#">K</a></li>
-			<li><a href="#">L</a></li>
-			<li><a href="#">M</a></li>
-			<li><a href="#">N</a></li>
-			<li><a href="#">O</a></li>
-			<li><a href="#">P</a></li>
-			<li><a href="#">Q</a></li>
-			<li><a href="#">R</a></li>
-			<li><a href="#">S</a></li>
-			<li><a href="#">T</a></li>
-			<li><a href="#">U</a></li>
-			<li><a href="#">V</a></li>
-			<li><a href="#">W</a></li>
-			<li><a href="#">X</a></li>
-			<li><a href="#">Y</a></li>
-			<li><a href="#">Z</a></li>
+			<li><a href="#">↑</a></li>
+			<li><a href="#keyA">A</a></li>
+			<li><a href="#keyB">B</a></li>
+			<li><a href="#keyC">C</a></li>
+			<li><a href="#keyD">D</a></li>
+			<li><a href="#keyE">E</a></li>
+			<li><a href="#keyF">F</a></li>
+			<li><a href="#keyG">G</a></li>
+			<li><a href="#keyH">H</a></li>
+			<li><a href="#keyI">I</a></li>
+			<li><a href="#keyJ">J</a></li>
+			<li><a href="#keyK">K</a></li>
+			<li><a href="#keyL">L</a></li>
+			<li><a href="#keyM">M</a></li>
+			<li><a href="#keyN">N</a></li>
+			<li><a href="#keyO">O</a></li>
+			<li><a href="#keyP">P</a></li>
+			<li><a href="#keyQ">Q</a></li>
+			<li><a href="#keyR">R</a></li>
+			<li><a href="#keyS">S</a></li>
+			<li><a href="#keyT">T</a></li>
+			<li><a href="#keyU">U</a></li>
+			<li><a href="#keyV">V</a></li>
+			<li><a href="#keyW">W</a></li>
+			<li><a href="#keyX">X</a></li>
+			<li><a href="#keyY">Y</a></li>
+			<li><a href="#keyZ">Z</a></li>
 		</ul><!--alphabet-->
 		
 		<div id="header">
@@ -93,6 +92,59 @@
 					<dd><a href="#">保定</a></dd>
 					<dd><a href="#">包头</a></dd>
 					<dd><a href="#">白山</a></dd>
+					<dt id="keyB">B</dt>
+					<dd><a href="#">北京</a></dd>
+					<dd><a href="#">保定</a></dd>
+					<dd><a href="#">包头</a></dd>
+					<dd><a href="#">白山</a></dd>
+					<dt id="keyC">C</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyD">D</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyE">E</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyF">F</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyG">G</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyH">H</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyI">I</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyJ">J</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyK">K</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyL">L</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyM">M</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyN">N</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyO">O</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyP">P</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyQ">Q</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyR">R</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyS">S</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyT">T</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyU">U</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyV">V</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyW">W</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyX">X</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyY">Y</dt>
+					<dd><a href="#"></a></dd>
+					<dt id="keyZ">Z</dt>
+					<dd><a href="#"></a></dd>
 				</dl>
 			</div>
 		</div><!--container-->
@@ -117,6 +169,14 @@
 		$("#input_x").css("display","none");
 	});
 	
+	$(".alphabet a").click(function(){
+		var moveT = $(this).attr("href")
+		var thisP = $(moveT).text();
+		if( thisP !== "#"){
+			$("#showBox").text(thisP).stop().show().animate({opacity : 1},500).animate({opacity : 0},1000);
+		}
+	})
+
 </script>
 </body>
 </html>
