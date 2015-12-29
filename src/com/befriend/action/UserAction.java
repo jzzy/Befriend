@@ -131,7 +131,6 @@ public class UserAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void sha1() throws NoSuchAlgorithmException, IOException {
-
 		int[] a = { 49, 38, 65, 97, 76, 13, 27, 49, 78, 34, 12, 64, 1 };
 		System.out.println("排序之前：");
 		// 插入排序
@@ -243,7 +242,7 @@ public class UserAction extends ActionSupport {
 			}
 			if (u.getAccnumno() != null) {
 				System.out.println("用户有账号了！:" + u.getAccnumno() + "第" + i
-						+ "个！");
+						+ "个！".toString());
 				continue;
 			}
 			boolean b = true;

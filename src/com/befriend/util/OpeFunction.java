@@ -680,8 +680,6 @@ public class OpeFunction {
 //		 System.out.println(nickname);
 //		 System.out.println(getNameDayTime());
 //		 System.out.println(setTime("1015-11-23  16:38:54"));
-		
-
 	}
 
 	public static long fromDateStringTLong(String inVal) { // 此方法计算时间毫秒
