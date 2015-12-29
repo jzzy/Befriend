@@ -1,5 +1,4 @@
 package com.befriend.wechat;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.cert.CertificateException;
@@ -42,14 +41,12 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import com.befriend.util.OpeFunction;
-
 @SuppressWarnings("all")
 public class WechatKit {
 	private static final Log log = LogFactory.getLog(WechatKit.class);
 	private static HttpClient httpClient = getHttpClient();
 	private static HttpClient postClient = null;
-	private static HttpResponse httpResponse = null;
-	
+	private static HttpResponse httpResponse = null; 
 	/**
 	 * 适合多线程的HttpClient,用httpClient4.2.1实现
 	 * 
@@ -202,7 +199,6 @@ public class WechatKit {
 			if (httpResponse!=null) {
 				EntityUtils.consume(httpResponse.getEntity());
 			}                                          
-			
 			if (post != null) { // 不要忘记释放，尽量通过该方法实现，
 
 				post.releaseConnection();

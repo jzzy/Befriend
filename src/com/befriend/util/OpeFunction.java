@@ -680,7 +680,6 @@ public class OpeFunction {
 //		 System.out.println(nickname);
 //		 System.out.println(getNameDayTime());
 //		 System.out.println(setTime("1015-11-23  16:38:54"));
-		
 
 	}
 
