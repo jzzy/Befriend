@@ -619,7 +619,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			request.setAttribute("currentPage", currentPage);
 
 			request.setAttribute("nl", nl);
-
+			request.setAttribute("province", province);
 			request.setAttribute("a", a);
 			return Action.SUCCESS;
 		}
@@ -656,9 +656,9 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		System.out.println("用户来自：" + province);
 
 		request.setAttribute("currentPage", currentPage);
-
+		
 		request.setAttribute("nl", nl);
-
+		request.setAttribute("province", province);
 		request.setAttribute("a", a);
 		return Action.SUCCESS;
 	}

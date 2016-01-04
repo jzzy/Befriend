@@ -91,8 +91,6 @@ List<EduServices> lEduServices=(List)(request.getAttribute("EduServices")==null?
 							<p class="rate clearfix">
 							<%
 							for(int y=0;y<f;y++){
-								
-							
 							%>
 							<span class="star_r"></span>
 							<%

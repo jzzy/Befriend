@@ -7,6 +7,7 @@
 
 
 
+String province=request.getAttribute("province").toString();
 //获取总的页数
 int a=(Integer)request.getAttribute("a");
 //获取第几页
@@ -44,7 +45,12 @@ $(document).ready(function(){
 
 <body>
 <div class="cont">
-    <h1 class="tit tit5"><a style="float:left;" href="<%=request.getContextPath()%>/webNewsA10" class="fl"><span>&lt; 今日必读</span></a></h1>
+    <h1 class="tit tit5">
+    <a style="float:left;" href="<%=request.getContextPath()%>/webNewsA10" class="fl"><span>&lt; 今日必读</span></a>
+    
+    <a style="float:right;" href="<%=request.getContextPath()%>/SimulationApp/lihu/jsp/switchregion.jsp" class="fl"><span>&lt; 切换地区</span></a>
+   <center><%=province %></center>
+     </h1>
 
    <div class="sstop">
    <p class="simg"><img src="SimulationApp/images/bdzxlog.png" height="120" /></p><p class="scont"><span>本地资讯是按照地区划分，重点提供本地区的相关教育新闻及政策，让家长方便的了解本地相关的教育资讯。</span></p>

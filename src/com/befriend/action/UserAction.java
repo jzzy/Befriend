@@ -800,7 +800,7 @@ public class UserAction extends ActionSupport {
 	/**
 	 * ¸øuser¸³ÓèÈ¨ÏÞ
 	 * 
-	 * @throws IOException
+	 * @throws IOException b
 	 * @throws InterruptedException
 	 */
 	public void SetQU() throws IOException, InterruptedException {

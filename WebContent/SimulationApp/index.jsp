@@ -49,7 +49,7 @@ $(document).ready(function(){
 </head>
 
 <body>
-<div class="cont">
+<div class="cont" style="position: static ;">
 
    <div class="top">
        <a href="<%=request.getContextPath()%>/webNewsA10" class="fl"><img src="SimulationApp/images/xw_03.png" height="40" /></a>
