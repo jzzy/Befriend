@@ -621,6 +621,10 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			request.setAttribute("nl", nl);
 			request.setAttribute("province", province);
 			request.setAttribute("a", a);
+			System.out.println(" 有-" + a + "-页");
+			System.out.println("每页多少条-" + pageSize);
+			System.out.println("第-" + currentPage + "-页");
+			System.out.println("用户来自：" + province);
 			return Action.SUCCESS;
 		}
 		if (nl.size() == 0) {
