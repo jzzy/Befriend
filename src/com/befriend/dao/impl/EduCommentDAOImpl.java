@@ -82,4 +82,14 @@ public class EduCommentDAOImpl implements EduCommentDAO
 		return query.getResultList();
 	}
 
+	@Override
+	public List<EduComment> find(String merchantId, int currentPage,
+			int pageSize) {
+		Query query  = entityManager.createQuery("select u from EduComment u where u.merchantId = :merchantId order by u.time desc");
+		query.setParameter("merchantId", merchantId);
+		query.setFirstResult((currentPage-1)*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
 }

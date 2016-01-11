@@ -106,7 +106,7 @@ public class EduServicesDAOImpl implements EduServicesDAO
 		String sql = "select u from EduServices u where u.merchantId=:merchantId";
 		Query query = entityManger.createQuery(sql);
 		query.setMaxResults(1);
-		query.setParameter("merchantId", merchantId);
+		query.setParameter("merchantId",String.valueOf( merchantId));
 		List<EduServices> edusl=query.getResultList();
 		if(edusl.size()>0)
 			return edusl.get(0);

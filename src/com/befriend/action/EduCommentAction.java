@@ -65,7 +65,7 @@ public class EduCommentAction implements ServletRequestAware {
 		request.setAttribute("content", content);
 		return Action.SUCCESS;
 	}
-
+	
 	public String getAllCommments() {
 		
 		educl = eduCommentDAO.find(currentPage, pageSize);
@@ -132,6 +132,20 @@ public class EduCommentAction implements ServletRequestAware {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().println(JsonUtil.toJsonExpose(eduComments));
+	}
+	public String getWebCommments() throws IOException {
+		try {
+			
+		
+	EduServices edus=eduServicesDAO.findMerchantId(Integer.parseInt(merchantId));
+	educl=eduCommentDAO.find(merchantId,currentPage, pageSize);
+	request.setAttribute("educl", educl);
+	request.setAttribute("edus", edus);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		return Action.SUCCESS;
 	}
 
 	/**
