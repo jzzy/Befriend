@@ -26,7 +26,7 @@ import com.befriend.util.OpeFunction;
 import com.opensymphony.xwork2.Action;
 
 public class EduCommentAction implements ServletRequestAware {
-	
+
 	private EduCommentDAO eduCommentDAO;
 	private EduServicesDAO eduServicesDAO;
 	private UserDAO userDAO;
@@ -42,21 +42,22 @@ public class EduCommentAction implements ServletRequestAware {
 	private File[] pictures;
 	private String[] picturesFileName;
 	private String[] picturesContentType;
-	
+
 	private int currentPage = 1;
 	private int pageSize = 10;
-	
-	
-	List<EduActivity> eaal=new ArrayList<EduActivity>();
-	List<EduServices> edusl=new ArrayList<EduServices>();
-	List<EduComment> educl=new ArrayList<EduComment>();
+
+	List<EduActivity> eaal = new ArrayList<EduActivity>();
+	List<EduServices> edusl = new ArrayList<EduServices>();
+	List<EduComment> educl = new ArrayList<EduComment>();
+
 	public String getLikeCommment() {
-		pageSize=100;
+		pageSize = 100;
 		if (!OpeFunction.isEmpty(content)) {
-			educl=eduCommentDAO.likeFind(content, currentPage, pageSize);
-			request.setAttribute("el",educl);
+			educl = eduCommentDAO.likeFind(content, currentPage, pageSize);
+			request.setAttribute("el", educl);
 			for (EduComment eduComment : educl) {
-				edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(eduComment.getMerchantId())));
+				edusl.add(eduServicesDAO.findMerchantId(Integer
+						.parseInt(eduComment.getMerchantId())));
 			}
 			request.setAttribute("edusl", edusl);
 		}
@@ -65,18 +66,19 @@ public class EduCommentAction implements ServletRequestAware {
 		request.setAttribute("content", content);
 		return Action.SUCCESS;
 	}
-	
+
 	public String getAllCommments() {
-		
+
 		educl = eduCommentDAO.find(currentPage, pageSize);
 		for (EduComment eduComment : educl) {
-			edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(eduComment.getMerchantId())));
+			edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(eduComment
+					.getMerchantId())));
 		}
 		request.setAttribute("edusl", edusl);
 		request.setAttribute("el", educl.size() > 0 ? educl : null);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageSize", pageSize);
-		
+
 		return Action.SUCCESS;
 	}
 
@@ -85,9 +87,9 @@ public class EduCommentAction implements ServletRequestAware {
 		if (Ed != null) {
 			eduCommentDAO.delete(Ed);
 		}
-		if(content!=null){
+		if (content != null) {
 			((HttpServletResponse) OpeFunction.response()).sendRedirect(request
-					.getContextPath() + "/getLikeCommment?content="+content);
+					.getContextPath() + "/getLikeCommment?content=" + content);
 			return null;
 		}
 		return Action.SUCCESS;
@@ -133,15 +135,17 @@ public class EduCommentAction implements ServletRequestAware {
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().println(JsonUtil.toJsonExpose(eduComments));
 	}
+
 	public String getWebCommments() throws IOException {
 		try {
-			
-		
-	EduServices edus=eduServicesDAO.findMerchantId(Integer.parseInt(merchantId));
-	educl=eduCommentDAO.find(merchantId,currentPage, pageSize);
-	request.setAttribute("educl", educl);
-	request.setAttribute("edus", edus);
+
+			EduServices edus = eduServicesDAO.findMerchantId(Integer
+					.parseInt(merchantId));
+			educl = eduCommentDAO.find(merchantId, currentPage, pageSize);
+			request.setAttribute("educl", educl);
+			request.setAttribute("edus", edus);
 		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return null;
 		}
@@ -167,7 +171,7 @@ public class EduCommentAction implements ServletRequestAware {
 	public void addComments() throws IOException {
 		response = ServletActionContext.getResponse();
 		response.setContentType("application/json");
-		response.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8 ");
 		boolean result = false;
 		if (!StringUtils.isEmpty(userId) && StringUtils.isNumeric(userId)
 				&& !StringUtils.isEmpty(merchantId)) {
@@ -237,15 +241,13 @@ public class EduCommentAction implements ServletRequestAware {
 		response.getWriter().println(result);
 	}
 
-	public EduCommentAction(EduCommentDAO eduCommentDAO,EduServicesDAO eduServicesDAO,
-			UserDAO userDAO) {
+	public EduCommentAction(EduCommentDAO eduCommentDAO,
+			EduServicesDAO eduServicesDAO, UserDAO userDAO) {
 		super();
 		this.eduCommentDAO = eduCommentDAO;
 		this.eduServicesDAO = eduServicesDAO;
 		this.userDAO = userDAO;
 	}
-
-
 
 	public String getMerchantId() {
 		return merchantId;
