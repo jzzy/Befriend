@@ -21,19 +21,19 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
 		
-		<!-- 本地 	
+		<!-- 本地 	-->	
 
 		<property name="url" value="jdbc:mysql://localhost:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="admin"></property>
-		-->	
-		<!--测试服数据库 -->
+		
+		<!--测试服数据库 
 		
 		<property name="url" value="jdbc:mysql://123.56.45.164:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property> 
 		<property name="username" value="root"></property> 
 		<property name="password" value="admin"></property> 
 			 
-			 
+			 -->
 		<!--家长之友正式服数据库	
 		
 		<property name="url" value="jdbc:mysql://182.92.100.235:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property> 

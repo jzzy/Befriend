@@ -558,7 +558,7 @@ public class OpeFunction {
 	 */
 	public static void setphone(String phone, String textp) {
 		try {
-			
+
 			String account = "cf_wcsk_jztd";// 用户名 cf_wcsk_jztd
 			String pwd = "wcsk1212";// 密码 wcsk1212
 			String postUrl = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";// 地址
@@ -671,21 +671,16 @@ public class OpeFunction {
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException, ParseException {
-//		  System.out.println(calculatingTime("2015-11-01 14:49:00",
-//		  "2015-12-03 14:49:00"));
-//		 String str = "123456789";
-//		 String nickname = "123456789";
-//		 nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-//		 : nickname.length()));
-//		 System.out.println(nickname);
-//		 System.out.println(getNameDayTime());
-//		 System.out.println(setTime("1015-11-23  16:38:54"));
-<<<<<<< HEAD
-
-=======
->>>>>>> 14ace49a27422b763cb6b99172024e0b6d2ca9f8
+		// System.out.println(calculatingTime("2015-11-01 14:49:00",
+		// "2015-12-03 14:49:00"));
+		// String str = "123456789";
+		// String nickname = "123456789";
+		// nickname = nickname.substring(0, (nickname.length() > 20 ? 20
+		// : nickname.length()));
+		// System.out.println(nickname);
+		// System.out.println(getNameDayTime());
+		// System.out.println(setTime("1015-11-23  16:38:54"));
 	}
-
 	public static long fromDateStringTLong(String inVal) { // 此方法计算时间毫秒
 		Date date = null; // 定义时间类型
 		SimpleDateFormat inputFormat = new SimpleDateFormat(
@@ -697,5 +692,6 @@ public class OpeFunction {
 		}
 		return date.getTime(); // 返回毫秒数
 	}
+
 
 }

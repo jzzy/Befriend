@@ -29,7 +29,7 @@ $(document).ready(function(){
 </head>
 
 <body style="background-color: white;">
-<div  class="cont" style="position: static ;">
+<div  class="cont">
    <div  class="top">
        <a href="<%=request.getContextPath()%>/webNewsA10" class="fl"><img src="<%=request.getContextPath()%>/SimulationApp/images/xw_03.png" height="40" /></a>
       <p class="set fr"><a href="<%=request.getContextPath()%>/SimulationApp/about.html"></a><a href="<%=request.getContextPath()%>/SimulationApp/about.html"><img src="SimulationApp/images/xw_07.png" height="40" /></a></p>
