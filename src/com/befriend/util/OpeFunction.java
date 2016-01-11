@@ -671,6 +671,7 @@ public class OpeFunction {
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException, ParseException {
+<<<<<<< HEAD
 		// System.out.println(calculatingTime("2015-11-01 14:49:00",
 		// "2015-12-03 14:49:00"));
 		// String str = "123456789";
@@ -680,6 +681,18 @@ public class OpeFunction {
 		// System.out.println(nickname);
 		// System.out.println(getNameDayTime());
 		// System.out.println(setTime("1015-11-23  16:38:54"));
+=======
+//		  System.out.println(calculatingTime("2015-11-01 14:49:00",
+//		  "2015-12-03 14:49:00"));
+//		 String str = "123456789";
+//		 String nickname = "123456789";
+//		 nickname = nickname.substring(0, (nickname.length() > 20 ? 20
+//		 : nickname.length()));
+//		 System.out.println(nickname);
+//		 System.out.println(getNameDayTime());
+//		 System.out.println(setTime("1015-11-23  16:38:54"));
+
+>>>>>>> 65d0918855a502b5d1c8264512007ae73b1a6f37
 	}
 	public static long fromDateStringTLong(String inVal) { // 此方法计算时间毫秒
 		Date date = null; // 定义时间类型
