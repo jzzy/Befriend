@@ -18,7 +18,10 @@
 	<div id="header">
 		<div class="topArea clearfix">
 			<div class="prev">
-				<a href="#" onclick="javascript:history.back(-1);"></a>
+				<a href="getEduWeb" ></a>
+				<!-- 
+				onclick="javascript:history.back(-1);"
+				 -->
 			</div>
 			<div class="topTool">
 				<a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/share.png" alt="分享" /></a>
@@ -43,7 +46,7 @@
 				</div>
 			</div>
 			<p class="adress"><a class="clearfix" href="#"><%=edus.getAddress() %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
-			<p class="tel"><a class="clearfix" href="#">010-64789568,18611116327<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
+			<p class="tel"><a class="clearfix" href="#"><%=edus.getTelephone() %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
 		</div>
 		<div class="review">
 			<h2><a href="review.html">网友点评<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="ico" /></a></h2>
@@ -97,7 +100,7 @@
 	<div id="footer">
 		<ul class="clearfix">
 			<li><a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/shoucang.png" alt="我的收藏" /></a></li>
-			<li><a href="comment.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/dianping.png" alt="我要点评" /></a></li>
+			<li><a href="<%=request.getContextPath() %>/SimulationApp/lihu/comment.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/dianping.png" alt="我要点评" /></a></li>
 		</ul>
 	</div>
    <!--userlist-->

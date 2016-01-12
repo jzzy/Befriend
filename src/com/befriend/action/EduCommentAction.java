@@ -2,6 +2,7 @@ package com.befriend.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,11 +10,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
+
 import com.befriend.dao.EduCommentDAO;
 import com.befriend.dao.EduServicesDAO;
 import com.befriend.dao.UserDAO;
@@ -42,7 +45,8 @@ public class EduCommentAction implements ServletRequestAware {
 	private File[] pictures;
 	private String[] picturesFileName;
 	private String[] picturesContentType;
-
+	private HttpSession session = ServletActionContext.getRequest()
+			.getSession();
 	private int currentPage = 1;
 	private int pageSize = 10;
 
@@ -138,12 +142,13 @@ public class EduCommentAction implements ServletRequestAware {
 
 	public String getWebCommments() throws IOException {
 		try {
-
+			System.out.println("merchantId:" + merchantId);
 			EduServices edus = eduServicesDAO.findMerchantId(Integer
 					.parseInt(merchantId));
 			educl = eduCommentDAO.find(merchantId, currentPage, pageSize);
 			request.setAttribute("educl", educl);
 			request.setAttribute("edus", edus);
+			session.setAttribute("merchantId", merchantId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
@@ -239,6 +244,105 @@ public class EduCommentAction implements ServletRequestAware {
 			result = false;
 		}
 		response.getWriter().println(result);
+	}
+
+	/**
+	 * @describe add comment
+	 * @param userId
+	 *            necessary
+	 * @param merchantId
+	 *            necessary
+	 * @param pictures
+	 *            choice
+	 * @param content
+	 *            choice
+	 * @param score
+	 *            choice
+	 * @param fatherId
+	 *            choice
+	 * @throws IOException
+	 */
+	public void addWebComments() throws IOException {
+		
+		merchantId=(String)session.getAttribute("merchantId");
+		System.out.println("merchantId:"+merchantId);
+		System.out.println("score:"+score);
+		System.out.println("content:"+content);
+		if (!OpeFunction.isEmpty(merchantId)) {
+			User user = (User)session.getAttribute("u");
+			if (user != null) {
+				EduComment eduComment = new EduComment();
+
+				String picStr = "";
+				if (pictures != null && pictures.length > 0) {
+					System.out.println("upload");
+					String path = "/file/" + user.getId() + "/EduComment/"
+							+ merchantId + "/";
+					String realPath = ServletActionContext.getServletContext()
+							.getRealPath(path).replace("Befriend", "");
+					System.out.println("realPath:" + realPath);
+					File saveDir = new File(realPath);
+					if (!saveDir.exists()) {
+						saveDir.mkdirs();
+					}
+
+					for (int i = 0; i < pictures.length; i++) {
+						try {
+
+							int index = picturesFileName[i].indexOf(".");
+							String suffix = picturesFileName[i]
+									.substring(index);
+							String fileName = String.valueOf(new Date()
+									.getTime()) + suffix;
+							File saveFile = new File(saveDir, fileName);
+							FileUtils.copyFile(pictures[i], saveFile);
+							picStr += path + fileName + "!#";
+
+						} catch (IOException e) {
+							
+							e.printStackTrace();
+						}
+					}
+
+				}
+
+				eduComment.setMerchantId(merchantId);
+				eduComment.setUser(user);
+				eduComment.setScore(score);//12345 星级
+				eduComment.setContent(content);//评论内容
+				eduComment.setPictures(picStr);	//图片地址			
+				eduComment.setTime(OpeFunction.getNowTime());
+				if (!StringUtils.isEmpty(fatherId)
+						&& StringUtils.isNumeric(fatherId)) {
+					eduComment.setFatherId(Integer.valueOf(fatherId));
+				}
+				if (!StringUtils.isEmpty(replyId)
+						&& StringUtils.isNumeric(replyId)) {
+					User reply = userDAO.byid(Integer.valueOf(replyId));
+					eduComment.setReply(reply);
+				}
+				eduCommentDAO.save(eduComment);
+				System.out.println(true);
+			} else {
+				System.out.println(false);
+			}
+		} else {
+			System.out.println(false);
+		}
+		HttpServletResponse response = ServletActionContext.getResponse();
+
+		response.setCharacterEncoding("GBK");
+		PrintWriter out = response.getWriter();
+		String loginPage = "Befriend/getWebCommments?merchantId="+merchantId;
+		StringBuilder builder = new StringBuilder();
+		builder.append("<script type=\"text/javascript\">");
+		builder.append("alert('" + "评论成功" + "');");
+		builder.append("window.top.location.href='");
+		builder.append(loginPage);
+		builder.append("';");
+		builder.append("</script>");
+		out.print(builder.toString());
+		
 	}
 
 	public EduCommentAction(EduCommentDAO eduCommentDAO,

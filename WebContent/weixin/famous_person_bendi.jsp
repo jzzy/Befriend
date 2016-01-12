@@ -4,22 +4,15 @@
     <%@page import="com.befriend.util.*"%>
 <%@page import="com.befriend.entity.*"%>
 <%
-
-
-
+String province=(String)request.getAttribute("province");
 //获取总的页数
 int a=(Integer)request.getAttribute("a");
 //获取第几页
 int currentPage=(Integer)request.getAttribute("currentPage");
 //获取新闻
 List<News> nl=(List)request.getAttribute("nl");
-if(nl==null||currentPage<=0){
-	
-	%> 
-	<p>没有您要的信息</p>
-	<% 
-	return;
-}
+
+
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -47,7 +40,15 @@ $(document).ready(function(){
 
 <body>
 <div class="cont">
-   <h1 class="tit tit5"><a style="float:left;" href="<%=request.getContextPath()%>/weiXniBDN"><span>&lt; 本地资讯</span></a></h1>
+
+      <h1 class="tit tit5">
+    <a style="float:left;"  href="<%=request.getContextPath()%>/weiXniBDN"><span>&lt; 本地资讯</span></a>
+    
+    <a style="float:right;" href="<%=request.getContextPath()%>/SimulationApp/lihu/jsp/wechatSwitchregion.jsp" class="fl"><span>&lt; 切换地区</span></a>
+   <center><%=province %></center>
+     </h1>
+   
+   
    <div class="sstop">
    <p class="simg"><img src="SimulationApp/images/bdzxlog.png" height="120" /></p><p class="scont"><span>本地资讯是按照地区划分，重点提供本地区的相关教育新闻及政策，让家长方便的了解本地相关的教育资讯。</span></p>
   

@@ -10,6 +10,8 @@
 		<action name="getWebCommments" class="eduCommentAction" method="getWebCommments">
 		<result name="success">/SimulationApp/lihu/jsp/detail.jsp</result>
 		</action>
+		<action name="addWebComments" class="eduCommentAction" method="addWebComments">
+		</action>
 		<action name="deleteCommment" class="eduCommentAction" method="deleteCommment">
 		<result type="redirectAction" name="success">getAllCommments</result> 
 		</action>

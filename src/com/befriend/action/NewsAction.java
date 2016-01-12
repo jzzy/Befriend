@@ -345,7 +345,9 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		}
 
 		int a = 0;
-
+		if(!OpeFunction.isEmpty(province)){
+			session.setAttribute("province",province);
+		}
 		Object Oprovince = session.getAttribute("province");
 		if (Oprovince != null) {
 			province = Oprovince.toString();

@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/zyupload-1.0.0.min.css" type="text/css">
 </head>
 <body>
+<form action="addWebComments" enctype="multipart/form-data" method="post">
 	<div class="cont">
 			<div id="header">
 				<div class="topArea clearfix">
@@ -20,7 +21,7 @@
 					</div>
 					<h1>写点评</h1>
 					<div class="topTool writeBtn">
-						<span><a href="#">发送</a></span>
+						<span><input type="submit" value="发送"/></span>
 					</div>
 				</div>
 			</div><!--header-->
@@ -29,11 +30,11 @@
 					<div class="rate clearfix">
 						<h2>总体</h2>
 						<div id="raty" style="cursor: pointer;"></div>
-						<div id="raty_hint" class="hint">0</div>
+						<div name="score" id="raty_hint" class="hint">0</div>
 					</div>
 					<div class="write">
 						<p class="textarea">
-							<textarea cols="50" rows="15" id="textarea">亲，课程怎么样，老师好不好，环境如何，学习效果满意吗？</textarea>
+							<textarea cols="50" rows="15" name="content" id="textarea">亲，课程怎么样，老师好不好，环境如何，学习效果满意吗？</textarea>
 						</p>
 						<p class="info">加油，还差<span>50</span>字！</p>
 					</div>
@@ -44,7 +45,7 @@
 				</div>
 			</div><!--container-->
 	</div><!--cont-->
-
+</form>
 <script type="text/javascript">
 
 	$(function(){
@@ -89,7 +90,7 @@
 		targetKeep: true,
 		precision : false,//是否包含小数
 		click: function(score, evt) {
-		 // alert('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt.type);
+		  //alert('ID: ' + $(this).attr('id') + "\nscore: " + score + "\nevent: " + evt.type);
 		}
 	});    
 

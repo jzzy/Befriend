@@ -50,7 +50,7 @@
 		<a href="<%=request.getContextPath()%>/SimulationApp/feedback.html">意见反馈</a><br>
 	
 	<a href="<%=request.getContextPath()%>/SimulationApp/exchangebook.jsp">教育部推荐用书</a><br>
-	
+	<a href="<%=request.getContextPath()%>/getEduWeb">教辅机构</a><br>
 	
 </div>
 <div id="div" style="color: blue;" ></div>
