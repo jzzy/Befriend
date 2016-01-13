@@ -17,12 +17,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.befriend.dao.CollectDAO;
 import com.befriend.dao.EduCommentDAO;
 import com.befriend.dao.EduServicesDAO;
+import com.befriend.dao.NewsDAO;
 import com.befriend.dao.UserDAO;
+import com.befriend.entity.Attention;
+import com.befriend.entity.Collect;
 import com.befriend.entity.EduActivity;
 import com.befriend.entity.EduComment;
 import com.befriend.entity.EduServices;
+import com.befriend.entity.News;
 import com.befriend.entity.User;
 import com.befriend.util.JsonUtil;
 import com.befriend.util.OpeFunction;
@@ -33,6 +38,8 @@ public class EduCommentAction implements ServletRequestAware {
 	private EduCommentDAO eduCommentDAO;
 	private EduServicesDAO eduServicesDAO;
 	private UserDAO userDAO;
+	private NewsDAO newsDAO;
+	private CollectDAO collectDAO;
 	private HttpServletResponse response;
 	private HttpServletRequest request;
 	private String merchantId;
@@ -53,6 +60,34 @@ public class EduCommentAction implements ServletRequestAware {
 	List<EduActivity> eaal = new ArrayList<EduActivity>();
 	List<EduServices> edusl = new ArrayList<EduServices>();
 	List<EduComment> educl = new ArrayList<EduComment>();
+	List<Attention> attl = new ArrayList<Attention>();
+	List<News> nl = new ArrayList<News>();
+
+	public String userLookEduASBK() throws IOException {
+		try {
+			User u = (User) session.getAttribute("u");
+			attl = eduServicesDAO.byUserid(u.getId(), currentPage, pageSize,
+					Attention.COME_EduServices);
+			for (int i = 0; i < attl.size(); i++) {
+				edusl.add(eduServicesDAO.findMerchantId(attl.get(i)
+						.getObjectid()));
+			}
+			request.setAttribute("edusl", edusl);
+
+			for (Collect c : collectDAO.Allu(u.getId())) {
+				News n = newsDAO.byid(c.getNewsid());
+				if (n != null) {
+					nl.add(n);
+				}
+
+			}
+			request.setAttribute("nl", nl);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
 
 	public String getLikeCommment() {
 		pageSize = 100;
@@ -263,13 +298,13 @@ public class EduCommentAction implements ServletRequestAware {
 	 * @throws IOException
 	 */
 	public void addWebComments() throws IOException {
-		
-		merchantId=(String)session.getAttribute("merchantId");
-		System.out.println("merchantId:"+merchantId);
-		System.out.println("score:"+score);
-		System.out.println("content:"+content);
+		String text;
+		merchantId = (String) session.getAttribute("merchantId");
+		System.out.println("merchantId:" + merchantId);
+		System.out.println("score:" + score);
+		System.out.println("content:" + content);
 		if (!OpeFunction.isEmpty(merchantId)) {
-			User user = (User)session.getAttribute("u");
+			User user = (User) session.getAttribute("u");
 			if (user != null) {
 				EduComment eduComment = new EduComment();
 
@@ -299,7 +334,7 @@ public class EduCommentAction implements ServletRequestAware {
 							picStr += path + fileName + "!#";
 
 						} catch (IOException e) {
-							
+
 							e.printStackTrace();
 						}
 					}
@@ -308,9 +343,9 @@ public class EduCommentAction implements ServletRequestAware {
 
 				eduComment.setMerchantId(merchantId);
 				eduComment.setUser(user);
-				eduComment.setScore(score);//12345 星级
-				eduComment.setContent(content);//评论内容
-				eduComment.setPictures(picStr);	//图片地址			
+				eduComment.setScore(score);// 12345 星级
+				eduComment.setContent(content);// 评论内容
+				eduComment.setPictures(picStr); // 图片地址
 				eduComment.setTime(OpeFunction.getNowTime());
 				if (!StringUtils.isEmpty(fatherId)
 						&& StringUtils.isNumeric(fatherId)) {
@@ -322,35 +357,41 @@ public class EduCommentAction implements ServletRequestAware {
 					eduComment.setReply(reply);
 				}
 				eduCommentDAO.save(eduComment);
+				text = "评论成功";
 				System.out.println(true);
 			} else {
 				System.out.println(false);
+				text = "未登入";
 			}
 		} else {
 			System.out.println(false);
+			text = "评论失败";
 		}
 		HttpServletResponse response = ServletActionContext.getResponse();
 
 		response.setCharacterEncoding("GBK");
 		PrintWriter out = response.getWriter();
-		String loginPage = "Befriend/getWebCommments?merchantId="+merchantId;
+		String loginPage = "Befriend/getWebCommments?merchantId=" + merchantId;
 		StringBuilder builder = new StringBuilder();
 		builder.append("<script type=\"text/javascript\">");
-		builder.append("alert('" + "评论成功" + "');");
+		builder.append("alert('" + text + "');");
 		builder.append("window.top.location.href='");
 		builder.append(loginPage);
 		builder.append("';");
 		builder.append("</script>");
 		out.print(builder.toString());
-		
+
 	}
 
 	public EduCommentAction(EduCommentDAO eduCommentDAO,
-			EduServicesDAO eduServicesDAO, UserDAO userDAO) {
+			EduServicesDAO eduServicesDAO, UserDAO userDAO, NewsDAO newsDAO,
+			CollectDAO collectDAO) {
 		super();
 		this.eduCommentDAO = eduCommentDAO;
 		this.eduServicesDAO = eduServicesDAO;
 		this.userDAO = userDAO;
+		this.newsDAO = newsDAO;
+		this.collectDAO = collectDAO;
 	}
 
 	public String getMerchantId() {

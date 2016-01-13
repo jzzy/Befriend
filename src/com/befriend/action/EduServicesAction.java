@@ -120,10 +120,11 @@ public class EduServicesAction extends ActionSupport implements
 			}
 			request.setAttribute("EduServices",
 					eduServicesDAO.find(map, currentPage, pageSize));
-			return Action.SUCCESS;
+			
 		} catch (Exception e) {
-			return Action.ERROR;
+			e.printStackTrace();
 		}
+		return Action.SUCCESS;
 
 	}
 

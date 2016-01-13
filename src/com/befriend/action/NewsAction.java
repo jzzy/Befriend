@@ -451,7 +451,9 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 		for (Collect c : cdao.Allu(userid)) {
 			n = ndao.byid(c.getNewsid());
-			nl.add(n);
+			if(n!=null){
+				nl.add(n);
+			}
 
 		}
 		request.setAttribute("nl", nl);
@@ -2118,7 +2120,9 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			}
 			for (Collect c : cdao.Allu(userid)) {
 				n = ndao.byid(c.getNewsid());
-				nl.add(n);
+				if(n!=null){
+					nl.add(n);
+				}
 
 			}
 			System.out.println("用户" + u.getUsername() + "收藏了" + nl.size()

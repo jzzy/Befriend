@@ -161,6 +161,9 @@
 		<constructor-arg ref="eduCommentDAO"></constructor-arg>
 		<constructor-arg ref="eduServicesDAO"></constructor-arg>
 		<constructor-arg ref="userDAO"></constructor-arg>
+		<constructor-arg ref="newsDAO"></constructor-arg>
+		<constructor-arg ref="collectDAO"></constructor-arg>
+		
 	</bean>
 	
 	<bean id="uploadAction" class="com.befriend.action.UploadAction" scope="prototype"></bean>

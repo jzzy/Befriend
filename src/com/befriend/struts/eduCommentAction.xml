@@ -6,7 +6,9 @@
 		<action name="getCommments" class="eduCommentAction" method="getCommments"></action>
 		<action name="addComments" class="eduCommentAction" method="addComments"></action>
 		
-		
+		<action name="userLookEduASBK" class="eduCommentAction" method="userLookEduASBK">
+		<result name="success">/SimulationApp/lihu/jsp/myfavorite.jsp</result>
+		</action>
 		<action name="getWebCommments" class="eduCommentAction" method="getWebCommments">
 		<result name="success">/SimulationApp/lihu/jsp/detail.jsp</result>
 		</action>

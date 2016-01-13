@@ -25,7 +25,7 @@
 			</div>
 			<div class="topTool">
 				<a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/share.png" alt="分享" /></a>
-				<a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/dot3.png" alt="附近美食" /></a>
+				<a href="<%=request.getContextPath() %>/SimulationApp/lihu/nearbyinfo.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/dot3.png" alt="附近美食" /></a>
 			</div>
 		</div>
 	</div>
@@ -99,7 +99,7 @@
 	</div>
 	<div id="footer">
 		<ul class="clearfix">
-			<li><a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/shoucang.png" alt="我的收藏" /></a></li>
+			<li><a href="userLookEduASBK"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/shoucang.png" alt="我的收藏" /></a></li>
 			<li><a href="<%=request.getContextPath() %>/SimulationApp/lihu/comment.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/dianping.png" alt="我要点评" /></a></li>
 		</ul>
 	</div>

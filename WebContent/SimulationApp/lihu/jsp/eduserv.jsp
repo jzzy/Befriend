@@ -21,8 +21,8 @@
 				</div>
 				<h1>教辅机构</h1>
 				<div class="topTool">
-					<a href="search.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/search_ico.png" alt="搜索" /></a>
-					<a href="location.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/location_ico.png" alt="定位" /></a>
+					<a href="<%=request.getContextPath() %>/SimulationApp/lihu/search.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/search_ico.png" alt="搜索" /></a>
+					<a href="<%=request.getContextPath() %>/SimulationApp/lihu/location.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/location_ico.png" alt="定位" /></a>
 				</div>
 			</div>
 		</div><!--header-->
@@ -32,27 +32,28 @@
 				<li class="district">
 					<a href="#" class="fNiv">全部地区&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
 					<ul>
-						<li><a href="#">东城区</a></li>
-						<li><a href="#">西城区</a></li>
-						<li><a href="#">朝阳区</li>
-						<li><a href="#">丰台区</a></li>
-						<li><a href="#">石景山区</a></li>
-						<li><a href="#">海淀区</a></li>
-						<li><a href="#">门头沟区</a></li>
+						<li><a href="getEduWeb?county=东城区">东城区</a></li>
+						<li><a href="getEduWeb?county=西城区">西城区</a></li>
+						<li><a href="getEduWeb?county=朝阳区">朝阳区</li>
+						<li><a href="getEduWeb?county=丰台区">丰台区</a></li>
+						<li><a href="getEduWeb?county=石景山区">石景山区</a></li>
+						<li><a href="getEduWeb?county=海淀区">海淀区</a></li>
+						<li><a href="getEduWeb?county=门头沟区">门头沟区</a></li>
+						
 					</ul>
 				</li>
 				<li class="edutrain">
 					<a href="#" class="fNiv">教育培训&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
 					<ul>
-						<li><a href="#">外语</a></li>
-						<li><a href="#">音乐</a></li>
-						<li><a href="#">幼儿教育</a></li>
-						<li><a href="#">升学指导</a></li>
-						<li><a href="#">教育院校</a></li>
-						<li><a href="#">舞蹈</a></li>
-						<li><a href="#">学校</a></li>
-						<li><a href="#">驾校</a></li>
-						<li><a href="#">兴趣生活</a></li>
+						<li><a href="getEduWeb?classSecond=外语">外语</a></li>
+						<li><a href="getEduWeb?classSecond=音乐">音乐</a></li>
+						<li><a href="getEduWeb?classSecond=幼儿教育">幼儿教育</a></li>
+						<li><a href="getEduWeb?classSecond=升学指导">升学指导</a></li>
+						<li><a href="getEduWeb?classSecond=教育院校">教育院校</a></li>
+						<li><a href="getEduWeb?classSecond=舞蹈">舞蹈</a></li>
+						<li><a href="getEduWeb?classSecond=学校">学校</a></li>
+						<li><a href="getEduWeb?classSecond=驾校">驾校</a></li>
+						<li><a href="getEduWeb?classSecond=兴趣生活">兴趣生活</a></li>
 					</ul>
 				</li>
 				<li class="sort fNiv">
