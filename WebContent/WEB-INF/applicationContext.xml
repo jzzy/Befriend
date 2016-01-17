@@ -10,39 +10,30 @@
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="mysqlDataSource"></property>
+		<property name="dataSource" ref="dataSource"></property>
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdaptor">
 		</property>
 	</bean>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/befriend" />
+		<property name="user" value="root" />
+		<property name="password" value="admin" />
+		<!-- 连接池中保留的最小连接数，默认为：3-->
+		<property name="minPoolSize" value="5" />
+		<!--连接池中保留的最大连接数。默认值: 15 -->
+		<property name="maxPoolSize" value="30" />
+		<!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3-->
+		<property name="initialPoolSize" value="10" />
+		<!--最大空闲时间，120秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0 -->
+		<property name="maxIdleTime" value="120" />
+		<!-- 当连接池连接耗尽时，客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException，如设为0则无限期等待。单位毫秒。默认: 0 --> 
+		<property name="checkoutTimeout" value="3000"/>
+		<!--每60秒检查所有连接池中的空闲连接。默认值: 0，不检查 -->
+		<property name="idleConnectionTestPeriod" value="60" />
+	</bean>	
 
-
-	<bean id="mysqlDataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver">
-		</property>
-		
-		<!-- 本地 	
-
-		<property name="url" value="jdbc:mysql://localhost:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="admin"></property>
-		-->	
-		<!--测试服数据库  -->
-		
-		<property name="url" value="jdbc:mysql://123.56.45.164:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property> 
-		<property name="username" value="root"></property> 
-		<property name="password" value="admin"></property> 
-			 
-			
-		<!--家长之友正式服数据库	
-		
-		<property name="url" value="jdbc:mysql://182.92.100.235:3306/befriend?useUnicode=true&amp;characterEncoding=utf8"></property> 
-		<property name="username" value="root"></property> 
-		<property name="password" value="admin"></property> 
-		-->
-	
-	</bean>
-	
 	
 	
 
