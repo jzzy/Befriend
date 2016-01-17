@@ -37,10 +37,17 @@ $(document).ready(function(){
 
 <body>
 <div class="cont">
+ 
    <div class="top">
+   
        <a href="<%=request.getContextPath()%>/webNewsA10" class="fl"><img src="<%=request.getContextPath()%>/weixin/images/xw_03.png" height="40" /></a>
-       <p class="set fr"><a href="<%=request.getContextPath()%>/webNewsA10" title="返回主页"><img src="<%=request.getContextPath()%>/weixin/images/xw_07s.png" height="40" /></a></p>
+      <!--   <p class="set fr"><a href="<%=request.getContextPath()%>/webNewsA10" title="返回主页"><img src="<%=request.getContextPath()%>/weixin/images/xw_07s.png" height="40" /></a></p>
+  -->
+ 
+   <a style="float: right;font-size:16px;color:white;" href="<%=request.getContextPath()%>/SimulationApp/lihu/jsp/wechatSwitchregion.jsp" class="fl"> < 切换地区</a>
+    <center ><span style="font-size:16px;color:white;"><%=province %></span></center>
    </div>
+
    <!--top-->
    <!--  
 <h1 class="tit8"><span class="fl">本地资讯</span>
@@ -82,6 +89,7 @@ $(document).ready(function(){
 					<div  class="tempWrap"  style="overflow:hidden; position:relative;">
                         <ul  style="width: 3360px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition: 200ms; -webkit-transition: 200ms; -webkit-transform: translate(-1680px, 0px) translateZ(0px);">
 								<%
+								
 								for(int i=0;i<4;i++){
 									
 							%>
@@ -109,10 +117,8 @@ $(document).ready(function(){
    <!--slideBox-->
     <%
     		int i=0;
-    		if(nl.size()!=8){
-    			i=0;
-    			}else{
-    				i=4;
+    		if(nl.size()>4){
+    			i=4;
     			}
 				for(;i<nl.size();i++){
 			%>

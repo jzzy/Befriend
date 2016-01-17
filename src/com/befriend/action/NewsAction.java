@@ -967,14 +967,14 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			Object pro = session.getAttribute("province");
 			if (pro == null) {
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/weixin/weixin.html");
+						.getContextPath() + "/weixin/byip.html");
 			} else {
 				province = pro.toString();
 			}
 
 		}
 
-		nl = ndao.Hotarea(8, province);
+		nl = ndao.Hotarea(province, pageSize, currentPage, time);
 		request.setAttribute("nl", nl);
 		request.setAttribute("province", province);
 		request.setAttribute("city", city);

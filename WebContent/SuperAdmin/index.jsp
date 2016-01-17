@@ -39,8 +39,6 @@
 	<a href="<%=request.getContextPath()%>/webNewsA10">WEB主页</a><br>
 	
 	<hr></hr>
-	<a href="<%=request.getContextPath()%>/weixin/Wonderful.html">精彩互动</a><br>	
-	<a href="<%=request.getContextPath()%>/weixin/Local_info.html">本地资讯</a><br>
 	<hr></hr>
 	<a href="<%=request.getContextPath()%>/SimulationApp/laigao/laigao.html">家长投稿</a><br>
 	
