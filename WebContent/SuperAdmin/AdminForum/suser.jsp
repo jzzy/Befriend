@@ -44,10 +44,13 @@ if(admin==null){
 	return;
 }
 for(int i=0;i<ush.size();i++){
+	if(ush.get(i)==null){
+		continue;
+	}
 	//等于1 就是 超级管理员
 	if(admin.getLevel()==1){
 		if(pl.get(i)==null||ush.get(i)==null){
-			return;
+			continue;
 		}
 %>
 <form action="">
@@ -99,9 +102,10 @@ for(int i=0;i<ush.size();i++){
 <td>最后登入时间:<%=ush.get(i).getFinaltime()==null?"无":ush.get(i).getFinaltime()%>
 </td>
 </tr>
+
 <%
 String come="";
-
+if(ush.get(i).getCome()!=null){
 if(ush.get(i).getCome().equals(User.SYN)){
 	come="优教通";
 }else if(ush.get(i).getCome().equals(User.OWN)){
@@ -115,9 +119,10 @@ if(ush.get(i).getCome().equals(User.SYN)){
 else if(ush.get(i).getCome().equals(User.XDD)){
 	come="学多多";
 }
+}
 %>
 <tr>
-<td>来自:<%=come %>
+<td>来自:<%=ush.get(i).getCome() %>
 </td>
 </tr>
 </table>

@@ -17,7 +17,7 @@ $(document).ready(function(){
   $("#b01").click(function(){
 	  
   htmlobj=$.ajax({url:"/Befriend/getUsermh?username="+$("#tet").val(),async:false});
-  $("#myDiv").html(htmlobj.responseText);
+  $("#myDiv").html($("#myDiv").html()+htmlobj.responseText);
   });
 });
 

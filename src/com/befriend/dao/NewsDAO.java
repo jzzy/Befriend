@@ -51,7 +51,8 @@ public interface NewsDAO {
 	public List<News> Hotarea(String area, String areas, int pageSize,int currentPage);
 	// 3 本地 省级 市级 排序 按搜藏 评论数 时间 分页查询
 	public List<News> Hotarea(String area, int pageSize,int currentPage,String time);
-
+	//查询本地新闻数量
+	public int Hotarea(String area,String time);
 	
 	// 更新新闻被收藏的次数
 	public void Upnews(News news);

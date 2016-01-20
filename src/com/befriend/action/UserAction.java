@@ -1234,13 +1234,14 @@ public class UserAction extends ActionSupport {
 	 * 模糊查询user信息
 	 */
 	public String getUsermh() throws IOException {
-
+		System.out.println("username1:" + username);
 		if (!OpeFunction.isEmpty(username)) {
 			us = userdao.likeusername(username);
 		}
 		List<Password> pl = new ArrayList<Password>();
 		for (int i = 0; i < us.size(); i++) {
 			u = us.get(i);
+			System.out.println("username2:" + u.getUsername());
 			if (u != null) {
 				pd = userdao.select(u.getId());
 				pl.add(pd);
@@ -1250,7 +1251,7 @@ public class UserAction extends ActionSupport {
 			}
 		}
 
-		System.out.println("username:" + username);
+		
 
 		request.setAttribute("usaha", us);
 		request.setAttribute("pl", pl);

@@ -163,6 +163,10 @@
 		<action name="weiXniBDN" class="newsAction" method="weiXniBDN">
 		<result name="success">/weixin/index.jsp</result>
 		</action>
+		<!--微信查询 本地新闻ajax-->
+		<action name="weiXniProvince" class="newsAction" method="weiXniProvince">
+		<result name="success">/weixin/Ofindex.jsp</result>
+		</action>
 		
 		<!--微信通过id查询 新闻-->
 		<action name="weiXniNewsId" class="newsAction" method="weiXniNewsId">

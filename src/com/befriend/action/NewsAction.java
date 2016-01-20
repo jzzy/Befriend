@@ -345,8 +345,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		}
 
 		int a = 0;
-		if(!OpeFunction.isEmpty(province)){
-			session.setAttribute("province",province);
+		if (!OpeFunction.isEmpty(province)) {
+			session.setAttribute("province", province);
 		}
 		Object Oprovince = session.getAttribute("province");
 		if (Oprovince != null) {
@@ -356,7 +356,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			province = "湖南";
 		}
 		System.out.println(province);
-		a = ndao.area(province, 0, OpeFunction.getNowTime()).size();
+		a = ndao.Hotarea(province,OpeFunction.getNowTime());
 
 		if (a % pageSize == 0) {
 			a = a / pageSize;
@@ -451,7 +451,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 		for (Collect c : cdao.Allu(userid)) {
 			n = ndao.byid(c.getNewsid());
-			if(n!=null){
+			if (n != null) {
 				nl.add(n);
 			}
 
@@ -601,7 +601,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		int a = 0;
 		if (u != null) {
 			System.out.println("用户来自：" + u.getAddress());
-			a = ndao.area(u.getAddress(), 0, OpeFunction.getNowTime()).size();
+			a = ndao.Hotarea(u.getAddress(), OpeFunction.getNowTime());
 			if (a % pageSize == 0) {
 				a = a / pageSize;
 			} else {
@@ -616,8 +616,20 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage,
 					OpeFunction.getNowTime());
 		}
-		if(!OpeFunction.isEmpty(province)){
+		if (!OpeFunction.isEmpty(province)) {
 			session.setAttribute("province", province);
+			a = ndao.Hotarea(province, OpeFunction.getNowTime());
+			if (a % pageSize == 0) {
+				a = a / pageSize;
+			} else {
+				a = a / pageSize + 1;
+			}
+			if (currentPage > a) {
+				currentPage = a;
+			}
+			if (currentPage <= 0) {
+				currentPage = 1;
+			}
 			nl = ndao.Hotarea(province, pageSize, currentPage,
 					OpeFunction.getNowTime());
 			request.setAttribute("currentPage", currentPage);
@@ -637,7 +649,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (obj != null) {
 				province = obj.toString();
 			}
-			a = ndao.area(province, 0, OpeFunction.getNowTime()).size();
+			a = ndao.Hotarea(province, OpeFunction.getNowTime());
 			if (a % pageSize == 0) {
 				a = a / pageSize;
 			} else {
@@ -649,6 +661,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (currentPage <= 0) {
 				currentPage = 1;
 			}
+			
 			nl = ndao.Hotarea(province, pageSize, currentPage,
 					OpeFunction.getNowTime());
 
@@ -664,7 +677,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		System.out.println("用户来自：" + province);
 
 		request.setAttribute("currentPage", currentPage);
-		
+
 		request.setAttribute("nl", nl);
 		request.setAttribute("province", province);
 		request.setAttribute("a", a);
@@ -976,9 +989,53 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 		nl = ndao.Hotarea(province, pageSize, currentPage, time);
 		request.setAttribute("nl", nl);
+		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("province", province);
 		request.setAttribute("city", city);
 		System.out.println("" + province + nl.size() + "新闻");
+		return Action.SUCCESS;
+	}
+
+	/**
+	 * 微信公众号 本地新闻 按时间排序
+	 * 
+	 * @throws IOException
+	 * @throws InterruptedException
+	 * 
+	 */
+	public String weiXniProvince() throws IOException, InterruptedException {
+		if (!OpeFunction.isEmpty(province)) {
+			session.setAttribute("province", province);
+		} else {
+			Object pro = session.getAttribute("province");
+			if (pro == null) {
+				((HttpServletResponse) util.response()).sendRedirect(request
+						.getContextPath() + "/weixin/byip.html");
+			} else {
+				province = pro.toString();
+			}
+
+		}
+		int all = ndao.Hotarea(province, time);
+		int Max = 0;
+		if (all % pageSize == 0) {
+			Max = all / pageSize;
+		} else {
+			Max = all / pageSize + 1;
+		}
+		System.out.println("****" + province + nl.size() + "新闻 Max:"+Max+"currentPage:"+currentPage);
+		if (currentPage <= Max) {
+			nl = ndao.Hotarea(province, pageSize, currentPage, time);
+
+			request.setAttribute("nl", nl);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("province", province);
+			System.out.println("****" + province + nl.size() + "新闻 Max:"+Max+"currentPage:"+currentPage);
+			
+		} else {
+			System.out.println("下一页没有新闻了");
+
+		}
 		return Action.SUCCESS;
 	}
 
@@ -1324,7 +1381,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 			num = 2;
 			// 本省 新闻数量 小于2
-			if (ndao.area(area, num, OpeFunction.getNowTime()).size() < 2) {
+			if (ndao.Hotarea(area, OpeFunction.getNowTime()) < 2) {
 				System.out.println("本省新闻小于2条");
 				n4 = ndao.type(2, "轻松驿站", OpeFunction.getNowTime());
 
@@ -1380,19 +1437,20 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			System.out.println("百度定位 :" + pro);
 			if (pro != null) {
 				area = pro.toString();
-				province=area;
+				province = area;
 			}
 			if (u != null) {
 
-				System.out.println("获取到用户信息了"+ u.getAddress());
-				if( u.getAddress()!=null){
-				area = u.getAddress();
+				System.out.println("获取到用户信息了" + u.getAddress());
+				if (u.getAddress() != null) {
+					area = u.getAddress();
 				}
-				if(area==null){
-					((HttpServletResponse) util.response()).sendRedirect(request
-							.getContextPath() + "/SimulationApp/baidugps.html");
+				if (area == null) {
+					((HttpServletResponse) util.response())
+							.sendRedirect(request.getContextPath()
+									+ "/SimulationApp/baidugps.html");
 				}
-			
+
 			} else if (pro == null) {
 
 				((HttpServletResponse) util.response()).sendRedirect(request
@@ -1446,7 +1504,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 			num = 2;
 
-			if (ndao.area(area, num, OpeFunction.getNowTime()).size() < 2) {
+			if (ndao.Hotarea(area, OpeFunction.getNowTime()) < 2) {
 
 				System.out.println("本省新闻小于2条");
 				n4 = ndao.area("北京", num, OpeFunction.getNowTime());
@@ -1569,7 +1627,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			List<News> n4 = new ArrayList<News>();
 			num = 2;
 
-			if (ndao.area(area, num, OpeFunction.getNowTime()).size() < 2) {
+			if (ndao.Hotarea(area, OpeFunction.getNowTime()) < 2) {
 				System.out.println("本省新闻小于2条");
 				n4 = ndao.type(2, "轻松驿站", OpeFunction.getNowTime());
 
@@ -2120,7 +2178,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			}
 			for (Collect c : cdao.Allu(userid)) {
 				n = ndao.byid(c.getNewsid());
-				if(n!=null){
+				if (n != null) {
 					nl.add(n);
 				}
 

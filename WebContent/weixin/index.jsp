@@ -5,17 +5,25 @@
 <%@page import="com.befriend.entity.News"%>
 <%
 //获取前8个新闻
-List<News> nl=(List)request.getAttribute("nl");
+List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List)request.getAttribute("nl");
 //省级
-Object province=request.getAttribute("province");
+Object province=request.getAttribute("province")==null?"":request.getAttribute("province");
 //市级
-Object city=request.getAttribute("city");
-
+int currentPage=(Integer)request.getAttribute("currentPage")==null?0:(Integer)request.getAttribute("currentPage");
+int cp=currentPage;
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <script  src="SimulationApp/js/jquery.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+
+	  $("#b01").click(function(){
+	  htmlobj=$.ajax({url:"/Befriend/weiXniProvince?currentPage="+$("#divc").html(),async:false});
+	  $("#divc").html(parseInt($("#divc").html())+1);
+	  $("#myDiv").html($("#myDiv").html()+htmlobj.responseText);
+	  });
+	});
 $(document).ready(function(){
 	
 	//alert("cookie:"+document.cookie);
@@ -36,16 +44,25 @@ $(document).ready(function(){
 </head>
 
 <body>
+<div id="divc" style="display: none"><%=currentPage+1 %></div>
+
 <div class="cont">
- 
+
    <div class="top">
    
        <a href="<%=request.getContextPath()%>/webNewsA10" class="fl"><img src="<%=request.getContextPath()%>/weixin/images/xw_03.png" height="40" /></a>
       <!--   <p class="set fr"><a href="<%=request.getContextPath()%>/webNewsA10" title="返回主页"><img src="<%=request.getContextPath()%>/weixin/images/xw_07s.png" height="40" /></a></p>
   -->
  
-   <a style="float: right;font-size:16px;color:white;" href="<%=request.getContextPath()%>/SimulationApp/lihu/jsp/wechatSwitchregion.jsp" class="fl"> < 切换地区</a>
-    <center ><span style="font-size:16px;color:white;"><%=province %></span></center>
+    <a style="margin-top: 8px;float: right;font-size:16px;color:white;" href="<%=request.getContextPath()%>/SimulationApp/lihu/jsp/wechatSwitchregion.jsp" class="fl"> 
+	
+	<span>< 切换地区</span>
+    </a>
+    <center  style="margin-top: 8px; font-size:16px;color:white;">
+  
+    <span><%=province %></span>
+
+    </center>
    </div>
 
    <!--top-->
@@ -57,7 +74,7 @@ $(document).ready(function(){
    </span>
    </h1>
    -->
-   
+
   
 
    <%	   
@@ -140,10 +157,12 @@ $(document).ready(function(){
 			}
             %>  
    <!--list-->  
-   <div class="more4">
-     <dl>
-      <dt><a href="<%=request.getContextPath()%>/webWeiXinHotarea"><img src="<%=request.getContextPath()%>/weixin/images/xia.png" width="23"></a></dt>
-      <dd><a href="<%=request.getContextPath()%>/webWeiXinHotarea"> <b style="color:#666;font-size: 18px;"  >查看更多</b></a></dd>
+   <div id="myDiv"></div>
+   <div id="b01" class="more4">
+     <dl >
+      <dt><img src="<%=request.getContextPath()%>/weixin/images/xia.png" width="23"></dt>
+      <dd> <b   style="color:#666;font-size: 18px;"  >查看更多</b></dd>
+ 
       
     </dl>
   </div>

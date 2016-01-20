@@ -534,4 +534,13 @@ public class NewsDAOImpl implements NewsDAO {
 		return (int)(long)query.getSingleResult();
 	}
 
+	@Override
+	public int Hotarea(String area, String time) {
+		Query query = entityManager
+				.createQuery("select count(u) from News u  where u.time<=:time and u.area=:area");
+		query.setParameter("area", area);
+		query.setParameter("time", time);
+		return (int) (long) query.getSingleResult();
+	}
+
 }
