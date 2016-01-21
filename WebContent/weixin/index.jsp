@@ -21,7 +21,7 @@ $(window).scroll(function () {
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(document).height();
     var windowHeight = $(this).height();
-    if (scrollTop + windowHeight == scrollHeight) {
+    if (scrollTop + windowHeight >=scrollHeight-300) {
 	//alert("加载了");
 	 
 	htmlobj=$.ajax({url:"/Befriend/weiXniProvince?currentPage="+$("#divc").html(),async:false});
@@ -179,6 +179,7 @@ $(document).ready(function(){
             %>  
    <!--list-->  
    <div id="myDiv"></div>
+   <!--  
    <div id="b01" class="more4">
      <dl >
       <dt><img src="<%=request.getContextPath()%>/weixin/images/xia.png" width="23"></dt>
@@ -187,6 +188,7 @@ $(document).ready(function(){
       
     </dl>
   </div>
+  -->
   <!--more4-->
 </div>
 <!--cont-->
