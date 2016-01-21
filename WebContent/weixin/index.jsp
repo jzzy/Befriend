@@ -16,6 +16,27 @@ int cp=currentPage;
 <html xmlns="http://www.w3.org/1999/xhtml">
 <script  src="SimulationApp/js/jquery.js"></script>
 <script type="text/javascript">
+
+$(window).scroll(function () {
+    var scrollTop = $(this).scrollTop();
+    var scrollHeight = $(document).height();
+    var windowHeight = $(this).height();
+    if (scrollTop + windowHeight == scrollHeight) {
+	//alert("加载了");
+	 
+	htmlobj=$.ajax({url:"/Befriend/weiXniProvince?currentPage="+$("#divc").html(),async:false});
+	$("#divc").html(parseInt($("#divc").html())+1);
+	$("#myDiv").html($("#myDiv").html()+htmlobj.responseText);
+		 
+  //此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
+
+//var page = Number($("#redgiftNextPage").attr('currentpage')) + 1;
+//redgiftList(page);
+//$("#redgiftNextPage").attr('currentpage', page + 1);
+
+    }
+});
+
 $(document).ready(function(){
 
 	  $("#b01").click(function(){
@@ -50,7 +71,7 @@ $(document).ready(function(){
 
    <div class="top">
    
-       <a href="<%=request.getContextPath()%>/webNewsA10" class="fl"><img src="<%=request.getContextPath()%>/weixin/images/xw_03.png" height="40" /></a>
+       <a  href="<%=request.getContextPath()%>/webNewsA10" class="fl"><img src="<%=request.getContextPath()%>/weixin/images/xw_03.png" height="40" /></a>
       <!--   <p class="set fr"><a href="<%=request.getContextPath()%>/webNewsA10" title="返回主页"><img src="<%=request.getContextPath()%>/weixin/images/xw_07s.png" height="40" /></a></p>
   -->
  
@@ -58,7 +79,7 @@ $(document).ready(function(){
 	
 	<span>< 切换地区</span>
     </a>
-    <center  style="margin-top: 8px; font-size:16px;color:white;">
+    <center style="margin-top: 8px;margin-right:0px; font-size:16px;color:white;">
   
     <span><%=province %></span>
 
