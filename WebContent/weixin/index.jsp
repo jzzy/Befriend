@@ -21,7 +21,7 @@ $(window).scroll(function () {
     var scrollTop = $(this).scrollTop();
     var scrollHeight = $(document).height();
     var windowHeight = $(this).height();
-    if (scrollTop + windowHeight >=scrollHeight-300) {
+    if (scrollTop + windowHeight >=scrollHeight-100) {
 	//alert("加载了");
 	 
 	htmlobj=$.ajax({url:"/Befriend/weiXniProvince?currentPage="+$("#divc").html(),async:false});
