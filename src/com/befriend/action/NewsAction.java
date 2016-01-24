@@ -613,6 +613,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (currentPage <= 0) {
 				currentPage = 1;
 			}
+			session.setAttribute("province", u.getAddress());
 			nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage,
 					OpeFunction.getNowTime());
 		}
