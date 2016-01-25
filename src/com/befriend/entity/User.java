@@ -28,6 +28,7 @@ public class User implements Serializable
 	public static final String BBT="bbt";//掌中校园
 	public static final String SYN="syn";//优教通
 	public static final String ZHZH="zhzh";//翼校通 电信	
+	public static final String NLCOM="nlcom";//翼校通2 能龙教育		
 	public static final String XDD="xdd";// 学多多
 	public static final String KUX="kux";// 酷校
 	public static final String HCOM="hcom";// 恒谦教育

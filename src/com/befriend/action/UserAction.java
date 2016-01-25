@@ -2395,6 +2395,131 @@ public class UserAction extends ActionSupport {
 			System.out.println("转发走了");
 		}
 	}
+	public void thirdPartyNlSave() throws IOException, JSONException {
+		// nickname = userName;
+		// username = userId;
+		// phone = userPhone;
+		if (OpeFunction.isEmpty(username)) {
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/webNewsA10");
+			return;
+		}
+		os = User.NLCOM;
+		username = os + username;
+
+		u = userdao.byUsernameAccnumnoPhone(username);
+		if (u != null) {
+			System.out.println("ok");
+
+			int ut = u.getLoginnum();
+			if (ut > 0) {
+				ut = ++ut;
+				u.setLoginnum(ut);
+			} else {
+				u.setLoginnum(1);
+			}
+			u.setFinaltime(time);
+			u.setIp(request.getRemoteAddr());
+			userdao.update(u);
+			session.setAttribute("u", u);
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
+					+ u.getId();
+			WechatKit.sendGet(url);
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/webNewsA10");
+			System.out.println("转发走了");
+			return;
+		}
+		if (nickname == null) {
+			nickname = username.substring(0, (username.length() > 20 ? 20
+					: username.length()));
+		}
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
+				: nickname.length()));
+		synchronized (this) {
+
+			u = new User();
+			// 验证用户名
+			// String reg = "^[A-Za-z_][A-Za-z0-9]{5,17}";
+			boolean b = true;
+			// 判断生成群号 会不会和以前冲突
+			while (b) {
+				// 随机生成8位随机数 作为 群号
+				accnumno = String
+						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
+					b = false;
+				}
+
+			}
+
+			System.out.println("用户名:" + username);
+
+			System.out.println("用户号:" + accnumno);
+
+			u.setUsername(username);
+			u.setNickname(nickname);// 没有设置过显示用户名
+			u.setCome(os);
+			u.setOs(os);
+			u.setAccnumno(accnumno);
+			u.setStage("未填写");
+			if (!util.isEmpty(address)) {
+				u.setAddress(address);
+			}
+			if (!util.isEmpty(addcity)) {
+				u.setAddcity(addcity);
+			}
+
+			u.setFinaltime(time);
+			u.setSchool("未填写");
+			u.setLookphone(phone);
+			u.setTime(time);
+			u.setCompetence(0);// 普通用户
+			u.setGag(0);// 可以创建论坛
+			if (userdao.byUsernameAccnumnoPhone(username) != null) {
+				util.Out().print(false);
+				return;
+
+			}
+			userdao.save(u);
+		}
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
+				+ ",pw:" + password);
+
+		// 注册环信
+		u = userdao.byUsernameAccnumnoPhone(accnumno);
+		if (u != null) {
+			if (file != null) {
+
+				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
+				String pah = util.ufileToServer(path, file, fileFileName,
+						"jpg", true);
+				u.setImg(pah);
+				userdao.update(u);
+			} else {
+				System.out.println("没有获取到头像!");
+			}
+			pd.setUid(u.getId());
+			pd.setPassword("123456");
+			userdao.save(pd);
+			JSONObject json = new JSONObject();
+			json.put("username", u.getId());
+			// 用户id
+			json.put("password", "123456");
+			// 用户密码
+			String w = WechatKit.post(URL, json,
+					RefreshAccessToken.access_token);
+			System.out.println(w);
+
+			session.setAttribute("u", u);
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
+					+ u.getId();
+			WechatKit.sendGet(url);
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/webNewsA10");
+			System.out.println("转发走了");
+		}
+	}
 
 	public void thirdPartyKdSave() throws IOException, JSONException {
 		// kdSave

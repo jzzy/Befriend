@@ -735,7 +735,7 @@ public class ApputilAction {
 		l.add(User.HCOM);
 		l.add(User.KDCOM);
 		l.add(User.YGCOM);
-		
+		l.add(User.NLCOM);
 		province = User.ALL;
 		for (int i = 0; i < l.size(); i++) {
 			System.out.println("look aStas:" + l.get(i));

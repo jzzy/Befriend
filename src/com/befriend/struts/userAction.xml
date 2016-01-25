@@ -11,6 +11,9 @@
 			</result>
 		</action>
 		
+		<!-- 同步用户 能龙教育 登入 -->
+		<action name="thirdPartyNlSave" class="userAction" method="thirdPartyNlSave">
+		</action>
 		<!-- 同步用户 亿谷教育 登入 -->
 		<action name="thirdPartyYgSave" class="userAction" method="thirdPartyYgSave">
 		</action>
