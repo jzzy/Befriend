@@ -1477,13 +1477,13 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				if (area == null) {
 					((HttpServletResponse) util.response())
 							.sendRedirect(request.getContextPath()
-									+ "/SimulationApp/byip.html");
+									+ "/SimulationApp/byIp.jsp");
 				}
 
 			} else if (pro == null) {
 
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/byip.html");
+						.getContextPath() + "/SimulationApp/byIp.jsp");
 			}
 
 			System.out.println(" ±º‰ «" + util.getNowTime());
