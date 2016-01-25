@@ -7,7 +7,7 @@
 
 
 
-Object province=request.getAttribute("province");
+Object province=session.getAttribute("province");
 //获取总的页数
 int a=(Integer)request.getAttribute("a");
 //获取第几页

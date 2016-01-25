@@ -599,9 +599,28 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		}
 
 		int a = 0;
-		if (u != null) {
-			System.out.println("用户来自：" + u.getAddress());
-			a = ndao.Hotarea(u.getAddress(), OpeFunction.getNowTime());
+//		if (u != null) {
+//			System.out.println("用户来自：" + u.getAddress());
+//			a = ndao.Hotarea(u.getAddress(), OpeFunction.getNowTime());
+//			if (a % pageSize == 0) {
+//				a = a / pageSize;
+//			} else {
+//				a = a / pageSize + 1;
+//			}
+//			if (currentPage > a) {
+//				currentPage = a;
+//			}
+//			if (currentPage <= 0) {
+//				currentPage = 1;
+//			}
+//			session.setAttribute("province", u.getAddress());
+//			nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage,
+//					OpeFunction.getNowTime());
+//		}
+		
+		if (!OpeFunction.isEmpty(province)) {
+			session.setAttribute("province", province);
+			a = ndao.Hotarea(province, OpeFunction.getNowTime());
 			if (a % pageSize == 0) {
 				a = a / pageSize;
 			} else {
@@ -613,12 +632,21 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (currentPage <= 0) {
 				currentPage = 1;
 			}
-			session.setAttribute("province", u.getAddress());
-			nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage,
+			nl = ndao.Hotarea(province, pageSize, currentPage,
 					OpeFunction.getNowTime());
+			request.setAttribute("currentPage", currentPage);
+
+			request.setAttribute("nl", nl);
+			request.setAttribute("province", province);
+			request.setAttribute("a", a);
+			System.out.println(" 有-" + a + "-页");
+			System.out.println("每页多少条-" + pageSize);
+			System.out.println("第-" + currentPage + "-页");
+			System.out.println("用户来自：" + province);
+			return Action.SUCCESS;
 		}
-		if (!OpeFunction.isEmpty(province)) {
-			session.setAttribute("province", province);
+		if(session.getAttribute("province")!=null){
+			province=session.getAttribute("province").toString();
 			a = ndao.Hotarea(province, OpeFunction.getNowTime());
 			if (a % pageSize == 0) {
 				a = a / pageSize;
@@ -680,7 +708,6 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		request.setAttribute("currentPage", currentPage);
 
 		request.setAttribute("nl", nl);
-		request.setAttribute("province", province);
 		request.setAttribute("a", a);
 		return Action.SUCCESS;
 	}
@@ -1445,17 +1472,18 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				System.out.println("获取到用户信息了" + u.getAddress());
 				if (u.getAddress() != null) {
 					area = u.getAddress();
+					session.setAttribute("province",  u.getAddress());
 				}
 				if (area == null) {
 					((HttpServletResponse) util.response())
 							.sendRedirect(request.getContextPath()
-									+ "/SimulationApp/baidugps.html");
+									+ "/SimulationApp/byip.html");
 				}
 
 			} else if (pro == null) {
 
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/baidugps.html");
+						.getContextPath() + "/SimulationApp/byip.html");
 			}
 
 			System.out.println("时间是" + util.getNowTime());
