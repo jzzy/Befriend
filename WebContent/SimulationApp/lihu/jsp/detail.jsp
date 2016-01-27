@@ -41,8 +41,17 @@
 				</div>
 				<div class="infoArea">
 					<p class="name"><%=edus.getName() %></p>
-					<p class="rate"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" /><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" /><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" /><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" /><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_off.png" alt="" /></p>
-					<p class="point"><span>设施:7.0</span><span>环境:1.0</span><span>服务:0.0</span></p>
+					<p class="rate">
+					<%
+							for(int g=0;g<edus.getStar();g++){
+							%>
+					<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" />
+					<%
+							}
+					%>
+					
+					</p>
+					<p class="point"><span>设施:<%=edus.getEnvScore() %></span><span>环境:<%=edus.getSerScore() %></span><span>服务:<%=edus.getStar() %></span></p>
 				</div>
 			</div>
 			<p class="adress"><a class="clearfix" href="#"><%=edus.getAddress() %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
@@ -56,20 +65,40 @@
 			%>
 				<li>
 					<div class="inner clearfix">
-						<div class="userImg"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/b10.png" alt="ico" /></div>
+						<div class="userImg"><img src="<%=request.getContextPath() %><%=educl.get(i).getUser().getImg()==null?"http://182.92.100.235/Befriend/SimulationApp/images/logod.png":educl.get(i).getUser().getImg() %>" alt="ico" /></div>
 						<div class="message">
-							<p class="userId"><%=educl.get(i).getUser().getNickname() %><span class="rate">
-							<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" />
-							<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" />
-							<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" />
-							<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" /><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_off.png" alt="" /></span></p>
+							<p class="userId"><%=educl.get(i).getUser().getNickname() %><span  class="rate">
+							<%
+							for(int g=0;g<educl.get(i).getScore();g++){
+							%>
+							<img  src="<%=request.getContextPath() %>/SimulationApp/lihu/images/detail_star_on.png" alt="" />
+						<%
+							}
+						%>
+							
+							</span>
+							</p>
 							<p class="words">
 							<%=educl.get(i).getContent() %>
 							</p>
 							<p class="attachImg">
-							<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/b10.png" alt="" />
-							<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/b10.png" alt="" />
-							<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/b10.png" alt="" />
+							<%
+							if(!OpeFunction.isEmpty(educl.get(i).getPictures())){
+								
+							
+							String s = new String(educl.get(i).getPictures());   
+					        String a[] = s.split("!#");  
+					        for(int y=0;y<a.length;y++){
+								 System.out.println("i:"+i+"y:"+y+":"+a[y]);
+							
+			
+				
+							%>
+							<img src="<%="http://182.92.100.235/"+a[y] %>" alt="" />
+							<%
+					        }
+							}
+							%>
 							</p>
 							<p class="time"><%=educl.get(i).getTime() %></p>
 						</div>

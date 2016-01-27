@@ -16,6 +16,7 @@ public interface EduServicesDAO
 	public EduServices find(int id);
 	public EduServices findMerchantId(int merchantId);
 	public List<EduServices> find(Map<String,String> map,int currentPage,int pageSize);
+	public List<EduServices> findLike(String value,int currentPage,int pageSize);
 	
 	public void save(Attention Attention);
 	public void remove(Attention Attention);

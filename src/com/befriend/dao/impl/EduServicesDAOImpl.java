@@ -2,10 +2,13 @@ package com.befriend.dao.impl;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import org.springframework.transaction.annotation.Transactional;
+
 import com.befriend.dao.EduServicesDAO;
 import com.befriend.entity.Attention;
 import com.befriend.entity.EduServices;
@@ -111,6 +114,17 @@ public class EduServicesDAOImpl implements EduServicesDAO
 		if(edusl.size()>0)
 			return edusl.get(0);
 		return null;
+	}
+
+	@Override
+	public List<EduServices> findLike(String value, int currentPage,
+			int pageSize) {
+		String sql = "select u from EduServices u where u.name like :value or u.classSecond like :value";
+		Query query = entityManger.createQuery(sql);
+		query.setParameter("value","%"+value+"%");
+		query.setFirstResult((currentPage-1)*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
 	}
 
 }

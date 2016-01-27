@@ -7,6 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="js/jquery.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>教辅机构</title>
 <script type="text/javascript" src="<%=request.getContextPath() %>/SimulationApp/lihu/js/jquery.js"></script>
@@ -30,6 +31,7 @@ Object classSecond=request.getAttribute("classSecond");
 
 
 Object address=request.getAttribute("address");
+Object value=request.getAttribute("value");
 
 %>
 <script type="text/javascript">
@@ -38,9 +40,9 @@ $(window).scroll(function () {
     var scrollHeight = $(document).height();
     var windowHeight = $(this).height();
     if (scrollTop + windowHeight >=scrollHeight) {
-	//alert("加载了"+"/Befriend/getEduWebAjax?address=<%=address==null?"":address%>&classSecond=<%=classSecond==null?"":classSecond%>&classFirst=<%=classFirst==null?"":classSecond%>&city=<%=city==null?"":city%>&county=<%=county==null?"":county%>&province=<%=province==null?"":province%>&currentPage="+$("#divc").html());
+	//alert("加载了");
 	 
-	htmlobj=$.ajax({url:"/Befriend/getEduWebAjax?address=<%=address==null?"":address%>&classSecond=<%=classSecond==null?"":classSecond%>&classFirst=<%=classFirst==null?"":classSecond%>&city=<%=city==null?"":city%>&county=<%=county==null?"":county%>&province=<%=province==null?"":province%>&currentPage="+$("#divc").html(),async:false});
+	htmlobj=$.ajax({url:"/Befriend/getLikeEduWebAjax?value=<%=value==null?"":value%>&currentPage="+$("#divc").html(),async:false});
 	$("#divc").html(parseInt($("#divc").html())+1);
      $("#myDiv").html($("#myDiv").html()+htmlobj.responseText);
 		 
@@ -59,19 +61,26 @@ $(window).scroll(function () {
 
 <div id="divc">2</div>
 	<div class="cont">
-		<div id="header">
+	<form action="getLikeEduWeb">
+	
+	<div id="header" class="resoult">
 			<div class="topArea clearfix">
 				<div class="prev">
 					<a href="#" onclick="javascript:history.back(-1);"></a>
 				</div>
-				<h1>教辅机构</h1>
+				<div class="topSearch">
+					<div class="inner">
+						<!--span class="search_img"><img src="images/search_img.png" alt="" /></span-->
+						<input type="text" name="value" id="searchword" alt="搜索窗" value="<%=value %>" />
+						<span id="input_x"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/input_x.png" alt="" /></span>
+					</div>
+				</div>
 				<div class="topTool">
-					<a href="<%=request.getContextPath() %>/SimulationApp/lihu/search.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/search_ico.png" alt="搜索" /></a>
-					<a href="<%=request.getContextPath() %>/SimulationApp/lihu/location.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/location_ico.png" alt="定位" /></a>
+					<input type="image" name="submit" src="<%=request.getContextPath() %>/SimulationApp/lihu/images/search_ico.png"/>
 				</div>
 			</div>
 		</div><!--header-->
-		
+		</form>
 		<div id="container">
 			<ul class="navi clearfix" id="jMenu">
 				<li class="district">

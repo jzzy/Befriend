@@ -52,6 +52,9 @@ public class EduCommentAction implements ServletRequestAware {
 	private File[] pictures;
 	private String[] picturesFileName;
 	private String[] picturesContentType;
+	private File[] file;
+	private String[] fileFileName;
+	private String[] fileContentType;
 	private HttpSession session = ServletActionContext.getRequest()
 			.getSession();
 	private int currentPage = 1;
@@ -303,6 +306,7 @@ public class EduCommentAction implements ServletRequestAware {
 		System.out.println("merchantId:" + merchantId);
 		System.out.println("score:" + score);
 		System.out.println("content:" + content);
+		System.out.println("file:" + file==null);
 		if (!OpeFunction.isEmpty(merchantId)) {
 			User user = (User) session.getAttribute("u");
 			if (user != null) {
@@ -486,6 +490,30 @@ public class EduCommentAction implements ServletRequestAware {
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub
 		this.request = arg0;
+	}
+
+	public File[] getFile() {
+		return file;
+	}
+
+	public void setFile(File[] file) {
+		this.file = file;
+	}
+
+	public String[] getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String[] fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+
+	public String[] getFileContentType() {
+		return fileContentType;
+	}
+
+	public void setFileContentType(String[] fileContentType) {
+		this.fileContentType = fileContentType;
 	}
 
 }

@@ -9,6 +9,19 @@
    
 	    <result name="success"> /SimulationApp/lihu/jsp/eduserv.jsp</result>
 	    </action>
+	      <action name="getEduWebAjax" class="eduAction" method="getEduWebAjax">
+   
+	    <result name="success"> /SimulationApp/lihu/jsp/Ajax/eduservAjax.jsp</result>
+	    </action>
+	      <action name="getLikeEduWeb" class="eduAction" method="getLikeEduWeb">
+   
+	    <result name="success"> /SimulationApp/lihu/jsp/search_resoult.jsp</result>
+	    </action>
+	    <action name="getLikeEduWebAjax" class="eduAction" method="getLikeEduWebAjax">
+   
+	    <result name="success"> /SimulationApp/lihu/jsp/Ajax/eduservAjax.jsp</result>
+	    </action>
+	    
 	   
 	    <action name="saveEduAttention" class="eduAction" method="saveEduAttention"></action>
 	    <action name="removeEduAttention" class="eduAction" method="removeEduAttention"></action>

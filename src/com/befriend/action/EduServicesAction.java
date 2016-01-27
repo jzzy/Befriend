@@ -8,8 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -37,6 +35,7 @@ public class EduServicesAction extends ActionSupport implements
 	private String classFirst;
 	private String classSecond;
 	private String address;
+	private String value;
 	private int currentPage = 1;
 	private int pageSize = 10;
 	private Integer userid = null;
@@ -91,35 +90,122 @@ public class EduServicesAction extends ActionSupport implements
 
 			Map<String, String> map = new HashMap<String, String>();
 
-			if (!StringUtils.isEmpty(merchantId)) {
-				map.put("merchantId", merchantId);
-			}
+//			if (!OpeFunction.isEmpty(merchantId)) {
+//				map.put("merchantId", merchantId);
+//			}
 
-			if (!StringUtils.isEmpty(province)) {
+			if (!OpeFunction.isEmpty(province)) {
 				map.put("province", province);
+				request.setAttribute("province", province);
 			}
 
-			if (!StringUtils.isEmpty(county)) {
+			if (!OpeFunction.isEmpty(county)) {
 				map.put("county", county);
+				request.setAttribute("county", county);
 			}
 
-			if (!StringUtils.isEmpty(city)) {
+			if (!OpeFunction.isEmpty(city)) {
 				map.put("city", city);
+				request.setAttribute("city", city);
 			}
 
-			if (!StringUtils.isEmpty(classFirst)) {
+			if (!OpeFunction.isEmpty(classFirst)) {
 				map.put("classFirst", classFirst);
+				request.setAttribute("classFirst", classFirst);
 			}
 
-			if (!StringUtils.isEmpty(classSecond)) {
+			if (!OpeFunction.isEmpty(classSecond)) {
 				map.put("classSecond", classSecond);
+				request.setAttribute("classSecond", classSecond);
 			}
 
-			if (!StringUtils.isEmpty(address)) {
+			if (!OpeFunction.isEmpty(address)) {
 				map.put("address", address);
+				request.setAttribute("address", address);
+			}
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("EduServices",
+					eduServicesDAO.find(map, currentPage, pageSize));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+
+	}
+	public String getEduWebAjax() throws IOException {
+		try {
+
+			Map<String, String> map = new HashMap<String, String>();
+
+//			if (!OpeFunction.isEmpty(merchantId)) {
+//				map.put("merchantId", merchantId);
+//			}
+			
+			if (!OpeFunction.isEmpty(province)) {
+				map.put("province", province);
+				System.out.println("province"+province);
+			}
+
+			if (!OpeFunction.isEmpty(county)) {
+				map.put("county", county);
+				System.out.println("county"+county);
+			}
+
+			if (!OpeFunction.isEmpty(city)) {
+				map.put("city", city);
+				System.out.println("city"+city);
+			}
+
+			if (!OpeFunction.isEmpty(classFirst)) {
+				map.put("classFirst", classFirst);
+				System.out.println("classFirst"+classFirst);
+			}
+
+			if (!OpeFunction.isEmpty(classSecond)) {
+				map.put("classSecond", classSecond);
+				System.out.println("classSecond"+classSecond);
+			}
+
+			if (!OpeFunction.isEmpty(address)) {
+				map.put("address", address);
+				System.out.println("address"+address);
 			}
 			request.setAttribute("EduServices",
 					eduServicesDAO.find(map, currentPage, pageSize));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+
+	}
+	public String getLikeEduWeb() throws IOException {
+		try {
+			System.out.println("value"+value);
+
+			request.setAttribute("EduServices",
+					eduServicesDAO.findLike(value, currentPage, pageSize));
+			request.setAttribute("value",value);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+
+	}
+	public String getLikeEduWebAjax() throws IOException {
+		try {
+			System.out.println("value"+value);
+			System.out.println("currentPage"+currentPage);
+			List<EduServices> edusl=eduServicesDAO.findLike(value, currentPage, pageSize);
+			if(edusl.size()==0){
+				System.out.println("没有更多了！");
+				return null;
+			}
+			request.setAttribute("EduServices",
+					edusl);
+			request.setAttribute("value",value);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -134,31 +220,31 @@ public class EduServicesAction extends ActionSupport implements
 		response.setCharacterEncoding("utf-8");
 		Map<String, String> map = new HashMap<String, String>();
 
-		if (!StringUtils.isEmpty(merchantId)) {
+		if (!OpeFunction.isEmpty(merchantId)) {
 			map.put("merchantId", merchantId);
 		}
 
-		if (!StringUtils.isEmpty(province)) {
+		if (!OpeFunction.isEmpty(province)) {
 			map.put("province", province);
 		}
 
-		if (!StringUtils.isEmpty(county)) {
+		if (!OpeFunction.isEmpty(county)) {
 			map.put("county", county);
 		}
 
-		if (!StringUtils.isEmpty(city)) {
+		if (!OpeFunction.isEmpty(city)) {
 			map.put("city", city);
 		}
 
-		if (!StringUtils.isEmpty(classFirst)) {
+		if (!OpeFunction.isEmpty(classFirst)) {
 			map.put("classFirst", classFirst);
 		}
 
-		if (!StringUtils.isEmpty(classSecond)) {
+		if (!OpeFunction.isEmpty(classSecond)) {
 			map.put("classSecond", classSecond);
 		}
 
-		if (!StringUtils.isEmpty(address)) {
+		if (!OpeFunction.isEmpty(address)) {
 			map.put("address", address);
 		}
 
@@ -282,6 +368,14 @@ public class EduServicesAction extends ActionSupport implements
 
 	public void setAttentionId(Integer attentionId) {
 		this.attentionId = attentionId;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	@Override
