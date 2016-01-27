@@ -13,7 +13,7 @@
     $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js',function(){  
     	 // alert(remote_ip_info.country);//国家  
     	  //alert(remote_ip_info.province);//省份  
-    	  //alert(remote_ip_info.city);//城市  
+    	 // alert(remote_ip_info.city);//城市  
     	  //alert("您所在的省份为:" + remote_ip_info.province);
     	  if(<%=session.getAttribute("province")==null%>){
     		//  alert("进入主页");

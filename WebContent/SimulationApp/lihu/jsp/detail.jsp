@@ -58,7 +58,7 @@
 			<p class="tel"><a class="clearfix" href="#"><%=edus.getTelephone() %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
 		</div>
 		<div class="review">
-			<h2><a href="review.html">网友点评<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="ico" /></a></h2>
+			<h2><a href="#">网友点评<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="ico" /></a></h2>
 			<ul>
 			<%
 			for(int i=0;i<educl.size();i++){
@@ -92,9 +92,10 @@
 								 System.out.println("i:"+i+"y:"+y+":"+a[y]);
 							
 			
-				
+							//http://182.92.100.235
+							//http://123.56.45.164
 							%>
-							<img src="<%="http://182.92.100.235/"+a[y] %>" alt="" />
+							<img src="<%="http://182.92.100.235"+a[y] %>" alt="pic" />
 							<%
 					        }
 							}
@@ -109,7 +110,7 @@
 			</ul>
 		</div>
 		<div class="shopInfo">
-			<h2><a href="shopinfo.html">商户信息<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="ico" /></a></h2>
+			<h2><a href="#">商户信息<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="ico" /></a></h2>
 			<p class="time">营业时间&nbsp;:&nbsp;尚无营业时间</p>
 			<p class="tel">联系电话&nbsp;:&nbsp;<%=edus.getTelephone() %></p>
 			<p class="shopName">商户名称&nbsp;:&nbsp;<%=edus.getName() %></p>

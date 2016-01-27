@@ -21,9 +21,14 @@
 					</div>
 					<h1>写点评</h1>
 					<div class="topTool writeBtn">
-						<span>
-						<input type="image" name="submit" src="images/search_ico.png"/>
-						</span>
+					
+						<!-- 
+						<input style="background:#ff6633;margin-top: 0px;width: 50px;height: 30px;" type="image" name="submit" value=" 发送" />
+					
+						 -->
+						 <input type="image" style="line-height:24px;background:#ff6633;font-size:16px;margin-top: 5px;border:none;width: 48px;height: 30px;" name="submit" value="&nbsp发送" />
+					
+						
 					</div>
 				</div>
 			</div><!--header-->
@@ -41,8 +46,19 @@
 						<p class="info">加油，还差<span>50</span>字！</p>
 					</div>
 					<div class="attach">
-						<p class="info">点击+号上传图片,点击删除已选图片</p>
+						<input class="info" type="file" name="pictures"/>
+						<!--  
+						<input class="info" type="file" name="pictures"/>
+						<input class="info" type="file" name="pictures"/>
+						<input class="info" type="file" name="pictures"/>
+						<input class="info" type="file" name="pictures"/>
+						
+						<p class="info">
+						点击+号上传图片,点击删除已选图片</p>
+						
 						<div id="zyupload" class="zyupload"></div>
+						-->
+						
 					</div>
 				</div>
 			</div><!--container-->
@@ -79,7 +95,7 @@
 
 	$('#raty').raty({
 		number: 5,//多少个星星设置
-		score: 0,//初始值是设置
+		score: 1,//初始值是设置
 		targetType: 'number',//类型选择，number是数字值，hint，是设置的数组值
 		path      : 'images',
 		cancelOff : 'commentstar_off.png',
@@ -104,7 +120,7 @@
 			height           :   "auto",                 // 宽度
 			itemWidth        :   "60%",                 // 文件项的宽度
 			itemHeight       :   "80px",                 // 文件项的高度
-			url              :   "http://localhost/Befriend/addWebComments",  // 上传文件的路径
+			url              :   "upload.action",  // 上传文件的路径
 			fileType         :   ["jpg","png","js","exe"],// 上传文件的类型
 			fileSize         :   51200000,                // 上传文件的大小
 			multiple         :   true,                    // 是否可以多个文件上传

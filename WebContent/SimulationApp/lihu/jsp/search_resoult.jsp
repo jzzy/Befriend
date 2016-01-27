@@ -146,7 +146,9 @@ $(window).scroll(function () {
 							</p>
 							<div class="clearfix"><strong><%=lEduServices.get(i).getCity()%></strong><span><%=lEduServices.get(i).getClassFirst() %></span></div>
 						</div>
+						<!-- 
 						<div class="distance">8000m</div>
+						 -->
 					</a>
 				</li>
 			<%

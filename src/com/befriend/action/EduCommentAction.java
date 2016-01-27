@@ -52,9 +52,6 @@ public class EduCommentAction implements ServletRequestAware {
 	private File[] pictures;
 	private String[] picturesFileName;
 	private String[] picturesContentType;
-	private File[] file;
-	private String[] fileFileName;
-	private String[] fileContentType;
 	private HttpSession session = ServletActionContext.getRequest()
 			.getSession();
 	private int currentPage = 1;
@@ -225,7 +222,7 @@ public class EduCommentAction implements ServletRequestAware {
 				String picStr = "";
 				if (pictures != null && pictures.length > 0) {
 					System.out.println("upload");
-					String path = "/file/" + user.getId() + "/EduComment/"
+					String path = "/file/" +OpeFunction.getNameDayTime()+"/"+ user.getId() + "/EduComment/"
 							+ merchantId + "/";
 					String realPath = ServletActionContext.getServletContext()
 							.getRealPath(path).replace("Befriend", "");
@@ -301,13 +298,14 @@ public class EduCommentAction implements ServletRequestAware {
 	 * @throws IOException
 	 */
 	public void addWebComments() throws IOException {
-		String text;
+		String text="";
+		String loginPage="";
+		
 		merchantId = (String) session.getAttribute("merchantId");
 		System.out.println("merchantId:" + merchantId);
 		System.out.println("score:" + score);
 		System.out.println("content:" + content);
-		System.out.println("file:" + file==null);
-		if (!OpeFunction.isEmpty(merchantId)) {
+		if (!OpeFunction.isEmpty(merchantId)&&!OpeFunction.isEmpty(content)) {
 			User user = (User) session.getAttribute("u");
 			if (user != null) {
 				EduComment eduComment = new EduComment();
@@ -315,7 +313,7 @@ public class EduCommentAction implements ServletRequestAware {
 				String picStr = "";
 				if (pictures != null && pictures.length > 0) {
 					System.out.println("upload");
-					String path = "/file/" + user.getId() + "/EduComment/"
+					String path = "/file/" +OpeFunction.getNameDayTime()+"/"+ user.getId() + "/EduComment/"
 							+ merchantId + "/";
 					String realPath = ServletActionContext.getServletContext()
 							.getRealPath(path).replace("Befriend", "");
@@ -363,19 +361,22 @@ public class EduCommentAction implements ServletRequestAware {
 				eduCommentDAO.save(eduComment);
 				text = "评论成功";
 				System.out.println(true);
+				loginPage = "/Befriend/getWebCommments?merchantId=" + merchantId;
 			} else {
 				System.out.println(false);
 				text = "未登入";
+				loginPage = "/Befriend/SimulationApp/login.html";
 			}
 		} else {
 			System.out.println(false);
 			text = "评论失败";
+			loginPage = "/Befriend/getWebCommments?merchantId=" + merchantId;
 		}
 		HttpServletResponse response = ServletActionContext.getResponse();
 
 		response.setCharacterEncoding("GBK");
 		PrintWriter out = response.getWriter();
-		String loginPage = "Befriend/getWebCommments?merchantId=" + merchantId;
+		 
 		StringBuilder builder = new StringBuilder();
 		builder.append("<script type=\"text/javascript\">");
 		builder.append("alert('" + text + "');");
@@ -490,30 +491,6 @@ public class EduCommentAction implements ServletRequestAware {
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub
 		this.request = arg0;
-	}
-
-	public File[] getFile() {
-		return file;
-	}
-
-	public void setFile(File[] file) {
-		this.file = file;
-	}
-
-	public String[] getFileFileName() {
-		return fileFileName;
-	}
-
-	public void setFileFileName(String[] fileFileName) {
-		this.fileFileName = fileFileName;
-	}
-
-	public String[] getFileContentType() {
-		return fileContentType;
-	}
-
-	public void setFileContentType(String[] fileContentType) {
-		this.fileContentType = fileContentType;
 	}
 
 }
