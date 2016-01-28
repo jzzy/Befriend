@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -21,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.crypto.Cipher;
@@ -51,12 +53,14 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.bouncycastle.asn1.cms.Time;
+import org.json.JSONObject;
 
 import com.befriend.email.MailSenderInfo;
 import com.befriend.email.SimpleMailSender;
 import com.befriend.entity.User;
 import com.befriend.wechat.WechatKit;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionContext;
 import com.sun.rowset.internal.Row;
 
@@ -671,7 +675,15 @@ public class OpeFunction {
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException, ParseException {
-
+		File file=new File("C:\\Users\\Administrator\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Befriend\\address.json");
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+		Gson gs = new Gson();
+		List<SortModel> lsm = gs.fromJson(br.readLine(), new TypeToken<List<SortModel>>(){}.getType());
+		
+		for (SortModel sortModel : lsm) {
+			System.out.println(sortModel.getName()+sortModel.getSortLetters());
+		}
 		// System.out.println(calculatingTime("2015-11-01 14:49:00",
 		// "2015-12-03 14:49:00"));
 		// String str = "123456789";

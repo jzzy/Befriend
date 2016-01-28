@@ -57,7 +57,7 @@ $(window).scroll(function () {
 </head>
 <body>
 
-<div id="divc">2</div>
+<div style="display: none;" id="divc">2</div>
 	<div class="cont">
 		<div id="header">
 			<div class="topArea clearfix">
