@@ -126,28 +126,20 @@ public class ApputilAction {
 	private final static String IP = "http://182.92.100.235/";// 正式服
 
 	// private final static String IP="http://192.168.1.240/";//本地
-	public void saveCity() throws IOException {
-		File file = new File(
-				"C:\\Users\\Administrator\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Befriend\\address.json");
-		FileReader fr = new FileReader(file);
-		BufferedReader br = new BufferedReader(fr);
-		Gson gs = new Gson();
-		List<SortModel> lsm = gs.fromJson(br.readLine(),
-				new TypeToken<List<SortModel>>() {
-				}.getType());
-
-		for (SortModel sortModel : lsm) {
-			System.out
-					.println(sortModel.getName() + sortModel.getSortLetters());
-			City c=new City();
-			//c.setValue(sortModel.getName());
-		//	c.setKey(sortModel.getSortLetters());
-			System.out
-			.println(c.getValue() + c.getKey());
-	
-			audao.Save(c);
-	
+	public void obtainCity() throws IOException {
+		List<City> cl=audao.cityFindAll();
+		String so="";
+		for (int i=0;i<cl.size();i++) {
+		
+			if(i+1<cl.size()&&!so.equals(cl.get(i).getSortmodel())){
+				System.out.println("<dt id=key"+cl.get(i).getSortmodel()+">"+cl.get(i).getSortmodel()+"</dt>");
+				
+			}
+			
+			System.out.println("<dd><a href=getEduWeb?city="+cl.get(i).getName().substring(0, (cl.get(i).getName().length()-1))+">"+cl.get(i).getName()+"</a></dd>");
+			so=cl.get(i).getSortmodel();
 		}
+		request.setAttribute("cl", cl);
 	}
 
 	public void RemoveParentsLetterone() throws IOException {

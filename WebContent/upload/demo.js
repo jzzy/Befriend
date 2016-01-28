@@ -33,6 +33,7 @@ $(function(){
 			console.info(file);
 		},
 		onComplete: function(responseInfo){           // 上传完成的回调方法
+			
 			console.info("文件上传完成");
 			console.info(responseInfo);
 		}

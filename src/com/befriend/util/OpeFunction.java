@@ -84,6 +84,31 @@ import javax.crypto.spec.IvParameterSpec;
 
 @SuppressWarnings("all")
 public class OpeFunction {
+	
+	/**
+	 * 读取文件 转json
+	 * 
+	 * @throws IOException
+	 */
+	public static List outFile() throws IOException {
+		File file = new File(
+				"C:\\Users\\彦楠\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Befriend\\address.json");
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+		Gson gs = new Gson();
+		List<SortModel> lsm = gs.fromJson(br.readLine(),
+				new TypeToken<List<SortModel>>() {
+				}.getType());
+
+		for (SortModel sortModel : lsm) {
+			System.out
+					.println(sortModel.getName() + sortModel.getSortLetters());
+			
+			
+
+		}
+		return lsm;
+	}
 	/**
 	 * js返回到html
 	 * 
@@ -675,24 +700,24 @@ public class OpeFunction {
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException, ParseException {
-		File file=new File("C:\\Users\\Administrator\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Befriend\\address.json");
-		FileReader fr = new FileReader(file);
-		BufferedReader br = new BufferedReader(fr);
-		Gson gs = new Gson();
-		List<SortModel> lsm = gs.fromJson(br.readLine(), new TypeToken<List<SortModel>>(){}.getType());
+//		File file=new File("C:\\Users\\Administrator\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Befriend\\address.json");
+//		FileReader fr = new FileReader(file);
+//		BufferedReader br = new BufferedReader(fr);
+//		Gson gs = new Gson();
+//		List<SortModel> lsm = gs.fromJson(br.readLine(), new TypeToken<List<SortModel>>(){}.getType());
+//		
+//		for (SortModel sortModel : lsm) {
+//			System.out.println(sortModel.getName()+sortModel.getSortLetters());
+//		}
 		
-		for (SortModel sortModel : lsm) {
-			System.out.println(sortModel.getName()+sortModel.getSortLetters());
-		}
 		// System.out.println(calculatingTime("2015-11-01 14:49:00",
 		// "2015-12-03 14:49:00"));
-		// String str = "123456789";
-		// String nickname = "123456789";
-		// nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-		// : nickname.length()));
-		// System.out.println(nickname);
-		// System.out.println(getNameDayTime());
-		// System.out.println(setTime("1015-11-23  16:38:54"));
+		 String str = "123456789";
+		 String nickname = "123456789";
+		 nickname = nickname.substring(0, (nickname.length()-1));
+		 System.out.println(nickname);
+//		 System.out.println(getNameDayTime());
+//		 System.out.println(setTime("1015-11-23  16:38:54"));
 
 //		  System.out.println(calculatingTime("2015-11-01 14:49:00",
 //		  "2015-12-03 14:49:00"));

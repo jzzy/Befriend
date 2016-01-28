@@ -6,7 +6,7 @@
 	
 			
 		
-		<action name="saveCity" class="appupAction" method="saveCity">
+		<action name="obtainCity" class="appupAction" method="obtainCity">
 		
 		
 		</action>

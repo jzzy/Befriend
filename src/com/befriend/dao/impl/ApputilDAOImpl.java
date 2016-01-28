@@ -430,7 +430,7 @@ public class ApputilDAOImpl implements ApputilDAO {
 	}
 
 	@Override
-	public List<City> Cityfind(String key) {
+	public List<City> cityFind(String key) {
 		Query query = entityManager
 				.createQuery("select u from City u where u.key=:key");
 		query.setParameter("key", key);
@@ -443,6 +443,14 @@ public class ApputilDAOImpl implements ApputilDAO {
 		// TODO Auto-generated method stub
 		entityManager.persist(c);
 		
+	}
+
+
+	@Override
+	public List<City> cityFindAll() {
+		Query query = entityManager
+				.createQuery("select u from City u order by u.sortmodel asc");
+		return query.getResultList();
 	}
 
 	

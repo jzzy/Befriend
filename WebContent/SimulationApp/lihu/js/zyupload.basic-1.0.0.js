@@ -16,7 +16,7 @@ var ZYFILE = {
 	fileInput : null,             // 选择文件按钮dom对象
 	uploadInput : null,           // 上传文件按钮dom对象
 	dragDrop: null,				  // 拖拽敏感区域
-	url : "",  					  // 上传action路径
+	url : "upload.action",  					  // 上传action路径
 	uploadFile : [],  			  // 需要上传的文件数组
 	lastUploadFile : [],          // 上一次选择的文件数组，方便继续上传使用
 	perUploadFile : [],           // 存放永久的文件数组，方便删除使用
@@ -152,7 +152,7 @@ var ZYFILE = {
 	funUploadFile : function(file){
 		var self = this;  // 在each中this指向没个v  所以先将this保留
 		var formdata = new FormData();
-		formdata.append("file", file);	 
+		formdata.append("fileList", file);	 //action接收的name fileList pictures
 		// 添加裁剪的坐标和宽高发送给后台
 		if($("#uploadTailor_"+file.index).length>0){
 			// 除了这样获取不到zyUpload的值啊啊啊啊啊啊啊啊啊啊啊
@@ -245,7 +245,7 @@ var ZYFILE = {
 					height           :   "auto",                 // 宽度
 					itemWidth        :   "60%",                 // 文件项的宽度
 					itemHeight       :   "80px",                 // 文件项的高度
-					url              : "/upload/UploadAction",  	      // 上传文件的路径
+					url              : "upload.action",  	      // 上传文件的路径
 					fileType         : [],                                // 上传文件的类型
 					fileSize         : 51200000,                          // 上传文件的大小
 					multiple         : true,  						      // 是否可以多个文件上传

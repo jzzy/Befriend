@@ -161,6 +161,7 @@ public interface ApputilDAO {
 	/**
 	 * ²éÑ¯µØÇøABCD
 	 */
-	public List<City> Cityfind(String key);
+	public List<City> cityFind(String key);
+	public List<City> cityFindAll();
 	public void Save(City c);
 }

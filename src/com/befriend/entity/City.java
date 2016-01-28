@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name="city")
 public class City  implements Serializable {
@@ -19,30 +21,29 @@ public class City  implements Serializable {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-	@Column(name="value")
-	private String value;
-	@Column(name="key")
-	private String key;
+	@Expose private Integer id;
+	@Column(name="name")
+	@Expose private String name;
+	@Column(name="sortmodel")
+	@Expose private String sortmodel;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getValue() {
-		return value;
+	public String getName() {
+		return name;
 	}
-	public void setValue(String value) {
-		this.value = value;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getKey() {
-		return key;
+	public String getSortmodel() {
+		return sortmodel;
 	}
-	public void setKey(String key) {
-		this.key = key;
+	public void setSortmodel(String sortmodel) {
+		this.sortmodel = sortmodel;
 	}
-	
 	
 	
 }

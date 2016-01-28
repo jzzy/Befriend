@@ -76,7 +76,10 @@ $(window).scroll(function () {
 			<ul class="navi clearfix" id="jMenu">
 				<li class="district">
 					<a href="#" class="fNiv">全部地区&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
+	
+				
 					<ul>
+	
 						<li><a href="getEduWeb?county=东城区">东城区</a></li>
 						<li><a href="getEduWeb?county=西城区">西城区</a></li>
 						<li><a href="getEduWeb?county=朝阳区">朝阳区</li>
@@ -84,6 +87,9 @@ $(window).scroll(function () {
 						<li><a href="getEduWeb?county=石景山区">石景山区</a></li>
 						<li><a href="getEduWeb?county=海淀区">海淀区</a></li>
 						<li><a href="getEduWeb?county=门头沟区">门头沟区</a></li>
+	
+ 
+</form>
 						
 					</ul>
 				</li>

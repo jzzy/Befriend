@@ -5,6 +5,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <script type="text/javascript" src="js/jquery.js"></script>
+    
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+<script type="text/javascript" >
+    $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js',function(){  
+    	 // alert(remote_ip_info.country);//国家  
+    	  //alert(remote_ip_info.province);//省份  
+    	  //alert(remote_ip_info.city);//城市  
+    	  //salert("您所在的省份为:" + remote_ip_info.province);
+    	  document.getElementById('div').innerHTML = remote_ip_info.province;
+    
+    }); 
+</script>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -43,7 +55,7 @@
 		<div id="header">
 			<div class="topArea clearfix">
 				<div class="prev">
-					<a href="#" onclick="javascript:history.back(-1);"></a>
+					<a href="/Befriend/getEduWeb" ></a>
 				</div>
 				<h1>城市的选择</h1>
 			</div>
@@ -57,109 +69,441 @@
 				</div>
 			</div>
 			<div class="currentLoc clearfix">
-				<div class="leftArea"><a href="#">北京市<span>GPS定位&nbsp;/&nbsp;点击查看详细信息</span></a></div>
+				<div class="leftArea"><span><a href="#"><span id="div" style="font-size: 15px;color: black;" ></span>&nbsp;</a>GPS定位&nbsp;/&nbsp;点击查看详细信息</span></div>
 				<div class="rightArea"><img src="images/f5.png" alt="" /></div>
 			</div>
 			<div class="nearbyList">
 				<h2>周边热门城市</h2>
 				<ul class="clearfix">
-					<li><a href="#">济南</a></li>
-					<li><a href="#">天津</a></li>
-					<li><a href="#">保定</a></li>
-					<li><a href="#">廊坊</a></li>
-					<li><a href="#">张家口</a></li>
-					<li><a href="#">石家庄</a></li>
+					<li><a href=getEduWeb?city=济南>济南</a></li>
+					<li><a href=getEduWeb?city=天津>天津</a></li>
+					<li><a href=getEduWeb?city=保定>保定</a></li>
+					<li><a href=getEduWeb?city=廊坊>廊坊</a></li>
+					<li><a href=getEduWeb?city=张家口>张家口</a></li>
+					<li><a href=getEduWeb?city=石家庄>石家庄</a></li>
 				</ul>
 			</div>
 			<div class="hotList">
 				<h2>国内热门城市</h2>
 				<ul class="clearfix">
-					<li><a href="#">上海</a></li>
-					<li><a href="#">广州</a></li>
-					<li><a href="#">深圳</a></li>
-					<li><a href="#">北京</a></li>
-					<li><a href="#">海口</a></li>
-					<li><a href="#">杭州</a></li>
+					<li><a href=getEduWeb?city=上海>上海</a></li>
+					<li><a href=getEduWeb?city=广州>广州</a></li>
+					<li><a href=getEduWeb?city=深圳>深圳</a></li>
+					<li><a href=getEduWeb?city=北京>北京</a></li>
+					<li><a href=getEduWeb?city=海口>海口</a></li>
+					<li><a href=getEduWeb?city=杭州>杭州</a></li>
 				</ul>
 			</div>
 			<div class="allList">
 				<h2>全部城市</h2>
 				<dl>
-					<dt id="keyA">A</dt>
-					<dd><a href="#">安徽</a></dd>
-					阿拉善盟A
-安阳市A
-安徽省A
-澳門特別行政區A
-安庆市A
-阿里地区A
-安顺市A
-阿克苏地区A
-阿勒泰地区A
-阿拉尔市A
-阿坝藏族羌族自治州A
-安徽省A
-澳門特別行政區A
-安徽省A
-澳門特別行政區A
-					<dt id="keyB">B</dt>
-					<dd><a href="#">北京</a></dd>
-					<dd><a href="#">保定</a></dd>
-					<dd><a href="#">包头</a></dd>
-					<dd><a href="#">白山</a></dd>
-					<dt id="keyB">B</dt>
-					<dd><a href="#">北京</a></dd>
-					<dd><a href="#">保定</a></dd>
-					<dd><a href="#">包头</a></dd>
-					<dd><a href="#">白山</a></dd>
-					<dt id="keyC">C</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyD">D</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyE">E</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyF">F</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyG">G</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyH">H</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyI">I</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyJ">J</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyK">K</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyL">L</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyM">M</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyN">N</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyO">O</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyP">P</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyQ">Q</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyR">R</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyS">S</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyT">T</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyU">U</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyV">V</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyW">W</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyX">X</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyY">Y</dt>
-					<dd><a href="#"></a></dd>
-					<dt id="keyZ">Z</dt>
-					<dd><a href="#"></a></dd>
+					<dt id=keyA>A</dt>
+<dd><a href=getEduWeb?city=阿坝藏族羌族自治>阿坝藏族羌族自治州</a></dd>
+<dd><a href=getEduWeb?city=阿克苏地>阿克苏地区</a></dd>
+<dd><a href=getEduWeb?city=阿拉尔>阿拉尔市</a></dd>
+<dd><a href=getEduWeb?city=阿拉善>阿拉善盟</a></dd>
+<dd><a href=getEduWeb?city=阿勒泰地>阿勒泰地区</a></dd>
+<dd><a href=getEduWeb?city=阿里地>阿里地区</a></dd>
+<dd><a href=getEduWeb?city=安徽>安徽省</a></dd>
+<dd><a href=getEduWeb?city=安庆>安庆市</a></dd>
+<dd><a href=getEduWeb?city=安顺>安顺市</a></dd>
+<dd><a href=getEduWeb?city=安阳>安阳市</a></dd>
+<dd><a href=getEduWeb?city=澳門特別行政>澳門特別行政區</a></dd>
+<dt id=keyB>B</dt>
+<dd><a href=getEduWeb?city=巴彦淖尔>巴彦淖尔市</a></dd>
+<dd><a href=getEduWeb?city=巴音郭楞蒙古自治>巴音郭楞蒙古自治州</a></dd>
+<dd><a href=getEduWeb?city=巴中>巴中市</a></dd>
+<dd><a href=getEduWeb?city=白城>白城市</a></dd>
+<dd><a href=getEduWeb?city=白沙黎族自治>白沙黎族自治县</a></dd>
+<dd><a href=getEduWeb?city=白山>白山市</a></dd>
+<dd><a href=getEduWeb?city=白银>白银市</a></dd>
+<dd><a href=getEduWeb?city=百色>百色市</a></dd>
+<dd><a href=getEduWeb?city=蚌埠>蚌埠市</a></dd>
+<dd><a href=getEduWeb?city=包头>包头市</a></dd>
+<dd><a href=getEduWeb?city=保定>保定市</a></dd>
+<dd><a href=getEduWeb?city=保山>保山市</a></dd>
+<dd><a href=getEduWeb?city=保亭黎族苗族自治>保亭黎族苗族自治县</a></dd>
+<dd><a href=getEduWeb?city=北海>北海市</a></dd>
+<dd><a href=getEduWeb?city=北京>北京市</a></dd>
+<dd><a href=getEduWeb?city=北京市市辖>北京市市辖区</a></dd>
+<dd><a href=getEduWeb?city=北>北區</a></dd>
+<dd><a href=getEduWeb?city=北屯>北屯市</a></dd>
+<dd><a href=getEduWeb?city=毕节>毕节市</a></dd>
+<dd><a href=getEduWeb?city=滨州>滨州市</a></dd>
+<dd><a href=getEduWeb?city=博尔塔拉蒙古自治>博尔塔拉蒙古自治州</a></dd>
+<dt id=keyC>C</dt>
+<dd><a href=getEduWeb?city=沧州>沧州市</a></dd>
+<dd><a href=getEduWeb?city=昌都>昌都市</a></dd>
+<dd><a href=getEduWeb?city=昌吉回族自治>昌吉回族自治州</a></dd>
+<dd><a href=getEduWeb?city=昌江黎族自治>昌江黎族自治县</a></dd>
+<dd><a href=getEduWeb?city=常德>常德市</a></dd>
+<dd><a href=getEduWeb?city=常州>常州市</a></dd>
+<dd><a href=getEduWeb?city=潮州>潮州市</a></dd>
+<dd><a href=getEduWeb?city=郴州>郴州市</a></dd>
+<dd><a href=getEduWeb?city=成都>成都市</a></dd>
+<dd><a href=getEduWeb?city=承德>承德市</a></dd>
+<dd><a href=getEduWeb?city=澄迈>澄迈县</a></dd>
+<dd><a href=getEduWeb?city=池州>池州市</a></dd>
+<dd><a href=getEduWeb?city=赤峰>赤峰市</a></dd>
+<dd><a href=getEduWeb?city=崇左>崇左市</a></dd>
+<dd><a href=getEduWeb?city=滁州>滁州市</a></dd>
+<dd><a href=getEduWeb?city=楚雄彝族自治>楚雄彝族自治州</a></dd>
+<dd><a href=getEduWeb?city=长春>长春市</a></dd>
+<dd><a href=getEduWeb?city=长沙>长沙市</a></dd>
+<dd><a href=getEduWeb?city=长治>长治市</a></dd>
+<dt id=keyD>D</dt>
+<dd><a href=getEduWeb?city=达州>达州市</a></dd>
+<dd><a href=getEduWeb?city=大理白族自治>大理白族自治州</a></dd>
+<dd><a href=getEduWeb?city=大埔>大埔區</a></dd>
+<dd><a href=getEduWeb?city=大庆>大庆市</a></dd>
+<dd><a href=getEduWeb?city=大堂>大堂區</a></dd>
+<dd><a href=getEduWeb?city=大同>大同市</a></dd>
+<dd><a href=getEduWeb?city=大兴安岭地>大兴安岭地区</a></dd>
+<dd><a href=getEduWeb?city=德宏傣族景颇族自治>德宏傣族景颇族自治州</a></dd>
+<dd><a href=getEduWeb?city=德阳>德阳市</a></dd>
+<dd><a href=getEduWeb?city=德州>德州市</a></dd>
+<dd><a href=getEduWeb?city=迪庆藏族自治>迪庆藏族自治州</a></dd>
+<dd><a href=getEduWeb?city=定安>定安县</a></dd>
+<dd><a href=getEduWeb?city=定西>定西市</a></dd>
+<dd><a href=getEduWeb?city=东方>东方市</a></dd>
+<dd><a href=getEduWeb?city=东莞>东莞市</a></dd>
+<dd><a href=getEduWeb?city=东营>东营市</a></dd>
+<dt id=keyE>E</dt>
+<dd><a href=getEduWeb?city=鄂尔多斯>鄂尔多斯市</a></dd>
+<dt id=keyF>F</dt>
+<dd><a href=getEduWeb?city=防城港>防城港市</a></dd>
+<dd><a href=getEduWeb?city=佛山>佛山市</a></dd>
+<dd><a href=getEduWeb?city=福建>福建省</a></dd>
+<dd><a href=getEduWeb?city=福州>福州市</a></dd>
+<dd><a href=getEduWeb?city=抚州>抚州市</a></dd>
+<dd><a href=getEduWeb?city=阜阳>阜阳市</a></dd>
+<dt id=keyG>G</dt>
+<dd><a href=getEduWeb?city=甘南藏族自治>甘南藏族自治州</a></dd>
+<dd><a href=getEduWeb?city=甘肃>甘肃省</a></dd>
+<dd><a href=getEduWeb?city=甘孜藏族自治>甘孜藏族自治州</a></dd>
+<dd><a href=getEduWeb?city=赣州>赣州市</a></dd>
+<dd><a href=getEduWeb?city=固原>固原市</a></dd>
+<dd><a href=getEduWeb?city=广安>广安市</a></dd>
+<dd><a href=getEduWeb?city=广东>广东省</a></dd>
+<dd><a href=getEduWeb?city=广西壮族自治>广西壮族自治区</a></dd>
+<dd><a href=getEduWeb?city=广元>广元市</a></dd>
+<dd><a href=getEduWeb?city=广州>广州市</a></dd>
+<dd><a href=getEduWeb?city=贵港>贵港市</a></dd>
+<dd><a href=getEduWeb?city=贵阳>贵阳市</a></dd>
+<dd><a href=getEduWeb?city=贵州>贵州省</a></dd>
+<dd><a href=getEduWeb?city=桂林>桂林市</a></dd>
+<dd><a href=getEduWeb?city=果洛藏族自治>果洛藏族自治州</a></dd>
+<dt id=keyH>H</dt>
+<dd><a href=getEduWeb?city=哈尔滨>哈尔滨市</a></dd>
+<dd><a href=getEduWeb?city=哈密地>哈密地区</a></dd>
+<dd><a href=getEduWeb?city=海北藏族自治>海北藏族自治州</a></dd>
+<dd><a href=getEduWeb?city=海东>海东市</a></dd>
+<dd><a href=getEduWeb?city=海口>海口市</a></dd>
+<dd><a href=getEduWeb?city=海南藏族自治>海南藏族自治州</a></dd>
+<dd><a href=getEduWeb?city=海南>海南省</a></dd>
+<dd><a href=getEduWeb?city=海西蒙古族藏族自治>海西蒙古族藏族自治州</a></dd>
+<dd><a href=getEduWeb?city=邯郸>邯郸市</a></dd>
+<dd><a href=getEduWeb?city=杭州>杭州市</a></dd>
+<dd><a href=getEduWeb?city=合肥>合肥市</a></dd>
+<dd><a href=getEduWeb?city=和田地>和田地区</a></dd>
+<dd><a href=getEduWeb?city=河北>河北省</a></dd>
+<dd><a href=getEduWeb?city=河池>河池市</a></dd>
+<dd><a href=getEduWeb?city=河南>河南省</a></dd>
+<dd><a href=getEduWeb?city=河源>河源市</a></dd>
+<dd><a href=getEduWeb?city=菏泽>菏泽市</a></dd>
+<dd><a href=getEduWeb?city=贺州>贺州市</a></dd>
+<dd><a href=getEduWeb?city=鹤壁>鹤壁市</a></dd>
+<dd><a href=getEduWeb?city=鹤岗>鹤岗市</a></dd>
+<dd><a href=getEduWeb?city=黑河>黑河市</a></dd>
+<dd><a href=getEduWeb?city=黑龙江>黑龙江省</a></dd>
+<dd><a href=getEduWeb?city=衡水>衡水市</a></dd>
+<dd><a href=getEduWeb?city=衡阳>衡阳市</a></dd>
+<dd><a href=getEduWeb?city=红河哈尼族彝族自治>红河哈尼族彝族自治州</a></dd>
+<dd><a href=getEduWeb?city=呼和浩特>呼和浩特市</a></dd>
+<dd><a href=getEduWeb?city=呼伦贝尔>呼伦贝尔市</a></dd>
+<dd><a href=getEduWeb?city=湖北>湖北省</a></dd>
+<dd><a href=getEduWeb?city=湖南>湖南省</a></dd>
+<dd><a href=getEduWeb?city=湖州>湖州市</a></dd>
+<dd><a href=getEduWeb?city=花地瑪堂>花地瑪堂區</a></dd>
+<dd><a href=getEduWeb?city=花王堂>花王堂區</a></dd>
+<dd><a href=getEduWeb?city=怀化>怀化市</a></dd>
+<dd><a href=getEduWeb?city=淮安>淮安市</a></dd>
+<dd><a href=getEduWeb?city=淮北>淮北市</a></dd>
+<dd><a href=getEduWeb?city=淮南>淮南市</a></dd>
+<dd><a href=getEduWeb?city=黄南藏族自治>黄南藏族自治州</a></dd>
+<dd><a href=getEduWeb?city=黄山>黄山市</a></dd>
+<dd><a href=getEduWeb?city=惠州>惠州市</a></dd>
+<dt id=keyJ>J</dt>
+<dd><a href=getEduWeb?city=鸡西>鸡西市</a></dd>
+<dd><a href=getEduWeb?city=吉安>吉安市</a></dd>
+<dd><a href=getEduWeb?city=吉林>吉林省</a></dd>
+<dd><a href=getEduWeb?city=吉林>吉林市</a></dd>
+<dd><a href=getEduWeb?city=济南>济南市</a></dd>
+<dd><a href=getEduWeb?city=济宁>济宁市</a></dd>
+<dd><a href=getEduWeb?city=济源>济源市</a></dd>
+<dd><a href=getEduWeb?city=佳木斯>佳木斯市</a></dd>
+<dd><a href=getEduWeb?city=嘉模堂>嘉模堂區</a></dd>
+<dd><a href=getEduWeb?city=嘉兴>嘉兴市</a></dd>
+<dd><a href=getEduWeb?city=嘉峪关>嘉峪关市</a></dd>
+<dd><a href=getEduWeb?city=江门>江门市</a></dd>
+<dd><a href=getEduWeb?city=江苏>江苏省</a></dd>
+<dd><a href=getEduWeb?city=江西>江西省</a></dd>
+<dd><a href=getEduWeb?city=焦作>焦作市</a></dd>
+<dd><a href=getEduWeb?city=揭阳>揭阳市</a></dd>
+<dd><a href=getEduWeb?city=金昌>金昌市</a></dd>
+<dd><a href=getEduWeb?city=金华>金华市</a></dd>
+<dd><a href=getEduWeb?city=晋城>晋城市</a></dd>
+<dd><a href=getEduWeb?city=晋中>晋中市</a></dd>
+<dd><a href=getEduWeb?city=景德镇>景德镇市</a></dd>
+<dd><a href=getEduWeb?city=九江>九江市</a></dd>
+<dd><a href=getEduWeb?city=九龍城>九龍城區</a></dd>
+<dd><a href=getEduWeb?city=酒泉>酒泉市</a></dd>
+<dt id=keyK>K</dt>
+<dd><a href=getEduWeb?city=喀什地>喀什地区</a></dd>
+<dd><a href=getEduWeb?city=开封>开封市</a></dd>
+<dd><a href=getEduWeb?city=克拉玛依>克拉玛依市</a></dd>
+<dd><a href=getEduWeb?city=克孜勒苏柯尔克孜自治>克孜勒苏柯尔克孜自治州</a></dd>
+<dd><a href=getEduWeb?city=葵青>葵青區</a></dd>
+<dd><a href=getEduWeb?city=昆明>昆明市</a></dd>
+<dt id=keyL>L</dt>
+<dd><a href=getEduWeb?city=拉萨>拉萨市</a></dd>
+<dd><a href=getEduWeb?city=来宾>来宾市</a></dd>
+<dd><a href=getEduWeb?city=莱芜>莱芜市</a></dd>
+<dd><a href=getEduWeb?city=兰州>兰州市</a></dd>
+<dd><a href=getEduWeb?city=廊坊>廊坊市</a></dd>
+<dd><a href=getEduWeb?city=乐东黎族自治>乐东黎族自治县</a></dd>
+<dd><a href=getEduWeb?city=乐山>乐山市</a></dd>
+<dd><a href=getEduWeb?city=丽江>丽江市</a></dd>
+<dd><a href=getEduWeb?city=丽水>丽水市</a></dd>
+<dd><a href=getEduWeb?city=连云港>连云港市</a></dd>
+<dd><a href=getEduWeb?city=凉山彝族自治>凉山彝族自治州</a></dd>
+<dd><a href=getEduWeb?city=辽宁>辽宁省</a></dd>
+<dd><a href=getEduWeb?city=辽源>辽源市</a></dd>
+<dd><a href=getEduWeb?city=聊城>聊城市</a></dd>
+<dd><a href=getEduWeb?city=林芝地>林芝地区</a></dd>
+<dd><a href=getEduWeb?city=临沧>临沧市</a></dd>
+<dd><a href=getEduWeb?city=临汾>临汾市</a></dd>
+<dd><a href=getEduWeb?city=临高>临高县</a></dd>
+<dd><a href=getEduWeb?city=临夏回族自治>临夏回族自治州</a></dd>
+<dd><a href=getEduWeb?city=临沂>临沂市</a></dd>
+<dd><a href=getEduWeb?city=陵水黎族自治>陵水黎族自治县</a></dd>
+<dd><a href=getEduWeb?city=柳州>柳州市</a></dd>
+<dd><a href=getEduWeb?city=六安>六安市</a></dd>
+<dd><a href=getEduWeb?city=六盘水>六盘水市</a></dd>
+<dd><a href=getEduWeb?city=龙岩>龙岩市</a></dd>
+<dd><a href=getEduWeb?city=陇南>陇南市</a></dd>
+<dd><a href=getEduWeb?city=娄底>娄底市</a></dd>
+<dd><a href=getEduWeb?city=路氹>路氹城</a></dd>
+<dd><a href=getEduWeb?city=洛阳>洛阳市</a></dd>
+<dd><a href=getEduWeb?city=吕梁>吕梁市</a></dd>
+<dt id=keyM>M</dt>
+<dd><a href=getEduWeb?city=马鞍山>马鞍山市</a></dd>
+<dd><a href=getEduWeb?city=茂名>茂名市</a></dd>
+<dd><a href=getEduWeb?city=眉山>眉山市</a></dd>
+<dd><a href=getEduWeb?city=梅州>梅州市</a></dd>
+<dd><a href=getEduWeb?city=绵阳>绵阳市</a></dd>
+<dd><a href=getEduWeb?city=牡丹江>牡丹江市</a></dd>
+<dd><a href=getEduWeb?city=聖方濟各堂>聖方濟各堂區</a></dd>
+<dt id=keyN>N</dt>
+<dd><a href=getEduWeb?city=那曲地>那曲地区</a></dd>
+<dd><a href=getEduWeb?city=南昌>南昌市</a></dd>
+<dd><a href=getEduWeb?city=南充>南充市</a></dd>
+<dd><a href=getEduWeb?city=南京>南京市</a></dd>
+<dd><a href=getEduWeb?city=南宁>南宁市</a></dd>
+<dd><a href=getEduWeb?city=南平>南平市</a></dd>
+<dd><a href=getEduWeb?city=南>南區</a></dd>
+<dd><a href=getEduWeb?city=南通>南通市</a></dd>
+<dd><a href=getEduWeb?city=南阳>南阳市</a></dd>
+<dd><a href=getEduWeb?city=内江>内江市</a></dd>
+<dd><a href=getEduWeb?city=内蒙古自治>内蒙古自治区</a></dd>
+<dd><a href=getEduWeb?city=宁波>宁波市</a></dd>
+<dd><a href=getEduWeb?city=宁德>宁德市</a></dd>
+<dd><a href=getEduWeb?city=宁夏回族自治>宁夏回族自治区</a></dd>
+<dd><a href=getEduWeb?city=怒江傈僳族自治>怒江傈僳族自治州</a></dd>
+<dt id=keyP>P</dt>
+<dd><a href=getEduWeb?city=攀枝花>攀枝花市</a></dd>
+<dd><a href=getEduWeb?city=平顶山>平顶山市</a></dd>
+<dd><a href=getEduWeb?city=平凉>平凉市</a></dd>
+<dd><a href=getEduWeb?city=萍乡>萍乡市</a></dd>
+<dd><a href=getEduWeb?city=莆田>莆田市</a></dd>
+<dd><a href=getEduWeb?city=普洱>普洱市</a></dd>
+<dt id=keyQ>Q</dt>
+<dd><a href=getEduWeb?city=七台河>七台河市</a></dd>
+<dd><a href=getEduWeb?city=齐齐哈尔>齐齐哈尔市</a></dd>
+<dd><a href=getEduWeb?city=黔东南苗族侗族自治>黔东南苗族侗族自治州</a></dd>
+<dd><a href=getEduWeb?city=黔南布依族苗族自治>黔南布依族苗族自治州</a></dd>
+<dd><a href=getEduWeb?city=黔西南布依族苗族自治>黔西南布依族苗族自治州</a></dd>
+<dd><a href=getEduWeb?city=钦州>钦州市</a></dd>
+<dd><a href=getEduWeb?city=秦皇岛>秦皇岛市</a></dd>
+<dd><a href=getEduWeb?city=青岛>青岛市</a></dd>
+<dd><a href=getEduWeb?city=青海>青海省</a></dd>
+<dd><a href=getEduWeb?city=清远>清远市</a></dd>
+<dd><a href=getEduWeb?city=庆阳>庆阳市</a></dd>
+<dd><a href=getEduWeb?city=琼海>琼海市</a></dd>
+<dd><a href=getEduWeb?city=琼中黎族苗族自治>琼中黎族苗族自治县</a></dd>
+<dd><a href=getEduWeb?city=曲靖>曲靖市</a></dd>
+<dd><a href=getEduWeb?city=泉州>泉州市</a></dd>
+<dt id=keyR>R</dt>
+<dd><a href=getEduWeb?city=日喀则>日喀则市</a></dd>
+<dd><a href=getEduWeb?city=日照>日照市</a></dd>
+<dt id=keyS>S</dt>
+<dd><a href=getEduWeb?city=三门峡>三门峡市</a></dd>
+<dd><a href=getEduWeb?city=三明>三明市</a></dd>
+<dd><a href=getEduWeb?city=三沙>三沙市</a></dd>
+<dd><a href=getEduWeb?city=三亚>三亚市</a></dd>
+<dd><a href=getEduWeb?city=沙田>沙田區</a></dd>
+<dd><a href=getEduWeb?city=山东>山东省</a></dd>
+<dd><a href=getEduWeb?city=山南地>山南地区</a></dd>
+<dd><a href=getEduWeb?city=山西>山西省</a></dd>
+<dd><a href=getEduWeb?city=陕西>陕西省</a></dd>
+<dd><a href=getEduWeb?city=汕头>汕头市</a></dd>
+<dd><a href=getEduWeb?city=汕尾>汕尾市</a></dd>
+<dd><a href=getEduWeb?city=商丘>商丘市</a></dd>
+<dd><a href=getEduWeb?city=上海>上海市</a></dd>
+<dd><a href=getEduWeb?city=上海市市辖>上海市市辖区</a></dd>
+<dd><a href=getEduWeb?city=上饶>上饶市</a></dd>
+<dd><a href=getEduWeb?city=韶关>韶关市</a></dd>
+<dd><a href=getEduWeb?city=邵阳>邵阳市</a></dd>
+<dd><a href=getEduWeb?city=绍兴>绍兴市</a></dd>
+<dd><a href=getEduWeb?city=深水埗>深水埗區</a></dd>
+<dd><a href=getEduWeb?city=深圳>深圳市</a></dd>
+<dd><a href=getEduWeb?city=石河子>石河子市</a></dd>
+<dd><a href=getEduWeb?city=石家庄>石家庄市</a></dd>
+<dd><a href=getEduWeb?city=石嘴山>石嘴山市</a></dd>
+<dd><a href=getEduWeb?city=双河>双河市</a></dd>
+<dd><a href=getEduWeb?city=双鸭山>双鸭山市</a></dd>
+<dd><a href=getEduWeb?city=朔州>朔州市</a></dd>
+<dd><a href=getEduWeb?city=四川>四川省</a></dd>
+<dd><a href=getEduWeb?city=四平>四平市</a></dd>
+<dd><a href=getEduWeb?city=松原>松原市</a></dd>
+<dd><a href=getEduWeb?city=苏州>苏州市</a></dd>
+<dd><a href=getEduWeb?city=绥化>绥化市</a></dd>
+<dd><a href=getEduWeb?city=遂宁>遂宁市</a></dd>
+<dd><a href=getEduWeb?city=宿迁>宿迁市</a></dd>
+<dd><a href=getEduWeb?city=宿州>宿州市</a></dd>
+<dt id=keyT>T</dt>
+<dd><a href=getEduWeb?city=塔城地>塔城地区</a></dd>
+<dd><a href=getEduWeb?city=台湾>台湾省</a></dd>
+<dd><a href=getEduWeb?city=台州>台州市</a></dd>
+<dd><a href=getEduWeb?city=太原>太原市</a></dd>
+<dd><a href=getEduWeb?city=泰安>泰安市</a></dd>
+<dd><a href=getEduWeb?city=泰州>泰州市</a></dd>
+<dd><a href=getEduWeb?city=唐山>唐山市</a></dd>
+<dd><a href=getEduWeb?city=天津>天津市</a></dd>
+<dd><a href=getEduWeb?city=天津市市辖>天津市市辖区</a></dd>
+<dd><a href=getEduWeb?city=天水>天水市</a></dd>
+<dd><a href=getEduWeb?city=铁门关>铁门关市</a></dd>
+<dd><a href=getEduWeb?city=通化>通化市</a></dd>
+<dd><a href=getEduWeb?city=通辽>通辽市</a></dd>
+<dd><a href=getEduWeb?city=铜陵>铜陵市</a></dd>
+<dd><a href=getEduWeb?city=铜仁>铜仁市</a></dd>
+<dd><a href=getEduWeb?city=图木舒克>图木舒克市</a></dd>
+<dd><a href=getEduWeb?city=吐鲁番地>吐鲁番地区</a></dd>
+<dd><a href=getEduWeb?city=屯昌>屯昌县</a></dd>
+<dd><a href=getEduWeb?city=屯門>屯門區</a></dd>
+<dt id=keyU>U</dt>
+<dd><a href=getEduWeb?city=東>東區</a></dd>
+<dd><a href=getEduWeb?city=灣仔>灣仔區</a></dd>
+<dt id=keyW>W</dt>
+<dd><a href=getEduWeb?city=万宁>万宁市</a></dd>
+<dd><a href=getEduWeb?city=望德堂>望德堂區</a></dd>
+<dd><a href=getEduWeb?city=威海>威海市</a></dd>
+<dd><a href=getEduWeb?city=潍坊>潍坊市</a></dd>
+<dd><a href=getEduWeb?city=温州>温州市</a></dd>
+<dd><a href=getEduWeb?city=文昌>文昌市</a></dd>
+<dd><a href=getEduWeb?city=文山壮族苗族自治>文山壮族苗族自治州</a></dd>
+<dd><a href=getEduWeb?city=乌海>乌海市</a></dd>
+<dd><a href=getEduWeb?city=乌兰察布>乌兰察布市</a></dd>
+<dd><a href=getEduWeb?city=乌鲁木齐>乌鲁木齐市</a></dd>
+<dd><a href=getEduWeb?city=无锡>无锡市</a></dd>
+<dd><a href=getEduWeb?city=芜湖>芜湖市</a></dd>
+<dd><a href=getEduWeb?city=吴忠>吴忠市</a></dd>
+<dd><a href=getEduWeb?city=梧州>梧州市</a></dd>
+<dd><a href=getEduWeb?city=五家渠>五家渠市</a></dd>
+<dd><a href=getEduWeb?city=五指山>五指山市</a></dd>
+<dd><a href=getEduWeb?city=武威>武威市</a></dd>
+<dt id=keyX>X</dt>
+<dd><a href=getEduWeb?city=厦门>厦门市</a></dd>
+<dd><a href=getEduWeb?city=西藏自治>西藏自治区</a></dd>
+<dd><a href=getEduWeb?city=西貢>西貢區</a></dd>
+<dd><a href=getEduWeb?city=西宁>西宁市</a></dd>
+<dd><a href=getEduWeb?city=西双版纳傣族自治>西双版纳傣族自治州</a></dd>
+<dd><a href=getEduWeb?city=锡林郭勒>锡林郭勒盟</a></dd>
+<dd><a href=getEduWeb?city=香港特別行政>香港特別行政區</a></dd>
+<dd><a href=getEduWeb?city=湘潭>湘潭市</a></dd>
+<dd><a href=getEduWeb?city=湘西土家族苗族自治>湘西土家族苗族自治州</a></dd>
+<dd><a href=getEduWeb?city=忻州>忻州市</a></dd>
+<dd><a href=getEduWeb?city=新疆维吾尔自治>新疆维吾尔自治区</a></dd>
+<dd><a href=getEduWeb?city=新乡>新乡市</a></dd>
+<dd><a href=getEduWeb?city=新余>新余市</a></dd>
+<dd><a href=getEduWeb?city=信阳>信阳市</a></dd>
+<dd><a href=getEduWeb?city=邢台>邢台市</a></dd>
+<dd><a href=getEduWeb?city=兴安>兴安盟</a></dd>
+<dd><a href=getEduWeb?city=徐州>徐州市</a></dd>
+<dd><a href=getEduWeb?city=许昌>许昌市</a></dd>
+<dd><a href=getEduWeb?city=宣城>宣城市</a></dd>
+<dt id=keyY>Y</dt>
+<dd><a href=getEduWeb?city=觀塘>觀塘區</a></dd>
+<dd><a href=getEduWeb?city=雅安>雅安市</a></dd>
+<dd><a href=getEduWeb?city=烟台>烟台市</a></dd>
+<dd><a href=getEduWeb?city=延边朝鲜族自治>延边朝鲜族自治州</a></dd>
+<dd><a href=getEduWeb?city=盐城>盐城市</a></dd>
+<dd><a href=getEduWeb?city=扬州>扬州市</a></dd>
+<dd><a href=getEduWeb?city=阳江>阳江市</a></dd>
+<dd><a href=getEduWeb?city=阳泉>阳泉市</a></dd>
+<dd><a href=getEduWeb?city=伊春>伊春市</a></dd>
+<dd><a href=getEduWeb?city=伊犁哈萨克自治>伊犁哈萨克自治州</a></dd>
+<dd><a href=getEduWeb?city=宜宾>宜宾市</a></dd>
+<dd><a href=getEduWeb?city=宜春>宜春市</a></dd>
+<dd><a href=getEduWeb?city=益阳>益阳市</a></dd>
+<dd><a href=getEduWeb?city=银川>银川市</a></dd>
+<dd><a href=getEduWeb?city=鹰潭>鹰潭市</a></dd>
+<dd><a href=getEduWeb?city=永州>永州市</a></dd>
+<dd><a href=getEduWeb?city=油尖旺>油尖旺區</a></dd>
+<dd><a href=getEduWeb?city=玉林>玉林市</a></dd>
+<dd><a href=getEduWeb?city=玉树藏族自治>玉树藏族自治州</a></dd>
+<dd><a href=getEduWeb?city=玉溪>玉溪市</a></dd>
+<dd><a href=getEduWeb?city=元朗>元朗區</a></dd>
+<dd><a href=getEduWeb?city=岳阳>岳阳市</a></dd>
+<dd><a href=getEduWeb?city=云浮>云浮市</a></dd>
+<dd><a href=getEduWeb?city=云南>云南省</a></dd>
+<dd><a href=getEduWeb?city=运城>运城市</a></dd>
+<dt id=keyZ>Z</dt>
+<dd><a href=getEduWeb?city=亳州>亳州市</a></dd>
+<dd><a href=getEduWeb?city=儋州>儋州市</a></dd>
+<dd><a href=getEduWeb?city=風順堂>風順堂區</a></dd>
+<dd><a href=getEduWeb?city=黃大仙>黃大仙區</a></dd>
+<dd><a href=getEduWeb?city=離島>離島區</a></dd>
+<dd><a href=getEduWeb?city=泸州>泸州市</a></dd>
+<dd><a href=getEduWeb?city=漯河>漯河市</a></dd>
+<dd><a href=getEduWeb?city=濮阳>濮阳市</a></dd>
+<dd><a href=getEduWeb?city=衢州>衢州市</a></dd>
+<dd><a href=getEduWeb?city=荃灣>荃灣區</a></dd>
+<dd><a href=getEduWeb?city=枣庄>枣庄市</a></dd>
+<dd><a href=getEduWeb?city=湛江>湛江市</a></dd>
+<dd><a href=getEduWeb?city=张家界>张家界市</a></dd>
+<dd><a href=getEduWeb?city=张家口>张家口市</a></dd>
+<dd><a href=getEduWeb?city=张掖>张掖市</a></dd>
+<dd><a href=getEduWeb?city=漳州>漳州市</a></dd>
+<dd><a href=getEduWeb?city=昭通>昭通市</a></dd>
+<dd><a href=getEduWeb?city=肇庆>肇庆市</a></dd>
+<dd><a href=getEduWeb?city=浙江>浙江省</a></dd>
+<dd><a href=getEduWeb?city=镇江>镇江市</a></dd>
+<dd><a href=getEduWeb?city=郑州>郑州市</a></dd>
+<dd><a href=getEduWeb?city=中山>中山市</a></dd>
+<dd><a href=getEduWeb?city=中卫>中卫市</a></dd>
+<dd><a href=getEduWeb?city=中西>中西區</a></dd>
+<dd><a href=getEduWeb?city=重庆>重庆市</a></dd>
+<dd><a href=getEduWeb?city=重庆市市辖>重庆市市辖区</a></dd>
+<dd><a href=getEduWeb?city=舟山>舟山市</a></dd>
+<dd><a href=getEduWeb?city=周口>周口市</a></dd>
+<dd><a href=getEduWeb?city=珠海>珠海市</a></dd>
+<dd><a href=getEduWeb?city=株洲>株洲市</a></dd>
+<dd><a href=getEduWeb?city=驻马店>驻马店市</a></dd>
+<dd><a href=getEduWeb?city=资阳>资阳市</a></dd>
+<dd><a href=getEduWeb?city=淄博>淄博市</a></dd>
+<dd><a href=getEduWeb?city=自贡>自贡市</a></dd>
+<dd><a href=getEduWeb?city=遵义>遵义市</a></dd>
 				</dl>
 			</div>
 		</div><!--container-->

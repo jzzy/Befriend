@@ -21,6 +21,7 @@ public class UploadAction extends ActionSupport
 	
 	public void upload() throws IOException
 	{
+		System.out.println("第一次进入upload");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
@@ -32,6 +33,7 @@ public class UploadAction extends ActionSupport
 		}
 		if(fileList != null && fileList.length>0)
 		{
+			System.out.println("文件上传了");
 			for ( int i=0 ; i<fileList.length ; i++ )
 			{
 				try

@@ -305,6 +305,7 @@ public class EduCommentAction implements ServletRequestAware {
 		System.out.println("merchantId:" + merchantId);
 		System.out.println("score:" + score);
 		System.out.println("content:" + content);
+		System.out.println("fatherId:" + fatherId);
 		if (!OpeFunction.isEmpty(merchantId)&&!OpeFunction.isEmpty(content)) {
 			User user = (User) session.getAttribute("u");
 			if (user != null) {
