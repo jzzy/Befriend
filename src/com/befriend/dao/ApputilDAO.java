@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.befriend.entity.Admin;
 import com.befriend.entity.AppUp;
+import com.befriend.entity.City;
 import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
 import com.befriend.entity.ParentsLetter;
@@ -157,4 +158,9 @@ public interface ApputilDAO {
 	public int byTimeConut(String time, String os);
 	//É¾³ý
 	public void Remove(SetIp SetIp);
+	/**
+	 * ²éÑ¯µØÇøABCD
+	 */
+	public List<City> Cityfind(String key);
+	public void Save(City c);
 }

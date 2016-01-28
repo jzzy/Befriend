@@ -4,7 +4,12 @@
 <struts>
 	<package name="appp" extends="struts-default" >
 	
+			
 		
+		<action name="saveCity" class="appupAction" method="saveCity">
+		
+		
+		</action>
 			<!-- 查看更新广告 -->
 		<action name="byidLookAdv" class="appupAction" method="byidLookAdv">
 		<result>/SuperAdmin/AdminNews/Adv/upAdv.jsp</result>

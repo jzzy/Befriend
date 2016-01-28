@@ -1,8 +1,10 @@
 package com.befriend.action;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -31,6 +33,7 @@ import com.befriend.entity.Admin;
 import com.befriend.entity.Adv;
 import com.befriend.entity.App;
 import com.befriend.entity.AppUp;
+import com.befriend.entity.City;
 import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
 import com.befriend.entity.ParentsLetter;
@@ -40,7 +43,10 @@ import com.befriend.entity.User;
 import com.befriend.entity.Visitor;
 import com.befriend.util.Message;
 import com.befriend.util.OpeFunction;
+import com.befriend.util.SortModel;
 import com.befriend.wechat.WechatKit;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -116,10 +122,34 @@ public class ApputilAction {
 	private String img;
 	private String title;
 	HttpSession session = ServletActionContext.getRequest().getSession();
-	//private final static String IP="http://123.56.45.164/";//测试服
-	private final static String IP="http://182.92.100.235/";//正式服
-	//private final static String IP="http://192.168.1.240/";//本地
+	// private final static String IP="http://123.56.45.164/";//测试服
+	private final static String IP = "http://182.92.100.235/";// 正式服
+
+	// private final static String IP="http://192.168.1.240/";//本地
+	public void saveCity() throws IOException {
+		File file = new File(
+				"C:\\Users\\Administrator\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Befriend\\address.json");
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+		Gson gs = new Gson();
+		List<SortModel> lsm = gs.fromJson(br.readLine(),
+				new TypeToken<List<SortModel>>() {
+				}.getType());
+
+		for (SortModel sortModel : lsm) {
+			System.out
+					.println(sortModel.getName() + sortModel.getSortLetters());
+			City c=new City();
+			//c.setValue(sortModel.getName());
+		//	c.setKey(sortModel.getSortLetters());
+			System.out
+			.println(c.getValue() + c.getKey());
 	
+			audao.Save(c);
+	
+		}
+	}
+
 	public void RemoveParentsLetterone() throws IOException {
 		ParentsLetter p = audao.Plbyid(id);
 		if (p != null) {
@@ -546,9 +576,9 @@ public class ApputilAction {
 		System.out.println("进入staLoginCount id=" + id);
 		User u = (User) session.getAttribute("u");
 		if (u == null) {
-			u = userdao.byid(id);			
+			u = userdao.byid(id);
 		}
-		
+
 		if (u != null) {
 			Stas sta = audao.StasTimeDay(time, u.getOs(), User.ALL);
 			if (sta == null) {
@@ -580,7 +610,7 @@ public class ApputilAction {
 			}
 		}
 		System.out.println("进入statisticsPVIP" + util.getNowTime() + "用户来自:"
-				+ u.getOs() + " id来自:" + id+" ip是:"+ip);
+				+ u.getOs() + " id来自:" + id + " ip是:" + ip);
 
 		SetIp sp = audao.byTimeIp(time, ip, u.getOs());
 		if (sp == null) {
@@ -726,12 +756,12 @@ public class ApputilAction {
 		l.add(User.SYN);
 		l.add(User.BBT);
 		l.add(User.WECHAT);
-		
+
 		l.add(User.ZHZH);
 		l.add(User.XDD);
-		
+
 		l.add(User.KUX);
-		
+
 		l.add(User.HCOM);
 		l.add(User.KDCOM);
 		l.add(User.YGCOM);
@@ -750,26 +780,26 @@ public class ApputilAction {
 				} else {
 					usersyned = synlogin / 5;
 				}
-				if(usersyned==0){
-					usersyned=1;
+				if (usersyned == 0) {
+					usersyned = 1;
 				}
 			} else {
-	
+
 				usersyned = 0;
 			}
 			if (sta == null) {
 				sta = new Stas();
 				sta.setProvince(province);
-				sta.setTime(time);				
+				sta.setTime(time);
 				if (downloaded != 0 && l.get(i).equals(os)) {
 					sta.setDownloaded(1);
 				} else {
 					sta.setDownloaded(0);
-					
+
 				}
 				sta.setOs(l.get(i));
-				if(usersyned>sta.getUsersyned()){
-				sta.setUsersyned(usersyned);
+				if (usersyned > sta.getUsersyned()) {
+					sta.setUsersyned(usersyned);
 				}
 				sta.setUsersaved(usersaved);
 				sta.setVored(vored);
@@ -781,9 +811,9 @@ public class ApputilAction {
 			if (downloaded != 0 && l.get(i).equals(os)) {
 				sta.setDownloaded(sta.getDownloaded() + 1);
 			}
-			if(usersyned>sta.getUsersyned()){
+			if (usersyned > sta.getUsersyned()) {
 				sta.setUsersyned(usersyned);
-				}
+			}
 			sta.setUsersaved(usersaved);
 			sta.setVored(vored);
 			sta.setUv(synlogin);
@@ -834,9 +864,9 @@ public class ApputilAction {
 	}
 
 	public void JztdAppm() throws IOException {
-		
+
 		au = audao.select();
-		if (au != null&&apptv>0&&!OpeFunction.isEmpty(updates)) {
+		if (au != null && apptv > 0 && !OpeFunction.isEmpty(updates)) {
 			System.out.println(apptv);
 			System.out.println(updates);
 			au.setApptv(apptv);
@@ -873,17 +903,18 @@ public class ApputilAction {
 				File file1 = new File(ServletActionContext.getServletContext()
 						.getRealPath("/AppUp/FamilyGroup.apk"));
 				b = file1.delete();
-			//	audao.Remove(au);
+				// audao.Remove(au);
 			}
 
 			savePath = "AppUp";
 			AppUp ap = new AppUp();
 
-			String upth =IP+"Befriend/"
+			String upth = IP
+					+ "Befriend/"
 					+ OpeFunction.fileToServer(savePath, appFile,
 							appFileFileName, appFileContentType, false);
 
-			savePath = "AppUp/Past/"+OpeFunction.getNameDayTime();
+			savePath = "AppUp/Past/" + OpeFunction.getNameDayTime();
 			OpeFunction.fileToServer(savePath, appFile, appFileFileName,
 					appFileContentType, true);
 			ap.setApptv(downloads);
@@ -986,8 +1017,8 @@ public class ApputilAction {
 					+ "&downloaded=1";
 			WechatKit.sendGet(url);
 
-			((HttpServletResponse) util.response())
-					.sendRedirect("http://"+OpeFunction.getLIP()+"/Befriend/AppUp/FamilyGroup.apk");
+			((HttpServletResponse) util.response()).sendRedirect("http://"
+					+ OpeFunction.getLIP() + "/Befriend/AppUp/FamilyGroup.apk");
 
 		}
 

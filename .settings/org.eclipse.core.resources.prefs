@@ -5,6 +5,7 @@ encoding//WebContent/SuperAdmin/AdminForum/user.jsp=UTF-8
 encoding//WebContent/SuperAdmin/SuperAdmin/App/JZTDUP.jsp=UTF-8
 encoding//WebContent/SuperAdmin/SuperAdmin/home.jsp=UTF-8
 encoding//WebContent/SuperAdmin/index.jsp=UTF-8
+encoding//WebContent/address.json=GBK
 encoding//src/com/befriend/action/ApputilAction.java=UTF-8
 encoding//src/com/befriend/entity/Attention.java=UTF-8
 encoding//src/com/befriend/entity/User.java=GBK

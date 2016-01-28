@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.befriend.dao.ApputilDAO;
 import com.befriend.entity.Admin;
 import com.befriend.entity.AppUp;
+import com.befriend.entity.City;
 import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
 import com.befriend.entity.ParentsLetter;
@@ -426,6 +427,22 @@ public class ApputilDAOImpl implements ApputilDAO {
 		if(sep.size()>0)
 			return sep.get(0);
 		return null;
+	}
+
+	@Override
+	public List<City> Cityfind(String key) {
+		Query query = entityManager
+				.createQuery("select u from City u where u.key=:key");
+		query.setParameter("key", key);
+		return query.getResultList();
+		
+	}
+
+	@Override
+	public void Save(City c) {
+		// TODO Auto-generated method stub
+		entityManager.persist(c);
+		
 	}
 
 	
