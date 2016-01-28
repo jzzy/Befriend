@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
@@ -12,7 +13,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UploadAction extends ActionSupport
 {
-
+	private HttpSession session = ServletActionContext.getRequest()
+			.getSession();
 	private static final long serialVersionUID = 1L;
 	
 	private File[] 		fileList;
@@ -40,7 +42,17 @@ public class UploadAction extends ActionSupport
 				{
 					File saveFile = new File(path+fileListFileName[i]);
 					FileUtils.copyFile(fileList[i], saveFile);
-					response.getWriter().println(ServletActionContext.getServletContext().getContextPath()+"/file/upload/"+fileListFileName[i]);
+					String src=ServletActionContext.getServletContext().getContextPath()+"/file/upload/"+fileListFileName[i];
+					response.getWriter().println(src);
+					src=src+"!#";
+					Object obj= session.getAttribute("src");
+					if(obj!=null){
+						session.setAttribute("src", obj+src);
+						System.out.println("第二次存");
+					}else{
+					session.setAttribute("src", src);
+					System.out.println("第-次存");
+					}
 				}
 				catch ( IOException e )
 				{

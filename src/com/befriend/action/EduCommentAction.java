@@ -348,7 +348,11 @@ public class EduCommentAction implements ServletRequestAware {
 				eduComment.setUser(user);
 				eduComment.setScore(score);// 12345 星级
 				eduComment.setContent(content);// 评论内容
-				eduComment.setPictures(picStr); // 图片地址
+				Object obj=session.getAttribute("src");
+				if(obj!=null){
+				eduComment.setPictures(obj.toString()); // 图片地址
+				session.removeAttribute("src");
+				}
 				eduComment.setTime(OpeFunction.getNowTime());
 				if (!StringUtils.isEmpty(fatherId)
 						&& StringUtils.isNumeric(fatherId)) {
