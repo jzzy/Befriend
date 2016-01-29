@@ -22,6 +22,7 @@ public interface EduServicesDAO
 	public void remove(Attention Attention);
 	public void update(Attention Attention);
 	public Attention byId(int attentionId);
+	public Attention checkAttention(int userid,int objectid,int come);
 	public List<Attention> byUserid(int userid,int currentPage,int pageSize,int come);
 	public int eduServicesCount(int eduServicesId,int come);
 }

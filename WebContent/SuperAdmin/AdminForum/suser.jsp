@@ -88,6 +88,7 @@ for(int i=0;i<ush.size();i++){
 <td>
 编号:<a href="getUserin?id=<%=ush.get(i).getId() %>" ><%=ush.get(i).getAccnumno() %></a>
 </td>
+
 </tr>
 
 <tr>
@@ -101,6 +102,9 @@ for(int i=0;i<ush.size();i++){
 <tr>
 <td>最后登入时间:<%=ush.get(i).getFinaltime()==null?"无":ush.get(i).getFinaltime()%>
 </td>
+</tr>
+<tr>
+<td>用户id为:<%=ush.get(i).getId() %></td>
 </tr>
 
 <%

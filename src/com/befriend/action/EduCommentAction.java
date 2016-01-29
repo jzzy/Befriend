@@ -72,6 +72,7 @@ public class EduCommentAction implements ServletRequestAware {
 				edusl.add(eduServicesDAO.findMerchantId(attl.get(i)
 						.getObjectid()));
 			}
+			request.setAttribute("attl", attl);
 			request.setAttribute("edusl", edusl);
 
 			for (Collect c : collectDAO.Allu(u.getId())) {

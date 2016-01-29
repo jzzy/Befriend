@@ -25,6 +25,8 @@
 	   
 	    <action name="saveEduAttention" class="eduAction" method="saveEduAttention"></action>
 	    <action name="removeEduAttention" class="eduAction" method="removeEduAttention"></action>
+	    <action name="removeEduAttentionWeb" class="eduAction" method="removeEduAttentionWeb"></action>
+	  
 	    <action name="userLookEduAttention" class="eduAction" method="userLookEduAttention"></action>
 	    
 	    

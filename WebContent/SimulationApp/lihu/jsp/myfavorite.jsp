@@ -16,7 +16,9 @@
 <%
 List<EduServices> edusl=(List)request.getAttribute("edusl")==null?new ArrayList<EduServices>():(List)request.getAttribute("edusl"); 
 List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List)request.getAttribute("nl"); 
-%>
+List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News>():(List)request.getAttribute("attl"); 
+%>	
+	
 	<div class="cont">
 		<div id="header" class="myfavorite">
 			<div class="topArea clearfix">
@@ -26,6 +28,7 @@ List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List
 				<h1>收藏列表</h1>
 				<div class="topTool">
 					<span id="favorEdit">编辑</span>
+					<input style="display: none" id="divxw" value="1" />
 				</div>
 			</div>
 		</div><!--header-->
@@ -67,19 +70,19 @@ List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List
 				<%
 				for(int i=0;i<edusl.size();i++){
 				%>
-					<li class="list" id="<%=edusl.get(i).getMerchantId() %>">
+					<li class="list" id="<%=attl.get(i).getId()%>">
 						<div class="checkArea">
 						<label for="b1<%=edusl.get(i).getMerchantId() %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/check_off.png" alt="swich" />
 						</label>
-						<input type="checkbox" id="b1<%=edusl.get(i).getMerchantId() %>" name="check"/></div>
-						<a href="detail.html">
+						<input type="checkbox" id="b1<%=edusl.get(i).getMerchantId() %>" name="check" value="<%=attl.get(i).getId()%>"/></div>
+						<a href="getWebCommments?merchantId=<%=edusl.get(i).getMerchantId()%>">
 							<div class="imgArea"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/xw_15.png" alt="" /></div>
 							<div class="infoArea">
 								<h3><%=edusl.get(i).getName() %></h3>
 								<p class="rate clearfix"><span class="star_r"></span><span class="star_r"></span><span class="star_r"></span><span class="star_r"></span><span class="star_r"></span></p>
 								<div class="clearfix"><strong><%=edusl.get(i).getCounty() %></strong><span><%=edusl.get(i).getClassSecond() %></span></div>
 							</div>
-							<div class="distance">8000m</div>
+							<!--  <div class="distance">8000m</div>-->
 						</a>
 					</li>
 					<%
@@ -97,6 +100,7 @@ List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List
 				</div>
 				<div class="rightArea">
 					<span id="delete">删除</span>
+					
 				</div>
 			</div>
 		</div><!--footer-->
@@ -130,10 +134,20 @@ $("#delete").click(function(){
     	            }
     	    
     	        });
+    		 	if($("#divxw").val()==2){
+    		 		
+    		 	//删除新闻
     			 $.ajax({
   					type:"post",
   					url:"RemoveCWeb.action?summary="+text
   				});
+    		 	}else{
+    		 	//删除教辅
+    		 	  $.ajax({
+    	  			type:"post",
+    	  			url:"removeEduAttentionWeb.action?attentionId="+text
+    	  		});
+    		 	}
     	
     			alert("删除成功！");
     	     	
@@ -177,6 +191,8 @@ $("#favorEdit").click(function(){
 	};	
 });
 $(".myFavor1").click(function(){
+	
+	$("#divxw").val(2);
 	$("#myFavor1").css("display","block");
 	$("#myFavor2").css("display","none");
 	$(this).find("span").addClass("on");
@@ -189,6 +205,7 @@ $(".myFavor1").click(function(){
 	$("#myFavor2 .checkArea label img").attr("src","<%=request.getContextPath() %>/SimulationApp/lihu/images/check_off.png");  
 });
 $(".myFavor2").click(function(){
+	$("#divxw").val(1);
 	$("#myFavor1").css("display","none");
 	$("#myFavor2").css("display","block");
 	$(this).find("span").addClass("on");

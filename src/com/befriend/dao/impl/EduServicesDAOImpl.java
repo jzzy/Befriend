@@ -127,4 +127,18 @@ public class EduServicesDAOImpl implements EduServicesDAO
 		return query.getResultList();
 	}
 
+	@Override
+	public Attention checkAttention(int userid, int objectid,int come) {
+		// TODO Auto-generated method stub
+				Query query = entityManger.createQuery("select u from Attention u where u.userid=:userid and u.objectid=:objectid and u.come=:come");
+				query.setParameter("userid", userid);
+				query.setParameter("objectid", objectid);
+				query.setParameter("come", come);
+				query.setMaxResults(1);
+				List<Attention> al=query.getResultList();
+				if(al.size()==0)
+					return null;
+				return al.get(0);
+	}
+
 }

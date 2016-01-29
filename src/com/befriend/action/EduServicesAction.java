@@ -8,12 +8,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.befriend.dao.EduServicesDAO;
 import com.befriend.entity.Attention;
 import com.befriend.entity.EduServices;
+import com.befriend.entity.User;
 import com.befriend.util.JsonUtil;
 import com.befriend.util.OpeFunction;
 import com.opensymphony.xwork2.Action;
@@ -25,7 +28,8 @@ public class EduServicesAction extends ActionSupport implements
 	private static final long serialVersionUID = 1L;
 
 	private EduServicesDAO eduServicesDAO;
-
+	private HttpSession session = ServletActionContext.getRequest()
+			.getSession();
 	private HttpServletResponse response;
 	private HttpServletRequest request;
 	private String province;
@@ -69,16 +73,44 @@ public class EduServicesAction extends ActionSupport implements
 			OpeFunction.Out().print(false);
 		}
 	}
+	public void removeEduAttentionWeb() throws IOException {
+		
+		try {
+			User u = (User) session.getAttribute("u");
+			if (u == null) {
+
+				System.out.println("请重新登入!");
+				((HttpServletResponse) OpeFunction.response()).sendRedirect(request
+						.getContextPath() + "/SimulationApp/login.html");
+
+				return;
+			}
+			attention = eduServicesDAO.byId(attentionId);
+			eduServicesDAO.remove(attention);
+			System.out.println("教辅机构删除成功！id="+attentionId);
+			OpeFunction.Out().print(true);
+		} catch (Exception e) {
+			OpeFunction.Out().print(false);
+		}
+	}
 
 	public void saveEduAttention() throws IOException {
 		System.out.println("userid " + userid + " objectid " + objectid);
 		try {
+			
+				
+			
 			attention.setCome(Attention.COME_EduServices);
 			attention.setTime(OpeFunction.getNowTime());
 			attention.setUserid(userid);
 			attention.setObjectid(objectid);
+			if(eduServicesDAO.checkAttention(userid, objectid,Attention.COME_EduServices)==null){
 			eduServicesDAO.save(attention);
 			OpeFunction.Out().print(true);
+			}else{
+			OpeFunction.Out().print(false);
+			}
+			
 		} catch (Exception e) {
 			OpeFunction.Out().print(false);
 		}
