@@ -98,7 +98,7 @@ if(n==null){
        <%
        }
        %>
-  <!--  <a href="<%=request.getContextPath()%>/webCsave?newsid=<%=n.getId()%>">收藏</a>--> 
+    <!--  <a href="<%=request.getContextPath()%>/webCsave?newsid=<%=n.getId()%>">收藏</a>-->
    </div>
    <!--newtit-->
 

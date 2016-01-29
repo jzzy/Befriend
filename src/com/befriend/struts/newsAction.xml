@@ -55,6 +55,10 @@
 		<!-- 删除收藏 -->
 		<action name="RemoveC" class="newsAction" method="RemoveC">
 		</action>
+			<!-- 删除收藏 -->
+		<action name="RemoveCWeb" class="newsAction" method="RemoveCWeb">
+		</action>
+		
 
 		<!-- 用户查询他收藏了那些文章 -->
 		<action name="SB" class="newsAction" method="SearchBookmark">

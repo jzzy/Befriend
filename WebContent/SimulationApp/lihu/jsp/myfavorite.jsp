@@ -36,16 +36,23 @@ List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List
 					<div class="myFavor1"><span>资讯</span></div>
 					<div class="myFavor2"><span class="on">机构</span></div>
 				</h2>
-				<ul class="localInfo" id="myFavor1">
+				<ul class="localInfo" id="myFavor1" >
 				<%
+				//新闻
 				for(int i=0;i<nl.size();i++){
 					if(nl.get(i)==null){
 						continue;
 					}
 				%>
 				
-					<li>
-						<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/check_off.png" alt="swich" /></label><input type="checkbox" id="a1" name="check"/></div>
+					<li id="<%=nl.get(i).getId()%>">
+						<div class="checkArea" >
+						<label for="a1<%=nl.get(i).getId()%>">
+						<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/check_off.png" alt="swich" />
+						</label>
+						<input type="checkbox" id="a1<%=nl.get(i).getId()%>" name="check" value="<%=nl.get(i).getId()%>"/>
+						
+						</div>
 							<a href="webNewsId?id=<%=nl.get(i).getId()%>"><p class="info"><%=nl.get(i).getTitle() %></p>
 						<p class="time"><%=nl.get(i).getTime()%></p>
 						</a>
@@ -60,8 +67,11 @@ List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List
 				<%
 				for(int i=0;i<edusl.size();i++){
 				%>
-					<li class="list">
-						<div class="checkArea"><label for="b1"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/check_off.png" alt="swich" /></label><input type="checkbox" id="b1" name="check"/></div>
+					<li class="list" id="<%=edusl.get(i).getMerchantId() %>">
+						<div class="checkArea">
+						<label for="b1<%=edusl.get(i).getMerchantId() %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/check_off.png" alt="swich" />
+						</label>
+						<input type="checkbox" id="b1<%=edusl.get(i).getMerchantId() %>" name="check"/></div>
 						<a href="detail.html">
 							<div class="imgArea"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/xw_15.png" alt="" /></div>
 							<div class="infoArea">
@@ -86,14 +96,59 @@ List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List
 					<span id="checkAll">全选</span>
 				</div>
 				<div class="rightArea">
-					<span>删除</span>
+					<span id="delete">删除</span>
 				</div>
 			</div>
 		</div><!--footer-->
 	</div><!--cont-->
 
 <script type="text/javascript">
-
+//获取选中的checked的值 进行炒作
+$("#delete").click(function(){
+	//alert($("input:checkbox:checked").length); 
+	
+   
+    	var text="";  
+        $("input[name=check]").each(function() {  
+            if ($(this).attr("checked")) {
+                text += ","+$(this).val();
+            }
+    
+        });
+        
+        // alert(text);
+        if(text==""){
+        	 alert("未选择！");
+       		 return false;
+   		 }
+    	 if(confirm("确定删除？")){
+    		 	 
+    		 
+    		 $("input[name=check]").each(function() {  
+    	            if ($(this).attr("checked")) {
+    	                $("#"+$(this).val()).css("display","none");
+    	            }
+    	    
+    	        });
+    			 $.ajax({
+  					type:"post",
+  					url:"RemoveCWeb.action?summary="+text
+  				});
+    	
+    			alert("删除成功！");
+    	     	
+    	  }else{
+    			alert("取消成功！");
+   		   }
+  
+    //var chk_value =[];    
+    // $('input[name="check"]:checked').each(function(){    
+    // chk_value.push($(this).val());    
+    // });    
+    // alert(chk_value.length==0 ?'你还没有选择任何内容！':chk_value);   
+	 	
+		
+});
 $(".checkArea").click(function(){
 	var favorCheck = $(this).children("input").attr("checked");
 	if( favorCheck == false ){

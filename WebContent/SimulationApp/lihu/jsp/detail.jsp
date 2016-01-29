@@ -18,10 +18,8 @@
 	<div id="header">
 		<div class="topArea clearfix">
 			<div class="prev">
-				<a href="getEduWeb" ></a>
-				<!-- 
-				onclick="javascript:history.back(-1);"
-				 -->
+				<a  onclick="javascript:history.back(-1);" ></a>
+			
 			</div>
 			<div class="topTool">
 				<a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/share.png" alt="分享" /></a>

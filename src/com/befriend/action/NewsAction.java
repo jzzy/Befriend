@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -60,11 +61,9 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	private int expert = 0;// 获取新闻是否为 专家 0不是 1是
 	private String types;// 4小类
 	private String type;// 8大类
-
 	private String summary;// 简介
 	private String title;// 标题
 	private String timet;// 时间
-
 	private String area;// 省级
 	private String areas;// 市级
 
@@ -356,7 +355,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			province = "湖南";
 		}
 		System.out.println(province);
-		a = ndao.Hotarea(province,OpeFunction.getNowTime());
+		a = ndao.Hotarea(province, OpeFunction.getNowTime());
 
 		if (a % pageSize == 0) {
 			a = a / pageSize;
@@ -469,7 +468,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	 */
 	public void webCsave() throws IOException {
 		try {
-			System.out.println("webCsave你还没有登入!");
+
+			System.out.println("webCsave");
 
 			User u = (User) session.getAttribute("u");
 
@@ -504,10 +504,13 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 				ndao.Upnews(n);
 				util.Out().print("收藏成功");
+
 			}
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+
 	}
 
 	/**
@@ -599,25 +602,25 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		}
 
 		int a = 0;
-//		if (u != null) {
-//			System.out.println("用户来自：" + u.getAddress());
-//			a = ndao.Hotarea(u.getAddress(), OpeFunction.getNowTime());
-//			if (a % pageSize == 0) {
-//				a = a / pageSize;
-//			} else {
-//				a = a / pageSize + 1;
-//			}
-//			if (currentPage > a) {
-//				currentPage = a;
-//			}
-//			if (currentPage <= 0) {
-//				currentPage = 1;
-//			}
-//			session.setAttribute("province", u.getAddress());
-//			nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage,
-//					OpeFunction.getNowTime());
-//		}
-		
+		// if (u != null) {
+		// System.out.println("用户来自：" + u.getAddress());
+		// a = ndao.Hotarea(u.getAddress(), OpeFunction.getNowTime());
+		// if (a % pageSize == 0) {
+		// a = a / pageSize;
+		// } else {
+		// a = a / pageSize + 1;
+		// }
+		// if (currentPage > a) {
+		// currentPage = a;
+		// }
+		// if (currentPage <= 0) {
+		// currentPage = 1;
+		// }
+		// session.setAttribute("province", u.getAddress());
+		// nl = ndao.Hotarea(u.getAddress(), pageSize, currentPage,
+		// OpeFunction.getNowTime());
+		// }
+
 		if (!OpeFunction.isEmpty(province)) {
 			session.setAttribute("province", province);
 			a = ndao.Hotarea(province, OpeFunction.getNowTime());
@@ -645,8 +648,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			System.out.println("用户来自：" + province);
 			return Action.SUCCESS;
 		}
-		if(session.getAttribute("province")!=null){
-			province=session.getAttribute("province").toString();
+		if (session.getAttribute("province") != null) {
+			province = session.getAttribute("province").toString();
 			a = ndao.Hotarea(province, OpeFunction.getNowTime());
 			if (a % pageSize == 0) {
 				a = a / pageSize;
@@ -690,7 +693,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (currentPage <= 0) {
 				currentPage = 1;
 			}
-			
+
 			nl = ndao.Hotarea(province, pageSize, currentPage,
 					OpeFunction.getNowTime());
 
@@ -1051,15 +1054,17 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		} else {
 			Max = all / pageSize + 1;
 		}
-		System.out.println("****" + province + nl.size() + "新闻 Max:"+Max+"currentPage:"+currentPage);
+		System.out.println("****" + province + nl.size() + "新闻 Max:" + Max
+				+ "currentPage:" + currentPage);
 		if (currentPage <= Max) {
 			nl = ndao.Hotarea(province, pageSize, currentPage, time);
 
 			request.setAttribute("nl", nl);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("province", province);
-			System.out.println("****" + province + nl.size() + "新闻 Max:"+Max+"currentPage:"+currentPage);
-			
+			System.out.println("****" + province + nl.size() + "新闻 Max:" + Max
+					+ "currentPage:" + currentPage);
+
 		} else {
 			System.out.println("下一页没有新闻了");
 
@@ -1472,7 +1477,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				System.out.println("获取到用户信息了" + u.getAddress());
 				if (u.getAddress() != null) {
 					area = u.getAddress();
-					session.setAttribute("province",  u.getAddress());
+					session.setAttribute("province", u.getAddress());
 				}
 				if (area == null) {
 					((HttpServletResponse) util.response())
@@ -2158,6 +2163,13 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	 */
 	public void RemoveC() throws IOException {
 		try {
+
+			String[] st = summary.split(",");
+			for (int i = 0; i < st.length; i++) {
+
+				System.out.println("summary:" + st[i]);
+			}
+
 			if (cdao.unid(userid, newsid) != null) {
 				cdao.remove(cdao.unid(userid, newsid));
 				n = ndao.byid(newsid);
@@ -2171,6 +2183,51 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				util.Out().print(true);
 			} else {
 				util.Out().print(false);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	/**
+	 * 删除收藏 通过 用户id 新闻id
+	 * 
+	 * @throws IOException
+	 */
+	public void RemoveCWeb() throws IOException {
+		try {
+			User u = (User) session.getAttribute("u");
+			if (u == null) {
+
+				System.out.println("请重新登入!");
+				((HttpServletResponse) util.response()).sendRedirect(request
+						.getContextPath() + "/SimulationApp/login.html");
+
+				return;
+			}
+			userid = u.getId();
+			String[] st = summary.split(",");
+			for (int i = 0; i < st.length; i++) {
+				if (OpeFunction.isEmpty(st[i])) {
+					continue;
+				}
+				newsid = Integer.parseInt(st[i].toString());
+				System.out.println("获取到底 summary:" + st[i]);
+
+				if (cdao.unid(userid, newsid) != null) {
+					cdao.remove(cdao.unid(userid, newsid));
+					n = ndao.byid(newsid);
+					// 收藏数
+					n.setCollectnum((n.getCollectnum() == null ? 0 : n
+							.getCollectnum()) - 1);
+					// 收藏数*2+点击数
+					n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum())
+							* 2 + (n.getHits() == null ? 0 : n.getHits()));
+					ndao.Upnews(n);
+					util.Out().print(true);
+				} else {
+					util.Out().print(false);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
