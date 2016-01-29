@@ -62,7 +62,7 @@ $(window).scroll(function () {
 		<div id="header">
 			<div class="topArea clearfix">
 				<div class="prev">
-					<a href="#" onclick="javascript:history.back(-1);"></a>
+					<a href="javascript:history.back(-1);"></a>
 				</div>
 				<h1>教辅机构</h1>
 				<div class="topTool">
@@ -75,7 +75,7 @@ $(window).scroll(function () {
 		<div id="container">
 			<ul class="navi clearfix" id="jMenu">
 				<li class="district">
-					<a href="#" class="fNiv">全部地区&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
+					<a   class="fNiv">全部地区&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
 	
 				
 					<ul>
@@ -94,7 +94,7 @@ $(window).scroll(function () {
 					</ul>
 				</li>
 				<li class="edutrain">
-					<a href="#" class="fNiv">教育培训&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
+					<a class="fNiv">教育培训&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
 					<ul>
 						<li><a href="getEduWeb?classSecond=外语">外语</a></li>
 						<li><a href="getEduWeb?classSecond=音乐">音乐</a></li>
@@ -108,7 +108,7 @@ $(window).scroll(function () {
 					</ul>
 				</li>
 				<li class="sort fNiv">
-					<a href="#" class="fNiv">智能排序&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
+					<a  class="fNiv">智能排序&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
 					<ul>
 						<li><a href="#">离我最近的商户</a></li>
 						<li><a href="#">人气最高的商户</a></li>

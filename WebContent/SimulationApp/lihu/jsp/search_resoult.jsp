@@ -66,7 +66,7 @@ $(window).scroll(function () {
 	<div id="header" class="resoult">
 			<div class="topArea clearfix">
 				<div class="prev">
-					<a href="#" onclick="javascript:history.back(-1);"></a>
+					<a href="javascript:history.back(-1);"></a>
 				</div>
 				<div class="topSearch">
 					<div class="inner">

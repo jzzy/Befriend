@@ -18,7 +18,7 @@
 	<div id="header">
 		<div class="topArea clearfix">
 			<div class="prev">
-				<a  onclick="javascript:history.back(-1);" ></a>
+				<a href="javascript:history.back(-1);"></a>
 			
 			</div>
 			<div class="topTool">

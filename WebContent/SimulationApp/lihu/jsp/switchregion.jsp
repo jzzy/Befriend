@@ -32,7 +32,7 @@
 		<div id="header">
 			<div class="topArea clearfix">
 				<div class="prev">
-					<a href="<%=request.getContextPath() %>/webHotareaf?province=北京" onclick="javascript:history.back(-1);"></a>
+					<a href="javascript:history.back(-1);"></a>
 				</div>
 				<h1>本地资讯</h1>
 			</div>

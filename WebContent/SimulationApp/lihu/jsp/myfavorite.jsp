@@ -23,7 +23,7 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 		<div id="header" class="myfavorite">
 			<div class="topArea clearfix">
 				<div class="prev">
-					<a href="#" onclick="javascript:history.back(-1);"></a>
+					<a href="javascript:history.back(-1);"></a>
 				</div>
 				<h1>收藏列表</h1>
 				<div class="topTool">
