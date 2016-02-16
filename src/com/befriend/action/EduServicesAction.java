@@ -50,6 +50,8 @@ public class EduServicesAction extends ActionSupport implements
 	Attention attention = new Attention();
 	List<Attention> la = new ArrayList<Attention>();
 	List<EduServices> ls = new ArrayList<EduServices>();
+	double lng=116.483917;//¾­¶È
+	double lat=39.920533;//Î³¶È
 
 	public void userLookEduAttention() throws IOException {
 		try {
@@ -163,11 +165,11 @@ public class EduServicesAction extends ActionSupport implements
 			for (int i = 0; i < edl.size(); i++) {
 
 				EduServices edu = edl.get(i);
-				edu.setDistance(OpeFunction.Distance(42.0090289997803,
-						121.678251000076, edu.getLongitude(), edu.getLatitude()));
+				edu.setDistance(OpeFunction.Distance(lng,
+						lat, edu.getLongitude(), edu.getLatitude()));
 				System.out.println("¾àÀë:"
-						+ OpeFunction.Distance(42.0090289997803,
-								121.678251000076, edu.getLongitude(),
+						+ OpeFunction.Distance(lng,
+								lat, edu.getLongitude(),
 								edu.getLatitude()));
 				edl.set(i, edu);
 			}
@@ -244,11 +246,11 @@ public class EduServicesAction extends ActionSupport implements
 			for (int i = 0; i < edl.size(); i++) {
 
 				EduServices edu = edl.get(i);
-				edu.setDistance(OpeFunction.Distance(42.0090289997803,
-						121.678251000076, edu.getLongitude(), edu.getLatitude()));
+				edu.setDistance(OpeFunction.Distance(lng,
+						lat, edu.getLongitude(), edu.getLatitude()));
 				System.out.println("¾àÀë:"
-						+ OpeFunction.Distance(42.0090289997803,
-								121.678251000076, edu.getLongitude(),
+						+ OpeFunction.Distance(lng,
+								lat, edu.getLongitude(),
 								edu.getLatitude()));
 				edl.set(i, edu);
 			}
@@ -469,6 +471,22 @@ public class EduServicesAction extends ActionSupport implements
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub
 		this.request = arg0;
+	}
+
+	public double getLng() {
+		return lng;
+	}
+
+	public void setLng(double lng) {
+		this.lng = lng;
+	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
 	}
 
 }
