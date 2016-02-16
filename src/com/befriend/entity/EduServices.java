@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.google.gson.annotations.Expose;
 
 @Table(name="edu_services")
 @Entity
@@ -82,6 +85,11 @@ public class EduServices implements Serializable{
 	
 	@Column(name="describe")
 	private String describe;
+	@Transient
+    @Expose
+    //æ‡¿Î
+	private int distance;
+	
 	
 	@Column(name="label")
 	private String label;
@@ -122,6 +130,20 @@ public class EduServices implements Serializable{
 	public Integer getId() {
 		return id;
 	}
+
+	
+
+	public int getDistance() {
+		return distance;
+	}
+
+
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+
 
 	public void setId(Integer id) {
 		this.id = id;

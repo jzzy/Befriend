@@ -2,6 +2,7 @@ package com.befriend.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import com.befriend.dao.EduServicesDAO;
 import com.befriend.entity.Attention;
 import com.befriend.entity.EduServices;
+import com.befriend.entity.News;
 import com.befriend.entity.User;
 import com.befriend.util.JsonUtil;
 import com.befriend.util.OpeFunction;
@@ -73,21 +75,23 @@ public class EduServicesAction extends ActionSupport implements
 			OpeFunction.Out().print(false);
 		}
 	}
+
 	public void removeEduAttentionWeb() throws IOException {
-		
+
 		try {
 			User u = (User) session.getAttribute("u");
 			if (u == null) {
 
 				System.out.println("请重新登入!");
-				((HttpServletResponse) OpeFunction.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/login.html");
+				((HttpServletResponse) OpeFunction.response())
+						.sendRedirect(request.getContextPath()
+								+ "/SimulationApp/login.html");
 
 				return;
 			}
 			attention = eduServicesDAO.byId(attentionId);
 			eduServicesDAO.remove(attention);
-			System.out.println("教辅机构删除成功！id="+attentionId);
+			System.out.println("教辅机构删除成功！id=" + attentionId);
 			OpeFunction.Out().print(true);
 		} catch (Exception e) {
 			OpeFunction.Out().print(false);
@@ -97,20 +101,19 @@ public class EduServicesAction extends ActionSupport implements
 	public void saveEduAttention() throws IOException {
 		System.out.println("userid " + userid + " objectid " + objectid);
 		try {
-			
-				
-			
+
 			attention.setCome(Attention.COME_EduServices);
 			attention.setTime(OpeFunction.getNowTime());
 			attention.setUserid(userid);
 			attention.setObjectid(objectid);
-			if(eduServicesDAO.checkAttention(userid, objectid,Attention.COME_EduServices)==null){
-			eduServicesDAO.save(attention);
-			OpeFunction.Out().print(true);
-			}else{
-			OpeFunction.Out().print(false);
+			if (eduServicesDAO.checkAttention(userid, objectid,
+					Attention.COME_EduServices) == null) {
+				eduServicesDAO.save(attention);
+				OpeFunction.Out().print(true);
+			} else {
+				OpeFunction.Out().print(false);
 			}
-			
+
 		} catch (Exception e) {
 			OpeFunction.Out().print(false);
 		}
@@ -122,9 +125,9 @@ public class EduServicesAction extends ActionSupport implements
 
 			Map<String, String> map = new HashMap<String, String>();
 
-//			if (!OpeFunction.isEmpty(merchantId)) {
-//				map.put("merchantId", merchantId);
-//			}
+			// if (!OpeFunction.isEmpty(merchantId)) {
+			// map.put("merchantId", merchantId);
+			// }
 
 			if (!OpeFunction.isEmpty(province)) {
 				map.put("province", province);
@@ -155,90 +158,142 @@ public class EduServicesAction extends ActionSupport implements
 				map.put("address", address);
 				request.setAttribute("address", address);
 			}
+			List<EduServices> edl = eduServicesDAO.find(map, currentPage,
+					pageSize);
+			for (int i = 0; i < edl.size(); i++) {
+
+				EduServices edu = edl.get(i);
+				edu.setDistance(OpeFunction.Distance(42.0090289997803,
+						121.678251000076, edu.getLongitude(), edu.getLatitude()));
+				System.out.println("距离:"
+						+ OpeFunction.Distance(42.0090289997803,
+								121.678251000076, edu.getLongitude(),
+								edu.getLatitude()));
+				edl.set(i, edu);
+			}
+			edl.sort(new eduServicesSprt());
+			for (int i = 0; i < edl.size(); i++) {
+
+				System.out.println("距离2:" + edl.get(i).getDistance());
+
+			}
+			request.setAttribute("EduServices", edl);
 			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("EduServices",
-					eduServicesDAO.find(map, currentPage, pageSize));
 			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 
 	}
+
+	@SuppressWarnings("all")
+	private class eduServicesSprt implements Comparator<EduServices> {
+		//排序最近的在前
+		public int compare(EduServices first, EduServices second) {
+			if (first.getDistance() > second.getDistance())
+				return 1;
+			else if (first.getDistance() < second.getDistance())
+				return -1;
+			else
+				return 0;
+		}
+
+	}
+
 	public String getEduWebAjax() throws IOException {
 		try {
-
 			Map<String, String> map = new HashMap<String, String>();
 
-//			if (!OpeFunction.isEmpty(merchantId)) {
-//				map.put("merchantId", merchantId);
-//			}
-			
+			// if (!OpeFunction.isEmpty(merchantId)) {
+			// map.put("merchantId", merchantId);
+			// }
+
 			if (!OpeFunction.isEmpty(province)) {
 				map.put("province", province);
-				System.out.println("province"+province);
+				System.out.println("province" + province);
 			}
 
 			if (!OpeFunction.isEmpty(county)) {
 				map.put("county", county);
-				System.out.println("county"+county);
+				System.out.println("county" + county);
 			}
 
 			if (!OpeFunction.isEmpty(city)) {
 				map.put("city", city);
-				System.out.println("city"+city);
+				System.out.println("city" + city);
 			}
 
 			if (!OpeFunction.isEmpty(classFirst)) {
 				map.put("classFirst", classFirst);
-				System.out.println("classFirst"+classFirst);
+				System.out.println("classFirst" + classFirst);
 			}
 
 			if (!OpeFunction.isEmpty(classSecond)) {
 				map.put("classSecond", classSecond);
-				System.out.println("classSecond"+classSecond);
+				System.out.println("classSecond" + classSecond);
 			}
 
 			if (!OpeFunction.isEmpty(address)) {
 				map.put("address", address);
-				System.out.println("address"+address);
+				System.out.println("address" + address);
 			}
-			request.setAttribute("EduServices",
-					eduServicesDAO.find(map, currentPage, pageSize));
-			
+			List<EduServices> edl = eduServicesDAO.find(map, currentPage,
+					pageSize);
+			for (int i = 0; i < edl.size(); i++) {
+
+				EduServices edu = edl.get(i);
+				edu.setDistance(OpeFunction.Distance(42.0090289997803,
+						121.678251000076, edu.getLongitude(), edu.getLatitude()));
+				System.out.println("距离:"
+						+ OpeFunction.Distance(42.0090289997803,
+								121.678251000076, edu.getLongitude(),
+								edu.getLatitude()));
+				edl.set(i, edu);
+			}
+			edl.sort(new eduServicesSprt());
+			for (int i = 0; i < edl.size(); i++) {
+
+				System.out.println("距离2:" + edl.get(i).getDistance());
+
+			}
+			request.setAttribute("EduServices", edl);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 
 	}
+
 	public String getLikeEduWeb() throws IOException {
 		try {
-			System.out.println("value"+value);
-
+			System.out.println("value" + value);
 			request.setAttribute("EduServices",
 					eduServicesDAO.findLike(value, currentPage, pageSize));
-			request.setAttribute("value",value);
-			
+			request.setAttribute("value", value);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 
 	}
+
 	public String getLikeEduWebAjax() throws IOException {
 		try {
-			System.out.println("value"+value);
-			System.out.println("currentPage"+currentPage);
-			List<EduServices> edusl=eduServicesDAO.findLike(value, currentPage, pageSize);
-			if(edusl.size()==0){
+			System.out.println("value" + value);
+			System.out.println("currentPage" + currentPage);
+			List<EduServices> edusl = eduServicesDAO.findLike(value,
+					currentPage, pageSize);
+			if (edusl.size() == 0) {
 				System.out.println("没有更多了！");
 				return null;
 			}
-			request.setAttribute("EduServices",
-					edusl);
-			request.setAttribute("value",value);
-			
+			request.setAttribute("EduServices", edusl);
+			request.setAttribute("value", value);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
