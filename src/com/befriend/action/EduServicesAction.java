@@ -121,7 +121,12 @@ public class EduServicesAction extends ActionSupport implements
 		}
 
 	}
-
+	public String daohang() throws IOException {
+		request.setAttribute("lng", lng);
+		request.setAttribute("lat", lat);	
+		return Action.SUCCESS;
+		
+	}
 	public String getEduWeb() throws IOException {
 		try {
 
@@ -130,7 +135,14 @@ public class EduServicesAction extends ActionSupport implements
 			// if (!OpeFunction.isEmpty(merchantId)) {
 			// map.put("merchantId", merchantId);
 			// }
-
+//			if(lng==116.483917||lat==39.920533){
+//				((HttpServletResponse) OpeFunction.response()).sendRedirect(request
+//						.getContextPath() + "/SimulationApp/lihu/GPS/baiduGPS.html");
+//			}
+			
+			System.out.println("lng:"+lng+"lat:"+lat);
+			session.setAttribute("lng", lng);
+			session.setAttribute("lat", lat);
 			if (!OpeFunction.isEmpty(province)) {
 				map.put("province", province);
 				request.setAttribute("province", province);
@@ -248,7 +260,7 @@ public class EduServicesAction extends ActionSupport implements
 				EduServices edu = edl.get(i);
 				edu.setDistance(OpeFunction.Distance(lng,
 						lat, edu.getLongitude(), edu.getLatitude()));
-				System.out.println("距离:"
+				System.out.println("排序前:"
 						+ OpeFunction.Distance(lng,
 								lat, edu.getLongitude(),
 								edu.getLatitude()));
@@ -257,7 +269,7 @@ public class EduServicesAction extends ActionSupport implements
 			edl.sort(new eduServicesSprt());
 			for (int i = 0; i < edl.size(); i++) {
 
-				System.out.println("距离2:" + edl.get(i).getDistance());
+				System.out.println("排序后:" + edl.get(i).getDistance());
 
 			}
 			request.setAttribute("EduServices", edl);
@@ -272,8 +284,26 @@ public class EduServicesAction extends ActionSupport implements
 	public String getLikeEduWeb() throws IOException {
 		try {
 			System.out.println("value" + value);
+			List<EduServices> edl = eduServicesDAO.findLike(value, currentPage, pageSize);
+			for (int i = 0; i < edl.size(); i++) {
+
+				EduServices edu = edl.get(i);
+				edu.setDistance(OpeFunction.Distance(lng,
+						lat, edu.getLongitude(), edu.getLatitude()));
+				System.out.println("排序前:"
+						+ OpeFunction.Distance(lng,
+								lat, edu.getLongitude(),
+								edu.getLatitude()));
+				edl.set(i, edu);
+			}
+			edl.sort(new eduServicesSprt());
+			for (int i = 0; i < edl.size(); i++) {
+
+				System.out.println("排序后:" + edl.get(i).getDistance());
+
+			}
 			request.setAttribute("EduServices",
-					eduServicesDAO.findLike(value, currentPage, pageSize));
+					edl);
 			request.setAttribute("value", value);
 
 		} catch (Exception e) {
@@ -287,13 +317,31 @@ public class EduServicesAction extends ActionSupport implements
 		try {
 			System.out.println("value" + value);
 			System.out.println("currentPage" + currentPage);
-			List<EduServices> edusl = eduServicesDAO.findLike(value,
-					currentPage, pageSize);
-			if (edusl.size() == 0) {
+			List<EduServices> edl = eduServicesDAO.findLike(value, currentPage, pageSize);
+			for (int i = 0; i < edl.size(); i++) {
+
+				EduServices edu = edl.get(i);
+				edu.setDistance(OpeFunction.Distance(lng,
+						lat, edu.getLongitude(), edu.getLatitude()));
+				System.out.println("排序前:"
+						+ OpeFunction.Distance(lng,
+								lat, edu.getLongitude(),
+								edu.getLatitude()));
+				edl.set(i, edu);
+			}
+			edl.sort(new eduServicesSprt());
+			for (int i = 0; i < edl.size(); i++) {
+
+				System.out.println("排序后:" + edl.get(i).getDistance());
+
+			}
+			request.setAttribute("EduServices",
+					edl);
+			if (edl.size() == 0) {
 				System.out.println("没有更多了！");
 				return null;
 			}
-			request.setAttribute("EduServices", edusl);
+			request.setAttribute("EduServices", edl);
 			request.setAttribute("value", value);
 
 		} catch (Exception e) {

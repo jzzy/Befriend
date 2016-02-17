@@ -52,7 +52,7 @@
 					<p class="point"><span>设施:<%=edus.getEnvScore() %></span><span>环境:<%=edus.getSerScore() %></span><span>服务:<%=edus.getStar() %></span></p>
 				</div>
 			</div>
-			<p class="adress"><a class="clearfix" href="#"><%=edus.getAddress() %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
+			<p class="adress"><a class="clearfix" href="daohang?lng=<%=edus.getLongitude() %>&lat=<%=edus.getLatitude() %>"><%=edus.getAddress() %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
 			<p class="tel"><a class="clearfix" href="#"><%=edus.getTelephone() %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
 		</div>
 		<div class="review">

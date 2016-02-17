@@ -22,6 +22,10 @@
 	    <result name="success"> /SimulationApp/lihu/jsp/Ajax/eduservAjax.jsp</result>
 	    </action>
 	    
+	      <action name="daohang" class="eduAction" method="daohang">
+   
+	    <result name="success"> /SimulationApp/lihu/jsp/daohang.jsp</result>
+	    </action>
 	   
 	    <action name="saveEduAttention" class="eduAction" method="saveEduAttention"></action>
 	    <action name="removeEduAttention" class="eduAction" method="removeEduAttention"></action>
