@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
     <style type="text/css">
         #panel {
+        	display:none;
             position: fixed;
             background-color: white;
             max-height: 90%;
