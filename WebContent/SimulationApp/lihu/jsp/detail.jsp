@@ -23,7 +23,7 @@
 			</div>
 			<div class="topTool">
 				<a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/share.png" alt="分享" /></a>
-				<a href="<%=request.getContextPath() %>/SimulationApp/lihu/nearbyinfo.html"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/dot3.png" alt="附近美食" /></a>
+				<a href="GaoDeFujin"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/dot3.png" alt="附近美食" /></a>
 			</div>
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 				</div>
 			</div>
 			<p class="adress"><a class="clearfix" href="daohang?lng=<%=edus.getLongitude() %>&lat=<%=edus.getLatitude() %>"><%=edus.getAddress() %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
-			<p class="tel"><a class="clearfix" href="#"><%=edus.getTelephone() %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
+			<p class="tel"><a class="clearfix" href="tel:<%=edus.getTelephone().split(",")[0] %>"><%=edus.getTelephone().split(",")[0] %><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="" /></a></p>
 		</div>
 		<div class="review">
 			<h2><a href="#">网友点评<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="ico" /></a></h2>
@@ -110,18 +110,18 @@
 		<div class="shopInfo">
 			<h2><a href="#">商户信息<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/grayarrow.gif" alt="ico" /></a></h2>
 			<p class="time">营业时间&nbsp;:&nbsp;尚无营业时间</p>
-			<p class="tel">联系电话&nbsp;:&nbsp;<%=edus.getTelephone() %></p>
+			<p class="tel">联系电话&nbsp;:&nbsp;<%=edus.getTelephone().split(",")[0] %></p>
 			<p class="shopName">商户名称&nbsp;:&nbsp;<%=edus.getName() %></p>
 		</div>
 		<div class="nearby">
 			<h2>在这家店附近找</h2>
 			<ul class="clearfix">
-				<li><a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby1.gif" alt="" /></a></li>
-				<li><a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby2.gif" alt="" /></a></li>
-				<li><a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby3.gif" alt="" /></a></li>
-				<li class="clear"><a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby4.gif" alt="" /></a></li>
-				<li><a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby5.gif" alt="" /></a></li>
-				<li><a href="#"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby6.gif" alt="" /></a></li>
+				<li><a href="GaoDeFujin?type=美食&lng=<%=edus.getLongitude() %>&lat=<%=edus.getLatitude() %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby1.gif" alt="" /></a></li>
+				<li><a href="GaoDeFujin?type=娱乐&lng=<%=edus.getLongitude() %>&lat=<%=edus.getLatitude() %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby2.gif" alt="" /></a></li>
+				<li><a href="GaoDeFujin?type=酒店&lng=<%=edus.getLongitude() %>&lat=<%=edus.getLatitude() %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby3.gif" alt="" /></a></li>
+				<li class="clear"><a href="GaoDeFujin?type=景点&lng=<%=edus.getLongitude() %>&lat=<%=edus.getLatitude() %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby4.gif" alt="" /></a></li>
+				<li><a href="GaoDeFujin?type=购物&lng=<%=edus.getLongitude() %>&lat=<%=edus.getLatitude() %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby5.gif" alt="" /></a></li>
+				<li><a href="GaoDeFujin?type=停车&lng=<%=edus.getLongitude() %>&lat=<%=edus.getLatitude() %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/nearby6.gif" alt="" /></a></li>
 			</ul>
 		</div>
 	</div>

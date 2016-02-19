@@ -1,4 +1,4 @@
-package com.befriend.util;
+package com.befriend.entity;
 
 public class SortModel {
 

@@ -13,6 +13,12 @@
    
 	    <result name="success"> /SimulationApp/lihu/jsp/Ajax/eduservAjax.jsp</result>
 	    </action>
+	    
+	    
+	     <action name="GaoDeFujin" class="eduAction" method="GaoDeFujin">
+   
+	    <result name="success"> /SimulationApp/lihu/jsp/nearvyinfo.jsp</result>
+	    </action>
 	      <action name="getLikeEduWeb" class="eduAction" method="getLikeEduWeb">
    
 	    <result name="success"> /SimulationApp/lihu/jsp/search_resoult.jsp</result>

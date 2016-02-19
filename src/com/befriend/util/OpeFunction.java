@@ -53,10 +53,13 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.bouncycastle.asn1.cms.Time;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.befriend.email.MailSenderInfo;
 import com.befriend.email.SimpleMailSender;
+import com.befriend.entity.SortModel;
 import com.befriend.entity.User;
 import com.befriend.wechat.WechatKit;
 import com.google.gson.Gson;
@@ -699,7 +702,7 @@ public class OpeFunction {
 	}
 
 	public static void main(String[] args) throws IOException,
-			InterruptedException, ParseException {
+			InterruptedException, ParseException, JSONException {
 //		File file=new File("C:\\Users\\Administrator\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Befriend\\address.json");
 //		FileReader fr = new FileReader(file);
 //		BufferedReader br = new BufferedReader(fr);
@@ -712,9 +715,9 @@ public class OpeFunction {
 		
 		// System.out.println(calculatingTime("2015-11-01 14:49:00",
 		// "2015-12-03 14:49:00"));
-		 String str = "123456789";
-		 String nickname = "123456789";
-		 nickname = nickname.substring(0, (nickname.length()-1));
+//		 String str = "123456789";
+//		 String nickname = "123456789";
+//		 nickname = nickname.substring(0, (nickname.length()-1));
 		 //System.out.println(nickname);
 //		 System.out.println(getNameDayTime());
 //		 System.out.println(setTime("1015-11-23  16:38:54"));
@@ -728,8 +731,28 @@ public class OpeFunction {
 //		 System.out.println(nickname);
 //		 System.out.println(getNameDayTime());
 //		 System.out.println(setTime("1015-11-23  16:38:54"));
+		
+		String str=WechatKit.sendGet("http://restapi.amap.com/v3/place/around?key=5deb2485b0b9546999783b2fab8ff625"
+				+ "&location=116.481488,39.990464"
+				+ "&keywords=美食"
+				+ "&types="
+				+ "&offset=10"
+				+ "&page=1"
+				+ "&extensions=all");
+		JSONObject jsonObject = new JSONObject(str);
 
-System.out.println("计算两点距离:"+Distance(42.0090289997803, 121.678251000076,42.0090289997803, 121.678251000076));
+		JSONArray jsonArray =jsonObject.getJSONArray("pois");
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jo = jsonArray.getJSONObject(i);
+			System.out.println(jo.getString("name"));
+			System.out.println(jo.getString("type"));
+			System.out.println(jo.getString("location"));
+			System.out.println(jo.getString("tel"));
+			
+
+}
+		//System.out.println("计算两点距离:"+Distance(42.0090289997803, 121.678251000076,42.0090289997803, 121.678251000076));
 
 	}
 	/** 

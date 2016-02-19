@@ -43,7 +43,6 @@ import com.befriend.entity.User;
 import com.befriend.entity.Visitor;
 import com.befriend.util.Message;
 import com.befriend.util.OpeFunction;
-import com.befriend.util.SortModel;
 import com.befriend.wechat.WechatKit;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
