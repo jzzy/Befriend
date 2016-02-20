@@ -33,10 +33,13 @@ import com.befriend.entity.Admin;
 import com.befriend.entity.Adv;
 import com.befriend.entity.App;
 import com.befriend.entity.AppUp;
+import com.befriend.entity.Areas;
+import com.befriend.entity.Cities;
 import com.befriend.entity.City;
 import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
 import com.befriend.entity.ParentsLetter;
+import com.befriend.entity.Provinces;
 import com.befriend.entity.SetIp;
 import com.befriend.entity.Stas;
 import com.befriend.entity.User;
@@ -126,19 +129,40 @@ public class ApputilAction {
 
 	// private final static String IP="http://192.168.1.240/";//本地
 	public void obtainCity() throws IOException {
-		List<City> cl=audao.cityFindAll();
-		String so="";
-		for (int i=0;i<cl.size();i++) {
-		
-			if(i+1<cl.size()&&!so.equals(cl.get(i).getSortmodel())){
-				System.out.println("<dt id=key"+cl.get(i).getSortmodel()+">"+cl.get(i).getSortmodel()+"</dt>");
-				
+		// List<City> cl=audao.cityFindAll();
+		// String so="";
+		// for (int i=0;i<cl.size();i++) {
+		//
+		// if(i+1<cl.size()&&!so.equals(cl.get(i).getSortmodel())){
+		// System.out.println("<dt id=key"+cl.get(i).getSortmodel()+">"+cl.get(i).getSortmodel()+"</dt>");
+		//
+		// }
+		//
+		// System.out.println("<dd><a href=getEduWeb?city="+cl.get(i).getName().substring(0,
+		// (cl.get(i).getName().length()-1))+">"+cl.get(i).getName()+"</a></dd>");
+		// so=cl.get(i).getSortmodel();
+		// }
+		// request.setAttribute("cl", cl);
+		String name = title;
+		List<Provinces> lpro = audao.ProvincesName(name);
+
+		for (int i = 0; i < lpro.size(); i++) {
+			System.out.println(lpro.get(i).getProvince() + "区域代码:"
+					+ lpro.get(i).getProvinceid());
+			List<Cities> lcit = audao.CitiesName(lpro.get(i).getProvinceid());
+			if (lcit.size() > 0 && lcit.size() <= 2) {
+				List<Areas> lar = audao.AreasName(lcit.get(0).getCityid());
+				for (int i2 = 0; i2 < lar.size(); i2++) {
+					System.out.println(lpro.get(i).getProvince() + "下的区:"
+							+ lar.get(i2).getArea());
+				}
+			} else {
+				for (int i2 = 0; i2 < lcit.size(); i2++) {
+					System.out.println(lpro.get(i).getProvince() + "下的市:"
+							+ lcit.get(i2).getCity());
+				}
 			}
-			
-			System.out.println("<dd><a href=getEduWeb?city="+cl.get(i).getName().substring(0, (cl.get(i).getName().length()-1))+">"+cl.get(i).getName()+"</a></dd>");
-			so=cl.get(i).getSortmodel();
 		}
-		request.setAttribute("cl", cl);
 	}
 
 	public void RemoveParentsLetterone() throws IOException {
@@ -249,6 +273,7 @@ public class ApputilAction {
 	}
 
 	public void Removejzfkid() throws IOException {
+
 		Feedback f = audao.FeedbackByid(id);
 		if (f != null) {
 			audao.Remove(f);

@@ -1,4 +1,5 @@
 package com.befriend.dao.impl;
+import com.befriend.entity.Provinces;
 
 import java.util.List;
 
@@ -8,9 +9,11 @@ import javax.persistence.Query;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.befriend.entity.Cities;
 import com.befriend.dao.ApputilDAO;
 import com.befriend.entity.Admin;
 import com.befriend.entity.AppUp;
+import com.befriend.entity.Areas;
 import com.befriend.entity.City;
 import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
@@ -450,6 +453,31 @@ public class ApputilDAOImpl implements ApputilDAO {
 	public List<City> cityFindAll() {
 		Query query = entityManager
 				.createQuery("select u from City u order by u.sortmodel asc");
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Cities> CitiesName(Integer provinceid) {
+		Query query = entityManager
+				.createQuery("select c from Cities c where c.provinceid=:provinceid order by c.provinceid asc");
+		query.setParameter("provinceid", provinceid);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Provinces> ProvincesName(String name) {
+				Query query = entityManager
+				.createQuery("select p from Provinces p  where p.province LIKE :name");
+		query.setParameter("name", "%"+name+"%");
+		return query.getResultList();
+		
+	}
+
+	@Override
+	public List<Areas> AreasName(Integer cityid) {
+		Query query = entityManager
+				.createQuery("select c from Areas c where c.cityid=:cityid ");
+		query.setParameter("cityid", cityid);
 		return query.getResultList();
 	}
 

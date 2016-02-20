@@ -156,6 +156,8 @@
 	
 	<bean id="eduAction" class="com.befriend.action.EduServicesAction" scope="prototype">
 	    <constructor-arg ref="eduServicesDAO"></constructor-arg>
+	       <constructor-arg ref="appupDAO"></constructor-arg>
+	    
 	</bean>
 	<bean id="eduCommentAction" class="com.befriend.action.EduCommentAction" scope="prototype">
 		<constructor-arg ref="eduCommentDAO"></constructor-arg>

@@ -57,6 +57,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.befriend.dao.ApputilDAO;
 import com.befriend.email.MailSenderInfo;
 import com.befriend.email.SimpleMailSender;
 import com.befriend.entity.SortModel;
@@ -732,28 +733,27 @@ public class OpeFunction {
 //		 System.out.println(getNameDayTime());
 //		 System.out.println(setTime("1015-11-23  16:38:54"));
 		
-		String str=WechatKit.sendGet("http://restapi.amap.com/v3/place/around?key=5deb2485b0b9546999783b2fab8ff625"
-				+ "&location=116.481488,39.990464"
-				+ "&keywords=美食"
-				+ "&types="
-				+ "&offset=10"
-				+ "&page=1"
-				+ "&extensions=all");
-		JSONObject jsonObject = new JSONObject(str);
-
-		JSONArray jsonArray =jsonObject.getJSONArray("pois");
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jo = jsonArray.getJSONObject(i);
-			System.out.println(jo.getString("name"));
-			System.out.println(jo.getString("type"));
-			System.out.println(jo.getString("location"));
-			System.out.println(jo.getString("tel"));
-			
-
-}
+//		String str=WechatKit.sendGet("http://restapi.amap.com/v3/place/around?key=5deb2485b0b9546999783b2fab8ff625"
+//				+ "&location=116.481488,39.990464"
+//				+ "&keywords=美食"
+//				+ "&types="
+//				+ "&offset=10"
+//				+ "&page=1"
+//				+ "&extensions=all");
+//		JSONObject jsonObject = new JSONObject(str);
+//
+//		JSONArray jsonArray =jsonObject.getJSONArray("pois");
+//
+//		for (int i = 0; i < jsonArray.length(); i++) {
+//			JSONObject jo = jsonArray.getJSONObject(i);
+//			System.out.println(jo.getString("name"));
+//			System.out.println(jo.getString("type"));
+//			System.out.println(jo.getString("location"));
+//			System.out.println(jo.getString("tel"));
+//			
+//
+//}
 		//System.out.println("计算两点距离:"+Distance(42.0090289997803, 121.678251000076,42.0090289997803, 121.678251000076));
-
 	}
 	/** 
 	 * 计算地球上任意两点(经纬度)距离 

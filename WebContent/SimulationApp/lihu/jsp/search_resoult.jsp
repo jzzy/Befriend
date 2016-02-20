@@ -85,29 +85,50 @@ $(window).scroll(function () {
 			<ul class="navi clearfix" id="jMenu">
 				<li class="district">
 					<a href="#" class="fNiv">全部地区&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
+					<%
+				List<Areas> lar=(List)(request.getAttribute("lar")==null?new ArrayList<Areas>():request.getAttribute("lar")); 			
+				List<Cities> lcit=(List)(request.getAttribute("lcit")==null?new ArrayList<Cities>():request.getAttribute("lcit")); 			
+
+				%>
 					<ul>
-						<li><a href="getEduWeb?county=东城区">东城区</a></li>
-						<li><a href="getEduWeb?county=西城区">西城区</a></li>
-						<li><a href="getEduWeb?county=朝阳区">朝阳区</li>
-						<li><a href="getEduWeb?county=丰台区">丰台区</a></li>
-						<li><a href="getEduWeb?county=石景山区">石景山区</a></li>
-						<li><a href="getEduWeb?county=海淀区">海淀区</a></li>
-						<li><a href="getEduWeb?county=门头沟区">门头沟区</a></li>
+					<%
+						for(int i=0;i<lar.size();i++){
+							
+						
+						%>
+						<li><a href="getLikeEduWeb?county=<%=lar.get(i).getArea().substring(0, lar.get(i).getArea().length()-1) %>&province=<%=session.getAttribute("province")%>"><%=lar.get(i).getArea() %></a></li>
+					
+						<%
+						}
+						%>
+							<%
+						for(int i=0;i<lcit.size();i++){
+							
+						
+						%>
+						<li><a href="getLikeEduWeb?county=<%=lcit.get(i).getCity().substring(0, lcit.get(i).getCity().length()-1) %>&province=<%=session.getAttribute("province")%>"><%=lcit.get(i).getCity() %></a></li>
+					
+						<%
+						}
+						%>
+ 
+ 
+
 						
 					</ul>
 				</li>
 				<li class="edutrain">
 					<a href="#" class="fNiv">教育培训&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
 					<ul>
-						<li><a href="getEduWeb?classSecond=外语">外语</a></li>
-						<li><a href="getEduWeb?classSecond=音乐">音乐</a></li>
-						<li><a href="getEduWeb?classSecond=幼儿教育">幼儿教育</a></li>
-						<li><a href="getEduWeb?classSecond=升学指导">升学指导</a></li>
-						<li><a href="getEduWeb?classSecond=教育院校">教育院校</a></li>
-						<li><a href="getEduWeb?classSecond=舞蹈">舞蹈</a></li>
-						<li><a href="getEduWeb?classSecond=学校">学校</a></li>
-						<li><a href="getEduWeb?classSecond=驾校">驾校</a></li>
-						<li><a href="getEduWeb?classSecond=兴趣生活">兴趣生活</a></li>
+						<li><a href="getLikeEduWeb?classSecond=外语">外语</a></li>
+						<li><a href="getLikeEduWeb?classSecond=音乐">音乐</a></li>
+						<li><a href="getLikeEduWeb?classSecond=幼儿教育">幼儿教育</a></li>
+						<li><a href="getLikeEduWeb?classSecond=升学指导">升学指导</a></li>
+						<li><a href="getLikeEduWeb?classSecond=教育院校">教育院校</a></li>
+						<li><a href="getLikeEduWeb?classSecond=舞蹈">舞蹈</a></li>
+						<li><a href="getLikeEduWeb?classSecond=学校">学校</a></li>
+						<li><a href="getLikeEduWeb?classSecond=驾校">驾校</a></li>
+						<li><a href="getLikeEduWeb?classSecond=兴趣生活">兴趣生活</a></li>
 					</ul>
 				</li>
 				<li class="sort fNiv">

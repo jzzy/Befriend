@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.befriend.entity.Admin;
 import com.befriend.entity.AppUp;
+import com.befriend.entity.Areas;
+import com.befriend.entity.Cities;
 import com.befriend.entity.City;
 import com.befriend.entity.Feedback;
 import com.befriend.entity.House;
 import com.befriend.entity.ParentsLetter;
+import com.befriend.entity.Provinces;
 import com.befriend.entity.SetIp;
 import com.befriend.entity.Stas;
 import com.befriend.entity.Visitor;
@@ -164,4 +167,10 @@ public interface ApputilDAO {
 	public List<City> cityFind(String key);
 	public List<City> cityFindAll();
 	public void Save(City c);
+	/**
+	 * 查询省得到市
+	 */
+	public List<Provinces> ProvincesName(String name);
+	public List<Cities> CitiesName(Integer provinceid);
+	public List<Areas> AreasName(Integer cityid);
 }

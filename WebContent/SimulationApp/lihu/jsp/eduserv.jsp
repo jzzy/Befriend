@@ -77,19 +77,34 @@ $(window).scroll(function () {
 				<li class="district">
 					<a   class="fNiv">全部地区&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
 	
-				
+				<%
+				List<Areas> lar=(List)(request.getAttribute("lar")==null?new ArrayList<Areas>():request.getAttribute("lar")); 			
+				List<Cities> lcit=(List)(request.getAttribute("lcit")==null?new ArrayList<Cities>():request.getAttribute("lcit")); 			
+
+				%>
 					<ul>
-	
-						<li><a href="getEduWeb?county=东城区">东城区</a></li>
-						<li><a href="getEduWeb?county=西城区">西城区</a></li>
-						<li><a href="getEduWeb?county=朝阳区">朝阳区</li>
-						<li><a href="getEduWeb?county=丰台区">丰台区</a></li>
-						<li><a href="getEduWeb?county=石景山区">石景山区</a></li>
-						<li><a href="getEduWeb?county=海淀区">海淀区</a></li>
-						<li><a href="getEduWeb?county=门头沟区">门头沟区</a></li>
-	
+						<%
+						for(int i=0;i<lar.size();i++){
+							
+						
+						%>
+						<li><a href="getEduWeb?county=<%=lar.get(i).getArea().substring(0, lar.get(i).getArea().length()-1) %>&province=<%=session.getAttribute("province")%>"><%=lar.get(i).getArea() %></a></li>
+					
+						<%
+						}
+						%>
+							<%
+						for(int i=0;i<lcit.size();i++){
+							
+						
+						%>
+						<li><a href="getEduWeb?county=<%=lcit.get(i).getCity().substring(0, lcit.get(i).getCity().length()-1) %>&province=<%=session.getAttribute("province")%>"><%=lcit.get(i).getCity() %></a></li>
+					
+						<%
+						}
+						%>
  
-</form>
+
 						
 					</ul>
 				</li>

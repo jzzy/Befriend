@@ -16,9 +16,13 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.befriend.dao.ApputilDAO;
 import com.befriend.dao.EduServicesDAO;
+import com.befriend.entity.Areas;
 import com.befriend.entity.Attention;
+import com.befriend.entity.Cities;
 import com.befriend.entity.EduServices;
+import com.befriend.entity.Provinces;
 import com.befriend.entity.User;
 import com.befriend.util.JsonUtil;
 import com.befriend.util.OpeFunction;
@@ -32,6 +36,8 @@ public class EduServicesAction extends ActionSupport implements
 	private static final long serialVersionUID = 1L;
 
 	private EduServicesDAO eduServicesDAO;
+	private ApputilDAO audao;
+	
 	private HttpSession session = ServletActionContext.getRequest()
 			.getSession();
 	private HttpServletResponse response;
@@ -104,6 +110,7 @@ public class EduServicesAction extends ActionSupport implements
 
 	public void removeEduAttention() throws IOException {
 		try {
+			
 			attention = eduServicesDAO.byId(attentionId);
 			eduServicesDAO.remove(attention);
 			OpeFunction.Out().print(true);
@@ -165,6 +172,36 @@ public class EduServicesAction extends ActionSupport implements
 
 	public String getEduWeb() throws IOException {
 		try {
+			
+			
+			
+			List<Provinces> lpro = audao.ProvincesName(session.getAttribute("province")==null?"北京":session.getAttribute("province").toString());
+
+			for (int i = 0; i < lpro.size(); i++) {
+				System.out.println(lpro.get(i).getProvince() + "区域代码:"
+						+ lpro.get(i).getProvinceid());
+				List<Cities> lcit = audao.CitiesName(lpro.get(i).getProvinceid());
+				if (lcit.size() > 0 && lcit.size() <= 2) {
+					List<Areas> lar = audao.AreasName(lcit.get(0).getCityid());
+					for (int i2 = 0; i2 < lar.size(); i2++) {
+						System.out.println(lpro.get(i).getProvince() + "下的区:"
+								+ lar.get(i2).getArea());
+					}
+					System.out.println(lar.size()+"个区");
+					request.setAttribute("lar", lar);
+				} else {
+					for (int i2 = 0; i2 < lcit.size(); i2++) {
+						System.out.println(lpro.get(i).getProvince() + "下的市:"
+								+ lcit.get(i2).getCity());
+					}
+					request.setAttribute("lcit", lcit);
+					System.out.println(lcit.size()+"个市");
+				}
+			}
+			
+			
+			
+			
 
 			Map<String, String> map = new HashMap<String, String>();
 
@@ -239,11 +276,63 @@ public class EduServicesAction extends ActionSupport implements
 
 	@SuppressWarnings("all")
 	private class eduServicesSprt implements Comparator<EduServices> {
-		// 排序最近的在前
+		// 离我最近
 		public int compare(EduServices first, EduServices second) {
 			if (first.getDistance() > second.getDistance())
 				return 1;
 			else if (first.getDistance() < second.getDistance())
+				return -1;
+			else
+				return 0;
+		}
+
+	}
+	@SuppressWarnings("all")
+	private class eduServicesSprtPopularityMax implements Comparator<EduServices> {
+		// 人气最高
+		public int compare(EduServices first, EduServices second) {
+			if (first.getDistance() > second.getDistance())
+				return 1;
+			else if (first.getDistance() < second.getDistance())
+				return -1;
+			else
+				return 0;
+		}
+
+	}
+	@SuppressWarnings("all")
+	private class eduServicesSprtEvaluationMax implements Comparator<EduServices> {
+		// 评价最好
+		public int compare(EduServices first, EduServices second) {
+			if (first.getDistance() > second.getDistance())
+				return 1;
+			else if (first.getDistance() < second.getDistance())
+				return -1;
+			else
+				return 0;
+		}
+
+	}
+	@SuppressWarnings("all")
+	private class eduServicesSprtPerCapitaMin implements Comparator<EduServices> {
+		// 人均最低
+		public int compare(EduServices first, EduServices second) {
+			if (first.getAvePrice() > second.getAvePrice())
+				return 1;
+			else if (first.getAvePrice() < second.getAvePrice())
+				return -1;
+			else
+				return 0;
+		}
+
+	}
+	@SuppressWarnings("all")
+	private class eduServicesSprtPerCapitaMax implements Comparator<EduServices> {
+		// 人均最高
+		public int compare(EduServices first, EduServices second) {
+			if (first.getAvePrice() < second.getAvePrice())
+				return 1;
+			else if (first.getAvePrice() > second.getAvePrice())
 				return -1;
 			else
 				return 0;
@@ -317,6 +406,29 @@ public class EduServicesAction extends ActionSupport implements
 
 	public String getLikeEduWeb() throws IOException {
 		try {
+			List<Provinces> lpro = audao.ProvincesName(session.getAttribute("province")==null?"北京":session.getAttribute("province").toString());
+
+			for (int i = 0; i < lpro.size(); i++) {
+				System.out.println(lpro.get(i).getProvince() + "区域代码:"
+						+ lpro.get(i).getProvinceid());
+				List<Cities> lcit = audao.CitiesName(lpro.get(i).getProvinceid());
+				if (lcit.size() > 0 && lcit.size() <= 2) {
+					List<Areas> lar = audao.AreasName(lcit.get(0).getCityid());
+					for (int i2 = 0; i2 < lar.size(); i2++) {
+						System.out.println(lpro.get(i).getProvince() + "下的区:"
+								+ lar.get(i2).getArea());
+					}
+					System.out.println(lar.size()+"个区");
+					request.setAttribute("lar", lar);
+				} else {
+					for (int i2 = 0; i2 < lcit.size(); i2++) {
+						System.out.println(lpro.get(i).getProvince() + "下的市:"
+								+ lcit.get(i2).getCity());
+					}
+					request.setAttribute("lcit", lcit);
+					System.out.println(lcit.size()+"个市");
+				}
+			}
 			System.out.println("value" + value);
 			List<EduServices> edl = eduServicesDAO.findLike(value, currentPage,
 					pageSize);
@@ -471,8 +583,12 @@ public class EduServicesAction extends ActionSupport implements
 		return eduServicesDAO;
 	}
 
-	public void setEduServicesDAO(EduServicesDAO eduServicesDAO) {
+	
+
+	public EduServicesAction(EduServicesDAO eduServicesDAO, ApputilDAO audao) {
+		super();
 		this.eduServicesDAO = eduServicesDAO;
+		this.audao = audao;
 	}
 
 	public String getMerchantId() {
