@@ -48,7 +48,7 @@ public class EduCommentAction implements ServletRequestAware {
 	private String replyId;
 	private String content;
 	private String fatherId;
-
+	private String path;
 	private File[] pictures;
 	private String[] picturesFileName;
 	private String[] picturesContentType;
@@ -307,6 +307,8 @@ public class EduCommentAction implements ServletRequestAware {
 		System.out.println("score:" + score);
 		System.out.println("content:" + content);
 		System.out.println("fatherId:" + fatherId);
+		System.out.println("path:" + path);
+		
 		if (!OpeFunction.isEmpty(merchantId)&&!OpeFunction.isEmpty(content)) {
 			User user = (User) session.getAttribute("u");
 			if (user != null) {
@@ -349,11 +351,9 @@ public class EduCommentAction implements ServletRequestAware {
 				eduComment.setUser(user);
 				eduComment.setScore(score);// 12345 –«º∂
 				eduComment.setContent(content);// ∆¿¬€ƒ⁄»›
-				Object obj=session.getAttribute("src");
-				if(obj!=null){
-				eduComment.setPictures(obj.toString()); // Õº∆¨µÿ÷∑
-				session.removeAttribute("src");
-				}
+				
+				eduComment.setPictures(path); // Õº∆¨µÿ÷∑
+				
 				eduComment.setTime(OpeFunction.getNowTime());
 				if (!StringUtils.isEmpty(fatherId)
 						&& StringUtils.isNumeric(fatherId)) {
@@ -497,6 +497,14 @@ public class EduCommentAction implements ServletRequestAware {
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub
 		this.request = arg0;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }

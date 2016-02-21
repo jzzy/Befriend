@@ -13,8 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UploadAction extends ActionSupport
 {
-	private HttpSession session = ServletActionContext.getRequest()
-			.getSession();
+	
 	private static final long serialVersionUID = 1L;
 	
 	private File[] 		fileList;
@@ -44,15 +43,8 @@ public class UploadAction extends ActionSupport
 					FileUtils.copyFile(fileList[i], saveFile);
 					String src=ServletActionContext.getServletContext().getContextPath()+"/file/upload/"+fileListFileName[i];
 					response.getWriter().println(src);
-					src=src+"!#";
-					Object obj= session.getAttribute("src");
-					if(obj!=null){
-						session.setAttribute("src", obj+src);
-						System.out.println("第二次存");
-					}else{
-					session.setAttribute("src", src);
-					System.out.println("第-次存");
-					}
+					System.out.println("文件上传"+src);
+					
 				}
 				catch ( IOException e )
 				{

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/zyupload-1.0.0.min.css" type="text/css">
 </head>
 <body>
-<form action="addWebComments" enctype="multipart/form-data" method="post">
+<form action="addWebComments" id="form9527" enctype="multipart/form-data" method="post">
 	<div class="cont">
 			<div id="header">
 				<div class="topArea clearfix">
@@ -27,9 +27,14 @@
 						<!-- 
 						<input style="background:#ff6633;margin-top: 0px;width: 50px;height: 30px;" type="image" name="submit" value=" 发送" />
 					
-						 -->
+						
 						 <input   type="image" style="line-height:24px;background:#ff6633;font-size:16px;margin-top: 5px;border:none;width: 48px;height: 30px;" name="submit" value="&nbsp发送" />
-					
+					 -->
+					 <div  style="24px;background:#ff6633;font-size:16px;margin-top: 5px;border:none;width: 40px;height: 30px;" class="upload_btn">
+					 <span style="margin-top: 0px;margin-left: -8px;">提交</span>
+					 
+					 
+					 </div>
 						
 					</div>
 				</div>
@@ -41,7 +46,11 @@
 						<div id="raty" style="cursor: pointer;"></div>
 						<div name="score" id="raty_hint" class="hint">0</div>
 					</div>
+					
 					<div class="write">
+					
+					
+					<input id="inputm" type="text" name="path" style="width: 1000px;display: none;"/>
 						<p class="textarea">
 							<textarea cols="50" rows="15" name="content" id="textarea">亲，课程怎么样，老师好不好，环境如何，学习效果满意吗？</textarea>
 						</p>
@@ -60,7 +69,7 @@
 						点击+号上传图片,点击删除已选图片</p>
 						
 						<div id="zyupload" class="zyupload"></div>
-						<div class="upload_btn">开始上传</div>
+						
 						<div id="uploadInf" name="fatherId" class="upload_inf"></div>
 						
 						
@@ -148,22 +157,32 @@
 				console.info(file.name);
 				console.info("此文件上传到服务器地址：");
 				console.info(response);
-				//$("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+				//$("#divm").append("<p>上传成功，文件地址是：" + response + "</p>");
+				 if($("#inputm").attr("value")!=null){
+					 $("#inputm").attr("value",$("#inputm").attr("value")+response+"!#");
+				 }else{
+					 $("#inputm").attr("value",response+"!#");
+				 }
+				
+				
 				//$("#uploadInf").html(response);
-				$("#uploadInf").append("<p>上传成功!</p>");
+			//	$("#uploadInf").append("<p>上传成功!</p>");
 			},
 			onFailure: function(file, response){          // 文件上传失败的回调方法
 				console.info("此文件上传失败：");
 				console.info(file.name);
 			},
 			onComplete: function(response){           	  // 上传完成的回调方法
-				console.info("文件上传完成");
+				//salert("文件上传完成");
+				$("#form9527").submit(); 
+				//console.info("文件上传完成");
+				
 				console.info(response);
 			}
 		});
 		
 	});
-  
+	
 </script>
  
  

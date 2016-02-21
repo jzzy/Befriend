@@ -96,7 +96,7 @@ $(window).scroll(function () {
 							
 						
 						%>
-						<li><a href="getLikeEduWeb?county=<%=lar.get(i).getArea().substring(0, lar.get(i).getArea().length()-1) %>&province=<%=session.getAttribute("province")%>"><%=lar.get(i).getArea() %></a></li>
+						<li><a href="getLikeEduWeb?county=<%=lar.get(i).getArea().substring(0, lar.get(i).getArea().length()-1) %>&province=<%=session.getAttribute("province")==null||session.getAttribute("province").equals("null")?"北京":session.getAttribute("province")%>"><%=lar.get(i).getArea() %></a></li>
 					
 						<%
 						}
@@ -106,7 +106,7 @@ $(window).scroll(function () {
 							
 						
 						%>
-						<li><a href="getLikeEduWeb?county=<%=lcit.get(i).getCity().substring(0, lcit.get(i).getCity().length()-1) %>&province=<%=session.getAttribute("province")%>"><%=lcit.get(i).getCity() %></a></li>
+						<li><a href="getLikeEduWeb?county=<%=lcit.get(i).getCity().substring(0, lcit.get(i).getCity().length()-1) %>&province=<%=session.getAttribute("province")==null||session.getAttribute("province").equals("null")?"北京":session.getAttribute("province")%>"><%=lcit.get(i).getCity() %></a></li>
 					
 						<%
 						}
@@ -134,11 +134,11 @@ $(window).scroll(function () {
 				<li class="sort fNiv">
 					<a href="#" class="fNiv">智能排序&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
 					<ul>
-						<li><a href="#">离我最近的商户</a></li>
-						<li><a href="#">人气最高的商户</a></li>
-						<li><a href="#">评价醉好的商户</a></li>
-						<li><a href="#">人均最低的商户</a></li>
-						<li><a href="#">人均最高的商户</a></li>
+						<li><a href="getLikeEduWeb?sortType=1">离我最近的商户</a></li>
+						<li><a href="getLikeEduWeb?sortType=2">人气最高的商户</a></li>
+						<li><a href="getLikeEduWeb?sortType=5">评价醉好的商户</a></li>
+						<li><a href="getLikeEduWeb?sortType=3">人均最低的商户</a></li>
+						<li><a href="getLikeEduWeb?sortType=4">人均最高的商户</a></li>
 					</ul>
 				</li>
 			</ul>

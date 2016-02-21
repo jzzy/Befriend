@@ -15,7 +15,7 @@
     	  //alert(remote_ip_info.province);//省份  
     	 // alert(remote_ip_info.city);//城市  
     	  //alert("您所在的省份为:" + remote_ip_info.province);
-    	  if(<%=session.getAttribute("province")==null%>){
+    	  if(<%=session.getAttribute("province")==null||session.getAttribute("province").equals("null")%>){
     		//  alert("进入主页");
     		  location.href="/Befriend/webNewsA10?province="+remote_ip_info.province;  
     	  }else{

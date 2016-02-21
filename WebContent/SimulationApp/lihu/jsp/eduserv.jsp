@@ -40,7 +40,7 @@ $(window).scroll(function () {
     if (scrollTop + windowHeight >=scrollHeight) {
 	//alert("加载了"+"/Befriend/getEduWebAjax?address=<%=address==null?"":address%>&classSecond=<%=classSecond==null?"":classSecond%>&classFirst=<%=classFirst==null?"":classSecond%>&city=<%=city==null?"":city%>&county=<%=county==null?"":county%>&province=<%=province==null?"":province%>&currentPage="+$("#divc").html());
 	 
-	htmlobj=$.ajax({url:"/Befriend/getEduWebAjax?address=<%=address==null?"":address%>&classSecond=<%=classSecond==null?"":classSecond%>&classFirst=<%=classFirst==null?"":classSecond%>&city=<%=city==null?"":city%>&county=<%=county==null?"":county%>&province=<%=province==null?"":province%>&currentPage="+$("#divc").html(),async:false});
+	htmlobj=$.ajax({url:"/Befriend/getEduWebAjax?address=<%=address==null?"":address%>&classSecond=<%=classSecond==null?"":classSecond%>&classFirst=<%=classFirst==null?"":classFirst%>&city=<%=city==null?"":city%>&county=<%=county==null?"":county%>&province=<%=province==null?"":province%>&currentPage="+$("#divc").html(),async:false});
 	$("#divc").html(parseInt($("#divc").html())+1);
      $("#myDiv").html($("#myDiv").html()+htmlobj.responseText);
 		 
@@ -88,7 +88,7 @@ $(window).scroll(function () {
 							
 						
 						%>
-						<li><a href="getEduWeb?county=<%=lar.get(i).getArea().substring(0, lar.get(i).getArea().length()-1) %>&province=<%=session.getAttribute("province")%>"><%=lar.get(i).getArea() %></a></li>
+						<li><a href="getEduWeb?county=<%=lar.get(i).getArea().substring(0, lar.get(i).getArea().length()-1) %>&province=<%=session.getAttribute("province")==null||session.getAttribute("province").equals("null")?"北京":session.getAttribute("province")%>"><%=lar.get(i).getArea() %></a></li>
 					
 						<%
 						}
@@ -98,7 +98,7 @@ $(window).scroll(function () {
 							
 						
 						%>
-						<li><a href="getEduWeb?county=<%=lcit.get(i).getCity().substring(0, lcit.get(i).getCity().length()-1) %>&province=<%=session.getAttribute("province")%>"><%=lcit.get(i).getCity() %></a></li>
+						<li><a href="getEduWeb?city=<%=lcit.get(i).getCity().substring(0, lcit.get(i).getCity().length()-1) %>&province=<%=session.getAttribute("province")==null||session.getAttribute("province").equals("null")?"北京":session.getAttribute("province")%>"><%=lcit.get(i).getCity() %></a></li>
 					
 						<%
 						}
@@ -125,11 +125,12 @@ $(window).scroll(function () {
 				<li class="sort fNiv">
 					<a  class="fNiv">智能排序&nbsp;<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/arrow_off.gif" width="20" height="10" alt="" /></a>
 					<ul>
-						<li><a href="#">离我最近的商户</a></li>
-						<li><a href="#">人气最高的商户</a></li>
-						<li><a href="#">评价醉好的商户</a></li>
-						<li><a href="#">人均最低的商户</a></li>
-						<li><a href="#">人均最高的商户</a></li>
+					
+						<li><a href="getEduWeb?sortType=1">离我最近的商户</a></li>
+						<li><a href="getEduWeb?sortType=2">人气最高的商户</a></li>
+						<li><a href="getEduWeb?sortType=5">评价醉好的商户</a></li>
+						<li><a href="getEduWeb?sortType=3">人均最低的商户</a></li>
+						<li><a href="getEduWeb?sortType=4">人均最高的商户</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -173,6 +174,7 @@ $(window).scroll(function () {
 		</div><!--container-->
 		
 	</div><!--cont-->
+
 
 <script type="text/javascript" src="<%=request.getContextPath() %>/SimulationApp/lihu/js/jMenu.jquery.js"></script>
 <script type="text/javascript">

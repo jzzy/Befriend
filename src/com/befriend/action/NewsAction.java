@@ -1466,10 +1466,10 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				session.setAttribute("province", province);
 			}
 
-			Object pro = session.getAttribute("province");
+			String pro = session.getAttribute("province")==null?null:session.getAttribute("province").toString();
 			System.out.println("百度定位 :" + pro);
 			if (pro != null) {
-				area = pro.toString();
+				area = pro;
 				province = area;
 			}
 			if (u != null) {
@@ -1479,16 +1479,18 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 					area = u.getAddress();
 					session.setAttribute("province", u.getAddress());
 				}
-				if (area == null) {
+				if (area == null||pro.equals("null")) {
 					((HttpServletResponse) util.response())
 							.sendRedirect(request.getContextPath()
 									+ "/SimulationApp/byIp.jsp");
+					
 				}
 
-			} else if (pro == null) {
-
+			} else if (OpeFunction.isEmpty(pro)||pro.equals("null")) {
+				System.out.println("12222222222222222222");
 				((HttpServletResponse) util.response()).sendRedirect(request
 						.getContextPath() + "/SimulationApp/byIp.jsp");
+				
 			}
 
 			System.out.println("时间是" + util.getNowTime());
