@@ -197,7 +197,8 @@ s.push(i + '=' + encodeURIComponent(p[i]||''));
 document.write(['<a version="1.0"  href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank"><li><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/fx4.png" alt="QQ空间" /><span>QQ空间</span></li></a>'].join(''));
 })();
 </script>
-<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>		
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>	
+	
 			<!-- 
 				<li><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/fx1.png" alt="微信" /><span>微信好友</span></li>
 				<li><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/fx2.png" alt="朋友圈" /><span>朋友圈</span></li>

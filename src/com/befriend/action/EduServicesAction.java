@@ -212,28 +212,31 @@ public class EduServicesAction extends ActionSupport implements
 			System.out.println("lng:" + lng + "lat:" + lat);
 			session.setAttribute("lng", lng);
 			session.setAttribute("lat", lat);
-			if (OpeFunction.isEmpty(province)!=true?!province.equals("null"):false) {
-				session.setAttribute("province", province);
-			} else {
-				province = session.getAttribute("province") == null ? null
-						: session.getAttribute("province").toString();
-				if(session.getAttribute("province")==null||session.getAttribute("province").equals("null")){
-					province="北京";	
-				}
-			}
-			if (OpeFunction.isEmpty(city)!=true?!city.equals("null"):false) {
-				session.setAttribute("city", city);
-			} else {
-				city = session.getAttribute("city") == null||session.getAttribute("city").equals("null") ? null : session
-						.getAttribute("city").toString();
-			}
+//			if (OpeFunction.isEmpty(province)!=true?!province.equals("null"):false) {
+//				session.setAttribute("province", province);
+//				
+//			} else {
+//				province = session.getAttribute("province") == null ? null
+//						: session.getAttribute("province").toString();
+//				if(session.getAttribute("province")==null||session.getAttribute("province").equals("null")){
+//					province="北京";	
+//				}
+//			}
+//			if (OpeFunction.isEmpty(city)!=true?!city.equals("null"):false) {
+//				session.setAttribute("city", city);
+//			} 
+//			else {
+//				city = session.getAttribute("city") == null||session.getAttribute("city").equals("null") ? null : session
+//						.getAttribute("city").toString();
+//			}
 
-			if (OpeFunction.isEmpty(county)!=true?!county.equals("null"):false) {
-				session.setAttribute("county", county);
-			} else {
-				county = session.getAttribute("county") == null||session.getAttribute("county").equals("null") ? null : session
-						.getAttribute("county").toString();
-			}
+//			if (OpeFunction.isEmpty(county)!=true?!county.equals("null"):false) {
+//				session.setAttribute("county", county);
+//			} 
+//			else {
+//				county = session.getAttribute("county") == null||session.getAttribute("county").equals("null") ? null : session
+//						.getAttribute("county").toString();
+//			}
 			System.out.println("province"+province);
 			System.out.println("city"+city);
 			System.out.println("county"+county);

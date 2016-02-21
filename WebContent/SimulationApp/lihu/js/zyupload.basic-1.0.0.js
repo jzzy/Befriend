@@ -721,10 +721,11 @@ var ZYFILE = {
 				// 绑定上传点击事件
 				$(".upload_btn").bind("click", function(e){
 					// 判断当前是否有文件需要上传
+					
 					if(ZYFILE.funReturnNeedFiles().length > 0){
 						$("#fileSubmit").click();
 					}else{
-						alert("请先选中文件再点击上传");
+						alert("请选择至少一张图片");
 					}
 	            });
 				
