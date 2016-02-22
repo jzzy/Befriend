@@ -245,7 +245,7 @@ public class EduServicesAction extends ActionSupport implements
 			System.out.println("address"+address);
 			System.out.println("county"+county);
 			
-			if  (!OpeFunction.isEmpty(province)||!province.equals("null")) {
+			if  (!OpeFunction.isEmpty(province)) {
 				map.put("province", province);
 				request.setAttribute("province", province);
 			}
@@ -482,7 +482,7 @@ public class EduServicesAction extends ActionSupport implements
 			// map.put("merchantId", merchantId);
 			// }
 
-			if  (!OpeFunction.isEmpty(province)||!province.equals("null")) {
+			if  (!OpeFunction.isEmpty(province)) {
 				map.put("province", province);
 				System.out.println("province" + province);
 			}
@@ -830,7 +830,7 @@ public class EduServicesAction extends ActionSupport implements
 			map.put("merchantId", merchantId);
 		}
 
-		if  (!OpeFunction.isEmpty(province)||!province.equals("null")) {
+		if  (!OpeFunction.isEmpty(province)) {
 			map.put("province", province);
 		}
 

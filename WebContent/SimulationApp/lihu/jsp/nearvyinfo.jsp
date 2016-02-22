@@ -45,7 +45,7 @@ Object	type=request.getAttribute("type");
 				<li>
 					<dl class="topArea">
 						<dt><%=jo.getString("name") %></dt>
-						<dd class="tel">联系方式&nbsp;:&nbsp;<%=jo.getString("tel").length()<=3?"无":jo.getString("tel") %></dd>
+						<dd class="tel">联系方式&nbsp;:&nbsp;<%=jo.getString("tel").length()<=3?"无":jo.getString("tel").split(";")[0]  %></dd>
 						<dd class="type">服务类型&nbsp;:&nbsp;<%=type %>服务</dd>
 					</dl>
 					<ul class="bottomArea clearfix">
@@ -53,7 +53,9 @@ Object	type=request.getAttribute("type");
 							<a href="daohang?lng=<%=jo.getString("location").split(",")[0] %>&lat=<%=jo.getString("location").split(",")[1] %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/bolt.png" alt="" />导航过去</a>
 						</li>
 						<li>
-							<a href="tel:<%=jo.getString("tel").length()<=3?"无":jo.getString("tel") %>"><img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/tel.png" alt="<%=jo.getString("tel").length()<=3?"无":jo.getString("tel") %>" />联系商家</a>
+							<a href="tel:<%=jo.getString("tel").length()<=3?"无":jo.getString("tel").split(";")[0] %>">
+							<img src="<%=request.getContextPath() %>/SimulationApp/lihu/images/tel.png" alt="<%=jo.getString("tel").length()<=3?"无":jo.getString("tel").split(";")[0]  %>" />
+							联系商家</a>
 						</li>
 					</ul>
 				</li>

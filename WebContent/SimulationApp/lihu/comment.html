@@ -82,6 +82,7 @@
 			</div><!--container-->
 	</div><!--cont-->
 </form>
+<div  id="divc">0</div>
 <script type="text/javascript">
 
 	$(function(){
@@ -139,18 +140,23 @@
 			itemWidth        :   "60%",                 // 文件项的宽度
 			itemHeight       :   "80px",                 // 文件项的高度
 			url              :   "upload.action",  // 上传文件的路径
-			fileType         :   ["jpg","png","js","exe"],// 上传文件的类型
+			fileType         :   ["jpg","png","gif","JPG","PNG","GIF"],// 上传文件的类型
 			fileSize         :   51200000,                // 上传文件的大小
 			multiple         :   true,                    // 是否可以多个文件上传
 			dragDrop         :   false,                   // 是否可以拖动上传文件
 			tailor           :   false,                   // 是否可以裁剪图片
 			del              :   true,                    // 是否可以删除文件
 			finishDel        :   false,  	
-			fileNum : 5,  								  // 代表文件总个数，因为涉及到继续添加，所以下一次添加需要在它的基础上添加索引
+			fileNum : 1,  								  // 代表文件总个数，因为涉及到继续添加，所以下一次添加需要在它的基础上添加索引
 			/* 外部获得的回调接口 */
 			onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+				$("#divc").html(parseInt($("#divc").html())+1);
+				alert(selectFiles);
 				console.info("当前选择了以下文件：");
 				console.info(selectFiles);
+				if(parseInt($("#divc").html())>=2){
+					$("#uploadInf").show();
+				}
 			},
 			onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
 				console.info("当前删除了此文件：");
