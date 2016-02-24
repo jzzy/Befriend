@@ -30,7 +30,12 @@
 						
 						 <input   type="image" style="line-height:24px;background:#ff6633;font-size:16px;margin-top: 5px;border:none;width: 48px;height: 30px;" name="submit" value="&nbsp发送" />
 					 -->
-					 <div  style="background:#ff6633;font-size:16px;margin-top: 5px;border:none;width: 40px;height: 30px;" class="upload_btn">
+					 <div id="div1653"  style="background:#ff6633;font-size:16px;margin-top: 5px;border:none;width: 40px;height: 30px;" class="upload_btn">
+					 <span style="margin-top: 0px;margin-left: -8px;" >提交</span>
+					 
+					 
+					 </div>
+					 <div id="div1655"  style="display:none;background:#ff6633;font-size:16px;margin-top: 5px;border:none;width: 40px;height: 30px;" class="upload_btn">
 					 <span style="margin-top: 0px;margin-left: -8px;">提交</span>
 					 
 					 
@@ -70,11 +75,11 @@
 						-->
 					
 						<p class="info">
-						点击+号上传图片,点击删除已选图片</p>
+						点击+号上传图片,点击删除已选图片(最多6张)</p>
 						
 						<div id="zyupload" class="zyupload"></div>
 						
-						<div id="uploadInf" name="fatherId" class="upload_inf"></div>
+						
 						
 						
 					</div>
@@ -82,8 +87,11 @@
 			</div><!--container-->
 	</div><!--cont-->
 </form>
-<div  id="divc">0</div>
+
 <script type="text/javascript">
+$("#div1653").click(function(){
+	$("#form9527").submit(); 
+});
 
 	$(function(){
 		var textarea = $("#textarea");
@@ -147,16 +155,21 @@
 			tailor           :   false,                   // 是否可以裁剪图片
 			del              :   true,                    // 是否可以删除文件
 			finishDel        :   false,  	
-			fileNum : 1,  								  // 代表文件总个数，因为涉及到继续添加，所以下一次添加需要在它的基础上添加索引
+			fileNum : 0,  								  // 代表文件总个数，因为涉及到继续添加，所以下一次添加需要在它的基础上添加索引
 			/* 外部获得的回调接口 */
 			onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
-				$("#divc").html(parseInt($("#divc").html())+1);
-				alert(selectFiles);
+			//s	$("#divc").html(parseInt($("#divc").html())+1);
+				//alert(allFiles.length);
 				console.info("当前选择了以下文件：");
 				console.info(selectFiles);
-				if(parseInt($("#divc").html())>=2){
-					$("#uploadInf").show();
+				$("#div1653").hide(); 
+				$("#div1655").show();
+				if(allFiles.length>6){
+					$("#fileImage").hide();
 				}
+				
+			
+				
 			},
 			onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
 				console.info("当前删除了此文件：");
@@ -179,6 +192,7 @@
 			//	$("#uploadInf").append("<p>上传成功!</p>");
 			},
 			onFailure: function(file, response){          // 文件上传失败的回调方法
+					alert("此文件上传失败："+file.name);
 				console.info("此文件上传失败：");
 				console.info(file.name);
 			},

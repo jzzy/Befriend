@@ -55,12 +55,12 @@ var ZYFILE = {
 	},
 	// 获取文件
 	funGetFiles : function(e){  
+		
 		var self = this;
 		// 取消鼠标经过样式
 		this.funDragHover(e);
 		// 从事件中获取选中的所有文件
 		var files = e.target.files || e.dataTransfer.files;
-		//alert("从事件中获取选中的所有文件"+files.length);
 		self.lastUploadFile = this.uploadFile;
 		this.uploadFile = this.uploadFile.concat(this.filterFile(files));
 		var tmpFiles = [];
@@ -81,11 +81,17 @@ var ZYFILE = {
 				tmpFiles.push(self.uploadFile[k]);
 			}
 		});
+	//	alert("funGetFiles tmpFiles "+tmpFiles.length);
+	//	alert("funGetFiles this.uploadFile "+this.uploadFile.length);
+	
 		
 		// 如果tmpFiles进行过过滤上一次选择的文件的操作，需要把过滤后的文件赋值
 		//if(tmpFiles.length!=0){
 			this.uploadFile = tmpFiles;
+			
 		//}
+				
+			
 		
 		// 调用对文件处理的方法
 		this.funDealtFiles();
@@ -94,22 +100,7 @@ var ZYFILE = {
 	},
 	// 处理过滤后的文件，给每个文件设置下标
 	funDealtFiles : function(){
-		var files = [];  // 替换的文件数组
-		files=this.uploadFile;
-
-		var arrFiles = [];  // 替换的文件数组
-		for (var i = 0, file; file = files[i]; i++) {
-			if(i>=6){
-							
-				continue;
-			}
-			
-			arrFiles.push(file);	
-			
-		}
-		this.uploadFile=arrFiles;
 		
-	
 		
 		
 		var self = this;
@@ -120,9 +111,6 @@ var ZYFILE = {
 			// 添加一个之后自增
 			self.fileNum++;
 	
-			
-				
-			
 		});
 		// 先把当前选中的文件保存备份
 		var selectFile = this.uploadFile;  
@@ -130,14 +118,31 @@ var ZYFILE = {
 		this.perUploadFile = this.perUploadFile.concat(this.uploadFile);
 		// 合并下上传的文件
 		this.uploadFile = this.lastUploadFile.concat(this.uploadFile);
+		var files = [];
+		files=this.uploadFile;
 		
+		var arrFiles = [];  // 替换的文件数组
+		for (var i = 0, file; file = files[i]; i++) {
+			//alert("i "+i+"this.uploadFile "+this.uploadFile.length);
 		
+			if(this.uploadFile.length<=6){
+				arrFiles.push(file);	
+			}else{
+				//alert("最多只能选择6张图片!1");
+				break;
+			}
 		
+			
+			
+			
+			
+		}
+		//this.uploadFile=arrFiles;
+	//	alert("funDealtFiles"+this.uploadFile.length);
 		// 执行选择回调
 		this.onSelect(selectFile, this.uploadFile);
 		console.info("继续选择");
 		console.info(this.uploadFile);
-		//alert("合并下上传的文件"+this.uploadFile.length);
 		return this;
 	},
 	// 处理需要删除的文件  isCb代表是否回调onDelete方法  
@@ -213,6 +218,23 @@ var ZYFILE = {
 	},
 	// 返回需要上传的文件
 	funReturnNeedFiles : function(){
+		
+		var files = [];
+		files=this.uploadFile;
+		
+		var arrFiles = [];  // 替换的文件数组
+		for (var i = 0, file; file = files[i]; i++) {
+			if(i<6){
+				arrFiles.push(file);	
+				
+			}
+		
+			
+			
+			
+			
+		}
+		this.uploadFile=arrFiles;
 		return this.uploadFile;
 	},
 	
@@ -314,7 +336,7 @@ var ZYFILE = {
 	            	html += '				<div class="convent_choice">';
 	            	html += '					<div class="andArea">';
 	            	html += '						<div class="filePicker">点击选择文件</div>';
-	            	html += '						<input id="fileImage" type="file" size="30" name="fileselect[]" '+multiple+'>';
+	            	html += '						<input id="fileImage" type="file" size="30" name="fileselect[]" '+multiple+'/>';
 	            	html += '					</div>';
 	            	html += '				</div>';
 					html += '				<span id="fileDragArea" class="upload_drag_area">或者将文件拖到此处</span>';
@@ -337,14 +359,14 @@ var ZYFILE = {
 				}else{
 					var imgWidth = parseInt(para.itemWidth.replace("px", ""))-15;
 					
-					// 创建不带有拖动的html  我所使用的
+					// 创建不带有拖动的html
 					html += '<form id="uploadForm" action="'+para.url+'" method="post" enctype="multipart/form-data">';
 					html += '	<div class="upload_box">';
 					html += '		<div class="upload_main single_main">';
 		            html += '			<div class="status_bar">';
 		            html += '				<div id="status_info">选中0张文件，共0B。</div>';
 		            html += '				<div class="btns">';
-		            html += '					<input id="fileImage" type="file" size="30" name="fileselect[]" '+multiple+'>';
+		            html += '					<input id="fileImage" type="file" size="30" name="fileselect[]" '+multiple+'/>';
 		            html += '					<div class="webuploader_pick">选择文件</div>';
 		            html += '					<div class="upload_btn">开始上传</div>';
 		            html += '				</div>';
@@ -353,7 +375,7 @@ var ZYFILE = {
 				    html += '				<div class="add_upload">';
 				    html += '					<a title="点击添加文件" id="rapidAddImg" class="add_imgBox" href="javascript:void(0)">';
 				    html += '						<div class="uploadImg">';
-				    html += '							<img  class="upload_image" src="images/uploadfile.gif"/>';
+				    html += '							<img id="1Img" class="upload_image" src="images/uploadfile.gif"/>';
 				    html += '						</div>'; 
 				    html += '					</a>';
 				    html += '				</div>';
@@ -404,12 +426,11 @@ var ZYFILE = {
 			 */
 			this.funFilterEligibleFile = function(files){
 				var arrFiles = [];  // 替换的文件数组
-				
 				for (var i = 0, file; file = files[i]; i++) {
+					
 					if(i>=6){
-						if(i=files.length-1){
-							alert("最多只能选择6张图片!");
-						}
+					
+						alert("最多只能选择6张图片!");
 						
 						break;
 					}
@@ -455,6 +476,9 @@ var ZYFILE = {
 				if(para.del){  // 显示删除按钮
 					delHtml = '<span class="file_del" data-index="'+file.index+'" title="删除"></span>';
 				}
+				
+				
+				
 				
 				var newStr = file.name.split("").reverse().join("");
 				var type = newStr.split(".")[0].split("").reverse().join("");
@@ -577,20 +601,34 @@ var ZYFILE = {
 					url: $("#uploadForm").attr("action"),
 					
 					filterFile: function(files) {
-						 //alert("过滤合格的文件"+files.length);
-						// 过滤合格的文件
-						return self.funFilterEligibleFile(files);
+						
+					// 过滤合格的文件
+					return self.funFilterEligibleFile(files);
+						
+						
+						
 					},
 					onSelect: function(selectFiles, allFiles) {
+
 						para.onSelect(selectFiles, allFiles);  // 回调方法
 						self.funSetStatusInfo(ZYFILE.funReturnNeedFiles());  // 显示统计信息
+						
+						
 						var html = '', i = 0;
+						
+							
+						
 						// 组织预览html
 						var funDealtPreviewHtml = function() {
+							
+								
+								
+						
 							file = selectFiles[i];
 							if (file) {
 								var reader = new FileReader();
 								reader.onload = function(e) {
+									
 									// 处理下配置参数和格式的html
 									html += self.funDisposePreviewHtml(file, e);
 									
@@ -600,13 +638,17 @@ var ZYFILE = {
 								}
 								reader.readAsDataURL(file);
 							} else {
+								//alert("走到这里说明文件html已经组织完毕"+html);
 								// 走到这里说明文件html已经组织完毕，要把html添加到预览区
 								funAppendPreviewHtml(html);
 							}
+							
 						};
+						
 						
 						// 添加预览html
 						var funAppendPreviewHtml = function(html){
+							//alert("预览"+html);
 							// 添加到添加按钮前
 							if(para.dragDrop){
 								$("#preview").append(html);
@@ -763,9 +805,6 @@ var ZYFILE = {
 					
 					if(ZYFILE.funReturnNeedFiles().length > 0){
 						$("#fileSubmit").click();
-					}else{
-						
-						//alert("请选择至少一张图片");
 					}
 	            });
 				
@@ -774,11 +813,11 @@ var ZYFILE = {
 					
 					// 绑定添加点击事件
 					$("#rapidAddImg").bind("click", function(e){
-						
+						alert("最多只能选择6张图片!");
 						if(ZYFILE.funReturnNeedFiles().length<6){
 							$("#fileImage").click();
 						}else{
-							alert("图片数量已达上限！");
+							alert("最多只能选择6张图片!");
 							$("#fileImage").hide();
 							
 							
