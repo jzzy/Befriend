@@ -192,12 +192,12 @@ $("#div1653").click(function(){
 			//	$("#uploadInf").append("<p>上传成功!</p>");
 			},
 			onFailure: function(file, response){          // 文件上传失败的回调方法
-					alert("此文件上传失败："+file.name);
+				alert("此文件上传失败："+file.name);
 				console.info("此文件上传失败：");
 				console.info(file.name);
 			},
 			onComplete: function(response){           	  // 上传完成的回调方法
-				//salert("文件上传完成");
+				//alert("文件上传完成");
 				$("#form9527").submit(); 
 				//console.info("文件上传完成");
 				
