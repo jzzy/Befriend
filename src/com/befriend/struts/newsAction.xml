@@ -21,7 +21,8 @@
 		</action>
 		<!-- 通过类型分页看书籍 -->
 		<action name="webLookBook" class="newsAction" method="webLookBook">
-			<result name="success">/SimulationApp/famous_book.jsp</result>
+			<!--<result name="success">/SimulationApp/famous_book.jsp</result>-->
+			<result name="success">/sample_lihu/jsp/book_list.jsp</result>
 		
 		</action>
 		<!-- app通过类型分页看书籍 -->
@@ -188,17 +189,25 @@
 			
 			<!--获取主页新闻-->
 		<action name="webNewsA10" class="newsAction" method="webNewsA10">
-		<result name="success">/SimulationApp/index.jsp</result>
+		<!-- <result name="success">/SimulationApp/index.jsp</result> -->
+		<result name="success">/sample_lihu/jsp/index.jsp</result>
 		</action>
 		
 			<!--通过id查询新闻-->
 		<action name="webNewsId" class="newsAction" method="webNewsId">
-		<result  name="success">/SimulationApp/news_cont.jsp</result>
+		<!--  <result  name="success">/SimulationApp/news_cont.jsp</result>-->
+		<result  name="success">/sample_lihu/jsp/newsdetail.jsp</result>
 		</action>
+		<action name="webNewsIdcomm" class="newsAction" method="webNewsIdcomm">
+		<!--  <result  name="success">/SimulationApp/news_cont.jsp</result>-->
+		<result  name="success">/sample_lihu/jsp/commentwrite.jsp</result>
+		</action>
+		
 		
 			<!--分页 查询八大类新闻-->
 		<action name="webNewtype" class="newsAction" method="webNewtype">
-		<result name="success">/SimulationApp/famous_person_badalei.jsp</result>
+		<!--  <result name="success">/SimulationApp/famous_person_badalei.jsp</result>-->
+		<result name="success">/sample_lihu/jsp/healthguide.jsp</result>
 		</action>
 		
 			<!--分页 查询升学指南的4小类类新闻-->

@@ -164,12 +164,14 @@
 		
 			<!-- 按类型查看论坛-->
 		<action name="webForumApptype" class="forumAction" method="webForumApptype">
-		<result name="success">/SimulationApp/exchange.jsp</result>
+		<!-- <result name="success">/SimulationApp/exchange.jsp</result> -->
+		<result name="success">/sample_lihu/jsp/forum.jsp</result>
 		</action>
 		
 		<!-- 通过id查看论坛-->
 		<action name="webForumLook" class="forumAction" method="webForumLook">
-		<result name="success">/SimulationApp/bbs.jsp</result>
+	<!--  	<result name="success">/SimulationApp/bbs.jsp</result>-->
+	<result name="success">/sample_lihu/jsp/forumreview.jsp</result>
 		</action>
 		
 		<!-- 通过userid查看我创建的论坛-->

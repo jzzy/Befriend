@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<div class="topArea clearfix">
+				<h1>家长反馈</h1>
+				<div class="prev">
+					<a href="#" onclick="javascript:history.back(-1);"><img src="images/prev.png" alt="后退" /></a>
+				</div>
+			</div>
+		</div><!--header-->
+		<div id="container">
+			<div class="feedback">
+				<p class="info">感谢您的反馈，您的反馈对我们很重要</p>
+				<div class="inner">
+					<textarea name="feedback" id="feedback" cols="30" rows="10">请简单描述你所遇到的问题或你的建议，我们会尽快处理。</textarea>
+				</div>
+			</div>
+		</div><!--container-->
+		<div id="footer">
+			<a href="#" class="fbButton">发送</a>
+		</div><!--footer-->
+	</div><!--wrap-->
+<script type="text/javascript">
+$(function(){
+	var textarea3 = $("#feedback");
+		textarea3.focusin(function(){
+		  if($(this).text() !== "请简单描述你所遇到的问题或你的建议，我们会尽快处理。"){
+			return false;
+		  }else{
+			$(this).text("");
+		  }
+		});
+		textarea3.focusout(function(){
+		  if($(this).text() == ""){
+			$(this).text("请简单描述你所遇到的问题或你的建议，我们会尽快处理。");
+		  }
+		});
+});
+</script>
+</body>
+</html>

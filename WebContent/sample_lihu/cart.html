@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<div class="topArea clearfix">
+				<h1>购物车</h1>
+				<div class="prev">
+					<a href="#" onclick="javascript:history.back(-1);"><img src="images/prev.png" alt="后退" /></a>
+				</div>
+			</div>
+		</div><!--header-->
+		<div id="container">
+			<div class="myCart">
+				<h2><img src="images/logo2.gif" alt="logo2" /></h2>
+				<ul>
+					<li>
+						<div class="inner clearfix">
+							<div class="checkArea"><label for="a1"><img src="images/ico28.png" alt="swich" /></label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" /></div>
+							<div class="product clearfix">
+								<div class="imgArea">
+									<a href="#"><img src="images/sample02.gif" alt="sample" /></a>
+								</div>
+								<div class="infoArea">
+									<p class="title">暖房子景点绘本系列·第五辑：一切因为有你</p>
+									<p class="info">（赢）弗莱德满 著，（英）豪沃思 绘，张喆 译</p>
+									<div class="other">
+										<div class="event"><img src="images/ico16.gif" alt="deco" />包邮 7.5折</div>
+										<div class="del"><img src="images/ico30.png" alt="delete" /></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="quantity"><a href="#">-</a><input type="text" value="1" name="quantity" /><a href="#">+</a></div>
+					</li>
+					<li>
+						<div class="inner clearfix">
+							<div class="checkArea"><label for="a1"><img src="images/ico28.png" alt="swich" /></label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" /></div>
+							<div class="product clearfix">
+								<div class="imgArea">
+									<a href="#"><img src="images/sample02.gif" alt="sample" /></a>
+								</div>
+								<div class="infoArea">
+									<p class="title">暖房子景点绘本系列·第五辑：一切因为有你</p>
+									<p class="info">（赢）弗莱德满 著，（英）豪沃思 绘，张喆 译</p>
+									<div class="other">
+										<div class="event"><img src="images/ico16.gif" alt="deco" />包邮 7.5折</div>
+										<div class="del"><img src="images/ico30.png" alt="delete" /></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="quantity"><a href="#">-</a><input type="text" value="1" name="quantity" /><a href="#">+</a></div>
+					</li>
+				</ul>
+			</div>
+		</div><!--container-->
+		<div id="footer">
+			<div class="cartMenu clearfix">
+				<div id="checkAll">
+					<label for="a1"><img src="images/ico28.png" alt="swich" />全选</label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" />
+				</div>
+				<div class="inner">
+					<div class="total">
+						<p class="title">商品金额总计</p>
+						<p class="price">￥20.01</p>
+					</div>
+					<div class="buy">
+						<a href="order.html">结算（1）</a>
+					</div>
+				</div>
+			</div>
+		</div><!--footer-->
+	</div><!--wrap-->
+
+<script type="text/javascript">
+
+$(function(){
+	$(".checkArea input").attr("checked", false);
+	
+	$(".checkArea label").click(function(){
+		var favorCheck = $(this).siblings("input").attr("value");
+		if( favorCheck == "unchecked" ){
+		$(this).children("img").attr("src","images/ico29.png");
+		$(this).siblings("input").attr({"value":"checked","checked":true});
+		}else if( favorCheck == "checked" ){
+		$(this).children("img").attr("src","images/ico28.png");
+		$(this).siblings("input").attr({"value":"unchecked","checked":false});
+		$("#checkAll img").attr("src","images/ico28.png");
+		}
+	});
+});
+
+$("#checkAll").click(function(){
+		$(".checkArea input").attr({"value" : "checked" , "checked" : true}).siblings("label").find("img").attr("src","images/ico29.png");
+		$(this).find("img").attr("src","images/ico29.png");
+});
+
+</script>
+</body>
+</html>

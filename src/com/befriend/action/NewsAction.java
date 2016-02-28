@@ -913,7 +913,11 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		}
 		return Action.SUCCESS;
 	}
-
+	public String webNewsIdcomm() throws IOException, ParseException {
+		n = ndao.byid(id);
+		request.setAttribute("n", n);
+		return Action.SUCCESS;
+	}
 	/**
 	 * web 通过id查询新闻
 	 * 

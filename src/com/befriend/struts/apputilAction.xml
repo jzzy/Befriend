@@ -217,8 +217,9 @@
 		<!-- 获取全部app-->
 		<action name="webGetapp" class="appupAction" method="webGetapp">
 
-			  <result name="success">/SimulationApp/Special_ColumnsCopy.jsp</result>
-			<!--<result name="success">/SimulationApp/Special_Columns.jsp</result>	-->
+			  <!--<result name="success">/SimulationApp/Special_ColumnsCopy.jsp</result>
+			<result name="success">/SimulationApp/Special_Columns.jsp</result>	-->
+			<result name="success">/sample_lihu/jsp/servicelist.jsp</result>
 		</action>
 		
 

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<div class="topArea clearfix">
+				<h1>我的收藏</h1>
+				<div class="prev">
+					<a href="#" onclick="javascript:history.back(-1);"><img src="images/prev.png" alt="后退" /></a>
+				</div>
+				<div class="topTool">
+					<span id="favorEdit">编辑</span>
+				</div>
+			</div>
+			<ul class="topMenu colum3 clearfix">
+				<li class="on"><a href="myfavor_info.html">资讯</a></li>
+				<li><a href="myfavor_forum.html">论坛</a></li>
+				<li><a href="myfavor_edu.html">教辅机构</a></li>
+			</ul>
+		</div><!--header-->
+		<div id="container">
+			<div class="myFavor">
+				<div class="mainList">
+					<ul>
+						<li>
+							<div class="checkArea"><label for="a1"><img src="images/ico28.png" alt="swich" /></label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" /></div>
+							<div class="inner clearfix">
+								<div class="infoArea">
+									<p class="title"><a href="newsdetail.html">一张班主任给家长的试卷，震撼心灵！</a></p>
+									<p class="info">
+										<span><img src="images/comment_ico.gif" alt="留言" />&nbsp;520</span>
+										<span><img src="images/favor_ico.gif" alt="关注" />&nbsp;120</span>
+									</p>
+								</div>
+								<div class="imgArea">
+									<p class="big_img"><a href="newsdetail.html"><img src="images/listBanner.jpg" alt="mediumImg" /></a></p>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="checkArea"><label for="a1"><img src="images/ico28.png" alt="swich" /></label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" /></div>
+							<div class="inner clearfix">
+								<div class="infoArea">
+									<p class="title"><a href="newsdetail.html">一张班主任给家长的试卷，震撼心灵！</a></p>
+									<p class="info">
+										<span><img src="images/comment_ico.gif" alt="留言" />&nbsp;520</span>
+										<span><img src="images/favor_ico.gif" alt="关注" />&nbsp;120</span>
+									</p>
+								</div>
+								<div class="imgArea">
+									<p class="big_img"><a href="newsdetail.html"><img src="images/listBanner.jpg" alt="mediumImg" /></a></p>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="checkArea"><label for="a1"><img src="images/ico28.png" alt="swich" /></label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" /></div>
+							<div class="inner clearfix">
+								<div class="infoArea">
+									<p class="title"><a href="newsdetail.html">一张班主任给家长的试卷，震撼心灵！</a></p>
+									<p class="info">
+										<span><img src="images/comment_ico.gif" alt="留言" />&nbsp;520</span>
+										<span><img src="images/favor_ico.gif" alt="关注" />&nbsp;120</span>
+									</p>
+								</div>
+								<div class="imgArea">
+									<p class="big_img"><a href="newsdetail.html"><img src="images/listBanner.jpg" alt="mediumImg" /></a></p>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div><!--container-->
+		<div id="footer">
+			<div class="favorDel clearfix">
+				<div class="leftArea">
+					<span id="checkAll">全选</span>
+				</div>
+				<div class="rightArea">
+					<span>删除</span>
+				</div>
+			</div>
+		</div><!--footer-->
+	</div><!--wrap-->
+
+<script type="text/javascript">
+
+$(function(){
+	$(".checkArea input").attr("checked", false);
+	
+	$(".checkArea label").click(function(){
+		var favorCheck = $(this).siblings("input").attr("value");
+		if( favorCheck == "unchecked" ){
+		$(this).children("img").attr("src","images/ico29.png");
+		$(this).siblings("input").attr({"value":"checked","checked":true});
+		}else if( favorCheck == "checked" ){
+		$(this).children("img").attr("src","images/ico28.png");
+		$(this).siblings("input").attr({"value":"unchecked","checked":false});
+		}
+	});
+});
+
+
+$("#favorEdit").click(function(){
+	var dis = $(".checkArea").css("display");
+	if( dis == "none"){
+		$(".checkArea").show();
+		$(".favorDel").show();
+		$(this).text("完成");
+		$("#container .myFavor li").css("padding-left","26px");
+	};
+	if( dis == "block"){
+		$(".checkArea").hide();
+		$(".favorDel").hide();
+		$(this).text("编辑");
+		$("#container .myFavor li").css("padding-left","0px");
+	};	
+});
+
+$("#checkAll").click(function(){
+		$(".checkArea input").attr({"value" : "checked" , "checked" : true}).siblings("label").find("img").attr("src","images/ico29.png");
+});
+
+</script>
+</body>
+</html>
