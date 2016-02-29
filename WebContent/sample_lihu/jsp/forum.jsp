@@ -113,8 +113,8 @@ $(document).ready(function(){
 								
 							</div>
 							<div class="info">
-								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=fone.get(i).getfHits() %></span>
-								<span><img src="sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;<%=fone.get(i).getFrs() %></span>
+								<span><img src="sample_lihu/images/comment_ico.gif" alt="回复数" />&nbsp;<%=fone.get(i).getFrs() %></span>
+								<span><img src="sample_lihu/images/favor2_ico.gif" alt="浏览数" />&nbsp;<%=fone.get(i).getfHits() %></span>
 							</div>
 						</li>
 						
