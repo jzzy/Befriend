@@ -99,8 +99,37 @@ if(f==null){
 											</div>
 										</div>
 									</li>
+									
+									
+								<%
+								if(fl.get(i)!=null){
+									//获取回复信息
+									List<ForumThree> fa=(List)fl.get(i);
+									for(int i1=0;i1<fa.size();i1++){
+										
+									
+								%>	
+									
+									<li class="reply">
+										<div class="inner clearfix">
+											<div class="leftArea"><img src="sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
+											<div class="rightArea">
+												<p class="name"><img src="sample_lihu/images/ico03.png" alt="reply" /><%=us.get(i).getUsername() %></p>
+												<p class="detail"><%=fa.get(i1).getReply() %></p>
+												<p class="time"><%=fa.get(i1).getTime() %></p>
+											</div>
+										</div>
+									</li>
+									<%
+									}
+								}
+									%>
 								</ul>
 							</li>
+							
+							
+							
+							
 						
 						<%
 						}

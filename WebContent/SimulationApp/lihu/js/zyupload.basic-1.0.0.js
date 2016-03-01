@@ -837,7 +837,7 @@ var ZYFILE = {
 						if(ZYFILE.funReturnNeedFiles().length<6){
 							$("#fileImage").click();
 						}else{
-							alert("图片数量已达上限！");
+							alert("图片数量已达6张！");
 							$("#fileImage").hide();
 							
 							

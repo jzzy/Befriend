@@ -37,7 +37,7 @@
 				<li><a href="sample_lihu/book_product.html"><img src="sample_lihu/images/servlist01.gif" alt="读书会" />读书会</a></li>
 				<li><a href="getEduWeb"><img src="sample_lihu/images/servlist02.gif" alt="教辅机构" />教辅机构</a></li>
 				<li><a href="sample_lihu/jsp/book_category.jsp"><img src="sample_lihu/images/servlist03.gif" alt="教育部推荐用书" />教育部推荐用书</a></li>
-				<li><a href="sample_lihu/search_house.html"><img src="sample_lihu/images/servlist04.gif" alt="搜学区房" />搜学区房</a></li>
+				<li><a href="selectwxHouseallzh"><img src="sample_lihu/images/servlist04.gif" alt="搜学区房" />搜学区房</a></li>
 				<li><a href="sample_lihu/post2.html"><img src="sample_lihu/images/servlist05.gif" alt="家长来稿" />家长来稿</a></li>
 				<li><a href="sample_lihu/post3.html"><img src="sample_lihu/images/servlist06.gif" alt="意见反馈" />意见反馈</a></li>
 			</ul>

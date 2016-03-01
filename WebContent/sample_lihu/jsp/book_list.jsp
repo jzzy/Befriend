@@ -6,6 +6,25 @@
 <%
 List<Book> bookl=(List)request.getAttribute("bookl");
 int type=request.getAttribute("type")==null?0:(Integer)request.getAttribute("type");
+String title="";
+switch (type) {
+case 1:
+	title="幼儿数目推荐";
+	break;
+case 2:
+	title="小学数目推荐";
+	break;
+case 3:
+	title="初中数目推荐";
+	break;
+case 4:
+	title="高中数目推荐";
+	break;
+
+default:
+	title="幼儿数目推荐";
+	break;
+}
 switch(type){
 case 1:
 	type=331;
@@ -28,24 +47,7 @@ int max=request.getAttribute("max")==null?0:(Integer)request.getAttribute("max")
 if(bookl.size()==0){
 	
 }
-String title="";
-switch (type) {
-case 1:
-	title="幼儿数目推荐";
-	break;
-case 2:
-	title="小学数目推荐";
-	break;
-case 3:
-	title="初中数目推荐";
-	break;
-case 4:
-	title="高中数目推荐";
-	break;
 
-default:
-	break;
-}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -62,7 +64,7 @@ default:
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
-				<h1>幼儿数目推荐</h1>
+				<h1><%=title %></h1>
 				<div class="prev">
 					<a href="#" onclick="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
@@ -75,7 +77,7 @@ default:
    								 for(int i=0;i<bookl.size();i++){
    							     %>
 					<li>
-						<a href="book_detail.html">
+						<a href="webLookBookById?id=<%=bookl.get(i).getId() %>">
 							<h2><%=bookl.get(i).getTitle() %></h2>
 							<p><img src="sample_lihu/images/ico04.gif" alt="作者" /><%=bookl.get(i).getAuthor() %></p>
 							<p><img src="sample_lihu/images/ico05.gif" alt="出版社" /><%=bookl.get(i).getSummary() %></p>

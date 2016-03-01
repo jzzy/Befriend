@@ -13,8 +13,8 @@
 		</action>
 		<!-- 通过id查看书籍 -->
 		<action name="webLookBookById" class="newsAction" method="webLookBookById">
-		<result name="success">/SimulationApp/book_cont.jsp</result>
-		
+		<!--  <result name="success">/SimulationApp/book_cont.jsp</result>-->
+		<result name="success">/sample_lihu/jsp/book_detail.jsp</result>
 		</action>
 			<!-- app通过id查看书籍 -->
 		<action name="LookBookById" class="newsAction" method="LookBookById">

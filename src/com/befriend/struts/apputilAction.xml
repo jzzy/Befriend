@@ -71,8 +71,8 @@
 		</action>
 	<!-- 最火的学区房 -->
 		<action name="selectwxHouseallzh" class="appupAction" method="selectwxHouseallzh">
-			<result  name="success">/SimulationApp/laigao/sousou.jsp</result>
-		
+			<!-- <result  name="success">/SimulationApp/laigao/sousou.jsp</result> -->
+			<result name="success">/sample_lihu/jsp/search_house.jsp</result>
 		</action>
 	<!-- 通过id删除家长来信 -->
 		<action name="RemoveParentsLetterone" class="appupAction" method="RemoveParentsLetterone">
@@ -112,8 +112,8 @@
 		</action>
 		<!--web 搜所学区房 -->
 		<action name="selectwxHouseall" class="appupAction" method="selectwxHouseall">
-			<result name="success">/SimulationApp/laigao/right.jsp</result>
-			
+			<!--  <result name="success">/SimulationApp/laigao/right.jsp</result>-->
+			<result name="success">/sample_lihu/jsp/search_houseresoult.jsp</result>
 		</action>
 	<!-- 搜所学区房 -->
 		<action name="selectHouseall" class="appupAction" method="selectHouseall">

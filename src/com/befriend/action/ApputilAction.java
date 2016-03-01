@@ -336,7 +336,7 @@ public class ApputilAction {
 
 		if (util.isEmpty(schoolname)) {
 			System.out.println("schoolname閿熻绌虹鎷�");
-		}
+		}else{
 		List<House> hl = audao.bylikeshoolname(schoolname);
 
 		for (int i = 0; i < hl.size(); i++) {
@@ -348,6 +348,8 @@ public class ApputilAction {
 		}
 		request.setAttribute("hl", hl);
 		request.setAttribute("name", schoolname);
+		}
+		
 		return Action.SUCCESS;
 
 	}
