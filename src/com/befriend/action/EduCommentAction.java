@@ -72,6 +72,7 @@ public class EduCommentAction implements ServletRequestAware {
 				edusl.add(eduServicesDAO.findMerchantId(attl.get(i)
 						.getObjectid()));
 			}
+			System.out.println("收藏多少教辅"+edusl.size());
 			request.setAttribute("attl", attl);
 			request.setAttribute("edusl", edusl);
 

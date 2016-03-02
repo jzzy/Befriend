@@ -7,7 +7,8 @@
 		<action name="addComments" class="eduCommentAction" method="addComments"></action>
 		
 		<action name="userLookEduASBK" class="eduCommentAction" method="userLookEduASBK">
-		<result name="success">/SimulationApp/lihu/jsp/myfavorite.jsp</result>
+		<!-- <result name="success">/SimulationApp/lihu/jsp/myfavorite.jsp</result> -->
+		<result name="success">/sample_lihu/jsp/myfavor_forum.jsp</result>
 		</action>
 		<action name="getWebCommments" class="eduCommentAction" method="getWebCommments">
 		<result name="success">/SimulationApp/lihu/jsp/detail.jsp</result>

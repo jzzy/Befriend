@@ -99,7 +99,7 @@ $(function(){
 	$(".checkArea input").attr("checked", false);
 	
 	$(".checkArea label").click(function(){
-		var favorCheck = $(this).siblings("input").attr("value");
+		var favorCheck = $(this).siblings("input").attr("checked");
 		if( favorCheck == "unchecked" ){
 		$(this).children("img").attr("src","images/ico29.png");
 		$(this).siblings("input").attr({"value":"checked","checked":true});
