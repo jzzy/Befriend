@@ -893,7 +893,52 @@ public class ForumAction {
 			util.Out().print(false);
 		}
 	}
+	/**
+	 * 取消收藏
+	 */
+	public void webFolR() throws IOException {
+		try {
+			
+		
+		User u = (User) session.getAttribute("u");
+		userid = u.getId();
+		String[] st = title.split(",");
+		for (int i = 0; i < st.length; i++) {
+			if (OpeFunction.isEmpty(st[i])) {
+				continue;
+			}
+		
+		forumid = Integer.parseInt(st[i].toString());
+		fo = foldao.ufid(userid, forumid);
 
+		if (fo != null) {
+
+			foldao.remove(fo);
+
+			fone = forumdao.getForumOne(forumid);
+			if (fone == null) {
+				util.Out().print("null");
+				return;
+			}
+			int num = fone.getFollectnum();
+
+			if (num > 0) {
+				num = --num;
+				fone.setFollectnum(num);
+			} else {
+
+				fone.setFollectnum(0);
+			}
+			forumdao.update(fone);
+			System.out.println("取消论坛收藏成功");
+		} else {
+			System.out.println("取消论坛收藏失败");
+		}
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	/**
 	 * 判断是否收藏过
 	 */

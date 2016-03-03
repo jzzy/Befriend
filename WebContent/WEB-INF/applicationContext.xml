@@ -165,6 +165,8 @@
 		<constructor-arg ref="userDAO"></constructor-arg>
 		<constructor-arg ref="newsDAO"></constructor-arg>
 		<constructor-arg ref="collectDAO"></constructor-arg>
+		<constructor-arg ref="forumDAO"></constructor-arg>
+		<constructor-arg ref="follectDAO"></constructor-arg>
 		
 	</bean>
 	

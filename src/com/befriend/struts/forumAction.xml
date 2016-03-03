@@ -130,6 +130,11 @@
 		<action name="FolR" class="forumAction" method="FolR">
 		
 		</action>
+		
+					<!-- 删除收藏-->
+		<action name="webFolR" class="forumAction" method="webFolR">
+		
+		</action>
 				<!-- 根据 类型 分页查看论坛-->
 		<action name="ForumApptype" class="forumAction" method="ForumApptype">
 		

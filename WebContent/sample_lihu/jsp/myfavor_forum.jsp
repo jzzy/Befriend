@@ -28,7 +28,7 @@
 			</div>
 			<ul class="topMenu colum3 clearfix">
 				<li class="on" id="li1"><a id="af1" href="#">资讯</a></li>
-				<li  id="li2"  ><a id="af2" href="#">论坛</a></li>
+				<li  id="li2"  ><a id="af2"   href="#">论坛</a></li>
 				<li  id="li3"  ><a id="af3" href="#">教辅机构</a></li>
 			</ul>
 		</div><!--header-->
@@ -78,35 +78,43 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 				<!-- 论坛的收藏 -->
 				<div id="divforum" class="forum" style="display: none;">
 					<ul>
+					<%
+					List<ForumOne> fones=(List)request.getAttribute("fones");
+					List<User> us =(List)request.getAttribute("us");
+					for(int i=0;i<us.size();i++){
+					%>
 					
-						<li>
+						<li id="<%=fones.get(i).getId() %>">
 							<div class="checkArea">
 							<label for="a2">
 							<img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" />
 							</label>
-							<input type="checkbox"  name="check" value="1" />
+							<input type="checkbox"  name="check" value="<%=fones.get(i).getId() %>" />
 							</div>
 							<div class="inner clearfix">
 								<div class="user clearfix">
 									<p class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sample" /></p>
 									<p class="rightArea">
-										<span>家长之友aaa</span>
-										<span>2016-01-15 09:54</span>
+										<span><%=us.get(i).getUsername() %></span>
+										<span><%=fones.get(i).getTime() %></span>
 									</p>
 								</div>
-								<div class="title"><a href="forumreview.html">这里是标题</a></div>
-								<div class="detail"><a href="forumreview.html">第一题是这样的第一题是这样的第一题是这样的第一题是这样的</a></div>
+								<div class="title"><a href="forumreview.html"><%=fones.get(i).getTitle() %></a></div>
+								<div class="detail"><a href="forumreview.html"><%=fones.get(i).getContent() %></a></div>
 								<div class="imgList clearfix">
 									<p><a href="forumreview.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
 									<p><a href="forumreview.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
 									<p><a href="forumreview.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
 								</div>
 								<div class="info">
-									<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span>
-									<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;120</span>
+									<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=fones.get(i).getFrs() %></span>
+									<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;<%=fones.get(i).getfHits() %></span>
 								</div>
 							</div>
-						</li>		
+						</li>	
+						<%
+						}
+						%>	
 					</ul>
 				</div>
 				<!-- 教辅机构的收藏 -->
@@ -152,12 +160,15 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 	</div><!--wrap-->
 
 <script type="text/javascript">
+
 $("#af1").click(function(){
 	//alert(1);
 	$("#divmainList").show();
 	$("#divforum").hide();
 	$("#divlistPack").hide();
-	
+//	$("#af1")removeClass( ".no" );
+	$("#li2").addClass("container");
+	//container .pagging ul li
 	$(".checkArea").hide();
 	$(".favorDel").hide();
 	$("#favorEdit").text("编辑");
@@ -227,7 +238,11 @@ $("#delete").click(function(){
          }
        //调用论坛
  		if($("#divforum").is(":visible")){
-         	
+ 			
+ 			$.ajax({
+				type:"post",
+				url:"webFolR.action?title="+text
+			});
          }
  		//调用教辅机构
  		if($("#divlistPack").is(":visible")){

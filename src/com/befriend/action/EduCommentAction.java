@@ -20,6 +20,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import com.befriend.dao.CollectDAO;
 import com.befriend.dao.EduCommentDAO;
 import com.befriend.dao.EduServicesDAO;
+import com.befriend.dao.FollectDAO;
+import com.befriend.dao.ForumDAO;
 import com.befriend.dao.NewsDAO;
 import com.befriend.dao.UserDAO;
 import com.befriend.entity.Attention;
@@ -27,6 +29,10 @@ import com.befriend.entity.Collect;
 import com.befriend.entity.EduActivity;
 import com.befriend.entity.EduComment;
 import com.befriend.entity.EduServices;
+import com.befriend.entity.Follect;
+import com.befriend.entity.ForumOne;
+import com.befriend.entity.ForumThree;
+import com.befriend.entity.ForumTwo;
 import com.befriend.entity.News;
 import com.befriend.entity.User;
 import com.befriend.util.JsonUtil;
@@ -40,6 +46,19 @@ public class EduCommentAction implements ServletRequestAware {
 	private UserDAO userDAO;
 	private NewsDAO newsDAO;
 	private CollectDAO collectDAO;
+	private ForumDAO forumdao;// 论坛dao
+	private FollectDAO foldao;// 论坛收藏dao
+	
+	List<User> us = new ArrayList<User>();
+	Follect fo = new Follect();// 论坛收藏类
+	ForumOne fone = new ForumOne();// 论坛主类
+	ForumTwo ftwo = new ForumTwo();// 论坛主页类
+	ForumThree fehree = new ForumThree();// 论坛回复类
+	List<Follect> fos = new ArrayList<Follect>();// 论坛收藏类List
+	List<ForumOne> fones = new ArrayList<ForumOne>();// 论坛主类List
+	List<ForumTwo> ftwos = new ArrayList<ForumTwo>();// 论坛主类List
+	List<ForumThree> fehrees = new ArrayList<ForumThree>();// 论坛主类List
+	
 	private HttpServletResponse response;
 	private HttpServletRequest request;
 	private String merchantId;
@@ -66,13 +85,34 @@ public class EduCommentAction implements ServletRequestAware {
 	public String userLookEduASBK() throws IOException {
 		try {
 			User u = (User) session.getAttribute("u");
+
+			fos = foldao.Allu(u.getId());
+
+			for (int i = 0; i < fos.size(); i++) {
+
+				fone = forumdao.getForumOne(fos.get(i).getForumid());
+
+				User u1 = userDAO.byid(fone.getUserid());
+				if (fone != null && u1 != null) {
+					us.add(u1);
+					fones.add(fone);
+				} else {
+					
+
+				}
+
+			}
+
+			request.setAttribute("fones", fones);
+			request.setAttribute("us", us);
+
 			attl = eduServicesDAO.byUserid(u.getId(), currentPage, pageSize,
 					Attention.COME_EduServices);
 			for (int i = 0; i < attl.size(); i++) {
 				edusl.add(eduServicesDAO.findMerchantId(attl.get(i)
 						.getObjectid()));
 			}
-			System.out.println("收藏多少教辅"+edusl.size());
+			
 			request.setAttribute("attl", attl);
 			request.setAttribute("edusl", edusl);
 
@@ -84,7 +124,7 @@ public class EduCommentAction implements ServletRequestAware {
 
 			}
 			request.setAttribute("nl", nl);
-
+			System.out.println(u.getId()+"新闻"+nl.size()+"收藏多少教辅"+attl.size()+" ==" + edusl.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -395,15 +435,19 @@ public class EduCommentAction implements ServletRequestAware {
 
 	}
 
+
+
 	public EduCommentAction(EduCommentDAO eduCommentDAO,
 			EduServicesDAO eduServicesDAO, UserDAO userDAO, NewsDAO newsDAO,
-			CollectDAO collectDAO) {
+			CollectDAO collectDAO, ForumDAO forumdao, FollectDAO foldao) {
 		super();
 		this.eduCommentDAO = eduCommentDAO;
 		this.eduServicesDAO = eduServicesDAO;
 		this.userDAO = userDAO;
 		this.newsDAO = newsDAO;
 		this.collectDAO = collectDAO;
+		this.forumdao = forumdao;
+		this.foldao = foldao;
 	}
 
 	public String getMerchantId() {
