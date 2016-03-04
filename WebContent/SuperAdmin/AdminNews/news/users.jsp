@@ -130,7 +130,7 @@ if(kuxsta!=null){
 %>
 <tr style="color:red;">
 <td width="200"><h4>酷校</h4></td>
-<td width="200"><h4><%=syn %></h4></td>
+<td width="200"><h4><%=kux %></h4></td>
 <td width="120"><h4><%=kuxsta.getUserlogined() %></h4></td>
 <td width="190"><h4><%=kuxsta.getUsersyned() %></h4></td>
 <td width="120"><h4><%=kuxsta.getPv() %></h4></td>
