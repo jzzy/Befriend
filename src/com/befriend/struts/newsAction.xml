@@ -242,7 +242,9 @@
 		
 		<!--通过username查询最新评论-->
 		<action name="webReviewsusername" class="newsAction" method="webReviewsusername">
-		<result name="success">/SimulationApp/metopinglun.jsp</result>
+		<result name="success">/sample_lihu/jsp/mycomment_rei.jsp</result>
+		
+		<!--  <result name="success">/SimulationApp/metopinglun.jsp</result>-->
 		</action>
 		
 		<!-- 微信分页 查询本地新闻-->

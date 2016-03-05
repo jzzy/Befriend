@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForTokens"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@page import="java.util.*"%>
@@ -45,22 +46,27 @@
 
 		<div id="container">
 			<div class="myFavor">
-		
+	
 	
 			<!--新闻评论-->
 					<div id="divmainList" class="mainList comment">
 					<ul>
-						<li>
+						<%
+		List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List)request.getAttribute("nl");
+		List<Review> rl=(List)request.getAttribute("rl")==null?new ArrayList<News>():(List)request.getAttribute("rl"); 
+		for(int i=0;i<nl.size();i++){
+		%>
+						<li id="<%=rl.get(i).getId()%>">
 							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" />
-							</label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" />
+							</label><input type="checkbox" id="a1" name="check" value="<%=rl.get(i).getId()%>" />
 							</div>
 							<dl>
 								<dt class="inner clearfix">
 									<div class="infoArea">
-										<p class="title"><a href="newsdetail.html">一张班主任给家长的试卷，震撼心灵！</a></p>
+										<p class="title"><a href="newsdetail.html"><%=nl.get(i).getTitle() %></a></p>
 										<p class="info">
-											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span>
-											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;120</span>
+											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=nl.get(i).getReviews() %></span>
+											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=nl.get(i).getCollectnum() %></span>
 										</p>
 									</div>
 									<div class="imgArea">
@@ -71,42 +77,44 @@
 									<div class="inner clearfix">
 										<div class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
 										<div class="rightArea">
-											<p class="name">家长之友aaa</p>
-											<p class="time">2016-1-15 09:54</p>
-											<p class="detail">第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”</p>
+											<p class="name"><%=((User)session.getAttribute("u")).getNickname() %></p>
+											<p class="time"><%=rl.get(i).getTime() %></p>
+											<p class="detail"><%=rl.get(i).getReview() %></p>
 										</div>
 									</div>
 								</dd>
-								<dd class="reply">
-									<div class="inner clearfix">
-										<div class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
-										<div class="rightArea">
-											<p class="name">家长之友aaa</p>
-											<p class="time">2016-1-15 09:54</p>
-											<p class="detail">第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”</p>
-										</div>
-									</div>
-								</dd>
+								
 							</dl>
 						</li>
+						<%
+						
+						}%>
 					
 					</ul>
 					
 				</div>
-				
-				
+		
+		
 					<!-- 论坛  -->
 						<div id="divforum" style="display: none;" class="mainList comment">
 					<ul>
+							<%
+		List<ForumOne> fones=(List)request.getAttribute("fones")==null?new ArrayList<ForumOne>():(List)request.getAttribute("fones");
+		List<ForumTwo> fow=(List)request.getAttribute("fow")==null?new ArrayList<ForumTwo>():(List)request.getAttribute("fow"); 
+		List<User> us=(List)request.getAttribute("us")==null?new ArrayList<User>():(List)request.getAttribute("us"); 
+		for(int i=0;i<fones.size();i++){
+		%>
 						<li>
 							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" /></label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" /></div>
 							<dl>
 								<dt class="inner clearfix">
 									<div class="infoArea">
-										<p class="title"><a href="forumreview.html">一张班主任给家长的试卷，震撼心灵！</a></p>
+										<p class="title"><a href="forumreview.html"><%=fones.get(i).getTitle() %></a></p>
 										<p class="info">
-											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span>
-											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;120</span>
+											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />
+											&nbsp;<%=fones.get(i).getFollectnum()%></span>
+											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor_ico.gif" alt="关注" />
+											&nbsp;<%=fones.get(i).getFrs()%></span>
 										</p>
 									</div>
 									<div class="imgArea">
@@ -117,24 +125,18 @@
 									<div class="inner clearfix">
 										<div class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
 										<div class="rightArea">
-											<p class="name">家长之友aaa</p>
-											<p class="time">2016-1-15 09:54</p>
-											<p class="detail">第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”</p>
+											<p class="name"><%=((User)session.getAttribute("u")).getNickname() %></p>
+											<p class="time"><%=fow.get(i).getTime() %></p>
+											<p class="detail"><%=fow.get(i).getReply() %></p>
 										</div>
 									</div>
 								</dd>
-								<dd class="reply">
-									<div class="inner clearfix">
-										<div class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
-										<div class="rightArea">
-											<p class="name">家长之友aaa</p>
-											<p class="time">2016-1-15 09:54</p>
-											<p class="detail">第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”</p>
-										</div>
-									</div>
-								</dd>
+							
 							</dl>
 						</li>
+						<%
+		}
+						%>
 						</ul>
 						</div>	
 				
@@ -143,16 +145,28 @@
 				
 				<div id="divlistPack"  style="display: none;" class="listPack comment">
 					<ul>
+					<%
+					List<EduComment> educl=request.getAttribute("educl")==null?new ArrayList<EduComment>():(List)request.getAttribute("educl"); 
+					List<EduServices> edusl=request.getAttribute("edusl")==null?new ArrayList<EduServices>():(List)request.getAttribute("edusl"); 
+					
+					
+					for(int i=0;i<educl.size();i++){
+					%>
+					
 						<li>
-							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" /></label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" /></div>
+							
+							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" />
+							</label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" />
+							</div>
 							<dl>
 								<dt class="inner clearfix">
 									<a href="edu_detail.html">
 										<div class="imgArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/xw_15.png" alt="" /></div>
 										<div class="infoArea">
-											<h3>尚东酒吧</h3>
-											<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p>
-											<div class="clearfix"><strong>海淀区</strong><span>职业技术</span><div class="distance">8000m</div></div>
+											<h3><%=edusl.get(i).getName() %></h3>
+											<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off">
+											</span><span class="star_off"></span><span class="star_off"></span></p>
+											<div class="clearfix"><strong><%=edusl.get(i).getCity() %></strong><span><%=edusl.get(i).getClassFirst()%></span><div class="distance">8000m</div></div>
 										</div>
 									</a>
 								</dt>
@@ -160,24 +174,28 @@
 									<div class="inner clearfix">
 										<div class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
 										<div class="rightArea">
-											<div class="name">家长之友aaa <p class="rate"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p></div>
-											<p class="time">2016-1-15 09:54</p>
-											<p class="detail">第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”</p>
-										</div>
-									</div>
-								</dd>
-								<dd class="reply">
-									<div class="inner clearfix">
-										<div class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
-										<div class="rightArea">
-											<div class="name">家长之友aaa <p class="rate"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p></div>
-											<p class="time">2016-1-15 09:54</p>
-											<p class="detail">第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”第一题是这样的：“你家有藏书吗？有多少册”</p>
+											<div class="name"><%=((User)session.getAttribute("u")).getNickname() %>
+											
+											<p class="rate">
+											
+											<span class="star_on"></span>	
+											<span class="star_on"></span>
+											<span class="star_off"></span>
+											<span class="star_off"></span>
+											<span class="star_off"></span>
+											
+											
+											</p></div>
+											<p class="time"><%=educl.get(i).getTime() %></p>
+											<p class="detail"><%=educl.get(i).getContent()%></p>
 										</div>
 									</div>
 								</dd>
 							</dl>
 						</li>
+						<%
+					}
+						%>
 						</ul>
 						</div>
 						
@@ -277,7 +295,7 @@ $("#delete").click(function(){
          if($("#divmainList").is(":visible")){
         	 $.ajax({
 					type:"post",
-					url:"RemoveCWeb.action?summary="+text
+					//url:"RemoveCWeb.action?summary="+text
 				});
          }
        //调用论坛
@@ -285,14 +303,14 @@ $("#delete").click(function(){
  			
  			$.ajax({
 				type:"post",
-				url:"webFolR.action?title="+text
+				//url:"webFolR.action?title="+text
 			});
          }
  		//调用教辅机构
  		if($("#divlistPack").is(":visible")){
  			 $.ajax({
     	  			type:"post",
-    	  			url:"removeEduAttentionWeb.action?attentionId="+text
+    	  			//url:"removeEduAttentionWeb.action?attentionId="+text
     	  		});
          	
          }

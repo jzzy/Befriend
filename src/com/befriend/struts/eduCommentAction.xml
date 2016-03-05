@@ -3,6 +3,12 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="eduComment" extends="struts-default" >
+	
+	
+	<action name="webEduReviews" class="eduCommentAction" method="webEduReviews">
+		<result name="success">/sample_lihu/jsp/mycomment_rei.jsp</result>
+		
+		</action>
 		<action name="getCommments" class="eduCommentAction" method="getCommments"></action>
 		<action name="addComments" class="eduCommentAction" method="addComments"></action>
 		

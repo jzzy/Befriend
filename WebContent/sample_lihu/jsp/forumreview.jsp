@@ -24,11 +24,56 @@ if(f==null){
 <title></title>
 <script type="text/javascript" src="sample_lihu/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="sample_lihu/js/common.js"></script>
+
+<script type="text/javascript" >
+
+var wrap=(function(){
+	
+	$("#wrap").show();
+	$("#wrapcomm").hide();
+	
+});
+var wrapcomm=(function(){
+	
+	
+	$("#wrap").hide();
+	$("#wrapcomm").show();
+	var textarea2 = $("#postCont");
+
+	textarea2.focusin(function(){
+	  // alert(a);
+	  if($(this).text() !== "写点什么吧…"){
+		return false;
+	  }else{
+		$(this).text("");
+	  }
+	});
+	textarea2.focusout(function(){
+	  if($(this).text() == ""){
+		$(this).text("写点什么吧…");
+	  }
+	});
+	
+	
+});
+var submit=(function(){
+	$("#form1").attr("action","webForumtwosaveapp").submit(); 
+	
+});
+var submit2=(function(){
+	$("#form1").attr("action","webForumthreesappadd").submit(); 
+	
+});
+
+</script>
 <link href="sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="sample_lihu/css/pullToRefresh.css"/>
 </head>
 <body>
-	<div id="wrap">
+
+	
+	
+	<div id="wrap" >
 		<div id="header">
 			<div class="topArea clearfix">
 				<h1>全国论坛讨论社区</h1>
@@ -36,7 +81,7 @@ if(f==null){
 					<a href="#" onclick="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 				<div class="topTool">
-					<span><a href="commentwrite.html">回复楼主</a></span>
+					<span><a href="#" onclick="wrapcomm();">回复楼主</a></span>
 				</div>
 			</div>
 		</div><!--header-->
@@ -85,7 +130,7 @@ if(f==null){
 										<div class="inner clearfix">
 											<div class="leftArea"><img src="sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
 											<div class="rightArea">
-												<p class="name"><%=us.get(i).getUsername() %><span class="userTag"><%=i+1 %>楼</span></p>
+												<p class="name"><%=us.get(i).getUsername() %><span class="userTag"><%=fs.size()-i %>楼</span></p>
 												<p class="detail"><%=fs.get(i).getReply() %></p>
 												<p class="time"><%=fs.get(i).getTime() %>
 												<span class="button">
@@ -142,6 +187,43 @@ if(f==null){
 		<div id="footer">
 		</div><!--footer-->
 	</div><!--wrap-->
+	
+	
+	
+<div id="wrapcomm"  style="display: none;">
+	<form action="" id="form1">
+	<!-- 获取论坛的id -->
+			<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none"/>
+			
+		<div id="header">
+			<div class="topArea clearfix">
+				<h1>发表评论</h1>
+				<div class="prev">
+					<a href="#" onclick="wrap();"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
+				</div>
+			</div>
+		</div><!--header-->
+		<div id="container">
+			<div class="forumPost">
+				<div class="write">
+					<p class="posts commentWrite" style="padding-top: 35px;padding-left: -100px;">
+					<textarea name="reply" id="postCont" cols="30" rows="10">写点什么吧…</textarea>
+					
+					</p>
+				</div>
+				<div class="btn clearfix">
+					<span class="rightArea clearfix">
+						<a href="#" onclick="wrap();">取消</a>
+						<a href="#" onclick="submit();">发表</a>
+						<a href="#" onclick="submit2();" style="display: none;">发表</a>
+					</span>
+				</div>
+			</div>
+		</div><!--container-->
+		<div id="footer"></div><!--footer-->
+		</form>
+	</div><!--wrap-->
+	
 <script src="sample_lihu/js/iscroll.js"></script>
 <script src="sample_lihu/js/pullToRefresh.js"></script>
 <script>

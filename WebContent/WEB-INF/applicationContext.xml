@@ -161,6 +161,8 @@
 	    
 	</bean>
 	<bean id="eduCommentAction" class="com.befriend.action.EduCommentAction" scope="prototype">
+	
+		<constructor-arg ref="reviewDAO"></constructor-arg>
 		<constructor-arg ref="eduCommentDAO"></constructor-arg>
 		<constructor-arg ref="eduServicesDAO"></constructor-arg>
 		<constructor-arg ref="userDAO"></constructor-arg>

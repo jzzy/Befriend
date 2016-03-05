@@ -23,6 +23,7 @@ import com.befriend.dao.EduServicesDAO;
 import com.befriend.dao.FollectDAO;
 import com.befriend.dao.ForumDAO;
 import com.befriend.dao.NewsDAO;
+import com.befriend.dao.ReviewDAO;
 import com.befriend.dao.UserDAO;
 import com.befriend.entity.Attention;
 import com.befriend.entity.Collect;
@@ -34,6 +35,7 @@ import com.befriend.entity.ForumOne;
 import com.befriend.entity.ForumThree;
 import com.befriend.entity.ForumTwo;
 import com.befriend.entity.News;
+import com.befriend.entity.Review;
 import com.befriend.entity.User;
 import com.befriend.util.JsonUtil;
 import com.befriend.util.OpeFunction;
@@ -48,6 +50,7 @@ public class EduCommentAction implements ServletRequestAware {
 	private CollectDAO collectDAO;
 	private ForumDAO forumdao;// 论坛dao
 	private FollectDAO foldao;// 论坛收藏dao
+	private ReviewDAO rdao;// 评论dao
 	
 	List<User> us = new ArrayList<User>();
 	Follect fo = new Follect();// 论坛收藏类
@@ -81,6 +84,114 @@ public class EduCommentAction implements ServletRequestAware {
 	List<EduComment> educl = new ArrayList<EduComment>();
 	List<Attention> attl = new ArrayList<Attention>();
 	List<News> nl = new ArrayList<News>();
+	List<Review> rl = new ArrayList<Review>();
+
+	/**
+	 * 通过username查询评论 新闻和对每个新闻的最新 评论
+	 * 
+	 * @throws IOException
+	 */
+	public String webEduReviews() throws IOException {
+
+		User u = (User) session.getAttribute("u");
+
+		if (u == null) {
+
+			((HttpServletResponse) OpeFunction.response())
+					.sendRedirect(request.getContextPath() + "/SimulationApp/login.html");
+			return null;
+		}
+
+		String username = u.getUsername();
+
+		List<Integer> rn = new ArrayList<Integer>();// 收藏 List
+		for (Review r1 : rdao.Allu(username)) {
+
+			Boolean b = true;
+
+			for (int i = 0; i < rn.size(); i++) {
+
+				if (rn.get(i) == r1.getNewsid()) {
+
+					b = false;
+				}
+
+			}
+
+			if (b) {
+				System.out.println("我评论过的新闻  用户名和新闻id" + username + "+" + r1.getNewsid() + "时间是：" + r1.getTime());
+				rl.add(rdao.unid(username, r1.getNewsid()).get(0));
+				nl.add(newsDAO.byid(r1.getNewsid()));
+			}
+
+			rn.add(r1.getNewsid());
+
+		}
+
+		request.setAttribute("nl", nl);
+		request.setAttribute("rl", rl);
+
+		int userid = u.getId();
+		
+		
+		
+		
+		
+		
+
+		ftwos = forumdao.getFuserALL(userid);
+		List<Integer> l = new ArrayList<Integer>();
+		List<ForumTwo> fow = new ArrayList<ForumTwo>();
+		Boolean b = true;
+		for (int i = 0; i < ftwos.size(); i++) {
+
+			for (int y = 0; y < l.size(); y++) {
+				System.out.println("y=" + y);
+				if (l.get(y) == ftwos.get(i).getForumid()) {
+
+					b = false;
+					break;
+				}
+			}
+			System.out.println("b=" + b);
+
+			if (b) {
+				fow.add(ftwos.get(i));
+				fones.add(forumdao.getForumOne(ftwos.get(i).getForumid()));
+				l.add(ftwos.get(i).getForumid());
+			}
+			b = true;
+
+		}
+
+		for (int i = 0; i < fones.size(); i++) {
+			System.out.println("id" + fones.get(i).getId());
+
+			User uf = userDAO.byid(fones.get(i).getUserid());
+
+			us.add(uf);
+
+		}
+		
+		System.out.println("ftwos" + fow.size());
+		System.out.println("用户" + us.size());
+		System.out.println("论坛" + fones.size());
+		request.setAttribute("fow", fow);
+		request.setAttribute("us", us);
+		request.setAttribute("fones", fones);
+		
+		
+		
+		educl=eduCommentDAO.myComments(u, currentPage, pageSize);
+		for(int i=0;i<educl.size();i++){
+			edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(educl.get(i).getMerchantId())));
+		}
+		request.setAttribute("educl", educl);
+		request.setAttribute("edusl", edusl);
+		return Action.SUCCESS;
+	}
+	
+	
 
 	public String userLookEduASBK() throws IOException {
 		try {
@@ -437,18 +548,21 @@ public class EduCommentAction implements ServletRequestAware {
 
 
 
-	public EduCommentAction(EduCommentDAO eduCommentDAO,
-			EduServicesDAO eduServicesDAO, UserDAO userDAO, NewsDAO newsDAO,
-			CollectDAO collectDAO, ForumDAO forumdao, FollectDAO foldao) {
+	
+	public EduCommentAction(EduServicesDAO eduServicesDAO, EduCommentDAO eduCommentDAO, UserDAO userDAO,
+			NewsDAO newsDAO, CollectDAO collectDAO, ForumDAO forumdao, FollectDAO foldao, ReviewDAO rdao) {
 		super();
-		this.eduCommentDAO = eduCommentDAO;
 		this.eduServicesDAO = eduServicesDAO;
+		this.eduCommentDAO = eduCommentDAO;
 		this.userDAO = userDAO;
 		this.newsDAO = newsDAO;
 		this.collectDAO = collectDAO;
 		this.forumdao = forumdao;
 		this.foldao = foldao;
+		this.rdao = rdao;
 	}
+
+
 
 	public String getMerchantId() {
 		return merchantId;

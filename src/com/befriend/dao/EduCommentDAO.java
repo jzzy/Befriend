@@ -3,6 +3,7 @@ package com.befriend.dao;
 import java.util.List;
 
 import com.befriend.entity.EduComment;
+import com.befriend.entity.User;
 
 public interface EduCommentDAO
 {
@@ -13,6 +14,7 @@ public interface EduCommentDAO
 	public List<EduComment> find(String merchantId,int fatherId,int currentPage,int pageSize);
 	public List<EduComment> find(String merchantId);
 	
+	public List<EduComment> myComments(User user,int currentPage,int pageSize);
 	public List<EduComment> find(int currentPage,int pageSize);
 	public List<EduComment> find(String merchantId,int currentPage,int pageSize);
 	public List<EduComment> likeFind(String string,int currentPage,int pageSize);

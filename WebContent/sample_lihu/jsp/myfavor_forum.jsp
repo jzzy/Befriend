@@ -89,8 +89,9 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 				<div id="divforum" class="forum" style="display: none;">
 					<ul>
 					<%
-					List<ForumOne> fones=(List)request.getAttribute("fones");
-					List<User> us =(List)request.getAttribute("us");
+					List<ForumOne> fones=request.getAttribute("fones")==null?new ArrayList<ForumOne>():(List)request.getAttribute("fones");
+					
+					List<User> us =request.getAttribute("us")==null?new ArrayList<User>():(List)request.getAttribute("us");
 					for(int i=0;i<us.size();i++){
 					%>
 					
