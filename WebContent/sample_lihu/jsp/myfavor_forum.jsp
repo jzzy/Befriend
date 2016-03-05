@@ -26,10 +26,20 @@
 					<span id="favorEdit" >编辑</span>
 				</div>
 			</div>
-			<ul class="topMenu colum3 clearfix">
-				<li class="on" id="li1"><a id="af1" href="#">资讯</a></li>
-				<li  id="li2"  ><a id="af2"   href="#">论坛</a></li>
-				<li  id="li3"  ><a id="af3" href="#">教辅机构</a></li>
+			<ul id="ul1" class="topMenu colum3 clearfix">
+				<li class="on" id="li1"><a onclick="ul1()" id="af1" href="#">资讯</a></li>
+				<li  id="li2"  ><a onclick="ul2()"   href="#">论坛</a></li>
+				<li  id="li3"  ><a  onclick="ul3()" href="#">教辅机构</a></li>
+			</ul>
+			<ul id="ul2" style="display: none;" class="topMenu colum3 clearfix">
+				<li  id="li1"><a onclick="ul1()" id="af1" href="#">资讯</a></li>
+				<li class="on" onclick="ul2()" id="li2"  ><a id="af2"   href="#">论坛</a></li>
+				<li  id="li3"  ><a onclick="ul3()" id="af3" href="#">教辅机构</a></li>
+			</ul>
+			<ul id="ul3" style="display: none;" class="topMenu colum3 clearfix">
+				<li id="li1"><a onclick="ul1()" id="af1" href="#">资讯</a></li>
+				<li  id="li2"  ><a onclick="ul2()" id="af2"   href="#">论坛</a></li>
+				<li  class="on" onclick="ul3()"  id="li3"  ><a id="af3" href="#">教辅机构</a></li>
 			</ul>
 		</div><!--header-->
 		<%
@@ -161,12 +171,14 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 
 <script type="text/javascript">
 
-$("#af1").click(function(){
+var ul1=(function(){
 	//alert(1);
 	$("#divmainList").show();
 	$("#divforum").hide();
 	$("#divlistPack").hide();
-//	$("#af1")removeClass( ".no" );
+	$("#ul1").show();
+	$("#ul2").hide();
+	$("#ul3").hide();
 	$("#li2").addClass("container");
 	//container .pagging ul li
 	$(".checkArea").hide();
@@ -180,11 +192,13 @@ $("#af1").click(function(){
 	
 });
 
-$("#af2").click(function(){
+var ul2=(function(){
 	$("#divmainList").hide();
 	$("#divforum").show();
 	$("#divlistPack").hide();
-	
+	$("#ul2").show();
+	$("#ul1").hide();
+	$("#ul3").hide();
 	$(".checkArea").hide();
 	$(".favorDel").hide();
 	$("#favorEdit").text("编辑");
@@ -193,11 +207,13 @@ $("#af2").click(function(){
 	
 	
 });
-$("#af3").click(function(){
+var ul3=(function(){
 	$("#divmainList").hide();
 	$("#divforum").hide();
 	$("#divlistPack").show();
-	
+	$("#ul3").show();
+	$("#ul2").hide();
+	$("#ul1").hide();
 	$(".checkArea").hide();
 	$(".favorDel").hide();
 	$("#favorEdit").text("编辑");
