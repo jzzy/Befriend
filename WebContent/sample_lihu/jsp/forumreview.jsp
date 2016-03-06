@@ -238,7 +238,7 @@ function Refresh() {
 		el =document.querySelector("#wrapper ul");					
 		//这里写你的刷新代码				
 		document.getElementById("wrapper").querySelector(".pullDownIcon").style.display="none";		
-		document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='css/ok.png'/>刷新成功";																					 
+		document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='sample_lihu/images/ok.png'/>刷新成功";																					 
 		setTimeout(function () {
 			wrapper.refresh();
 			document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								

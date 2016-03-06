@@ -54,7 +54,7 @@ $(document).ready(function(){
 					<a href="sample_lihu/jsp/relocation.jsp">北京&nbsp;<img src="sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
-					<span class="mapLink"><a href="sample_lihu/sitemap.html"><img src="sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
+					<span class="mapLink"><a href="sample_lihu/jsp/sitemap.jsp"><img src="sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
 				</div>
 			</div>
 			<ul class="topMenu clearfix">
@@ -74,26 +74,28 @@ $(document).ready(function(){
 						News n=Hottime.get(i);
 						if(i==0){
 						%>
-						<a href="webNewsId?id=<%=n.getId()%>" >
+						
 							<li class="first">
-						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="newsdetail.html"><%=n.getTitle() %></a></p>
+							
+						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 						<p class="big_img"><a href="newsdetail.html"><img src="sample_lihu/images/banner.jpg" alt="bigImg" /></a></p>
 						<p class="info">
 							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
 						</p>
+						
 					</li>
-						</a>
+						
 						<%
 						}
 						%>
 						
 						
 						
-			<a href="webNewsId?id=<%=n.getId()%>" >
+			
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><%=n.getTitle() %></p>
+							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -103,7 +105,7 @@ $(document).ready(function(){
 							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
-					</a>
+					
 					<%
 							}
 					%>
@@ -116,11 +118,13 @@ $(document).ready(function(){
 						for(int i=0;i<Hotarea.size();i++){
 						News n=Hotarea.get(i);
 						
-						%>
-				<a href="webNewsId?id=<%=n.getId()%>" >
+				%>
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><%=n.getTitle() %></p>
+							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" />
+							<a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %>
+							</a>
+							</p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -130,7 +134,7 @@ $(document).ready(function(){
 							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
-					</a>
+					
 					<%
 							}
 					%>
@@ -144,10 +148,10 @@ $(document).ready(function(){
 						News n=typejk.get(i);
 						
 						%>
-				<a href="webNewsId?id=<%=n.getId()%>" >
+				
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><%=n.getTitle() %></p>
+							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -157,7 +161,7 @@ $(document).ready(function(){
 							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
-					</a>
+				
 					<%
 							}
 					%>
@@ -171,10 +175,10 @@ $(document).ready(function(){
 						News n=typeqs.get(i);
 						
 						%>
-				<a href="webNewsId?id=<%=n.getId()%>" >
+				
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><%=n.getTitle() %></p>
+							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -184,7 +188,7 @@ $(document).ready(function(){
 							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
-					</a>
+					
 					<%
 							}
 					%>
@@ -198,10 +202,10 @@ $(document).ready(function(){
 						News n=Hottest.get(i);
 						
 						%>
-				<a href="webNewsId?id=<%=n.getId()%>" >
+				
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><%=n.getTitle() %></p>
+							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a>></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -211,7 +215,7 @@ $(document).ready(function(){
 							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
-					</a>
+					
 					<%
 							}
 					%>

@@ -22,7 +22,7 @@
 					<a href="sample_lihu/jsp/relocation.jsp">北京&nbsp;<img src="sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
-					<span class="mapLink"><a href="sample_lihu/sitemap.html"><img src="sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
+					<span class="mapLink"><a href="sample_lihu/jsp/sitemap.jsp"><img src="sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
 				</div>
 			</div>
 			<ul class="topMenu clearfix">

@@ -39,7 +39,7 @@ List<News> nl=(List)request.getAttribute("nl");
 					<a href="sample_lihu/jsp/relocation.jsp">北京&nbsp;<img src="sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
-					<span class="mapLink"><a href="sample_lihu/sitemap.html"><img src="sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
+					<span class="mapLink"><a href="sample_lihu/jsp/sitemap.jsp"><img src="sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
 				</div>
 			</div>
 		</div><!--header-->
@@ -87,7 +87,7 @@ List<News> nl=(List)request.getAttribute("nl");
    }
    
    %>
-				<h2 class="tit2"><img src="sample_lihu/images/<%=pth %>" alt="<%=text%>" /></h2>
+				<h2 class="tit2"><img src="sample_lihu/images/<%=pth %>" alt=" " /></h2>
 				
 			
 				<div id="wrapper">
@@ -97,20 +97,22 @@ List<News> nl=(List)request.getAttribute("nl");
 						News n=nl.get(i);
 						
 						%>
-					<a href="webNewsId?id=<%=n.getId()%>" >
+					
 					<li>
+						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+					
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><%=n.getTitle() %></p>
-							<p class="info">
+													<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
 							</p>
 						</div>
+					
 						<div class="imgArea">
 							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
-					</a>
+					
 					<%
 							}
 					%>

@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="css/zyupload-1.0.0.min.css" type="text/css">
 </head>
 <body>
-<form id="form1" name="form1" method="post"   enctype="multipart/form-data"  onsubmit="alert(document.test_form.browse.value);">
+<form id="form1" name="form1" method="post" action="webForumonesaveapp"  enctype="multipart/form-data"  onsubmit="alert(document.test_form.browse.value);">
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
-				<h1>家长来稿</h1>
+				<h1>发表新帖</h1>
 				<div class="prev">
 					<a href="#" onclick="javascript:history.back(-1);"><img src="images/prev.png" alt="后退" /></a>
 				</div>
@@ -80,16 +80,16 @@ return true;
 
 function fn_browse() 
 { 
-document.form1.imgFile.click(); 
+document.form1.file.click(); 
 } 
 </script> 
 
 <p>
-<div id="localImag"><img src="images/sc.jpg" id="preview" onclick="javascript:document.form1.imgFile.click();"  />
+<div id="localImag"><img src="images/sc.jpg" id="preview" onclick="javascript:document.form1.file.click();"  />
 </div>
 </p>
 
-<input type=file name="imgFile" id="doc" style="display:none;" onchange="javascript:setImagePreview();">
+<input type=file name="file" id="doc" style="display:none;" onchange="javascript:setImagePreview();">
 
 </div>
 				</div>
@@ -127,7 +127,7 @@ function  checkvalue()
    		alert("请正确填写内容 10字以上");
    		return false;
    	}
-document.form1.action="SaveParentsL";
+document.form1.action="webForumonesaveapp";
 document.form1.submit();
 alert('已提交');
 return true;

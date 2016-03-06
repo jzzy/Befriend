@@ -54,7 +54,7 @@ $(document).ready(function(){
 					<a href="sample_lihu/jsp/relocation.jsp">北京&nbsp;<img src="sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
-					<span><a href="post.html">发表</a></span>
+					<span><a href="sample_lihu/post4.html">发表</a></span>
 				</div>
 			</div>
 			<ul class="topMenu clearfix">
