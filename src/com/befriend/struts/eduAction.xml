@@ -6,8 +6,8 @@
 	    <action name="getEdu" class="eduAction" method="getEdu"></action>
 	    
 	    <action name="getEduWeb" class="eduAction" method="getEduWeb">
-   
-	    <result name="success"> /SimulationApp/lihu/jsp/eduserv.jsp</result>
+   <result name="success">/sample_lihu/jsp/eduserv.jsp</result>
+	    <!--  <result name="success"> /SimulationApp/lihu/jsp/eduserv.jsp</result>-->
 	    </action>
 	      <action name="getEduWebAjax" class="eduAction" method="getEduWebAjax">
    
