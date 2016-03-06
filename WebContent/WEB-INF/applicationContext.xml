@@ -20,14 +20,14 @@
 		
 
 		<!--本地 autoReconnect=true&amp;以防8小时无连接错误  useUnicode=true&amp;characterEncoding=utf8设置编码为 utf8
-		--><property name="jdbcUrl" value="jdbc:mysql://localhost:3306/befriend?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8" />
-
+	<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/befriend?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8" />
+	-->
 		<!-- 正式服
 		<property name="jdbcUrl" value="jdbc:mysql://182.92.100.235:3306/befriend?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8" />
 		 -->
-		<!-- 测试服 
+		<!-- 测试服 -->
 		<property name="jdbcUrl" value="jdbc:mysql://123.56.45.164:3306/befriend?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8" />
-		-->
+		
 		<property name="user" value="root" />
 		<property name="password" value="admin" />
 		<!-- 连接池中保留的最小连接数，默认为：3-->

@@ -67,7 +67,7 @@ if(false){
 					<h2>资讯相关</h2>
 					<ul class="clearfix">
 						<li class="leftArea"><a href="<%=request.getContextPath() %>/userLookEduASBK"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico26.png" alt="我的收藏" /><br/>我的收藏</a></li>
-						<li class="rightArea"><a href="mycomment_info.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico27.png" alt="我的评论" /><br/>我的评论</a></li>
+						<li class="rightArea"><a href="<%=request.getContextPath() %>/webEduReviews"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico27.png" alt="我的评论" /><br/>我的评论</a></li>
 					</ul>
 				</div>
 				<div class="shopArea">

@@ -72,8 +72,24 @@ $(document).ready(function(){
   <%
 						for(int i=0;i<Hottime.size();i++){
 						News n=Hottime.get(i);
-						
+						if(i==0){
 						%>
+						<a href="webNewsId?id=<%=n.getId()%>" >
+							<li class="first">
+						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="newsdetail.html"><%=n.getTitle() %></a></p>
+						<p class="big_img"><a href="newsdetail.html"><img src="sample_lihu/images/banner.jpg" alt="bigImg" /></a></p>
+						<p class="info">
+							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
+								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
+						</p>
+					</li>
+						</a>
+						<%
+						}
+						%>
+						
+						
+						
 			<a href="webNewsId?id=<%=n.getId()%>" >
 					<li>
 						<div class="infoArea">
