@@ -78,7 +78,7 @@ $(document).ready(function(){
 							<li class="first">
 							
 						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
-						<p class="big_img"><a href="newsdetail.html"><img src="sample_lihu/images/banner.jpg" alt="bigImg" /></a></p>
+						<p class="big_img"><a href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
 						<p class="info">
 							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -87,6 +87,7 @@ $(document).ready(function(){
 					</li>
 						
 						<%
+						continue;
 						}
 						%>
 						
@@ -95,14 +96,14 @@ $(document).ready(function(){
 			
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img  src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
 					
@@ -112,7 +113,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="local mainList">
-				<h2 class="tit2"><a href="#"><img src="sample_lihu/images/localinfo_tit.gif" alt="本地资讯" /></a></h2>
+				<h2 class="tit2"><a href="#"><img src="sample_lihu/images/1.gif" alt="本地资讯" /></a></h2>
 				<ul>
 				<%
 						for(int i=0;i<Hotarea.size();i++){
@@ -131,7 +132,7 @@ $(document).ready(function(){
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
 					
@@ -141,7 +142,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="health mainList">
-				<h2 class="tit2"><a href="healthguide.html"><img src="sample_lihu/images/healthguide_tit.gif" alt="健康导航" /></a></h2>
+				<h2 class="tit2"><a href="healthguide.html"><img src="sample_lihu/images/4.gif" alt="健康导航" /></a></h2>
 				<ul>
 					<%
 						for(int i=0;i<typejk.size();i++){
@@ -158,7 +159,7 @@ $(document).ready(function(){
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
 				
@@ -168,7 +169,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="health2 mainList">
-				<h2 class="tit2"><a href="#"><img src="sample_lihu/images/healthguide2_tit.gif" alt="轻松驿站" /></a></h2>
+				<h2 class="tit2"><a href="#"><img src="sample_lihu/images/7.gif" alt="轻松驿站" /></a></h2>
 				<ul>
 				<%
 						for(int i=0;i<typeqs.size();i++){
@@ -185,7 +186,7 @@ $(document).ready(function(){
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
 					
@@ -195,7 +196,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="rank mainList">
-				<h2 class="tit2"><a href="newsdetail.html"><img src="sample_lihu/images/rank_tit.gif" alt="热门排名" /></a></h2>
+				<h2 class="tit2"><a href="newsdetail.html"><img src="sample_lihu/images/8.gif" alt="热文排名" /></a></h2>
 				<ul>
 					<%
 						for(int i=0;i<Hottest.size();i++){
@@ -212,7 +213,7 @@ $(document).ready(function(){
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
 					
@@ -225,8 +226,8 @@ $(document).ready(function(){
 				<li><a href="webNewtype?tp=1"><img src="sample_lihu/images/ft_guidemap1.gif" alt="升学指南" />升学指南</a></li>
 				<li><a href="webNewtype?tp=2"><img src="sample_lihu/images/ft_guidemap2.gif" alt="教子经验" />教子经验</a></li>
 				<li><a href="webNewtype?tp=3"><img src="sample_lihu/images/ft_guidemap3.gif" alt="成长路上" />成长路上</a></li>
-				<li><a href="webNewtype?tp=4"><img src="sample_lihu/images/ft_guidemap4.gif" alt="兴趣特长" />兴趣特长</a></li>
-				<li><a href="webNewtype?tp=5"><img src="sample_lihu/images/ft_guidemap5.gif" alt="出国留学" />出国留学</a></li>
+				<li><a href="webNewtype?tp=5"><img src="sample_lihu/images/ft_guidemap4.gif" alt="兴趣特长" />兴趣特长</a></li>
+				<li><a href="webNewtype?tp=4"><img src="sample_lihu/images/ft_guidemap5.gif" alt="出国留学" />出国留学</a></li>
 				<li><a href="webNewtype?tp=6"><img src="sample_lihu/images/ft_guidemap6.gif" alt="名人教子" />名人教子</a></li>
 				<li><a href="webNewtype?tp=7"><img src="sample_lihu/images/ft_guidemap7.gif" alt="健康导航" />健康导航</a></li>
 				<li><a href="webNewtype?tp=8"><img src="sample_lihu/images/ft_guidemap8.gif" alt="轻松驿站" />轻松驿站</a></li>

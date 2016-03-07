@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/zyupload.basic-1.0.0.js"></script>
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../css/zyupload-1.0.0.min.css" type="text/css">
+</head>
+<body>
+<form id="form1" name="form1" method="post" action="webForumonesaveapp"  enctype="multipart/form-data"  onsubmit="alert(document.test_form.browse.value);">
+	<div id="wrap">
+		<div id="header">
+			<div class="topArea clearfix">
+				<h1>发表新帖</h1>
+				<div class="prev">
+					<a href="#" onclick="javascript:history.back(-1);"><img src="../images/prev.png" alt="后退" /></a>
+				</div>
+			</div>
+		</div><!--header-->
+		<div id="container">
+			<div class="forumPost">
+				<div class="write">
+					<p class="title"><textarea name="title" id="postTit" cols="30" rows="10">标题，4-25个字</textarea></p>
+					<p class="posts"><textarea name="content" id="postCont" cols="30" rows="10">内容，10-700个字</textarea></p>
+				</div>
+				<div class="inner">
+					<div class="info clearfix">
+						<span class="leftArea"><img src="../images/attachimg.gif" alt="添加图片" /></span>
+						<span class="rightArea">请提供一张不小于720*360像素的图片<br/>大小不超过2M</span>
+					</div>
+					
+					
+					<div class="sv">
+  <script> 
+function setImagePreview() { 
+var docObj=document.getElementById("doc"); 
+var imgObjPreview=document.getElementById("preview"); 
+if(docObj.files && docObj.files[0]){ 
+//火狐下，直接设img属性 
+imgObjPreview.style.display = 'block'; 
+imgObjPreview.style.width = '300px'; 
+imgObjPreview.style.height = '120px'; 
+//imgObjPreview.src = docObj.files[0].getAsDataURL(); 
+//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式 
+if (window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1) { 
+imgObjPreview.src = window.webkitURL.createObjectURL(docObj.files[0]); 
+} 
+else { 
+imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]); 
+} 
+//imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]); 
+
+}else{ 
+//IE下，使用滤镜 
+docObj.select(); 
+var imgSrc = document.selection.createRange().text; 
+var localImagId = document.getElementById("localImag"); 
+//必须设置初始大小 
+localImagId.style.width = "250px"; 
+localImagId.style.height = "200px"; 
+//图片异常的捕捉，防止用户修改后缀来伪造图片 
+try{ 
+localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+locem("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc; 
+}catch(e){ 
+alert("您上传的图片格式不正确，请重新选择!"); 
+return false; 
+} 
+localImagId.style.display = 'block'; 
+imgObjPreview.style.display = 'none'; 
+document.selection.empty(); 
+} 
+return true; 
+} 
+
+function fn_browse() 
+{ 
+document.form1.file.click(); 
+} 
+</script> 
+
+<p>
+<div id="localImag"><img src="../images/sc.jpg" id="preview" onclick="javascript:document.form1.file.click();"  />
+</div>
+</p>
+
+<input type=file name="file" id="doc" style="display:none;" onchange="javascript:setImagePreview();">
+
+</div>
+				</div>
+			</div>
+		</div><!--container-->
+		
+		
+		<div id="footer">
+			<div class="post_btn">
+				<ul class="clearfix">
+					<li>
+						<a href="#" onclick="javascript:history.back(-1);">取消</a>
+					</li>
+					<li>
+						<a id="af1" href="#" onClick="javascript:return checkvalue();">发表</a>
+					</li>
+				</ul>
+			</div>
+		</div><!--footer-->
+	</div><!--wrap-->
+</form>
+	
+<script type="text/javascript">
+function  checkvalue()
+{
+	 var content = document.getElementById("postCont").value;
+	  var title = document.getElementById("postTit").value;
+	
+	  if (title==""||title==null||title.length>30||title.length<2){
+ 		alert("请正确填写标题 2字以上30字之间！");
+ 		return false;
+		}
+	  
+	  if (content==""||content==null||content.length<10){
+   		alert("请正确填写内容 10字以上");
+   		return false;
+   	}
+document.form1.action="webForumonesaveapp";
+document.form1.submit();
+alert('已提交');
+return true;
+
+}
+	$(function(){
+		var textarea = $("#postTit");
+		var textarea2 = $("#postCont");
+
+		textarea.focusin(function(){
+		  // alert(a);
+		  if($(this).text() !== "标题，4-25个字"){
+			return false;
+		  }else{
+			$(this).text("");
+		  }
+		});
+		textarea.focusout(function(){
+		  if($(this).text() == ""){
+			$(this).text("标题，4-25个字");
+		  }
+		});
+		textarea2.focusin(function(){
+		  // alert(a);
+		  if($(this).text() !== "内容，10-700个字"){
+			return false;
+		  }else{
+			$(this).text("");
+		  }
+		});
+		textarea2.focusout(function(){
+		  if($(this).text() == ""){
+			$(this).text("内容，10-700个字");
+		  }
+		});
+	});
+	$(function(){
+		// 初始化插件
+		$("#zyupload").zyUpload({
+			width            :   "100%",                 // 宽度
+			height           :   "auto",                 // 宽度
+			itemWidth        :   "60%",                 // 文件项的宽度
+			itemHeight       :   "80px",                 // 文件项的高度
+			url              :   "http://www.jq22.com/demo/jquery-publicity20151104/upload/UploadAction",  // 上传文件的路径
+			fileType         :   ["jpg","png","js","exe"],// 上传文件的类型
+			fileSize         :   51200000,                // 上传文件的大小
+			multiple         :   true,                    // 是否可以多个文件上传
+			dragDrop         :   false,                   // 是否可以拖动上传文件
+			tailor           :   false,                   // 是否可以裁剪图片
+			del              :   true,                    // 是否可以删除文件
+			finishDel        :   false,  	
+			fileNum : 5,  								  // 代表文件总个数，因为涉及到继续添加，所以下一次添加需要在它的基础上添加索引
+			/* 外部获得的回调接口 */
+			onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+				console.info("当前选择了以下文件：");
+				console.info(selectFiles);
+			},
+			onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+				console.info("当前删除了此文件：");
+				console.info(file.name);
+			},
+			onSuccess: function(file, response){          // 文件上传成功的回调方法
+				console.info("此文件上传成功：");
+				console.info(file.name);
+				console.info("此文件上传到服务器地址：");
+				console.info(response);
+				$("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+			},
+			onFailure: function(file, response){          // 文件上传失败的回调方法
+				console.info("此文件上传失败：");
+				console.info(file.name);
+			},
+			onComplete: function(response){           	  // 上传完成的回调方法
+				console.info("文件上传完成");
+				console.info(response);
+			}
+		});
+		
+	});
+</script>
+</body>
+</html>

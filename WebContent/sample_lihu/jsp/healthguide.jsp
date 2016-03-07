@@ -51,35 +51,35 @@ List<News> nl=(List)request.getAttribute("nl");
   
    
    if(type.equals("升学指南")){
-	   pth="healthguide_tit.gif";
+	   pth="9.gif";
 	   text="";
    }
    if(type.equals("兴趣特长")){
-	   pth="4xq.png";
+	   pth="10.gif";
 	   text="如何发现孩子的兴趣爱好及特长？在这里会给你答案，留心观察孩子的才能，帮助众多家长选择孩子的最佳成才之路。";
    }
    if(type.equals("教子经验")){
-	   pth="2jz.png";
+	   pth="5.gif";
 	   text="教子有方，如何正确的教育孩子？在这里教育专家专门为年轻的家长做了最实用、最科学的教子经验总结。";
    }
    if(type.equals("成长路上")){
-	   pth="3cz.png";
+	   pth="2.gif";
 	   text="重视家庭教育，关注身心健康，陪伴孩子快乐成长，正确赞赏和激励促使孩子进步，分享育孩子成长相关的宝贵经验。";
    }
    if(type.equals("出国留学")){
-	   pth="5lx.png";
+	   pth="3.gif";
 	   text="整理众多有关留学咨询的问题，共同分析留学方案的具体问题、就读专业等，分享国际院校海外深造的最佳捷径。";
    }
    if(type.equals("名人教子")){
-	   pth="6mr.png";
+	   pth="6.gif";
 	   text="汇集数位顶尖名人的教子启示录，分享教育经验，启发父母的正确教育观念。";
    }
    if(type.equals("健康导航")){
-	   pth="7jk.png";
+	   pth="4.gif";
 	   text="提供日常有助孩子最权威、最实用的保健知识，共同关注家庭健康的生活方式。";
    }
    if(type.equals("轻松驿站")){
-	   pth="8qs.png";
+	   pth="7.gif";
 	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
    }
    if(pth==null){
@@ -92,24 +92,41 @@ List<News> nl=(List)request.getAttribute("nl");
 			
 				<div id="wrapper">
 					<ul>
-						<%
+					 <%
 						for(int i=0;i<nl.size();i++){
 						News n=nl.get(i);
-						
+						if(i==0){
 						%>
-					
-					<li>
+						
+							<li class="first">
+							
 						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
-					
+						<p class="big_img"><a href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
+						<p class="info">
+							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
+								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
+						</p>
+						
+					</li>
+						
+						<%
+						continue;
+						}
+						%>
+						
+						
+						
+			
+					<li>
 						<div class="infoArea">
-													<p class="info">
+							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
 							</p>
 						</div>
-					
 						<div class="imgArea">
-							<p class="big_img"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img  src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
 						</div>
 					</li>
 					

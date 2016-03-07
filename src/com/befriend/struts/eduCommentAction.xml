@@ -17,7 +17,10 @@
 		<result name="success">/sample_lihu/jsp/myfavor_forum.jsp</result>
 		</action>
 		<action name="getWebCommments" class="eduCommentAction" method="getWebCommments">
-		<result name="success">/SimulationApp/lihu/jsp/detail.jsp</result>
+		<!--<result name="success">/SimulationApp/lihu/jsp/detail.jsp</result>  -->
+		<result name="success">/sample_lihu/jsp/edu_detail.jsp</result>
+		
+		
 		</action>
 		<action name="addWebComments" class="eduCommentAction" method="addWebComments">
 		</action>

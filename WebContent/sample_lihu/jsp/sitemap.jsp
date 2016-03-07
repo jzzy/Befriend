@@ -57,8 +57,8 @@
 					<li><a href="<%=request.getContextPath() %>/getEduWeb"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav2.gif" alt="教辅机构" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/book_category.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav3.gif" alt="教育部推荐用书" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/selectwxHouseallzh"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav4.gif" alt="搜学区房" /></a></li>
-					<li><a href="<%=request.getContextPath() %>/sample_lihu/post2.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav5.gif" alt="家长来稿" /></a></li>
-					<li><a href="<%=request.getContextPath() %>/sample_lihu/post3.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav6.gif" alt="意见反馈" /></a></li>
+					<li><a href="<%=request.getContextPath() %>/sample_lihu/htm/post2.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav5.gif" alt="家长来稿" /></a></li>
+					<li><a href="<%=request.getContextPath() %>/sample_lihu/htm/post3.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav6.gif" alt="意见反馈" /></a></li>
 				</ul>
 			</div>
 			<div class="myNav">

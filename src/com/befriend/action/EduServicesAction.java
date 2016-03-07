@@ -147,7 +147,28 @@ public class EduServicesAction extends ActionSupport implements
 			OpeFunction.Out().print(false);
 		}
 	}
+	public void saveEduAttentionWeb() throws IOException {
+		System.out.println("userid " + userid + " objectid " + objectid);
+		try {
+			User u=(User)session.getAttribute("u");
+			userid=u.getId();
+			attention.setCome(Attention.COME_EduServices);
+			attention.setTime(OpeFunction.getNowTime());
+			attention.setUserid(userid);
+			attention.setObjectid(objectid);
+			if (eduServicesDAO.checkAttention(userid, objectid,
+					Attention.COME_EduServices) == null) {
+				eduServicesDAO.save(attention);
+				OpeFunction.Out().print(true);
+			} else {
+				OpeFunction.Out().print(false);
+			}
 
+		} catch (Exception e) {
+			OpeFunction.Out().print(false);
+		}
+
+	}
 	public void saveEduAttention() throws IOException {
 		System.out.println("userid " + userid + " objectid " + objectid);
 		try {
