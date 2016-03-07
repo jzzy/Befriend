@@ -19,7 +19,7 @@
 			<div class="topArea clearfix">
 				<h1><a href="index.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/logo.gif" alt="家长之友" /></a></h1>
 				<div class="relocation">
-					<a href="relocation.html">北京&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
+					<a href="<%=request.getContextPath() %>/webNewsA10?province=北京">北京&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
 					<span class="mapLink"><a href="sitemap.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
