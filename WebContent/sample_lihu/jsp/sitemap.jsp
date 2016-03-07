@@ -42,7 +42,7 @@
 				
 				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=5"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap5.gif" alt="出国留学" />出国留学</a></li>
 				
-				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=8"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap9.gif" alt="本地资讯" />轻松驿站</a></li>
+				<li><a href="<%=request.getContextPath() %>/webHotareaf"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap9.gif" alt="本地资讯" />本地资讯</a></li>
 				
 				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=6"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap6.gif" alt="名人教子" />名人教子</a></li>
 				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=7"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap7.gif" alt="健康导航" />健康导航</a></li>

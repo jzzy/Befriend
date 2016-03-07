@@ -77,7 +77,7 @@ $(document).ready(function(){
 						
 							<li class="first">
 							
-						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+						<p class="title"  style="color:#666;font-size: 18px;font-weight:bold;"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a></p>
 						<p class="big_img"><a href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
 						<p class="info">
 							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
@@ -96,7 +96,7 @@ $(document).ready(function(){
 			
 					<li>
 						<div class="infoArea">
-							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -113,7 +113,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="local mainList">
-				<h2 class="tit2"><a href="#"><img src="sample_lihu/images/1.gif" alt="本地资讯" /></a></h2>
+				<h2 class="tit2"><a href="webHotareaf"><img src="sample_lihu/images/1.gif" alt="本地资讯" /></a></h2>
 				<ul>
 				<%
 						for(int i=0;i<Hotarea.size();i++){
@@ -123,7 +123,7 @@ $(document).ready(function(){
 					<li>
 						<div class="infoArea">
 							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" />
-							<a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %>
+							<a href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %>
 							</a>
 							</p>
 							<p class="info">
@@ -142,7 +142,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="health mainList">
-				<h2 class="tit2"><a href="healthguide.html"><img src="sample_lihu/images/4.gif" alt="健康导航" /></a></h2>
+				<h2 class="tit2"><a href="webNewtype?tp=7"><img src="sample_lihu/images/4.gif" alt="健康导航" /></a></h2>
 				<ul>
 					<%
 						for(int i=0;i<typejk.size();i++){
@@ -152,7 +152,7 @@ $(document).ready(function(){
 				
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -169,7 +169,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="health2 mainList">
-				<h2 class="tit2"><a href="#"><img src="sample_lihu/images/7.gif" alt="轻松驿站" /></a></h2>
+				<h2 class="tit2"><a href="webNewtype?tp=8"><img src="sample_lihu/images/7.gif" alt="轻松驿站" /></a></h2>
 				<ul>
 				<%
 						for(int i=0;i<typeqs.size();i++){
@@ -179,7 +179,7 @@ $(document).ready(function(){
 				
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -196,7 +196,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="rank mainList">
-				<h2 class="tit2"><a href="newsdetail.html"><img src="sample_lihu/images/8.gif" alt="热文排名" /></a></h2>
+				<h2 class="tit2"><a href="webHottest"><img src="sample_lihu/images/8.gif" alt="热文排名" /></a></h2>
 				<ul>
 					<%
 						for(int i=0;i<Hottest.size();i++){
@@ -206,7 +206,7 @@ $(document).ready(function(){
 				
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a>></p>
+							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a>></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>

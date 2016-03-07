@@ -94,6 +94,7 @@ if(bookl.size()==0){
 
 <script src="sample_lihu/js/iscroll.js"></script>
 <script src="sample_lihu/js/pullToRefresh.js"></script>
+<!--  
 <script>
 refresher.init({
 	id:"wrapper",//<------------------------------------------------------------------------------------┐
@@ -127,5 +128,6 @@ function Load() {
 	},2000);	
 }
 </script>
+-->
 </body>
 </html>

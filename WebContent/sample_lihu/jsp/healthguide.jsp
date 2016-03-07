@@ -82,6 +82,14 @@ List<News> nl=(List)request.getAttribute("nl");
 	   pth="7.gif";
 	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
    }
+   if(type.equals("zr")){
+	   pth="8.gif";
+	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
+   }
+   if(type.equals("bd")){
+	   pth="1.gif";
+	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
+   }
    if(pth==null){
 	   pth="logod.png";
    }
@@ -100,7 +108,7 @@ List<News> nl=(List)request.getAttribute("nl");
 						
 							<li class="first">
 							
-						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 						<p class="big_img"><a href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
 						<p class="info">
 							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
@@ -119,7 +127,7 @@ List<News> nl=(List)request.getAttribute("nl");
 			
 					<li>
 						<div class="infoArea">
-							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -142,6 +150,7 @@ List<News> nl=(List)request.getAttribute("nl");
 	
 <script src="sample_lihu/js/iscroll.js"></script>
 <script src="sample_lihu/js/pullToRefresh.js"></script>
+<!--
 <script>
 refresher.init({
 	id:"wrapper",//<------------------------------------------------------------------------------------┐
@@ -175,5 +184,6 @@ function Load() {
 	},2000);	
 }
 </script>
+  -->
 </body>
 </html>

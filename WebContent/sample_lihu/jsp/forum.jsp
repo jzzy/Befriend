@@ -85,7 +85,7 @@ $(document).ready(function(){
                    if(us.get(i).getImg()!=null){
                    %>
                    
-                   <p class="leftArea"><img src="<%=request.getContextPath()%><%=us.get(i).getImg() %>" alt="sample" /></p>
+                   <p class="leftArea"><img src="<%=request.getContextPath()%><%=us.get(i).getImg() %>" style="width: 50px;height: 50px;" alt="sample" /></p>
                    <%
                    }else{
                    %>

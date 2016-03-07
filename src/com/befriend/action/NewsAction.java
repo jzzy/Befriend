@@ -638,7 +638,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			nl = ndao.Hotarea(province, pageSize, currentPage,
 					OpeFunction.getNowTime());
 			request.setAttribute("currentPage", currentPage);
-
+			request.setAttribute("type", "bd");
 			request.setAttribute("nl", nl);
 			request.setAttribute("province", province);
 			request.setAttribute("a", a);
@@ -669,6 +669,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			request.setAttribute("nl", nl);
 			request.setAttribute("province", province);
 			request.setAttribute("a", a);
+			request.setAttribute("type", "bd");
 			System.out.println(" 有-" + a + "-页");
 			System.out.println("每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
@@ -707,7 +708,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		System.out.println("每页多少条-" + pageSize);
 		System.out.println("第-" + currentPage + "-页");
 		System.out.println("用户来自：" + province);
-
+		request.setAttribute("type", "bd");
 		request.setAttribute("currentPage", currentPage);
 
 		request.setAttribute("nl", nl);
@@ -742,9 +743,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			nl = ndao.Hottest(pageSize, currentPage, OpeFunction.getNowTime());
 
 			request.setAttribute("currentPage", currentPage);
-
+			request.setAttribute("type", "zr");
 			request.setAttribute("nl", nl);
-
 			request.setAttribute("a", a);
 
 		} catch (Exception e) {
