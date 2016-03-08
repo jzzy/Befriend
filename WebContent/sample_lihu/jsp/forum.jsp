@@ -130,7 +130,7 @@ $(document).ready(function(){
 	</div><!--wrap-->
 <script src="sample_lihu/js/iscroll.js"></script>
 <script src="sample_lihu/js/pullToRefresh.js"></script>
-<!--
+
 <script>
 
 refresher.init({
@@ -164,7 +164,7 @@ function Load() {
 		wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
 	},2000);	
 }
--->
+
 </script>
 </body>
 </html>

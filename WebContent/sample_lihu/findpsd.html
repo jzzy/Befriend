@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<div class="topArea clearfix">
+				<h1>找回密码</h1>
+				<div class="prev">
+					<a href="#" onclick="javascript:history.back(-1);"><img src="images/prev.png" alt="后退" /></a>
+				</div>
+			</div>
+		</div><!--header-->
+		<div id="container">
+			<div class="login">
+				<div class="logId clearfix">
+					<div class="leftArea">手机号</div>
+					<div class="rightArea"><input type="text" name="entryTel" id="entryTel" value="请输入手机号" /><div class="sentCode"><a href="#">发送验证码</a></div></div>
+				</div>
+				<div class="logPsd clearfix">
+					<div class="leftArea">密码</div>
+					<div class="rightArea"><input type="text" name="entryCode" id="entryCode" value="请输入验证码" /><div id="showPsd" class="clearfix"><div class="inner clearfix"><span>change</span></div></div></div>
+				</div>
+			</div>
+		</div><!--container-->
+		<div id="footer">
+			<a href="#" class="fbButton">完成</a>
+		</div><!--footer-->
+	</div><!--wrap-->
+
+<script type="text/javascript">
+	$(function(){
+		var entryTel = $("#entryTel");
+		var entryCode = $("#entryCode");
+		entryTel.focusin(function(){
+			if(entryTel.val() !== "请输入手机号" ){
+			return false;
+			}else{
+			$(this).val("");
+			}
+		}
+		);
+		entryTel.focusout(function(){
+		  if($(this).val() == ""){
+			$(this).val("请输入手机号");
+		  }
+		});
+		
+		entryCode.focusin(function(){
+		  // alert(a);
+		  if($(this).val() !== "请输入验证码"){
+			return false;
+		  }else{
+			$(this).val("");
+			entryCode.attr("type","password")
+		  }
+		});
+		entryCode.focusout(function(){
+		  if($(this).val() == ""){
+			entryCode.attr("type","text")
+			$(this).val("请输入验证码");
+			$("#showPsd .inner span").removeClass("changeOn");
+		  }
+		});
+		$("#showPsd .inner").click(function(){
+			if(entryCode.val() !== "请输入验证码"){
+				if(entryCode.attr("type") == "password"){
+					entryCode.attr("type","text");
+					$("#showPsd .inner span").addClass("changeOn");
+				}else{
+					entryCode.attr("type","password");
+					$("#showPsd .inner span").removeClass("changeOn");
+				}
+			}
+		});
+	});
+</script>
+</body>
+</html>

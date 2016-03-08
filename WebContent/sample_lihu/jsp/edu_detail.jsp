@@ -41,7 +41,24 @@
 						</div>
 						<div class="infoArea">
 							<p class="name"><%=edus.getName() %></p>
-							<p class="rate"><img src="sample_lihu/images/star_on.png" alt="" /><img src="sample_lihu/images/star_on.png" alt="" /><img src="sample_lihu/images/star_on.png" alt="" /><img src="sample_lihu/images/star_off.png" alt="" /><img src="sample_lihu/images/star_off.png" alt="" /></p>
+							<p class="rate">
+								<%
+							for(int g=0;g<edus.getStar();g++){
+							%>
+								<img src="sample_lihu/images/star_on.png" alt="" />
+								
+											<%
+											if(g==edus.getStar()-1)
+							for(int y=0;y<4-g;y++){
+							%>
+								
+								<img src="sample_lihu/images/star_off.png" alt="" />
+						<%
+							}
+							}
+						%>
+							
+							</p>
 							<p class="loc"><%=edus.getCity()%> <%=edus.getClassFirst() %></p>
 							<p class="point"><span>设施:<%=edus.getEnvScore() %></span><span>环境:<%=edus.getSerScore() %></span><span>服务:<%=edus.getStar() %></span></p>
 						</div>
@@ -63,16 +80,74 @@
 			%>
 						<li>
 							<div class="inner clearfix">
-								<div class="userImg"><img src="sample_lihu/images/testuser_ico.gif" alt="ico" /></div>
+								<div class="userImg"><img style="width: 50px;height: 50px;" src="<%=request.getContextPath()+educl.get(i).getUser().getImg()%>" alt="ico" /></div>
+								
 								<div class="message">
-									<p class="userId"><%=educl.get(i).getUser().getNickname() %><span class="rate"><img src="sample_lihu/images/star_on.png" alt="" /><img src="sample_lihu/images/star_on.png" alt="" /><img src="sample_lihu/images/star_on.png" alt="" /><img src="sample_lihu/images/star_on.png" alt="" /><img src="sample_lihu/images/star_off.png" alt="" /></span></p>
-									<p class="time"><%=educl.get(i).getTime() %></p>
+									<p class="userId"><%=educl.get(i).getUser().getNickname() %>
+									<span class="rate">
+									<%
+							for(int g=0;g<educl.get(i).getScore();g++){
+							%>
+								<img src="sample_lihu/images/star_on.png" alt="" />
+								
+											<%
+											if(g==educl.get(i).getScore()-1)
+							for(int y=0;y<4-g;y++){
+							%>
+								
+								<img src="sample_lihu/images/star_off.png" alt="" />
+						<%
+							}
+							}
+						%>
+									
+									
+									
+									
+									
+									
+									
+									
+									
+								
+									
+									</span>
+									
+									</p>
+									<p class="time"><%=educl.get(i).getTime() %>
+									</p>
 									<p class="words">	<%=educl.get(i).getContent() %>
 									</p>
 									<ul class="attachImg">
+									
+									<%
+							if(!OpeFunction.isEmpty(educl.get(i).getPictures())){
+								
+							
+							String s = new String(educl.get(i).getPictures());   
+					        String a[] = s.split("!#");  
+					        for(int y=0;y<a.length;y++){
+								// System.out.println("i:"+i+"y:"+y+":"+a[y]);
+							
+			
+							//http://182.92.100.235
+							//http://123.56.45.164
+							
+							if(y<6){
+							%>
+							<li><img src="<%=a[y] %>" alt="pic" /></li>
+							<%
+							}
+					        }
+							}
+							%>
+							</p>
+									<!-- 
+									
 										<li><img src="sample_lihu/images/sample01.gif" alt="" /></li>
 										<li><img src="sample_lihu/images/sample01.gif" alt="" /></li>
 										<li><img src="sample_lihu/images/sample01.gif" alt="" /></li>
+										 -->
 									</li>
 								</div>
 							</div>
@@ -102,7 +177,7 @@
 		<div id="footer">
 			<div class="newsDetail_ft clearfix">
 				<div class="leftArea">
-					<a href="<%=request.getContextPath() %>/SimulationApp/lihu/comment.html" ><img src="sample_lihu/images/writecom_btn.gif" alt="说说你的看法" /></a>
+					<a href="<%=request.getContextPath() %>/sample_lihu/edu_commentwrite.html" ><img src="sample_lihu/images/writecom_btn.gif" alt="说说你的看法" /></a>
 				</div>
 				<div class="rightArea">
 					<a href="#" onclick="hre();"><img src="sample_lihu/images/favor_ico_red.gif" alt="红心" /></a>
@@ -127,39 +202,6 @@
 	</div><!--wrap-->
 	
 	
-	<div id="wrapcomm"  style="display: none;">
-	<form action="" id="form1">
-	<!-- 获取论坛的id -->
-			<input type="text" name="forumid" value="edus" style="display: none"/>
-			
-		<div id="header">
-			<div class="topArea clearfix">
-				<h1>发表评论</h1>
-				<div class="prev">
-					<a href="#" onclick="wrap();"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
-				</div>
-			</div>
-		</div><!--header-->
-		<div id="container">
-			<div class="forumPost">
-				<div class="write">
-					<p class="posts commentWrite" style="padding-top: 35px;padding-left: -100px;">
-					<textarea  name="content"  id="postCont" cols="30" rows="10">写点什么吧…</textarea>
-					
-					</p>
-				</div>
-				<div class="btn clearfix">
-					<span class="rightArea clearfix">
-						<a href="#" onclick="wrap();">取消</a>
-						<a href="#" onclick="submit();">发表</a>
-						<a href="#" onclick="submit2();" style="display: none;">发表</a>
-					</span>
-				</div>
-			</div>
-		</div><!--container-->
-		<div id="footer"></div><!--footer-->
-		</form>
-	</div><!--wrap-->
 <script type="text/javascript">
 var hre=(function(){
 	// 

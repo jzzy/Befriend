@@ -30,7 +30,7 @@
 		 -->
 		<property name="user" value="root" />
 		<property name="password" value="admin" />
-		<!-- 连接池中保留的最小连接数，默认为：3-->
+		<!-- 连接池中保留的最小连接数，默认为：3--> 
 		<property name="minPoolSize" value="5" />
 		<!--连接池中保留的最大连接数。默认值: 15 -->
 		<property name="maxPoolSize" value="30" />

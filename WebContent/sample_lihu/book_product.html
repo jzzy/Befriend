@@ -1,13 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="css/pullToRefresh.css"/>
 </head>
 <body>
 	<div id="wrap">
@@ -30,53 +29,8 @@
 				<li><a href="#">最新</a></li>
 			</ul>
 		</div><!--header-->
-		<div id="container">
-			<div id="wrapper">
-				<ul class="prdList">
-					<li>
-						<div class="inBox">
-							<p class="prdImg"><a href="prd_detail.html"><img src="images/sample02.gif" alt="sample" /></a></p>
-							<p class="title"><a href="prd_detail.html">快乐的小熊</a></p>
-							<p class="price"><img src="images/ico14.gif" alt="货币单位" />20.01<span><a href="cart.html"><img src="images/ico11.gif" alt="购物车" /></a></span></p>
-						</div>
-					</li>
-					<li>
-						<div class="inBox">
-							<p class="prdImg"><a href="prd_detail.html"><img src="images/sample02.gif" alt="sample" /></a></p>
-							<p class="title"><a href="prd_detail.html">快乐的小熊</a></p>
-							<p class="price"><img src="images/ico14.gif" alt="货币单位" />20.01<span><a href="cart.html"><img src="images/ico11.gif" alt="购物车" /></a></span></p>
-						</div>
-					</li>
-					<li>
-						<div class="inBox">
-							<p class="prdImg"><a href="prd_detail.html"><img src="images/sample02.gif" alt="sample" /></a></p>
-							<p class="title"><a href="prd_detail.html">快乐的小熊</a></p>
-							<p class="price"><img src="images/ico14.gif" alt="货币单位" />20.01<span><a href="cart.html"><img src="images/ico11.gif" alt="购物车" /></a></span></p>
-						</div>
-					</li>
-					<li>
-						<div class="inBox">
-							<p class="prdImg"><a href="prd_detail.html"><img src="images/sample02.gif" alt="sample" /></a></p>
-							<p class="title"><a href="prd_detail.html">快乐的小熊</a></p>
-							<p class="price"><img src="images/ico14.gif" alt="货币单位" />20.01<span><a href="cart.html"><img src="images/ico11.gif" alt="购物车" /></a></span></p>
-						</div>
-					</li>
-					<li>
-						<div class="inBox">
-							<p class="prdImg"><a href="prd_detail.html"><img src="images/sample02.gif" alt="sample" /></a></p>
-							<p class="title"><a href="prd_detail.html">快乐的小熊</a></p>
-							<p class="price"><img src="images/ico14.gif" alt="货币单位" />20.01<span><a href="cart.html"><img src="images/ico11.gif" alt="购物车" /></a></span></p>
-						</div>
-					</li>
-					<li>
-						<div class="inBox">
-							<p class="prdImg"><a href="prd_detail.html"><img src="images/sample02.gif" alt="sample" /></a></p>
-							<p class="title"><a href="prd_detail.html">快乐的小熊</a></p>
-							<p class="price"><img src="images/ico14.gif" alt="货币单位" />20.01<span><a href="cart.html"><img src="images/ico11.gif" alt="购物车" /></a></span></p>
-						</div>
-					</li>
-				</ul>
-			</div>
+		<div id="container" class="load">
+			<iframe id="mainiframe" src="book_product_iframe.html" frameborder="0" scrolling="no" width="100%"></iframe>
 			<div class="pagging displaynone">
 				<ul>
 					<li class="first"><a href="#"><img src="images/ico12.gif" alt="prev" /></a></li>
@@ -108,41 +62,5 @@ $("#bg").click(function(){
 })
 
 </script>
-<script src="js/iscroll.js"></script>
-<script src="js/pullToRefresh.js"></script>
-<!-- 
-<script>
-refresher.init({
-	id:"wrapper",//<------------------------------------------------------------------------------------┐
-	pullDownAction:Refresh,                                                            
-	pullUpAction:Load 																			
-	});																																							
-function Refresh() {																
-	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
-		var el, li, i;																		
-		el =document.querySelector("#wrapper ul");					
-		//这里写你的刷新代码				
-		document.getElementById("wrapper").querySelector(".pullDownIcon").style.display="none";		
-		document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='css/ok.png'/>刷新成功";																					 
-		setTimeout(function () {
-			wrapper.refresh();
-			document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								
-			},1000);//模拟qq下拉刷新显示成功效果
-		/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
-	}, 1000);
-}
-function Load() {
-	setTimeout(function () {// <-- Simulate network congestion, remove setTimeout from production!
-		var el, li, i;
-		el =document.querySelector("#wrapper ul");
-		for (i=0; i<10; i++) {
-			li = document.createElement('li');
-			li.innerHTML='<div class="inBox"><p class="prdImg"><a href="prd_detail.html"><img src="images/sample02.gif" alt="sample" /></a></p><p class="title"><a href="prd_detail.html">快乐的小熊</a></p><p class="price"><img src="images/ico14.gif" alt="货币单位" />20.01<span><a href="cart.html"><img src="images/ico11.gif" alt="购物车" /></a></span></p></div>';
-			el.appendChild(li, el.childNodes[0]);
-		}
-		wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
-	},2000);	
-}
-</script> -->
 </body>
 </html>

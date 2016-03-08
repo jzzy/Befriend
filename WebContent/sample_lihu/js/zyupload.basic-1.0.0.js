@@ -91,8 +91,17 @@ var ZYFILE = {
 		
 		return true;
 	},
+	/**
+	 * 限制上传选取文件的个数
+	 */
 	// 处理过滤后的文件，给每个文件设置下标
 	funDealtFiles : function(){
+		var num=6;//可以上传 可以选择 的数目
+		var files = [];  // 替换的文件数组
+		var arrFiles = [];  // 替换的文件数组
+	
+		
+		
 		var self = this;
 		// 目前是遍历所有的文件，给每个文件增加唯一索引值
 		$.each(this.uploadFile, function(k, v){
@@ -100,18 +109,91 @@ var ZYFILE = {
 			v.index = self.fileNum;
 			// 添加一个之后自增
 			self.fileNum++;
+	
+			
+				
+			
 		});
 		// 先把当前选中的文件保存备份
 		var selectFile = this.uploadFile;  
-		// 要把全部的文件都保存下来，因为删除所使用的下标是全局的变量
+		// 要把全部的文件都保存下来，因为删除所使用的下标是全局的变量  
+		//这是选择过的图片总数
 		this.perUploadFile = this.perUploadFile.concat(this.uploadFile);
+		
 		// 合并下上传的文件
+		//这是 当前选的图片 加 以选择的图片 的 总数
 		this.uploadFile = this.lastUploadFile.concat(this.uploadFile);
+		
+		
+		arrFiles=[];
+		files=selectFile;
+			//全部图片等于6说明这有6张  全部获取
+			if(this.uploadFile.length==num){
+				//alert("this.uploadFile.length==6");
+				arrFiles=[];		
+	
+				for (var i = 0;i<files.length; i++) {
+							
+					arrFiles.push(files[i]);	
+					
+				}
+				
+			}
+			//全部图片小于6说明这有不到6张 可以 全部获取
+			else if(this.uploadFile.length<num){
+				//alert("this.uploadFile.length<6");
+				arrFiles=[];				
+				for (var i = 0;i<selectFile.length; i++) {
+							
+					arrFiles.push(files[i]);	
+					
+				}
+			}
+			//全部图片大于于6说明 这有6+张 用当前选择的个数 减去 (全部-6)这就是多出来的数目
+			else if(this.uploadFile.length>num){
+				//alert("this.uploadFile.length>6");
+				arrFiles=[];				
+				for (var i = 0;i<selectFile.length-(this.uploadFile.length-num); i++) {
+							
+					arrFiles.push(files[i]);	
+					
+				}
+			}
+			
+			selectFile=arrFiles;
+		
+		files=this.perUploadFile;
+		arrFiles = [];  // 替换的文件数组
+		
+		for (var i = 0, file; file = files[i]; i++) {
+			if(i>=num){
+				
+				continue;
+			}
+				arrFiles.push(file);	
+					
+		}
+		//this.perUploadFile=arrFiles;
+		files=this.uploadFile;
+		arrFiles=[];
+		
+		for (var i = 0, file; file = files[i]; i++) {
+			if(i>=num){
+							
+				continue;
+			}
+			
+			
+			arrFiles.push(file);	
+			
+		}
+		this.uploadFile=arrFiles;
 		
 		// 执行选择回调
 		this.onSelect(selectFile, this.uploadFile);
 		console.info("继续选择");
 		console.info(this.uploadFile);
+		//alert(selectFile.length+"合并下上传的文件"+this.uploadFile.length+"合并下上传的文件"+this.perUploadFile.length);
 		return this;
 	},
 	// 处理需要删除的文件  isCb代表是否回调onDelete方法  
@@ -152,7 +234,7 @@ var ZYFILE = {
 	funUploadFile : function(file){
 		var self = this;  // 在each中this指向没个v  所以先将this保留
 		var formdata = new FormData();
-		formdata.append("file", file);	 
+		formdata.append("fileList", file);	 
 		// 添加裁剪的坐标和宽高发送给后台
 		if($("#uploadTailor_"+file.index).length>0){
 			// 除了这样获取不到zyUpload的值啊啊啊啊啊啊啊啊啊啊啊
@@ -334,7 +416,7 @@ var ZYFILE = {
 					html += '			</div>';
 					html += '		</div>';
 					html += '		<div class="upload_submit">';
-					html += '			<button type="button" id="fileSubmit" class="upload_submit_btn">上传图片</button>';
+					html += '			<button type="button" style="display: none;" id="fileSubmit" class="upload_submit_btn">上传图片</button>';
 					html += '		</div>';
 					html += '		<div id="uploadInf" class="upload_inf"></div>';
 					html += '	</div>';

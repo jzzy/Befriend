@@ -467,38 +467,6 @@ public class EduCommentAction implements ServletRequestAware {
 				EduComment eduComment = new EduComment();
 
 				String picStr = "";
-				if (pictures != null && pictures.length > 0) {
-					System.out.println("upload");
-					String path = "/file/" +OpeFunction.getNameDayTime()+"/"+ user.getId() + "/EduComment/"
-							+ merchantId + "/";
-					String realPath = ServletActionContext.getServletContext()
-							.getRealPath(path).replace("Befriend", "");
-					System.out.println("realPath:" + realPath);
-					File saveDir = new File(realPath);
-					if (!saveDir.exists()) {
-						saveDir.mkdirs();
-					}
-
-					for (int i = 0; i < pictures.length; i++) {
-						try {
-
-							int index = picturesFileName[i].indexOf(".");
-							String suffix = picturesFileName[i]
-									.substring(index);
-							String fileName = String.valueOf(new Date()
-									.getTime()) + suffix;
-							File saveFile = new File(saveDir, fileName);
-							FileUtils.copyFile(pictures[i], saveFile);
-							picStr += path + fileName + "!#";
-
-						} catch (IOException e) {
-
-							e.printStackTrace();
-						}
-					}
-
-				}
-
 				eduComment.setMerchantId(merchantId);
 				eduComment.setUser(user);
 				eduComment.setScore(score);// 12345 ÐÇ¼¶

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
@@ -15,6 +15,7 @@
 </style>
 </head>
 <body>
+<form action="addWebComments" id="form9527" enctype="multipart/form-data" method="post">
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
@@ -30,9 +31,9 @@
 					<div class="rate clearfix">
 						<div class="title">评价：</div>
 						<div id="raty" style="cursor: pointer;"></div>
-						<div id="raty_hint" class="hint">0</div>
+						<div  name="score" id="raty_hint" class="hint">0</div>
 					</div>
-					<p class="posts"><textarea name="" id="postCont" cols="30" rows="10">亲，课程怎么样，老师好不好，环境如何，学习效果满意吗？</textarea></p>
+					<p class="posts"><textarea name="content" id="postCont" cols="30" rows="10">亲，课程怎么样，老师好不好，环境如何，学习效果满意吗？</textarea></p>
 				</div>
 				<div class="inner">
 					<div class="info clearfix">
@@ -47,17 +48,22 @@
 			<div class="post_btn">
 				<ul class="clearfix">
 					<li>
-						<a href="#">取消</a>
+						<a href="#" onclick="javascript:history.back(-1);">取消</a>
 					</li>
 					<li>
-						<a href="#">发表</a>
+						
+						<a href="#"  id="div1653" >发表</a>
+						<a href="#"  id="div1655" style="display: none;" class="upload_btn">发表</a>
 					</li>
 				</ul>
 			</div>
 		</div><!--footer-->
 	</div><!--wrap-->
-	
+	<input id="inputm" type="text" name="path" style="display: none;"/>
 <script type="text/javascript">
+$("#div1653").click(function(){
+	$("#form9527").submit(); 
+});
 	$(function(){
 		var textarea2 = $("#postCont");
 
@@ -103,8 +109,8 @@
 			height           :   "auto",                 // 宽度
 			itemWidth        :   "60%",                 // 文件项的宽度
 			itemHeight       :   "80px",                 // 文件项的高度
-			url              :   "http://www.jq22.com/demo/jquery-publicity20151104/upload/UploadAction",  // 上传文件的路径
-			fileType         :   ["jpg","png","js","exe"],// 上传文件的类型
+			url              :   "upload.action",  // 上传文件的路径
+			fileType         :   ["jpg","png","gif","JPG","PNG","GIF"],// 上传文件的类型
 			fileSize         :   51200000,                // 上传文件的大小
 			multiple         :   true,                    // 是否可以多个文件上传
 			dragDrop         :   false,                   // 是否可以拖动上传文件
@@ -116,6 +122,11 @@
 			onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
 				console.info("当前选择了以下文件：");
 				console.info(selectFiles);
+				$("#div1653").hide(); 
+				$("#div1655").show();
+				if(allFiles.length>6){
+					$("#fileImage").hide();
+				}
 			},
 			onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
 				console.info("当前删除了此文件：");
@@ -126,7 +137,13 @@
 				console.info(file.name);
 				console.info("此文件上传到服务器地址：");
 				console.info(response);
+				//alert(response);
 				$("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+				 if($("#inputm").attr("value")!=null){
+					 $("#inputm").attr("value",$("#inputm").attr("value")+response+"!#");
+				 }else{
+					 $("#inputm").attr("value",response+"!#");
+				 }
 			},
 			onFailure: function(file, response){          // 文件上传失败的回调方法
 				console.info("此文件上传失败：");
@@ -134,11 +151,13 @@
 			},
 			onComplete: function(response){           	  // 上传完成的回调方法
 				console.info("文件上传完成");
+				$("#form9527").submit(); 
 				console.info(response);
 			}
 		});
 		
 	});
 </script>
+</form>
 </body>
 </html>

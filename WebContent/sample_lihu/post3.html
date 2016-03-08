@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
@@ -10,7 +10,6 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<form id="form1" name="form1" action="webSaveFeedback" method="post">
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
@@ -24,24 +23,15 @@
 			<div class="feedback">
 				<p class="info">感谢您的反馈，您的反馈对我们很重要</p>
 				<div class="inner">
-					<textarea name="information" id="feedback" cols="30" rows="10">请简单描述你所遇到的问题或你的建议，我们会尽快处理。</textarea>
+					<textarea name="feedback" id="feedback" cols="30" rows="10">请简单描述你所遇到的问题或你的建议，我们会尽快处理。</textarea>
 				</div>
 			</div>
 		</div><!--container-->
 		<div id="footer">
-			<a href="#" class="fbButton"  onClick="javascript:return checkvalue();">发送</a>
+			<a href="#" class="fbButton">发送</a>
 		</div><!--footer-->
 	</div><!--wrap-->
-	</form>
 <script type="text/javascript">
-function  checkvalue()
-{	 
-document.form1.action="webSaveFeedback";
-document.form1.submit();
-alert('已提交');
-return true;
-
-}
 $(function(){
 	var textarea3 = $("#feedback");
 		textarea3.focusin(function(){
