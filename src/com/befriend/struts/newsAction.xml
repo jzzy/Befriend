@@ -207,8 +207,13 @@
 			<!--分页 查询八大类新闻-->
 		<action name="webNewtype" class="newsAction" method="webNewtype">
 		<!--  <result name="success">/SimulationApp/famous_person_badalei.jsp</result>-->
+		<result name="success">/sample_lihu/jsp/healthguide_iframe.jsp</result>
+		</action>
+		<action name="webSbType" class="newsAction" method="webSbType">
+		<!--  <result name="success">/SimulationApp/famous_person_badalei.jsp</result>-->
 		<result name="success">/sample_lihu/jsp/healthguide.jsp</result>
 		</action>
+		
 		
 			<!--分页 查询升学指南的4小类类新闻-->
 		<action name="webTypes" class="newsAction" method="webTypes">
@@ -218,13 +223,13 @@
 		<!--分页 查询全国最热-->
 		<action name="webHottest" class="newsAction" method="webHottest">
 		<!--<result name="success">/SimulationApp/famous_person_zuire.jsp</result>-->
-			<result name="success">/sample_lihu/jsp/healthguide.jsp</result>
+			<result name="success">/sample_lihu/jsp/healthguide_iframe.jsp</result>
 		</action>
 		
 		<!--分页 查询本地新闻-->
 		<action name="webHotareaf" class="newsAction" method="webHotareaf">
 		<!--  <result name="success">/SimulationApp/famous_person_bendi.jsp</result>-->
-			<result name="success">/sample_lihu/jsp/healthguide.jsp</result>
+			<result name="success">/sample_lihu/jsp/healthguide_iframe.jsp</result>
 		</action>
 		
 		<!--添加评论-->

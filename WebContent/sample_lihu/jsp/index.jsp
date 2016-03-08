@@ -113,7 +113,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="local mainList">
-				<h2 class="tit2"><a href="webHotareaf"><img src="sample_lihu/images/1.gif" alt="本地资讯" /></a></h2>
+				<h2 class="tit2"><a href="webSbType?tp=10"><img src="sample_lihu/images/1.gif" alt="本地资讯" /></a></h2>
 				<ul>
 				<%
 						for(int i=0;i<Hotarea.size();i++){
@@ -142,7 +142,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="health mainList">
-				<h2 class="tit2"><a href="webNewtype?tp=7"><img src="sample_lihu/images/4.gif" alt="健康导航" /></a></h2>
+				<h2 class="tit2"><a href="webSbType?tp=7"><img src="sample_lihu/images/4.gif" alt="健康导航" /></a></h2>
 				<ul>
 					<%
 						for(int i=0;i<typejk.size();i++){
@@ -169,7 +169,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="health2 mainList">
-				<h2 class="tit2"><a href="webNewtype?tp=8"><img src="sample_lihu/images/7.gif" alt="轻松驿站" /></a></h2>
+				<h2 class="tit2"><a href="webSbType?tp=8"><img src="sample_lihu/images/7.gif" alt="轻松驿站" /></a></h2>
 				<ul>
 				<%
 						for(int i=0;i<typeqs.size();i++){
@@ -196,7 +196,7 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<div class="rank mainList">
-				<h2 class="tit2"><a href="webHottest"><img src="sample_lihu/images/8.gif" alt="热文排名" /></a></h2>
+				<h2 class="tit2"><a href="webSbType?tp=9"><img src="sample_lihu/images/8.gif" alt="热文排名" /></a></h2>
 				<ul>
 					<%
 						for(int i=0;i<Hottest.size();i++){
@@ -223,14 +223,14 @@ $(document).ready(function(){
 				</ul>
 			</div>
 			<ul class="ft_guidemap clearfix">
-				<li><a href="webNewtype?tp=1"><img src="sample_lihu/images/ft_guidemap1.gif" alt="升学指南" />升学指南</a></li>
-				<li><a href="webNewtype?tp=2"><img src="sample_lihu/images/ft_guidemap2.gif" alt="教子经验" />教子经验</a></li>
-				<li><a href="webNewtype?tp=3"><img src="sample_lihu/images/ft_guidemap3.gif" alt="成长路上" />成长路上</a></li>
-				<li><a href="webNewtype?tp=5"><img src="sample_lihu/images/ft_guidemap4.gif" alt="兴趣特长" />兴趣特长</a></li>
-				<li><a href="webNewtype?tp=4"><img src="sample_lihu/images/ft_guidemap5.gif" alt="出国留学" />出国留学</a></li>
-				<li><a href="webNewtype?tp=6"><img src="sample_lihu/images/ft_guidemap6.gif" alt="名人教子" />名人教子</a></li>
-				<li><a href="webNewtype?tp=7"><img src="sample_lihu/images/ft_guidemap7.gif" alt="健康导航" />健康导航</a></li>
-				<li><a href="webNewtype?tp=8"><img src="sample_lihu/images/ft_guidemap8.gif" alt="轻松驿站" />轻松驿站</a></li>
+				<li><a href="webSbType?tp=1"><img src="sample_lihu/images/ft_guidemap1.gif" alt="升学指南" />升学指南</a></li>
+				<li><a href="webSbType?tp=2"><img src="sample_lihu/images/ft_guidemap2.gif" alt="教子经验" />教子经验</a></li>
+				<li><a href="webSbType?tp=3"><img src="sample_lihu/images/ft_guidemap3.gif" alt="成长路上" />成长路上</a></li>
+				<li><a href="webSbType?tp=5"><img src="sample_lihu/images/ft_guidemap4.gif" alt="兴趣特长" />兴趣特长</a></li>
+				<li><a href="webSbType?tp=4"><img src="sample_lihu/images/ft_guidemap5.gif" alt="出国留学" />出国留学</a></li>
+				<li><a href="webSbType?tp=6"><img src="sample_lihu/images/ft_guidemap6.gif" alt="名人教子" />名人教子</a></li>
+				<li><a href="webSbType?tp=7"><img src="sample_lihu/images/ft_guidemap7.gif" alt="健康导航" />健康导航</a></li>
+				<li><a href="webSbType?tp=8"><img src="sample_lihu/images/ft_guidemap8.gif" alt="轻松驿站" />轻松驿站</a></li>
 			</ul>
 		</div><!--container-->
 		<div id="footer"></div><!--footer-->

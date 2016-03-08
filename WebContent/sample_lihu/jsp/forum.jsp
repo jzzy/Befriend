@@ -66,6 +66,7 @@ $(document).ready(function(){
 		</div><!--header-->
 		<div id="container">
 			<div class="forum">
+			<div id="wrapper">
 				<h2 class="tit2"><img src="sample_lihu/images/forum_tit.gif" alt="全国论坛讨论社区" /></h2>
 				<div id="wrapper">
 					<ul>
@@ -123,6 +124,7 @@ $(document).ready(function(){
 						%>
 					</ul>
 				</div>
+				</div>
 			</div>
 		</div><!--container-->
 		<div id="footer">
@@ -130,7 +132,7 @@ $(document).ready(function(){
 	</div><!--wrap-->
 <script src="sample_lihu/js/iscroll.js"></script>
 <script src="sample_lihu/js/pullToRefresh.js"></script>
-
+<!--
 <script>
 
 refresher.init({
@@ -166,6 +168,7 @@ function Load() {
 }
 
 </script>
+-->
 </body>
 </html>
 

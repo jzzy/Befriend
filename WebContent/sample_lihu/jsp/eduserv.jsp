@@ -128,7 +128,7 @@ Object address=request.getAttribute("address");
 		</div><!--header-->
 		
 		<div id="container" class="load" style="padding:70px 0 0;">
-			<div id="container">
+		
 		<div class="eduServ listPack" id="wrapper">
 			<ul>
 						<%
@@ -187,7 +187,7 @@ Object address=request.getAttribute("address");
 					%>
 				</ul>
 		</div>
-	</div>
+
 		</div><!--container-->
 		<div id="footer"></div><!--footer-->
 	</div><!--wrap-->

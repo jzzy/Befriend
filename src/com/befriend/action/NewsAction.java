@@ -818,6 +818,16 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		return Action.SUCCESS;
 
 	}
+	/**
+	 * web分页 查询 八大类type
+	 * 
+	 * @throws IOException
+	 */
+	public String webSbType() throws IOException {
+		request.setAttribute("tp", tp);
+		return Action.SUCCESS;
+		
+	}
 
 	/**
 	 * web分页 查询 八大类type
@@ -900,10 +910,10 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 					OpeFunction.getNowTime());
 
 			request.setAttribute("currentPage", currentPage);
-
+			request.setAttribute("nl", nl);
 			request.setAttribute("type", type);
 
-			request.setAttribute("nl", nl);
+			
 
 			request.setAttribute("tp", tp);
 

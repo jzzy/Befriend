@@ -80,7 +80,7 @@
 			%>
 						<li>
 							<div class="inner clearfix">
-								<div class="userImg"><img style="width: 50px;height: 50px;" src="<%=request.getContextPath()+educl.get(i).getUser().getImg()%>" alt="ico" /></div>
+								<div class="userImg"><img  src="<%=request.getContextPath()+educl.get(i).getUser().getImg()%>" alt="ico" /></div>
 								
 								<div class="message">
 									<p class="userId"><%=educl.get(i).getUser().getNickname() %>

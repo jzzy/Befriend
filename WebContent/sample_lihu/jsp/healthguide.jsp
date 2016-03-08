@@ -3,22 +3,7 @@
     <%@page import="java.util.*"%>
     <%@page import="com.befriend.util.*"%>
 <%@page import="com.befriend.entity.*"%>
-<%
 
-
-//获取总的页数
-int a=(Integer)request.getAttribute("a");
-//获取第几页
-int currentPage=(Integer)request.getAttribute("currentPage");
-//获取新闻分类
-String type=(String)request.getAttribute("type");
-//获取新闻分类代号
-int tp=(Integer)request.getAttribute("tp");
-//获取新闻
-List<News> nl=(List)request.getAttribute("nl");
-
-
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -31,121 +16,101 @@ List<News> nl=(List)request.getAttribute("nl");
 <link rel="stylesheet" href="sample_lihu/css/pullToRefresh.css"/>
 </head>
 <body>
+	 <%
+
+		//获取新闻分类
+		int type=(Integer)request.getAttribute("tp");
+		
+
+	 System.out.println("type"+type);
+	 
+		
+   String text=null;
+   String pth=null;
+   String img="";
+  
+   
+   if(type==1){
+	   System.out.println("type1"+type);
+		 System.out.println("pth1"+pth);
+	   pth="/webNewtype?tp=1";
+	   img="9.gif";
+	   text="";
+   }
+   if(type==5){
+	   img="10.gif";
+	   pth="/webNewtype?tp=5";
+	   text="如何发现孩子的兴趣爱好及特长？在这里会给你答案，留心观察孩子的才能，帮助众多家长选择孩子的最佳成才之路。";
+   }
+   if(type==2){
+	   img="5.gif";
+	   pth="/webNewtype?tp=2";
+	   text="教子有方，如何正确的教育孩子？在这里教育专家专门为年轻的家长做了最实用、最科学的教子经验总结。";
+   }
+   if(type==3){
+	   img="2.gif";
+	   pth="/webNewtype?tp=3";
+	   text="重视家庭教育，关注身心健康，陪伴孩子快乐成长，正确赞赏和激励促使孩子进步，分享育孩子成长相关的宝贵经验。";
+   }
+   if(type==4){
+	   img="3.gif";
+	   pth="/webNewtype?tp=4";
+	   text="整理众多有关留学咨询的问题，共同分析留学方案的具体问题、就读专业等，分享国际院校海外深造的最佳捷径。";
+   }
+   if(type==6){
+	   img="6.gif";
+	   pth="/webNewtype?tp=6";
+	   text="汇集数位顶尖名人的教子启示录，分享教育经验，启发父母的正确教育观念。";
+   }
+   if(type==7){
+	   img="4.gif";
+	   pth="/webNewtype?tp=7";
+	   text="提供日常有助孩子最权威、最实用的保健知识，共同关注家庭健康的生活方式。";
+   }
+   if(type==8){
+	   img="7.gif";
+	   pth="/webNewtype?tp=8";
+	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
+   }
+   if(type==9){
+	   img="8.gif";
+	   pth="/webHottest";
+	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
+   }
+   if(type==10){ img="1.gif";
+	   pth="/webHotareaf";
+	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
+   }
+	 System.out.println("type"+type);
+	 System.out.println("pth"+pth);
+	 
+   if(pth==null){
+	   pth="logod.png";
+	   return;
+   }
+   
+   %>
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
 				<h1><a href="index.html"><img src="sample_lihu/images/logo.gif" alt="家长之友" /></a></h1>
 				<div class="relocation">
-					<a href="sample_lihu/jsp/relocation.jsp">北京&nbsp;<img src="sample_lihu/images/location_more.gif" alt="down" /></a>
+					<a href="relocation.html">北京&nbsp;<img src="sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
-					<span class="mapLink"><a href="sample_lihu/jsp/sitemap.jsp"><img src="sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
+					<span class="mapLink"><a href="sitemap.html"><img src="sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
 				</div>
+			</div>
+			<div class="mainList">
+				<h2 class="tit2"><img src="sample_lihu/images/<%=img %>" alt="今日必读" /></h2>
 			</div>
 		</div><!--header-->
-		<div id="container">
-			<div class="mainList">
-		 <%
-   String text=null;
-   String pth=null;
-  
-   
-   if(type.equals("升学指南")){
-	   pth="9.gif";
-	   text="";
-   }
-   if(type.equals("兴趣特长")){
-	   pth="10.gif";
-	   text="如何发现孩子的兴趣爱好及特长？在这里会给你答案，留心观察孩子的才能，帮助众多家长选择孩子的最佳成才之路。";
-   }
-   if(type.equals("教子经验")){
-	   pth="5.gif";
-	   text="教子有方，如何正确的教育孩子？在这里教育专家专门为年轻的家长做了最实用、最科学的教子经验总结。";
-   }
-   if(type.equals("成长路上")){
-	   pth="2.gif";
-	   text="重视家庭教育，关注身心健康，陪伴孩子快乐成长，正确赞赏和激励促使孩子进步，分享育孩子成长相关的宝贵经验。";
-   }
-   if(type.equals("出国留学")){
-	   pth="3.gif";
-	   text="整理众多有关留学咨询的问题，共同分析留学方案的具体问题、就读专业等，分享国际院校海外深造的最佳捷径。";
-   }
-   if(type.equals("名人教子")){
-	   pth="6.gif";
-	   text="汇集数位顶尖名人的教子启示录，分享教育经验，启发父母的正确教育观念。";
-   }
-   if(type.equals("健康导航")){
-	   pth="4.gif";
-	   text="提供日常有助孩子最权威、最实用的保健知识，共同关注家庭健康的生活方式。";
-   }
-   if(type.equals("轻松驿站")){
-	   pth="7.gif";
-	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
-   }
-   if(type.equals("zr")){
-	   pth="8.gif";
-	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
-   }
-   if(type.equals("bd")){
-	   pth="1.gif";
-	   text="这里主要有一些好玩的奇闻趣事、人生感悟，更有幽默风趣的故事小品、家庭幽默与无忌童言。";
-   }
-   if(pth==null){
-	   pth="logod.png";
-   }
-   
-   %>
-				<h2 class="tit2"><img src="sample_lihu/images/<%=pth %>" alt=" " /></h2>
-				
-			
-				<div id="wrapper">
-					<ul>
-					 <%
-						for(int i=0;i<nl.size();i++){
-						News n=nl.get(i);
-						if(i==0){
-						%>
-						
-							<li class="first">
-							
-						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
-						<p class="big_img"><a href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
-						<p class="info">
-							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
-								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
-						</p>
-						
-					</li>
-						
-						<%
-						continue;
-						}
-						%>
-						
-						
-						
-			
-					<li>
-						<div class="infoArea">
-							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
-							<p class="info">
-								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
-								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
-							</p>
-						</div>
-						<div class="imgArea">
-							<p class="big_img"><img  src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
-						</div>
-					</li>
-					
-					<%
-							}
-					%>
-					</ul>
-				</div>
-			</div>
+		
+		<div id="container" class="load">
+			<iframe id="mainiframe" src="<%=request.getContextPath()+pth %>" frameborder="0" scrolling="no" width="100%"></iframe>
 		</div><!--container-->
-		<div id="footer"></div><!--footer-->
+		
+		
 	</div><!--wrap-->
 	
 <script src="sample_lihu/js/iscroll.js"></script>
@@ -160,13 +125,13 @@ refresher.init({
 function Refresh() {																
 	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
 		var el, li, i;																		
-		el =document.querySelector("#wrapper ul");					
+		el =document.querySelector("#wrapper ul;					
 		//这里写你的刷新代码				
-		document.getElementById("wrapper").querySelector(".pullDownIcon").style.display="none";		
-		document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='sample_lihu/css/ok.png'/>刷新成功";																					 
+		document.getElementById("wrapper.querySelector(".pullDownIcon.style.display="none";		
+		document.getElementById("wrapper.querySelector(".pullDownLabel.innerHTML="<img src='sample_lihu/css/ok.png'/>刷新成功";																					 
 		setTimeout(function () {
 			wrapper.refresh();
-			document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								
+			document.getElementById("wrapper.querySelector(".pullDownLabel.innerHTML="";								
 			},1000);//模拟qq下拉刷新显示成功效果
 		/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
 	}, 1000);
@@ -174,7 +139,7 @@ function Refresh() {
 function Load() {
 	setTimeout(function () {// <-- Simulate network congestion, remove setTimeout from production!
 		var el, li, i;
-		el =document.querySelector("#wrapper ul");
+		el =document.querySelector("#wrapper ul;
 		for (i=0; i<10; i++) {
 			li = document.createElement('li');
 			li.innerHTML='<div class="infoArea"><p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="newsdetail.html">一张班主任给家长的试卷，震撼心灵！</a></p><p class="info"><span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span><span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;120</span></p></div><div class="imgArea"><p class="big_img"><a href="newsdetail.html"><img src="slistBanner.jpg" alt="mediumImg" /></a></p></div>';
