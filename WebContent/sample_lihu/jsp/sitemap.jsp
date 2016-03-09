@@ -22,7 +22,7 @@
 					<a href="<%=request.getContextPath() %>/sample_lihu/jsp/relocation.jsp">北京&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
-					<span class="mapLink"><a href="<%=request.getContextPath() %>/sample_lihu/jsp/sitemap.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
+					<span class="mapLink"><a href="<%=request.getContextPath() %>/sample_lihu/readingindex.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
 				</div>
 			</div>
 		</div><!--header-->
@@ -53,7 +53,7 @@
 			<div class="servNav">
 				<h2 class="tit2"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnavi_tit.gif" alt="服务导航" /></h2>
 				<ul class="clearfix">
-					<li><a href="<%=request.getContextPath() %>/sample_lihu/book_product.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav1.gif" alt="读书会" /></a></li>
+					<li><a href="<%=request.getContextPath() %>/sample_lihu/readingindex.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav1.gif" alt="读书会" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/getEduWeb"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav2.gif" alt="教辅机构" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/book_category.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav3.gif" alt="教育部推荐用书" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/selectwxHouseallzh"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav4.gif" alt="搜学区房" /></a></li>

@@ -169,8 +169,10 @@
 		
 			<!-- 按类型查看论坛-->
 		<action name="webForumApptype" class="forumAction" method="webForumApptype">
-		<!-- <result name="success">/SimulationApp/exchange.jsp</result> -->
-		<result name="success">/sample_lihu/jsp/forum.jsp</result>
+		<!-- <result name="success">/SimulationApp/exchange.jsp</result> 
+		
+			<result name="success">/sample_lihu/jsp/forum_iframe.jsp</result>-->
+			<result name="success">/sample_lihu/jsp/forum.jsp</result>
 		</action>
 		
 		<!-- 通过id查看论坛-->

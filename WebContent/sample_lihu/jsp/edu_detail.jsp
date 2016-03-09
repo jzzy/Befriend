@@ -20,7 +20,7 @@
 			<div class="topArea clearfix">
 				<h1>机构详情</h1>
 				<div class="prev">
-					<a href="#" onclick="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
+					<a href="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 				<div class="topTool">
 					<a href="#" class="share"><img src="sample_lihu/images/ico17.gif" alt="分享" /></a>

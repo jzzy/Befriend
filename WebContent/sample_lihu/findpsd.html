@@ -6,6 +6,7 @@
 <title></title>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/codetimeset.js"></script>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -22,16 +23,16 @@
 			<div class="login">
 				<div class="logId clearfix">
 					<div class="leftArea">手机号</div>
-					<div class="rightArea"><input type="text" name="entryTel" id="entryTel" value="请输入手机号" /><div class="sentCode"><a href="#">发送验证码</a></div></div>
+					<div class="rightArea"><input type="text" name="entryTel" id="entryTel" value="请输入手机号" /><div class="sentCode"><input id="btnSendCode" type="button" value="发送验证码" onClick="sendMessage()" /></div></div>
 				</div>
 				<div class="logPsd clearfix">
-					<div class="leftArea">密码</div>
-					<div class="rightArea"><input type="text" name="entryCode" id="entryCode" value="请输入验证码" /><div id="showPsd" class="clearfix"><div class="inner clearfix"><span>change</span></div></div></div>
+					<div class="leftArea">验证码</div>
+					<div class="rightArea"><input type="text" name="entryCode" id="entryCode" value="请输出验证码" /><div id="showPsd" class="clearfix"><div class="inner clearfix"><span>change</span></div></div></div>
 				</div>
 			</div>
 		</div><!--container-->
 		<div id="footer">
-			<a href="#" class="fbButton">完成</a>
+			<a href="modifypsd.html" class="fbButton">完成</a>
 		</div><!--footer-->
 	</div><!--wrap-->
 
@@ -55,7 +56,7 @@
 		
 		entryCode.focusin(function(){
 		  // alert(a);
-		  if($(this).val() !== "请输入验证码"){
+		  if($(this).val() !== "请输出验证码"){
 			return false;
 		  }else{
 			$(this).val("");
@@ -65,12 +66,12 @@
 		entryCode.focusout(function(){
 		  if($(this).val() == ""){
 			entryCode.attr("type","text")
-			$(this).val("请输入验证码");
+			$(this).val("请输出验证码");
 			$("#showPsd .inner span").removeClass("changeOn");
 		  }
 		});
 		$("#showPsd .inner").click(function(){
-			if(entryCode.val() !== "请输入验证码"){
+			if(entryCode.val() !== "请输出验证码"){
 				if(entryCode.attr("type") == "password"){
 					entryCode.attr("type","text");
 					$("#showPsd .inner span").addClass("changeOn");

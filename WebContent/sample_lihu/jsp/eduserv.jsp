@@ -44,7 +44,7 @@ Object address=request.getAttribute("address");
 			<div class="topArea clearfix">
 				<h1>教辅机构</h1>
 				<div class="prev">
-					<a href="#" onclick="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
+					<a href="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 			<div class="topTool">
 					<a href="<%=request.getContextPath() %>/sample_lihu/jsp/edu_search.jsp"><img src="sample_lihu/images/ico31.png" alt="搜索" /></a>

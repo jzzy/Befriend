@@ -25,7 +25,7 @@
 					</div>
 				</div>
 				<div class="prev">
-					<a href="#" onclick="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
+					<a href="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 			</div>
 		</div><!--header-->

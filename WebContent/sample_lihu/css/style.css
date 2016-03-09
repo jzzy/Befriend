@@ -821,7 +821,7 @@ border-radius:10px;
 #container .login .info a {color:#999;}
 
 #container .login .logId .sentCode {display:inline-block;width:40%;font-size:12px;margin:5px 0 0;text-align:right;}
-#container .login .logId .sentCode a {display:inline-block;padding:0 10px;margin:0 10px 0 0;font-size:12px;border:1px solid #999999;height:22px;line-height:22px;text-align:center;color:#999;
+#container .login .logId .sentCode input {display:inline-block;margin:0 10px 0 0;font-size:12px;height:24px;line-height:14px;border:1px solid #999999;text-align:center;color:#999;width:84px;
 -moz-border-radius: 10px;      /* Gecko browsers */
 -webkit-border-radius: 10px;   /* Webkit browsers */
 border-radius:10px;
@@ -838,10 +838,13 @@ border-radius:10px;
 #container .modifyInfo li.userIco .leftArea {line-height:50px;}
 #container .modifyInfo li.userIco .rightArea img {width:50px;height:50px;}
 #container .modifyInfo li .rightArea input{text-align:right;border:none;width:100%;}
-#container .modifyInfo li a {color:#000;display:block;padding:0 20px 0 0;background:url("../images/ico47.png") no-repeat center right;}
+#container .modifyInfo li a {color:#000;display:block;padding:0 20px 0 0;background:url("../images/ico47.png") no-repeat center right;background-size:7px 14px;}
 #container .modifyInfo .info {padding:10px;text-align:right;}
 #container .modifyInfo #modify_ico input{display:none;}
-
+#container .modifyInfo .province,
+#container .modifyInfo .city {line-height:24px;}
+#container .modifyInfo .province select,
+#container .modifyInfo .city select {width: 135px;text-align:center;} 
 
 #container .promotion h2 {border-bottom:1px solid #eee;} 
 #container .promotion ul {font-size:0;}
@@ -856,3 +859,20 @@ border-radius:10px;
 #container .promotion ul > li.two a {background:#a0d468;}
 #container .promotion ul > li.three a {background:#48cfae;}
 #container .promotion ul > li.four a {background:#4fc0e8;}
+
+/* readingindex.html */
+
+#container .tit2 span {float:right;}
+#container .tit2 span a{display:block;padding:0 15px 0 0;float:right;font-size:14px;line-height:20px;font-weight:normal;background:url("../images/ico49.gif") no-repeat right 4px;background-size:7px 14px;}
+#container .readBanner {padding:20px 10px;border-top:1px solid #e4e4e4;background:#eee;}
+#container .readBanner li {font-size:0;}
+#container .readBanner li.colum2 {margin:0 0 10px;}
+#container .readBanner li span {float:left;}
+#container .readBanner li span a img {width:100%;}
+#container .readBanner li.colum2 span {width:48%;margin:0 0 0 4%;}
+#container .readBanner li.colum2 span:first-child {margin:0;}
+#container .readBanner li.colum4 span {width:22%;margin:0 0 0 4%;}
+#container .readBanner li.colum4 span:first-child {margin:0;}
+#container .readEvent {padding:10px 10px 0;}
+#container .readEvent li {width:100%;margin:0 0 10px;}
+#container .readEvent li img {width:100%;}

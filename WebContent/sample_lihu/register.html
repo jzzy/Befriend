@@ -24,12 +24,12 @@
 		<div id="container">
 			<div class="login">
 				<div class="logId clearfix">
-					<div class="leftArea">账号</div>
-					<div class="rightArea"><input type="text" name="userid" id="logId" value="用户名/手机号" /></div>
+					<div class="leftArea">手机号</div>
+					<div class="rightArea"><input type="text" name="userTel" id="userTel" value="请输入手机号" /></div>
 				</div>
 				<div class="logId clearfix">
-					<div class="leftArea">验证码</div>
-					<div class="rightArea"><input type="text" name="entryCode" id="entryCode" value="请输入验证码" /><div class="sentCode"><a href="#">发送验证码</a></div></div>
+					<div class="leftArea">用户名</div>
+					<div class="rightArea"><input type="text" name="userName" id="userName" value="请输入用户名" /></div>
 				</div>
 				<div class="logPsd clearfix">
 					<div class="leftArea">密码</div>
@@ -45,41 +45,41 @@
 
 <script type="text/javascript">
 	$(function(){
-		var logId = $("#logId");
-		var entryCode = $("#entryCode");
+		var userTel = $("#userTel");
+		var userName = $("#userName");
 		var logPsd = $("#logPsd");
-		logId.focusin(function(){
-			if(logId.val() !== "用户名/手机号" ){
+		userTel.focusin(function(){
+			if(userTel.val() !== "请输入手机号" ){
 			return false;
 			}else{
 			$(this).val("");
 			}
 		}
 		);
-		logId.focusout(function(){
+		userTel.focusout(function(){
 		  if($(this).val() == ""){
-			$(this).val("用户名/手机号");
+			$(this).val("请输入手机号");
 		  }
 		});
 		
-		entryCode.focusin(function(){
+		userName.focusin(function(){
 		  // alert(a);
-		  if($(this).val() !== "请输入验证码"){
+		  if($(this).val() !== "请输入用户名"){
 			return false;
 		  }else{
 			$(this).val("");
 		  }
 		});
-		entryCode.focusout(function(){
+		userName.focusout(function(){
 		  if($(this).val() == ""){
-			entryCode.attr("type","text")
-			$(this).val("请输入验证码");
+			userName.attr("type","text")
+			$(this).val("请输入用户名");
 		  }
 		});
 		
 		logPsd.focusin(function(){
 		  // alert(a);
-		  if($(this).val() !== "请输入密码"){
+		  if($(this).val() !== "请输入6~16位字符"){
 			return false;
 		  }else{
 			$(this).val("");
@@ -89,12 +89,12 @@
 		logPsd.focusout(function(){
 		  if($(this).val() == ""){
 			logPsd.attr("type","text")
-			$(this).val("请输入密码");
+			$(this).val("请输入6~16位字符");
 			$("#showPsd .inner span").removeClass("changeOn");
 		  }
 		});
 		$("#showPsd .inner").click(function(){
-			if(logPsd.val() !== "请输入密码"){
+			if(logPsd.val() !== "请输入6~16位字符"){
 				if(logPsd.attr("type") == "password"){
 					logPsd.attr("type","text");
 					$("#showPsd .inner span").addClass("changeOn");

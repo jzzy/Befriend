@@ -34,7 +34,7 @@ News n=(News)request.getAttribute("n");
 			<div class="topArea clearfix">
 				<h1>发表评论</h1>
 				<div class="prev">
-					<a href="#" onclick="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
+					<a href="javascript:history.back(-1);"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 			</div>
 		</div><!--header-->
@@ -45,7 +45,7 @@ News n=(News)request.getAttribute("n");
 				</div>
 				<div class="btn clearfix">
 					<span class="rightArea clearfix">
-						<a href="#" onclick="javascript:history.back(-1);">取消</a>
+						<a href="javascript:history.back(-1);">取消</a>
 						<a href="#" id="a1">发表</a>
 					</span>
 				</div>

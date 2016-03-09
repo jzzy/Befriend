@@ -7,8 +7,17 @@
 	    
 	    <action name="getEduWeb" class="eduAction" method="getEduWeb">
    
-	    <!--  <result name="success"> /SimulationApp/lihu/jsp/eduserv.jsp</result>-->
-	    <result name="success">/sample_lihu/jsp/eduserv.jsp</result>
+	    <!--  <result name="success"> /SimulationApp/lihu/jsp/eduserv.jsp</result>
+	     <result name="success">/sample_lihu/jsp/eduserv_iframe.jsp</result>
+	  -->
+	     
+	        <result name="success">/sample_lihu/jsp/eduserv.jsp</result>
+	    </action>
+	    <action name="getEduWebArea" class="eduAction" method="getEduWebArea">
+   
+	    <!--  <result name="success"> /SimulationApp/lihu/jsp/eduserv.jsp</result>
+	    <result name="success">/sample_lihu/jsp/eduserv.jsp</result>-->
+	    <result name="success">/sample_lihu/jsp/eduserv2.jsp</result>
 	    </action>
 	      <action name="getEduWebAjax" class="eduAction" method="getEduWebAjax">
    
