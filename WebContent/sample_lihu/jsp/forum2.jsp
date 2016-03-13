@@ -37,7 +37,7 @@
 			</div>
 		</div><!--header-->
 		<div id="container" class="load">
-			<iframe id="mainiframe" src="<%=request.getContextPath() %>/sample_lihu/forum_iframe.html" frameborder="0" scrolling="no" width="100%"></iframe>
+			<iframe id="mainiframe" src="<%=request.getContextPath() %>/webForumApptype" frameborder="0" scrolling="no" width="100%"></iframe>
 		</div><!--container-->
 		<div id="footer">
 		</div><!--footer-->

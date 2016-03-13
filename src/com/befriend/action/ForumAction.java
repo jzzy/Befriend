@@ -764,7 +764,100 @@ public class ForumAction {
 		return Action.SUCCESS;
 
 	}
+	/**
+	 * web 根据 类型 查询论坛 论坛
+	 * 
+	 * @throws IOException
+	 */
+	public void webForumApptypeToJson() throws IOException {
 
+		System.out.println(" web用户按类型 查看全国论坛");
+		System.out.println();
+		User user = (User) session.getAttribute("u");
+		
+//		if (user == null) {
+//			 ((HttpServletResponse) util.response())
+//			  .sendRedirect(request.getContextPath()+
+//			  "/SimulationApp/login.html");
+//			return null;
+//		}
+//		if (model <= 0) {
+//			System.out.println("请重新登入!");
+//			util.Out().print("model <= 0");
+//			
+//			
+//			 
+//			return null;
+//		}
+		fones=forumdao.getForumOneALL234();
+		cpe=fones.size();
+//		area=area==null?"北京":area;
+//		if(model==5){
+//			cpe =forumdao.getForumOneareaALL(area, model).size();
+//		}else{
+//			
+//			cpe = forumdao.gettypeForumOneALL(model).size();
+//		}
+		System.out.println("类型type是 ：" + model+"有" + cpe + "个论坛"+area);
+
+		if (pageSize <= 0) {
+			pageSize = 10;
+		}
+
+		if (cpe % pageSize == 0) {
+			cpe = cpe / pageSize;
+		} else {
+			cpe = cpe / pageSize + 1;
+		}
+		if (currentPage <= 0) {
+			currentPage = 1;
+		}
+		if (currentPage >= cpe) {
+			currentPage = cpe;
+		}
+		System.out.println("currentPage" + currentPage);
+		fones=forumdao.getForumOneALL234(pageSize, currentPage);
+//		if(model==5){
+//		fones = forumdao.getForumOneareaALL(pageSize, currentPage, area, model);
+//		}else{
+//			fones = forumdao.getForumOneALL(pageSize, currentPage, model);
+//		
+//		}
+		List<ForumTwo> ftwosa = new ArrayList<ForumTwo>();
+
+		for (int i = 0; i < fones.size(); i++) {
+
+			us.add(userdao.byid(fones.get(i).getUserid()));
+
+			ftwos = forumdao.getForumTwoALL(fones.get(i).getId());
+			int g = ftwos.size() - 1;
+			System.out.println("g==" + g);
+			if (g >= 0) {
+				System.out.println("添加了");
+				ftwo = ftwos.get(0);
+
+				ftwosa.add(ftwo);
+			} else {
+				System.out.println("没有添加");
+				ftwosa.add(null);
+			}
+
+		}
+		System.out.println("应该相同比例！" + fones.size() + "-" + ftwosa.size() + "-"
+				+ us.size());
+
+	
+		
+		request.setAttribute("currentPage", currentPage);
+
+		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":"
+				+ util.ToJson(ftwosa) + ",\"us\":" + util.ToJson(us)
+				+ ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage
+				+ "}";
+		util.Out().print(result);
+		
+
+	}
 	/**
 	 * web 根据 类型 查询论坛 论坛
 	 * 
@@ -859,6 +952,12 @@ public class ForumAction {
 		request.setAttribute("area", area);
 		
 		request.setAttribute("currentPage", currentPage);
+
+		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":"
+				+ util.ToJson(ftwosa) + ",\"us\":" + util.ToJson(us)
+				+ ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage
+				+ "}";
+		util.Out().print(result);
 		return Action.SUCCESS;
 
 	}
