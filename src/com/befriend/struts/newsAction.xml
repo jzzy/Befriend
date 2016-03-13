@@ -33,6 +33,7 @@
 		
 	
 		</action>
+		
 		<!-- 上传书籍 -->
 		<action name="upBook" class="newsAction" method="upBook">
 		
@@ -203,7 +204,11 @@
 		<result  name="success">/sample_lihu/jsp/commentwrite.jsp</result>
 		</action>
 		
+		<!-- 分页 查询八大类新闻 -->
+		<action name="webNewtypeToJson" class="newsAction" method="webNewtypeToJson">
 		
+	
+		</action>
 			<!--分页 查询八大类新闻-->
 		<action name="webNewtype" class="newsAction" method="webNewtype">
 		<!--  <result name="success">/SimulationApp/famous_person_badalei.jsp</result>-->
@@ -225,7 +230,12 @@
 		<!--<result name="success">/SimulationApp/famous_person_zuire.jsp</result>-->
 			<result name="success">/sample_lihu/jsp/healthguide_iframe.jsp</result>
 		</action>
-		
+		<!--分页 查询全国最热-->
+		<action name="webHottestToJson" class="newsAction" method="webHottestToJson">
+	</action>
+			<!--分页 查询本地新闻-->
+		<action name="webHotareafToJson" class="newsAction" method="webHotareafToJson">
+			</action>
 		<!--分页 查询本地新闻-->
 		<action name="webHotareaf" class="newsAction" method="webHotareaf">
 		<!--  <result name="success">/SimulationApp/famous_person_bendi.jsp</result>-->

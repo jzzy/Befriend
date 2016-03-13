@@ -58,8 +58,8 @@ if(fone==null||us==null){
 								<span>2016-01-15 09:54</span>
 							</p>
 						</div>
-						<div class="title"><a href="forumreview.html" target="_parent"><%=fone.get(i).getTitle() %></a></div>
-						<div class="detail"><a href="forumreview.html" target="_parent"><%=fone.get(i).getContent() %></a></div>
+						<div class="title"><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent"><%=fone.get(i).getTitle() %></a></div>
+						<div class="detail"><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent"><%=fone.get(i).getContent() %></a></div>
 						<div class="imgList clearfix">
 							<p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
 							<p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
@@ -82,7 +82,7 @@ if(fone==null||us==null){
 	<div id=divc style="display: none;">2</div>
 <script src="<%=request.getContextPath() %>/sample_lihu/js/iscroll.js"></script>
 <script src="<%=request.getContextPath() %>/sample_lihu/js/pullToRefresh.js"></script>
-<script>
+<script type="text/javascript">
 refresher.init({
 	id:"wrapper",//<------------------------------------------------------------------------------------
 	pullDownAction:Refresh,                                                            
@@ -121,7 +121,7 @@ function Load() {
 						    //alert(arr[i].title);
 
 								li = document.createElement('li');
-								li.innerHTML='<div class="user clearfix"><p class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sample" /></p><p class="rightArea"><span>'+us[i].nickname+'</span><span>2016-01-15 09:54</span></p></div><div class="title"><a href="forumreview.html" target="_parent">'+arr[i].title+'</a></div><div class="detail"><a href="forumreview.html" target="_parent">'+arr[i].content+'</a></div><div class="imgList clearfix"><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p></div><div class="info"><span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span><span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;120</span></div>';
+								li.innerHTML='<div class="user clearfix"><p class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sample" /></p><p class="rightArea"><span>'+us[i].nickname+'</span><span>2016-01-15 09:54</span></p></div><div class="title"><a href=<%=request.getContextPath() %>/webForumLook?id='+arr[i].id+' target="_parent">'+arr[i].title+'</a></div><div class="detail"><a href=<%=request.getContextPath() %>/webForumLook?id='+arr[i].id+' target="_parent">'+arr[i].content+'</a></div><div class="imgList clearfix"><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p></div><div class="info"><span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span><span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;120</span></div>';
 								el.appendChild(li, el.childNodes[0]);
 
 						}

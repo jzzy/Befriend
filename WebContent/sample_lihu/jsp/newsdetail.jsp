@@ -18,7 +18,7 @@ if(n==null)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <script type="text/javascript" src="sample_lihu/js/jquery-1.10.2.min.js"></script>
@@ -129,7 +129,7 @@ if(n==null)
 				</div>
 				<div class="rightArea">
 					<a href="webCsave?newsid=<%=n.getId()%>"><img src="sample_lihu/images/favor_ico_red.gif" alt="红心" /></a>
-					<a href="#" class="share"><img src="sample_lihu/images/share_ico.gif" alt="分享" /></a>
+					<a  class="share"><img src="sample_lihu/images/share_ico.gif" alt="分享" /></a>
 				</div>
 			</div>
 		</div><!--footer-->

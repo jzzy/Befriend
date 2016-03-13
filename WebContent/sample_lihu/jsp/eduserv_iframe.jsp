@@ -26,8 +26,8 @@
 				
 			%>
 					<li>
-					<a href="getWebCommments?merchantId=<%=lEduServices.get(i).getMerchantId()%>">
-							<div class="imgArea"><img src="sample_lihu/images/xw_15.png" alt="" /></div>
+					<a href="<%=request.getContextPath() %>/getWebCommments?merchantId=<%=lEduServices.get(i).getMerchantId()%>" target="_parent" >
+							<div class="imgArea"><img src="<%="http://182.92.100.235/"+lEduServices.get(i).getPicture() %>" alt="" /></div>
 							<div class="infoArea">
 								<h3><%=lEduServices.get(i).getName() %></h3>
 								<p class="rate clearfix">
@@ -75,6 +75,7 @@
 			</ul>
 		</div>
 	</div>
+	<div id="divc" style="display: none;">2</div>
 <script src="sample_lihu/js/iscroll.js"></script>
 <script src="sample_lihu/js/pullToRefresh.js"></script>
 <script>
@@ -101,13 +102,35 @@ function Load() {
 	setTimeout(function () {// <-- Simulate network congestion, remove setTimeout from production!
 		var el, li, i;
 		el =document.querySelector("#wrapper ul");
-		for (i=0; i<10; i++) {
-			li = document.createElement('li');
-			li.innerHTML='<a href="edu_detail.html" target="_parent"><div class="imgArea"><img src="sample_lihu/images/xw_15.png" alt="" /></div><div class="infoArea"><h3>尚东酒吧</h3><p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix"><strong>海淀区</strong><span>职业技术</span><div class="distance">8000m</div></div></div></a>';
-			el.appendChild(li, el.childNodes[0]);
-		}
-		wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
-	},2000);	
+		$.ajax({
+			url:"/Befriend/getEduWebToJson?currentPage="+$("#divc").html(),
+			 dataType: "json", 
+					async:false,
+					success: function (data) {     
+						var val = data["edl"];//获取json中的 key
+					//	var vus = data["us"];
+					//alert(val[0].id);
+					
+						for (i=0; i<val.length; i++) {
+							
+							li = document.createElement('li');
+							li.innerHTML='<a href="<%=request.getContextPath()+"/" %>getWebCommments?merchantId='+val[i].merchantId+'" target="_parent"><div class="imgArea"><img  src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3><p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix"><strong>海淀区</strong><span>职业技术</span><div class="distance">8000m</div></div></div></a>';
+							el.appendChild(li, el.childNodes[0]);
+						}
+						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+					
+						$("#divc").html(parseInt($("#divc").html())+1);
+					
+					
+						},
+					
+		})
+		
+		
+		
+		
+		
+	});	
 }
 </script>
 </body>

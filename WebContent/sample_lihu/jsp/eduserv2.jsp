@@ -41,11 +41,11 @@
 									<%
 					if(lar.size()==0){
 					%>
-					<li><a href="getEduWeb?city=all"><%=session.getAttribute("province") %></a></li>
+					<li><a href="getEduWebArea?city=all"><%=session.getAttribute("province") %></a></li>
 					<%
 					}else{
 					%>
-					<li><a href="getEduWeb?county=all"><%=session.getAttribute("province") %></a></li>
+					<li><a href="getEduWebArea?county=all"><%=session.getAttribute("province") %></a></li>
 					<%
 					}
 					%>
@@ -54,7 +54,7 @@
 							
 						
 						%>
-						<li><a href="getEduWeb?county=<%=lar.get(i).getArea().substring(0, lar.get(i).getArea().length()-1) %>&province=<%=session.getAttribute("province")==null||session.getAttribute("province").equals("null")?"北京":session.getAttribute("province")%>"><%=lar.get(i).getArea() %></a></li>
+						<li><a href="getEduWebArea?county=<%=lar.get(i).getArea().substring(0, lar.get(i).getArea().length()-1) %>&province=<%=session.getAttribute("province")==null||session.getAttribute("province").equals("null")?"北京":session.getAttribute("province")%>"><%=lar.get(i).getArea() %></a></li>
 					
 						<%
 			
@@ -67,7 +67,7 @@
 							
 						
 						%>
-						<li><a href="getEduWeb?city=<%=lcit.get(i).getCity().substring(0, lcit.get(i).getCity().length()-1) %>&province=<%=session.getAttribute("province")==null||session.getAttribute("province").equals("null")?"北京":session.getAttribute("province")%>"><%=lcit.get(i).getCity() %></a></li>
+						<li><a href="getEduWebArea?city=<%=lcit.get(i).getCity().substring(0, lcit.get(i).getCity().length()-1) %>&province=<%=session.getAttribute("province")==null||session.getAttribute("province").equals("null")?"北京":session.getAttribute("province")%>"><%=lcit.get(i).getCity() %></a></li>
 					
 						<%
 						}
@@ -77,26 +77,26 @@
 				<li class="edutrain">
 					<a class="fNiv">教育培训&nbsp;<img src="sample_lihu/images/arrow_off.png" width="20" height="10" alt="" /></a>
 					<ul>
-						<li><a href="getEduWeb?classSecond=all">不限</a></li>
-						<li><a href="getEduWeb?classSecond=外语">外语</a></li>
-						<li><a href="getEduWeb?classSecond=音乐">音乐</a></li>
-						<li><a href="getEduWeb?classSecond=幼儿教育">幼儿教育</a></li>
-						<li><a href="getEduWeb?classSecond=升学指导">升学指导</a></li>
-						<li><a href="getEduWeb?classSecond=教育院校">教育院校</a></li>
-						<li><a href="getEduWeb?classSecond=舞蹈">舞蹈</a></li>
-						<li><a href="getEduWeb?classSecond=学校">学校</a></li>
-						<li><a href="getEduWeb?classSecond=驾校">驾校</a></li>
-						<li><a href="getEduWeb?classSecond=兴趣生活">兴趣生活</a></li>
+						<li><a href="getEduWebArea?classSecond=all">不限</a></li>
+						<li><a href="getEduWebArea?classSecond=外语">外语</a></li>
+						<li><a href="getEduWebArea?classSecond=音乐">音乐</a></li>
+						<li><a href="getEduWebArea?classSecond=幼儿教育">幼儿教育</a></li>
+						<li><a href="getEduWebArea?classSecond=升学指导">升学指导</a></li>
+						<li><a href="getEduWebArea?classSecond=教育院校">教育院校</a></li>
+						<li><a href="getEduWebArea?classSecond=舞蹈">舞蹈</a></li>
+						<li><a href="getEduWebArea?classSecond=学校">学校</a></li>
+						<li><a href="getEduWebArea?classSecond=驾校">驾校</a></li>
+						<li><a href="getEduWebArea?classSecond=兴趣生活">兴趣生活</a></li>
 					</ul>
 				</li>
 				<li class="sort fNiv">
 					<a  class="fNiv">智能排序&nbsp;<img src="sample_lihu/images/arrow_off.png" width="20" height="10" alt="" /></a>
 					<ul>
-					<li><a href="getEduWeb?sortType=1">离我最近的商户</a></li>
-						<li><a href="getEduWeb?sortType=2">人气最高的商户</a></li>
-						<li><a href="getEduWeb?sortType=5">评价最好的商户</a></li>
-						<li><a href="getEduWeb?sortType=3">人均最低的商户</a></li>
-						<li><a href="getEduWeb?sortType=4">人均最高的商户</a></li>
+					<li><a href="getEduWebArea?sortType=1">离我最近的商户</a></li>
+						<li><a href="getEduWebArea?sortType=2">人气最高的商户</a></li>
+						<li><a href="getEduWebArea?sortType=5">评价最好的商户</a></li>
+						<li><a href="getEduWebArea?sortType=3">人均最低的商户</a></li>
+						<li><a href="getEduWebArea?sortType=4">人均最高的商户</a></li>
 					</ul>
 				</li>
 			</ul>

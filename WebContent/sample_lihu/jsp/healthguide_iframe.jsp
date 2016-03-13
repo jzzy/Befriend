@@ -9,9 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<script type="text/javascript" src="sample_lihu/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="sample_lihu/js/common.js"></script>
-<link href="sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
+<link href="<%=request.getContextPath() %>/sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="sample_lihu/css/pullToRefresh.css"/>
 </head>
 <body>
@@ -31,7 +31,14 @@
 		int tp=(Integer)request.getAttribute("tp");
 		//获取新闻
 		List<News> nl=(List)request.getAttribute("nl");
-
+		String url="";
+		if(request.getAttribute("path")==null){
+		
+		url="/Befriend/webNewtypeToJson?tp="+tp;	
+		}else{
+			 url="/Befriend/"+request.getAttribute("path")+"?tp="+tp;	
+			}
+		
 
 		
    String text=null;
@@ -114,7 +121,8 @@
 			
 					<li>
 						<div class="infoArea">
-							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" />
+							<a style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -132,10 +140,10 @@
 				</div>
 		</div>
 	</div>
-	
-<script src="sample_lihu/js/iscroll.js"></script>
-<script src="sample_lihu/js/pullToRefresh.js"></script>
-<script>
+<div id=divc style="display: none;">2</div>
+<script src="<%=request.getContextPath() %>/sample_lihu/js/iscroll.js"></script>
+<script src="<%=request.getContextPath() %>/sample_lihu/js/pullToRefresh.js"></script>
+<script type="text/javascript">
 refresher.init({
 	id:"wrapper",//<------------------------------------------------------------------------------------┐
 	pullDownAction:Refresh,                                                            
@@ -157,15 +165,39 @@ function Refresh() {
 }
 function Load() {
 	setTimeout(function () {// <-- Simulate network congestion, remove setTimeout from production!
-		var el, li, i;
-		el =document.querySelector("#wrapper ul");
-		for (i=0; i<10; i++) {
-			li = document.createElement('li');
-			li.innerHTML='<div class="infoArea"><p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="newsdetail.html" target="_parent">一张班主任给家长的试卷，震撼心灵！</a></p><p class="info"><span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span><span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;120</span></p></div><div class="imgArea"><p class="big_img"><a href="newsdetail.html" target="_parent"><img src="sample_lihu/images/listBanner.jpg" alt="mediumImg" /></a></p></div>';
-			el.appendChild(li, el.childNodes[0]);
-		}
-		wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
-	},2000);	
+	//	alert(1);
+		$.ajax({
+					dataType: "json",
+				
+					url:"<%=url%>"+"&currentPage="+$("#divc").html(),		
+								
+					async:false,
+					success: function (data) {     
+						var val = data["nl"];//获取json中的 key
+					
+						var el, li, i;
+						el =document.querySelector("#wrapper ul");
+						for (i=0; i<val.length; i++) {
+							li = document.createElement('li');
+							li.innerHTML='<div class="infoArea"><p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href=<%=request.getContextPath()%>/webNewsId?id='+val[i].id+' target="_parent">'+val[i].title+'</a></p><p class="info"><span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span><span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;120</span></p></div><div class="imgArea"><p class="big_img"><a href="newsdetail.html" target="_parent"><img src="http://182.92.100.235/Befriend/'+val[i].img+'" alt="mediumImg" /></a></p></div>';
+							el.appendChild(li, el.childNodes[0]);
+						}
+						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+						
+					
+					
+						}
+		
+		
+					
+					
+		})
+		
+		
+		
+		
+
+	});	
 }
 </script>
 </body>

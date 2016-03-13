@@ -18,19 +18,19 @@
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
-				<h1><a href="index.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/logo.gif" alt="家长之友" /></a></h1>
+				<h1><a href="<%=request.getContextPath() %>/webNewsA10"><img src="<%=request.getContextPath() %>/sample_lihu/images/logo.gif" alt="家长之友" /></a></h1>
 				<div class="relocation">
-					<a href="relocation.html">北京&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
+					<a href="<%=request.getContextPath() %>/sample_lihu/jsp/relocation.jsp">北京&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
-					<span><a href="post.html">发表</a></span>
+					<span><a href="<%=request.getContextPath() %>/sample_lihu/post4.html">发表</a></span>
 				</div>
 			</div>
 			<ul class="topMenu clearfix">
-				<li><a href="index.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/hottoday_ico.gif" alt="fire" />&nbsp;今日必读</a></li>
-				<li class="on"><a href="forum.html">社区互动</a></li>
-				<li><a href="servicelist.html">贴心服务</a></li>
-				<li><a href="mypage.html">我的信息</a></li>
+				<li><a href="<%=request.getContextPath() %>/webNewsA10"><img src="<%=request.getContextPath() %>/sample_lihu/images/hottoday_ico.gif" alt="fire" />&nbsp;今日必读</a></li>
+				<li class="on"><a href="<%=request.getContextPath() %>/sample_lihu/jsp/forum2.jsp">社区互动</a></li>
+				<li><a href="<%=request.getContextPath() %>/webGetapp">贴心服务</a></li>
+				<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/mypage.jsp">我的信息</a></li>
 			</ul>
 			<div class="forum">
 				<h2 class="tit2"><img src="<%=request.getContextPath() %>/sample_lihu/images/forum_tit.gif" alt="全国论坛讨论社区" /></h2>

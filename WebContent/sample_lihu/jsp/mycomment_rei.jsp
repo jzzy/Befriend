@@ -58,7 +58,7 @@
 		%>
 						<li id="<%=rl.get(i).getId()%>">
 							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" />
-							</label><input type="checkbox" id="a1" name="check" value="<%=rl.get(i).getId()%>" />
+							</label><input type="checkbox" name="check" value="<%=rl.get(i).getId()%>" />
 							</div>
 							<dl>
 								<dt class="inner clearfix">
@@ -104,8 +104,9 @@
 		List<User> us=(List)request.getAttribute("us")==null?new ArrayList<User>():(List)request.getAttribute("us"); 
 		for(int i=0;i<fones.size();i++){
 		%>
-						<li>
-							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" /></label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" /></div>
+						<li id="<%=fow.get(i).getId()%>" >
+							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" /></label>
+							<input type="checkbox"  name="check" value="<%=fow.get(i).getId()%>"  /></div>
 							<dl>
 								<dt class="inner clearfix">
 									<div class="infoArea">
@@ -153,10 +154,10 @@
 					for(int i=0;i<educl.size();i++){
 					%>
 					
-						<li>
+						<li id="<%=educl.get(i).getId()%>">
 							
 							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" />
-							</label><input type="checkbox" id="a1" name="check" value="unchecked" checked="checked" />
+							</label><input type="checkbox"  name="check" value="<%=educl.get(i).getId()%>"  />
 							</div>
 							<dl>
 								<dt class="inner clearfix">
@@ -369,6 +370,8 @@ $("#favorEdit").click(function(){
 });
 $("#checkAll").click(function(){
 	var favorCheck =$(".mainList input").attr("checked");
+	
+	
 	if(favorCheck){
 		$(".mainList input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
 
@@ -376,6 +379,7 @@ $("#checkAll").click(function(){
 		$(".mainList input").attr({"checked" : true}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico29.png");
 		
 	}
+	
 });
 
 </script>

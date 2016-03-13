@@ -4,14 +4,15 @@
 <struts>
 	<package name="edu" extends="struts-default" >
 	    <action name="getEdu" class="eduAction" method="getEdu"></action>
-	    
+	      <action name="getEduWebToJson" class="eduAction" method="getEduWebToJson"></action>
 	    <action name="getEduWeb" class="eduAction" method="getEduWeb">
    
 	    <!--  <result name="success"> /SimulationApp/lihu/jsp/eduserv.jsp</result>
-	     <result name="success">/sample_lihu/jsp/eduserv_iframe.jsp</result>
-	  -->
+	 
+	
 	     
-	        <result name="success">/sample_lihu/jsp/eduserv.jsp</result>
+	        <result name="success">/sample_lihu/jsp/eduserv.jsp</result>  -->
+	            <result name="success">/sample_lihu/jsp/eduserv_iframe.jsp</result>
 	    </action>
 	    <action name="getEduWebArea" class="eduAction" method="getEduWebArea">
    

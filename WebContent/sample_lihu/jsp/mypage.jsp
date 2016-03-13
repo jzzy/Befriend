@@ -37,7 +37,7 @@ if(false){
 			</div>
 			<ul class="topMenu clearfix">
 				<li><a href="<%=request.getContextPath() %>/webNewsA10"><img src="<%=request.getContextPath() %>/sample_lihu/images/hottoday_ico.gif" alt="fire" />&nbsp;今日必读</a></li>
-				<li><a href="<%=request.getContextPath() %>/webForumApptype">社区互动</a></li>
+				<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/forum2.jsp">社区互动</a></li>
 				<li><a href="<%=request.getContextPath() %>/webGetapp">贴心服务</a></li>
 				<li class="on"><a href="<%=request.getContextPath() %>/sample_lihu/jsp/mypage.jsp">我的信息</a></li>
 			</ul>

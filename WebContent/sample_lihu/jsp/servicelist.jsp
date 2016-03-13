@@ -27,7 +27,7 @@
 			</div>
 			<ul class="topMenu clearfix">
 				<li><a href="webNewsA10"><img src="sample_lihu/images/hottoday_ico.gif" alt="fire" />&nbsp;今日必读</a></li>
-				<li><a href="webForumApptype">社区互动</a></li>
+				<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/forum2.jsp">社区互动</a></li>
 				<li class="on"><a href="webGetapp">贴心服务</a></li>
 				<li><a href="sample_lihu/jsp/mypage.jsp">我的信息</a></li>
 			</ul>
@@ -35,7 +35,7 @@
 		<div id="container">
 			<ul class="servList clearfix">
 				<li><a href="sample_lihu/readingindex.html"><img src="sample_lihu/images/servlist01.gif" alt="读书会" />读书会</a></li>
-				<li><a href="getEduWeb"><img src="sample_lihu/images/servlist02.gif" alt="教辅机构" />教辅机构</a></li>
+				<li><a href="getEduWebArea"><img src="sample_lihu/images/servlist02.gif" alt="教辅机构" />教辅机构</a></li>
 				<li><a href="sample_lihu/jsp/book_category.jsp"><img src="sample_lihu/images/servlist03.gif" alt="教育部推荐用书" />教育部推荐用书</a></li>
 				<li><a href="selectwxHouseallzh"><img src="sample_lihu/images/servlist04.gif" alt="搜学区房" />搜学区房</a></li>
 				<li><a href="sample_lihu/htm/post2.html"><img src="sample_lihu/images/servlist05.gif" alt="家长来稿" />家长来稿</a></li>
