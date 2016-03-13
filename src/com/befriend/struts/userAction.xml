@@ -196,8 +196,9 @@
 		
 		<!-- 注册-->
 		<action name="webRegistration" class="userAction" method="webRegistration">
-			<!-- 注册成功-->
-			<result name="success">/SimulationApp/perfect_information.html</result>
+			<!-- 注册成功
+			<result name="success">/SimulationApp/perfect_information.html</result>-->
+			<result name="success">/sample_lihu/htm/login.html</result>
 			<!-- 注册失败-->
 			<result name="error">/SimulationApp/RegistrationFailed.jsp</result>	
 		</action>

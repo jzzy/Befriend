@@ -135,7 +135,7 @@ public class EduServicesAction extends ActionSupport implements
 				System.out.println("«Î÷ÿ–¬µ«»Î!");
 				((HttpServletResponse) OpeFunction.response())
 						.sendRedirect(request.getContextPath()
-								+ "/SimulationApp/login.html");
+								+ "/sample_lihu/htm/login.html");
 
 				return;
 			}

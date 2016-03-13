@@ -98,7 +98,7 @@ public class EduCommentAction implements ServletRequestAware {
 		if (u == null) {
 
 			((HttpServletResponse) OpeFunction.response())
-					.sendRedirect(request.getContextPath() + "/SimulationApp/login.html");
+					.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 			return null;
 		}
 
@@ -491,7 +491,7 @@ public class EduCommentAction implements ServletRequestAware {
 			} else {
 				System.out.println(false);
 				text = "Œ¥µ«»Î";
-				loginPage = "/Befriend/SimulationApp/login.html";
+				loginPage = "/Befriend/sample_lihu/htm/login.html";
 			}
 		} else {
 			System.out.println(false);

@@ -432,7 +432,7 @@ public class ForumAction {
 
 			System.out.println("请重新登入!");
 			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/SimulationApp/login.html");
+					.getContextPath() + "/sample_lihu/htm/login.html");
 			return;
 		}
 
@@ -491,7 +491,7 @@ public class ForumAction {
 
 			System.out.println("请重新登入!");
 			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/SimulationApp/login.html");
+					.getContextPath() + "/sample_lihu/htm/login.html");
 			return;
 		}
 		if (OpeFunction.isEmpty(reply)) {
@@ -562,7 +562,7 @@ public class ForumAction {
 
 			System.out.println("请重新登入!");
 			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/SimulationApp/login.html");
+					.getContextPath() + "/sample_lihu/htm/login.html");
 			return;
 		}
 		if (OpeFunction.isEmpty(reply)) {
@@ -629,7 +629,7 @@ public class ForumAction {
 
 				System.out.println("请重新登入!");
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/login.html");
+						.getContextPath() + "/sample_lihu/htm/login.html");
 				return null;
 			}
 
@@ -778,7 +778,7 @@ public class ForumAction {
 //		if (user == null) {
 //			 ((HttpServletResponse) util.response())
 //			  .sendRedirect(request.getContextPath()+
-//			  "/SimulationApp/login.html");
+//			  "/sample_lihu/htm/login.html");
 //			return null;
 //		}
 //		if (model <= 0) {
@@ -872,7 +872,7 @@ public class ForumAction {
 //		if (user == null) {
 //			 ((HttpServletResponse) util.response())
 //			  .sendRedirect(request.getContextPath()+
-//			  "/SimulationApp/login.html");
+//			  "/sample_lihu/htm/login.html");
 //			return null;
 //		}
 //		if (model <= 0) {

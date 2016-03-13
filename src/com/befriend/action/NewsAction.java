@@ -393,7 +393,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (u == null) {
 
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/login.html");
+						.getContextPath() + "/sample_lihu/htm/login.html");
 				return null;
 			}
 
@@ -442,7 +442,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		if (u == null) {
 
 			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/SimulationApp/login.html");
+					.getContextPath() + "/sample_lihu/htm/login.html");
 			return null;
 		}
 		userid = u.getId();
@@ -476,7 +476,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (u == null) {
 
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/login.html");
+						.getContextPath() + "/sample_lihu/htm/login.html");
 				System.out.println("你还没有登入!");
 				return;
 			}
@@ -527,7 +527,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (u == null) {
 
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/login.html");
+						.getContextPath() + "/sample_lihu/htm/login.html");
 				System.out.println("你还没登入!");
 				return;
 			}
@@ -592,7 +592,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		// if (u == null) {
 		//
 		// ((HttpServletResponse) util.response()).sendRedirect(request
-		// .getContextPath() + "/SimulationApp/login.html");
+		// .getContextPath() + "/sample_lihu/htm/login.html");
 		// System.out.println("你还没登入!");
 		//
 		// return null;
@@ -733,7 +733,7 @@ System.out.println("进入webHotareafToJson");
 		// if (u == null) {
 		//
 		// ((HttpServletResponse) util.response()).sendRedirect(request
-		// .getContextPath() + "/SimulationApp/login.html");
+		// .getContextPath() + "/sample_lihu/htm/login.html");
 		// System.out.println("你还没登入!");
 		//
 		// return null;
@@ -2500,7 +2500,7 @@ System.out.println("进入webHotareafToJson");
 
 				System.out.println("请重新登入!");
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/login.html");
+						.getContextPath() + "/sample_lihu/htm/login.html");
 
 				return;
 			}

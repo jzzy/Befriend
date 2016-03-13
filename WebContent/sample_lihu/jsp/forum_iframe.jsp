@@ -61,9 +61,27 @@ if(fone==null||us==null){
 						<div class="title"><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent"><%=fone.get(i).getTitle() %></a></div>
 						<div class="detail"><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent"><%=fone.get(i).getContent() %></a></div>
 						<div class="imgList clearfix">
-							<p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
-							<p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
-							<p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
+							<p><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent">
+						
+							<img src="	<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" />
+							
+							
+						
+							</a></p>
+							<p><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent">
+						
+							<img src="	<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" />
+							
+							
+						
+							</a></p>
+							<p><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent">
+						
+							<img src="	<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" />
+							
+							
+						
+							</a></p>
 						</div>
 						<div class="info">
 							<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span>

@@ -481,7 +481,7 @@ public class UserAction extends ActionSupport {
 		// 销毁session
 		session.removeAttribute("u");
 		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/SimulationApp/login.html");
+				.getContextPath() + "/sample_lihu/htm/login.html");
 	}
 
 	/**
@@ -496,7 +496,7 @@ public class UserAction extends ActionSupport {
 
 			System.out.println("请重新登入!");
 			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/SimulationApp/login.html");
+					.getContextPath() + "/sample_lihu/htm/login.html");
 
 			return;
 		}
@@ -512,7 +512,7 @@ public class UserAction extends ActionSupport {
 				userdao.update(pd);
 				session.removeAttribute("u");
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/login.html");
+						.getContextPath() + "/sample_lihu/htm/login.html");
 				return;
 			} else {
 				util.Out().print("没有获取到新密码!" + newpwd);
@@ -538,7 +538,7 @@ public class UserAction extends ActionSupport {
 
 				System.out.println("请重新登入!");
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/login.html");
+						.getContextPath() + "/sample_lihu/htm/login.html");
 
 				return;
 			}
@@ -558,7 +558,7 @@ public class UserAction extends ActionSupport {
 
 				System.out.println("请重新登入!");
 				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/login.html");
+						.getContextPath() + "/sample_lihu/htm/login.html");
 
 				return;
 			}
