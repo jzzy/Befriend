@@ -21,7 +21,7 @@
 			<div class="topArea clearfix">
 				<h1>我的评论</h1>
 				<div class="prev">
-					<a href="javascript:history.back(-1);"><img src="<%=request.getContextPath() %>/sample_lihu/images/prev.png" alt="后退" /></a>
+					<a href="<%=request.getContextPath() %>/sample_lihu/jsp/mypage.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 				<div class="topTool">
 					<span id="favorEdit" >编辑</span>
@@ -63,7 +63,7 @@
 							<dl>
 								<dt class="inner clearfix">
 									<div class="infoArea">
-										<p class="title"><a href="newsdetail.html"><%=nl.get(i).getTitle() %></a></p>
+										<p class="title"><a  href="webNewsId?id=<%=rl.get(i).getNewsid()%>"><%=nl.get(i).getTitle() %></a></p>
 										<p class="info">
 											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=nl.get(i).getReviews() %></span>
 											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=nl.get(i).getCollectnum() %></span>
@@ -296,7 +296,7 @@ $("#delete").click(function(){
          if($("#divmainList").is(":visible")){
         	 $.ajax({
 					type:"post",
-					//url:"RemoveCWeb.action?summary="+text
+					url:"webRemoveReviews.action?content=N&fatherId="+text
 				});
          }
        //调用论坛
@@ -304,14 +304,14 @@ $("#delete").click(function(){
  			
  			$.ajax({
 				type:"post",
-				//url:"webFolR.action?title="+text
+				url:"webRemoveReviews.action?content=F&fatherId="+text
 			});
          }
  		//调用教辅机构
  		if($("#divlistPack").is(":visible")){
  			 $.ajax({
     	  			type:"post",
-    	  			//url:"removeEduAttentionWeb.action?attentionId="+text
+    	  			url:"webRemoveReviews.action?content=E&fatherId="+text
     	  		});
          	
          }
@@ -373,10 +373,10 @@ $("#checkAll").click(function(){
 	
 	
 	if(favorCheck){
-		$(".mainList input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+	//	$(".mainList input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
 
 	}else{
-		$(".mainList input").attr({"checked" : true}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico29.png");
+	//	$(".mainList input").attr({"checked" : true}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico29.png");
 		
 	}
 	

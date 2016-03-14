@@ -26,6 +26,7 @@ if(u==null){
 <link href="<%=request.getContextPath() %>/sample_lihu/css/common.css" rel="stylesheet"/>
 </head>
 <body>
+<form action="" name="form1" method="post" enctype="multipart/form-data">
 	<div class="shadow displaynone"></div>
 	<div id="wrap">
 		<div id="header">
@@ -35,7 +36,7 @@ if(u==null){
 					<a href="#" onclick="javascript:history.back(-1);"><img src="<%=request.getContextPath() %>/sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 				<div class="topTool">
-					<span><a href="modifypsd.html">修改密码</a></span>
+					<span><a href="<%=request.getContextPath() %>/sample_lihu/htm/modifypsd.html">修改密码</a></span>
 				</div>
 			</div>
 		</div><!--header-->
@@ -44,7 +45,12 @@ if(u==null){
 				<ul>
 					<li class="userIco">
 						<div class="leftArea">头像</div>
-						<div class="rightArea" id="modify_ico"><span><label for="up_img_WU_FILE_0"><img id="imgShow_WU_FILE_0" src="<%=request.getContextPath() %>/sample_lihu/images/userico.png" alt="sample" /></label><input type="file" id="up_img_WU_FILE_0"></span></div>
+						<div class="rightArea" id="modify_ico">
+						<span><label for="up_img_WU_FILE_0">
+						<img id="imgShow_WU_FILE_0" src="<%=request.getContextPath()+u.getImg() %>" alt="sample" />
+						</label>
+						<input type="file" name="file" id="up_img_WU_FILE_0">
+						</span></div>
 					</li>
 					<li class="userId">
 						<div class="leftArea">用户名</div>
@@ -52,13 +58,13 @@ if(u==null){
 					</li>
 					<li class="userName">
 						<div class="leftArea">昵称</div>
-						<div class="rightArea"><a href="<%=request.getContextPath() %>/sample_lihu/modifyname.html"><%=u.getNickname()%></a></div>
+						<div class="rightArea"><a href="<%=request.getContextPath() %>/sample_lihu/jsp/modifyname.jsp"><%=u.getNickname()%></a></div>
 					</li>
 					<li class="province">
 						<div class="leftArea">省/市</div>
 						<div class="rightArea">
 						
-							<select  id="selProvince" name="area" onchange="provinceChange();"></select> 
+							<select  id="selProvince" name="province" onchange="provinceChange();"></select> 
 						
 							
 						</div>
@@ -66,20 +72,29 @@ if(u==null){
 					<li class="city">
 						<div class="leftArea">城市</div>
 						<div class="rightArea">
-							<select id="selCity"   name="areas"></select> 
+							<select id="selCity"   name="city"></select> 
 						</div>
 					</li>
 					<li>
 						<div class="leftArea">所在学校</div>
-						<div class="rightArea"><a href="<%=request.getContextPath() %>/sample_lihu/modifyschool.html"><%=u.getSchool() %></a></div>
+						<div class="rightArea"><a href="<%=request.getContextPath() %>/sample_lihu/jsp/modifyschool.jsp"><%=u.getSchool() %></a></div>
 					</li>
 				</ul>
 			</div>
 		</div><!--container-->
 		<div id="footer">
-			<a href="#" class="fbButton">保存</a>
+			<a id="sum" class="fbButton">保存</a>
 		</div><!--footer-->
 	</div><!--wrap-->
+	</form>
+		<script type="text/javascript" >
+$("#sum").click(function(){
+	document.form1.action="webModification";
+	document.form1.submit();
+	alert('已提交');
+	
+});
+</script>
 </body>
 </html>
 

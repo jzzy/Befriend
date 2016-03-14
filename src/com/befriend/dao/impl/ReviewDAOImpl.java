@@ -78,6 +78,22 @@ public class ReviewDAOImpl implements ReviewDAO
 		 
 		
 	}
+	@Override
+	public Review byid(int reviewid) {
+		Query query = entityManager.createQuery("select u from Review u  where"
+				+ " u.id=:id  order"
+			      + " by u.time desc");
+		
+		query.setParameter("id", reviewid);
+		
+		List<Review>  r =query.getResultList();
+		if(r.size()>0)
+			return r.get(0);
+		return null;
+		
+		 
+		
+	}
 	
 
 }

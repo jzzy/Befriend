@@ -24,4 +24,5 @@ public interface ReviewDAO {
 
     // ¸ù¾Ýid²éÑ¯
     public Review byid(int reviewid,String username);
+    public Review byid(int reviewid);
 }

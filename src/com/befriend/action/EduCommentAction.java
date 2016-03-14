@@ -51,7 +51,7 @@ public class EduCommentAction implements ServletRequestAware {
 	private ForumDAO forumdao;// 论坛dao
 	private FollectDAO foldao;// 论坛收藏dao
 	private ReviewDAO rdao;// 评论dao
-	
+
 	List<User> us = new ArrayList<User>();
 	Follect fo = new Follect();// 论坛收藏类
 	ForumOne fone = new ForumOne();// 论坛主类
@@ -61,7 +61,7 @@ public class EduCommentAction implements ServletRequestAware {
 	List<ForumOne> fones = new ArrayList<ForumOne>();// 论坛主类List
 	List<ForumTwo> ftwos = new ArrayList<ForumTwo>();// 论坛主类List
 	List<ForumThree> fehrees = new ArrayList<ForumThree>();// 论坛主类List
-	
+
 	private HttpServletResponse response;
 	private HttpServletRequest request;
 	private String merchantId;
@@ -74,8 +74,7 @@ public class EduCommentAction implements ServletRequestAware {
 	private File[] pictures;
 	private String[] picturesFileName;
 	private String[] picturesContentType;
-	private HttpSession session = ServletActionContext.getRequest()
-			.getSession();
+	private HttpSession session = ServletActionContext.getRequest().getSession();
 	private int currentPage = 1;
 	private int pageSize = 10;
 
@@ -85,6 +84,69 @@ public class EduCommentAction implements ServletRequestAware {
 	List<Attention> attl = new ArrayList<Attention>();
 	List<News> nl = new ArrayList<News>();
 	List<Review> rl = new ArrayList<Review>();
+	private int id;
+
+	public void webRemoveReviews() throws IOException {
+		try {
+
+			String[] st = fatherId.split(",");
+			for (int i = 0; i < st.length; i++) {
+				if (OpeFunction.isEmpty(st[i])) {
+					continue;
+				}
+				id = Integer.parseInt(st[i].toString());
+				switch (content) {
+				case "F":
+					ftwo = forumdao.getForumTwoid(id);
+					if (ftwo != null) {
+						forumdao.Remove(ftwo);
+						System.out.println("删除论坛评论成功");
+						// OpeFunction.Out().println(true);
+						// return;
+					} else {
+						System.out.println("删除论坛评论失败");
+					}
+
+					break;
+				case "E":
+
+					EduComment educ = eduCommentDAO.find(id);
+					if (educ != null) {
+						eduCommentDAO.delete(educ);
+						System.out.println("删除教辅机构评论成功");
+						// OpeFunction.Out().println(true);
+						// return;
+					} else {
+						System.out.println("删除教辅机构评论失败");
+					}
+
+					break;
+				case "N":
+					Review r = rdao.byid(id);
+					if (r != null) {
+						rdao.remove(r);
+						System.out.println("删除新闻评论成功");
+						// OpeFunction.Out().println(true);
+						// return;
+					} else {
+						System.out.println("删除新闻评论失败");
+					}
+
+					break;
+
+				default:
+					System.out.println("不知道删除什么");
+					break;
+				}
+			}
+			OpeFunction.Out().println(true);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			OpeFunction.Out().println(false);
+		}
+
+	}
 
 	/**
 	 * 通过username查询评论 新闻和对每个新闻的最新 评论
@@ -132,12 +194,6 @@ public class EduCommentAction implements ServletRequestAware {
 		request.setAttribute("rl", rl);
 
 		int userid = u.getId();
-		
-		
-		
-		
-		
-		
 
 		ftwos = forumdao.getFuserALL(userid);
 		List<Integer> l = new ArrayList<Integer>();
@@ -172,26 +228,22 @@ public class EduCommentAction implements ServletRequestAware {
 			us.add(uf);
 
 		}
-		
+
 		System.out.println("ftwos" + fow.size());
 		System.out.println("用户" + us.size());
 		System.out.println("论坛" + fones.size());
 		request.setAttribute("fow", fow);
 		request.setAttribute("us", us);
 		request.setAttribute("fones", fones);
-		
-		
-		
-		educl=eduCommentDAO.myComments(u, currentPage, pageSize);
-		for(int i=0;i<educl.size();i++){
+
+		educl = eduCommentDAO.myComments(u, currentPage, pageSize);
+		for (int i = 0; i < educl.size(); i++) {
 			edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(educl.get(i).getMerchantId())));
 		}
 		request.setAttribute("educl", educl);
 		request.setAttribute("edusl", edusl);
 		return Action.SUCCESS;
 	}
-	
-	
 
 	public String userLookEduASBK() throws IOException {
 		try {
@@ -208,7 +260,6 @@ public class EduCommentAction implements ServletRequestAware {
 					us.add(u1);
 					fones.add(fone);
 				} else {
-					
 
 				}
 
@@ -217,13 +268,11 @@ public class EduCommentAction implements ServletRequestAware {
 			request.setAttribute("fones", fones);
 			request.setAttribute("us", us);
 
-			attl = eduServicesDAO.byUserid(u.getId(), currentPage, pageSize,
-					Attention.COME_EduServices);
+			attl = eduServicesDAO.byUserid(u.getId(), currentPage, pageSize, Attention.COME_EduServices);
 			for (int i = 0; i < attl.size(); i++) {
-				edusl.add(eduServicesDAO.findMerchantId(attl.get(i)
-						.getObjectid()));
+				edusl.add(eduServicesDAO.findMerchantId(attl.get(i).getObjectid()));
 			}
-			
+
 			request.setAttribute("attl", attl);
 			request.setAttribute("edusl", edusl);
 
@@ -235,7 +284,7 @@ public class EduCommentAction implements ServletRequestAware {
 
 			}
 			request.setAttribute("nl", nl);
-			System.out.println(u.getId()+"新闻"+nl.size()+"收藏多少教辅"+attl.size()+" ==" + edusl.size());
+			System.out.println(u.getId() + "新闻" + nl.size() + "收藏多少教辅" + attl.size() + " ==" + edusl.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -248,8 +297,7 @@ public class EduCommentAction implements ServletRequestAware {
 			educl = eduCommentDAO.likeFind(content, currentPage, pageSize);
 			request.setAttribute("el", educl);
 			for (EduComment eduComment : educl) {
-				edusl.add(eduServicesDAO.findMerchantId(Integer
-						.parseInt(eduComment.getMerchantId())));
+				edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(eduComment.getMerchantId())));
 			}
 			request.setAttribute("edusl", edusl);
 		}
@@ -263,8 +311,7 @@ public class EduCommentAction implements ServletRequestAware {
 
 		educl = eduCommentDAO.find(currentPage, pageSize);
 		for (EduComment eduComment : educl) {
-			edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(eduComment
-					.getMerchantId())));
+			edusl.add(eduServicesDAO.findMerchantId(Integer.parseInt(eduComment.getMerchantId())));
 		}
 		request.setAttribute("edusl", edusl);
 		request.setAttribute("el", educl.size() > 0 ? educl : null);
@@ -280,8 +327,8 @@ public class EduCommentAction implements ServletRequestAware {
 			eduCommentDAO.delete(Ed);
 		}
 		if (content != null) {
-			((HttpServletResponse) OpeFunction.response()).sendRedirect(request
-					.getContextPath() + "/getLikeCommment?content=" + content);
+			((HttpServletResponse) OpeFunction.response())
+					.sendRedirect(request.getContextPath() + "/getLikeCommment?content=" + content);
 			return null;
 		}
 		return Action.SUCCESS;
@@ -316,11 +363,9 @@ public class EduCommentAction implements ServletRequestAware {
 	public void getCommments() throws IOException {
 		List<EduComment> eduComments = null;
 		if (!StringUtils.isEmpty(fatherId) && StringUtils.isNumeric(fatherId)) {
-			eduComments = eduCommentDAO.find(merchantId,
-					Integer.valueOf(fatherId), currentPage, pageSize);
+			eduComments = eduCommentDAO.find(merchantId, Integer.valueOf(fatherId), currentPage, pageSize);
 		} else {
-			eduComments = eduCommentDAO.find(merchantId, EduComment.ROOT,
-					currentPage, pageSize);
+			eduComments = eduCommentDAO.find(merchantId, EduComment.ROOT, currentPage, pageSize);
 		}
 		response = ServletActionContext.getResponse();
 		response.setContentType("application/json");
@@ -331,8 +376,7 @@ public class EduCommentAction implements ServletRequestAware {
 	public String getWebCommments() throws IOException {
 		try {
 			System.out.println("merchantId:" + merchantId);
-			EduServices edus = eduServicesDAO.findMerchantId(Integer
-					.parseInt(merchantId));
+			EduServices edus = eduServicesDAO.findMerchantId(Integer.parseInt(merchantId));
 			educl = eduCommentDAO.find(merchantId, currentPage, pageSize);
 			request.setAttribute("educl", educl);
 			request.setAttribute("edus", edus);
@@ -366,8 +410,7 @@ public class EduCommentAction implements ServletRequestAware {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8 ");
 		boolean result = false;
-		if (!StringUtils.isEmpty(userId) && StringUtils.isNumeric(userId)
-				&& !StringUtils.isEmpty(merchantId)) {
+		if (!StringUtils.isEmpty(userId) && StringUtils.isNumeric(userId) && !StringUtils.isEmpty(merchantId)) {
 			User user = userDAO.byid(Integer.valueOf(userId));
 			if (user != null) {
 				EduComment eduComment = new EduComment();
@@ -375,10 +418,10 @@ public class EduCommentAction implements ServletRequestAware {
 				String picStr = "";
 				if (pictures != null && pictures.length > 0) {
 					System.out.println("upload");
-					String path = "/file/" +OpeFunction.getNameDayTime()+"/"+ user.getId() + "/EduComment/"
+					String path = "/file/" + OpeFunction.getNameDayTime() + "/" + user.getId() + "/EduComment/"
 							+ merchantId + "/";
-					String realPath = ServletActionContext.getServletContext()
-							.getRealPath(path).replace("Befriend", "");
+					String realPath = ServletActionContext.getServletContext().getRealPath(path).replace("Befriend",
+							"");
 					System.out.println("realPath:" + realPath);
 					File saveDir = new File(realPath);
 					if (!saveDir.exists()) {
@@ -389,10 +432,8 @@ public class EduCommentAction implements ServletRequestAware {
 						try {
 
 							int index = picturesFileName[i].indexOf(".");
-							String suffix = picturesFileName[i]
-									.substring(index);
-							String fileName = String.valueOf(new Date()
-									.getTime()) + suffix;
+							String suffix = picturesFileName[i].substring(index);
+							String fileName = String.valueOf(new Date().getTime()) + suffix;
 							File saveFile = new File(saveDir, fileName);
 							FileUtils.copyFile(pictures[i], saveFile);
 							picStr += path + fileName + "!#";
@@ -410,16 +451,13 @@ public class EduCommentAction implements ServletRequestAware {
 				eduComment.setScore(score);
 				eduComment.setContent(content);
 				eduComment.setPictures(picStr);
-				SimpleDateFormat sdf = new SimpleDateFormat(
-						"yyyy-MM-dd HH:mm:ss");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				Date date = new Date();
 				eduComment.setTime(sdf.format(date));
-				if (!StringUtils.isEmpty(fatherId)
-						&& StringUtils.isNumeric(fatherId)) {
+				if (!StringUtils.isEmpty(fatherId) && StringUtils.isNumeric(fatherId)) {
 					eduComment.setFatherId(Integer.valueOf(fatherId));
 				}
-				if (!StringUtils.isEmpty(replyId)
-						&& StringUtils.isNumeric(replyId)) {
+				if (!StringUtils.isEmpty(replyId) && StringUtils.isNumeric(replyId)) {
 					User reply = userDAO.byid(Integer.valueOf(replyId));
 					eduComment.setReply(reply);
 				}
@@ -451,17 +489,17 @@ public class EduCommentAction implements ServletRequestAware {
 	 * @throws IOException
 	 */
 	public void addWebComments() throws IOException {
-		String text="";
-		String loginPage="";
-		
+		String text = "";
+		String loginPage = "";
+
 		merchantId = (String) session.getAttribute("merchantId");
 		System.out.println("merchantId:" + merchantId);
 		System.out.println("score:" + score);
 		System.out.println("content:" + content);
 		System.out.println("fatherId:" + fatherId);
 		System.out.println("path:" + path);
-		
-		if (!OpeFunction.isEmpty(merchantId)&&!OpeFunction.isEmpty(content)) {
+
+		if (!OpeFunction.isEmpty(merchantId) && !OpeFunction.isEmpty(content)) {
 			User user = (User) session.getAttribute("u");
 			if (user != null) {
 				EduComment eduComment = new EduComment();
@@ -471,16 +509,14 @@ public class EduCommentAction implements ServletRequestAware {
 				eduComment.setUser(user);
 				eduComment.setScore(score);// 12345 星级
 				eduComment.setContent(content);// 评论内容
-				
+
 				eduComment.setPictures(path); // 图片地址
-				
+
 				eduComment.setTime(OpeFunction.getNowTime());
-				if (!StringUtils.isEmpty(fatherId)
-						&& StringUtils.isNumeric(fatherId)) {
+				if (!StringUtils.isEmpty(fatherId) && StringUtils.isNumeric(fatherId)) {
 					eduComment.setFatherId(Integer.valueOf(fatherId));
 				}
-				if (!StringUtils.isEmpty(replyId)
-						&& StringUtils.isNumeric(replyId)) {
+				if (!StringUtils.isEmpty(replyId) && StringUtils.isNumeric(replyId)) {
 					User reply = userDAO.byid(Integer.valueOf(replyId));
 					eduComment.setReply(reply);
 				}
@@ -502,7 +538,7 @@ public class EduCommentAction implements ServletRequestAware {
 
 		response.setCharacterEncoding("GBK");
 		PrintWriter out = response.getWriter();
-		 
+
 		StringBuilder builder = new StringBuilder();
 		builder.append("<script type=\"text/javascript\">");
 		builder.append("alert('" + text + "');");
@@ -514,9 +550,6 @@ public class EduCommentAction implements ServletRequestAware {
 
 	}
 
-
-
-	
 	public EduCommentAction(EduServicesDAO eduServicesDAO, EduCommentDAO eduCommentDAO, UserDAO userDAO,
 			NewsDAO newsDAO, CollectDAO collectDAO, ForumDAO forumdao, FollectDAO foldao, ReviewDAO rdao) {
 		super();
@@ -529,8 +562,6 @@ public class EduCommentAction implements ServletRequestAware {
 		this.foldao = foldao;
 		this.rdao = rdao;
 	}
-
-
 
 	public String getMerchantId() {
 		return merchantId;

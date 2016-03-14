@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<form action="" name="form1" method="post" enctype="multipart/form-data">
+	<div id="wrap">
+		<div id="header">
+			<div class="topArea clearfix">
+				<h1>修改密码</h1>
+				<div class="prev">
+					<a href="javascript:history.back(-1);"><img src="../images/prev.png" alt="后退" /></a>
+				</div>
+			</div>
+		</div><!--header-->
+		<div id="container">
+			<div class="login">
+				<div class="logPsd clearfix">
+					<div class="leftArea">密码</div>
+					<div class="rightArea"><input type="text" onmouseout=" " name="password" id="modifyPsd" value="请输入新密码" />
+					<div id="showPsd" class="clearfix"><div class="inner clearfix"><span>change</span></div></div></div>
+				</div>
+			</div>
+		</div><!--container-->
+		<div id="footer">
+			<a id="sum" class="fbButton">完成</a>
+		</div><!--footer-->
+	</div><!--wrap-->
+	</form>
+	<script type="text/javascript" >
+	
+$("#sum").click(function(){
+	$.ajax({
+		dataType: "json",
+		url:"webpassMphone?newpwd="+$("#modifyPsd").val(),			
+		async:false,
+		success: function (data) {   
+			
+			if(data){
+				alert('修改成功');
+				
+				window.location="login.html";
+			}else{
+				alert('修改失败');
+				//href="";
+			}
+		}
+	})
+	
+});
+</script>
+<script type="text/javascript">
+	$(function(){
+		var modifyPsd = $("#modifyPsd");
+		
+		modifyPsd.focusin(function(){
+		  // alert(a);
+		  if($(this).val() !== "请输入新密码"){
+			return false;
+		  }else{
+			$(this).val("");
+			modifyPsd.attr("type","password")
+		  }
+		});
+		modifyPsd.focusout(function(){
+		  if($(this).val() == ""){
+			modifyPsd.attr("type","text")
+			$(this).val("请输入新密码");
+			$("#showPsd .inner span").removeClass("changeOn");
+		  }
+		});
+		$("#showPsd .inner").click(function(){
+			if(modifyPsd.val() !== "请输入新密码"){
+				if(modifyPsd.attr("type") == "password"){
+					modifyPsd.attr("type","text");
+					$("#showPsd .inner span").addClass("changeOn");
+				}else{
+					modifyPsd.attr("type","password");
+					$("#showPsd .inner span").removeClass("changeOn");
+				}
+			}
+		});
+	});
+</script>
+</body>
+</html>

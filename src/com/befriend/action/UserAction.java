@@ -50,11 +50,11 @@ public class UserAction extends ActionSupport {
 	HttpServletRequest request = ServletActionContext.getRequest();
 	private String code;// 验证码
 	List<Cis> cis = new ArrayList<Cis>();// 聊天记录
-//	 String account = "cf_wcskdxyz";//用户名 cf_wcsk_jztd
-//	 String account = "cf_wcsk_jztd";// 用户名 cf_wcsk_jztd
-//	 String pwd = "wcsk1212";// 密码 wcsk1212
-//	 String postUrl =
-//	 "http://106.ihuyi.cn/webservice/sms.php?method=Submit";// 地址
+	// String account = "cf_wcskdxyz";//用户名 cf_wcsk_jztd
+	// String account = "cf_wcsk_jztd";// 用户名 cf_wcsk_jztd
+	// String pwd = "wcsk1212";// 密码 wcsk1212
+	// String postUrl =
+	// "http://106.ihuyi.cn/webservice/sms.php?method=Submit";// 地址
 
 	private String phone;// 手机号
 	private String username;// 用户名
@@ -68,9 +68,7 @@ public class UserAction extends ActionSupport {
 	private String address;// 地址 省级
 	private String os = "web";// 系统
 	private String addcity;// 地址 市级
-
-	private HttpSession session = ServletActionContext.getRequest()
-			.getSession();
+	private HttpSession session = ServletActionContext.getRequest().getSession();
 
 	private int competence2 = 0;// 用户id competence 用户权限 0-普通用户 1-市级论坛管理员
 								// 2-省级论坛管理员
@@ -84,7 +82,7 @@ public class UserAction extends ActionSupport {
 	private File file;// logo图片
 	private String fileFileName;// 文件名
 	private String fileContentType;// 文件类型
-	
+
 	private String key;// key
 	private String accnumno;//
 	private int port = 0;//
@@ -241,14 +239,12 @@ public class UserAction extends ActionSupport {
 
 			}
 			if (u.getAccnumno() != null) {
-				System.out.println("用户有账号了！:" + u.getAccnumno() + "第" + i
-						+ "个！".toString());
+				System.out.println("用户有账号了！:" + u.getAccnumno() + "第" + i + "个！".toString());
 				continue;
 			}
 			boolean b = true;
 			while (b) {
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -270,8 +266,7 @@ public class UserAction extends ActionSupport {
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	public synchronized void huanxinzc() throws JSONException,
-			InterruptedException, IOException {
+	public synchronized void huanxinzc() throws JSONException, InterruptedException, IOException {
 
 		System.out.println("进入huanxinzc");
 		Admin admin = (Admin) session.getAttribute("admin");
@@ -297,13 +292,9 @@ public class UserAction extends ActionSupport {
 				System.out.println("没有获取到access_token!");
 				return;
 			}
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
-			util.Out().println(
-					"第" + (i + 1) + "用户id-" + us.get(i).getId() + "-注册 返回:" + w
-							+ "=400已注册");
-			System.out.println("第" + (i + 1) + "用户id-" + us.get(i).getId()
-					+ "-注册 返回:" + w + "=400已注册");
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
+			util.Out().println("第" + (i + 1) + "用户id-" + us.get(i).getId() + "-注册 返回:" + w + "=400已注册");
+			System.out.println("第" + (i + 1) + "用户id-" + us.get(i).getId() + "-注册 返回:" + w + "=400已注册");
 		}
 		util.Out().print("同步完成!");
 
@@ -326,8 +317,7 @@ public class UserAction extends ActionSupport {
 		}
 		userdao.updateAllXiaxian();
 		System.out.println("一键下线成功!");
-		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/GetUserAll");
+		((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/GetUserAll");
 
 	}
 
@@ -341,8 +331,7 @@ public class UserAction extends ActionSupport {
 		u = userdao.byid(id);
 		if (u != null) {
 			cis = gdao.Cisuid(u.getId());
-			System.out.println("用户有:" + u.getUsername() + cis.size() + "个未读消息!"
-					+ "Online:" + u.getOnline());
+			System.out.println("用户有:" + u.getUsername() + cis.size() + "个未读消息!" + "Online:" + u.getOnline());
 
 			if (cis.size() == 0) {
 				OpeFunction.Out().print(true);
@@ -353,12 +342,10 @@ public class UserAction extends ActionSupport {
 				if (cis.get(i).getOnline() == 1) {
 					continue;
 				}
-				Profile profile = gdao.FindProfilebyid(cis.get(i).getGroupid(),
-						cis.get(i).getSenduserid());
+				Profile profile = gdao.FindProfilebyid(cis.get(i).getGroupid(), cis.get(i).getSenduserid());
 				User su = userdao.byid(cis.get(i).getSenduserid());
 
-				String result = "{\"u\":" + util.ToJson(su) + ",\"cis\":"
-						+ util.ToJson(cis.get(i)) + ",\"profile\":"
+				String result = "{\"u\":" + util.ToJson(su) + ",\"cis\":" + util.ToJson(cis.get(i)) + ",\"profile\":"
 						+ util.ToJson(profile) + "}";
 
 				String ip = u.getIp();
@@ -382,7 +369,7 @@ public class UserAction extends ActionSupport {
 		} else {// 判断连接的 用户是否存在!
 			util.Out().print(false);
 
-		}// 判断连接的 用户是否存在!
+		} // 判断连接的 用户是否存在!
 
 	}
 
@@ -480,8 +467,45 @@ public class UserAction extends ActionSupport {
 	public void websessionrom() throws IOException {
 		// 销毁session
 		session.removeAttribute("u");
-		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/sample_lihu/htm/login.html");
+		((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
+	}
+
+	/**
+	 * web用户 修改密码
+	 * 
+	 * @throws IOException
+	 */
+	public void webpassMphone() throws IOException {
+		try {
+			
+		
+		phone = (String) session.getAttribute("phone_xxx");
+		u = userdao.byUsernameAccnumnoPhone(phone);
+		System.out.println("phone:"+phone);
+		Password pd = userdao.select(u.getId());
+		if (pd != null) {
+
+			pd.setPassword(newpwd);
+			System.out.println("修改了密码"+ newpwd);
+			
+			userdao.update(pd);
+			session.removeAttribute("u");
+			session.removeAttribute("phone_xxx");
+//			((HttpServletResponse) util.response())
+//					.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
+			util.Out().print(true);
+			return;
+		} else {
+			util.Out().print(false);
+			return;
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+			util.Out().print(false);
+			return;
+		}
+
 	}
 
 	/**
@@ -495,8 +519,8 @@ public class UserAction extends ActionSupport {
 		if (u == null) {
 
 			System.out.println("请重新登入!");
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/sample_lihu/htm/login.html");
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 
 			return;
 		}
@@ -511,8 +535,8 @@ public class UserAction extends ActionSupport {
 				util.Out().print("密码修改成功!" + newpwd);
 				userdao.update(pd);
 				session.removeAttribute("u");
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/sample_lihu/htm/login.html");
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 				return;
 			} else {
 				util.Out().print("没有获取到新密码!" + newpwd);
@@ -537,8 +561,8 @@ public class UserAction extends ActionSupport {
 			if (u == null) {
 
 				System.out.println("请重新登入!");
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/sample_lihu/htm/login.html");
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 
 				return;
 			}
@@ -557,11 +581,33 @@ public class UserAction extends ActionSupport {
 			if (u == null) {
 
 				System.out.println("请重新登入!");
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/sample_lihu/htm/login.html");
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 
 				return;
 			}
+
+			// String newpassword = request.getParameter("newpassword");
+			// System.out.println("密码为 " + password);
+			pd = userdao.select(u.getId());
+			if (password != null && password != " " && pd != null) {
+
+				// 验证密码
+				String reg = "[A-Za-z0-9_]{6,18}";
+				if (password.matches(reg)) {
+					pd.setPassword(password);
+					userdao.update(pd);
+					System.out.println("修改成功!新密码为:" + password);
+					util.Out().print(true);
+					// return;
+
+				} else {
+					System.out.println("密码不符合规范" + password);
+					util.Out().print("false");
+					return;
+				}
+			}
+
 			String path = "";
 			if (u.getImg() != null) {
 				path = u.getImg();
@@ -570,8 +616,7 @@ public class UserAction extends ActionSupport {
 
 				util.fileRemove(path);
 				path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				String pah = util.ufileToServer(path, file, fileFileName,
-						"jpg", true);
+				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				u.setImg(pah);
 
 			}
@@ -599,8 +644,7 @@ public class UserAction extends ActionSupport {
 					}
 
 				}
-				if (province != null && !province.equals("省份名")
-						&& province != "") {
+				if (province != null && !province.equals("省份名") && province != "") {
 					u.setAddress(province);
 					System.out.println("修改了地址省级");
 				} else {
@@ -644,9 +688,8 @@ public class UserAction extends ActionSupport {
 			userdao.update(u);
 			session.setAttribute("u", u);
 
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath()
-					+ "/SimulationApp/personal_information.jsp");
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/sample_lihu/jsp/mypage.jsp");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -659,8 +702,7 @@ public class UserAction extends ActionSupport {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public synchronized String webRegistration() throws IOException,
-			JSONException {
+	public synchronized String webRegistration() throws IOException, JSONException {
 
 		phone = request.getParameter("phone");
 		password = request.getParameter("password");
@@ -710,8 +752,7 @@ public class UserAction extends ActionSupport {
 
 		while (b) {
 
-			accnumno = String
-					.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+			accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 			if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 				b = false;
 			}
@@ -765,8 +806,7 @@ public class UserAction extends ActionSupport {
 			json.put("username", u.getId());
 			// 用户id
 			json.put("password", "123456"); // 用户密码
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 		}
 
 		return Action.SUCCESS;
@@ -800,7 +840,8 @@ public class UserAction extends ActionSupport {
 	/**
 	 * 给user赋予权限
 	 * 
-	 * @throws IOException b
+	 * @throws IOException
+	 *             b
 	 * @throws InterruptedException
 	 */
 	public void SetQU() throws IOException, InterruptedException {
@@ -810,27 +851,23 @@ public class UserAction extends ActionSupport {
 		System.out.println("id是-" + id);
 		u = userdao.byid(id);
 		if (u == null || ue == null) {
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/Judge/No.html");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/Judge/No.html");
 			return;
 		}
 		if (u.getId().equals(ue.getId())) {
 			// util.Out().print("非法操作");
 			System.out.println("自己不可以更改自己的权限!");
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/Judge/No.html");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/Judge/No.html");
 			return;
 		}
 		if (!u.getAddress().equals(ue.getAddress()) || u.getAddress() == null) {
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/Judge/No.html");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/Judge/No.html");
 			return;
 		}
 		System.out.println("competence2是-" + competence2);
 		if (competence2 == 2) {
 
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/Judge/No.html");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/Judge/No.html");
 
 			return;
 		}
@@ -838,16 +875,14 @@ public class UserAction extends ActionSupport {
 			// 取消授权
 			u.setCompetence(0);
 			userdao.update(u);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/getUadmin");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/getUadmin");
 			return;
 		}
 
 		if (competence2 == 1) {
 
 			if (u.getAddcity() == null) {
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/Judge/No.html");
+				((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/Judge/No.html");
 
 				return;
 			}
@@ -857,8 +892,7 @@ public class UserAction extends ActionSupport {
 			util.Out().print("成功赋予市级论坛管理员权限");
 			// 等待3s
 			// Thread.sleep(3000);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/getUsera");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/getUsera");
 			return;
 		}
 
@@ -974,8 +1008,7 @@ public class UserAction extends ActionSupport {
 			if (u.getCompetence() == 1) {
 				System.out.println("市级");
 
-				us = userdao.getUserAll(u.getAddress(), u.getAddcity(), timeq,
-						timeh);
+				us = userdao.getUserAll(u.getAddress(), u.getAddcity(), timeq, timeh);
 
 			}
 
@@ -985,8 +1018,7 @@ public class UserAction extends ActionSupport {
 
 				if (!addcity.equals("nu")) {
 
-					us = userdao.getUserAll(u.getAddress(), addcity, timeq,
-							timeh);
+					us = userdao.getUserAll(u.getAddress(), addcity, timeq, timeh);
 				} else {
 
 					us = userdao.getUserAll(u.getAddress(), timeq, timeh);
@@ -1081,26 +1113,19 @@ public class UserAction extends ActionSupport {
 			for (int c = 0; c < a.size(); c++) {
 				System.out.println("a" + a.get(c).toString() + c);
 				// 查询30天以内
-				int i30 = userdao.getUserAll(u.getAddress(),
-						a.get(c).toString(), time30, time0).size();
+				int i30 = userdao.getUserAll(u.getAddress(), a.get(c).toString(), time30, time0).size();
 				// 7
-				int i7 = userdao.getUserAll(u.getAddress(),
-						a.get(c).toString(), time7, time0).size();
+				int i7 = userdao.getUserAll(u.getAddress(), a.get(c).toString(), time7, time0).size();
 				// 365
-				int i365 = userdao.getUserAll(u.getAddress(),
-						a.get(c).toString(), time365, time0).size();
+				int i365 = userdao.getUserAll(u.getAddress(), a.get(c).toString(), time365, time0).size();
 
 				// 今天
-				int i0 = userdao.getUserAll(u.getAddress(),
-						a.get(c).toString(), util.getNumTime(0), time0).size();
+				int i0 = userdao.getUserAll(u.getAddress(), a.get(c).toString(), util.getNumTime(0), time0).size();
 				// 全部
-				int all = userdao.getUserAll(u.getAddress(),
-						a.get(c).toString()).size();
-				System.out.println(u.getAddress() + a.get(c).toString() + i0
-						+ i7 + i30 + i365 + all);
+				int all = userdao.getUserAll(u.getAddress(), a.get(c).toString()).size();
+				System.out.println(u.getAddress() + a.get(c).toString() + i0 + i7 + i30 + i365 + all);
 				// 查询是否有
-				System.out.println("刷新地区为" + u.getAddress()
-						+ a.get(c).toString());
+				System.out.println("刷新地区为" + u.getAddress() + a.get(c).toString());
 				Registrationsa rg = new Registrationsa();
 
 				rg = regdao.addressty(u.getAddress(), a.get(c).toString());
@@ -1251,8 +1276,6 @@ public class UserAction extends ActionSupport {
 			}
 		}
 
-		
-
 		request.setAttribute("usaha", us);
 		request.setAttribute("pl", pl);
 		return Action.SUCCESS;
@@ -1303,8 +1326,7 @@ public class UserAction extends ActionSupport {
 
 			u.setCompetence(0);
 			userdao.update(u);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/getUseradmin");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/getUseradmin");
 			return;
 		}
 		if (competence2 == 2) {
@@ -1316,8 +1338,7 @@ public class UserAction extends ActionSupport {
 			util.Out().print("成功赋予省级论坛管理员权限");
 
 			userdao.update(u);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/getUser");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/getUser");
 			return;
 		}
 		if (competence2 == 1) {
@@ -1329,8 +1350,7 @@ public class UserAction extends ActionSupport {
 			util.Out().print("成功赋予市级论坛管理员权限");
 
 			userdao.update(u);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/getUser");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/getUser");
 			return;
 		}
 		if (competence2 == 4) {
@@ -1339,8 +1359,7 @@ public class UserAction extends ActionSupport {
 			util.Out().print("成功赋予教授");
 
 			userdao.update(u);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/getUser");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/getUser");
 			return;
 		}
 
@@ -1408,29 +1427,23 @@ public class UserAction extends ActionSupport {
 
 			if (cpe == 1) {
 
-				session.setAttribute("home", request.getContextPath()
-						+ "/ForumLookuser");
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/ForumLookuser");
+				session.setAttribute("home", request.getContextPath() + "/ForumLookuser");
+				((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/ForumLookuser");
 				return;
 			}
 
 			if (cpe == 2) {
 
-				session.setAttribute("home", request.getContextPath()
-						+ "/ForumLookuser");
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/ForumLookuser");
+				session.setAttribute("home", request.getContextPath() + "/ForumLookuser");
+				((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/ForumLookuser");
 				return;
 			}
 
 			if (cpe == 4) {
 
-				session.setAttribute("home", request.getContextPath()
-						+ "/ForumLookuser");
+				session.setAttribute("home", request.getContextPath() + "/ForumLookuser");
 
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/ForumLookuser");
+				((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/ForumLookuser");
 				return;
 			}
 
@@ -1542,8 +1555,7 @@ public class UserAction extends ActionSupport {
 			u.setFinaltime(time);
 
 			userdao.update(u);
-			String result = "{\"user\":" + util.ToJson(u) + ",\"pwd\":"
-					+ util.ToJson(pd) + "}";
+			String result = "{\"user\":" + util.ToJson(u) + ",\"pwd\":" + util.ToJson(pd) + "}";
 			util.Out().print(result);
 
 		} catch (Exception e) {
@@ -1568,15 +1580,13 @@ public class UserAction extends ActionSupport {
 		u = userdao.byUsernameAccnumnoPhone(username);
 		if (u == null) {
 			System.out.println("账户为空");
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			return;
 		}
 		Password pd = userdao.login(u.getId(), password);
 		if (pd == null) {
 			System.out.println("密码不对!");
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			return;
 		}
 
@@ -1600,8 +1610,7 @@ public class UserAction extends ActionSupport {
 			url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
 			session.setAttribute("u", u);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 
 		}
 
@@ -1657,8 +1666,7 @@ public class UserAction extends ActionSupport {
 			System.out.println("转发走了");
 			String url = "";
 			if (u.getAddress() != null) {
-				url = "http://127.0.0.1/Befriend/aStas?os=" + os + "&province="
-						+ u.getAddress();
+				url = "http://127.0.0.1/Befriend/aStas?os=" + os + "&province=" + u.getAddress();
 			} else {
 				url = "http://127.0.0.1/Befriend/aStas?os=" + os;
 			}
@@ -1674,17 +1682,17 @@ public class UserAction extends ActionSupport {
 	 */
 	public void appSendCodePasswrod() throws IOException {
 		try {
-			System.out.println("进入appSendCodePasswrod");
+			System.out.println("进入appSendCodePasswrod" + phone);
 			//
 			String regp = "[0-9]{11}";
 			if (phone == null) {
 				System.out.println("手机号空！");
-				util.Out().print("null");
+				util.Out().print(false);
 				return;
 			}
 			if (!phone.matches(regp)) {
 				System.out.println("手机号格式不对！");
-				util.Out().print("null");
+				util.Out().print(false);
 				return;
 			}
 
@@ -1704,11 +1712,12 @@ public class UserAction extends ActionSupport {
 			int num = (int) ((Math.random() * 9 + 1) * 100000);
 
 			session.setAttribute("app_code", String.valueOf(num));
+			
 			session.setMaxInactiveInterval(90);
+			session.setAttribute("phone_xxx", String.valueOf(phone));
 			System.out.println("1正确验证码为" + num);
 
-			String content = new String("您的验证码是：" + num
-					+ "。请不要把验证码泄露给其他人。如非本人操作，可不用理会！");
+			String content = new String("您的验证码是：" + num + "。请不要把验证码泄露给其他人。如非本人操作，可不用理会！");
 			util.setphone(phone, content);
 			util.Out().print(true);
 
@@ -1762,8 +1771,7 @@ public class UserAction extends ActionSupport {
 			session.setMaxInactiveInterval(90);
 			System.out.println("1正确验证码为" + num);
 
-			String content = new String("您的验证码是：" + num
-					+ "。请不要把验证码泄露给其他人。如非本人操作，可不用理会！");
+			String content = new String("您的验证码是：" + num + "。请不要把验证码泄露给其他人。如非本人操作，可不用理会！");
 			util.setphone(phone, content);
 			util.Out().print(true);
 
@@ -1797,7 +1805,7 @@ public class UserAction extends ActionSupport {
 			if (codes.equalsIgnoreCase(code)) {
 				System.out.println("验证码" + code + "正确");
 				util.Out().print(true);
-				session.invalidate();
+				session.removeAttribute("app_code");
 			} else {
 				System.out.println("验证码" + code + "错误");
 				util.Out().print(false);
@@ -1823,8 +1831,7 @@ public class UserAction extends ActionSupport {
 			// 判断生成群号 会不会和以前冲突
 			while (b) {
 				// 随机生成8位随机数 作为 群号
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -1910,18 +1917,15 @@ public class UserAction extends ActionSupport {
 
 			}
 			userdao.save(u);
-			System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
-					+ ",pw:" + password);
+			System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 			// 注册环信
 			u = userdao.byUsernameAccnumnoPhone(phone);
 			if (u != null) {
 				if (file != null) {
 
-					String path = "/IMG/Userimg/"
-							+ OpeFunction.getNameDayTime();
-					String pah = util.ufileToServer(path, file, fileFileName,
-							"jpg", true);
+					String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
+					String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 					u.setImg(pah);
 					userdao.update(u);
 				} else {
@@ -1935,14 +1939,12 @@ public class UserAction extends ActionSupport {
 				// 用户id
 				json.put("password", "123456");
 				// 用户密码
-				String w = WechatKit.post(URL, json,
-						RefreshAccessToken.access_token);
+				String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 				System.out.println(w);
 				u.setPassword(password);
 
 				util.Out().print(util.ToJson(u));
-				String url = "http://127.0.0.1/Befriend/aStas?province="
-						+ address + "&os=" + os;
+				String url = "http://127.0.0.1/Befriend/aStas?province=" + address + "&os=" + os;
 				url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 				WechatKit.sendGet(url);
 				return;
@@ -2037,8 +2039,7 @@ public class UserAction extends ActionSupport {
 				// 判断生成群号 会不会和以前冲突
 				while (b) {
 					// 随机生成8位随机数 作为 群号
-					accnumno = String
-							.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+					accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 					if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 						b = false;
 					}
@@ -2090,18 +2091,15 @@ public class UserAction extends ActionSupport {
 
 				}
 				userdao.save(u);
-				System.out.println("注册成功 phone" + phone + "accnumno:"
-						+ accnumno + ",pw:" + password);
+				System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 				// 注册环信
 				u = userdao.byUsernameAccnumnoPhone(accnumno);
 				if (u != null) {
 					if (file != null) {
 
-						String path = "/IMG/Userimg/"
-								+ OpeFunction.getNameDayTime();
-						String pah = util.ufileToServer(path, file,
-								fileFileName, "jpg", true);
+						String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
+						String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 						u.setImg(pah);
 						userdao.update(u);
 					} else {
@@ -2115,12 +2113,10 @@ public class UserAction extends ActionSupport {
 					// 用户id
 					json.put("password", "123456");
 					// 用户密码
-					String w = WechatKit.post(URL, json,
-							RefreshAccessToken.access_token);
+					String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 					System.out.println(w);
 					u.setPassword(password);
-					String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-							+ u.getId();
+					String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 					WechatKit.sendGet(url);
 					util.Out().print(true);
 					return;
@@ -2150,8 +2146,7 @@ public class UserAction extends ActionSupport {
 		username = userId;
 		phone = userPhone;
 		if (OpeFunction.isEmpty(username)) {
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			return;
 		}
 		username = "zcom" + username;
@@ -2171,20 +2166,16 @@ public class UserAction extends ActionSupport {
 			u.setIp(request.getRemoteAddr());
 			userdao.update(u);
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 			return;
 		}
 		if (nickname == null) {
-			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length()));
+			nickname = username.substring(0, (username.length() > 20 ? 20 : username.length()));
 		}
-		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length()));
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20 : nickname.length()));
 		synchronized (this) {
 
 			u = new User();
@@ -2194,8 +2185,7 @@ public class UserAction extends ActionSupport {
 			// 判断生成群号 会不会和以前冲突
 			while (b) {
 				// 随机生成8位随机数 作为 群号
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -2232,8 +2222,7 @@ public class UserAction extends ActionSupport {
 			}
 			userdao.save(u);
 		}
-		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
-				+ ",pw:" + password);
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 		// 注册环信
 		u = userdao.byUsernameAccnumnoPhone(accnumno);
@@ -2241,8 +2230,7 @@ public class UserAction extends ActionSupport {
 			if (file != null) {
 
 				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				String pah = util.ufileToServer(path, file, fileFileName,
-						"jpg", true);
+				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				u.setImg(pah);
 				userdao.update(u);
 			} else {
@@ -2256,16 +2244,13 @@ public class UserAction extends ActionSupport {
 			// 用户id
 			json.put("password", "123456");
 			// 用户密码
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 			System.out.println(w);
 
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 		}
 	}
@@ -2275,8 +2260,7 @@ public class UserAction extends ActionSupport {
 		// username = userId;
 		// phone = userPhone;
 		if (OpeFunction.isEmpty(username)) {
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			return;
 		}
 		os = User.HCOM;
@@ -2297,20 +2281,16 @@ public class UserAction extends ActionSupport {
 			u.setIp(request.getRemoteAddr());
 			userdao.update(u);
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 			return;
 		}
 		if (nickname == null) {
-			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length()));
+			nickname = username.substring(0, (username.length() > 20 ? 20 : username.length()));
 		}
-		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length()));
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20 : nickname.length()));
 		synchronized (this) {
 
 			u = new User();
@@ -2320,8 +2300,7 @@ public class UserAction extends ActionSupport {
 			// 判断生成群号 会不会和以前冲突
 			while (b) {
 				// 随机生成8位随机数 作为 群号
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -2358,8 +2337,7 @@ public class UserAction extends ActionSupport {
 			}
 			userdao.save(u);
 		}
-		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
-				+ ",pw:" + password);
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 		// 注册环信
 		u = userdao.byUsernameAccnumnoPhone(accnumno);
@@ -2367,8 +2345,7 @@ public class UserAction extends ActionSupport {
 			if (file != null) {
 
 				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				String pah = util.ufileToServer(path, file, fileFileName,
-						"jpg", true);
+				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				u.setImg(pah);
 				userdao.update(u);
 			} else {
@@ -2382,26 +2359,23 @@ public class UserAction extends ActionSupport {
 			// 用户id
 			json.put("password", "123456");
 			// 用户密码
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 			System.out.println(w);
 
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 		}
 	}
+
 	public void thirdPartyNlSave() throws IOException, JSONException {
 		// nickname = userName;
 		// username = userId;
 		// phone = userPhone;
 		if (OpeFunction.isEmpty(username)) {
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			return;
 		}
 		os = User.NLCOM;
@@ -2422,20 +2396,16 @@ public class UserAction extends ActionSupport {
 			u.setIp(request.getRemoteAddr());
 			userdao.update(u);
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 			return;
 		}
 		if (nickname == null) {
-			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length()));
+			nickname = username.substring(0, (username.length() > 20 ? 20 : username.length()));
 		}
-		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length()));
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20 : nickname.length()));
 		synchronized (this) {
 
 			u = new User();
@@ -2445,8 +2415,7 @@ public class UserAction extends ActionSupport {
 			// 判断生成群号 会不会和以前冲突
 			while (b) {
 				// 随机生成8位随机数 作为 群号
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -2483,8 +2452,7 @@ public class UserAction extends ActionSupport {
 			}
 			userdao.save(u);
 		}
-		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
-				+ ",pw:" + password);
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 		// 注册环信
 		u = userdao.byUsernameAccnumnoPhone(accnumno);
@@ -2492,8 +2460,7 @@ public class UserAction extends ActionSupport {
 			if (file != null) {
 
 				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				String pah = util.ufileToServer(path, file, fileFileName,
-						"jpg", true);
+				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				u.setImg(pah);
 				userdao.update(u);
 			} else {
@@ -2507,16 +2474,13 @@ public class UserAction extends ActionSupport {
 			// 用户id
 			json.put("password", "123456");
 			// 用户密码
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 			System.out.println(w);
 
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 		}
 	}
@@ -2527,8 +2491,7 @@ public class UserAction extends ActionSupport {
 		// username = userId;
 		// phone = userPhone;
 		if (OpeFunction.isEmpty(username)) {
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			return;
 		}
 
@@ -2551,20 +2514,16 @@ public class UserAction extends ActionSupport {
 			u.setIp(request.getRemoteAddr());
 			userdao.update(u);
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 			return;
 		}
 		if (nickname == null) {
-			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length()));
+			nickname = username.substring(0, (username.length() > 20 ? 20 : username.length()));
 		}
-		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length()));
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20 : nickname.length()));
 		synchronized (this) {
 
 			u = new User();
@@ -2574,8 +2533,7 @@ public class UserAction extends ActionSupport {
 			// 判断生成群号 会不会和以前冲突
 			while (b) {
 				// 随机生成8位随机数 作为 群号
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -2614,8 +2572,7 @@ public class UserAction extends ActionSupport {
 			}
 			userdao.save(u);
 		}
-		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
-				+ ",pw:" + password);
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 		// 注册环信
 		u = userdao.byUsernameAccnumnoPhone(accnumno);
@@ -2623,8 +2580,7 @@ public class UserAction extends ActionSupport {
 			if (file != null) {
 
 				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				String pah = util.ufileToServer(path, file, fileFileName,
-						"jpg", true);
+				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				u.setImg(pah);
 				userdao.update(u);
 			} else {
@@ -2639,16 +2595,13 @@ public class UserAction extends ActionSupport {
 			// 用户id
 			json.put("password", "123456");
 			// 用户密码
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 			System.out.println(w);
 
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 		}
 	}
@@ -2658,8 +2611,7 @@ public class UserAction extends ActionSupport {
 		// username = userId;
 		// phone = userPhone;
 		if (OpeFunction.isEmpty(username)) {
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			return;
 		}
 
@@ -2682,20 +2634,16 @@ public class UserAction extends ActionSupport {
 			u.setIp(request.getRemoteAddr());
 			userdao.update(u);
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了" + u.getUsername());
 			return;
 		}
 		if (nickname == null) {
-			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length()));
+			nickname = username.substring(0, (username.length() > 20 ? 20 : username.length()));
 		}
-		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length()));
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20 : nickname.length()));
 		synchronized (this) {
 
 			u = new User();
@@ -2705,8 +2653,7 @@ public class UserAction extends ActionSupport {
 			// 判断生成群号 会不会和以前冲突
 			while (b) {
 				// 随机生成8位随机数 作为 群号
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -2745,8 +2692,7 @@ public class UserAction extends ActionSupport {
 			}
 			userdao.save(u);
 		}
-		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
-				+ ",pw:" + password);
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 		// 注册环信
 		u = userdao.byUsernameAccnumnoPhone(accnumno);
@@ -2754,8 +2700,7 @@ public class UserAction extends ActionSupport {
 			if (file != null) {
 
 				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				String pah = util.ufileToServer(path, file, fileFileName,
-						"jpg", true);
+				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				u.setImg(pah);
 				userdao.update(u);
 			} else {
@@ -2770,16 +2715,13 @@ public class UserAction extends ActionSupport {
 			// 用户id
 			json.put("password", "123456");
 			// 用户密码
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 			System.out.println(w);
 
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 		}
 	}
@@ -2789,8 +2731,7 @@ public class UserAction extends ActionSupport {
 		// username=userId;
 		// phone=userPhone;
 		if (OpeFunction.isEmpty(username)) {
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			return;
 		}
 		username = "xcom" + username;
@@ -2810,20 +2751,16 @@ public class UserAction extends ActionSupport {
 			u.setIp(request.getRemoteAddr());
 			userdao.update(u);
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 			return;
 		}
 		if (nickname == null) {
-			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length()));
+			nickname = username.substring(0, (username.length() > 20 ? 20 : username.length()));
 		}
-		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length()));
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20 : nickname.length()));
 
 		synchronized (this) {
 
@@ -2834,8 +2771,7 @@ public class UserAction extends ActionSupport {
 			// 判断生成群号 会不会和以前冲突
 			while (b) {
 				// 随机生成8位随机数 作为 群号
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -2872,8 +2808,7 @@ public class UserAction extends ActionSupport {
 			}
 			userdao.save(u);
 		}
-		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
-				+ ",pw:" + password);
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 		// 注册环信
 		u = userdao.byUsernameAccnumnoPhone(accnumno);
@@ -2881,8 +2816,7 @@ public class UserAction extends ActionSupport {
 			if (file != null) {
 
 				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				String pah = util.ufileToServer(path, file, fileFileName,
-						"jpg", true);
+				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				u.setImg(pah);
 				userdao.update(u);
 			} else {
@@ -2896,16 +2830,13 @@ public class UserAction extends ActionSupport {
 			// 用户id
 			json.put("password", "123456");
 			// 用户密码
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 			System.out.println(w);
 
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 		}
 	}
@@ -2915,8 +2846,7 @@ public class UserAction extends ActionSupport {
 		// username=userId;
 		// phone=userPhone;
 		if (OpeFunction.isEmpty(username)) {
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			return;
 		}
 		username = "kcom" + username;
@@ -2937,20 +2867,16 @@ public class UserAction extends ActionSupport {
 			u.setIp(request.getRemoteAddr());
 			userdao.update(u);
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 			return;
 		}
 		if (nickname == null) {
-			nickname = username.substring(0, (username.length() > 20 ? 20
-					: username.length()));
+			nickname = username.substring(0, (username.length() > 20 ? 20 : username.length()));
 		}
-		nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-				: nickname.length()));
+		nickname = nickname.substring(0, (nickname.length() > 20 ? 20 : nickname.length()));
 
 		synchronized (this) {
 
@@ -2961,8 +2887,7 @@ public class UserAction extends ActionSupport {
 			// 判断生成群号 会不会和以前冲突
 			while (b) {
 				// 随机生成8位随机数 作为 群号
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -2999,8 +2924,7 @@ public class UserAction extends ActionSupport {
 			}
 			userdao.save(u);
 		}
-		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
-				+ ",pw:" + password);
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 		// 注册环信
 		u = userdao.byUsernameAccnumnoPhone(accnumno);
@@ -3008,8 +2932,7 @@ public class UserAction extends ActionSupport {
 			if (file != null) {
 
 				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				String pah = util.ufileToServer(path, file, fileFileName,
-						"jpg", true);
+				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				u.setImg(pah);
 				userdao.update(u);
 			} else {
@@ -3023,16 +2946,13 @@ public class UserAction extends ActionSupport {
 			// 用户id
 			json.put("password", "123456");
 			// 用户密码
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 			System.out.println(w);
 
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 		}
 	}
@@ -3044,8 +2964,7 @@ public class UserAction extends ActionSupport {
 	 * @throws JSONException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public void bbtSave() throws IOException, JSONException,
-			NoSuchAlgorithmException {
+	public void bbtSave() throws IOException, JSONException, NoSuchAlgorithmException {
 
 		Vcom_3DES vcom3DES = new Vcom_3DES();
 		vcom3DES.setKeyStr("jiazhangzhiyouforvcomyyy");
@@ -3101,11 +3020,9 @@ public class UserAction extends ActionSupport {
 			u.setIp(request.getRemoteAddr());
 			userdao.update(u);
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 			return;
 		}
@@ -3118,8 +3035,7 @@ public class UserAction extends ActionSupport {
 			// 判断生成群号 会不会和以前冲突
 			while (b) {
 				// 随机生成8位随机数 作为 群号
-				accnumno = String
-						.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
+				accnumno = String.valueOf((int) ((Math.random() * 9 + 1) * 10000000));
 				if (userdao.byUsernameAccnumnoPhone(accnumno) == null) {
 					b = false;
 				}
@@ -3161,8 +3077,7 @@ public class UserAction extends ActionSupport {
 			}
 			userdao.save(u);
 		}
-		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno
-				+ ",pw:" + password);
+		System.out.println("注册成功 phone" + phone + "accnumno:" + accnumno + ",pw:" + password);
 
 		// 注册环信
 		u = userdao.byUsernameAccnumnoPhone(accnumno);
@@ -3170,8 +3085,7 @@ public class UserAction extends ActionSupport {
 			if (file != null) {
 
 				String path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
-				String pah = util.ufileToServer(path, file, fileFileName,
-						"jpg", true);
+				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				u.setImg(pah);
 				userdao.update(u);
 			} else {
@@ -3185,16 +3099,13 @@ public class UserAction extends ActionSupport {
 			// 用户id
 			json.put("password", "123456");
 			// 用户密码
-			String w = WechatKit.post(URL, json,
-					RefreshAccessToken.access_token);
+			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 			System.out.println(w);
 
 			session.setAttribute("u", u);
-			String url = "http://127.0.0.1/Befriend/staLoginCount?id="
-					+ u.getId();
+			String url = "http://127.0.0.1/Befriend/staLoginCount?id=" + u.getId();
 			WechatKit.sendGet(url);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsA10");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webNewsA10");
 			System.out.println("转发走了");
 		}
 	}
@@ -3398,8 +3309,7 @@ public class UserAction extends ActionSupport {
 		// int num=123456789;
 		if (phone != null) {
 			System.out.println(phone);
-			String content = new String("尊敬的用户：您的号码" + phone
-					+ "已验证成功。感谢您注册家长之友！");
+			String content = new String("尊敬的用户：您的号码" + phone + "已验证成功。感谢您注册家长之友！");
 
 			util.setphone(phone, content);
 		} else {
@@ -3422,8 +3332,7 @@ public class UserAction extends ActionSupport {
 		Stas sta = new Stas();
 		for (int i = 0; i < lios.size(); i++) {
 			System.out.println("日期" + lios.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lios.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lios.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lios.get(i).getUsersaved());
 			sta.setDownloaded(sta.getDownloaded() + lios.get(i).getDownloaded());
 			if (lios.get(i).getUsersyned() > sta.getUsersyned()) {
@@ -3457,12 +3366,9 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < landroid.size(); i++) {
 			System.out.println("日期" + landroid.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ landroid.get(i).getUserlogined());
-			sta.setUsersaved(sta.getUsersaved()
-					+ landroid.get(i).getUsersaved());
-			sta.setDownloaded(sta.getDownloaded()
-					+ landroid.get(i).getDownloaded());
+			sta.setUserlogined(sta.getUserlogined() + landroid.get(i).getUserlogined());
+			sta.setUsersaved(sta.getUsersaved() + landroid.get(i).getUsersaved());
+			sta.setDownloaded(sta.getDownloaded() + landroid.get(i).getDownloaded());
 			if (landroid.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(landroid.get(i).getUsersyned());
 			}
@@ -3494,8 +3400,7 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lweb.size(); i++) {
 			System.out.println("日期" + lweb.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lweb.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lweb.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lweb.get(i).getUsersaved());
 			sta.setDownloaded(sta.getDownloaded() + lweb.get(i).getDownloaded());
 			if (lweb.get(i).getUsersyned() > sta.getUsersyned()) {
@@ -3529,8 +3434,7 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lsyn.size(); i++) {
 			System.out.println("日期" + lsyn.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lsyn.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lsyn.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lsyn.get(i).getUsersaved());
 			// sta.setDownloaded(sta.getDownloaded()+lsyn.get(i).getDownloaded());
 			if (lsyn.get(i).getUsersyned() > sta.getUsersyned()) {
@@ -3563,8 +3467,7 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lbbt.size(); i++) {
 			System.out.println("日期" + lbbt.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lbbt.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lbbt.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lbbt.get(i).getUsersaved());
 			// sta.setDownloaded(sta.getDownloaded()+lbbt.get(i).getDownloaded());
 			if (lbbt.get(i).getUsersyned() > sta.getUsersyned()) {
@@ -3597,8 +3500,7 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lxdd.size(); i++) {
 			System.out.println("日期" + lxdd.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lxdd.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lxdd.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lxdd.get(i).getUsersaved());
 			// sta.setDownloaded(sta.getDownloaded()+lbbt.get(i).getDownloaded());
 			if (lxdd.get(i).getUsersyned() > sta.getUsersyned()) {
@@ -3631,8 +3533,7 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lkux.size(); i++) {
 			System.out.println("日期" + lkux.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lkux.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lkux.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lkux.get(i).getUsersaved());
 			// sta.setDownloaded(sta.getDownloaded()+lbbt.get(i).getDownloaded());
 			if (lkux.get(i).getUsersyned() > sta.getUsersyned()) {
@@ -3665,8 +3566,7 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lwechat.size(); i++) {
 			System.out.println("日期" + lwechat.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lwechat.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lwechat.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lwechat.get(i).getUsersaved());
 
 			if (lwechat.get(i).getUsersyned() > sta.getUsersyned()) {
@@ -3699,11 +3599,9 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lzhzh.size(); i++) {
 			System.out.println("日期" + lzhzh.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lzhzh.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lzhzh.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lzhzh.get(i).getUsersaved());
-			sta.setDownloaded(sta.getDownloaded()
-					+ lzhzh.get(i).getDownloaded());
+			sta.setDownloaded(sta.getDownloaded() + lzhzh.get(i).getDownloaded());
 			if (lzhzh.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(lzhzh.get(i).getUsersyned());
 			}
@@ -3729,11 +3627,9 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lh.size(); i++) {
 			System.out.println("日期" + lh.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lh.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lh.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lh.get(i).getUsersaved());
-			sta.setDownloaded(sta.getDownloaded()
-					+ lh.get(i).getDownloaded());
+			sta.setDownloaded(sta.getDownloaded() + lh.get(i).getDownloaded());
 			if (lh.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(lh.get(i).getUsersyned());
 			}
@@ -3759,11 +3655,9 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lkdcom.size(); i++) {
 			System.out.println("日期" + lkdcom.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lkdcom.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lkdcom.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lkdcom.get(i).getUsersaved());
-			sta.setDownloaded(sta.getDownloaded()
-					+ lkdcom.get(i).getDownloaded());
+			sta.setDownloaded(sta.getDownloaded() + lkdcom.get(i).getDownloaded());
 			if (lkdcom.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(lkdcom.get(i).getUsersyned());
 			}
@@ -3789,11 +3683,9 @@ public class UserAction extends ActionSupport {
 		sta = new Stas();
 		for (int i = 0; i < lygcom.size(); i++) {
 			System.out.println("日期" + lygcom.get(i).getTime());
-			sta.setUserlogined(sta.getUserlogined()
-					+ lygcom.get(i).getUserlogined());
+			sta.setUserlogined(sta.getUserlogined() + lygcom.get(i).getUserlogined());
 			sta.setUsersaved(sta.getUsersaved() + lygcom.get(i).getUsersaved());
-			sta.setDownloaded(sta.getDownloaded()
-					+ lygcom.get(i).getDownloaded());
+			sta.setDownloaded(sta.getDownloaded() + lygcom.get(i).getDownloaded());
 			if (lygcom.get(i).getUsersyned() > sta.getUsersyned()) {
 				sta.setUsersyned(lygcom.get(i).getUsersyned());
 			}
@@ -3824,11 +3716,11 @@ public class UserAction extends ActionSupport {
 		int kd = userdao.getUsertimeCount(timeq, timeh, User.KDCOM);
 		int yg = userdao.getUsertimeCount(timeq, timeh, User.YGCOM);
 		int hc = userdao.getUsertimeCount(timeq, timeh, User.HCOM);
-		//us = userdao.getUsertime(timeq, timeh);
-//		for (int i = 0; i < us.size(); i++) {
-//			System.out.println("yonghuming:" + us.get(i).getUsername() + ":"
-//					+ us.get(i).getCome() + ":" + us.get(i).getOs());
-//		}
+		// us = userdao.getUsertime(timeq, timeh);
+		// for (int i = 0; i < us.size(); i++) {
+		// System.out.println("yonghuming:" + us.get(i).getUsername() + ":"
+		// + us.get(i).getCome() + ":" + us.get(i).getOs());
+		// }
 		System.out.println("own有" + own + "个用户");
 		System.out.println("bbt有" + bbt + "个用户");
 		System.out.println("syn有" + syn + "个用户");
@@ -3847,7 +3739,7 @@ public class UserAction extends ActionSupport {
 		request.setAttribute("zhzh", zhzh);
 		request.setAttribute("xdd", xdd);
 		request.setAttribute("kux", kux);
-		
+
 		request.setAttribute("kd", kd);
 		request.setAttribute("yg", yg);
 		request.setAttribute("hc", hc);
@@ -3867,7 +3759,7 @@ public class UserAction extends ActionSupport {
 		int xdd = userdao.getCount(User.XDD);// 同步的用户数量
 		int own = userdao.getCount(User.OWN);// 同步的用户数量
 		int kux = userdao.getCount(User.KUX);// 同步的用户数量
-		
+
 		int kd = userdao.getCount(User.KDCOM);// 同步的用户数量
 		int yg = userdao.getCount(User.YGCOM);// 同步的用户数量
 		int hc = userdao.getCount(User.HCOM);// 同步的用户数量
@@ -3900,11 +3792,11 @@ public class UserAction extends ActionSupport {
 		request.setAttribute("xdd", xdd);
 		request.setAttribute("own", own);
 		request.setAttribute("kux", kux);
-		
+
 		request.setAttribute("kd", kd);
 		request.setAttribute("yg", yg);
 		request.setAttribute("hc", hc);
-		
+
 		return Action.SUCCESS;
 	}
 
@@ -4156,8 +4048,7 @@ public class UserAction extends ActionSupport {
 		this.userId = userId;
 	}
 
-	public UserAction(ApputilDAO adao, UserDAO userdao, GroupDAO gdao,
-			RegistrationDAO regdao) {
+	public UserAction(ApputilDAO adao, UserDAO userdao, GroupDAO gdao, RegistrationDAO regdao) {
 		super();
 		this.adao = adao;
 		this.userdao = userdao;

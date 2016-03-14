@@ -11,6 +11,14 @@
 			</result>
 		</action>
 		
+		<!-- web通过手机号修改密码 -->
+		<action name="webpassMphone" class="userAction" method="webpassMphone">
+		</action>
+		
+		
+		
+		
+		
 		<!-- 同步用户 能龙教育 登入 -->
 		<action name="thirdPartyNlSave" class="userAction" method="thirdPartyNlSave">
 		</action>

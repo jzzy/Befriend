@@ -20,7 +20,7 @@
 			<div class="topArea clearfix">
 				<h1>我的收藏</h1>
 				<div class="prev">
-					<a href="javascript:history.back(-1);"><img src="<%=request.getContextPath() %>/sample_lihu/images/prev.png" alt="后退" /></a>
+					<a href="<%=request.getContextPath() %>/sample_lihu/jsp/mypage.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 				<div class="topTool">
 					<span id="favorEdit" >编辑</span>
@@ -67,7 +67,7 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 							<input type="checkbox"  name="check" value="<%=nl.get(i).getId() %>" /></div>
 							<div class="inner clearfix">
 								<div class="infoArea">
-									<p class="title"><a href="newsdetail.html"><%=nl.get(i).getTitle() %></a></p>
+									<p class="title"><a href="webNewsId?id=<%=nl.get(i).getId()%>"><%=nl.get(i).getTitle() %></a></p>
 									<p class="info">
 										<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=nl.get(i).getReviews() %></span>
 										<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=nl.get(i).getCollectnum() %></span>
@@ -325,10 +325,10 @@ $("#favorEdit").click(function(){
 $("#checkAll").click(function(){
 	var favorCheck =$(".mainList input").attr("checked");
 	if(favorCheck){
-		$(".mainList input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+		//$(".mainList input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
 
 	}else{
-		$(".mainList input").attr({"checked" : true}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico29.png");
+		//$(".mainList input").attr({"checked" : true}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico29.png");
 		
 	}
 });

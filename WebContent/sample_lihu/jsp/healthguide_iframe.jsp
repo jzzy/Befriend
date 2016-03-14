@@ -12,7 +12,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
 <link href="<%=request.getContextPath() %>/sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="sample_lihu/css/pullToRefresh.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/sample_lihu/css/pullToRefresh.css"/>
 </head>
 <body>
 
@@ -102,7 +102,8 @@
 						
 							<li class="first">
 							
-						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" />
+						<a target="_parent" style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 						<p class="big_img"><a href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
 						<p class="info">
 							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
@@ -122,7 +123,7 @@
 					<li>
 						<div class="infoArea">
 							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" />
-							<a style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+							<a target="_parent" style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -179,7 +180,7 @@ function Load() {
 						el =document.querySelector("#wrapper ul");
 						for (i=0; i<val.length; i++) {
 							li = document.createElement('li');
-							li.innerHTML='<div class="infoArea"><p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href=<%=request.getContextPath()%>/webNewsId?id='+val[i].id+' target="_parent">'+val[i].title+'</a></p><p class="info"><span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span><span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;120</span></p></div><div class="imgArea"><p class="big_img"><a href="newsdetail.html" target="_parent"><img src="http://182.92.100.235/Befriend/'+val[i].img+'" alt="mediumImg" /></a></p></div>';
+							li.innerHTML='<div class="infoArea"><p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href=<%=request.getContextPath()%>/webNewsId?id='+val[i].id+' target="_parent">'+val[i].title+'</a></p><p class="info"><span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span><span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;120</span></p></div><div class="imgArea"><p class="big_img"><a href=<%=request.getContextPath()%>/webNewsId?id='+val[i].id+' target="_parent"><img src="http://182.92.100.235/Befriend/'+val[i].img+'" alt="mediumImg" /></a></p></div>';
 							el.appendChild(li, el.childNodes[0]);
 						}
 						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/

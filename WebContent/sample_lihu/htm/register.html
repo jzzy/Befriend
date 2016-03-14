@@ -15,7 +15,7 @@
 			<div class="topArea clearfix">
 				<h1>注册</h1>
 				<div class="prev">
-					<a href="javascript:history.back(-1);"><img src="../images/prev.png" alt="后退" /></a>
+					<a  href="javascript:history.back(-1);"><img src="../images/prev.png" alt="后退" /></a>
 				</div>
 				<div class="topTool">
 					<span><a href="login.html">登录</a></span>
@@ -25,18 +25,18 @@
 		<div id="container">
 			<div class="login">
 				<div class="logId clearfix">
-					<div class="leftArea">账号</div>
-					<div class="rightArea"><input type="text" name="phone" id="logId" value="用户名/手机号" /></div>
+					<div class="leftArea">手机号</div>
+					<div class="rightArea"><input type="text" name="phone" id="userTel" value="请输入手机号" /></div>
 				</div>
 				<div class="logId clearfix">
-					<div class="leftArea">验证码</div>
-					<div class="rightArea"><input type="text" name="yanzhengma" id="entryCode" value="请输入验证码" /><div class="sentCode"><a href="#">发送验证码</a></div></div>
+					<div class="leftArea">用户名</div>
+					<div class="rightArea"><input type="text" name="username" id="userName" value="请输入用户名" /></div>
 				</div>
 				<div class="logPsd clearfix">
 					<div class="leftArea">密码</div>
 					<div class="rightArea"><input type="text" name="password" id="logPsd" value="请输入6~16位字符" /><div id="showPsd" class="clearfix"><div class="inner clearfix"><span>change</span></div></div></div>
 				</div>
-				<p class="info agree"><img src="../images/ico46.png" alt="checked" />我已阅读并同意<a href="#">《家长之友服务协议》</a></p>
+				<p class="info agree"><img src="../images/ico46.png" alt="checked" />我已阅读并同意<a >《家长之友服务协议》</a></p>
 			</div>
 		</div><!--container-->
 		<div id="footer">
@@ -52,67 +52,67 @@ $("#sum").click(function(){
 	
 });
 
-	$(function(){
-		var logId = $("#logId");
-		var entryCode = $("#entryCode");
-		var logPsd = $("#logPsd");
-		logId.focusin(function(){
-			if(logId.val() !== "用户名/手机号" ){
-			return false;
+$(function(){
+	var userTel = $("#userTel");
+	var userName = $("#userName");
+	var logPsd = $("#logPsd");
+	userTel.focusin(function(){
+		if(userTel.val() !== "请输入手机号" ){
+		return false;
+		}else{
+		$(this).val("");
+		}
+	}
+	);
+	userTel.focusout(function(){
+	  if($(this).val() == ""){
+		$(this).val("请输入手机号");
+	  }
+	});
+	
+	userName.focusin(function(){
+	  // alert(a);
+	  if($(this).val() !== "请输入用户名"){
+		return false;
+	  }else{
+		$(this).val("");
+	  }
+	});
+	userName.focusout(function(){
+	  if($(this).val() == ""){
+		userName.attr("type","text")
+		$(this).val("请输入用户名");
+	  }
+	});
+	
+	logPsd.focusin(function(){
+	  // alert(a);
+	  if($(this).val() !== "请输入6~16位字符"){
+		return false;
+	  }else{
+		$(this).val("");
+		logPsd.attr("type","password")
+	  }
+	});
+	logPsd.focusout(function(){
+	  if($(this).val() == ""){
+		logPsd.attr("type","text")
+		$(this).val("请输入6~16位字符");
+		$("#showPsd .inner span").removeClass("changeOn");
+	  }
+	});
+	$("#showPsd .inner").click(function(){
+		if(logPsd.val() !== "请输入6~16位字符"){
+			if(logPsd.attr("type") == "password"){
+				logPsd.attr("type","text");
+				$("#showPsd .inner span").addClass("changeOn");
 			}else{
-			$(this).val("");
+				logPsd.attr("type","password");
+				$("#showPsd .inner span").removeClass("changeOn");
 			}
 		}
-		);
-		logId.focusout(function(){
-		  if($(this).val() == ""){
-			$(this).val("用户名/手机号");
-		  }
-		});
-		
-		entryCode.focusin(function(){
-		  // alert(a);
-		  if($(this).val() !== "请输入验证码"){
-			return false;
-		  }else{
-			$(this).val("");
-		  }
-		});
-		entryCode.focusout(function(){
-		  if($(this).val() == ""){
-			entryCode.attr("type","text")
-			$(this).val("请输入验证码");
-		  }
-		});
-		
-		logPsd.focusin(function(){
-		  // alert(a);
-		  if($(this).val() !== "请输入6~16位字符"){
-			return false;
-		  }else{
-			$(this).val("");
-			logPsd.attr("type","password")
-		  }
-		});
-		logPsd.focusout(function(){
-		  if($(this).val() == ""){
-			logPsd.attr("type","text")
-			$(this).val("请输入6~16位字符");
-			$("#showPsd .inner span").removeClass("changeOn");
-		  }
-		});
-		$("#showPsd .inner").click(function(){
-			if(logPsd.val() !== "请输入6~16位字符"){
-				if(logPsd.attr("type") == "password"){
-					logPsd.attr("type","text");
-					$("#showPsd .inner span").addClass("changeOn");
-				}else{
-					logPsd.attr("type","password");
-					$("#showPsd .inner span").removeClass("changeOn");
-				}
-			}
-		});
 	});
+});
 </script>
 </form>
 </body>
