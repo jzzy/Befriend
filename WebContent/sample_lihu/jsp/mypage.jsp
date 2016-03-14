@@ -55,7 +55,7 @@ if(false){
 				}else{
 				%>
 				<div class="myInfo logon">
-					<p class="userImg"><img src="<%=request.getContextPath()+u.getImg() %>" alt="sample" /></p>
+					<p class="userImg"><img style="width: 78px;height: 78px;" src="<%=request.getContextPath()+u.getImg() %>" alt="sample" /></p>
 					<p class="name"><%=u.getNickname() %><a href="<%=request.getContextPath() %>/sample_lihu/jsp/myAccount.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico23.png" alt="修改" /></a></p>
 					<p class="info clearfix"><span class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico24.png" alt="" /><%=u.getAddress()+" "+u.getAddcity() %></span><span class="rightArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico25.png" alt="年级" /><%=u.getStage() %></span></p>
 					<span class="prev"><img onclick="javascript:history.back(-1);" src="<%=request.getContextPath() %>/sample_lihu/images/ico45.png" alt="上一页" /></span>
