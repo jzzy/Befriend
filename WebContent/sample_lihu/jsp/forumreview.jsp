@@ -49,7 +49,7 @@ if(f==null){
 			<div class="forumReview">
 				<div class="theme">
 					<div class="user clearfix">
-						<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%="http://182.92.100.235/Befriend/"+u.getImg() %>" alt="sample" /></div>
+						<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%=request.getContextPath()+u.getImg() %>" alt="sample" /></div>
 						<div class="rightArea">
 							<p class="name clearfix"><%=u.getNickname() %><span class="userTag"><img src="sample_lihu/images/user_ico.gif" alt="楼主" />楼主</span></p>
 							<p class="time"><%=f.getTime() %></p>
@@ -100,7 +100,7 @@ if(f==null){
 								<ul>
 									<li class="comment">
 										<div class="inner clearfix">
-											<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%="http://182.92.100.235/Befriend/"+us.get(i).getImg() %>" alt="sampleuser" /></div>
+											<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%=request.getContextPath()+us.get(i).getImg() %>" alt="sampleuser" /></div>
 											<div class="rightArea">
 												<p class="name"><%=us.get(i).getNickname() %><span class="userTag"><%=fs.size()-i %>楼</span></p>
 												<p class="detail"><%=fs.get(i).getReply() %></p>
@@ -131,7 +131,7 @@ if(f==null){
 									
 									<li class="reply">
 										<div class="inner clearfix">
-											<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%="http://182.92.100.235/Befriend/"+lfu.get(i1).getImg() %>" alt="sampleuser" /></div>
+											<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%=request.getContextPath()+lfu.get(i1).getImg() %>" alt="sampleuser" /></div>
 											<div class="rightArea">
 												<p class="name"><img src="sample_lihu/images/ico03.png" alt="reply" /><%=us.get(i).getNickname() %></p>
 												<p class="detail"><%=fa.get(i1).getReply() %></p>
@@ -172,7 +172,7 @@ if(f==null){
 								<ul>
 									<li class="comment">
 										<div class="inner clearfix">
-											<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%="http://182.92.100.235/Befriend/"+us.get(i).getImg() %>" alt="sampleuser" /></div>
+											<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%=request.getContextPath()+us.get(i).getImg() %>" alt="sampleuser" /></div>
 											<div class="rightArea">
 												<p class="name"><%=us.get(i).getNickname() %><span class="userTag"><%=fs.size()-i %>楼</span></p>
 												<p class="detail"><%=fs.get(i).getReply() %></p>
@@ -203,7 +203,7 @@ if(f==null){
 									
 									<li class="reply">
 										<div class="inner clearfix">
-											<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%="http://182.92.100.235/Befriend/"+lfu.get(i1).getImg() %>" alt="sampleuser" /></div>
+											<div class="leftArea"><img style="width: 60px;height: 60px;" src="<%=request.getContextPath()+lfu.get(i1).getImg() %>" alt="sampleuser" /></div>
 											<div class="rightArea">
 												<p class="name"><img src="sample_lihu/images/ico03.png" alt="reply" /><%=us.get(i).getNickname() %></p>
 												<p class="detail"><%=fa.get(i1).getReply() %></p>

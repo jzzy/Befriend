@@ -281,7 +281,7 @@ $("#delete").click(function(){
             }
     
         });
-        alert(text);
+     //   alert(text);
         if(confirm("确定删除？")){
 		 	 
    		 
