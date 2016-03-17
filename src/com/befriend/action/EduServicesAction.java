@@ -242,9 +242,10 @@ public class EduServicesAction extends ActionSupport implements
 			if (!OpeFunction.isEmpty(province)) {
 				if (!province.equals("all")) {
 					map.put("province", province);
+					request.setAttribute("province", province);
+					session.setAttribute("province", province);
 				}
-				request.setAttribute("province", province);
-				session.setAttribute("province", province);
+				
 
 			}
 
@@ -408,10 +409,11 @@ public class EduServicesAction extends ActionSupport implements
 			if (!OpeFunction.isEmpty(province)) {
 				if (!province.equals("all")) {
 					map.put("province", province);
-				}
-				request.setAttribute("province", province);
-				session.setAttribute("province", province);
+					request.setAttribute("province", province);
+					session.setAttribute("province", province);
 
+				}
+				
 			}
 
 			if (!OpeFunction.isEmpty(county)) {
@@ -608,9 +610,10 @@ public class EduServicesAction extends ActionSupport implements
 			if (!OpeFunction.isEmpty(province)) {
 				if (!province.equals("all")) {
 					map.put("province", province);
+					request.setAttribute("province", province);
+					session.setAttribute("province", province);
 				}
-				request.setAttribute("province", province);
-				session.setAttribute("province", province);
+			
 
 			}
 
@@ -845,9 +848,10 @@ public class EduServicesAction extends ActionSupport implements
 			if (!OpeFunction.isEmpty(province)) {
 				if (!province.equals("all")) {
 					map.put("province", province);
+					request.setAttribute("province", province);
+					session.setAttribute("province", province);
 				}
-				request.setAttribute("province", province);
-				session.setAttribute("province", province);
+				
 
 			}
 
@@ -997,39 +1001,24 @@ public class EduServicesAction extends ActionSupport implements
 
 	}
 
-	public String getLikeEduWeb() throws IOException {
+	public String getLikeEduWebArea() throws IOException {
 		try {
 
-			// if
-			// (OpeFunction.isEmpty(province)!=true?!province.equals("null"):false)
-			// {
-			// session.setAttribute("province", province);
-			// } else {
-			// province = session.getAttribute("province") == null ? null
-			// : session.getAttribute("province").toString();
-			// if(session.getAttribute("province")==null||session.getAttribute("province").equals("null")){
-			// province="北京";
-			// }
-			// }
+			 if
+			 (!OpeFunction.isEmpty(province))
+			 {
+			 session.setAttribute("province", province);
+			 }
 			//
-			// if (OpeFunction.isEmpty(city)!=true?!city.equals("null"):false) {
-			// session.setAttribute("city", city);
-			// } else {
-			// city = session.getAttribute("city") ==
-			// null||session.getAttribute("city").equals("null") ? "" : session
-			// .getAttribute("city").toString();
-			// }
+			 if (!OpeFunction.isEmpty(city)) {
+			 session.setAttribute("city", city);
+			 } 
 			//
-			// if
-			// (OpeFunction.isEmpty(county)!=true?!county.equals("null"):false)
-			// {
-			// session.setAttribute("county", county);
-			// } else {
-			// county = session.getAttribute("county") ==
-			// null||session.getAttribute("county").equals("null") ? "" :
-			// session
-			// .getAttribute("county").toString();
-			// }
+			 if
+			 (!OpeFunction.isEmpty(county))
+			 {
+			 session.setAttribute("county", county);
+			 } 
 
 			System.out.println("province" + province);
 			System.out.println("city" + city);
@@ -1069,7 +1058,135 @@ public class EduServicesAction extends ActionSupport implements
 				value = session.getAttribute("value").toString();
 			}
 
-			List<EduServices> edl = eduServicesDAO.findLike(value, currentPage,
+			
+			//request.setAttribute("EduServices", edl);
+			request.setAttribute("value", value);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+
+	}
+	public String getLikeEduWeb() throws IOException {
+		try {
+
+	
+			if(session.getAttribute("province")!=null){
+				province=session.getAttribute("province").toString();
+			}
+			if(session.getAttribute("city")!=null){
+				city=session.getAttribute("city").toString();
+			}
+			if(session.getAttribute("county")!=null){
+				county=session.getAttribute("county").toString();
+			}
+			System.out.println("province" + province);
+			System.out.println("city" + city);
+			System.out.println("county" + county);
+
+			Map<String, String> map = new HashMap<String, String>();
+
+			if (!OpeFunction.isEmpty(province)) {
+				if (!province.equals("all")) {
+					map.put("province", province);
+					request.setAttribute("province", province);
+					session.setAttribute("province", province);
+				}
+				
+
+			}
+
+			if (!OpeFunction.isEmpty(county)) {
+				if (!county.equals("all")) {
+					map.put("county", county);
+				}
+				request.setAttribute("county", county);
+				session.setAttribute("county", county);
+
+			}
+
+			if (!OpeFunction.isEmpty(city)) {
+				if (!city.equals("all")) {
+					map.put("city", city);
+				}
+				request.setAttribute("city", city);
+				session.setAttribute("city", city);
+
+			}
+
+			if (!OpeFunction.isEmpty(classFirst)) {
+				if (!classFirst.equals("all")) {
+					map.put("classFirst", classFirst);
+				}
+				request.setAttribute("classFirst", classFirst);
+				session.setAttribute("classFirst", classFirst);
+
+			}
+
+			if (!OpeFunction.isEmpty(classSecond)) {
+				if (!classSecond.equals("all")) {
+					System.out.println("条件正确" + classSecond);
+					map.put("classSecond", classSecond);
+				}
+				request.setAttribute("classSecond", classSecond);
+				session.setAttribute("classSecond", classSecond);
+
+			}
+
+			if (!OpeFunction.isEmpty(address)) {
+				if (!address.equals("all")) {
+					map.put("address", address);
+				}
+				request.setAttribute("address", address);
+				session.setAttribute("address", address);
+
+			}
+
+			if (OpeFunction.isEmpty(classSecond)) {
+
+				if (session.getAttribute("classSecond") != null&&!session.getAttribute("classSecond").equals("all")) {
+					classSecond = session.getAttribute("classSecond")
+							.toString();
+					map.put("classSecond", classSecond);
+				}
+
+			}
+			if (OpeFunction.isEmpty(county)) {
+
+				if (session.getAttribute("county") != null&&!session.getAttribute("county").equals("all")) {
+					county = session.getAttribute("county")
+							.toString();
+					map.put("county",county);
+				}
+
+			}
+			if (!OpeFunction.isEmpty(sortType)) {
+				session.setAttribute("sortType", sortType);
+			} else {
+				sortType = session.getAttribute("sortType") == null ? "6"
+						: session.getAttribute("sortType").toString();
+			}
+			
+			System.out.println("lng:" + lng + "lat:" + lat);
+			session.setAttribute("lng", lng);
+			session.setAttribute("lat", lat);
+			System.out.println("province" + province);
+			System.out.println("city" + city);
+			System.out.println("county" + county);
+			System.out.println("classSecond" + classSecond);
+			System.out.println("classFirst" + classFirst);
+			System.out.println("address" + address);
+			
+			
+			System.out.println("value" + value);
+			if (!OpeFunction.isEmpty(value)) {
+				session.setAttribute("value", value);
+			} else if (session.getAttribute("value") != null) {
+				value = session.getAttribute("value").toString();
+			}
+
+			List<EduServices> edl = eduServicesDAO.findLike(map,value, currentPage,
 					pageSize);
 			for (int i = 0; i < edl.size(); i++) {
 
@@ -1127,72 +1244,301 @@ public class EduServicesAction extends ActionSupport implements
 		return Action.SUCCESS;
 
 	}
-
-	public String getLikeEduWebAjax() throws IOException {
+	public void getLikeEduWebToJson() throws IOException {
 		try {
 
-			// if
-			// (OpeFunction.isEmpty(province)!=true?!province.equals("null"):false)
-			// {
-			// session.setAttribute("province", province);
-			// } else {
-			// province = session.getAttribute("province") == null ? null
-			// : session.getAttribute("province").toString();
-			// if(session.getAttribute("province")==null||session.getAttribute("province").equals("null")){
-			// province="北京";
-			// }
-			// }
-			// if
-			// (OpeFunction.isEmpty(classFirst)!=true?!classFirst.equals("null"):false)
-			// {
-			// session.setAttribute("classFirst", classFirst);
-			// } else {
-			// classFirst = session.getAttribute("classFirst") == null ? ""
-			// : session.getAttribute("classFirst").toString();
-			// }
-			// if (OpeFunction.isEmpty(city)!=true?!city.equals("null"):false) {
-			// session.setAttribute("city", city);
-			// } else {
-			// city = session.getAttribute("city") ==
-			// null||session.getAttribute("city").equals("null") ? "" : session
-			// .getAttribute("city").toString();
-			// }
-			//
-			// if
-			// (OpeFunction.isEmpty(county)!=true?!county.equals("null"):false)
-			// {
-			// session.setAttribute("county", county);
-			// } else {
-			// county = session.getAttribute("county") ==
-			// null||session.getAttribute("county").equals("null") ? "" :
-			// session
-			// .getAttribute("county").toString();
-			// }
-			//
-			// if
-			// (OpeFunction.isEmpty(classSecond)!=true?!classSecond.equals("null"):false)
-			// {
-			// session.setAttribute("classSecond", classSecond);
-			// } else {
-			// classSecond = session.getAttribute("classSecond") == null ? ""
-			// : session.getAttribute("classSecond").toString();
-			// }
-			//
-			// if
-			// (OpeFunction.isEmpty(address)!=true?!address.equals("null"):false)
-			// {
-			// session.setAttribute("address", address);
-			// } else {
-			// address = session.getAttribute("address") == null ? ""
-			// : session.getAttribute("address").toString();
-			// }
+			if(session.getAttribute("province")!=null){
+				province=session.getAttribute("province").toString();
+			}
+			if(session.getAttribute("city")!=null){
+				city=session.getAttribute("city").toString();
+			}
+			if(session.getAttribute("county")!=null){
+				county=session.getAttribute("county").toString();
+			}
 			System.out.println("province" + province);
 			System.out.println("city" + city);
 			System.out.println("county" + county);
 
+			Map<String, String> map = new HashMap<String, String>();
+
+			if (!OpeFunction.isEmpty(province)) {
+				if (!province.equals("all")) {
+					map.put("province", province);
+					request.setAttribute("province", province);
+					session.setAttribute("province", province);
+				}
+				
+
+			}
+
+			if (!OpeFunction.isEmpty(county)) {
+				if (!county.equals("all")) {
+					map.put("county", county);
+				}
+				request.setAttribute("county", county);
+				session.setAttribute("county", county);
+
+			}
+
+			if (!OpeFunction.isEmpty(city)) {
+				if (!city.equals("all")) {
+					map.put("city", city);
+				}
+				request.setAttribute("city", city);
+				session.setAttribute("city", city);
+
+			}
+
+			if (!OpeFunction.isEmpty(classFirst)) {
+				if (!classFirst.equals("all")) {
+					map.put("classFirst", classFirst);
+				}
+				request.setAttribute("classFirst", classFirst);
+				session.setAttribute("classFirst", classFirst);
+
+			}
+
+			if (!OpeFunction.isEmpty(classSecond)) {
+				if (!classSecond.equals("all")) {
+					System.out.println("条件正确" + classSecond);
+					map.put("classSecond", classSecond);
+				}
+				request.setAttribute("classSecond", classSecond);
+				session.setAttribute("classSecond", classSecond);
+
+			}
+
+			if (!OpeFunction.isEmpty(address)) {
+				if (!address.equals("all")) {
+					map.put("address", address);
+				}
+				request.setAttribute("address", address);
+				session.setAttribute("address", address);
+
+			}
+
+			if (OpeFunction.isEmpty(classSecond)) {
+
+				if (session.getAttribute("classSecond") != null&&!session.getAttribute("classSecond").equals("all")) {
+					classSecond = session.getAttribute("classSecond")
+							.toString();
+					map.put("classSecond", classSecond);
+				}
+
+			}
+			if (OpeFunction.isEmpty(county)) {
+
+				if (session.getAttribute("county") != null&&!session.getAttribute("county").equals("all")) {
+					county = session.getAttribute("county")
+							.toString();
+					map.put("county",county);
+				}
+
+			}
+			if (!OpeFunction.isEmpty(sortType)) {
+				session.setAttribute("sortType", sortType);
+			} else {
+				sortType = session.getAttribute("sortType") == null ? "6"
+						: session.getAttribute("sortType").toString();
+			}
+			
+			System.out.println("lng:" + lng + "lat:" + lat);
+			session.setAttribute("lng", lng);
+			session.setAttribute("lat", lat);
+			System.out.println("province" + province);
+			System.out.println("city" + city);
+			System.out.println("county" + county);
+			System.out.println("classSecond" + classSecond);
+			System.out.println("classFirst" + classFirst);
+			System.out.println("address" + address);
+			
+			
 			System.out.println("value" + value);
-			System.out.println("currentPage" + currentPage);
-			List<EduServices> edl = eduServicesDAO.findLike(value, currentPage,
+			if (!OpeFunction.isEmpty(value)) {
+				session.setAttribute("value", value);
+			} else if (session.getAttribute("value") != null) {
+				value = session.getAttribute("value").toString();
+			}
+
+			List<EduServices> edl = eduServicesDAO.findLike(map,value, currentPage,
+					pageSize);
+			for (int i = 0; i < edl.size(); i++) {
+
+				EduServices edu = edl.get(i);
+				edu.setDistance(OpeFunction.Distance(lng, lat,
+						edu.getLongitude(), edu.getLatitude()));
+				System.out.println("排序前:"
+						+ OpeFunction.Distance(lng, lat, edu.getLongitude(),
+								edu.getLatitude()));
+				edl.set(i, edu);
+			}
+			if (!OpeFunction.isEmpty(sortType)) {
+				session.setAttribute("sortType", sortType);
+			} else {
+				sortType = session.getAttribute("sortType") == null ? "6"
+						: session.getAttribute("sortType").toString();
+			}
+			switch (sortType) {
+			case "1":
+				// 离我最近
+				edl.sort(new eduServicesSprt());
+				break;
+			case "2":
+				// 人气最高
+				edl.sort(new eduServicesSprtPopularityMax());
+				break;
+			case "3":
+				// 人均最低
+				edl.sort(new eduServicesSprtPerCapitaMin());
+				break;
+			case "4":
+				// 人均最高
+				edl.sort(new eduServicesSprtPerCapitaMax());
+				break;
+			case "5":
+				// 评价最高
+				edl.sort(new eduServicesSprtEvaluationMax());
+				break;
+
+			default:
+				edl.sort(new eduServicesSprt());
+				break;
+			}
+			for (int i = 0; i < edl.size(); i++) {
+
+				System.out.println("排序后:" + edl.get(i).getDistance());
+
+			}
+			request.setAttribute("EduServices", edl);
+			request.setAttribute("value", value);
+			String result = "{\"edl\":" + OpeFunction.ToJson(edl)+ ",\"value\":" + OpeFunction.ToJson(value) + "}";
+			OpeFunction.Out().print(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	//	return Action.SUCCESS;
+
+	}
+
+	public String getLikeEduWebAjax() throws IOException {
+		try {
+
+			if(session.getAttribute("province")!=null){
+				province=session.getAttribute("province").toString();
+			}
+			if(session.getAttribute("city")!=null){
+				city=session.getAttribute("city").toString();
+			}
+			if(session.getAttribute("county")!=null){
+				county=session.getAttribute("county").toString();
+			}
+			System.out.println("province" + province);
+			System.out.println("city" + city);
+			System.out.println("county" + county);
+
+			Map<String, String> map = new HashMap<String, String>();
+
+			if (!OpeFunction.isEmpty(province)) {
+				if (!province.equals("all")) {
+					map.put("province", province);
+					request.setAttribute("province", province);
+					session.setAttribute("province", province);
+				}
+				
+
+			}
+
+			if (!OpeFunction.isEmpty(county)) {
+				if (!county.equals("all")) {
+					map.put("county", county);
+				}
+				request.setAttribute("county", county);
+				session.setAttribute("county", county);
+
+			}
+
+			if (!OpeFunction.isEmpty(city)) {
+				if (!city.equals("all")) {
+					map.put("city", city);
+				}
+				request.setAttribute("city", city);
+				session.setAttribute("city", city);
+
+			}
+
+			if (!OpeFunction.isEmpty(classFirst)) {
+				if (!classFirst.equals("all")) {
+					map.put("classFirst", classFirst);
+				}
+				request.setAttribute("classFirst", classFirst);
+				session.setAttribute("classFirst", classFirst);
+
+			}
+
+			if (!OpeFunction.isEmpty(classSecond)) {
+				if (!classSecond.equals("all")) {
+					System.out.println("条件正确" + classSecond);
+					map.put("classSecond", classSecond);
+				}
+				request.setAttribute("classSecond", classSecond);
+				session.setAttribute("classSecond", classSecond);
+
+			}
+
+			if (!OpeFunction.isEmpty(address)) {
+				if (!address.equals("all")) {
+					map.put("address", address);
+				}
+				request.setAttribute("address", address);
+				session.setAttribute("address", address);
+
+			}
+
+			if (OpeFunction.isEmpty(classSecond)) {
+
+				if (session.getAttribute("classSecond") != null&&!session.getAttribute("classSecond").equals("all")) {
+					classSecond = session.getAttribute("classSecond")
+							.toString();
+					map.put("classSecond", classSecond);
+				}
+
+			}
+			if (OpeFunction.isEmpty(county)) {
+
+				if (session.getAttribute("county") != null&&!session.getAttribute("county").equals("all")) {
+					county = session.getAttribute("county")
+							.toString();
+					map.put("county",county);
+				}
+
+			}
+			if (!OpeFunction.isEmpty(sortType)) {
+				session.setAttribute("sortType", sortType);
+			} else {
+				sortType = session.getAttribute("sortType") == null ? "6"
+						: session.getAttribute("sortType").toString();
+			}
+			
+			System.out.println("lng:" + lng + "lat:" + lat);
+			session.setAttribute("lng", lng);
+			session.setAttribute("lat", lat);
+			System.out.println("province" + province);
+			System.out.println("city" + city);
+			System.out.println("county" + county);
+			System.out.println("classSecond" + classSecond);
+			System.out.println("classFirst" + classFirst);
+			System.out.println("address" + address);
+			
+			
+			System.out.println("value" + value);
+			if (!OpeFunction.isEmpty(value)) {
+				session.setAttribute("value", value);
+			} else if (session.getAttribute("value") != null) {
+				value = session.getAttribute("value").toString();
+			}
+
+			List<EduServices> edl = eduServicesDAO.findLike(map,value, currentPage,
 					pageSize);
 			for (int i = 0; i < edl.size(); i++) {
 

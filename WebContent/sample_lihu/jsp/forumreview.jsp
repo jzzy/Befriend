@@ -66,17 +66,19 @@ if(f==null){
 							<span><img src="sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;<%=f.getFollectnum()%></span>
 						</div>
 					</div>
-					<div class="imgList clearfix">
 					<%
 					if(f.getImg()!=null){
 					%>
+					<div class="imgList clearfix">
+					
 						<p><a ><img src="<%=request.getContextPath()+f.getImg() %>" alt="sample" /></a></p>
-					<%
-					}
-					%>
+					
 					
 					
 					</div>
+					<%
+					}
+					%>
 				</div>
 			
 				<div class="reviewList">

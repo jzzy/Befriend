@@ -11,15 +11,14 @@
 <title></title>
 <link href="sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="sample_lihu/css/pullToRefresh.css"/>
-<script type="text/javascript" src="sample_lihu/js/common.js"></script>
 <script type="text/javascript" src="sample_lihu/js/jquery-1.10.2.min.js"></script>
-
+<script type="text/javascript" src="sample_lihu/js/common.js"></script>
 
 </head>
 <body>
 	<div id="container">
-		<div class="eduServ listPack" id="wrapper">
-			<ul>
+			<div class="eduServ listPack" id="wrapper">
+				<ul>
 					<%
 			List<EduServices> lEduServices=(List)(request.getAttribute("EduServices")==null?new ArrayList<EduServices>():request.getAttribute("EduServices")); 			
 			for(int i=0;i<lEduServices.size();i++){
@@ -28,8 +27,8 @@
 				
 			%>
 					<li>
-					<a href="<%=request.getContextPath() %>/getWebCommments?merchantId=<%=lEduServices.get(i).getMerchantId()%>" target="_parent" >
-							<div class="imgArea"><img src="<%="http://182.92.100.235/"+lEduServices.get(i).getPicture() %>" alt="" /></div>
+					<a target="_parent" href="getWebCommments?merchantId=<%=lEduServices.get(i).getMerchantId()%>">
+							<div class="imgArea"><img src="sample_lihu/images/xw_15.png" alt="" /></div>
 							<div class="infoArea">
 								<h3><%=lEduServices.get(i).getName() %></h3>
 								<p class="rate clearfix">
@@ -74,10 +73,10 @@
 					<%
 			}
 					%>
-			</ul>
-		</div>
+				</ul>
+			</div>
 	</div>
-	<div id="divc" style="display: none;">2</div>
+		<div id="divc" style="display: none;">2</div>
 <script src="sample_lihu/js/iscroll.js"></script>
 <script src="sample_lihu/js/pullToRefresh.js"></script>
 <script>
@@ -104,7 +103,7 @@ function Refresh() {
 		el =document.querySelector("#wrapper ul");					
 		//这里写你的刷新代码				
 		document.getElementById("wrapper").querySelector(".pullDownIcon").style.display="none";		
-		document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='images/ok.png' />刷新成功";																					 
+		document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='images/ok.png'/>刷新成功";																					 
 		setTimeout(function () {
 			wrapper.refresh();
 			document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								
@@ -114,10 +113,10 @@ function Refresh() {
 }
 function Load() {
 	setTimeout(function () {// <-- Simulate network congestion, remove setTimeout from production!
-		var el, li, i;
+		var el, li, i,str;
 		el =document.querySelector("#wrapper ul");
 		$.ajax({
-			url:"/Befriend/getEduWebToJson?currentPage="+$("#divc").html(),
+			url:"/Befriend/getLikeEduWebToJson?value=<%=request.getAttribute("value")%>&currentPage="+$("#divc").html(),
 			 dataType: "json", 
 					async:false,
 					success: function (data) {     
@@ -126,23 +125,24 @@ function Load() {
 					//alert(val[0].id);
 					
 						for (i=0; i<val.length; i++) {
-							
-							li = document.createElement('li');
-							li.innerHTML='<a href="<%=request.getContextPath()+"/" %>getWebCommments?merchantId='+val[i].merchantId+'" target="_parent"><div class="imgArea"><img  src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3><p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix"><strong>海淀区</strong><span>职业技术</span><div class="distance">8000m</div></div></div></a>';
-							el.appendChild(li, el.childNodes[0]);
-						}
+			li = document.createElement('li');
+			str='<a target="_parent" href="edu_detail.html" target="_parent"><div class="imgArea">';
+			str=str+'<img src="sample_lihu/images/xw_15.png" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3>';
+			str=str+'<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off">';
+			str=str+'</span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix">';
+			str=str+'<strong>海淀区</strong><span>职业技术</span><div class="distance">8000m</div></div></div></a>';
+		//	alert(str);
+			li.innerHTML=str;
+			el.appendChild(li, el.childNodes[0]);
+		}
 						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
-					
+						
 						$("#divc").html(parseInt($("#divc").html())+1);
 					
 					
 						},
 					
-		})
-		
-		
-		
-		
+		})	
 		
 	});	
 }

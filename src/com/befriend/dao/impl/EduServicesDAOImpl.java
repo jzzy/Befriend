@@ -117,9 +117,36 @@ public class EduServicesDAOImpl implements EduServicesDAO
 	}
 
 	@Override
-	public List<EduServices> findLike(String value, int currentPage,
+	public List<EduServices> findLike(Map<String,String> map,String value, int currentPage,
 			int pageSize) {
-		String sql = "select u from EduServices u where u.name like :value or u.classSecond like :value";
+		System.out.println("value"+value);
+		String sql = "select u from EduServices u ";
+		int i = 0;
+		if(map.size()>0)
+		{
+			sql += "where ";
+			
+			for(Entry<String, String> entry: map.entrySet())
+			{
+				if(i == 0)
+				{
+					sql += "u." + entry.getKey() + " like '%" +entry.getValue() +"%' ";
+				}
+				else
+				{
+					sql += "and u." + entry.getKey() + " like '%" +entry.getValue() + "%' ";
+				}
+				i++;
+			}
+			
+			
+		}
+		if(i!=0){
+			sql +="and (u.name like:value or u.classSecond like:value)";
+			}else{
+				sql +="where  u.name like:value or u.classSecond like:value";
+			}
+		
 		Query query = entityManger.createQuery(sql);
 		query.setParameter("value","%"+value+"%");
 		query.setFirstResult((currentPage-1)*pageSize);

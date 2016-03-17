@@ -52,7 +52,17 @@ if(fone==null||us==null){
 				<ul>
 					<li>
 						<div class="user clearfix">
-							<p class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sample" /></p>
+							<p class="leftArea">
+								<%
+						if(us.get(i).getImg()!=null){
+						%>
+							<img src="<%=request.getContextPath()+us.get(i).getImg() %>" alt="sample" />
+							<%}else{ %>
+								<img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sample" />
+							<%
+							}
+							%>
+							</p>
 							<p class="rightArea">
 								<span><%=us.get(i).getNickname() %></span>
 								<span>2016-01-15 09:54</span>
@@ -60,29 +70,22 @@ if(fone==null||us==null){
 						</div>
 						<div class="title"><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent"><%=fone.get(i).getTitle() %></a></div>
 						<div class="detail"><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent"><%=fone.get(i).getContent() %></a></div>
+						<%
+						if(fone.get(i).getImg()!=null){
+						%>
 						<div class="imgList clearfix">
+						
 							<p><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent">
 						
-							<img src="	<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" />
-							
-							
-						
-							</a></p>
-							<p><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent">
-						
-							<img src="	<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" />
-							
-							
-						
-							</a></p>
-							<p><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent">
-						
-							<img src="	<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" />
+							<img src="	<%=request.getContextPath()+fone.get(i).getImg() %>" alt="sample" />
 							
 							
 						
 							</a></p>
 						</div>
+						<%
+						}
+						%>
 						<div class="info">
 							<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span>
 							<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;120</span>
@@ -105,7 +108,19 @@ refresher.init({
 	id:"wrapper",//<------------------------------------------------------------------------------------
 	pullDownAction:Refresh,                                                            
 	pullUpAction:Load 																			
-	});																																							
+	});	
+$(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+	var el, li, i;																		
+	el =document.querySelector("#wrapper ul");					
+	//这里写你的刷新代码				
+	document.getElementById("wrapper").querySelector(".pullDownIcon").style.display="none";		
+	document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='sample_lihu/images/ok.png'/>刷新成功";																					 
+	setTimeout(function () {
+		wrapper.refresh();
+		document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								
+		},1000);//模拟qq下拉刷新显示成功效果
+	/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+}, 1000);
 function Refresh() {																
 	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
 		var el, li, i;																		
@@ -130,7 +145,7 @@ function Load() {
 					success: function (data) {     
 						var val = data["fones"];//获取json中的 key
 						var vus = data["us"];
-						var el, li, i;
+						var el, li, i,str;
 						el =document.querySelector("#wrapper ul");
 						var arr=eval(val);
 						var us=eval(vus);
@@ -139,9 +154,28 @@ function Load() {
 						    //alert(arr[i].title);
 
 								li = document.createElement('li');
-								li.innerHTML='<div class="user clearfix"><p class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sample" /></p><p class="rightArea"><span>'+us[i].nickname+'</span><span>2016-01-15 09:54</span></p></div><div class="title"><a href=<%=request.getContextPath() %>/webForumLook?id='+arr[i].id+' target="_parent">'+arr[i].title+'</a></div><div class="detail"><a href=<%=request.getContextPath() %>/webForumLook?id='+arr[i].id+' target="_parent">'+arr[i].content+'</a></div><div class="imgList clearfix"><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p></div><div class="info"><span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span><span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;120</span></div>';
+								str='<div class="user clearfix"><p class="leftArea">';
+								if(us[i].img==null){
+									str+='<img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sample" />';
+									
+								}else{
+									str+='<img src="<%=request.getContextPath() %>'+us[i].img+'" alt="sample" />';
+								}
+								
+								str+='</p><p class="rightArea"><span>'+us[i].nickname+'</span><span>2016-01-15 09:54</span></p></div>';
+								str+='<div class="title"><a href=<%=request.getContextPath() %>/webForumLook?id='+arr[i].id+' target="_parent">'+arr[i].title+'</a>';
+								str+='</div><div class="detail"><a href=<%=request.getContextPath() %>/webForumLook?id='+arr[i].id+' target="_parent">'+arr[i].content+'</a>';
+								str+='</div>';
+								if(arr[i].img!=null){
+									str+='<div class="imgList clearfix"><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>'+arr[i].img+'" alt="sample" /></a></p></div>';
+								}
+								
+								str+='<div class="info"><span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />';
+								str+='&nbsp;520</span><span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;120</span></div>';
+								//alert(str);
+								li.innerHTML=str;
 								el.appendChild(li, el.childNodes[0]);
-
+								
 						}
 						$("#divc").html(parseInt($("#divc").html())+1);
 					

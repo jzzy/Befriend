@@ -9,10 +9,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
 <link href="<%=request.getContextPath() %>/sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/sample_lihu/css/pullToRefresh.css"/>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
+
+<script src="<%=request.getContextPath() %>/sample_lihu/js/iscroll.js"></script>
+<script src="<%=request.getContextPath() %>/sample_lihu/js/pullToRefresh.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
+
 </head>
 <body>
 
@@ -142,14 +146,29 @@
 		</div>
 	</div>
 <div id=divc style="display: none;">2</div>
-<script src="<%=request.getContextPath() %>/sample_lihu/js/iscroll.js"></script>
-<script src="<%=request.getContextPath() %>/sample_lihu/js/pullToRefresh.js"></script>
+
 <script type="text/javascript">
-refresher.init({
-	id:"wrapper",//<------------------------------------------------------------------------------------┐
-	pullDownAction:Refresh,                                                            
-	pullUpAction:Load 																			
-	});																																							
+
+window.onload=function(){
+	refresher.init({
+		id:"wrapper",//<------------------------------------------------------------------------------------┐
+		pullDownAction:Refresh,                                                            
+		pullUpAction:Load 																			
+		},3000);	
+	var el, li, i;																		
+	el =document.querySelector("#wrapper ul");					
+	//这里写你的刷新代码				
+	document.getElementById("wrapper").querySelector(".pullDownIcon").style.display="none";		
+	document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='sample_lihu/images/ok.png'/>刷新成功";																					 
+	setTimeout(function () {
+		wrapper.refresh();
+		//document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								
+		},10000);//模拟qq下拉刷新显示成功效果
+	/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+
+}
+
+
 function Refresh() {																
 	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
 		var el, li, i;																		
@@ -159,7 +178,7 @@ function Refresh() {
 		document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='sample_lihu/images/ok.png'/>刷新成功";																					 
 		setTimeout(function () {
 			wrapper.refresh();
-			document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								
+			//document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								
 			},1000);//模拟qq下拉刷新显示成功效果
 		/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
 	}, 1000);

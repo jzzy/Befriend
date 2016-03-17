@@ -9,36 +9,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
+<link href="<%=request.getContextPath() %>/sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/jsjquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/jscommon.js"></script>
 <script type="text/javascript">
 function  checkvalue()
 {	 
-document.form1.action="<%=request.getContextPath() %>/getLikeEduWeb";
+document.form1.action="<%=request.getContextPath() %>/getLikeEduWebArea";
 document.form1.submit();
 //alert('已提交');
 return true;
 
 }
 </script>
-<link href="<%=request.getContextPath() %>/sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
-			<form name="form1" action="getLikeEduWeb">
+			<form name="form1" action="getLikeEduWebArea">
 				<div class="search_input2">
 					<div class="inner">
 						<input type="text" name="value" id="search2" />
-						<a href="#" onClick="javascript:return checkvalue();" class="search_btn2">
+						<a  onClick="javascript:return checkvalue();" class="search_btn2">
 						<img src="<%=request.getContextPath() %>/sample_lihu/images/ico07.gif" alt="确认搜索" />
 						</a>
 						</span>
 					</div>
 				</div>
 				<div class="prev">
-					<a href="javascript:history.back(-1);"><img src="<%=request.getContextPath() %>/sample_lihu/images/prev.png" alt="后退" /></a>
+					<a href="<%=request.getContextPath() %>/getEduWebArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 				</form>
 			</div>
@@ -47,21 +48,21 @@ return true;
 			<div class="everyone_search">
 				<h2>大家都在搜</h2>
 				<ul class="clearfix">
-				<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=英语培训">英语培训</a></li>
-					<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=韦博国际英语">韦博国际英语</a></li>
-					<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=绘画">绘画</a></li>
-					<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=钢琴">钢琴</a></li>
-					<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=芭蕾舞">芭蕾舞</a></li>
-					<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=数学">数学</a></li>
+				<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=英语培训">英语培训</a></li>
+					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=韦博国际英语">韦博国际英语</a></li>
+					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=绘画">绘画</a></li>
+					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=钢琴">钢琴</a></li>
+					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=芭蕾舞">芭蕾舞</a></li>
+					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=数学">数学</a></li>
 				</ul>
 			</div>
 			<div  class="history_search">
 				<h2>搜索历史：</h2>
 				<ul>
-					<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=英语">英语</a></li>
-					<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=数学">数学</a></li>
-					<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=语文">语文</a></li>
-					<li><a href="<%=request.getContextPath() %>/getLikeEduWeb?value=音乐">音乐</a></li>
+					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=英语">英语</a></li>
+					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=数学">数学</a></li>
+					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=语文">语文</a></li>
+					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=音乐">音乐</a></li>
 				</ul>
 				<p><a href="#">清空搜索历史</a></p>
 			</div>
