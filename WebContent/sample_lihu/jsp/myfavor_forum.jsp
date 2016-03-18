@@ -255,6 +255,9 @@ $("#delete").click(function(){
     
         });
        // alert(text);
+       if(text.length>1){
+    	   
+      
         if(confirm("确定删除？")){
 		 	 
    		 
@@ -303,6 +306,7 @@ $("#delete").click(function(){
    			alert("取消成功！");
    			
   		   }
+       }
         
         
       
