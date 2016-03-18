@@ -23,7 +23,7 @@
 					<a href="<%=request.getContextPath() %>/sample_lihu/jsp/relocation.jsp">北京&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
-					<span><a href="<%=request.getContextPath() %>/sample_lihu/post4.html">发表</a></span>
+					<span><a href="<%=request.getContextPath() %>/sample_lihu/htm/post4.html">发表</a></span>
 				</div>
 			</div>
 			<ul class="topMenu clearfix">

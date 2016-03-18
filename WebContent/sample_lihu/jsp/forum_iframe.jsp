@@ -65,7 +65,7 @@ if(fone==null||us==null){
 							</p>
 							<p class="rightArea">
 								<span><%=us.get(i).getNickname() %></span>
-								<span>2016-01-15 09:54</span>
+								<span><%=fone.get(i).getTime()%></span>
 							</p>
 						</div>
 						<div class="title"><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent"><%=fone.get(i).getTitle() %></a></div>

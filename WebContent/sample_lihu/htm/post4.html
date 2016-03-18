@@ -104,7 +104,7 @@ document.form1.file.click();
 						<a href="javascript:history.back(-1);">取消</a>
 					</li>
 					<li>
-						<a id="af1" href="#" onClick="javascript:return checkvalue();">发表</a>
+						<a id="af1" onClick="javascript:return checkvalue();">发表</a>
 					</li>
 				</ul>
 			</div>
@@ -118,15 +118,28 @@ function  checkvalue()
 	 var content = document.getElementById("postCont").value;
 	  var title = document.getElementById("postTit").value;
 	
-	  if (title==""||title==null||title.length>30||title.length<2){
- 		alert("请正确填写标题 2字以上30字之间！");
- 		return false;
+	  try {  
+          
+      
+	  var dom = document.getElementById("doc");  
+	  if(dom!=null)
+	 	 var fileSize =  dom.files[0].size;
+		if(fileSize>2077086){
+			alert("图片大于2Mb！");
+	 		return false;
 		}
-	  
-	  if (content==""||content==null||content.length<10){
-   		alert("请正确填写内容 10字以上");
-   		return false;
-   	}
+	
+} catch (e) {  
+}
+		 if (title==""||title==null||title.length>26||title.length<4 ||title== "标题，4-25个字"){
+		 		alert("标题，4-25个字之间！");
+		 		return false;
+				}
+			  
+	if (content==""||content==null||content.length<10||content== "内容，10-700个字"||content.length>700){
+		   		alert("内容，10-700个字之间！");
+		   		return false;
+		   	}
 document.form1.action="webForumonesaveapp";
 document.form1.submit();
 alert('已提交');

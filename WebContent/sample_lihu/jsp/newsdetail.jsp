@@ -125,7 +125,7 @@ if(n==null)
 		<div id="footer">
 			<div class="newsDetail_ft clearfix">
 				<div class="leftArea">
-					<a href="webNewsIdcomm?id=<%=n.getId() %>"><img src="sample_lihu/images/writecom_btn.gif" alt="说说你的看法" /></a>
+					<a onclick="return ck();" ><img src="sample_lihu/images/writecom_btn.gif" alt="说说你的看法" /></a>
 				</div>
 				<div class="rightArea">
 					<a href="webCsave?newsid=<%=n.getId()%>"><img src="sample_lihu/images/favor_ico_red.gif" alt="红心" /></a>
@@ -148,7 +148,59 @@ if(n==null)
 			<p class="shareCan">取消分享</p>
 		</div><!--sharing-->
 	</div><!--wrap-->
+	<form action="webRsave" method="post" id="myform" >
+		<input type="text" value="<%=n.getId() %>" name="newsid" style="display: none"/>
+	<div id="wrapc" style="display: none;">
+		<div id="header">
+			<div class="topArea clearfix">
+				<h1>发表评论</h1>
+				<div class="prev">
+					<a onclick="kc();"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
+				</div>
+			</div>
+		</div><!--header-->
+		<div id="container">
+			<div class="forumPost">
+				<div class="write">
+					<p class="posts commentWrite"><textarea  style="padding-top: 35px;padding-left: -100px;" name="review" id="review1" cols="30" rows="10"></textarea></p>
+				</div>
+				<div class="btn clearfix">
+					<span class="rightArea clearfix">
+						<a onclick="kc();">取消</a>
+						<a href="#" id="a1">发表</a>
+					</span>
+				</div>
+			</div>
+		</div><!--container-->
+		<div id="footer"></div><!--footer-->
+	</div><!--wrap-->
+	</form>
 <script type="text/javascript">
+var ck=(function(){
+	
+	$("#wrapc").show();
+	$("#wrap").hide();
+	
+});
+var kc=(function(){
+	
+	$("#wrapc").hide();
+	$("#wrap").show();
+	
+});
+
+$("#a1").click(function(){
+	 var title = document.getElementById("review1").value;
+		
+	  if (title==""||title==null||title.length<=2){
+		alert("请正确评论 2字以上！");
+		return false;
+		}
+	$("#myform").submit(); 
+	alert("评论成功");
+	return true;
+	
+});
 
 $(".share").click(function(){
 	$("#bg").show();

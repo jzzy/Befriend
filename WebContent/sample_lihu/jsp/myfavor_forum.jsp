@@ -74,7 +74,7 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 									</p>
 								</div>
 								<div class="imgArea">
-									<p class="big_img"><a href="newsdetail.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="mediumImg" /></a></p>
+									<p class="big_img"><a href="webNewsId?id=<%=nl.get(i).getId()%>"><img src="<%=request.getContextPath() +nl.get(i).getImg()%>" alt="mediumImg" /></a></p>
 								</div>
 							</div>
 						</li>
@@ -110,13 +110,26 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 										<span><%=fones.get(i).getTime() %></span>
 									</p>
 								</div>
-								<div class="title"><a href="forumreview.html"><%=fones.get(i).getTitle() %></a></div>
-								<div class="detail"><a href="forumreview.html"><%=fones.get(i).getContent() %></a></div>
-								<div class="imgList clearfix">
-									<p><a href="forumreview.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
-									<p><a href="forumreview.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
-									<p><a href="forumreview.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="sample" /></a></p>
-								</div>
+								<div class="title"><a href="webForumLook?id=<%=fones.get(i).getId()%>"><%=fones.get(i).getTitle() %></a></div>
+								<div class="detail"><a href="webForumLook?id=<%=fones.get(i).getId()%>"><%=fones.get(i).getContent() %></a></div>
+								<%
+						if(fones.get(i).getImg()!=null){
+						%>
+						<div class="imgList clearfix">
+						
+							<p><a href="webForumLook?id=<%=fones.get(i).getId()%>" target="_parent">
+						
+							<img src="	<%=request.getContextPath()+fones.get(i).getImg() %>" alt="sample" />
+							
+							
+						
+							</a></p>
+						</div>
+						<%
+						}
+						%>
+								
+								
 								<div class="info">
 									<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=fones.get(i).getFrs() %></span>
 									<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;<%=fones.get(i).getfHits() %></span>
@@ -173,6 +186,8 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 <script type="text/javascript">
 
 var ul1=(function(){
+	$("#wrap input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+
 	//alert(1);
 	$("#divmainList").show();
 	$("#divforum").hide();
@@ -194,6 +209,8 @@ var ul1=(function(){
 });
 
 var ul2=(function(){
+	$("#wrap input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+
 	$("#divmainList").hide();
 	$("#divforum").show();
 	$("#divlistPack").hide();
@@ -209,6 +226,8 @@ var ul2=(function(){
 	
 });
 var ul3=(function(){
+	$("#wrap input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+
 	$("#divmainList").hide();
 	$("#divforum").hide();
 	$("#divlistPack").show();
@@ -265,14 +284,24 @@ $("#delete").click(function(){
  		if($("#divlistPack").is(":visible")){
  			 $.ajax({
     	  			type:"post",
-    	  			url:"removeEduAttentionWeb.action?attentionId="+text
+    	  			url:"removeEduAttentionWeb.action?value="+text
     	  		});
          	
          }
    			alert("删除成功！");
    	     	
    	  }else{
+   		$("input[name=check]").each(function() {  
+			 if ($(this).attr("checked")) {
+				// alert($(this).val());
+	                //$("#"+$(this).val()).css("display","none");
+	                $(this).attr({"checked":false})
+	            }
+	    
+	        });
+	   
    			alert("取消成功！");
+   			
   		   }
         
         
@@ -323,12 +352,27 @@ $("#favorEdit").click(function(){
 	};	
 });
 $("#checkAll").click(function(){
-	var favorCheck =$(".mainList input").attr("checked");
+	var divid="";
+	 //调用新闻
+   if($("#divmainList").is(":visible")){
+   	divid="divmainList";
+   }
+ //调用论坛
+	if($("#divforum").is(":visible")){
+		
+		divid="divforum";
+   }
+	//调用教辅机构
+	if($("#divlistPack").is(":visible")){
+		divid="divlistPack";
+   	
+   }
+	var favorCheck =$("#"+divid+" input").attr("checked");
 	if(favorCheck){
-		//$(".mainList input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+		$("#"+divid+" input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
 
 	}else{
-		//$(".mainList input").attr({"checked" : true}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico29.png");
+		$("#"+divid+" input").attr({"checked" : true}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico29.png");
 		
 	}
 });

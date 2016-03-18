@@ -82,12 +82,16 @@
 						<li><a href="getEduWebArea?classSecond=外语">外语</a></li>
 						<li><a href="getEduWebArea?classSecond=音乐">音乐</a></li>
 						<li><a href="getEduWebArea?classSecond=幼儿教育">幼儿教育</a></li>
-						<li><a href="getEduWebArea?classSecond=升学指导">升学指导</a></li>
+						<li><a href="getEduWebArea?classSecond=升学辅导">升学辅导</a></li>
 						<li><a href="getEduWebArea?classSecond=教育院校">教育院校</a></li>
 						<li><a href="getEduWebArea?classSecond=舞蹈">舞蹈</a></li>
 						<li><a href="getEduWebArea?classSecond=学校">学校</a></li>
 						<li><a href="getEduWebArea?classSecond=驾校">驾校</a></li>
 						<li><a href="getEduWebArea?classSecond=兴趣生活">兴趣生活</a></li>
+							<li><a href="getEduWebArea?classSecond=职业技术">职业技术</a></li>
+						<li><a href="getEduWebArea?classSecond=体育">体育</a></li>
+						<li><a href="getEduWebArea?classSecond=美术">美术</a></li>
+						
 					</ul>
 				</li>
 				<li class="sort fNiv">

@@ -55,6 +55,9 @@
 		List<News> nl=(List)request.getAttribute("nl")==null?new ArrayList<News>():(List)request.getAttribute("nl");
 		List<Review> rl=(List)request.getAttribute("rl")==null?new ArrayList<News>():(List)request.getAttribute("rl"); 
 		for(int i=0;i<nl.size();i++){
+			if(rl.get(i)==null||nl.get(i)==null){
+				continue;
+			}
 		%>
 						<li id="<%=rl.get(i).getId()%>">
 							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" />
@@ -69,13 +72,19 @@
 											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=nl.get(i).getCollectnum() %></span>
 										</p>
 									</div>
+									<%
+									if(nl.get(i).getImg()!=null){
+									%>
 									<div class="imgArea">
-										<p class="big_img"><a href="newsdetail.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="mediumImg" /></a></p>
+										<p class="big_img"><a href="webNewsId?id=<%=rl.get(i).getNewsid()%>"><img src="<%=request.getContextPath()+nl.get(i).getImg() %>" alt="mediumImg" /></a></p>
 									</div>
+									<%
+										}
+									%>
 								</dt>
 								<dd class="reply">
 									<div class="inner clearfix">
-										<div class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
+										<div class="leftArea"><img src="<%=request.getContextPath()+((User)session.getAttribute("u")).getImg() %>" alt="sampleuser" /></div>
 										<div class="rightArea">
 											<p class="name"><%=((User)session.getAttribute("u")).getNickname() %></p>
 											<p class="time"><%=rl.get(i).getTime() %></p>
@@ -88,7 +97,8 @@
 						</li>
 						<%
 						
-						}%>
+						}
+						%>
 					
 					</ul>
 					
@@ -103,6 +113,9 @@
 		List<ForumTwo> fow=(List)request.getAttribute("fow")==null?new ArrayList<ForumTwo>():(List)request.getAttribute("fow"); 
 		List<User> us=(List)request.getAttribute("us")==null?new ArrayList<User>():(List)request.getAttribute("us"); 
 		for(int i=0;i<fones.size();i++){
+			if(fones.get(i)==null||fow.get(i)==null||us.get(i)==null){
+				continue;
+			}
 		%>
 						<li id="<%=fow.get(i).getId()%>" >
 							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" /></label>
@@ -110,7 +123,7 @@
 							<dl>
 								<dt class="inner clearfix">
 									<div class="infoArea">
-										<p class="title"><a href="forumreview.html"><%=fones.get(i).getTitle() %></a></p>
+										<p class="title"><a href="webForumLook?id=<%=fones.get(i).getId()%>" target="_parent"><%=fones.get(i).getTitle() %></a></p>
 										<p class="info">
 											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />
 											&nbsp;<%=fones.get(i).getFollectnum()%></span>
@@ -118,13 +131,24 @@
 											&nbsp;<%=fones.get(i).getFrs()%></span>
 										</p>
 									</div>
+									
+									<% 
+									if(fones.get(i).getImg()!=null){
+									%>
 									<div class="imgArea">
-										<p class="big_img"><a href="forumreview.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.jpg" alt="mediumImg" /></a></p>
+										<p class="big_img">
+										<a href="webForumLook?id=<%=fones.get(i).getId()%>" target="_parent">
+										<img src="<%=request.getContextPath() +fones.get(i).getImg()%>" alt="mediumImg" />
+										</a>
+										</p>
 									</div>
+									<%
+									}
+									%>
 								</dt>
 								<dd class="reply">
 									<div class="inner clearfix">
-										<div class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
+										<div class="leftArea"><img src="<%=request.getContextPath()+((User)session.getAttribute("u")).getImg() %>" alt="sampleuser" /></div>
 										<div class="rightArea">
 											<p class="name"><%=((User)session.getAttribute("u")).getNickname() %></p>
 											<p class="time"><%=fow.get(i).getTime() %></p>
@@ -152,6 +176,9 @@
 					
 					
 					for(int i=0;i<educl.size();i++){
+						if(educl.get(i)==null||edusl.get(i)==null){
+							continue;
+						}
 					%>
 					
 						<li id="<%=educl.get(i).getId()%>">
@@ -161,7 +188,7 @@
 							</div>
 							<dl>
 								<dt class="inner clearfix">
-									<a href="edu_detail.html">
+									<a href="getWebCommments?merchantId=<%=edusl.get(i).getMerchantId()%>">
 										<div class="imgArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/xw_15.png" alt="" /></div>
 										<div class="infoArea">
 											<h3><%=edusl.get(i).getName() %></h3>
@@ -173,7 +200,7 @@
 								</dt>
 								<dd class="reply">
 									<div class="inner clearfix">
-										<div class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sampleuser" /></div>
+										<div class="leftArea"><img src="<%=request.getContextPath()+((User)session.getAttribute("u")).getImg() %>" alt="sampleuser" /></div>
 										<div class="rightArea">
 											<div class="name"><%=((User)session.getAttribute("u")).getNickname() %>
 											
@@ -208,6 +235,8 @@
 			<div class="favorDel clearfix">
 				<div class="leftArea">
 					<span id="checkAll">全选</span>
+					
+				
 				</div>
 				<div class="rightArea">
 					<span id="delete">删除</span>
@@ -219,6 +248,8 @@
 <script type="text/javascript">
 
 var ul1=(function(){
+	$("#wrap input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+
 	//alert(1);
 	$("#divmainList").show();
 	$("#divforum").hide();
@@ -240,6 +271,8 @@ var ul1=(function(){
 });
 
 var ul2=(function(){
+	$("#wrap input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+
 	$("#divmainList").hide();
 	$("#divforum").show();
 	$("#divlistPack").hide();
@@ -255,6 +288,8 @@ var ul2=(function(){
 	
 });
 var ul3=(function(){
+	$("#wrap input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+
 	$("#divmainList").hide();
 	$("#divforum").hide();
 	$("#divlistPack").show();
@@ -281,7 +316,8 @@ $("#delete").click(function(){
             }
     
         });
-     //   alert(text);
+        //alert(text);
+     	if(text.length>=1){
         if(confirm("确定删除？")){
 		 	 
    		 
@@ -289,6 +325,7 @@ $("#delete").click(function(){
    			 if ($(this).attr("checked")) {
    				// alert($(this).val());
 	                $("#"+$(this).val()).css("display","none");
+	                $(this).attr({"checked":false})
 	            }
    	    
    	        });
@@ -315,11 +352,20 @@ $("#delete").click(function(){
     	  		});
          	
          }
-   			alert("删除成功！");
+   			//alert("删除成功！");
    	     	
    	  }else{
    			alert("取消成功！");
+   			$("input[name=check]").each(function() {  
+      			 if ($(this).attr("checked")) {
+      				// alert($(this).val());
+   	                //$("#"+$(this).val()).css("display","none");
+   	                $(this).attr({"checked":false})
+   	            }
+      	    
+      	        });
   		   }
+     	}
         
         
       
@@ -369,14 +415,31 @@ $("#favorEdit").click(function(){
 	};	
 });
 $("#checkAll").click(function(){
-	var favorCheck =$(".mainList input").attr("checked");
+	var divid="";
+	 //调用新闻
+    if($("#divmainList").is(":visible")){
+    	divid="divmainList";
+    }
+  //调用论坛
+	if($("#divforum").is(":visible")){
+		
+		divid="divforum";
+    }
+	//调用教辅机构
+	if($("#divlistPack").is(":visible")){
+		divid="divlistPack";
+    	
+    }
+	//alert("#"+divid+" input");
+	var favorCheck =$("#"+divid+" input").attr("checked");
+ 
 	
 	
 	if(favorCheck){
-	//	$(".mainList input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
+		$("#"+divid+" input").attr({"checked" : false}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico28.png");
 
 	}else{
-	//	$(".mainList input").attr({"checked" : true}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico29.png");
+		$("#"+divid+" input").attr({"checked" : true}).siblings("label").find("img").attr("src","<%=request.getContextPath() %>/sample_lihu/images/ico29.png");
 		
 	}
 	

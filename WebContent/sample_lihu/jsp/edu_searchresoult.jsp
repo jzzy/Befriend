@@ -45,7 +45,7 @@ return true;
 
 				%>
 				<li class="district">
-					<a href="#" class="fNiv">全部地区&nbsp;<img src="sample_lihu/images/arrow_off.png" width="20" height="10" alt="" /></a>
+					<a  class="fNiv">全部地区&nbsp;<img src="sample_lihu/images/arrow_off.png" width="20" height="10" alt="" /></a>
 					<ul>
 							<%
 					if(lar.size()==0){
@@ -84,22 +84,27 @@ return true;
 					</ul>
 				</li>
 				<li class="edutrain">
-					<a href="#" class="fNiv">教育培训&nbsp;<img src="sample_lihu/images/arrow_off.png" width="20" height="10" alt="" /></a>
-					<ul>
-							<li><a href="getLikeEduWebArea?classSecond=all">不限</a></li>
+					<a  class="fNiv">教育培训&nbsp;<img src="sample_lihu/images/arrow_off.png" width="20" height="10" alt="" /></a>
+				
+						<ul>
+						<li><a href="getLikeEduWebArea?classSecond=all">不限</a></li>
 						<li><a href="getLikeEduWebArea?classSecond=外语">外语</a></li>
 						<li><a href="getLikeEduWebArea?classSecond=音乐">音乐</a></li>
 						<li><a href="getLikeEduWebArea?classSecond=幼儿教育">幼儿教育</a></li>
-						<li><a href="getLikeEduWebArea?classSecond=升学指导">升学指导</a></li>
+						<li><a href="getLikeEduWebArea?classSecond=升学辅导">升学辅导</a></li>
 						<li><a href="getLikeEduWebArea?classSecond=教育院校">教育院校</a></li>
 						<li><a href="getLikeEduWebArea?classSecond=舞蹈">舞蹈</a></li>
 						<li><a href="getLikeEduWebArea?classSecond=学校">学校</a></li>
 						<li><a href="getLikeEduWebArea?classSecond=驾校">驾校</a></li>
 						<li><a href="getLikeEduWebArea?classSecond=兴趣生活">兴趣生活</a></li>
+							<li><a href="getLikeEduWebArea?classSecond=职业技术">职业技术</a></li>
+						<li><a href="getLikeEduWebArea?classSecond=体育">体育</a></li>
+						<li><a href="getLikeEduWebArea?classSecond=美术">美术</a></li>
+						
 					</ul>
 				</li>
 				<li class="sort fNiv">
-					<a href="#" class="fNiv">智能排序&nbsp;<img src="sample_lihu/images/arrow_off.png" width="20" height="10" alt="" /></a>
+					<a  class="fNiv">智能排序&nbsp;<img src="sample_lihu/images/arrow_off.png" width="20" height="10" alt="" /></a>
 					<ul>
 						<li><a href="getLikeEduWebArea?sortType=1">离我最近的商户</a></li>
 						<li><a href="getLikeEduWebArea?sortType=2">人气最高的商户</a></li>

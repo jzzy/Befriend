@@ -473,7 +473,7 @@ public class ForumAction {
 		System.out.println("添加论坛成功!论坛类型" + model);
 
 		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/webForumApptype?model=" + model + "");
+				.getContextPath() + "/sample_lihu/jsp/forum2.jsp");
 		return;
 
 	}

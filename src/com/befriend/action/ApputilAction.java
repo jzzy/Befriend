@@ -268,7 +268,7 @@ public class ApputilAction {
 		audao.Save(p);
 		// util.outjS("/Befriend/webNewsA10","Thank you!");
 		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/webNewsA10");
+				.getContextPath() + "/webGetapp");
 		return;
 	}
 
@@ -1230,7 +1230,7 @@ public class ApputilAction {
 		// OpeFunction.Email(Email, sg);
 
 		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/webNewsA10");
+				.getContextPath() + "/webGetapp");
 
 	}
 
