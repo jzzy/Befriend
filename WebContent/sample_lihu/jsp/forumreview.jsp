@@ -62,8 +62,8 @@ if(f==null){
 							<span><%=f.getArea()==null?"":f.getArea() %></span>
 						</div>
 						<div class="rightArea">
-							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=f.getfHits() %></span>
-							<span><img src="sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;<%=f.getFollectnum()%></span>
+							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=f.getFrs() %></span>
+							<span><img src="sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;<%=f.getfHits() %></span>
 						</div>
 					</div>
 					<%
@@ -347,10 +347,13 @@ var wrapcommp=(function(touserid,forumtwoid){
 	
 });
 var submit=(function(){
+	//alert($("#postCont").text());
+	
 	$("#form1").attr("action","webForumtwosaveapp").submit(); 
 	
 });
 var submit2=(function(){
+	
 	$("#form1").attr("action","webForumthreesappadd").submit(); 
 	
 });

@@ -87,8 +87,8 @@ if(fone==null||us==null){
 						}
 						%>
 						<div class="info">
-							<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;520</span>
-							<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;120</span>
+							<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=fone.get(i).getFrs()%></span>
+							<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;<%=fone.get(i).getfHits()%></span>
 						</div>
 					</li>
 					
@@ -162,7 +162,7 @@ function Load() {
 									str+='<img src="<%=request.getContextPath() %>'+us[i].img+'" alt="sample" />';
 								}
 								
-								str+='</p><p class="rightArea"><span>'+us[i].nickname+'</span><span>2016-01-15 09:54</span></p></div>';
+								str+='</p><p class="rightArea"><span>'+us[i].nickname+'</span><span>'+arr[i].time+'</span></p></div>';
 								str+='<div class="title"><a href=<%=request.getContextPath() %>/webForumLook?id='+arr[i].id+' target="_parent">'+arr[i].title+'</a>';
 								str+='</div><div class="detail"><a href=<%=request.getContextPath() %>/webForumLook?id='+arr[i].id+' target="_parent">'+arr[i].content+'</a>';
 								str+='</div>';
@@ -171,7 +171,7 @@ function Load() {
 								}
 								
 								str+='<div class="info"><span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />';
-								str+='&nbsp;520</span><span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;120</span></div>';
+								str+='&nbsp;'+arr[i].frs+'</span><span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;'+arr[i].fHits+'</span></div>';
 								//alert(str);
 								li.innerHTML=str;
 								el.appendChild(li, el.childNodes[0]);

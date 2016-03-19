@@ -67,14 +67,17 @@ if(n==null)
 				<p class="bigImg"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="sample" /></p>
 				<p class="detail"><%=n.getContent() %></p>
 			</div>
+							    <% 
+   	if(rl!=null&&ul!=null){
+   
+   %>
 			<div class="hotComment">
 				<h2 class="tit2"><img src="sample_lihu/images/hotcomments_tit.gif" alt="热门评论" /></h2>
 				<ul>
-				    <% 
-   	if(rl!=null&&ul!=null){
-   	for(int i=0;i<rl.size();i++){
-   		if(ul.get(i)!=null&&rl.get(i)!=null){
-   %>
+<%
+for(int i=0;i<rl.size();i++){
+		if(ul.get(i)!=null&&rl.get(i)!=null){
+%>
 					<li>
 						<div class="leftArea"><img src="<%=request.getContextPath()+(ul.get(i).getImg()==null?"/SimulationApp/images/logod.png":ul.get(i).getImg() )%>" alt="sampleuser" /></div>
 						<div class="rightArea">
