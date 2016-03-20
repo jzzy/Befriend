@@ -166,7 +166,9 @@ if(f==null){
 						
 						<%
 						for(int i=0;i<fs.size();i++){
-							
+							if(us.get(i)==null||fs.get(i)==null){
+								continue;
+							}
 						
 						%>
 							
@@ -244,13 +246,13 @@ if(f==null){
 	<form action="" id="form1">
 	<!-- 获取论坛的id -->
 			<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none"/>
-				<input type="text" id="touserid" name="touserid"  style="display: none"/>
-				<input type="text" id="forumtwoid" name="forumtwoid" style="display: none"/>
+				<input type="text" id="touserid" name="touserid" value=0 style="display: none"/>
+				<input type="text" id="forumtwoid" name="forumtwoid"  value=0 style="display: none"/>
 		<div id="header">
 			<div class="topArea clearfix">
 				<h1>发表评论</h1>
 				<div class="prev">
-					<a href="#" onclick="wrap();"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
+					<a  onclick="wrap();"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 			</div>
 		</div><!--header-->
@@ -347,6 +349,7 @@ var wrapcommp=(function(touserid,forumtwoid){
 	
 });
 var submit=(function(){
+	
 	//alert($("#postCont").val());
 	var rw=$("#postCont").val();
 	rw = rw.replace(/\s+/g,"");//去掉所有空格

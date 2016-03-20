@@ -556,8 +556,12 @@ public class ForumAction {
 	 * @throws IOException
 	 */
 	public void webForumtwosaveapp() throws IOException {
-
+		try {
+			
+		
+		
 		User u = (User) session.getAttribute("u");
+		System.out.println("用户"+u==null);
 		if (u == null) {
 
 			System.out.println("请重新登入!");
@@ -615,6 +619,12 @@ public class ForumAction {
 		}
 		util.Out().print("null");
 		return;
+		} catch (Exception e) {
+			System.out.println("请重新登入!");
+			((HttpServletResponse) util.response()).sendRedirect(request
+					.getContextPath() + "/sample_lihu/htm/login.html");
+			return;
+		}
 
 	}
 
@@ -756,10 +766,13 @@ public class ForumAction {
 
 			} else {
 				System.out.println("id不正确");
+				 ((HttpServletResponse) util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
+				 return null;
 			}
 
 		} catch (Exception e) {
-			util.Out().print(e.getMessage());
+			 ((HttpServletResponse) util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
+			 return null;
 		}
 		return Action.SUCCESS;
 
