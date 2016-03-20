@@ -347,13 +347,38 @@ var wrapcommp=(function(touserid,forumtwoid){
 	
 });
 var submit=(function(){
-	//alert($("#postCont").text());
+	//alert($("#postCont").val());
+	var rw=$("#postCont").val();
+	rw = rw.replace(/\s+/g,"");//去掉所有空格
+	//alert(rw);
+	if(!rw){
+		alert("请填写评论内容");
+		return false;
+	}
+	if($("#postCont").val().length==0||$("#postCont").val()=="写点什么吧…"){
+		alert("请填写回复内容");
+		return false;
+	}
 	
 	$("#form1").attr("action","webForumtwosaveapp").submit(); 
 	
 });
 var submit2=(function(){
-	
+	var rw=$("#postCont").val();
+	rw = rw.replace(/\s+/g,"");//去掉所有空格
+	//alert(rw);
+	if(!rw){
+		alert("请填写评论内容");
+		return false;
+	}
+	if($("#postCont").val().length==0||$("#postCont").val()=="写点什么吧…"){
+		alert("请填写回复内容");
+		return false;
+	}
+	if($("#postCont").val().length==0||$("#postCont").val()=="写点什么吧…"){
+		alert("请填写回复内容");
+		return false;
+	}
 	$("#form1").attr("action","webForumthreesappadd").submit(); 
 	
 });
