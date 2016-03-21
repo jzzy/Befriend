@@ -300,6 +300,13 @@ var wrap=(function(){
 	
 });
 var wrapcomm=(function(){
+	if(<%=session.getAttribute("u")==null%>){
+		//alert("未登入！");
+		window.location="<%=request.getContextPath() %>/sample_lihu/htm/login.html";
+		return false;
+		
+		
+	}
 	$("#al").show();
 	$("#ah").hide();
 	$("#wrap").hide();
@@ -323,6 +330,13 @@ var wrapcomm=(function(){
 	
 });
 var wrapcommp=(function(touserid,forumtwoid){
+	if(<%=session.getAttribute("u")==null%>){
+		//alert("未登入！");
+		window.location="<%=request.getContextPath() %>/sample_lihu/htm/login.html";
+		return false;
+		
+		
+	}
 	//alert(name+name1);
 	$("#touserid").val(touserid);
 	$("#forumtwoid").val(forumtwoid);

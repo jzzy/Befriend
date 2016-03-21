@@ -177,7 +177,7 @@
 		<div id="footer">
 			<div class="newsDetail_ft clearfix">
 				<div class="leftArea">
-					<a href="<%=request.getContextPath() %>/sample_lihu/edu_commentwrite.html" ><img src="sample_lihu/images/writecom_btn.gif" alt="说说你的看法" /></a>
+					<a onclick="return href2();" ><img src="sample_lihu/images/writecom_btn.gif" alt="说说你的看法" /></a>
 				</div>
 				<div class="rightArea">
 					<a href="#" onclick="hre();"><img src="sample_lihu/images/favor_ico_red.gif" alt="红心" /></a>
@@ -203,7 +203,27 @@
 	
 	
 <script type="text/javascript">
+var href2=(function(){
+	if(<%=session.getAttribute("u")==null%>){
+		//alert("未登入！");
+		window.location="<%=request.getContextPath() %>/sample_lihu/htm/login.html";
+		return false;
+		
+		
+	}
+	window.location="<%=request.getContextPath() %>/sample_lihu/edu_commentwrite.html";
+	
+	 
+	 
+	
+	
+});
 var hre=(function(){
+	if(<%=session.getAttribute("u")==null%>){
+		window.location="<%=request.getContextPath() %>/sample_lihu/htm/login.html";
+		//alert("未登入！");
+		return false;
+	}
 	// 
 	var htmlobj=$.ajax({url:"/Befriend/saveEduAttentionWeb?objectid="+<%=edus.getMerchantId()%>,async:false});
 	//alert(htmlobj.responseText=="true");

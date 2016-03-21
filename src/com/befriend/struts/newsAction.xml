@@ -199,6 +199,10 @@
 		<!--  <result  name="success">/SimulationApp/news_cont.jsp</result>-->
 		<result  name="success">/sample_lihu/jsp/newsdetail.jsp</result>
 		</action>
+		<action name="webNewsIdTojson" class="newsAction" method="webNewsIdTojson">
+		
+		</action>
+		
 		<action name="webNewsIdcomm" class="newsAction" method="webNewsIdcomm">
 		<!--  <result  name="success">/SimulationApp/news_cont.jsp</result>-->
 		<result  name="success">/sample_lihu/jsp/commentwrite.jsp</result>

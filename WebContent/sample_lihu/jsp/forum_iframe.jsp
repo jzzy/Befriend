@@ -41,7 +41,9 @@ if(fone==null||us==null){
 	<div id="container">
 		<div class="forum">
 			<div id="wrapper">
-			  <%
+			 
+				<ul>
+				 <%
                     for(int i=0;i<fone.size();i++){
                     	System.out.println(us.get(i));
                     	System.out.println(fone.get(i));
@@ -49,7 +51,6 @@ if(fone==null||us==null){
                     		continue;
                     	}
                     %>
-				<ul>
 					<li>
 						<div class="user clearfix">
 							<p class="leftArea">
@@ -90,6 +91,7 @@ if(fone==null||us==null){
 							<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=fone.get(i).getFrs()%></span>
 							<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor2_ico.gif" alt="关注" />&nbsp;<%=fone.get(i).getfHits()%></span>
 						</div>
+						<span></span>
 					</li>
 					
 					

@@ -540,19 +540,20 @@ public class EduCommentAction implements ServletRequestAware {
 			text = "∆¿¬€ ß∞‹";
 			loginPage = "/Befriend/getWebCommments?merchantId=" + merchantId;
 		}
-		HttpServletResponse response = ServletActionContext.getResponse();
-
-		response.setCharacterEncoding("GBK");
-		PrintWriter out = response.getWriter();
-
-		StringBuilder builder = new StringBuilder();
-		builder.append("<script type=\"text/javascript\">");
-		builder.append("alert('" + text + "');");
-		builder.append("window.top.location.href='");
-		builder.append(loginPage);
-		builder.append("';");
-		builder.append("</script>");
-		out.print(builder.toString());
+		((HttpServletResponse) OpeFunction.response()).sendRedirect(loginPage);
+//		HttpServletResponse response = ServletActionContext.getResponse();
+//
+//		response.setCharacterEncoding("GBK");
+//		PrintWriter out = response.getWriter();
+//
+//		StringBuilder builder = new StringBuilder();
+//		builder.append("<script type=\"text/javascript\">");
+//		builder.append("alert('" + text + "');");
+//		builder.append("window.top.location.href='");
+//		builder.append(loginPage);
+//		builder.append("';");
+//		builder.append("</script>");
+//		out.print(builder.toString());
 
 	}
 

@@ -59,6 +59,8 @@ if(false){
 					<p class="name"><%=u.getNickname() %><a href="<%=request.getContextPath() %>/sample_lihu/jsp/myAccount.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico23.png" alt="修改" /></a></p>
 					<p class="info clearfix"><span class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico24.png" alt="" /><%=u.getAddress()+" "+u.getAddcity() %></span><span class="rightArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico25.png" alt="年级" /><%=u.getStage() %></span></p>
 					<span class="prev"><img onclick="javascript:history.back(-1);" src="<%=request.getContextPath() %>/sample_lihu/images/ico45.png" alt="上一页" /></span>
+					<span class="logOut"><a href="websessionrom"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico48.png" alt="退出登录" /></a></span>
+					
 				</div>
 				<%
 				}

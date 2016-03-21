@@ -25,7 +25,7 @@ if(n==null)
 <script type="text/javascript" src="sample_lihu/js/common.js"></script>
 <link href="sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body  >
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
@@ -71,7 +71,7 @@ if(n==null)
    	if(rl!=null&&ul!=null){
    
    %>
-			<div class="hotComment">
+			<div id="divhot" class="hotComment">
 				<h2 class="tit2"><img src="sample_lihu/images/hotcomments_tit.gif" alt="热门评论" /></h2>
 				<ul>
 <%
@@ -170,7 +170,7 @@ for(int i=0;i<rl.size();i++){
 				<div class="btn clearfix">
 					<span class="rightArea clearfix">
 						<a onclick="kc();">取消</a>
-						<a href="#" id="a1">发表</a>
+						<a id="a1">发表</a>
 					</span>
 				</div>
 			</div>
@@ -180,6 +180,14 @@ for(int i=0;i<rl.size();i++){
 	</form>
 <script type="text/javascript">
 var ck=(function(){
+	//alert(<%=session.getAttribute("u")==null%>);
+	if(<%=session.getAttribute("u")==null%>){
+		//alert("未登入！");
+		window.location="<%=request.getContextPath() %>/sample_lihu/htm/login.html";
+		return false;
+		
+		
+	}
 	
 	$("#wrapc").show();
 	$("#wrap").hide();
@@ -199,9 +207,55 @@ $("#a1").click(function(){
 		alert("请正确评论 2字以上！");
 		return false;
 		}
-	$("#myform").submit(); 
-	alert("评论成功");
-	return true;
+	//$("#myform").submit(); 
+	
+	//alert("评论成功");
+	//return true;
+	
+	
+	
+	var el, li, i;
+	$("ul").find("li").remove();
+	el =document.querySelector("#divhot ul");
+	
+	$.ajax({
+		url:"/Befriend/webRsave?newsid=<%=n.getId()%>&review="+title,
+		 dataType: "json", 
+				async:false,
+				success: function (data) {     
+					var rl = data["rl"];//获取json中的 key
+					var ul = data["ul"];//获取json中的 key
+				//	var vus = data["us"];
+				//alert(val[0].id);
+				
+					for (i=0; i<rl.length; i++) {
+						if(rl[i]==null){
+							continue;
+						}
+						li = document.createElement('li');
+						
+							var vl='<div class="leftArea">';
+						vl+='<img src="s" alt="sampleuser" /></div>';
+						vl+='<div class="rightArea">';
+						vl+='	<p class="name">'+ul[i].nickname+'</p>';
+						vl+='<p class="time">'+rl[i].time+'</p>';
+						vl+='<p class="info">'+rl[i].review+'</p>';
+						vl+='</div>';
+						
+							li.innerHTML=vl;	
+						el.appendChild(li, el.childNodes[0]);
+					}
+					
+				
+				
+					},
+				
+	})
+	
+
+	$("#wrapc").hide();
+	$("#wrap").show();
+	
 	
 });
 

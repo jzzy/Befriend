@@ -467,7 +467,8 @@ public class UserAction extends ActionSupport {
 	public void websessionrom() throws IOException {
 		// Ïú»Ùsession
 		session.removeAttribute("u");
-		((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
+		System.out.println(request.getContextPath() + "/sample_lihu/jsp/mypage.jsp");
+		((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/sample_lihu/jsp/mypage.jsp");
 	}
 
 	/**

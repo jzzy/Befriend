@@ -565,11 +565,49 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			System.out.println("newsid是" + n.getId());
 			System.out.println("该文章被评论" + a);
 			n.setReviews(a);
-
+			id=newsid;
 			ndao.Upnews(n);
+			System.out.println("web 通过id查询新闻" + id);
+			if (id <= 0) {
+				util.Out().print("没有获取到新闻id");
+				System.out.println("没有获取到新闻id");
+				return ;
+			}
+			// 获取评论信息
+			rl = rdao.Alln(id);
+			if (rl.size() != 0) {
+				System.out.println("有评论");
+				for (int i = 0; i < rl.size(); i++) {
 
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webNewsId?id=" + newsid + "");
+					ul.add(userdao.byUsernameAccnumnoPhone(rl.get(i).getUsername()));
+				}
+				System.out.println("评论" + rl.size());
+
+				request.setAttribute("ul", ul);
+				request.setAttribute("rl", rl);
+			}
+
+			n = ndao.byid(id);
+			System.out.println("xinwne " + n.getTitle());
+			if (n != null) {
+				// 点击数+1
+				n.setHits(n.getHits() == null ? 0 : n.getHits() + 1);
+
+				// 点击数+收藏数 +1
+				n.setCah((n.getCah() == null ? 0 : n.getCah()) + 1);
+
+				System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah()
+						+ "收藏数:" + n.getCollectnum());
+
+				ndao.Upnews(n);
+			}
+			request.setAttribute("n", n);
+			String result = "{\"ul\":" + util.ToJson(ul) + ",\"rl\":"
+					+ util.ToJson(rl) + "}";
+
+			OpeFunction.Out().print(result);
+//			((HttpServletResponse) util.response()).sendRedirect(request
+//					.getContextPath() + "/webNewsIdTojson?id=" + newsid + "");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -1255,6 +1293,53 @@ System.out.println("进入webHotareafToJson");
 		request.setAttribute("n", n);
 
 		return Action.SUCCESS;
+	}
+	/**
+	 * web 通过id查询新闻
+	 * 
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public void webNewsIdTojson() throws IOException, ParseException {
+		System.out.println("web 通过id查询新闻" + id);
+		if (id <= 0) {
+			util.Out().print("没有获取到新闻id");
+			System.out.println("没有获取到新闻id");
+			return ;
+		}
+		// 获取评论信息
+		rl = rdao.Alln(id);
+		if (rl.size() != 0) {
+			System.out.println("有评论");
+			for (int i = 0; i < rl.size(); i++) {
+
+				ul.add(userdao.byUsernameAccnumnoPhone(rl.get(i).getUsername()));
+			}
+			System.out.println("评论" + rl.size());
+
+			request.setAttribute("ul", ul);
+			request.setAttribute("rl", rl);
+		}
+
+		n = ndao.byid(id);
+		System.out.println("xinwne " + n.getTitle());
+		if (n != null) {
+			// 点击数+1
+			n.setHits(n.getHits() == null ? 0 : n.getHits() + 1);
+
+			// 点击数+收藏数 +1
+			n.setCah((n.getCah() == null ? 0 : n.getCah()) + 1);
+
+			System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah()
+					+ "收藏数:" + n.getCollectnum());
+
+			ndao.Upnews(n);
+		}
+		request.setAttribute("n", n);
+		String result = "{\"ul\":" + util.ToJson(ul) + ",\"rl\":"
+				+ util.ToJson(rl) + "}";
+
+		OpeFunction.Out().print(result);
 	}
 
 	/**
