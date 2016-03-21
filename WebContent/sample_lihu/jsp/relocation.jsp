@@ -17,7 +17,7 @@
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
-				<h1><a href="index.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/logo.gif" alt="家长之友" /></a></h1>
+				<h1><a href="webNewsA10"><img src="<%=request.getContextPath() %>/sample_lihu/images/logo.gif" alt="家长之友" /></a></h1>
 				<div class="relocation">
 					<a href="<%=request.getContextPath() %>/webNewsA10?province=<%=session.getAttribute("province") %>"><%=session.getAttribute("province") %>&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
