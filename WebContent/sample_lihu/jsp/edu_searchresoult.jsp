@@ -116,7 +116,7 @@ return true;
 			</ul>
 		</div><!--header-->
 		<div id="container" class="load">
-			<iframe id="mainiframe" src="getLikeEduWeb<%=request.getAttribute("value") %>" frameborder="0" scrolling="no" width="100%"></iframe>
+			<iframe id="mainiframe" src="<%=request.getContextPath() %>/getLikeEduWeb?value<%=request.getAttribute("value") %>" frameborder="0" scrolling="no" width="100%"></iframe>
 		</div><!--container-->
 		<div id="footer"></div><!--footer-->
 		<div id="bg"></div>

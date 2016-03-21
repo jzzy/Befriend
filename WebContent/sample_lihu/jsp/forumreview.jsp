@@ -22,12 +22,13 @@ if(f==null){
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<script type="text/javascript" src="sample_lihu/js/jquery-1.10.2.min.js"></script>
+<link href="sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="sample_lihu/css/pullToRefresh.css"/>
+<script type="text/javascript" src="sample_lihu/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="sample_lihu/js/common.js"></script>
 
 
-<link href="sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="sample_lihu/css/pullToRefresh.css"/>
+
 </head>
 <body>
 
@@ -241,9 +242,9 @@ if(f==null){
 	</div><!--wrap-->
 	
 	
-	
+		<form action="" id="form1" name="form1">
 <div id="wrapcomm"  style="display: none;">
-	<form action="" id="form1">
+
 	<!-- 获取论坛的id -->
 			<input type="text" name="forumid" value="<%=f.getId() %>" style="display: none"/>
 				<input type="text" id="touserid" name="touserid" value=0 style="display: none"/>
@@ -267,18 +268,17 @@ if(f==null){
 				<div class="btn clearfix">
 					<span class="rightArea clearfix">
 						<a onclick="wrap();">取消</a>
-						<a id="al" onclick="submit();">发表</a>
+						<a id="al" onclick="submit78();">发表</a>
 						<a id="ah" onclick="submit2();" style="display: none;">发表</a>
 					</span>
 				</div>
 			</div>
 		</div><!--container-->
 		<div id="footer"></div><!--footer-->
-		</form>
+		
 	</div><!--wrap-->
-	
-<script src="sample_lihu/js/iscroll.js"></script>
-<script src="sample_lihu/js/pullToRefresh.js"></script>
+	</form>
+
 <script type="text/javascript" >
 var dz=(function(){
 	
@@ -348,9 +348,9 @@ var wrapcommp=(function(touserid,forumtwoid){
 	
 	
 });
-var submit=(function(){
+var submit78=(function(){
 	
-	//alert($("#postCont").val());
+	//alert(1);
 	var rw=$("#postCont").val();
 	rw = rw.replace(/\s+/g,"");//去掉所有空格
 	//alert(rw);

@@ -766,13 +766,14 @@ public class ForumAction {
 
 			} else {
 				System.out.println("id²»ÕýÈ·");
-				 ((HttpServletResponse) util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
-				 return null;
+//				 ((HttpServletResponse) util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
+//				 return null;
 			}
 
 		} catch (Exception e) {
-			 ((HttpServletResponse) util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
-			 return null;
+//			 ((HttpServletResponse) util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
+//			 return null;
+			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 

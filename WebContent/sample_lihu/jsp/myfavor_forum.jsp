@@ -292,6 +292,17 @@ $("#delete").click(function(){
          	
          }
    			alert("删除成功！");
+   		 $("input[name=check]").each(function() {  
+   			 if ($(this).attr("checked")) {
+   				// alert($(this).val());
+   				 $(this).attr({"checked":false});
+	            }
+   	    
+   	        });
+   			
+   			
+   			
+   			
    	     	
    	  }else{
    		$("input[name=check]").each(function() {  

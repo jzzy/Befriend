@@ -352,20 +352,33 @@ $("#delete").click(function(){
     	  		});
          	
          }
+ 		$("input[name=check]").each(function() {  
+ 			 if ($(this).attr("checked")) {
+ 				// alert($(this).val());
+	                //$("#"+$(this).val()).css("display","none");
+	                $(this).attr({"checked":false});
+	            }
+ 	    
+ 	        });
    			//alert("删除成功！");
    	     	
    	  }else{
    			alert("取消成功！");
+   			
    			$("input[name=check]").each(function() {  
       			 if ($(this).attr("checked")) {
       				// alert($(this).val());
    	                //$("#"+$(this).val()).css("display","none");
-   	                $(this).attr({"checked":false})
+   	                $(this).attr({"checked":false});
    	            }
       	    
       	        });
-  		   }
-     	}
+   			
+  		 }
+        
+        
+        
+     }
         
         
       

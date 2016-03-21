@@ -28,7 +28,7 @@
 			%>
 					<li>
 					<a target="_parent" href="getWebCommments?merchantId=<%=lEduServices.get(i).getMerchantId()%>">
-							<div class="imgArea"><img src="sample_lihu/images/xw_15.png" alt="" /></div>
+							<div class="imgArea"><img src="<%="http://182.92.100.235/"+lEduServices.get(i).getPicture() %>" alt="" /></div>
 							<div class="infoArea">
 								<h3><%=lEduServices.get(i).getName() %></h3>
 								<p class="rate clearfix">
@@ -127,7 +127,7 @@ function Load() {
 						for (i=0; i<val.length; i++) {
 			li = document.createElement('li');
 			str='<a target="_parent" href="edu_detail.html" target="_parent"><div class="imgArea">';
-			str=str+'<img src="sample_lihu/images/xw_15.png" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3>';
+			str=str+'<img src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3>';
 			str=str+'<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off">';
 			str=str+'</span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix">';
 			str=str+'<strong>海淀区</strong><span>职业技术</span><div class="distance">8000m</div></div></div></a>';

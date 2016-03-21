@@ -46,6 +46,26 @@
 
 <script type="text/javascript">
 $("#sum").click(function(){
+	var userTel = $("#userTel").val();
+	var userName = $("#userName").val();
+	var logPsd = $("#logPsd").val();
+	//alert(userTel+userName+logPsd);
+	 var m =/^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/;
+		 var b = m.test(userTel);
+		// alert(b);
+	if(!b){
+		alert("请填写正确手机号!");
+			 return false;
+		 }
+	if(userName=="请输入用户名"||userName.length<6){
+		alert("请填写正确用户名!");
+		 return false;
+	}
+if(logPsd=="请输入6~16位字符"||logPsd.length<6){
+	alert("请填写正确密码!");
+	 return false;
+	}
+		
 	document.form1.action="webRegistration";
 	document.form1.submit();
 	alert('已提交');

@@ -19,7 +19,7 @@
 			<div class="topArea clearfix">
 				<h1><a href="index.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/logo.gif" alt="家长之友" /></a></h1>
 				<div class="relocation">
-					<a href="<%=request.getContextPath() %>/webNewsA10?province=北京">北京&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
+					<a href="<%=request.getContextPath() %>/webNewsA10?province=<%=session.getAttribute("province") %>"><%=session.getAttribute("province") %>&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
 					<span class="mapLink"><a href="sitemap.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
@@ -29,7 +29,7 @@
 		<div id="container">
 			<div class="currentCity clearfix">
 				<span class="title">当前定位城市&nbsp;:</span>
-				<span class="name">北京市<a href="#"><img src="<%=request.getContextPath() %>/sample_lihu/images/relocation_ico.png" alt="重新定位" /></a></span>
+				<span class="name"><%=session.getAttribute("province") %><a href="#"><img src="<%=request.getContextPath() %>/sample_lihu/images/relocation_ico.png" alt="重新定位" /></a></span>
 			</div>
 			<div class="hotCity">
 				<h2 class="tit2">热门城市</h2>

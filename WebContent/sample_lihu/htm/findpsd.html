@@ -40,6 +40,16 @@
 <script type="text/javascript">
 $("#btnSendCode").click(function(){
 	//alert($("#entryTel").val());
+	var userTel = $("#entryTel").val();
+	
+	
+	 var m =/^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/;
+		 var b = m.test(userTel);
+		// alert(b);
+	if(!b){
+		alert("请填写正确手机号!");
+			 return false;
+		 }
 	$.ajax({
 		dataType: "json",
 		url:"appSendCodePasswrod?phone="+$("#entryTel").val(),			
@@ -101,7 +111,7 @@ $("#sum").click(function(){
 		
 		entryCode.focusin(function(){
 		  // alert(a);
-		  if($(this).val() !== "请输出验证码"){
+		  if($(this).val() !== "请入出验证码"){
 			return false;
 		  }else{
 			$(this).val("");
@@ -111,12 +121,12 @@ $("#sum").click(function(){
 		entryCode.focusout(function(){
 		  if($(this).val() == ""){
 			entryCode.attr("type","text")
-			$(this).val("请输出验证码");
+			$(this).val("请入出验证码");
 			$("#showPsd .inner span").removeClass("changeOn");
 		  }
 		});
 		$("#showPsd .inner").click(function(){
-			if(entryCode.val() !== "请输出验证码"){
+			if(entryCode.val() !== "请入出验证码"){
 				if(entryCode.attr("type") == "password"){
 					entryCode.attr("type","text");
 					$("#showPsd .inner span").addClass("changeOn");

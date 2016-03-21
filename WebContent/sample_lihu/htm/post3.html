@@ -37,9 +37,9 @@
 function  checkvalue()
 {	 
 	  var title = document.getElementById("feedback").value;
-		
-	  if (title==""||title==null||title.length<=2 ||title== "请简单描述你所遇到的问题或你的建议，我们会尽快处理。"){
- 		alert("请正确填写问题 2字以上！");
+	  //alert(title>1);
+	  if (title>=0||title==""||title==null||title.length<=2 ||title== "请简单描述你所遇到的问题或你的建议，我们会尽快处理。"){
+ 		alert("请正确填写问题!");
  		return false;
 		}
 document.form1.action="webSaveFeedback";
