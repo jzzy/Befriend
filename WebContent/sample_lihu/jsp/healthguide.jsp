@@ -96,7 +96,7 @@
 			<div class="topArea clearfix">
 				<h1><a href="webNewsA10"><img src="sample_lihu/images/logo.gif" alt="家长之友" /></a></h1>
 				<div class="relocation">
-					<a href="sample_lihu/jsp/relocation.jsp">北京&nbsp;<img src="sample_lihu/images/location_more.gif" alt="down" /></a>
+					<a href="sample_lihu/jsp/relocation.jsp"><%=session.getAttribute("province") %>&nbsp;<img src="sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
 					<span class="mapLink"><a href="sample_lihu/jsp/sitemap.jsp"><img src="sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>

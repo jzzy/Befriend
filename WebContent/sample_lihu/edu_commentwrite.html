@@ -38,7 +38,7 @@
 				<div class="inner">
 					<div class="info clearfix">
 						<span class="leftArea"><img src="images/attachimg.gif" alt="添加图片1" /></span>
-						<span class="rightArea">请提供一张不小于720*360像素的图片<br/>大小不超过2M</span>
+						<span class="rightArea">请提供不小于720*360像素的图片<br/>大小不超过2M</span>
 					</div>
 					<div id="zyupload" class="zyupload"></div>
 				</div>
@@ -59,7 +59,7 @@
 			</div>
 		</div><!--footer-->
 	</div><!--wrap-->
-	<input id="inputm" type="text" name="path" style="display: none;"/>
+	<input id="inputm" type="text" name="path" style="display: none;" />
 <script type="text/javascript">
 $("#div1653").click(function(){
 	$("#form9527").submit(); 
@@ -85,7 +85,7 @@ $("#div1653").click(function(){
 	
 	$('#raty').raty({
 		number: 5,//多少个星星设置
-		score: 0,//初始值是设置
+		score: 1,//初始值是设置
 		targetType: 'number',//类型选择，number是数字值，hint，是设置的数组值
 		path      : 'images',
 		cancelOff : 'star_off.png',
@@ -124,8 +124,10 @@ $("#div1653").click(function(){
 				console.info(selectFiles);
 				$("#div1653").hide(); 
 				$("#div1655").show();
-				if(allFiles.length>6){
-					$("#fileImage").hide();
+				//alert(allFiles.length);
+				if(allFiles.length==6){
+					alert("最多只能添加6张图片!");
+					//$("#fileImage").hide();
 				}
 			},
 			onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
@@ -148,6 +150,7 @@ $("#div1653").click(function(){
 			onFailure: function(file, response){          // 文件上传失败的回调方法
 				console.info("此文件上传失败：");
 				console.info(file.name);
+				//alert("1211");
 			},
 			onComplete: function(response){           	  // 上传完成的回调方法
 				console.info("文件上传完成");

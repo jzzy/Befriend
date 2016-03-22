@@ -33,7 +33,7 @@ if(u==null){
 			<div class="topArea clearfix">
 				<h1>我的账户</h1>
 				<div class="prev">
-					<a href="#" onclick="javascript:history.back(-1);"><img src="<%=request.getContextPath() %>/sample_lihu/images/prev.png" alt="后退" /></a>
+					<a href="<%=request.getContextPath() %>/sample_lihu/jsp/mypage.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 				<div class="topTool">
 					<span><a href="<%=request.getContextPath() %>/sample_lihu/htm/modifypsd.html">修改密码</a></span>

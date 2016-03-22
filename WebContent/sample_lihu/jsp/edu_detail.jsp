@@ -127,7 +127,7 @@
 							String s = new String(educl.get(i).getPictures());   
 					        String a[] = s.split("!#");  
 					        for(int y=0;y<a.length;y++){
-								// System.out.println("i:"+i+"y:"+y+":"+a[y]);
+								 System.out.println("i:"+i+"y:"+y+":"+a[y]);
 							
 			
 							//http://182.92.100.235

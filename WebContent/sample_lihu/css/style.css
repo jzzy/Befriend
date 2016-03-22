@@ -1,14 +1,14 @@
 /* tag reset */
 html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,img { margin:0; padding:0; }
 html { width:100%; }
-body,code {font:0.75em "Microsoft YaHei",Verdana,Aril,sans-serif; color:#666; background:#fff;}
+body,code {font:12px "Microsoft YaHei",Verdana,Aril,sans-serif; color:#666; background:#fff;}
 body {}
 li { list-style:none; }
 img,fieldset { border:none; vertical-align:middle; }
 table { width:100%; border:0; border-spacing:0; border-collapse:collapse; }
 caption { display:none; }
 th,td { border:0; vertical-align:top; }
-input,select,textarea { font-size:100%; font-family:微?雅黑; color:#353535; vertical-align:middle; outline:none;}
+input,select,textarea { font-size:100%; font-family:"Microsoft YaHei",Verdana,Aril,sans-serif; color:#353535; vertical-align:middle; outline:none;}
 .inputTypeText { height:19px; padding:3px 0 0 9px; border:1px solid #d5d5d5; }
 select { height:24px; border:1px solid #d5d5d5; }
 textarea { padding:5px 6px; border:1px solid #d5d5d5; line-height:1.5; }
@@ -17,7 +17,8 @@ button { overflow:visible; padding:0; margin:0; border:0; cursor:pointer; }
 hr.layout { display:none; }
 a { text-decoration:none; color:#666; }
 a:hover {color:#d63433;}
-a:active { text-decoration:none; }
+a:active { text-decoration:none; 
+background-color: transparent;}
 area {outline:none;}
 .objHidden { visibility:hidden; position:absolute; left:-1000px; top:-1000px; height:0; width:0; }
 .displaynone { display:none;}
@@ -63,7 +64,7 @@ area {outline:none;}
 #container .mainList ul {padding:0 10px;border-bottom:10px solid #eee;}
 #container .mainList ul li {position:relative;border-top:1px solid #eee;}
 #container .mainList ul li:first-child {border:0;}
-#container .mainList ul li .title {padding:10px 0;line-height:21px;}
+#container .mainList ul li .title {padding:10px 0;line-height:21px;font-size:18px;}
 #container .mainList ul li .title img {margin:0 5px 0 0;height:18px;}
 #container .mainList ul li .info {position:absolute;left:0;bottom:0;padding:10px 0;}
 #container .mainList ul li .info img{height:16px;margin:0 3px 0 10px;}
@@ -127,12 +128,12 @@ area {outline:none;}
 
 #header .prev {position:absolute;left:10px;top:10px;}
 #container .newsDetail {padding:0 10px;border-bottom:10px solid #eee;}
-#container .newsDetail h2 {padding:15px 0;color:#000;font-size:16px;}
-#container .newsDetail .info {margin:0 0 10px;color:#999;}
+#container .newsDetail h2 {padding:15px 0;color:#000;font-size:21px;}
+#container .newsDetail .info {margin:0 0 10px;color:#999;font-size:12px;color:#666;}
 #container .newsDetail .info span {margin:0 10px 0 0;}
 #container .newsDetail .bigImg {}
 #container .newsDetail .bigImg img {width:100%;}
-#container .newsDetail .detail {margin:10px 0;text-indent:20px;}
+#container .newsDetail .detail {margin:10px 0;text-indent:20px;font-size:16px;}
 
 #container .hotComment h2 {}
 #container .hotComment ul {padding:0 10px;border-bottom:10px solid #eee;}
@@ -159,11 +160,12 @@ area {outline:none;}
 #container .forum ul >li a {color:#333;}
 #container .forum ul .user {margin:0 0 10px;}
 #container .forum ul .user .leftArea {width:20%;text-align:center;}
-#container .forum ul .user .leftArea img {height:50px;}
+#container .forum ul .user .leftArea img {width:80%;}
 #container .forum ul .user .rightArea {width:80%;}
-#container .forum ul .user .rightArea span {display:block;margin:5px 0 0;}
-#container .forum ul .title {margin:0 0 5px;font-weight:bold;font-size:14px;color:#000;}
-#container .forum ul .detail {padding:0 0 10px;}
+#container .forum ul .user .rightArea span {display:block;margin:5px 0 0;color:#666;font-size:12px;}
+#container .forum ul .user .rightArea span:first-child {font-size:16px;}
+#container .forum ul .title {margin:0 0 5px;font-weight:bold;font-size:20px;color:#000;}
+#container .forum ul .detail {padding:0 0 10px;font-size:14px;}
 #container .forum ul .imgList p {float:left;width:33.33%;text-align:center;border-top:1px solid #eee;padding:20px 0;}
 #container .forum ul .imgList p img {width:90%;}
 #container .forum ul .info {border-top:1px solid #eee;padding:10px 0 0;}
@@ -197,13 +199,15 @@ border-radius:5px;
 #container .forumReview .theme {padding:0 10px;border-bottom:10px solid #eee;}
 #container .forumReview .theme .user {margin:10px 0;}
 #container .forumReview .theme .user .leftArea {width:20%;text-align:center;}
-#container .forumReview .theme .user .leftArea img {height:50px;}
+#container .forumReview .theme .user .leftArea img {width:80%;}
 #container .forumReview .theme .user .rightArea {width:80%;padding:5px 0 0;}
-#container .forumReview .theme .user .rightArea span {display:block;margin:5px 0 0;}
-#container .forumReview .theme .user .rightArea .userTag {float:right;}
+#container .forumReview .theme .user .rightArea .name {font-size:16px;}
+#container .forumReview .theme .user .rightArea span {display:block;margin:5px 0 0;color:#666;}
+#container .forumReview .theme .user .rightArea .time {font-size:12px;}
+#container .forumReview .theme .user .rightArea .userTag {float:right;font-size:12px;}
 #container .forumReview .theme .user .rightArea .userTag img {height:14px;margin:0 3px 0 0;vertical-align:top;}
-#container .forumReview .theme .title {padding:0 10px; margin:0 0 5px;font-weight:bold;font-size:14px;color:#000;}
-#container .forumReview .theme .detail {padding:0 10px;}
+#container .forumReview .theme .title {padding:0 10px; margin:0 0 5px;font-weight:bold;font-size:18px;color:#000;}
+#container .forumReview .theme .detail {padding:0 10px;font-size:16px;}
 #container .forumReview .theme .info {padding:10px;}
 #container .forumReview .theme .info .rightArea span {margin:0 0 0 10px;}
 #container .forumReview .theme .imgList p {float:left;width:33.33%;text-align:center;border-top:1px solid #eee;padding:20px 0;}
@@ -212,10 +216,10 @@ border-radius:5px;
 .forumReview .reviewList .tit2 span {float:right;}
 .forumReview .reviewList .tit2 span img {margin:0 10px 0 0;}
 .forumReview .reviewList .tit2 span a {font-size:12px;font-weight:normal;color:#999;}
-#container .forumReview .reviewList .list {border-bottom:1px solid #eee;}
+#container .forumReview .reviewList .list {border-bottom:1px solid #eee;font-size:14px;}
 #container .forumReview .reviewList .list ul > li {padding:0 10px;}
 #container .forumReview .reviewList .list li .leftArea {width:20%;text-align:center;}
-#container .forumReview .reviewList .list li .leftArea img {height:50px;}
+#container .forumReview .reviewList .list li .leftArea img {width:80%;}
 #container .forumReview .reviewList .list li .rightArea {width:80%;}
 #container .forumReview .reviewList .list li:after {content:"";display:block;clear:both;} 
 #container .forumReview .reviewList .list li.comment .inner {padding:10px;}
@@ -455,7 +459,7 @@ border-radius:5px;
 #container .myPage .myInfo.logon span.logOut img {width:18px;position:absolute;top:10px;right:10px;}
 #container .myPage .infoArea {border-bottom:10px solid #eee;}
 #container .myPage .infoArea h2 {padding:10px;font-size:14px;font-weight:normal;border-bottom:1px solid #eee;color:#138ddf;}
-#container .myPage .infoArea img {width:30px;}
+#container .myPage .infoArea img {width:30px;display:block;margin:0 auto;}
 #container .myPage .infoArea li {padding:30px 0;width:50%;text-align:center;}
 #container .myPage .shopArea h2 {padding:10px;font-size:14px;font-weight:normal;border-bottom:1px solid #eee;color:#138ddf;}
 #container .myPage .shopArea {border-bottom:10px solid #eee;}
@@ -521,7 +525,7 @@ border-radius:5px;
 border-radius:5px;
 }
 #container .myFavor .mainList dl dd.reply .leftArea {width:20%;text-align:center;}
-#container .myFavor .mainList dl dd.reply .leftArea img {height:50px;}
+#container .myFavor .mainList dl dd.reply .leftArea img {width:80%;}
 #container .myFavor .mainList dl dd.reply .rightArea {width:80%;}
 #container .myFavor .mainList dl dd.reply .rightArea .name {margin:0 0 5px;padding:0 10px 0 0;}
 #container .myFavor .mainList dl dd.reply .rightArea .time {margin:0 0 10px;padding:0 10px 0 0;}
@@ -540,7 +544,7 @@ border-radius:5px;
 border-radius:5px;
 }
 #container .myFavor .listPack dl dd.reply .leftArea {width:20%;text-align:center;}
-#container .myFavor .listPack dl dd.reply .leftArea img {height:50px;}
+#container .myFavor .listPack dl dd.reply .leftArea img {width:80%;}
 #container .myFavor .listPack dl dd.reply .rightArea {width:80%;}
 #container .myFavor .listPack dl dd.reply .rightArea .name {margin:0 0 5px;padding:0 10px 0 0;}
 #container .myFavor .listPack dl dd.reply .rightArea .name .rate {float:right;} 
@@ -714,9 +718,9 @@ border-radius:5px;
 #container .eduDetail .shopInfo h2,
 #container .eduDetail .nearby h2 {padding:10px;font-size:14px;color:#138ddf;font-weight:normal;}
 
-#container .eduDetail .review .inner {padding:10px;color:#7b7b7b;border-top:1px solid #eee;}
+#container .eduDetail .review .inner {padding:10px;color:#7b7b7b;border-top:1px solid #eee;font-size:14px;}
 #container .eduDetail .review .inner .userImg {float:left;width:15%;text-align:center;}
-#container .eduDetail .review .inner .userImg img{width:80%;height:80%;}
+#container .eduDetail .review .inner .userImg img{width:80%;}
 #container .eduDetail .review .inner .message {float:left;width:85%;}
 #container .eduDetail .review .inner .message p {margin:0 0 10px;}
 #container .eduDetail .review .inner .userId .rate{float:right;padding:0 10px 0 0;}
@@ -756,9 +760,9 @@ border-radius:5px;
 /* 52 */
 .eduReview .review h2 {padding:10px;font-size:14px;color:#138ddf;font-weight:normal;border:1px solid #eee;}
 .eduReview .review h2 img {height:16px;margin:0 5px 0 0;vertical-align:middle;}
-#container .eduReview .review .inner {padding:10px;color:#7b7b7b;border-bottom:1px solid #eee;}
+#container .eduReview .review .inner {padding:10px;color:#7b7b7b;border-bottom:1px solid #eee;font-size:14px;}
 #container .eduReview .review .inner .userImg {float:left;width:15%;text-align:center;}
-#container .eduReview .review .inner .userImg img{width:80%;height:80%;}
+#container .eduReview .review .inner .userImg img{width:80%;}
 #container .eduReview .review .inner .message {float:left;width:85%;}
 #container .eduReview .review .inner .message p {margin:0 0 10px;}
 #container .eduReview .review .inner .userId .rate{float:right;padding:0 10px 0 0;}

@@ -235,7 +235,7 @@ $("#a1").click(function(){
 						li = document.createElement('li');
 						
 							var vl='<div class="leftArea">';
-						vl+='<img src="s" alt="sampleuser" /></div>';
+						vl+='<img src="'+ul[i].img+'" alt="sampleuser" /></div>';
 						vl+='<div class="rightArea">';
 						vl+='	<p class="name">'+ul[i].nickname+'</p>';
 						vl+='<p class="time">'+rl[i].time+'</p>';
@@ -255,6 +255,7 @@ $("#a1").click(function(){
 
 	$("#wrapc").hide();
 	$("#wrap").show();
+	alert("评论成功");
 	
 	
 });

@@ -189,7 +189,7 @@
 							<dl>
 								<dt class="inner clearfix">
 									<a href="getWebCommments?merchantId=<%=edusl.get(i).getMerchantId()%>">
-										<div class="imgArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/xw_15.png" alt="" /></div>
+										<div class="imgArea"><img src="<%="http://182.92.100.235/"+edusl.get(i).getPicture() %>" alt="" /></div>
 										<div class="infoArea">
 											<h3><%=edusl.get(i).getName() %></h3>
 											<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off">
