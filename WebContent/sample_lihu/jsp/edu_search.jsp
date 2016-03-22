@@ -10,15 +10,81 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <link href="<%=request.getContextPath() %>/sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/jsjquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/jscommon.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
 <script type="text/javascript">
+ 
+
+//清空   
+function  deleteloca()
+{	 
+	if(localStorage.getItem('div1')!=null)
+	if(confirm("是否清空搜索历史？")){
+		
+	
+	
+	var div1 = document.getElementById('div1');
+	localStorage.clear();
+	div1.innerHTML = localStorage.getItem('div1');
+	}
+}
+	
+
+//读取
+$(document).ready(function(){
+	var div1 = document.getElementById('div1');
+	var loc=localStorage.getItem('div1');  //获取在  localStorage的值 
+	var array=loc.split(",");
+	var htm11='';
+	for (var i=0 ; i< array.length ; i++)
+	{
+	if(i==0){
+		htm11='<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value='+array[i]+'">'+array[i]+'</a></li>';
+
+	}else{
+		htm11+='<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value='+array[i]+'">'+array[i]+'</a></li>';
+
+	}
+	}
+
+
+	div1.innerHTML = htm11;
+	
+});
+//提交表单并存储
 function  checkvalue()
 {	 
-document.form1.action="<%=request.getContextPath() %>/getLikeEduWebArea";
-document.form1.submit();
-//alert('已提交');
-return true;
+	var div1 = document.getElementById('div1');//需要显示搜索内容的div
+	var search2 = document.getElementById('search2'); //搜索框
+	document.form1.action="<%=request.getContextPath() %>/getLikeEduWebArea";
+	document.form1.submit();
+	var str = search2.value; 
+	var loc=localStorage.getItem('div1');  //获取在  localStorage的值
+	if(loc!=null){
+		
+		 
+		var array=loc.split(",");
+		var htm11='';
+		var b=true;
+		for (var i=0 ; i< array.length ; i++)
+		{
+		if(array[i]==str)
+			{
+			b=false;
+			}
+		}
+		
+		if(b){
+			//存储在localStorage
+			localStorage.setItem('div1',loc+ ","+str); 
+		}
+		
+	}else{
+		localStorage.setItem('div1',str); 
+	}
+	
+	//alert('已提交');
+	return true;
 
 }
 </script>
@@ -59,15 +125,20 @@ return true;
 			<div  class="history_search">
 				<h2>搜索历史：</h2>
 				<ul>
+				<div id="div1"></div>
+				
+				<!--
 					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=英语">英语</a></li>
 					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=数学">数学</a></li>
 					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=语文">语文</a></li>
 					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=音乐">音乐</a></li>
+					  -->
 				</ul>
-				<p><a href="#">清空搜索历史</a></p>
+				<p><a onclick="deleteloca();">清空搜索历史</a></p>
 			</div>
 		</div><!--container-->
 		<div id="footer"></div><!--footer-->
 	</div><!--wrap-->
+
 </body>
 </html>

@@ -128,7 +128,7 @@ function Load() {
 						for (i=0; i<val.length; i++) {
 							
 							li = document.createElement('li');
-							li.innerHTML='<a href="<%=request.getContextPath()+"/" %>getWebCommments?merchantId='+val[i].merchantId+'" target="_parent"><div class="imgArea"><img  src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3><p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix"><strong>海淀区</strong><span>职业技术</span><div class="distance">8000m</div></div></div></a>';
+							li.innerHTML='<a href="<%=request.getContextPath()+"/" %>getWebCommments?merchantId='+val[i].merchantId+'" target="_parent"><div class="imgArea"><img  src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3><p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix"><strong>海淀区</strong><span>职业技术</span><div class="distance">'+val[i].distance+'m</div></div></div></a>';
 							el.appendChild(li, el.childNodes[0]);
 						}
 						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/

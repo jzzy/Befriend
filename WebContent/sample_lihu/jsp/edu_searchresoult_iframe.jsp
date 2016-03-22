@@ -130,7 +130,7 @@ function Load() {
 			str=str+'<img src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3>';
 			str=str+'<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off">';
 			str=str+'</span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix">';
-			str=str+'<strong>海淀区</strong><span>职业技术</span><div class="distance">8000m</div></div></div></a>';
+			str=str+'<strong>海淀区</strong><span>职业技术</span><div class="distance">'+val[i].distance+'m</div></div></div></a>';
 		//	alert(str);
 			li.innerHTML=str;
 			el.appendChild(li, el.childNodes[0]);

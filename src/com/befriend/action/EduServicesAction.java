@@ -197,7 +197,15 @@ System.out.println("removeEduAttentionWeb"+value);
 
 	public String getEduWeb() throws IOException {
 		try {
-
+			try {
+				
+			
+			lng=(double) session.getAttribute("lng");
+			lat=(double) session.getAttribute("lat");
+			} catch (Exception e) {
+				lng = 116.483917;// 经度
+				 lat = 39.920533;// 纬度
+			}
 			/**
 			 * 获取省对应的城市
 			 */
@@ -384,6 +392,15 @@ System.out.println("removeEduAttentionWeb"+value);
 
 	public void getEduWebToJson() throws IOException {
 		try {
+			try {
+				
+				
+				lng=(double) session.getAttribute("lng");
+				lat=(double) session.getAttribute("lat");
+				} catch (Exception e) {
+					lng = 116.483917;// 经度
+					 lat = 39.920533;// 纬度
+				}
 
 			Map<String, String> map = new HashMap<String, String>();
 
@@ -544,7 +561,8 @@ System.out.println("removeEduAttentionWeb"+value);
 
 	public String getEduWebArea() throws IOException {
 		try {
-
+			session.setAttribute("lng", lng);
+			session.setAttribute("lat", lat);
 			/**
 			 * 获取省对应的城市
 			 */
@@ -801,6 +819,15 @@ System.out.println("removeEduAttentionWeb"+value);
 
 	public String getEduWebAjax() throws IOException {
 		try {
+			try {
+				
+				
+				lng=(double) session.getAttribute("lng");
+				lat=(double) session.getAttribute("lat");
+				} catch (Exception e) {
+					lng = 116.483917;// 经度
+					 lat = 39.920533;// 纬度
+				}
 
 			Map<String, String> map = new HashMap<String, String>();
 
