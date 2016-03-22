@@ -6,34 +6,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <link href="<%=request.getContextPath() %>/sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" >
  
 
 //清空   
 function  deleteloca()
 {	 
-	if(localStorage.getItem('div1')!=null)
-	if(confirm("是否清空搜索历史？")){
-		
 	
-	
+	if(localStorage.getItem('lcls')!=null&&confirm("是否清空搜索历史？")){
 	var div1 = document.getElementById('div1');
 	localStorage.clear();
-	div1.innerHTML = localStorage.getItem('div1');
+	div1.innerHTML = "";
 	}
 }
 	
 
 //读取
 $(document).ready(function(){
-	var div1 = document.getElementById('div1');
-	var loc=localStorage.getItem('div1');  //获取在  localStorage的值 
+	
+	var div1 = document.getElementById('div1'); 
+	var loc=localStorage.getItem('lcls');  //获取在  localStorage的值 
+	//alert(loc);
+	if(loc!=null){
+		
+	
 	var array=loc.split(",");
 	var htm11='';
 	for (var i=0 ; i< array.length ; i++)
@@ -49,42 +51,56 @@ $(document).ready(function(){
 
 
 	div1.innerHTML = htm11;
+	}
 	
 });
 //提交表单并存储
 function  checkvalue()
 {	 
-	var div1 = document.getElementById('div1');//需要显示搜索内容的div
+	
 	var search2 = document.getElementById('search2'); //搜索框
-	document.form1.action="<%=request.getContextPath() %>/getLikeEduWebArea";
-	document.form1.submit();
+	
 	var str = search2.value; 
-	var loc=localStorage.getItem('div1');  //获取在  localStorage的值
+	if(str.length==0){
+		alert("请填写搜索内容！");
+		return false;
+	}
+
+	var loc=localStorage.getItem('lcls');  //获取在  localStorage的值
+	
 	if(loc!=null){
 		
 		 
 		var array=loc.split(",");
-		var htm11='';
+	
 		var b=true;
-		for (var i=0 ; i< array.length ; i++)
-		{
-		if(array[i]==str)
+			for (var i=0 ; i< array.length ; i++)
 			{
-			b=false;
+				
+				
+				
+				if(array[i]==str)
+				{
+					b=false;
+				}
+				
 			}
-		}
 		
-		if(b){
-			//存储在localStorage
-			localStorage.setItem('div1',loc+ ","+str); 
-		}
+			if(b){
+				//存储在localStorage
+				localStorage.setItem('lcls',loc+ ","+str); 
+			}
 		
 	}else{
-		localStorage.setItem('div1',str); 
+		localStorage.setItem('lcls',str);
+		
 	}
 	
-	//alert('已提交');
+	
+	document.form1.action="<%=request.getContextPath() %>/getLikeEduWebArea";
+	document.form1.submit();
 	return true;
+
 
 }
 </script>
@@ -94,13 +110,13 @@ function  checkvalue()
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
-			<form name="form1" action="<%=request.getContextPath() %>/getLikeEduWebArea">
+			<form name="form1" action="<%=request.getContextPath() %>/getLikeEduWebArea" onsubmit="return false">
 				<div class="search_input2">
 					<div class="inner">
 						<input type="text" name="value" id="search2" />
-					
-						<a  onClick="javascript:return checkvalue();" class="search_btn2">
-						<img  src="<%=request.getContextPath() %>/sample_lihu/images/ico07.gif" alt="确认搜索" />
+						<!-- onClick="javascript: checkvalue();"  -->
+						<a  class="search_btn2">
+						<img  onclick="return checkvalue();" src="<%=request.getContextPath() %>/sample_lihu/images/ico07.gif" alt="确认搜索" />
 						</a>
 						</span>
 					</div>
@@ -126,7 +142,7 @@ function  checkvalue()
 			<div  class="history_search">
 				<h2>搜索历史：</h2>
 				<ul>
-				<div id="div1"></div>
+				<div id="div1" > </div>
 				
 				<!--
 					<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value=英语">英语</a></li>
