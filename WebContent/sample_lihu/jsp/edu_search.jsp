@@ -94,12 +94,13 @@ function  checkvalue()
 	<div id="wrap">
 		<div id="header">
 			<div class="topArea clearfix">
-			<form name="form1" action="getLikeEduWebArea">
+			<form name="form1" action="<%=request.getContextPath() %>/getLikeEduWebArea">
 				<div class="search_input2">
 					<div class="inner">
 						<input type="text" name="value" id="search2" />
+					
 						<a  onClick="javascript:return checkvalue();" class="search_btn2">
-						<img src="<%=request.getContextPath() %>/sample_lihu/images/ico07.gif" alt="确认搜索" />
+						<img  src="<%=request.getContextPath() %>/sample_lihu/images/ico07.gif" alt="确认搜索" />
 						</a>
 						</span>
 					</div>
