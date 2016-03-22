@@ -19,7 +19,7 @@
 function  deleteloca()
 {	 
 	
-	if(localStorage.getItem('lcls')!=null&&confirm("是否清空搜索历史？")){
+	if(confirm("是否清空搜索历史？")){
 	var div1 = document.getElementById('div1');
 	localStorage.clear();
 	div1.innerHTML = "";
@@ -32,25 +32,25 @@ $(document).ready(function(){
 	
 	var div1 = document.getElementById('div1'); 
 	var loc=localStorage.getItem('lcls');  //获取在  localStorage的值 
-	//alert(loc);
+	
 	if(loc!=null){
 		
 	
-	var array=loc.split(",");
-	var htm11='';
-	for (var i=0 ; i< array.length ; i++)
-	{
-	if(i==0){
-		htm11='<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value='+array[i]+'">'+array[i]+'</a></li>';
+		var array=loc.split(",");
+		var htm11='';
+		for (var i=0 ; i< array.length ; i++)
+		{
+			if(i==0){
+				htm11='<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value='+array[i]+'">'+array[i]+'</a></li>';
 
-	}else{
-		htm11+='<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value='+array[i]+'">'+array[i]+'</a></li>';
+			}else{
+				htm11+='<li><a href="<%=request.getContextPath() %>/getLikeEduWebArea?value='+array[i]+'">'+array[i]+'</a></li>';
+	
+			}
+		}
 
-	}
-	}
 
-
-	div1.innerHTML = htm11;
+		div1.innerHTML = htm11;
 	}
 	
 });
@@ -76,14 +76,10 @@ function  checkvalue()
 		var b=true;
 			for (var i=0 ; i< array.length ; i++)
 			{
-				
-				
-				
 				if(array[i]==str)
 				{
 					b=false;
-				}
-				
+				}			
 			}
 		
 			if(b){
@@ -92,6 +88,7 @@ function  checkvalue()
 			}
 		
 	}else{
+		
 		localStorage.setItem('lcls',str);
 		
 	}
