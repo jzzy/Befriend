@@ -118,7 +118,9 @@
 			}
 		%>
 						<li id="<%=fow.get(i).getId()%>" >
-							<div class="checkArea"><label for="a1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" /></label>
+							<div class="checkArea"><label for="a1">
+							<img src="<%=request.getContextPath() %>/sample_lihu/images/ico28.png" alt="swich" />
+							</label>
 							<input type="checkbox"  name="check" value="<%=fow.get(i).getId()%>"  /></div>
 							<dl>
 								<dt class="inner clearfix">
@@ -194,7 +196,11 @@
 											<h3><%=edusl.get(i).getName() %></h3>
 											<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off">
 											</span><span class="star_off"></span><span class="star_off"></span></p>
-											<div class="clearfix"><strong><%=edusl.get(i).getCity() %></strong><span><%=edusl.get(i).getClassFirst()%></span><div class="distance">8000m</div></div>
+											<div class="clearfix"><strong><%=edusl.get(i).getCity() %></strong><span><%=edusl.get(i).getClassFirst()%></span>
+											
+											<div class="distance"></div>
+											
+											</div>
 										</div>
 									</a>
 								</dt>

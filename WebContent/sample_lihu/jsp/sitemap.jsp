@@ -50,7 +50,7 @@ alert('功能尚未开放');
 				
 				<li><a href="<%=request.getContextPath() %>/webSbType?tp=5"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap5.gif" alt="出国留学" />出国留学</a></li>
 				
-				<li><a href="<%=request.getContextPath() %>/webHotareaf"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap9.gif" alt="本地资讯" />本地资讯</a></li>
+				<li><a href="<%=request.getContextPath() %>/webSbType?tp=10"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap9.gif" alt="本地资讯" />本地资讯</a></li>
 				
 				<li><a href="<%=request.getContextPath() %>/webSbType?tp=6"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap6.gif" alt="名人教子" />名人教子</a></li>
 				<li><a href="<%=request.getContextPath() %>/webSbType?tp=7"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap7.gif" alt="健康导航" />健康导航</a></li>

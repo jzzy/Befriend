@@ -104,7 +104,7 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 							</div>
 							<div class="inner clearfix">
 								<div class="user clearfix">
-									<p class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/testuser_ico.gif" alt="sample" /></p>
+									<p class="leftArea"><img src="<%=request.getContextPath()+us.get(i).getImg() %>" alt="sample" /></p>
 									<p class="rightArea">
 										<span><%=us.get(i).getUsername() %></span>
 										<span><%=fones.get(i).getTime() %></span>
@@ -154,11 +154,13 @@ List<Attention> attl=(List)request.getAttribute("attl")==null?new ArrayList<News
 							<input type="checkbox"  name="check"  value="<%=attl.get(i).getId()%>" /></div>
 							<div class="inner clearfix">
 								<a href="getWebCommments?merchantId=<%=edusl.get(i).getMerchantId()%>">
-									<div class="imgArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/xw_15.png" alt="" /></div>
+									<div class="imgArea"><img src="<%="http://182.92.100.235/"+edusl.get(i).getPicture() %>" alt="" /></div>
 									<div class="infoArea">
 										<h3><%=edusl.get(i).getName() %></h3>
 										<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p>
-										<div class="clearfix"><strong><%=edusl.get(i).getCounty() %></strong><span><%=edusl.get(i).getClassSecond() %></span><div class="distance">8000m</div></div>
+										<div class="clearfix"><strong><%=edusl.get(i).getCounty() %></strong><span><%=edusl.get(i).getClassSecond() %></span>
+										<div class="distance"></div>
+										</div>
 									</div>
 								</a>
 							</div>
