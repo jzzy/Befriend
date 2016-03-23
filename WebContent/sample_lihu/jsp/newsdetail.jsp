@@ -261,8 +261,13 @@ $("#a1").click(function(){
 						}
 						li = document.createElement('li');
 						
-							var vl='<div class="leftArea">';
-						vl+='<img src="'+ul[i].img+'" alt="sampleuser" /></div>';
+						var vl='<div class="leftArea">';
+						if(ul[i].img!=null){
+							vl+='<img src="<%=request.getContextPath()%>'+ul[i].img+'" alt="'+ul[i].img+'" /></div>';
+						}else{
+							vl+='<img src="<%=request.getContextPath()%>/sample_lihu/images/testuser_ico.gif" alt="'+ul[i].img+'" /></div>';
+						}
+					
 						vl+='<div class="rightArea">';
 						vl+='	<p class="name">'+ul[i].nickname+'</p>';
 						vl+='<p class="time">'+rl[i].time+'</p>';
@@ -279,10 +284,10 @@ $("#a1").click(function(){
 				
 	})
 	
-
+	alert("评论成功");
 	$("#wrapc").hide();
 	$("#wrap").show();
-	alert("评论成功");
+
 	
 	
 });

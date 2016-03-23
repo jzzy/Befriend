@@ -100,6 +100,12 @@ public class EduCommentAction implements ServletRequestAware {
 					ftwo = forumdao.getForumTwoid(id);
 					if (ftwo != null) {
 						forumdao.Remove(ftwo);
+						fone=forumdao.getForumOne(ftwo.getForumid());
+						if(fone!=null){
+							fone.setFrs(forumdao.getForumTwoALL(ftwo.getForumid()).size());
+							forumdao.update(fone);
+						}
+						
 						System.out.println("删除论坛评论成功");
 						// OpeFunction.Out().println(true);
 						// return;
@@ -125,6 +131,12 @@ public class EduCommentAction implements ServletRequestAware {
 					Review r = rdao.byid(id);
 					if (r != null) {
 						rdao.remove(r);
+						News n=newsDAO.byid(r.getNewsid());
+						if(n!=null){
+						n.setReviews(rdao.Alln(r.getNewsid()).size());
+						newsDAO.Upnews(n);
+						}
+						
 						System.out.println("删除新闻评论成功");
 						// OpeFunction.Out().println(true);
 						// return;
@@ -167,31 +179,32 @@ public class EduCommentAction implements ServletRequestAware {
 		String username = u.getUsername();
 
 		List<Integer> rn = new ArrayList<Integer>();// 收藏 List
+		List<Review> rel=rdao.Allu(username);
 		for (Review r1 : rdao.Allu(username)) {
 
 			Boolean b = true;
 
-			for (int i = 0; i < rn.size(); i++) {
+//			for (int i = 0; i < rn.size(); i++) {
+//
+//				if (rn.get(i) == r1.getNewsid()) {
+//
+//				//	b = false;
+//				}
+//
+//			}
 
-				if (rn.get(i) == r1.getNewsid()) {
-
-					b = false;
-				}
-
-			}
-
-			if (b) {
-				//System.out.println("我评论过的新闻  用户名和新闻id" + username + "+" + r1.getNewsid() + "时间是：" + r1.getTime());
-				rl.add(rdao.unid(username, r1.getNewsid()).get(0));
-				nl.add(newsDAO.byid(r1.getNewsid()));
-			}
-
+//			if (b) {
+//				//System.out.println("我评论过的新闻  用户名和新闻id" + username + "+" + r1.getNewsid() + "时间是：" + r1.getTime());
+//				rl.add(rdao.unid(username, r1.getNewsid()).get(0));
+//				nl.add(newsDAO.byid(r1.getNewsid()));
+//			}
+			nl.add(newsDAO.byid(r1.getNewsid()));
 			rn.add(r1.getNewsid());
 
 		}
 
 		request.setAttribute("nl", nl);
-		request.setAttribute("rl", rl);
+		request.setAttribute("rl", rel);
 		System.out.println("nl"+nl.size()+"rl"+rl.size());
 		int userid = u.getId();
 
@@ -201,14 +214,14 @@ public class EduCommentAction implements ServletRequestAware {
 		Boolean b = true;
 		for (int i = 0; i < ftwos.size(); i++) {
 
-			for (int y = 0; y < l.size(); y++) {
-			//	System.out.println("y=" + y);
-				if (l.get(y) == ftwos.get(i).getForumid()) {
-
-					b = false;
-					break;
-				}
-			}
+//			for (int y = 0; y < l.size(); y++) {
+//			//	System.out.println("y=" + y);
+//				if (l.get(y) == ftwos.get(i).getForumid()) {
+//
+//				//	b = false;
+//					break;
+//				}
+//			}
 			//System.out.println("b=" + b);
 
 			if (b) {

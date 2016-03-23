@@ -57,8 +57,8 @@ public class EduServicesAction extends ActionSupport implements ServletRequestAw
 	Attention attention = new Attention();
 	List<Attention> la = new ArrayList<Attention>();
 	List<EduServices> ls = new ArrayList<EduServices>();
-	double lng = 116.483917;// 经度
-	double lat = 39.920533;// 纬度
+	double lng=0.0;// 经度
+	double lat=0.0;// 纬度
 	private String type = "美食";// 类别
 	private String sortType;
 
@@ -203,8 +203,7 @@ System.out.println("removeEduAttentionWeb"+value);
 			lng=(double) session.getAttribute("lng");
 			lat=(double) session.getAttribute("lat");
 			} catch (Exception e) {
-				lng = 116.483917;// 经度
-				 lat = 39.920533;// 纬度
+				e.printStackTrace();
 			}
 			/**
 			 * 获取省对应的城市
@@ -242,6 +241,11 @@ System.out.println("removeEduAttentionWeb"+value);
 					map.put("province", province);
 					request.setAttribute("province", province);
 					session.setAttribute("province", province);
+				}
+				if (province.equals("all")) {
+					map.put("province", session.getAttribute("province").toString());
+					
+					
 				}
 
 			}
@@ -398,8 +402,7 @@ System.out.println("removeEduAttentionWeb"+value);
 				lng=(double) session.getAttribute("lng");
 				lat=(double) session.getAttribute("lat");
 				} catch (Exception e) {
-					lng = 116.483917;// 经度
-					 lat = 39.920533;// 纬度
+					e.printStackTrace();
 				}
 
 			Map<String, String> map = new HashMap<String, String>();
@@ -410,6 +413,11 @@ System.out.println("removeEduAttentionWeb"+value);
 					request.setAttribute("province", province);
 					session.setAttribute("province", province);
 
+				}
+				if (province.equals("all")) {
+					map.put("province", session.getAttribute("province").toString());
+					
+					
 				}
 
 			}
@@ -561,8 +569,16 @@ System.out.println("removeEduAttentionWeb"+value);
 
 	public String getEduWebArea() throws IOException {
 		try {
+			
+			if(session.getAttribute("lat")==null&&lng==0.0){
+				
+				((HttpServletResponse) OpeFunction.response()).sendRedirect(request.getContextPath() + "/SimulationApp/baidugps.html");
+				return null;
+			}
+			if(lng !=0.0&& lat !=0.0){
 			session.setAttribute("lng", lng);
 			session.setAttribute("lat", lat);
+			}
 			/**
 			 * 获取省对应的城市
 			 */
@@ -599,6 +615,11 @@ System.out.println("removeEduAttentionWeb"+value);
 					map.put("province", province);
 					request.setAttribute("province", province);
 					session.setAttribute("province", province);
+				}
+				if (province.equals("all")) {
+					map.put("province", session.getAttribute("province").toString());
+					
+					
 				}
 
 			}
@@ -672,8 +693,7 @@ System.out.println("removeEduAttentionWeb"+value);
 			}
 
 			System.out.println("lng:" + lng + "lat:" + lat);
-			session.setAttribute("lng", lng);
-			session.setAttribute("lat", lat);
+			
 			System.out.println("province" + province);
 			System.out.println("city" + city);
 			System.out.println("county" + county);
@@ -825,8 +845,7 @@ System.out.println("removeEduAttentionWeb"+value);
 				lng=(double) session.getAttribute("lng");
 				lat=(double) session.getAttribute("lat");
 				} catch (Exception e) {
-					lng = 116.483917;// 经度
-					 lat = 39.920533;// 纬度
+					e.printStackTrace();
 				}
 
 			Map<String, String> map = new HashMap<String, String>();
@@ -836,6 +855,11 @@ System.out.println("removeEduAttentionWeb"+value);
 					map.put("province", province);
 					request.setAttribute("province", province);
 					session.setAttribute("province", province);
+				}
+				if (province.equals("all")) {
+					map.put("province", session.getAttribute("province").toString());
+					
+					
 				}
 
 			}
@@ -983,6 +1007,14 @@ System.out.println("removeEduAttentionWeb"+value);
 
 	public String getLikeEduWebArea() throws IOException {
 		try {
+			
+			
+			lng=(double) session.getAttribute("lng");
+			lat=(double) session.getAttribute("lat");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		try {
 
 			if (!OpeFunction.isEmpty(province)) {
 				session.setAttribute("province", province);
@@ -1044,6 +1076,14 @@ System.out.println("removeEduAttentionWeb"+value);
 
 	public String getLikeEduWeb() throws IOException {
 		try {
+			
+			
+			lng=(double) session.getAttribute("lng");
+			lat=(double) session.getAttribute("lat");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		try {
 
 			if (session.getAttribute("province") != null) {
 				province = session.getAttribute("province").toString();
@@ -1068,6 +1108,11 @@ System.out.println("removeEduAttentionWeb"+value);
 					map.put("province", province);
 					request.setAttribute("province", province);
 					session.setAttribute("province", province);
+				}
+				if (province.equals("all")) {
+					map.put("province", session.getAttribute("province").toString());
+					
+					
 				}
 
 			}
@@ -1213,6 +1258,14 @@ System.out.println("removeEduAttentionWeb"+value);
 
 	public void getLikeEduWebToJson() throws IOException {
 		try {
+			
+			
+			lng=(double) session.getAttribute("lng");
+			lat=(double) session.getAttribute("lat");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		try {
 
 			if (session.getAttribute("province") != null) {
 				province = session.getAttribute("province").toString();
@@ -1234,6 +1287,11 @@ System.out.println("removeEduAttentionWeb"+value);
 					map.put("province", province);
 					request.setAttribute("province", province);
 					session.setAttribute("province", province);
+				}
+				if (province.equals("all")) {
+					map.put("province", session.getAttribute("province").toString());
+					
+					
 				}
 
 			}
@@ -1380,6 +1438,14 @@ System.out.println("removeEduAttentionWeb"+value);
 
 	public String getLikeEduWebAjax() throws IOException {
 		try {
+			
+			
+			lng=(double) session.getAttribute("lng");
+			lat=(double) session.getAttribute("lat");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		try {
 
 			if (session.getAttribute("province") != null) {
 				province = session.getAttribute("province").toString();
@@ -1401,6 +1467,11 @@ System.out.println("removeEduAttentionWeb"+value);
 					map.put("province", province);
 					request.setAttribute("province", province);
 					session.setAttribute("province", province);
+				}
+				if (province.equals("all")) {
+					map.put("province", session.getAttribute("province").toString());
+					
+					
 				}
 
 			}

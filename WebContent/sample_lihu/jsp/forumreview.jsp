@@ -95,6 +95,7 @@ if(f==null){
 						
 						<%
 						for(int i=fs.size()-1;i>=0;i--){
+						
 							
 						
 						%>
@@ -103,7 +104,22 @@ if(f==null){
 								<ul>
 									<li class="comment">
 										<div class="inner clearfix">
+										<%
+										if(us.get(i).getImg()!=null){
+											
+										%>
 											<div class="leftArea"><img  " src="<%=request.getContextPath()+us.get(i).getImg() %>" alt="sampleuser" /></div>
+											<%
+										}else{
+											
+										
+											%>
+											<div class="leftArea"><img  " src="<%=request.getContextPath()+"/SimulationApp/images/logod.png" %>" alt="sampleuser" /></div>
+											
+											<%
+						}
+											%>
+											
 											<div class="rightArea">
 												<p class="name"><%=us.get(i).getNickname() %><span class="userTag"><%=fs.size()-i %>楼</span></p>
 												<p class="detail"><%=fs.get(i).getReply() %></p>

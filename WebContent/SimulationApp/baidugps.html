@@ -21,6 +21,8 @@
 </html>
 <script type="text/javascript">
 	 $(document).ready(function(){
+		
+		 
 		setTimeout(getLocationByIp,4000);
 		function getLocationByIp(){
 			  $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js',function(){  
@@ -28,7 +30,7 @@
 			    	  //alert(remote_ip_info.province);//省份  
 			    	  //alert(remote_ip_info.city);//城市  
 			    	  //alert("您所在的省份为:" + remote_ip_info.province);
-			          location.href="/Befriend/webNewsA10?province="+remote_ip_info.province;
+			        //  location.href="/Befriend/webNewsA10?province="+remote_ip_info.province;
 			    	});  
 		}
 		
@@ -36,7 +38,8 @@
 		geolocation.getCurrentPosition(function(r){
 			if(this.getStatus() == BMAP_STATUS_SUCCESS){
 				var mk = new BMap.Marker(r.point);
-				//alert('您的位置：'+r.point.lng+','+r.point.lat);
+				alert('您的位置：'+r.point.lng+','+r.point.lat);
+				location.href="/Befriend/getEduWebArea?lng="+r.point.lng+"&lat="+r.point.lat;
 				var point = new BMap.Point(r.point.lng,r.point.lat);
 				var geoc = new BMap.Geocoder();
 				geoc.getLocation(point, function(rs){
@@ -44,7 +47,7 @@
 					//alert(addComp.province + ", " + addComp.city );
 					//alert(addComp.province.substring(0, addComp.province.length-1));
 					//alert("gps");
-					location.href="/Befriend/webNewsA10?province="+addComp.province.substring(0, addComp.province.length-1);
+					//location.href="/Befriend/webNewsA10?province="+addComp.province.substring(0, addComp.province.length-1);
 					//return;
 				});   
 			}

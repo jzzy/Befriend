@@ -12,6 +12,14 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
 <link href="<%=request.getContextPath() %>/sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" >
+function  text()
+{	 
+alert('功能尚未开放');
+
+
+}
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -22,7 +30,7 @@
 					<a href="<%=request.getContextPath() %>/sample_lihu/jsp/relocation.jsp"><%=session.getAttribute("province") %>&nbsp;<img src="<%=request.getContextPath() %>/sample_lihu/images/location_more.gif" alt="down" /></a>
 				</div>
 				<div class="topTool">
-					<span class="mapLink"><a href="<%=request.getContextPath() %>/sample_lihu/readingindex.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
+					<span class="mapLink"><a href="javascript:history.back(-1);"><img src="<%=request.getContextPath() %>/sample_lihu/images/toptoolBtn.gif" alt="菜单" /></a></span>
 				</div>
 			</div>
 		</div><!--header-->
@@ -53,7 +61,7 @@
 			<div class="servNav">
 				<h2 class="tit2"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnavi_tit.gif" alt="服务导航" /></h2>
 				<ul class="clearfix">
-					<li><a href="<%=request.getContextPath() %>/sample_lihu/readingindex.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav1.gif" alt="读书会" /></a></li>
+					<li><a ><img onclick="text();" src="<%=request.getContextPath() %>/sample_lihu/images/servnav1.gif" alt="读书会" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/getEduWebArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav2.gif" alt="教辅机构" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/book_category.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav3.gif" alt="教育部推荐用书" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/selectwxHouseallzh"><img src="<%=request.getContextPath() %>/sample_lihu/images/servnav4.gif" alt="搜学区房" /></a></li>
@@ -64,7 +72,7 @@
 			<div class="myNav">
 				<h2 class="tit2"><img src="<%=request.getContextPath() %>/sample_lihu/images/mynavi_tit.gif" alt="我的导航" /></h2>
 				<ul class="clearfix">
-					<li><a href="<%=request.getContextPath() %>/webForumApptype"><img src="<%=request.getContextPath() %>/sample_lihu/images/mynavi1.gif" alt="论坛" /></a></li>
+					<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/forum2.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/mynavi1.gif" alt="论坛" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/mypage.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/mynavi2.gif" alt="我的" /></a></li>
 				</ul>
 			</div>

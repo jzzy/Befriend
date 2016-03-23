@@ -75,6 +75,33 @@ if(u==null){
 							<select id="selCity"   name="city"></select> 
 						</div>
 					</li>
+					<li class="userName">
+						<div class="leftArea">孩子阶段:</div>
+						<div class="rightArea">
+					
+						
+						
+							  
+    			<select  name="stage" id="type" disable=true >
+   							 <option value="<%=u.getStage()%>"><%=u.getStage()%></option>
+							<option value="未入园">未入园</option>
+							<option value="幼儿园">幼儿园</option>
+							<option value="一年级">一年级</option>
+							<option value="二年级">二年级</option>
+							<option value="三年级">三年级</option>
+							<option value="四年级">四年级</option>
+							<option value="五年级">五年级</option>
+							<option value="六年级">六年级</option>
+							<option value="初一">初一</option>
+							<option value="初二">初二</option>
+							<option value="初三">初三</option>
+							<option value="高一">高一</option>
+							<option value="高二">高二</option>
+							<option value="高三">高三</option>
+							<option value="大学以上">大学以上</option>
+					</select>   
+					</div>
+					</li>
 					<li>
 						<div class="leftArea">所在学校</div>
 						<div class="rightArea"><a href="<%=request.getContextPath() %>/sample_lihu/jsp/modifyschool.jsp"><%=u.getSchool() %></a></div>

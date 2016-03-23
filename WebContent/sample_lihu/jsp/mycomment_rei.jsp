@@ -126,9 +126,9 @@
 										<p class="title"><a href="webForumLook?id=<%=fones.get(i).getId()%>" target="_parent"><%=fones.get(i).getTitle() %></a></p>
 										<p class="info">
 											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />
-											&nbsp;<%=fones.get(i).getFollectnum()%></span>
-											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor_ico.gif" alt="关注" />
 											&nbsp;<%=fones.get(i).getFrs()%></span>
+											<span><img src="<%=request.getContextPath() %>/sample_lihu/images/favor_ico.gif" alt="关注" />
+											&nbsp;<%=fones.get(i).getFollectnum()%></span>
 										</p>
 									</div>
 									

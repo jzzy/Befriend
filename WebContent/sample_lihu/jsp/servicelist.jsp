@@ -12,7 +12,14 @@
 <link href="sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="sample_lihu/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="sample_lihu/js/common.js"></script>
+<script type="text/javascript" >
+function  text()
+{	 
+alert('功能尚未开放');
 
+
+}
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -35,7 +42,7 @@
 		</div><!--header-->
 		<div id="container">
 			<ul class="servList clearfix">
-				<li><a href="sample_lihu/readingindex.html"><img src="sample_lihu/images/servlist01.gif" alt="读书会" />读书会</a></li>
+				<li><a ><img onclick="text();" src="sample_lihu/images/servlist01.gif" alt="读书会" />读书会</a></li>
 				<li><a href="getEduWebArea"><img src="sample_lihu/images/servlist02.gif" alt="教辅机构" />教辅机构</a></li>
 				<li><a href="sample_lihu/jsp/book_category.jsp"><img src="sample_lihu/images/servlist03.gif" alt="教育部推荐用书" />教育部推荐用书</a></li>
 				<li><a href="selectwxHouseallzh"><img src="sample_lihu/images/servlist04.gif" alt="搜学区房" />搜学区房</a></li>

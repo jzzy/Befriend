@@ -23,6 +23,14 @@ if(false){
 	return;
 }
 %>
+<script type="text/javascript" >
+function  text()
+{	 
+alert('功能尚未开放');
+
+
+}
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -56,7 +64,7 @@ if(false){
 				}else{
 				%>
 				<div class="myInfo logon">
-					<p class="userImg"><img  src="<%=request.getContextPath()+u.getImg() %>" alt="sample" /></p>
+					<p class="userImg"><a href="<%=request.getContextPath() %>/sample_lihu/jsp/myAccount.jsp"><img  src="<%=request.getContextPath()+u.getImg() %>" alt="sample" /></a></p>
 					<p class="name"><%=u.getNickname() %><a href="<%=request.getContextPath() %>/sample_lihu/jsp/myAccount.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico23.png" alt="修改" /></a></p>
 					<p class="info clearfix"><span class="leftArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico24.png" alt="" /><%=u.getAddress()+" "+u.getAddcity() %></span><span class="rightArea"><img src="<%=request.getContextPath() %>/sample_lihu/images/ico25.png" alt="年级" /><%=u.getStage() %></span></p>
 					<span class="prev"><img onclick="javascript:history.back(-1);" src="<%=request.getContextPath() %>/sample_lihu/images/ico45.png" alt="上一页" /></span>
@@ -76,12 +84,12 @@ if(false){
 				<div class="shopArea">
 					<h2>购物相关</h2>
 					<ul class="clearfix">
-						<li><a href="cart.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/myshop1.png" alt="购物车" /><br/>购物车</a></li>
-						<li><a href="myshopping_2.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/myshop2.png" alt="待付款" /><br/>待付款</a></li>
-						<li><a href="myshopping_3.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/myshop3.png" alt="已发货" /><br/>已发货</a></li>
-						<li><a href="#"><img src="<%=request.getContextPath() %>/sample_lihu/images/myshop4.png" alt="交易完成" /><br/>交易完成</a></li>
-						<li><a href="myshopping_4.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/myshop5.png" alt="退货/售后" /><br/>退货/售后</a></li>
-						<li><a href="address.html"><img src="<%=request.getContextPath() %>/sample_lihu/images/myshop6.png" alt="收货地址" /><br/>收货地址</a></li>
+						<li><img onclick="text();" src="<%=request.getContextPath() %>/sample_lihu/images/myshop1.png" alt="购物车" /><br/>购物车</a></li>
+						<li><img onclick="text();" src="<%=request.getContextPath() %>/sample_lihu/images/myshop2.png" alt="待付款" /><br/>待付款</li>
+						<li><img onclick="text();" src="<%=request.getContextPath() %>/sample_lihu/images/myshop3.png" alt="已发货" /><br/>已发货</li>
+						<li><img onclick="text();" src="<%=request.getContextPath() %>/sample_lihu/images/myshop4.png" alt="交易完成" /><br/>交易完成</li>
+						<li><img onclick="text();" src="<%=request.getContextPath() %>/sample_lihu/images/myshop5.png" alt="退货/售后" /><br/>退货/售后</li>
+						<li><img onclick="text();" src="<%=request.getContextPath() %>/sample_lihu/images/myshop6.png" alt="收货地址" /><br/>收货地址</li>
 					</ul>
 				</div>
 			</div>

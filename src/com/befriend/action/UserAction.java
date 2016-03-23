@@ -709,7 +709,7 @@ public class UserAction extends ActionSupport {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public synchronized String webRegistration() throws IOException, JSONException {
+	public  void webRegistration() throws IOException, JSONException {
 
 		phone = request.getParameter("phone");
 		password = request.getParameter("password");
@@ -717,13 +717,13 @@ public class UserAction extends ActionSupport {
 
 		if (password == null) {
 			System.out.println("密码为空");
-			util.Out().print("密码为空");
-			return null;
+			OpeFunction.Out().print("null");
+			return ;
 		}
 		if (phone == null) {
 			System.out.println("手机号为空");
-			util.Out().print("手机号为空");
-			return null;
+			OpeFunction.Out().print("null");
+			return ;
 		}
 		// 验证用户名
 		String reg = "^[A-Za-z_][A-Za-z0-9]{5,17}";
@@ -732,8 +732,9 @@ public class UserAction extends ActionSupport {
 		if (username != null) {
 			if (!username.matches(reg)) {
 				System.out.println("用户名格式不对！");
-				util.Out().print("用户名格式不对！");
-				return null;
+				//util.Out().print("用户名格式不对！");
+				OpeFunction.Out().print("null");
+				return ;
 			}
 
 		}
@@ -741,15 +742,16 @@ public class UserAction extends ActionSupport {
 		reg = "[A-Za-z0-9_]{6,18}";
 		if (!password.matches(reg)) {
 			System.out.println("密码格式不对！");
-			util.Out().print("密码格式不对！");
-			return null;
+			OpeFunction.Out().print("null");
+			return ;
 		}
+		
 		// 验证手机号
 		String regp = "[0-9]{11}";
 		if (!phone.matches(regp)) {
 			System.out.println("密码格式不对！");
-			util.Out().print("密码格式不对！");
-			return null;
+			OpeFunction.Out().print("null");
+			return ;
 		}
 		System.out.println("进入web用户注册手机号为:" + phone);
 		System.out.println("进入时间" + util.getNowTime());
@@ -768,8 +770,8 @@ public class UserAction extends ActionSupport {
 		// 判断手机号是否注册过
 		if (userdao.byUsernameAccnumnoPhone(phone) != null) {
 			System.out.println("此手机号  已经注册过");
-			request.setAttribute("ph", phone);
-			return Action.ERROR;
+			OpeFunction.Out().print(true);
+			return ;
 		}
 
 		u.setAccnumno(accnumno);
@@ -787,16 +789,17 @@ public class UserAction extends ActionSupport {
 		u.setGag(0);// 可以创建论坛
 		u.setCome(User.OWN);// 来自家长之友
 		u.setOs(User.WEB);
+		u.setImg("/SimulationApp/images/logod.png");
 		if (userdao.byUsernameAccnumnoPhone(username) != null) {
 			System.out.println("此用户名  已经注册过");
-			request.setAttribute("ue", username);
-			return Action.ERROR;
+			OpeFunction.Out().print(false);
+			return ;
 		}
 		userdao.save(u);
 		u = userdao.byUsernameAccnumnoPhone(accnumno);
 		if (u == null) {
-			util.Out().print("异常请重新注册");
-			return null;
+			OpeFunction.Out().print(false);
+			return ;
 		}
 		pd.setUid(u.getId());
 		pd.setPassword(password);
@@ -815,9 +818,9 @@ public class UserAction extends ActionSupport {
 			json.put("password", "123456"); // 用户密码
 			String w = WechatKit.post(URL, json, RefreshAccessToken.access_token);
 		}
+		//OpeFunction.Out().print(true); 
 
-		return Action.SUCCESS;
-
+		
 	}
 
 	/**
@@ -1913,6 +1916,7 @@ public class UserAction extends ActionSupport {
 			u.setCompetence(0);// 普通用户
 			u.setGag(0);// 可以创建论坛
 			u.setCome("own");// 来自家长之友
+			u.setImg("/SimulationApp/images/logod.png");
 			if (userdao.byUsernameAccnumnoPhone(phone) != null) {
 				util.Out().print(false);
 				return;
@@ -2076,6 +2080,7 @@ public class UserAction extends ActionSupport {
 				}
 
 				u.setCome(User.SYN);
+				u.setImg("/SimulationApp/images/logod.png");
 				u.setOs(User.SYN);
 				u.setAccnumno(accnumno);
 				u.setStage("未填写");
@@ -2207,6 +2212,7 @@ public class UserAction extends ActionSupport {
 			u.setNickname(nickname);// 没有设置过显示用户名
 			u.setCome(User.ZHZH);
 			u.setOs(User.ZHZH);
+			u.setImg("/SimulationApp/images/logod.png");
 			u.setAccnumno(accnumno);
 			u.setStage("未填写");
 			if (!util.isEmpty(address)) {
@@ -2321,6 +2327,7 @@ public class UserAction extends ActionSupport {
 			u.setUsername(username);
 			u.setNickname(nickname);// 没有设置过显示用户名
 			u.setCome(os);
+			u.setImg("/SimulationApp/images/logod.png");
 			u.setOs(os);
 			u.setAccnumno(accnumno);
 			u.setStage("未填写");
@@ -2436,6 +2443,7 @@ public class UserAction extends ActionSupport {
 			u.setUsername(username);
 			u.setNickname(nickname);// 没有设置过显示用户名
 			u.setCome(os);
+			u.setImg("/SimulationApp/images/logod.png");
 			u.setOs(os);
 			u.setAccnumno(accnumno);
 			u.setStage("未填写");
@@ -2556,7 +2564,7 @@ public class UserAction extends ActionSupport {
 
 			u.setCome(os);
 			u.setOs(os);
-
+			u.setImg("/SimulationApp/images/logod.png");
 			u.setAccnumno(accnumno);
 			u.setStage("未填写");
 			if (!util.isEmpty(address)) {
@@ -2676,7 +2684,7 @@ public class UserAction extends ActionSupport {
 
 			u.setCome(os);
 			u.setOs(os);
-
+			u.setImg("/SimulationApp/images/logod.png");
 			u.setAccnumno(accnumno);
 			u.setStage("未填写");
 			if (!util.isEmpty(address)) {
@@ -2800,7 +2808,7 @@ public class UserAction extends ActionSupport {
 			}
 			if (!util.isEmpty(addcity)) {
 				u.setAddcity(addcity);
-			}
+			}u.setImg("/SimulationApp/images/logod.png");
 
 			u.setFinaltime(time);
 			u.setSchool("未填写");
@@ -2917,7 +2925,7 @@ public class UserAction extends ActionSupport {
 			if (!util.isEmpty(addcity)) {
 				u.setAddcity(addcity);
 			}
-
+			u.setImg("/SimulationApp/images/logod.png");
 			u.setFinaltime(time);
 			u.setSchool("未填写");
 			u.setLookphone(phone);
@@ -3070,7 +3078,7 @@ public class UserAction extends ActionSupport {
 			if (!util.isEmpty(addcity)) {
 				u.setAddcity(addcity);
 			}
-
+			u.setImg("/SimulationApp/images/logod.png");
 			u.setFinaltime(time);
 			u.setSchool("未填写");
 			u.setLookphone(phone);

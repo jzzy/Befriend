@@ -697,7 +697,7 @@ public class ForumAction {
 
 				ftwos = forumdao.getForumTwoALL(id);
 				User user = userdao.byid(fone.getUserid());
-
+				fone.setFrs(ftwos.size());
 				forumdao.update(fone);
 				List fl = new ArrayList();
 				List fu = new ArrayList();
@@ -1518,7 +1518,7 @@ public class ForumAction {
 
 				ftwos = forumdao.getForumTwoALL(id);
 				User user = userdao.byid(fone.getUserid());
-
+				fone.setFrs(ftwos.size());
 				forumdao.update(fone);
 
 				List fl = new ArrayList();
@@ -1958,7 +1958,7 @@ public class ForumAction {
 
 				ftwos = forumdao.getForumTwoALL(id);
 				User user = userdao.byid(fone.getUserid());
-
+				fone.setFrs(ftwos.size());
 				forumdao.update(fone);
 				List fl = new ArrayList();
 				List fu = new ArrayList();
@@ -2057,12 +2057,12 @@ public class ForumAction {
 				System.out.println("论坛标题:" + fone.getTitle());
 
 				User user = userdao.byid(fone.getUserid());
-
+				ftwos = forumdao.getForumTwoALL(id);
 				fone.setfHits(fone.getfHits() + 1);
-
+				fone.setFrs(ftwos.size());
 				forumdao.update(fone);
 
-				ftwos = forumdao.getForumTwoALL(id);
+				
 
 				List fl = new ArrayList();
 				System.out.println("评论数" + ftwos.size());
