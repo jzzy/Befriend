@@ -483,7 +483,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			userid = u.getId();
 			System.out.println("userid" + u.getId());
 			if (cdao.unid(userid, newsid) != null) {
-				util.Out().print("已经收藏过!");
+				util.Out().print(false);
 				return;
 			} else {
 				c.setNewsid(newsid);
@@ -503,12 +503,12 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 						* 2 + (n.getHits() == null ? 0 : n.getHits()));
 
 				ndao.Upnews(n);
-				util.Out().print("收藏成功");
+				util.Out().print(true);
 
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			util.Out().print(false);
 		}
 
 	}

@@ -1,9 +1,18 @@
 package com.befriend.util;
 
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+import java.awt.Image;
+import java.awt.Graphics2D;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,6 +37,7 @@ import java.util.Map;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,6 +76,7 @@ import com.befriend.wechat.WechatKit;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionContext;
+
 import com.sun.rowset.internal.Row;
 
 import java.io.ByteArrayOutputStream;
@@ -88,7 +99,7 @@ import javax.crypto.spec.IvParameterSpec;
 
 @SuppressWarnings("all")
 public class OpeFunction {
-	
+
 	/**
 	 * 读取文件 转json
 	 * 
@@ -100,19 +111,16 @@ public class OpeFunction {
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
 		Gson gs = new Gson();
-		List<SortModel> lsm = gs.fromJson(br.readLine(),
-				new TypeToken<List<SortModel>>() {
-				}.getType());
+		List<SortModel> lsm = gs.fromJson(br.readLine(), new TypeToken<List<SortModel>>() {
+		}.getType());
 
 		for (SortModel sortModel : lsm) {
-			System.out
-					.println(sortModel.getName() + sortModel.getSortLetters());
-			
-			
+			System.out.println(sortModel.getName() + sortModel.getSortLetters());
 
 		}
 		return lsm;
 	}
+
 	/**
 	 * js返回到html
 	 * 
@@ -248,11 +256,10 @@ public class OpeFunction {
 	 * 文件上传到服务器 可以自己定义文件格式
 	 *
 	 */
-	public static String ufileToServer(String path, File file, String fileName,
-			String fileType, boolean reName) throws IOException {
+	public static String ufileToServer(String path, File file, String fileName, String fileType, boolean reName)
+			throws IOException {
 
-		String realpath = ServletActionContext.getServletContext().getRealPath(
-				path);// 服务器路径
+		String realpath = ServletActionContext.getServletContext().getRealPath(path);// 服务器路径
 		if (file != null) {
 			File savedir = new File(realpath);// 建立目录
 			if (!savedir.getParentFile().exists())
@@ -263,8 +270,7 @@ public class OpeFunction {
 			// 重新命名 以免重名
 			if (reName) {
 
-				saveFile = new File(savedir, java.util.UUID.randomUUID() + "."
-						+ fileType);
+				saveFile = new File(savedir, java.util.UUID.randomUUID() + "." + fileType);
 
 				FileUtils.copyFile(file, saveFile);
 				return path + "/" + saveFile.getName();
@@ -286,8 +292,7 @@ public class OpeFunction {
 	 */
 	public static Boolean fileRemove(String path) throws IOException {
 		Boolean b = true;
-		File file = new File(ServletActionContext.getServletContext()
-				.getRealPath(path));
+		File file = new File(ServletActionContext.getServletContext().getRealPath(path));
 		if (file.exists()) {
 			file.delete();
 		} else {
@@ -304,8 +309,7 @@ public class OpeFunction {
 	 */
 	public static Boolean isEmptyfile(String path) throws IOException {
 		Boolean b = true;
-		if (new File(ServletActionContext.getServletContext().getRealPath(path))
-				.exists()) {
+		if (new File(ServletActionContext.getServletContext().getRealPath(path)).exists()) {
 			System.out.println("存在");
 		} else {
 			b = false;
@@ -319,11 +323,10 @@ public class OpeFunction {
 	 * 文件上传到服务器
 	 *
 	 */
-	public static String fileToServer(String path, File file, String fileName,
-			String fileType, boolean reName) throws IOException {
+	public static String fileToServer(String path, File file, String fileName, String fileType, boolean reName)
+			throws IOException {
 
-		String realpath = ServletActionContext.getServletContext().getRealPath(
-				path);// 服务器路径
+		String realpath = ServletActionContext.getServletContext().getRealPath(path);// 服务器路径
 		if (file != null) {
 			File savedir = new File(realpath);// 建立目录
 			if (!savedir.getParentFile().exists())
@@ -334,8 +337,7 @@ public class OpeFunction {
 			// 重新命名 以免重名
 			if (reName) {
 
-				saveFile = new File(savedir, java.util.UUID.randomUUID() + "."
-						+ fileType);
+				saveFile = new File(savedir, java.util.UUID.randomUUID() + "." + fileType);
 
 				FileUtils.copyFile(file, saveFile);
 				return path + "/" + saveFile.getName();
@@ -524,8 +526,7 @@ public class OpeFunction {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	public static HttpServletRequest request()
-			throws UnsupportedEncodingException {
+	public static HttpServletRequest request() throws UnsupportedEncodingException {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setCharacterEncoding("UTF-8");
 
@@ -539,8 +540,7 @@ public class OpeFunction {
 	 * @return
 	 */
 	public static <HHttpServletResponse> HHttpServletResponse response() {
-		HHttpServletResponse response = (HHttpServletResponse) ServletActionContext
-				.getResponse();
+		HHttpServletResponse response = (HHttpServletResponse) ServletActionContext.getResponse();
 
 		return response;
 
@@ -549,8 +549,7 @@ public class OpeFunction {
 	/**
 	 * gyn 电子邮件发送东西 需要Email
 	 */
-	public static void Email(String Email, String information)
-			throws IOException {
+	public static void Email(String Email, String information) throws IOException {
 		// 发送邮件
 		MailSenderInfo mailInfo = new MailSenderInfo();
 		mailInfo.setMailServerHost("smtp.chaimiyouxi.com");
@@ -565,8 +564,7 @@ public class OpeFunction {
 		mailInfo.setSubject("家长之友用户体验反馈信息");
 		// 时间
 
-		mailInfo.setContent("<h1 style='color: red;'>" + getNowTime() + "<br>"
-				+ information + "<h1>");
+		mailInfo.setContent("<h1 style='color: red;'>" + getNowTime() + "<br>" + information + "<h1>");
 		// 这个类主要来发送邮件
 		SimpleMailSender sms = new SimpleMailSender();
 		// sms.sendTextMail(mailInfo);//发送文体格式
@@ -598,12 +596,10 @@ public class OpeFunction {
 			// 输入要发送的信息
 			// String content = new String(textp+"!");
 			URL url = new URL(postUrl);
-			HttpURLConnection connection = (HttpURLConnection) url
-					.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setDoOutput(true);// 允许连接提交信息
 			connection.setRequestMethod("POST");// 网页提交方式“GET”、“POST”
-			connection.setRequestProperty("Content-Type",
-					"application/x-www-form-urlencoded");
+			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			connection.setRequestProperty("Connection", "Keep-Alive");
 			StringBuffer sb = new StringBuffer();
 			sb.append("&account=" + account);
@@ -615,8 +611,7 @@ public class OpeFunction {
 			os.close();
 
 			String line, result = "";
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					connection.getInputStream(), "utf-8"));
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
 			while ((line = in.readLine()) != null) {
 				result += line + "\n";
 			}
@@ -642,22 +637,15 @@ public class OpeFunction {
 		name = Integer.valueOf(cal.get(Calendar.YEAR)).toString();
 		name += "/";
 		if (cal.get(Calendar.MONTH) + 1 < 10) {
-			name = name + "0"
-					+ Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
+			name = name + "0" + Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
 		} else {
-			name = name
-					+ Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
+			name = name + Integer.valueOf(cal.get(Calendar.MONTH) + 1).toString();
 		}
 		name += "/";
 		if (cal.get(Calendar.DAY_OF_MONTH) < 10) {
-			name = name
-					+ "0"
-					+ Integer.valueOf(cal.get(Calendar.DAY_OF_MONTH))
-							.toString();
+			name = name + "0" + Integer.valueOf(cal.get(Calendar.DAY_OF_MONTH)).toString();
 		} else {
-			name = name
-					+ Integer.valueOf(cal.get(Calendar.DAY_OF_MONTH))
-							.toString();
+			name = name + Integer.valueOf(cal.get(Calendar.DAY_OF_MONTH)).toString();
 		}
 		// name += "/";
 		// if (cal.get(Calendar.HOUR) + 1 < 10) {
@@ -702,94 +690,176 @@ public class OpeFunction {
 
 	}
 
-	public static void main(String[] args) throws IOException,
-			InterruptedException, ParseException, JSONException {
-//		File file=new File("C:\\Users\\Administrator\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Befriend\\address.json");
-//		FileReader fr = new FileReader(file);
-//		BufferedReader br = new BufferedReader(fr);
-//		Gson gs = new Gson();
-//		List<SortModel> lsm = gs.fromJson(br.readLine(), new TypeToken<List<SortModel>>(){}.getType());
-//		
-//		for (SortModel sortModel : lsm) {
-//			System.out.println(sortModel.getName()+sortModel.getSortLetters());
-//		}
-		
+	/**
+	 * 缩放为指定大小
+	 * 
+	 * @param w
+	 * @param h
+	 * @param srcImageFile
+	 * @param newName
+	 * @throws Exception
+	 */
+	public static boolean imgNarrow(int w, int h, String srcImageFile, String newName) throws Exception {
+		try {
+
+			newName = newName.split(".jpg")[0] + ".JPEG";
+			System.out.println(srcImageFile);
+			System.out.println(newName);
+			// String srcImageFile = "C:/Users/gyn/Pictures/Camera
+			// Roll/05094b36acaf2edde146bfce8d1001e939019366.jpg";
+			// 得到源图片
+			BufferedImage bi = ImageIO.read(new File(srcImageFile));
+			// 创建此图像的缩放版本
+			java.awt.Image prevImage = bi.getScaledInstance(w, h, Image.SCALE_DEFAULT);
+			// 输出的image
+			BufferedImage tag = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+			// 将图像绘制上去
+			Graphics graphics = tag.createGraphics();
+			graphics.drawImage(prevImage, 0, 0, w, h, null);
+			graphics.dispose();
+			// 输出流
+			// String newName = "C:/Users/gyn/Pictures/Camera Roll/66.jpg";
+
+			OutputStream outs = new FileOutputStream(newName);
+			// 画出
+			ImageIO.write(tag, "JPEG", outs);
+			outs.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
+	}
+
+	/**
+	 * 裁剪
+	 * 
+	 * @throws Exception
+	 */
+	public static void testOne() throws Exception {
+		try {
+
+			int x = 100;// 要提取的矩形顶部的 x 位置
+
+			int y = 100;// 要提取的矩形顶部的 y 位置
+
+			int w = 100;// 要提取的矩形宽度
+
+			int h = 100;// 要提取的矩形高度
+
+			//
+			String srcImageFile = "C:/Users/gyn/Pictures/Camera Roll/05094b36acaf2edde146bfce8d1001e939019366.jpg";
+			BufferedImage bi = ImageIO.read(new File(srcImageFile));
+			// 创建要裁剪出来的图片
+			CropImageFilter cropFilter = new CropImageFilter(x, y, w, h);
+			java.awt.Image tagImg = Toolkit.getDefaultToolkit()
+					.createImage(new FilteredImageSource(bi.getSource(), cropFilter));
+			//
+			String newName = "C:/Users/gyn/Pictures/Camera Roll/99.jpg";
+			OutputStream outs = new FileOutputStream(newName);
+			//
+			BufferedImage tag = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+			Graphics graphics = tag.createGraphics();
+			graphics.drawImage(tagImg, 0, 0, w, h, null);
+			graphics.dispose();
+			ImageIO.write(tag, "JPEG", outs);
+			outs.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	public static void main(String[] args) throws Exception {
+		// testOne();
+		// imgNarrow();
+		// File file=new
+		// File("C:\\Users\\Administrator\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Befriend\\address.json");
+		// FileReader fr = new FileReader(file);
+		// BufferedReader br = new BufferedReader(fr);
+		// Gson gs = new Gson();
+		// List<SortModel> lsm = gs.fromJson(br.readLine(), new
+		// TypeToken<List<SortModel>>(){}.getType());
+		//
+		// for (SortModel sortModel : lsm) {
+		// System.out.println(sortModel.getName()+sortModel.getSortLetters());
+		// }
+
 		// System.out.println(calculatingTime("2015-11-01 14:49:00",
 		// "2015-12-03 14:49:00"));
-//		 String str = "123456789";
-//		 String nickname = "123456789";
-//		 nickname = nickname.substring(0, (nickname.length()-1));
-		 //System.out.println(nickname);
-//		 System.out.println(getNameDayTime());
-//		 System.out.println(setTime("1015-11-23  16:38:54"));
+		// String str = "123456789";
+		// String nickname = "123456789";
+		// nickname = nickname.substring(0, (nickname.length()-1));
+		// System.out.println(nickname);
+		// System.out.println(getNameDayTime());
+		// System.out.println(setTime("1015-11-23 16:38:54"));
 
-//		  System.out.println(calculatingTime("2015-11-01 14:49:00",
-//		  "2015-12-03 14:49:00"));
-//		 String str = "123456789";
-//		 String nickname = "123456789";
-//		 nickname = nickname.substring(0, (nickname.length() > 20 ? 20
-//		 : nickname.length()));
-//		 System.out.println(nickname);
-//		 System.out.println(getNameDayTime());
-//		 System.out.println(setTime("1015-11-23  16:38:54"));
-		
-//		String str=WechatKit.sendGet("http://restapi.amap.com/v3/place/around?key=5deb2485b0b9546999783b2fab8ff625"
-//				+ "&location=116.481488,39.990464"
-//				+ "&keywords=美食"
-//				+ "&types="
-//				+ "&offset=10"
-//				+ "&page=1"
-//				+ "&extensions=all");
-//		JSONObject jsonObject = new JSONObject(str);
-//
-//		JSONArray jsonArray =jsonObject.getJSONArray("pois");
-//
-//		for (int i = 0; i < jsonArray.length(); i++) {
-//			JSONObject jo = jsonArray.getJSONObject(i);
-//			System.out.println(jo.getString("name"));
-//			System.out.println(jo.getString("type"));
-//			System.out.println(jo.getString("location"));
-//			System.out.println(jo.getString("tel"));
-//			
-//
-//}
-		//System.out.println("计算两点距离:"+Distance(42.0090289997803, 121.678251000076,42.0090289997803, 121.678251000076));
+		// System.out.println(calculatingTime("2015-11-01 14:49:00",
+		// "2015-12-03 14:49:00"));
+		// String str = "123456789";
+		// String nickname = "123456789";
+		// nickname = nickname.substring(0, (nickname.length() > 20 ? 20
+		// : nickname.length()));
+		// System.out.println(nickname);
+		// System.out.println(getNameDayTime());
+		// System.out.println(setTime("1015-11-23 16:38:54"));
+
+		// String
+		// str=WechatKit.sendGet("http://restapi.amap.com/v3/place/around?key=5deb2485b0b9546999783b2fab8ff625"
+		// + "&location=116.481488,39.990464"
+		// + "&keywords=美食"
+		// + "&types="
+		// + "&offset=10"
+		// + "&page=1"
+		// + "&extensions=all");
+		// JSONObject jsonObject = new JSONObject(str);
+		//
+		// JSONArray jsonArray =jsonObject.getJSONArray("pois");
+		//
+		// for (int i = 0; i < jsonArray.length(); i++) {
+		// JSONObject jo = jsonArray.getJSONObject(i);
+		// System.out.println(jo.getString("name"));
+		// System.out.println(jo.getString("type"));
+		// System.out.println(jo.getString("location"));
+		// System.out.println(jo.getString("tel"));
+		//
+		//
+		// }
+		// System.out.println("计算两点距离:"+Distance(42.0090289997803,
+		// 121.678251000076,42.0090289997803, 121.678251000076));
 	}
-	/** 
-	 * 计算地球上任意两点(经纬度)距离 
-	 *  
-	 * @param long1 
-	 *            第一点经度 
-	 * @param lat1 
-	 *            第一点纬度 
-	 * @param long2 
-	 *            第二点经度 
-	 * @param lat2 
-	 *            第二点纬度 
-	 * @return 返回距离 单位：米 
-	 */  
-	public static int Distance(double long1, double lat1, double long2,  
-	        double lat2) {  
-	    double a, b, R;  
-	    R = 6378137; // 地球半径  
-	    lat1 = lat1 * Math.PI / 180.0;  
-	    lat2 = lat2 * Math.PI / 180.0;  
-	    a = lat1 - lat2;  
-	    b = (long1 - long2) * Math.PI / 180.0;  
-	    double d;  
-	    double sa2, sb2;  
-	    sa2 = Math.sin(a / 2.0);  
-	    sb2 = Math.sin(b / 2.0);  
-	    d = 2  
-	            * R  
-	            * Math.asin(Math.sqrt(sa2 * sa2 + Math.cos(lat1)  
-	                    * Math.cos(lat2) * sb2 * sb2));  
-	    return (int)d;  
-	}  
+
+	/**
+	 * 计算地球上任意两点(经纬度)距离
+	 * 
+	 * @param long1
+	 *            第一点经度
+	 * @param lat1
+	 *            第一点纬度
+	 * @param long2
+	 *            第二点经度
+	 * @param lat2
+	 *            第二点纬度
+	 * @return 返回距离 单位：米
+	 */
+	public static int Distance(double long1, double lat1, double long2, double lat2) {
+		double a, b, R;
+		R = 6378137; // 地球半径
+		lat1 = lat1 * Math.PI / 180.0;
+		lat2 = lat2 * Math.PI / 180.0;
+		a = lat1 - lat2;
+		b = (long1 - long2) * Math.PI / 180.0;
+		double d;
+		double sa2, sb2;
+		sa2 = Math.sin(a / 2.0);
+		sb2 = Math.sin(b / 2.0);
+		d = 2 * R * Math.asin(Math.sqrt(sa2 * sa2 + Math.cos(lat1) * Math.cos(lat2) * sb2 * sb2));
+		return (int) d;
+	}
+
 	public static long fromDateStringTLong(String inVal) { // 此方法计算时间毫秒
 		Date date = null; // 定义时间类型
-		SimpleDateFormat inputFormat = new SimpleDateFormat(
-				"yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
 			date = inputFormat.parse(inVal); // 将字符型转换成日期型
 		} catch (Exception e) {
@@ -797,6 +867,5 @@ public class OpeFunction {
 		}
 		return date.getTime(); // 返回毫秒数
 	}
-
 
 }

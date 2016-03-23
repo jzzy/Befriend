@@ -618,7 +618,13 @@ public class UserAction extends ActionSupport {
 				util.fileRemove(path);
 				path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
 				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
-				u.setImg(pah);
+				if(OpeFunction.imgNarrow(100, 100, ServletActionContext.getServletContext().getRealPath(
+						pah), ServletActionContext.getServletContext().getRealPath(
+								pah))){
+					u.setImg(pah.split(".jpg")[0]+".JPEG");
+				}
+				
+				
 
 			}
 			if (nickname != null) {

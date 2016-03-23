@@ -131,7 +131,7 @@ for(int i=0;i<rl.size();i++){
 					<a onclick="return ck();" ><img src="sample_lihu/images/writecom_btn.gif" alt="说说你的看法" /></a>
 				</div>
 				<div class="rightArea">
-					<a href="webCsave?newsid=<%=n.getId()%>"><img src="sample_lihu/images/favor_ico_red.gif" alt="红心" /></a>
+					<a onclick="sc();"><img src="sample_lihu/images/favor_ico_red.gif" alt="红心" /></a>
 					<a  class="share"><img src="sample_lihu/images/share_ico.gif" alt="分享" /></a>
 				</div>
 			</div>
@@ -179,6 +179,33 @@ for(int i=0;i<rl.size();i++){
 	</div><!--wrap-->
 	</form>
 <script type="text/javascript">
+var sc=(function(){
+	//alert(<%=session.getAttribute("u")==null%>);
+	if(<%=session.getAttribute("u")==null%>){
+		//alert("未登入！");
+		window.location="<%=request.getContextPath() %>/sample_lihu/htm/login.html";
+		return false;
+		
+		
+	}
+	$.ajax({
+		url:"webCsave?newsid=<%=n.getId()%>",
+		 dataType: "json", 
+				async:false,
+				success: function (data) {     
+					if(data){
+						alert("收藏成功！");
+					}else{
+						alert("已经收藏过！");
+					}
+					
+				
+				
+					},
+				
+	})
+	
+});
 var ck=(function(){
 	//alert(<%=session.getAttribute("u")==null%>);
 	if(<%=session.getAttribute("u")==null%>){
