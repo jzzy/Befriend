@@ -13,7 +13,7 @@
 	<!-- <div id="allmap" style="display:none"></div> -->
 	<div  align="center">
 	
-	<img  alt="" src="/Befriend/weixin/images/u=1757624993,1534874476&fm=15&gp=0.jpg">
+	<img  alt="" src="/Befriend/weixin/images/u=1757624993,1534874476&fm=15&gp=0.gif">
 	
 	</div>
 	<div  align="center"><b>正在定位中...</b></div>
@@ -38,7 +38,7 @@
 		geolocation.getCurrentPosition(function(r){
 			if(this.getStatus() == BMAP_STATUS_SUCCESS){
 				var mk = new BMap.Marker(r.point);
-				alert('您的位置：'+r.point.lng+','+r.point.lat);
+				//alert('您的位置：'+r.point.lng+','+r.point.lat);
 				location.href="/Befriend/getEduWebArea?lng="+r.point.lng+"&lat="+r.point.lat;
 				var point = new BMap.Point(r.point.lng,r.point.lat);
 				var geoc = new BMap.Geocoder();
