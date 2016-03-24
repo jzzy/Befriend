@@ -699,10 +699,10 @@ public class OpeFunction {
 	 * @param newName
 	 * @throws Exception
 	 */
-	public static boolean imgNarrow(int w, int h, String srcImageFile, String newName) throws Exception {
+	public static boolean imgNarrow(int w, int h, String srcImageFile, String newName,String type) throws Exception {
 		try {
 
-			newName = newName.split(".jpg")[0] + ".JPEG";
+			newName = newName.split(type)[0] + ".JPEG";
 			System.out.println(srcImageFile);
 			System.out.println(newName);
 			// String srcImageFile = "C:/Users/gyn/Pictures/Camera

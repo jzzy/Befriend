@@ -1,10 +1,13 @@
 package com.befriend.action;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +26,7 @@ import com.befriend.entity.ForumTwo;
 import com.befriend.entity.User;
 import com.befriend.util.OpeFunction;
 import com.opensymphony.xwork2.Action;
+
 @SuppressWarnings("all")
 public class ForumAction {
 	private OpeFunction util;// 自建工具类
@@ -39,8 +43,8 @@ public class ForumAction {
 	List<ForumOne> fones = new ArrayList<ForumOne>();// 论坛主类List
 	List<ForumTwo> ftwos = new ArrayList<ForumTwo>();// 论坛主类List
 	List<ForumThree> fehrees = new ArrayList<ForumThree>();// 论坛主类List
-	private HttpSession session = ServletActionContext.getRequest()
-			.getSession();// 获取 HttpSession
+	private HttpSession session = ServletActionContext.getRequest().getSession();// 获取
+																					// HttpSession
 	public HttpServletRequest request = ServletActionContext.getRequest();// 获取request
 	/**
 	 * 论坛主类字段
@@ -74,37 +78,40 @@ public class ForumAction {
 	private int pageSize = 0;// 每页显示的数据
 	private int currentPage = 0;// 当前页数
 	private int cpe = 0;// 共有多少页
-	public String upFonelikeTitle() throws IOException{
-		if(!util.isEmpty(title)){
-		fones=forumdao.likeTitle(title);
-		for (ForumOne f : fones) {
-			us.add(userdao.byid(f.getUserid()));
-		}
+
+	public String upFonelikeTitle() throws IOException {
+		if (!util.isEmpty(title)) {
+			fones = forumdao.likeTitle(title);
+			for (ForumOne f : fones) {
+				us.add(userdao.byid(f.getUserid()));
+			}
 		}
 		request.setAttribute("fones", fones);
 		request.setAttribute("us", us);
 		return Action.SUCCESS;
 	}
+
 	/**
 	 * 修改论坛参数
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
-	public void upFone() throws IOException{
-		Admin admin=(Admin)session.getAttribute("admin");
-		if(admin!=null){
-		fone=forumdao.getForumOne(id);
-		fone.setfHits(pageSize);	// 论坛被点击次数
-		fone.setTotal(total);// 论坛总回复数
-		fone.setFollectnum(currentPage);// 论坛被收藏次数
-		fone.setAdmin(admin.getAdmin());
-		forumdao.update(fone);
+	public void upFone() throws IOException {
+		Admin admin = (Admin) session.getAttribute("admin");
+		if (admin != null) {
+			fone = forumdao.getForumOne(id);
+			fone.setfHits(pageSize); // 论坛被点击次数
+			fone.setTotal(total);// 论坛总回复数
+			fone.setFollectnum(currentPage);// 论坛被收藏次数
+			fone.setAdmin(admin.getAdmin());
+			forumdao.update(fone);
 		}
-		
-		//转发
-		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/ForumLookalltype?model=6");
-		
+
+		// 转发
+		((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/ForumLookalltype?model=6");
+
 	}
+
 	/**
 	 * 模糊查询 根据title 搜索论坛
 	 */
@@ -135,8 +142,7 @@ public class ForumAction {
 		if (currentPage >= cpe) {
 			currentPage = cpe;
 		}
-		System.out.println("cpe:" + cpe + "currentPage:" + currentPage
-				+ "pageSize:" + pageSize);
+		System.out.println("cpe:" + cpe + "currentPage:" + currentPage + "pageSize:" + pageSize);
 		fones = forumdao.likeTitle(pageSize, currentPage, title);
 		for (int i = 0; i < fones.size(); i++) {
 
@@ -159,13 +165,10 @@ public class ForumAction {
 			}
 
 		}
-		System.out.println("likeTitle应该相同比例！" + fones.size() + "-"
-				+ ftwosa.size() + "-" + us.size());
+		System.out.println("likeTitle应该相同比例！" + fones.size() + "-" + ftwosa.size() + "-" + us.size());
 
-		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":"
-				+ util.ToJson(ftwosa) + ",\"us\":" + util.ToJson(us)
-				+ ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage
-				+ "}";
+		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":" + util.ToJson(ftwosa) + ",\"us\":"
+				+ util.ToJson(us) + ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage + "}";
 		util.Out().print(result);
 
 	}
@@ -192,13 +195,12 @@ public class ForumAction {
 			util.Out().print("没有该信息!");
 			return;
 		}
-		System.out.println("webProfessorRemoveForumThreeadmin forumid"
-				+ forumid);
+		System.out.println("webProfessorRemoveForumThreeadmin forumid" + forumid);
 
 		if (fone != null) {
-			//转发
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/ForumLook?id=" + fone.getId());
+			// 转发
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/ForumLook?id=" + fone.getId());
 		} else {
 			util.Out().print("没有获取到论坛");
 		}
@@ -251,8 +253,8 @@ public class ForumAction {
 				util.Out().print("删除异常!" + e.getMessage());
 			}
 
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/ForumLook?id=" + ftwo.getForumid());
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/ForumLook?id=" + ftwo.getForumid());
 
 		} else {
 			System.out.println("没有该评论");
@@ -284,8 +286,8 @@ public class ForumAction {
 			forumdao.Remove(fehree);
 		}
 
-		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/ForumLookiduser?id=" + forumid);
+		((HttpServletResponse) util.response())
+				.sendRedirect(request.getContextPath() + "/ForumLookiduser?id=" + forumid);
 	}
 
 	/**
@@ -329,7 +331,7 @@ public class ForumAction {
 						fone.setFrs((fone.getFrs() - 1));
 					} else {
 						fone.setFrs(0);
-					}					
+					}
 					forumdao.update(fone);
 
 				}
@@ -338,10 +340,8 @@ public class ForumAction {
 				util.Out().print("删除异常!" + e.getMessage());
 			}
 
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath()
-					+ "/ForumLookiduser?id="
-					+ ftwo.getForumid());
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/ForumLookiduser?id=" + ftwo.getForumid());
 
 		} else {
 			System.out.println("没有该评论");
@@ -370,10 +370,8 @@ public class ForumAction {
 		if (ftwo != null) {
 			ftwo.setReply(reply);
 			forumdao.update(ftwo);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath()
-					+ "/ForumLookiduser?id="
-					+ ftwo.getForumid());
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/ForumLookiduser?id=" + ftwo.getForumid());
 		} else {
 			System.out.println("没有该评论");
 			util.Out().print("没有该评论");
@@ -407,32 +405,32 @@ public class ForumAction {
 		ftwo.setForumid(forumid);
 		ftwo.setReply(reply);
 		ftwo.setTime(time);
-		fone.setTotal(fone.getTotal()+1);
+		fone.setTotal(fone.getTotal() + 1);
 		ftwo.setTouserid(fone.getUserid());
 		ftwo.setUserid(user.getId());
 		forumdao.save(ftwo);
 		fone.setFrs((fone.getFrs() + 1));
 		forumdao.update(fone);
-		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/ForumLookiduser?id=" + forumid);
+		((HttpServletResponse) util.response())
+				.sendRedirect(request.getContextPath() + "/ForumLookiduser?id=" + forumid);
 
 	}
 
 	/**
 	 * 创建论坛 web端
 	 * 
-	 * @throws IOException
+	 * @throws Exception
 	 */
 
-	public void webForumonesaveapp() throws IOException {
+	public void webForumonesaveapp() throws Exception {
 		System.out.println("进入web添加论坛！");
 
 		User u = (User) session.getAttribute("u");
 		if (u == null) {
 
 			System.out.println("请重新登入!");
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/sample_lihu/htm/login.html");
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 			return;
 		}
 
@@ -445,20 +443,32 @@ public class ForumAction {
 		}
 
 		if (model <= 0) {
-			model=2;
+			model = 2;
 		}
 		area = u.getAddress();
 		areas = u.getAddcity();
 		System.out.println("添加论坛" + area + areas);
 
 		if (file != null) {
-
-			img = "/IMG/Forumimg/"+OpeFunction.getNameDayTime();
+			img = "/IMG/Forumimg/" + OpeFunction.getNameDayTime();
 			img = util.ufileToServer(img, file, fileFileName, "jpg", true);
-			System.out.println(img);
-			fone.setImg(img);
+			BufferedImage sourceImg = ImageIO.read(new FileInputStream(file));
 
-			System.out.println("头像上传成功!");
+			float fimg = util.fileSize(file);
+			System.out.println(sourceImg.getWidth()+"*"+sourceImg.getHeight()+"图片大小为:" + fimg);
+
+			if (OpeFunction.imgNarrow(sourceImg.getWidth(), sourceImg.getHeight(),
+					ServletActionContext.getServletContext().getRealPath(img),
+					ServletActionContext.getServletContext().getRealPath(img),"jpg")) {
+				fone.setImg(img.split(".jpg")[0] + ".JPEG");
+			}
+			File f = new File(ServletActionContext.getServletContext().getRealPath(fone.getImg()));
+			fimg = util.fileSize(f);
+			sourceImg = ImageIO.read(new FileInputStream(f));
+			System.out.println(sourceImg.getWidth()+"*"+sourceImg.getHeight()+"图片大小为:" + fimg);
+			System.out.println("目录为："+fone.getImg());
+
+		
 		}
 
 		fone.setArea(area);
@@ -472,8 +482,7 @@ public class ForumAction {
 		forumdao.save(fone);
 		System.out.println("添加论坛成功!论坛类型" + model);
 
-		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/sample_lihu/jsp/forum2.jsp");
+		((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/sample_lihu/jsp/forum2.jsp");
 		return;
 
 	}
@@ -490,13 +499,13 @@ public class ForumAction {
 		if (u == null) {
 
 			System.out.println("请重新登入!");
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/sample_lihu/htm/login.html");
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 			return;
 		}
 		if (OpeFunction.isEmpty(reply)) {
 			util.Out().print("请填写回复内容!");
-			return ;
+			return;
 		}
 		userid = u.getId();
 		/**
@@ -545,8 +554,8 @@ public class ForumAction {
 		fehree.setUserid(userid);
 		fehree.setForumtwoid(forumtwoid);
 		forumdao.save(fehree);
-		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/webForumLook?id=" + forumid + "");
+		((HttpServletResponse) util.response())
+				.sendRedirect(request.getContextPath() + "/webForumLook?id=" + forumid + "");
 
 	}
 
@@ -557,72 +566,70 @@ public class ForumAction {
 	 */
 	public void webForumtwosaveapp() throws IOException {
 		try {
-			
-		
-		
-		User u = (User) session.getAttribute("u");
-		System.out.println("用户"+u==null);
-		if (u == null) {
 
-			System.out.println("请重新登入!");
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/sample_lihu/htm/login.html");
-			return;
-		}
-		if (OpeFunction.isEmpty(reply)) {
-			util.Out().print("请填写回复内容!");
-			return ;
-		}
+			User u = (User) session.getAttribute("u");
+			System.out.println("用户" + u == null);
+			if (u == null) {
 
-		userid = u.getId();
-		System.out.println("进入web添加论坛回复");
-		System.out.println("论坛id" + forumid);
-		System.out.println("回复内容" + reply);
-
-		System.out.println("我的id" + userid);
-
-		fone = forumdao.getForumOne(forumid);
-
-		ftwos = forumdao.getForumTwoALL(forumid);
-		/**
-		 * if(userid==touserid){ System.out.println("阻止了  自己回复自己的评论");
-		 * util.Out().print(false); return; }
-		 */
-		if (userid <= 0) {
-			util.Out().print("null");
-			return;
-
-		}
-
-		if (fone != null) {
-			if (fone.getType() == 1 && u.getCompetence() != 4) {
-				util.Out().print("您没有教授权限");
+				System.out.println("请重新登入!");
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
+				return;
+			}
+			if (OpeFunction.isEmpty(reply)) {
+				util.Out().print("请填写回复内容!");
 				return;
 			}
 
-			touserid = fone.getUserid();
-			ftwo.setForumid(forumid);
-			ftwo.setReply(reply);
+			userid = u.getId();
+			System.out.println("进入web添加论坛回复");
+			System.out.println("论坛id" + forumid);
+			System.out.println("回复内容" + reply);
 
-			ftwo.setTime(time);
-			ftwo.setTouserid(fone.getUserid());
-			ftwo.setUserid(userid);
-			int g = fone.getTotal() + 1;
-			fone.setTotal(g);		
-			forumdao.save(ftwo);
-			fone.setFrs((fone.getFrs() + 1));
-			forumdao.update(fone);
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/webForumLook?id=" + forumid + "");
+			System.out.println("我的id" + userid);
 
+			fone = forumdao.getForumOne(forumid);
+
+			ftwos = forumdao.getForumTwoALL(forumid);
+			/**
+			 * if(userid==touserid){ System.out.println("阻止了  自己回复自己的评论");
+			 * util.Out().print(false); return; }
+			 */
+			if (userid <= 0) {
+				util.Out().print("null");
+				return;
+
+			}
+
+			if (fone != null) {
+				if (fone.getType() == 1 && u.getCompetence() != 4) {
+					util.Out().print("您没有教授权限");
+					return;
+				}
+
+				touserid = fone.getUserid();
+				ftwo.setForumid(forumid);
+				ftwo.setReply(reply);
+
+				ftwo.setTime(time);
+				ftwo.setTouserid(fone.getUserid());
+				ftwo.setUserid(userid);
+				int g = fone.getTotal() + 1;
+				fone.setTotal(g);
+				forumdao.save(ftwo);
+				fone.setFrs((fone.getFrs() + 1));
+				forumdao.update(fone);
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/webForumLook?id=" + forumid + "");
+
+				return;
+			}
+			util.Out().print("null");
 			return;
-		}
-		util.Out().print("null");
-		return;
 		} catch (Exception e) {
 			System.out.println("请重新登入!");
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/sample_lihu/htm/login.html");
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 			return;
 		}
 
@@ -638,8 +645,8 @@ public class ForumAction {
 			if (u == null) {
 
 				System.out.println("请重新登入!");
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/sample_lihu/htm/login.html");
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 				return null;
 			}
 
@@ -726,8 +733,7 @@ public class ForumAction {
 						fut.add(null);
 						fu.add(null);
 					} else {
-						System.out.println("fehrees第" + i + "次循环 信息为"
-								+ fehrees.size() + "条");
+						System.out.println("fehrees第" + i + "次循环 信息为" + fehrees.size() + "条");
 						List<User> userz = new ArrayList<User>();
 						List<User> touser = new ArrayList<User>();
 
@@ -766,18 +772,21 @@ public class ForumAction {
 
 			} else {
 				System.out.println("id不正确");
-//				 ((HttpServletResponse) util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
-//				 return null;
+				// ((HttpServletResponse)
+				// util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
+				// return null;
 			}
 
 		} catch (Exception e) {
-//			 ((HttpServletResponse) util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
-//			 return null;
+			// ((HttpServletResponse)
+			// util.response()).sendRedirect(request.getContextPath()+"/sample_lihu/htm/login.html");
+			// return null;
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 
 	}
+
 	/**
 	 * web 根据 类型 查询论坛 论坛
 	 * 
@@ -788,31 +797,31 @@ public class ForumAction {
 		System.out.println(" web用户按类型 查看全国论坛");
 		System.out.println();
 		User user = (User) session.getAttribute("u");
-		
-//		if (user == null) {
-//			 ((HttpServletResponse) util.response())
-//			  .sendRedirect(request.getContextPath()+
-//			  "/sample_lihu/htm/login.html");
-//			return null;
-//		}
-//		if (model <= 0) {
-//			System.out.println("请重新登入!");
-//			util.Out().print("model <= 0");
-//			
-//			
-//			 
-//			return null;
-//		}
-		fones=forumdao.getForumOneALL234();
-		cpe=fones.size();
-//		area=area==null?"北京":area;
-//		if(model==5){
-//			cpe =forumdao.getForumOneareaALL(area, model).size();
-//		}else{
-//			
-//			cpe = forumdao.gettypeForumOneALL(model).size();
-//		}
-		System.out.println("类型type是 ：" + model+"有" + cpe + "个论坛"+area);
+
+		// if (user == null) {
+		// ((HttpServletResponse) util.response())
+		// .sendRedirect(request.getContextPath()+
+		// "/sample_lihu/htm/login.html");
+		// return null;
+		// }
+		// if (model <= 0) {
+		// System.out.println("请重新登入!");
+		// util.Out().print("model <= 0");
+		//
+		//
+		//
+		// return null;
+		// }
+		fones = forumdao.getForumOneALL234();
+		cpe = fones.size();
+		// area=area==null?"北京":area;
+		// if(model==5){
+		// cpe =forumdao.getForumOneareaALL(area, model).size();
+		// }else{
+		//
+		// cpe = forumdao.gettypeForumOneALL(model).size();
+		// }
+		System.out.println("类型type是 ：" + model + "有" + cpe + "个论坛" + area);
 
 		if (pageSize <= 0) {
 			pageSize = 10;
@@ -830,13 +839,14 @@ public class ForumAction {
 			currentPage = cpe;
 		}
 		System.out.println("currentPage" + currentPage);
-		fones=forumdao.getForumOneALL234(pageSize, currentPage);
-//		if(model==5){
-//		fones = forumdao.getForumOneareaALL(pageSize, currentPage, area, model);
-//		}else{
-//			fones = forumdao.getForumOneALL(pageSize, currentPage, model);
-//		
-//		}
+		fones = forumdao.getForumOneALL234(pageSize, currentPage);
+		// if(model==5){
+		// fones = forumdao.getForumOneareaALL(pageSize, currentPage, area,
+		// model);
+		// }else{
+		// fones = forumdao.getForumOneALL(pageSize, currentPage, model);
+		//
+		// }
 		List<ForumTwo> ftwosa = new ArrayList<ForumTwo>();
 
 		for (int i = 0; i < fones.size(); i++) {
@@ -857,21 +867,16 @@ public class ForumAction {
 			}
 
 		}
-		System.out.println("应该相同比例！" + fones.size() + "-" + ftwosa.size() + "-"
-				+ us.size());
+		System.out.println("应该相同比例！" + fones.size() + "-" + ftwosa.size() + "-" + us.size());
 
-	
-		
 		request.setAttribute("currentPage", currentPage);
 
-		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":"
-				+ util.ToJson(ftwosa) + ",\"us\":" + util.ToJson(us)
-				+ ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage
-				+ "}";
+		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":" + util.ToJson(ftwosa) + ",\"us\":"
+				+ util.ToJson(us) + ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage + "}";
 		util.Out().print(result);
-		
 
 	}
+
 	/**
 	 * web 根据 类型 查询论坛 论坛
 	 * 
@@ -882,31 +887,31 @@ public class ForumAction {
 		System.out.println(" web用户按类型 查看全国论坛");
 		System.out.println();
 		User user = (User) session.getAttribute("u");
-		
-//		if (user == null) {
-//			 ((HttpServletResponse) util.response())
-//			  .sendRedirect(request.getContextPath()+
-//			  "/sample_lihu/htm/login.html");
-//			return null;
-//		}
-//		if (model <= 0) {
-//			System.out.println("请重新登入!");
-//			util.Out().print("model <= 0");
-//			
-//			
-//			 
-//			return null;
-//		}
-		fones=forumdao.getForumOneALL234();
-		cpe=fones.size();
-//		area=area==null?"北京":area;
-//		if(model==5){
-//			cpe =forumdao.getForumOneareaALL(area, model).size();
-//		}else{
-//			
-//			cpe = forumdao.gettypeForumOneALL(model).size();
-//		}
-		System.out.println("类型type是 ：" + model+"有" + cpe + "个论坛"+area);
+
+		// if (user == null) {
+		// ((HttpServletResponse) util.response())
+		// .sendRedirect(request.getContextPath()+
+		// "/sample_lihu/htm/login.html");
+		// return null;
+		// }
+		// if (model <= 0) {
+		// System.out.println("请重新登入!");
+		// util.Out().print("model <= 0");
+		//
+		//
+		//
+		// return null;
+		// }
+		fones = forumdao.getForumOneALL234();
+		cpe = fones.size();
+		// area=area==null?"北京":area;
+		// if(model==5){
+		// cpe =forumdao.getForumOneareaALL(area, model).size();
+		// }else{
+		//
+		// cpe = forumdao.gettypeForumOneALL(model).size();
+		// }
+		System.out.println("类型type是 ：" + model + "有" + cpe + "个论坛" + area);
 
 		if (pageSize <= 0) {
 			pageSize = 10;
@@ -924,13 +929,14 @@ public class ForumAction {
 			currentPage = cpe;
 		}
 		System.out.println("currentPage" + currentPage);
-		fones=forumdao.getForumOneALL234(pageSize, currentPage);
-//		if(model==5){
-//		fones = forumdao.getForumOneareaALL(pageSize, currentPage, area, model);
-//		}else{
-//			fones = forumdao.getForumOneALL(pageSize, currentPage, model);
-//		
-//		}
+		fones = forumdao.getForumOneALL234(pageSize, currentPage);
+		// if(model==5){
+		// fones = forumdao.getForumOneareaALL(pageSize, currentPage, area,
+		// model);
+		// }else{
+		// fones = forumdao.getForumOneALL(pageSize, currentPage, model);
+		//
+		// }
 		List<ForumTwo> ftwosa = new ArrayList<ForumTwo>();
 
 		for (int i = 0; i < fones.size(); i++) {
@@ -951,8 +957,7 @@ public class ForumAction {
 			}
 
 		}
-		System.out.println("应该相同比例！" + fones.size() + "-" + ftwosa.size() + "-"
-				+ us.size());
+		System.out.println("应该相同比例！" + fones.size() + "-" + ftwosa.size() + "-" + us.size());
 
 		request.setAttribute("fones", fones);
 
@@ -964,13 +969,11 @@ public class ForumAction {
 
 		request.setAttribute("cpe", cpe);
 		request.setAttribute("area", area);
-		
+
 		request.setAttribute("currentPage", currentPage);
 
-		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":"
-				+ util.ToJson(ftwosa) + ",\"us\":" + util.ToJson(us)
-				+ ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage
-				+ "}";
+		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":" + util.ToJson(ftwosa) + ",\"us\":"
+				+ util.ToJson(us) + ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage + "}";
 		util.Out().print(result);
 		return Action.SUCCESS;
 
@@ -1006,52 +1009,53 @@ public class ForumAction {
 			util.Out().print(false);
 		}
 	}
+
 	/**
 	 * 取消收藏
 	 */
 	public void webFolR() throws IOException {
 		try {
-			
-		
-		User u = (User) session.getAttribute("u");
-		userid = u.getId();
-		String[] st = title.split(",");
-		for (int i = 0; i < st.length; i++) {
-			if (OpeFunction.isEmpty(st[i])) {
-				continue;
+
+			User u = (User) session.getAttribute("u");
+			userid = u.getId();
+			String[] st = title.split(",");
+			for (int i = 0; i < st.length; i++) {
+				if (OpeFunction.isEmpty(st[i])) {
+					continue;
+				}
+
+				forumid = Integer.parseInt(st[i].toString());
+				fo = foldao.ufid(userid, forumid);
+
+				if (fo != null) {
+
+					foldao.remove(fo);
+
+					fone = forumdao.getForumOne(forumid);
+					if (fone == null) {
+						util.Out().print("null");
+						return;
+					}
+					int num = fone.getFollectnum();
+
+					if (num > 0) {
+						num = --num;
+						fone.setFollectnum(num);
+					} else {
+
+						fone.setFollectnum(0);
+					}
+					forumdao.update(fone);
+					System.out.println("取消论坛收藏成功");
+				} else {
+					System.out.println("取消论坛收藏失败");
+				}
 			}
-		
-		forumid = Integer.parseInt(st[i].toString());
-		fo = foldao.ufid(userid, forumid);
-
-		if (fo != null) {
-
-			foldao.remove(fo);
-
-			fone = forumdao.getForumOne(forumid);
-			if (fone == null) {
-				util.Out().print("null");
-				return;
-			}
-			int num = fone.getFollectnum();
-
-			if (num > 0) {
-				num = --num;
-				fone.setFollectnum(num);
-			} else {
-
-				fone.setFollectnum(0);
-			}
-			forumdao.update(fone);
-			System.out.println("取消论坛收藏成功");
-		} else {
-			System.out.println("取消论坛收藏失败");
-		}
-		}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
+
 	/**
 	 * 判断是否收藏过
 	 */
@@ -1087,15 +1091,13 @@ public class ForumAction {
 					us.add(u);
 					fones.add(fone);
 				} else {
-					System.out.println("用户 或 收藏的论坛已被删除！论坛id为:"
-							+ fos.get(i).getForumid());
+					System.out.println("用户 或 收藏的论坛已被删除！论坛id为:" + fos.get(i).getForumid());
 
 				}
 
 			}
 
-			String result = "{\"fones\":" + util.ToJson(fones) + ",\"us\":"
-					+ util.ToJson(us) + "}";
+			String result = "{\"fones\":" + util.ToJson(fones) + ",\"us\":" + util.ToJson(us) + "}";
 			util.Out().print(result);
 
 		} else {
@@ -1178,8 +1180,7 @@ public class ForumAction {
 		if (area == null) {
 			fones = forumdao.getForumOneALL(pageSize, currentPage, model);
 		} else {
-			fones = forumdao.getForumOneareaALL(pageSize, currentPage, area,
-					model);
+			fones = forumdao.getForumOneareaALL(pageSize, currentPage, area, model);
 		}
 		List<ForumTwo> ftwosa = new ArrayList<ForumTwo>();
 		for (int i = 0; i < fones.size(); i++) {
@@ -1203,13 +1204,10 @@ public class ForumAction {
 			}
 
 		}
-		System.out.println("应该相同比例！" + fones.size() + "-" + ftwosa.size() + "-"
-				+ us.size());
+		System.out.println("应该相同比例！" + fones.size() + "-" + ftwosa.size() + "-" + us.size());
 
-		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":"
-				+ util.ToJson(ftwosa) + ",\"us\":" + util.ToJson(us)
-				+ ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage
-				+ "}";
+		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":" + util.ToJson(ftwosa) + ",\"us\":"
+				+ util.ToJson(us) + ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage + "}";
 		util.Out().print(result);
 
 	}
@@ -1262,8 +1260,7 @@ public class ForumAction {
 			if (fone.getImg() != null) {
 				try {
 
-					System.out.println("是否删除成功"
-							+ util.fileRemove(fone.getImg()));
+					System.out.println("是否删除成功" + util.fileRemove(fone.getImg()));
 
 				} catch (Exception e) {
 					System.out.println("删除异常!");
@@ -1330,13 +1327,10 @@ public class ForumAction {
 				}
 
 			}
-			System.out.println("应该相同比例！" + fones.size() + "-" + ftwosa.size()
-					+ "-" + us.size());
+			System.out.println("应该相同比例！" + fones.size() + "-" + ftwosa.size() + "-" + us.size());
 
-			String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":"
-					+ util.ToJson(ftwosa) + ",\"us\":" + util.ToJson(us)
-					+ ",\"cpe\":" + cpe + "" + ",\"currentPage\":"
-					+ currentPage + "}";
+			String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":" + util.ToJson(ftwosa) + ",\"us\":"
+					+ util.ToJson(us) + ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage + "}";
 
 			util.Out().print(result);
 		} else {
@@ -1394,8 +1388,8 @@ public class ForumAction {
 			System.out.println("用户" + us.size());
 			System.out.println("论坛" + fones.size());
 
-			String result = "{\"fones\":" + util.ToJson(fones) + ",\"us\":"
-					+ util.ToJson(us) + ",\"ftwos\":" + util.ToJson(fow) + "}";
+			String result = "{\"fones\":" + util.ToJson(fones) + ",\"us\":" + util.ToJson(us) + ",\"ftwos\":"
+					+ util.ToJson(fow) + "}";
 
 			util.Out().print(result);
 
@@ -1427,8 +1421,7 @@ public class ForumAction {
 
 		if (fones.size() != 0) {
 			System.out.println("正常");
-			String result = "{\"fones\":" + util.ToJson(fones) + ",\"us\":"
-					+ util.ToJson(us) + "}";
+			String result = "{\"fones\":" + util.ToJson(fones) + ",\"us\":" + util.ToJson(us) + "}";
 			util.Out().print(result);
 		} else {
 			System.out.println("空  没有论坛");
@@ -1548,8 +1541,7 @@ public class ForumAction {
 						fut.add(null);
 						fu.add(null);
 					} else {
-						System.out.println("fehrees第" + i + "次循环 信息为"
-								+ fehrees.size() + "条");
+						System.out.println("fehrees第" + i + "次循环 信息为" + fehrees.size() + "条");
 						List<User> userz = new ArrayList<User>();
 						List<User> touser = new ArrayList<User>();
 
@@ -1575,10 +1567,8 @@ public class ForumAction {
 
 				}
 				System.out.println("threes回复数" + fl.size());
-				String result = "{\"fone\":" + util.ToJson(fone)
-						+ ",\"ftwos\":" + util.ToJson(ftwos) + ",\"fl\":"
-						+ util.ToJson(fl) + ",\"fu\":" + util.ToJson(fu)
-						+ ",\"fut\":" + util.ToJson(fut) + ",\"us\":"
+				String result = "{\"fone\":" + util.ToJson(fone) + ",\"ftwos\":" + util.ToJson(ftwos) + ",\"fl\":"
+						+ util.ToJson(fl) + ",\"fu\":" + util.ToJson(fu) + ",\"fut\":" + util.ToJson(fut) + ",\"us\":"
 						+ util.ToJson(us) + ",\"u\":" + util.ToJson(user) + "}";
 				util.Out().print(result);
 
@@ -1730,7 +1720,7 @@ public class ForumAction {
 
 		if (file != null) {
 
-			img = "/IMG/Forumimg/"+OpeFunction.getNameDayTime();
+			img = "/IMG/Forumimg/" + OpeFunction.getNameDayTime();
 			img = util.ufileToServer(img, file, fileFileName, "jpg", true);
 			System.out.println(img);
 			fone.setImg(img);
@@ -1788,7 +1778,7 @@ public class ForumAction {
 		fone.setContent(content);
 		if (file != null) {
 
-			img = "/IMG/Forumimg/"+OpeFunction.getNameDayTime();
+			img = "/IMG/Forumimg/" + OpeFunction.getNameDayTime();
 			img = util.ufileToServer(img, file, fileFileName, "jpg", true);
 			System.out.println(img);
 			fone.setImg(img);
@@ -1799,8 +1789,7 @@ public class ForumAction {
 
 		util.Out().print(true);
 
-		((HttpServletResponse) util.response()).sendRedirect(request
-				.getContextPath() + "/ForumLookall");
+		((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/ForumLookall");
 		return;
 
 	}
@@ -1919,7 +1908,7 @@ public class ForumAction {
 		}
 
 		fones = forumdao.getForumOneALL(pageSize, currentPage, model);
-		if(model==6){
+		if (model == 6) {
 			fones = forumdao.getForumOneUpALL(pageSize, currentPage);
 		}
 		for (int i = 0; i < fones.size(); i++) {
@@ -1935,7 +1924,7 @@ public class ForumAction {
 		return Action.SUCCESS;
 
 	}
-	
+
 	/**
 	 * admin 和 论坛超级管理员 通过id查看论坛
 	 * 
@@ -1987,8 +1976,7 @@ public class ForumAction {
 						fut.add(null);
 						fu.add(null);
 					} else {
-						System.out.println("fehrees第" + i + "次循环 信息为"
-								+ fehrees.size() + "条");
+						System.out.println("fehrees第" + i + "次循环 信息为" + fehrees.size() + "条");
 						List<User> userz = new ArrayList<User>();
 						List<User> touser = new ArrayList<User>();
 
@@ -2062,8 +2050,6 @@ public class ForumAction {
 				fone.setFrs(ftwos.size());
 				forumdao.update(fone);
 
-				
-
 				List fl = new ArrayList();
 				System.out.println("评论数" + ftwos.size());
 
@@ -2084,8 +2070,7 @@ public class ForumAction {
 
 						fl.add(null);
 					} else {
-						System.out.println("fehrees第" + i + "次循环 信息为"
-								+ fehrees.size() + "条");
+						System.out.println("fehrees第" + i + "次循环 信息为" + fehrees.size() + "条");
 
 						List<User> userz = new ArrayList<User>();
 
@@ -2282,8 +2267,7 @@ public class ForumAction {
 			if (fone.getImg() != null) {
 				try {
 
-					System.out.println("是否删除成功"
-							+ util.fileRemove(fone.getImg()));
+					System.out.println("是否删除成功" + util.fileRemove(fone.getImg()));
 
 				} catch (Exception e) {
 					System.out.println("删除异常!");
@@ -2292,8 +2276,7 @@ public class ForumAction {
 
 			forumdao.Remove(fone);
 
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/ForumLookuser");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/ForumLookuser");
 			return;
 
 		}
@@ -2346,8 +2329,7 @@ public class ForumAction {
 			if (fone.getImg() != null) {
 				try {
 
-					System.out.println("是否删除成功"
-							+ util.fileRemove(fone.getImg()));
+					System.out.println("是否删除成功" + util.fileRemove(fone.getImg()));
 
 				} catch (Exception e) {
 					System.out.println("删除异常!");
@@ -2403,8 +2385,7 @@ public class ForumAction {
 			if (fone.getImg() != null) {
 				try {
 
-					System.out.println("是否删除成功"
-							+ util.fileRemove(fone.getImg()));
+					System.out.println("是否删除成功" + util.fileRemove(fone.getImg()));
 
 				} catch (Exception e) {
 					System.out.println("删除异常!");

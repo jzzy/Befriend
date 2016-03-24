@@ -620,7 +620,7 @@ public class UserAction extends ActionSupport {
 				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				if(OpeFunction.imgNarrow(100, 100, ServletActionContext.getServletContext().getRealPath(
 						pah), ServletActionContext.getServletContext().getRealPath(
-								pah))){
+								pah),".jpg")){
 					u.setImg(pah.split(".jpg")[0]+".JPEG");
 				}
 				
