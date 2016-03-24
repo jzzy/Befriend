@@ -1858,8 +1858,8 @@ System.out.println("进入webHotareafToJson");
 
 				System.out.println("获取到用户信息了" + u.getAddress());
 				if (u.getAddress() != null) {
-					area = u.getAddress();
-					session.setAttribute("province", u.getAddress());
+					//area = u.getAddress();
+				//	session.setAttribute("province", u.getAddress());
 				}
 				if (area == null||pro.equals("null")) {
 					((HttpServletResponse) util.response())
