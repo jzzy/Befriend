@@ -52,7 +52,7 @@ public class UploadAction extends ActionSupport {
 					float fimg = OpeFunction.fileSize(f);
 					System.out.println(sourceImg.getWidth() + "*" + sourceImg.getHeight() + "压缩前图片大小为:" + fimg);
 					System.out.println("文件类型" + type);
-					if (OpeFunction.imgNarrow(sourceImg.getWidth(), sourceImg.getHeight(), src, src,type)) {
+					if (OpeFunction.imgNarrow(sourceImg.getWidth()/4, sourceImg.getHeight()/4, src, src,type)) {
 						srcp = (srcp.split(type)[0] + ".JPEG");
 						src = (src.split(type)[0] + ".JPEG");
 					}

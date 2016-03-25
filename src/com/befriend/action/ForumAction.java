@@ -456,10 +456,9 @@ public class ForumAction {
 
 			float fimg = util.fileSize(file);
 			System.out.println(sourceImg.getWidth()+"*"+sourceImg.getHeight()+"ͼƬ��СΪ:" + fimg);
-
-			if (OpeFunction.imgNarrow(sourceImg.getWidth(), sourceImg.getHeight(),
+			if (OpeFunction.imgNarrow(sourceImg.getWidth()/3, sourceImg.getHeight()/3,
 					ServletActionContext.getServletContext().getRealPath(img),
-					ServletActionContext.getServletContext().getRealPath(img),"jpg")) {
+					ServletActionContext.getServletContext().getRealPath(img),".jpg")) {
 				fone.setImg(img.split(".jpg")[0] + ".JPEG");
 			}
 			File f = new File(ServletActionContext.getServletContext().getRealPath(fone.getImg()));
