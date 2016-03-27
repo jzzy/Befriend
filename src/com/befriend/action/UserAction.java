@@ -615,7 +615,7 @@ public class UserAction extends ActionSupport {
 			}
 			if (file != null) {
 
-				util.fileRemove(path);
+				//util.fileRemove(path);
 				path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
 				String pah = util.ufileToServer(path, file, fileFileName, "jpg", true);
 				if(OpeFunction.imgNarrow(100, 100, ServletActionContext.getServletContext().getRealPath(
@@ -1206,7 +1206,7 @@ public class UserAction extends ActionSupport {
 				String path = u.getImg();
 				Boolean b = true;
 				if (path != null) {
-					b = util.fileRemove(path);
+					//b = util.fileRemove(path);
 				}
 				System.out.println("头像删除是否成功？" + b);
 				path = "/IMG/Userimg/" + OpeFunction.getNameDayTime();
