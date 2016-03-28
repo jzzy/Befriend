@@ -78,8 +78,8 @@ $(document).ready(function(){
 						
 							<li class="first">
 							
-						<p class="title"  style="color:#666;font-size: 18px;font-weight:bold;"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a target="_parent" href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a></p>
-						<p class="big_img"><a target="_parent" href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
+						<p class="title"  style="color:#666;font-size: 18px;font-weight:bold;"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a  href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a></p>
+						<p class="big_img"><a  href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
 						<p class="info">
 							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>

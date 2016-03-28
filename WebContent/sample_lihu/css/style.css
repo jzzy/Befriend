@@ -1,7 +1,7 @@
 /* tag reset */
 html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,img { margin:0; padding:0; }
 html { width:100%; }
-body,code {font:12px "Microsoft YaHei",Verdana,Aril,sans-serif; color:#666; background:#fff;}
+body,code {font:14px "Microsoft YaHei",Verdana,Aril,sans-serif; color:#666; background:#fff;}
 body {}
 li { list-style:none; }
 img,fieldset { border:none; vertical-align:middle; }
@@ -692,7 +692,7 @@ border-radius:5px;
 #container .eduDetail > .inner .imgArea {padding:0 3%;width:30%;text-align:center;}
 #container .eduDetail > .inner .imgArea > img {width:100%;height:100%;}
 #container .eduDetail > .inner .infoArea {padding:0 2% 0 0;width:62%;}
-#container .eduDetail > .inner .infoArea .name {margin:0 0 5px;font-size:14px;}
+#container .eduDetail > .inner .infoArea .name {margin:0 0 5px;font-size:16px;}
 #container .eduDetail > .inner .infoArea .rate {margin:0 0 10px;}
 #container .eduDetail > .inner .infoArea .rate img {width:12px;height:12px;margin:0 2px;}
 #container .eduDetail > .inner .infoArea .loc {margin:0 0 5px;}
@@ -730,7 +730,7 @@ border-radius:5px;
 #container .eduDetail .review .inner .message .attachImg li {display:inline-block;font-size:12px;width:33.33%;text-align:center;}
 #container .eduDetail .review .inner .message .attachImg img {width:90%;}
 #container .eduDetail .review .inner .message .time {margin:0 0 10px;}
-#container .eduDetail .shopInfo p {padding:10px;font-size:12px;border-top:1px solid #eee;}
+#container .eduDetail .shopInfo p {padding:10px;font-size:14px;border-top:1px solid #eee;}
 #container .eduDetail .nearby {padding:0 0 20px;border-bottom:0}
 #container .eduDetail .nearby ul {font-size:0;}
 #container .eduDetail .nearby ul li {display:inline-block;width:33.33%;margin:20px 0 0;font-size:12px;text-align:center;}
@@ -772,7 +772,7 @@ border-radius:5px;
 #container .eduReview .review .inner .message .attachImg li {display:inline-block;font-size:12px;width:33.33%;text-align:center;}
 #container .eduReview .review .inner .message .attachImg img {width:90%;}
 #container .eduReview .review .inner .message .time {margin:0 0 10px;}
-#container .eduDetail .shopInfo p {padding:10px;font-size:12px;border-top:1px solid #eee;}
+#container .eduDetail .shopInfo p {padding:10px;font-size:14px;border-top:1px solid #eee;}
 
 /* 53 */
 #container .nearbyInfo li {border-bottom:10px solid #eee;}

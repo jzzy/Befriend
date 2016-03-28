@@ -64,7 +64,7 @@ if(n==null)
        }
        %>
 				</p>
-				<p class="bigImg"><img src="<%=request.getContextPath()+n.getImgmax() %>" alt="sample" /></p>
+				<p class="bigImg"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="sample" /></p>
 				<p class="detail"><%=n.getContent() %></p>
 			</div>
 							    <% 
