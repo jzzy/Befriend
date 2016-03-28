@@ -68,13 +68,15 @@ if(n==null)
 				<p class="detail"><%=n.getContent() %></p>
 			</div>
 							    <% 
-   	if(rl!=null&&ul!=null){
+  
    
    %>
 			<div id="divhot" class="hotComment">
 				<h2 class="tit2"><img src="sample_lihu/images/hotcomments_tit.gif" alt="热门评论" /></h2>
 				<ul>
+				
 <%
+	if(rl!=null&&ul!=null){
 for(int i=0;i<rl.size();i++){
 		if(ul.get(i)!=null&&rl.get(i)!=null){
 %>
