@@ -27,23 +27,17 @@ if(Hottime==null||Hottest==null||Hotarea==null||typeqs==null||typejk==null){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <link href="sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript"  src="sample_lihu/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="sample_lihu/js/common.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	
-	//alert("cookie:"+document.cookie);
-	$.ajax({
-		type:"post",
-		url:"statisticsPVIP.action?id=1"	
-	});
-});
-
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery.lazyload.js"></script>
+<script type="text/javascript" charset="utf-8">
+    
 </script>
+
 
 </head>
 <body>
@@ -79,7 +73,10 @@ $(document).ready(function(){
 							<li class="first">
 							
 						<p class="title"  style="color:#666;font-size: 18px;font-weight:bold;"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a  href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a></p>
-						<p class="big_img"><a  href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
+						<p class="big_img"><a  href="webNewsId?id=<%=n.getId()%>">
+					
+					
+						<img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
 						<p class="info">
 							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -105,7 +102,7 @@ $(document).ready(function(){
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img  src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="bigImg" /></p>
 						</div>
 					</li>
 					
@@ -134,7 +131,7 @@ $(document).ready(function(){
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="bigImg" /></p>
 						</div>
 					</li>
 					
@@ -161,7 +158,7 @@ $(document).ready(function(){
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="bigImg" /></p>
 						</div>
 					</li>
 				
@@ -188,7 +185,7 @@ $(document).ready(function(){
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="bigImg" /></p>
 						</div>
 					</li>
 					
@@ -208,14 +205,14 @@ $(document).ready(function(){
 				
 					<li>
 						<div class="infoArea">
-							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a>></p>
+							<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a href="webNewsId?id=<%=n.getId()%>"  style="color:#666;font-size: 18px;font-weight:bold;" ><%=n.getTitle() %></a></p>
 							<p class="info">
 								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="<%=request.getContextPath()+n.getImgmax() %>" /></p>
+							<p class="big_img"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" alt="bigImg" /></p>
 						</div>
 					</li>
 					
@@ -238,5 +235,22 @@ $(document).ready(function(){
 		<div id="footer"></div><!--footer-->
 	</div><!--wrap-->
 </body>
+<script type="text/javascript" >
+$(document).ready(function(){
+	  $(function() {
+          $("img").lazyload({ 
+          placeholder : "<%=request.getContextPath() %>/sample_lihu/images/listBanner.png",
+                 effect: "fadeIn",
+                 threshold : 20000
+           });  
+      });
+	//alert("cookie:"+document.cookie);
+	$.ajax({
+		type:"post",
+		url:"statisticsPVIP.action?id=1"	
+	});
+});
+
+</script>
 </html>
 

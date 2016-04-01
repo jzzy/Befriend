@@ -32,10 +32,27 @@ if(fone==null||us==null){
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"  />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
 <link href="<%=request.getContextPath() %>/sample_lihu/css/style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/sample_lihu/css/pullToRefresh.css"/>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
+
+
+
+<script type="text/javascript" charset="utf-8">
+      $(function() {
+    	 
+          $("img").lazyload({ 
+          placeholder : "<%=request.getContextPath() %>/sample_lihu/images/listBanner.png",
+                effect: "fadeIn",
+                threshold : 20000
+                 
+           });  
+      });
+</script>
+
 </head>
 <body>
 	<div id="container">
@@ -78,7 +95,7 @@ if(fone==null||us==null){
 						
 							<p><a href="webForumLook?id=<%=fone.get(i).getId()%>" target="_parent">
 						
-							<img src="	<%=request.getContextPath()+fone.get(i).getImg() %>" alt="sample" />
+							<img  src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png" data-original="<%=request.getContextPath()+fone.get(i).getImg() %>" alt="sample" />
 							
 							
 						
@@ -105,7 +122,9 @@ if(fone==null||us==null){
 	<div id=divc style="display: none;">2</div>
 <script src="<%=request.getContextPath() %>/sample_lihu/js/iscroll.js"></script>
 <script src="<%=request.getContextPath() %>/sample_lihu/js/pullToRefresh.js"></script>
+<!--  
 <script type="text/javascript">
+
 refresher.init({
 	id:"wrapper",//<------------------------------------------------------------------------------------
 	pullDownAction:Refresh,                                                            
@@ -169,7 +188,8 @@ function Load() {
 								str+='</div><div class="detail"><a href=<%=request.getContextPath() %>/webForumLook?id='+arr[i].id+' target="_parent">'+arr[i].content+'</a>';
 								str+='</div>';
 								if(arr[i].img!=null){
-									str+='<div class="imgList clearfix"><p><a href="forumreview.html" target="_parent"><img src="<%=request.getContextPath() %>'+arr[i].img+'" alt="sample" /></a></p></div>';
+		
+									str+='<div class="imgList clearfix"><p><a  target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png" data-original="<%=request.getContextPath() %>'+arr[i].img+'" alt="sample" /></a></p></div>';
 								}
 								
 								str+='<div class="info"><span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />';
@@ -194,5 +214,6 @@ function Load() {
 	},1000);	
 }
 </script>
+-->
 </body>
 </html>

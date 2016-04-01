@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/sample_lihu/css/pullToRefresh.css"/>
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
-
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery.lazyload.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -41,6 +41,7 @@
 			<iframe id="mainiframe" src="<%=request.getContextPath() %>/webForumApptype" frameborder="0" scrolling="no" width="100%"></iframe>
 		</div><!--container-->
 		<div id="footer">
+	
 		</div><!--footer-->
 	</div><!--wrap-->
 </body>
