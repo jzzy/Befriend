@@ -16,7 +16,19 @@
 <script src="<%=request.getContextPath() %>/sample_lihu/js/iscroll.js"></script>
 <script src="<%=request.getContextPath() %>/sample_lihu/js/pullToRefresh.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery.lazyload.min.js"></script>
 
+<script type="text/javascript" charset="utf-8">
+      $(function() {
+    	 
+          $("img").lazyload({ 
+          placeholder : "<%=request.getContextPath() %>/sample_lihu/images/listBanner.png",
+                effect: "fadeIn",
+                threshold : 20000
+                 
+           });  
+      });
+</script>
 </head>
 <body>
 
@@ -108,7 +120,7 @@
 							
 						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" />
 						<a target="_parent" style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
-						<p class="big_img"><a target="_parent" href="webNewsId?id=<%=n.getId()%>"><img src="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
+						<p class="big_img"><a target="_parent" href="webNewsId?id=<%=n.getId()%>"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
 						<p class="info">
 							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
 								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
@@ -134,7 +146,7 @@
 							</p>
 						</div>
 						<div class="imgArea">
-							<p class="big_img"><img  src="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" /></p>
+							<p class="big_img"><img  src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" /></p>
 						</div>
 					</li>
 					
