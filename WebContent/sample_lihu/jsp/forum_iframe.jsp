@@ -122,7 +122,7 @@ if(fone==null||us==null){
 	<div id=divc style="display: none;">2</div>
 <script src="<%=request.getContextPath() %>/sample_lihu/js/iscroll.js"></script>
 <script src="<%=request.getContextPath() %>/sample_lihu/js/pullToRefresh.js"></script>
-<!--  
+
 <script type="text/javascript">
 
 refresher.init({
@@ -214,6 +214,6 @@ function Load() {
 	},1000);	
 }
 </script>
--->
+
 </body>
 </html>

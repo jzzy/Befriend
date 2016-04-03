@@ -176,8 +176,9 @@
 		<!-- <result name="success">/SimulationApp/exchange.jsp</result> 
 		
 			
-			<result name="success">/sample_lihu/jsp/forum.jsp</result>-->
-			<result name="success">/sample_lihu/jsp/forum_iframe.jsp</result>
+			
+			<result name="success">/sample_lihu/jsp/forum_iframe.jsp</result>-->
+			<result name="success">/sample_lihu/jsp/forum2.jsp</result>
 		</action>
 		
 		<!-- 通过id查看论坛-->
