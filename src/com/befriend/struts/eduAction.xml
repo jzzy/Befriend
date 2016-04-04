@@ -11,14 +11,17 @@
 	 
 	
 	     
-	        <result name="success">/sample_lihu/jsp/eduserv.jsp</result>  -->
-	            <result name="success">/sample_lihu/jsp/eduserv_iframe.jsp</result>
+	        <result name="success">/sample_lihu/jsp/eduserv.jsp</result> 
+	            <result name="success">/sample_lihu/jsp/eduserv_iframe.jsp</result> -->
+	             <result name="success">/sample_lihu/jsp/eduserv.jsp</result>
 	    </action>
 	    <action name="getEduWebArea" class="eduAction" method="getEduWebArea">
    
 	    <!--  <result name="success"> /SimulationApp/lihu/jsp/eduserv.jsp</result>
-	    <result name="success">/sample_lihu/jsp/eduserv.jsp</result>-->
 	    <result name="success">/sample_lihu/jsp/eduserv.jsp</result>
+	    <result name="success">/sample_lihu/jsp/eduserv.jsp</result>-->
+	 
+	    <result type="redirectAction" name="success">getEduWeb</result> 
 	    </action>
 	      <action name="getEduWebAjax" class="eduAction" method="getEduWebAjax">
    
@@ -36,14 +39,18 @@
 	    </action>
 	    
 	    <action name="getLikeEduWebArea" class="eduAction" method="getLikeEduWebArea">
-     <result name="success">/sample_lihu/jsp/edu_searchresoult.jsp</result>
-	    <!--  <result name="success"> /SimulationApp/lihu/jsp/search_resoult.jsp</result>-->
+        <!--  <result name="success">/sample_lihu/jsp/edu_searchresoult.jsp</result>
+	 <result name="success"> /SimulationApp/lihu/jsp/search_resoult.jsp</result>-->
+	    
+	     
+	    <result type="redirectAction" name="success">getLikeEduWeb</result> 
 	    </action>
 	    
 	    
 	      <action name="getLikeEduWeb" class="eduAction" method="getLikeEduWeb">
-     <result name="success">/sample_lihu/jsp/edu_searchresoult_iframe.jsp</result>
-	    <!--  <result name="success"> /SimulationApp/lihu/jsp/search_resoult.jsp</result>-->
+   	    <!--   <result name="success">/sample_lihu/jsp/edu_searchresoult_iframe.jsp</result>
+ <result name="success"> /SimulationApp/lihu/jsp/search_resoult.jsp</result>-->
+	   <result name="success">/sample_lihu/jsp/edu_searchresoult.jsp</result>
 	    </action>
 	    <action name="getLikeEduWebAjax" class="eduAction" method="getLikeEduWebAjax">
    

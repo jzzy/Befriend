@@ -39,22 +39,22 @@ alert('功能尚未开放');
 				<h2 class="tit2"><img src="<%=request.getContextPath() %>/sample_lihu/images/colnavi_tit.gif" alt="栏目导航" /></h2>
 				<ul class="clearfix">
 				
-					<li><a href="<%=request.getContextPath() %>/webSbType?tp=1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap1.gif" alt="升学指南" />升学指南</a></li>
-				<li><a href="<%=request.getContextPath() %>/webSbType?tp=2"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap2.gif" alt="教子经验" />教子经验</a></li>
-				<li><a href="<%=request.getContextPath() %>/webSbType?tp=3"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap3.gif" alt="成长路上" />成长路上</a></li>
-				<li><a href="<%=request.getContextPath() %>/webSbType?tp=4"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap4.gif" alt="兴趣特长" />兴趣特长</a></li>
+					<li><a href="<%=request.getContextPath() %>/webNewtype?tp=1"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap1.gif" alt="升学指南" />升学指南</a></li>
+				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=2"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap2.gif" alt="教子经验" />教子经验</a></li>
+				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=3"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap3.gif" alt="成长路上" />成长路上</a></li>
+				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=4"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap4.gif" alt="兴趣特长" />兴趣特长</a></li>
 				
 				
 				
 				
 				
-				<li><a href="<%=request.getContextPath() %>/webSbType?tp=5"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap5.gif" alt="出国留学" />出国留学</a></li>
+				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=5"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap5.gif" alt="出国留学" />出国留学</a></li>
 				
-				<li><a href="<%=request.getContextPath() %>/webSbType?tp=10"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap9.gif" alt="本地资讯" />本地资讯</a></li>
+				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=10"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap9.gif" alt="本地资讯" />本地资讯</a></li>
 				
-				<li><a href="<%=request.getContextPath() %>/webSbType?tp=6"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap6.gif" alt="名人教子" />名人教子</a></li>
-				<li><a href="<%=request.getContextPath() %>/webSbType?tp=7"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap7.gif" alt="健康导航" />健康导航</a></li>
-				<li><a href="<%=request.getContextPath() %>/webSbType?tp=8"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap8.gif" alt="轻松驿站" />轻松驿站</a></li>
+				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=6"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap6.gif" alt="名人教子" />名人教子</a></li>
+				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=7"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap7.gif" alt="健康导航" />健康导航</a></li>
+				<li><a href="<%=request.getContextPath() %>/webNewtype?tp=8"><img src="<%=request.getContextPath() %>/sample_lihu/images/ft_guidemap8.gif" alt="轻松驿站" />轻松驿站</a></li>
 				
 				</ul>
 			</div>
@@ -72,7 +72,7 @@ alert('功能尚未开放');
 			<div class="myNav">
 				<h2 class="tit2"><img src="<%=request.getContextPath() %>/sample_lihu/images/mynavi_tit.gif" alt="我的导航" /></h2>
 				<ul class="clearfix">
-					<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/forum2.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/mynavi1.gif" alt="论坛" /></a></li>
+					<li><a href="<%=request.getContextPath() %>/webForumApptype"><img src="<%=request.getContextPath() %>/sample_lihu/images/mynavi1.gif" alt="论坛" /></a></li>
 					<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/mypage.jsp"><img src="<%=request.getContextPath() %>/sample_lihu/images/mynavi2.gif" alt="我的" /></a></li>
 				</ul>
 			</div>

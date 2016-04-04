@@ -678,6 +678,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("type", "bd");
 			request.setAttribute("nl", nl);
+			request.setAttribute("tp", tp);
 			request.setAttribute("province", province);
 			request.setAttribute("path", "webHotareafToJson");
 			request.setAttribute("a", a);
@@ -704,7 +705,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			nl = ndao.Hotarea(province, pageSize, currentPage,
 					OpeFunction.getNowTime());
 			request.setAttribute("currentPage", currentPage);
-
+			request.setAttribute("tp", tp);
 			request.setAttribute("nl", nl);
 			request.setAttribute("province", province);
 			request.setAttribute("a", a);
@@ -753,6 +754,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 		request.setAttribute("path", "webHotareafToJson");
 		request.setAttribute("nl", nl);
 		request.setAttribute("a", a);
+		request.setAttribute("tp", tp);
 		return Action.SUCCESS;
 	}
 
@@ -928,7 +930,7 @@ System.out.println("进入webHotareafToJson");
 				currentPage = 1;
 			}
 
-			System.out.println("每页多少条-" + pageSize);
+			System.out.println("最热每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
 
 			nl = ndao.Hottest(pageSize, currentPage, OpeFunction.getNowTime());
@@ -937,6 +939,7 @@ System.out.println("进入webHotareafToJson");
 			request.setAttribute("type", "zr");
 			request.setAttribute("nl", nl);
 			request.setAttribute("a", a);
+			request.setAttribute("tp", tp);
 			request.setAttribute("path", "webHottestToJson");
 
 		} catch (Exception e) {
@@ -1109,7 +1112,17 @@ System.out.println("进入webHotareafToJson");
 				break;
 			case 9:
 				type = "社会广角";
-				break;
+				//全国最热webHottest
+				
+				((HttpServletResponse) util.response()).sendRedirect(request
+						.getContextPath() + "/webHottest?tp=9");
+				return null;
+			case 10:
+				((HttpServletResponse) util.response()).sendRedirect(request
+						.getContextPath() + "/webHotareaf?tp=10");
+				return null;
+				//本地
+				
 
 			default:
 				System.out.println("请输入正确代码tp");

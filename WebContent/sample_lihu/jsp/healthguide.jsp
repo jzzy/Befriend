@@ -14,7 +14,19 @@
 <link rel="stylesheet" href="sample_lihu/css/pullToRefresh.css"/>
 <script type="text/javascript" src="sample_lihu/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="sample_lihu/js/common.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery.lazyload.min.js"></script>
 
+<script type="text/javascript" charset="utf-8">
+      $(function() {
+    	 
+          $("img").lazyload({ 
+          placeholder : "<%=request.getContextPath() %>/sample_lihu/images/listBanner.png",
+                effect: "fadeIn",
+                threshold : 20000
+                 
+           });  
+      });
+</script>
 </head>
 <body>
 	 <%
@@ -106,15 +118,135 @@
 				<h2 class="tit2"><img src="sample_lihu/images/<%=img %>" alt="今日必读" /></h2>
 			</div>
 		</div><!--header-->
+	
 		
-		<div id="container" class="load">
-			<iframe id="mainiframe" src="<%=request.getContextPath()+pth %>" frameborder="0" scrolling="no" width="100%"></iframe>
-		</div><!--container-->
+		
+	<div id="container">
+	 <%
+	
+
+
+		//获取总的页数
+		int a=(Integer)request.getAttribute("a");
+		//获取第几页
+		int currentPage=(Integer)request.getAttribute("currentPage");
+		//获取新闻分类
+	//	String type=(String)request.getAttribute("type");
+		//获取新闻分类代号
+		int tp=(Integer)request.getAttribute("tp");
+		//获取新闻
+		List<News> nl=request.getAttribute("nl")==null?new ArrayList<News>():(List)request.getAttribute("nl");
+		String url="";
+		if(request.getAttribute("path")==null){
+		
+		url="/Befriend/webNewtypeToJson?tp="+tp;	
+		}else{
+			 url="/Befriend/"+request.getAttribute("path")+"?tp="+tp;	
+			}
+		System.out.println(url);
+		
+
+
+   
+   %>
+			
+		<div class="mainList">
+			<div id="wrapper">
+					<ul>
+					 <%
+						for(int i=0;i<nl.size();i++){
+						News n=nl.get(i);
+						if(i==0){
+						%>
+						
+							<li class="first">
+							
+						<p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" />
+						<a target="_parent" style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+						<p class="big_img"><a target="_parent" href="webNewsId?id=<%=n.getId()%>"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImgmax() %>" alt="bigImg" /></a></p>
+						<p class="info">
+							<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
+								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
+						</p>
+						
+					</li>
+						
+						<%
+						continue;
+						}
+						%>
+						
+						
+						
+			
+					<li>
+						<div class="infoArea">
+							<p class="title"><img  src="sample_lihu/images/hot_ico.gif" alt="hot" />
+							<a target="_parent" style="color:#666;font-size: 18px;font-weight:bold;" href="webNewsId?id=<%=n.getId()%>" ><%=n.getTitle() %></a></p>
+							<p class="info">
+								<span><img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;<%=n.getReviews() %></span>
+								<span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;<%=n.getCollectnum() %></span>
+							</p>
+						</div>
+						<div class="imgArea">
+							<p class="big_img"><img  src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png"  data-original="<%="http://182.92.100.235/Befriend/"+n.getImg() %>" /></p>
+						</div>
+					</li>
+					
+					<%
+							}
+					%>
+					</ul>
+				</div>
+		</div>
+	</div>
+<div id=divc style="display: none;">2</div>
+	<div id="loding"><img src="<%=request.getContextPath() %>/sample_lihu/images/123.gif" alt="loding_ico" /></div><!--loding-->
 		
 		
 	</div><!--wrap-->
-	
+	<script type="text/javascript">
+	$(window).scroll(function () {
+	    if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
+	        $("#loding").slideDown(300).delay(300).slideUp(300);
+	//	alert(1);
+		$.ajax({
+					dataType: "json",
+				
+					url:"<%=url%>"+"&currentPage="+$("#divc").html(),		
+								
+					async:false,
+					success: function (data) {     
+						var val = data["nl"];//获取json中的 key
+					
+						var el, li, i;
+						el =document.querySelector("#wrapper ul");
+						for (i=0; i<val.length; i++) {
+							li = document.createElement('li');
+							var te='<div class="infoArea"><p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href=<%=request.getContextPath()%>/webNewsId?id='+val[i].id+' target="_parent">'+val[i].title+'</a></p><p class="info"><span>';
+							te+='<img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;'+val[i].reviews+'</span><span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;'+val[i].collectnum+'</span></p></div><div class="imgArea"><p class="big_img"><a href=<%=request.getContextPath()%>/webNewsId?id='+val[i].id+' target="_parent"><img src="http://182.92.100.235/Befriend/'+val[i].img+'" alt="mediumImg" /></a></p></div>';
+							li.innerHTML=te;
+							el.appendChild(li, el.childNodes[0]);
+						}
+						$("#divc").html(parseInt($("#divc").html())+1);
+						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+						
+					
+					
+						}
+		
+		
+					
+					
+		})
+		
+		
+		
+		
 
+	    }
+	});	
+</script>
 
 </body>
 </html>

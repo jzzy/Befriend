@@ -115,9 +115,75 @@ return true;
 				</li>
 			</ul>
 		</div><!--header-->
-		<div id="container" class="load">
+		<!--<div id="container" class="load">
 			<iframe id="mainiframe" src="<%=request.getContextPath() %>/getLikeEduWeb?value<%=request.getAttribute("value") %>" frameborder="0" scrolling="no" width="100%"></iframe>
-		</div><!--container-->
+		</div>container-->
+		
+		
+		<div id="container">
+			<div class="eduServ listPack" id="wrapper">
+				<ul>
+					<%
+			List<EduServices> lEduServices=(List)(request.getAttribute("EduServices")==null?new ArrayList<EduServices>():request.getAttribute("EduServices")); 			
+			for(int i=0;i<lEduServices.size();i++){
+				float f=lEduServices.get(i).getStar();
+				int f1=0;
+				
+			%>
+					<li>
+					<a target="_parent" href="getWebCommments?merchantId=<%=lEduServices.get(i).getMerchantId()%>">
+							<div class="imgArea"><img src="<%="http://182.92.100.235/"+lEduServices.get(i).getPicture() %>" alt="" /></div>
+							<div class="infoArea">
+								<h3><%=lEduServices.get(i).getName() %></h3>
+								<p class="rate clearfix">
+								
+								
+								
+								
+								<%
+							for(int y=0;y<f;y++){
+								f1++;
+							%>
+							<span class="star_on"></span>
+						
+							<%
+							}	
+							%>
+									<%
+							for(int y=0;y<5-f1;y++){
+							%>
+							<span class="star_off"></span>
+							
+							<%
+							}	
+							%>	
+								
+								
+								<!-- 
+								
+								<span class="star_on"></span>
+								<span class="star_on"></span>
+								<span class="star_off"></span>
+								<span class="star_off"></span>
+								<span class="star_off"></span>
+								 -->
+								</p>
+								<div class="clearfix"><strong><%=lEduServices.get(i).getCity()%></strong><span><%=lEduServices.get(i).getClassFirst() %></span></div>
+						</div>
+						
+						<div class="distance"><%=lEduServices.get(i).getDistance()%>m</div>
+						</a>
+					</li>
+					<%
+			}
+					%>
+				</ul>
+			</div>
+				
+	</div>
+		<div id="divc" style="display: none;">2</div>
+	<div id="loding"><img src="<%=request.getContextPath() %>/sample_lihu/images/123.gif" alt="loding_ico" /></div><!--loding-->
+		
 		<div id="footer"></div><!--footer-->
 		<div id="bg"></div>
 	</div><!--wrap-->
@@ -126,6 +192,45 @@ return true;
   $(document).ready(function(){
     $("#jMenu").jMenu();
   })
+</script>
+<script>
+$(window).scroll(function () {
+    if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
+        $("#loding").slideDown(300).delay(300).slideUp(300);
+		var el, li, i,str;
+		el =document.querySelector("#wrapper ul");
+		$.ajax({
+			url:"/Befriend/getLikeEduWebToJson?value=<%=request.getAttribute("value")%>&currentPage="+$("#divc").html(),
+			 dataType: "json", 
+					async:false,
+					success: function (data) {     
+						var val = data["edl"];//获取json中的 key
+					//	var vus = data["us"];
+					//alert(val[0].id);
+					
+						for (i=0; i<val.length; i++) {
+			li = document.createElement('li');
+			str='<a target="_parent" href="edu_detail.html" target="_parent"><div class="imgArea">';
+			str=str+'<img src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3>';
+			str=str+'<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off">';
+			str=str+'</span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix">';
+			str=str+'<strong>'+val[i].city+'</strong><span>'+val[i].classFirst+'</span><div class="distance">'+val[i].distance+'m</div></div></div></a>';
+		//	alert(str);
+		
+			li.innerHTML=str;
+			el.appendChild(li, el.childNodes[0]);
+		}
+						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+						
+						$("#divc").html(parseInt($("#divc").html())+1);
+					
+					
+						},
+					
+		})	
+		
+    }
+});
 </script>
 </form>
 </body>

@@ -51,7 +51,7 @@ if(fone==null||us==null){
 <script type="text/javascript">
 $(window).scroll(function () {
     if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
-        $("#loding").slideDown(300).delay(1000).slideUp(300);
+        $("#loding").slideDown(300).delay(300).slideUp(300);
         
         $.ajax({
 			url:"/Befriend/webForumApptypeToJson?currentPage="+$("#divc").html(),
@@ -119,7 +119,7 @@ $(window).scroll(function () {
 			</div>
 			<ul class="topMenu clearfix">
 				<li><a href="<%=request.getContextPath() %>/webNewsA10"><img src="<%=request.getContextPath() %>/sample_lihu/images/hottoday_ico.gif" alt="fire" />&nbsp;今日必读</a></li>
-				<li class="on"><a href="<%=request.getContextPath() %>/sample_lihu/jsp/forum2.jsp">社区互动</a></li>
+				<li class="on"><a href="<%=request.getContextPath() %>/webForumApptype">社区互动</a></li>
 				<li><a href="<%=request.getContextPath() %>/webGetapp">贴心服务</a></li>
 				<li><a href="<%=request.getContextPath() %>/sample_lihu/jsp/mypage.jsp">我的信息</a></li>
 			</ul>

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/sample_lihu/css/pullToRefresh.css"/>
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/common.js"></script>
-
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jMenu.jquery.js"></script>
 </head>
 <body>
 	<div id="bg">bg</div>
@@ -106,17 +106,119 @@
 				</li>
 			</ul>
 		</div><!--header-->
-		<div id="container" class="load" style="padding:70px 0 0;">
+		<!--<div id="container" class="load" style="padding:70px 0 0;">
 			<iframe id="mainiframe" src="<%=request.getContextPath()+"/getEduWeb" %>" frameborder="0" scrolling="no" width="100%"></iframe>
-		</div><!--container-->
+		</div>container-->
+		
+		
+		<div id="container">
+		<div class="eduServ listPack" id="wrapper">
+			<ul>
+					<%
+			List<EduServices> lEduServices=(List)(request.getAttribute("EduServices")==null?new ArrayList<EduServices>():request.getAttribute("EduServices")); 			
+			for(int i=0;i<lEduServices.size();i++){
+				float f=lEduServices.get(i).getStar();
+				int f1=0;
+				
+			%>
+					<li>
+					<a href="<%=request.getContextPath() %>/getWebCommments?merchantId=<%=lEduServices.get(i).getMerchantId()%>" target="_parent" >
+							<div class="imgArea"><img src="<%="http://182.92.100.235/"+lEduServices.get(i).getPicture() %>" alt="" /></div>
+							<div class="infoArea">
+								<h3><%=lEduServices.get(i).getName() %></h3>
+								<p class="rate clearfix">
+								
+								
+								
+								
+								<%
+							for(int y=0;y<f;y++){
+								f1++;
+							%>
+							<span class="star_on"></span>
+						
+							<%
+							}	
+							%>
+									<%
+							for(int y=0;y<5-f1;y++){
+							%>
+							<span class="star_off"></span>
+							
+							<%
+							}	
+							%>	
+								
+								
+								<!-- 
+								
+								<span class="star_on"></span>
+								<span class="star_on"></span>
+								<span class="star_off"></span>
+								<span class="star_off"></span>
+								<span class="star_off"></span>
+								 -->
+								</p>
+								<div class="clearfix"><strong><%=lEduServices.get(i).getCity()%></strong><span><%=lEduServices.get(i).getClassFirst() %></span></div>
+						</div>
+						
+						<div class="distance"><%=lEduServices.get(i).getDistance()%>m</div>
+						</a>
+					</li>
+					<%
+			}
+					%>
+			</ul>
+		</div>
+	</div>
+	<div id="divc" style="display: none;">2</div>
+		<div id="loding"><img src="<%=request.getContextPath() %>/sample_lihu/images/123.gif" alt="loding_ico" /></div><!--loding-->
+		
 		<div id="footer"></div><!--footer-->
 	</div><!--wrap-->
 	
-<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jMenu.jquery.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function(){
     $("#jMenu").jMenu();
   })
+</script>
+<script>
+
+$(window).scroll(function () {
+    if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
+        $("#loding").slideDown(300).delay(300).slideUp(300);
+		var el, li, i;
+		el =document.querySelector("#wrapper ul");
+		$.ajax({
+			url:"/Befriend/getEduWebToJson?currentPage="+$("#divc").html(),
+			 dataType: "json", 
+					async:false,
+					success: function (data) {     
+						var val = data["edl"];//获取json中的 key
+					//	var vus = data["us"];
+					//alert(val[0].id);
+					
+						for (i=0; i<val.length; i++) {
+							
+							li = document.createElement('li');
+							li.innerHTML='<a href="<%=request.getContextPath()+"/" %>getWebCommments?merchantId='+val[i].merchantId+'" target="_parent"><div class="imgArea"><img  src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3><p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off"></span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix"><strong>'+val[i].city+'</strong><span>'+val[i].classFirst+'</span><div class="distance">'+val[i].distance+'m</div></div></div></a>';
+							el.appendChild(li, el.childNodes[0]);
+						}
+						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+					
+						$("#divc").html(parseInt($("#divc").html())+1);
+					
+					
+						},
+					
+		})
+		
+		
+		
+
+    }
+});	
 </script>
 </body>
 </html>
