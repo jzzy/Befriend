@@ -22,7 +22,7 @@
           $("img").lazyload({ 
           placeholder : "<%=request.getContextPath() %>/sample_lihu/images/listBanner.png",
                 effect: "fadeIn",
-                threshold : 20000
+                threshold : 200
                  
            });  
       });

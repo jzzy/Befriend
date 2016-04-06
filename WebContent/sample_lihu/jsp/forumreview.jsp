@@ -39,7 +39,7 @@ if(f==null){
 			<div class="topArea clearfix">
 				<h1>全国论坛讨论社区</h1>
 				<div class="prev">
-					<a href="sample_lihu/jsp/forum2.jsp"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
+					<a href="webForumApptype"><img src="sample_lihu/images/prev.png" alt="后退" /></a>
 				</div>
 				<div class="topTool">
 					<span><a  onclick="wrapcomm();">回复楼主</a></span>

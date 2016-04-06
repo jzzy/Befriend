@@ -43,7 +43,7 @@ if(fone==null||us==null){
           $("img").lazyload({ 
           placeholder : "<%=request.getContextPath() %>/sample_lihu/images/listBanner.png",
                 effect: "fadeIn",
-                threshold : 20000
+                threshold : 200
                  
            });  
       });
@@ -83,7 +83,7 @@ $(window).scroll(function () {
 								str+='</div>';
 								if(arr[i].img!=null){
 		
-									str+='<div class="imgList clearfix"><p><a  target="_parent"><img src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png" data-original="<%=request.getContextPath() %>'+arr[i].img+'" alt="sample" /></a></p></div>';
+									str+='<div class="imgList clearfix"><p><a  target="_parent"><img src="<%=request.getContextPath() %>'+arr[i].img+'"  alt="sample" /></a></p></div>';
 								}
 								
 								str+='<div class="info"><span><img src="<%=request.getContextPath() %>/sample_lihu/images/comment_ico.gif" alt="留言" />';

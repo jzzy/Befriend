@@ -194,13 +194,16 @@ return true;
   })
 </script>
 <script>
+
 $(window).scroll(function () {
     if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
         $("#loding").slideDown(300).delay(300).slideUp(300);
-		var el, li, i,str;
+		var el, li, i,ht,y,g;
 		el =document.querySelector("#wrapper ul");
+		//alert($("#divc").html());
 		$.ajax({
-			url:"/Befriend/getLikeEduWebToJson?value=<%=request.getAttribute("value")%>&currentPage="+$("#divc").html(),
+			
+			url:"/Befriend/getEduWebToJson?currentPage="+$("#divc").html(),
 			 dataType: "json", 
 					async:false,
 					success: function (data) {     
@@ -209,28 +212,41 @@ $(window).scroll(function () {
 					//alert(val[0].id);
 					
 						for (i=0; i<val.length; i++) {
-			li = document.createElement('li');
-			str='<a target="_parent" href="edu_detail.html" target="_parent"><div class="imgArea">';
-			str=str+'<img src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3>';
-			str=str+'<p class="rate clearfix"><span class="star_on"></span><span class="star_on"></span><span class="star_off">';
-			str=str+'</span><span class="star_off"></span><span class="star_off"></span></p><div class="clearfix">';
-			str=str+'<strong>'+val[i].city+'</strong><span>'+val[i].classFirst+'</span><div class="distance">'+val[i].distance+'m</div></div></div></a>';
-		//	alert(str);
-		
-			li.innerHTML=str;
-			el.appendChild(li, el.childNodes[0]);
-		}
-						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
-						
+							
+							li = document.createElement('li');
+							
+							
+							ht='<a href="<%=request.getContextPath()+"/" %>getWebCommments?merchantId='+val[i].merchantId+'" target="_parent"><div class="imgArea"><img  src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3>';
+							ht+='<p class="rate clearfix">';
+							g=0;
+							for(y=0;y<val[i].star;y++){
+								g++;
+								ht+='<span class="star_on"></span>';
+							}
+							for(y=0;y<5-g;y++){
+								ht+='<span class="star_off"></span>';
+							}
+
+							ht+='</p>';
+							ht+='<div class="clearfix"><strong>'+val[i].city+'</strong><span>'+val[i].classFirst+'</span><div class="distance">'+val[i].distance+'m</div></div></div></a>';
+							li.innerHTML=ht;
+							el.appendChild(li, el.childNodes[0]);
+						}
 						$("#divc").html(parseInt($("#divc").html())+1);
+					
+					
+					
 					
 					
 						},
 					
-		})	
+		})
 		
+		
+		
+
     }
-});
+});	
 </script>
 </form>
 </body>
