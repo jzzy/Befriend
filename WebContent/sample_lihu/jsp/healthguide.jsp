@@ -224,12 +224,19 @@
 						for (i=0; i<val.length; i++) {
 							li = document.createElement('li');
 							var te='<div class="infoArea"><p class="title"><img src="sample_lihu/images/hot_ico.gif" alt="hot" /><a style="color:#666;font-size: 18px;font-weight:bold;" href=<%=request.getContextPath()%>/webNewsId?id='+val[i].id+' target="_parent">'+val[i].title+'</a></p><p class="info"><span>';
-							te+='<img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;'+val[i].reviews+'</span><span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;'+val[i].collectnum+'</span></p></div><div class="imgArea"><p class="big_img"><a href=<%=request.getContextPath()%>/webNewsId?id='+val[i].id+' target="_parent"><img src="http://182.92.100.235/Befriend/'+val[i].img+'" alt="mediumImg" /></a></p></div>';
+							te+='<img src="sample_lihu/images/comment_ico.gif" alt="留言" />&nbsp;'+val[i].reviews+'</span><span><img src="sample_lihu/images/favor_ico.gif" alt="关注" />&nbsp;'+val[i].collectnum+'</span></p></div><div class="imgArea"><p class="big_img"><a href=<%=request.getContextPath()%>/webNewsId?id='+val[i].id+' target="_parent">';
+							te+='<img  src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png" data-original="http://182.92.100.235/Befriend/'+val[i].img+'" alt="mediumImg" /></a></p></div>';
 							li.innerHTML=te;
 							el.appendChild(li, el.childNodes[0]);
 						}
 						$("#divc").html(parseInt($("#divc").html())+1);
-						wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+						 $("img").lazyload({ 
+					          placeholder : "<%=request.getContextPath() %>/sample_lihu/images/listBanner.png",
+					                effect: "fadeIn",
+					                threshold : 200
+					                 
+					           });
+					//	wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
 						
 					
 					
@@ -239,6 +246,7 @@
 					
 					
 		})
+		   
 		
 		
 		

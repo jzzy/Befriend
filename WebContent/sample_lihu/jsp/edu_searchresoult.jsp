@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="sample_lihu/css/pullToRefresh.css"/>
 <script type="text/javascript" src="sample_lihu/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="sample_lihu/js/common.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/sample_lihu/js/jquery.lazyload.min.js"></script>
 <script type="text/javascript">
 function  checkvalue()
 {	 
@@ -132,7 +133,7 @@ return true;
 			%>
 					<li>
 					<a target="_parent" href="getWebCommments?merchantId=<%=lEduServices.get(i).getMerchantId()%>">
-							<div class="imgArea"><img src="<%="http://182.92.100.235/"+lEduServices.get(i).getPicture() %>" alt="" /></div>
+							<div class="imgArea"><img  src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png" data-original="<%="http://182.92.100.235/"+lEduServices.get(i).getPicture() %>" /></div>
 							<div class="infoArea">
 								<h3><%=lEduServices.get(i).getName() %></h3>
 								<p class="rate clearfix">
@@ -216,7 +217,7 @@ $(window).scroll(function () {
 							li = document.createElement('li');
 							
 							
-							ht='<a href="<%=request.getContextPath()+"/" %>getWebCommments?merchantId='+val[i].merchantId+'" target="_parent"><div class="imgArea"><img  src="http://182.92.100.235/'+val[i].picture+'" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3>';
+							ht='<a href="<%=request.getContextPath()+"/" %>getWebCommments?merchantId='+val[i].merchantId+'" target="_parent"><div class="imgArea"><img  src="<%=request.getContextPath() %>/sample_lihu/images/listBanner.png" data-original="http://182.92.100.235/'+val[i].picture+'"" alt="" /></div><div class="infoArea"><h3>'+val[i].name+'</h3>';
 							ht+='<p class="rate clearfix">';
 							g=0;
 							for(y=0;y<val[i].star;y++){
@@ -233,7 +234,12 @@ $(window).scroll(function () {
 							el.appendChild(li, el.childNodes[0]);
 						}
 						$("#divc").html(parseInt($("#divc").html())+1);
-					
+						  $("img").lazyload({ 
+							    placeholder : "<%=request.getContextPath() %>/sample_lihu/images/listBanner.png",
+							          effect: "fadeIn",
+							          threshold : 200
+							           
+							     });  
 					
 					
 					
@@ -247,6 +253,15 @@ $(window).scroll(function () {
 
     }
 });	
+$(function() {
+	 
+    $("img").lazyload({ 
+    placeholder : "<%=request.getContextPath() %>/sample_lihu/images/listBanner.png",
+          effect: "fadeIn",
+          threshold : 200
+           
+     });  
+});
 </script>
 </form>
 </body>
