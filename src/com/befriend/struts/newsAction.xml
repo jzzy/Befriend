@@ -4,7 +4,12 @@
 <struts>
 	<package name="News" extends="struts-default">
 
+	<!-- 统计新闻点击数 客户端用 -->
+		<action name="countNewsId" class="newsAction" method="countNewsId">
+		
 	
+		
+		</action>
 	<!-- 模糊查询新闻 -->
 		<action name="searchNews" class="newsAction" method="searchNews">
 		<result name="success">/SuperAdmin/AdminNews/news/News.jsp</result>

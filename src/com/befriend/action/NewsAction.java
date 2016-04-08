@@ -85,8 +85,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 
-	private HttpSession session = ServletActionContext.getRequest()
-			.getSession();
+	private HttpSession session = ServletActionContext.getRequest().getSession();
 
 	private String province = null;// 省级
 
@@ -193,8 +192,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			currentPage = 1;
 		}
 		bookl = ndao.paging(pageSize, currentPage, itype);
-		String result = "{\"bookl\":" + util.ToJson(bookl) + ",\"max\":" + max
-				+ ",\"currentPage\":" + currentPage + "}";
+		String result = "{\"bookl\":" + util.ToJson(bookl) + ",\"max\":" + max + ",\"currentPage\":" + currentPage
+				+ "}";
 		util.Out().print(result);
 
 	}
@@ -223,14 +222,10 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 	}
 
-	public void upBookxmls() throws IOException, InvalidFormatException,
-			ParseException {
+	public void upBookxmls() throws IOException, InvalidFormatException, ParseException {
 		Admin admin = (Admin) session.getAttribute("admin");
 		if (xlsxFile == null || admin == null) {
-			OpeFunction
-					.outjS(request.getContextPath()
-							+ "/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp",
-							"null");
+			OpeFunction.outjS(request.getContextPath() + "/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "null");
 			return;
 		}
 		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(xlsxFile);
@@ -250,19 +245,13 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				if (xssfRow.getCell(0) != null) {
 
 					try {
-						title = xssfRow.getCell(0) == null ? null : xssfRow
-								.getCell(0).toString();
-						author = xssfRow.getCell(1) == null ? null : xssfRow
-								.getCell(1).toString();
-						house = xssfRow.getCell(2) == null ? null : xssfRow
-								.getCell(2).toString();
-						summary = xssfRow.getCell(3) == null ? null : xssfRow
-								.getCell(3).toString();
-						review = xssfRow.getCell(4) == null ? null : xssfRow
-								.getCell(4).toString();
+						title = xssfRow.getCell(0) == null ? null : xssfRow.getCell(0).toString();
+						author = xssfRow.getCell(1) == null ? null : xssfRow.getCell(1).toString();
+						house = xssfRow.getCell(2) == null ? null : xssfRow.getCell(2).toString();
+						summary = xssfRow.getCell(3) == null ? null : xssfRow.getCell(3).toString();
+						review = xssfRow.getCell(4) == null ? null : xssfRow.getCell(4).toString();
 						double bou = Double
-								.parseDouble(xssfRow.getCell(5) == null ? null
-										: xssfRow.getCell(5).toString());
+								.parseDouble(xssfRow.getCell(5) == null ? null : xssfRow.getCell(5).toString());
 						itype = (int) bou;
 
 					} catch (Exception e) {
@@ -291,16 +280,14 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			}
 		}
 
-		OpeFunction.outjS(request.getContextPath()
-				+ "/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "ok");
+		OpeFunction.outjS(request.getContextPath() + "/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "ok");
 
 	}
 
-	public String upBook() throws IOException, InvalidFormatException,
-			ParseException {
+	public String upBook() throws IOException, InvalidFormatException, ParseException {
 		Admin admin = (Admin) session.getAttribute("admin");
-		if (admin != null && title != null && author != null && summary != null
-				&& review != null && itype > 0 && house != null) {
+		if (admin != null && title != null && author != null && summary != null && review != null && itype > 0
+				&& house != null) {
 			book.setTitle(title);
 			book.setAuthor(author);
 			book.setSummary(summary);
@@ -312,8 +299,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			ndao.Save(book);
 			return Action.SUCCESS;
 		} else {
-			OpeFunction.outjS(request.getContextPath()
-					+ "/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "no");
+			OpeFunction.outjS(request.getContextPath() + "/SuperAdmin/AdminNews/kindeditor/jsp/upBook.jsp", "no");
 			return null;
 		}
 
@@ -366,8 +352,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			currentPage = a;
 		}
 
-		nl = ndao.Hotarea(province, pageSize, currentPage,
-				OpeFunction.getNowTime());
+		nl = ndao.Hotarea(province, pageSize, currentPage, OpeFunction.getNowTime());
 		System.out.println(" -有" + a + "页");
 		System.out.println("每页多少条-" + pageSize);
 		System.out.println("第-" + currentPage + "-页");
@@ -392,8 +377,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 			if (u == null) {
 
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/sample_lihu/htm/login.html");
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 				return null;
 			}
 
@@ -414,8 +399,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				}
 
 				if (b) {
-					System.out.println("我评论过的新闻  用户名和新闻id" + username + "+"
-							+ r1.getNewsid() + "时间是：" + r1.getTime());
+					System.out.println("我评论过的新闻  用户名和新闻id" + username + "+" + r1.getNewsid() + "时间是：" + r1.getTime());
 					rl.add(rdao.unid(username, r1.getNewsid()).get(0));
 					nl.add(ndao.byid(r1.getNewsid()));
 				}
@@ -441,8 +425,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 		if (u == null) {
 
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/sample_lihu/htm/login.html");
+			((HttpServletResponse) util.response())
+					.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 			return null;
 		}
 		userid = u.getId();
@@ -475,8 +459,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 			if (u == null) {
 
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/sample_lihu/htm/login.html");
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 				System.out.println("你还没有登入!");
 				return;
 			}
@@ -496,11 +480,10 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				System.out.println("newsid是" + n.getId());
 				System.out.println("1该文章被收藏" + n.getCollectnum());
 				// 收藏数
-				n.setCollectnum((n.getCollectnum() == null ? 0 : n
-						.getCollectnum()) + 1);
+				n.setCollectnum((n.getCollectnum() == null ? 0 : n.getCollectnum()) + 1);
 				// 收藏数*2+点击数
-				n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum())
-						* 2 + (n.getHits() == null ? 0 : n.getHits()));
+				n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum()) * 2
+						+ (n.getHits() == null ? 0 : n.getHits()));
 
 				ndao.Upnews(n);
 				util.Out().print(true);
@@ -526,8 +509,8 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 
 			if (u == null) {
 
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/sample_lihu/htm/login.html");
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 				System.out.println("你还没登入!");
 				return;
 			}
@@ -565,13 +548,13 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			System.out.println("newsid是" + n.getId());
 			System.out.println("该文章被评论" + a);
 			n.setReviews(a);
-			id=newsid;
+			id = newsid;
 			ndao.Upnews(n);
 			System.out.println("web 通过id查询新闻" + id);
 			if (id <= 0) {
 				util.Out().print("没有获取到新闻id");
 				System.out.println("没有获取到新闻id");
-				return ;
+				return;
 			}
 			// 获取评论信息
 			rl = rdao.Alln(id);
@@ -596,18 +579,16 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				// 点击数+收藏数 +1
 				n.setCah((n.getCah() == null ? 0 : n.getCah()) + 1);
 
-				System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah()
-						+ "收藏数:" + n.getCollectnum());
+				System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah() + "收藏数:" + n.getCollectnum());
 
 				ndao.Upnews(n);
 			}
 			request.setAttribute("n", n);
-			String result = "{\"ul\":" + util.ToJson(ul) + ",\"rl\":"
-					+ util.ToJson(rl) + "}";
+			String result = "{\"ul\":" + util.ToJson(ul) + ",\"rl\":" + util.ToJson(rl) + "}";
 
 			OpeFunction.Out().print(result);
-//			((HttpServletResponse) util.response()).sendRedirect(request
-//					.getContextPath() + "/webNewsIdTojson?id=" + newsid + "");
+			// ((HttpServletResponse) util.response()).sendRedirect(request
+			// .getContextPath() + "/webNewsIdTojson?id=" + newsid + "");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -673,8 +654,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (currentPage <= 0) {
 				currentPage = 1;
 			}
-			nl = ndao.Hotarea(province, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.Hotarea(province, pageSize, currentPage, OpeFunction.getNowTime());
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("type", "bd");
 			request.setAttribute("nl", nl);
@@ -702,8 +682,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 			if (currentPage <= 0) {
 				currentPage = 1;
 			}
-			nl = ndao.Hotarea(province, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.Hotarea(province, pageSize, currentPage, OpeFunction.getNowTime());
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("tp", tp);
 			request.setAttribute("nl", nl);
@@ -736,8 +715,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 				currentPage = 1;
 			}
 
-			nl = ndao.Hotarea(province, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.Hotarea(province, pageSize, currentPage, OpeFunction.getNowTime());
 
 			// if (nl.size() == 0) {
 			// a = ndao.area("北京", 0).size();
@@ -764,7 +742,7 @@ public class NewsAction implements ServletRequestAware, ServletResponseAware {
 	 * @throws IOException
 	 */
 	public void webHotareafToJson() throws IOException {
-System.out.println("进入webHotareafToJson");
+		System.out.println("进入webHotareafToJson");
 		User u = (User) session.getAttribute("u");
 		// if (province!=null) {
 		// session.setAttribute("province",province);
@@ -816,8 +794,7 @@ System.out.println("进入webHotareafToJson");
 			if (currentPage <= 0) {
 				currentPage = 1;
 			}
-			nl = ndao.Hotarea(province, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.Hotarea(province, pageSize, currentPage, OpeFunction.getNowTime());
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("type", "bd");
 			request.setAttribute("nl", nl);
@@ -828,8 +805,7 @@ System.out.println("进入webHotareafToJson");
 			System.out.println("每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
 			System.out.println("用户来自1：" + province);
-			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a
-					+ ",\"currentPage\":" + currentPage + "}";
+			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a + ",\"currentPage\":" + currentPage + "}";
 			System.out.println(result);
 			util.Out().print(result);
 			return;
@@ -848,8 +824,7 @@ System.out.println("进入webHotareafToJson");
 			if (currentPage <= 0) {
 				currentPage = 1;
 			}
-			nl = ndao.Hotarea(province, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.Hotarea(province, pageSize, currentPage, OpeFunction.getNowTime());
 			request.setAttribute("currentPage", currentPage);
 
 			request.setAttribute("nl", nl);
@@ -860,8 +835,7 @@ System.out.println("进入webHotareafToJson");
 			System.out.println("每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
 			System.out.println("用户来自2：" + province);
-			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a
-					+ ",\"currentPage\":" + currentPage + "}";
+			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a + ",\"currentPage\":" + currentPage + "}";
 			System.out.println(result);
 			util.Out().print(result);
 			return;
@@ -885,8 +859,7 @@ System.out.println("进入webHotareafToJson");
 				currentPage = 1;
 			}
 
-			nl = ndao.Hotarea(province, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.Hotarea(province, pageSize, currentPage, OpeFunction.getNowTime());
 
 			// if (nl.size() == 0) {
 			// a = ndao.area("北京", 0).size();
@@ -903,8 +876,7 @@ System.out.println("进入webHotareafToJson");
 
 		request.setAttribute("nl", nl);
 		request.setAttribute("a", a);
-		String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a
-				+ ",\"currentPage\":" + currentPage + "}";
+		String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a + ",\"currentPage\":" + currentPage + "}";
 		System.out.println(result);
 		util.Out().print(result);
 	}
@@ -947,6 +919,7 @@ System.out.println("进入webHotareafToJson");
 		}
 		return Action.SUCCESS;
 	}
+
 	/**
 	 * 全国最热新闻 分页查询
 	 */
@@ -973,16 +946,14 @@ System.out.println("进入webHotareafToJson");
 
 			nl = ndao.Hottest(pageSize, currentPage, OpeFunction.getNowTime());
 
-		
-			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a
-					+ ",\"currentPage\":" + currentPage + "}";
+			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a + ",\"currentPage\":" + currentPage + "}";
 			System.out.println(result);
 			util.Out().print(result);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
 
 	/**
@@ -1032,8 +1003,7 @@ System.out.println("进入webHotareafToJson");
 			System.out.println("每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
 
-			nl = ndao.types(type, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.types(type, pageSize, currentPage, OpeFunction.getNowTime());
 
 			request.setAttribute("currentPage", currentPage);
 
@@ -1050,6 +1020,7 @@ System.out.println("进入webHotareafToJson");
 		return Action.SUCCESS;
 
 	}
+
 	/**
 	 * web分页 查询 八大类type
 	 * 
@@ -1058,7 +1029,7 @@ System.out.println("进入webHotareafToJson");
 	public String webSbType() throws IOException {
 		request.setAttribute("tp", tp);
 		return Action.SUCCESS;
-		
+
 	}
 
 	/**
@@ -1112,17 +1083,14 @@ System.out.println("进入webHotareafToJson");
 				break;
 			case 9:
 				type = "社会广角";
-				//全国最热webHottest
-				
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/webHottest?tp=9");
+				// 全国最热webHottest
+
+				((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webHottest?tp=9");
 				return null;
 			case 10:
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/webHotareaf?tp=10");
+				((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/webHotareaf?tp=10");
 				return null;
-				//本地
-				
+			// 本地
 
 			default:
 				System.out.println("请输入正确代码tp");
@@ -1148,14 +1116,11 @@ System.out.println("进入webHotareafToJson");
 
 			System.out.println(type);
 
-			nl = ndao.type(0, type, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.type(0, type, pageSize, currentPage, OpeFunction.getNowTime());
 
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("nl", nl);
 			request.setAttribute("type", type);
-
-			
 
 			request.setAttribute("tp", tp);
 
@@ -1165,6 +1130,7 @@ System.out.println("进入webHotareafToJson");
 		}
 		return Action.SUCCESS;
 	}
+
 	/**
 	 * web分页 查询 八大类type
 	 * 
@@ -1221,7 +1187,7 @@ System.out.println("进入webHotareafToJson");
 			default:
 				System.out.println("请输入正确代码tp");
 				type = "No";
-				return ;
+				return;
 			}
 			int a = 0;
 
@@ -1242,26 +1208,26 @@ System.out.println("进入webHotareafToJson");
 
 			System.out.println(type);
 
-			nl = ndao.type(0, type, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.type(0, type, pageSize, currentPage, OpeFunction.getNowTime());
 
-		//	request.setAttribute("a", a);
-		
-			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a
-					+ ",\"currentPage\":" + currentPage + "}";
+			// request.setAttribute("a", a);
+
+			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a + ",\"currentPage\":" + currentPage + "}";
 			System.out.println(result);
 			util.Out().print(result);
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
+
 	public String webNewsIdcomm() throws IOException, ParseException {
 		n = ndao.byid(id);
 		request.setAttribute("n", n);
 		return Action.SUCCESS;
 	}
+
 	/**
 	 * web 通过id查询新闻
 	 * 
@@ -1298,8 +1264,7 @@ System.out.println("进入webHotareafToJson");
 			// 点击数+收藏数 +1
 			n.setCah((n.getCah() == null ? 0 : n.getCah()) + 1);
 
-			System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah()
-					+ "收藏数:" + n.getCollectnum());
+			System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah() + "收藏数:" + n.getCollectnum());
 
 			ndao.Upnews(n);
 		}
@@ -1307,6 +1272,36 @@ System.out.println("进入webHotareafToJson");
 
 		return Action.SUCCESS;
 	}
+
+	/**
+	 * web 通过id查询新闻
+	 * 
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public void countNewsId() throws IOException, ParseException {
+
+		try {
+
+			n = ndao.byid(id);
+
+			// 点击数+1
+			n.setHits(n.getHits() == null ? 0 : n.getHits() + 1);
+
+			// 点击数+收藏数 +1
+			n.setCah((n.getCah() == null ? 0 : n.getCah()) + 1);
+
+			System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah() + "收藏数:" + n.getCollectnum());
+
+			ndao.Upnews(n);
+			OpeFunction.Out().print(true);
+		} catch (Exception e) {
+			// TODO: 错误时返回 false
+			OpeFunction.Out().print(false);
+		}
+
+	}
+
 	/**
 	 * web 通过id查询新闻
 	 * 
@@ -1318,7 +1313,7 @@ System.out.println("进入webHotareafToJson");
 		if (id <= 0) {
 			util.Out().print("没有获取到新闻id");
 			System.out.println("没有获取到新闻id");
-			return ;
+			return;
 		}
 		// 获取评论信息
 		rl = rdao.Alln(id);
@@ -1343,14 +1338,12 @@ System.out.println("进入webHotareafToJson");
 			// 点击数+收藏数 +1
 			n.setCah((n.getCah() == null ? 0 : n.getCah()) + 1);
 
-			System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah()
-					+ "收藏数:" + n.getCollectnum());
+			System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah() + "收藏数:" + n.getCollectnum());
 
 			ndao.Upnews(n);
 		}
 		request.setAttribute("n", n);
-		String result = "{\"ul\":" + util.ToJson(ul) + ",\"rl\":"
-				+ util.ToJson(rl) + "}";
+		String result = "{\"ul\":" + util.ToJson(ul) + ",\"rl\":" + util.ToJson(rl) + "}";
 
 		OpeFunction.Out().print(result);
 	}
@@ -1405,8 +1398,7 @@ System.out.println("进入webHotareafToJson");
 		} else {
 			Object pro = session.getAttribute("province");
 			if (pro == null) {
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/weixin/byip.html");
+				((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/weixin/byip.html");
 			} else {
 				province = pro.toString();
 			}
@@ -1435,8 +1427,7 @@ System.out.println("进入webHotareafToJson");
 		} else {
 			Object pro = session.getAttribute("province");
 			if (pro == null) {
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/weixin/byip.html");
+				((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/weixin/byip.html");
 			} else {
 				province = pro.toString();
 			}
@@ -1449,16 +1440,14 @@ System.out.println("进入webHotareafToJson");
 		} else {
 			Max = all / pageSize + 1;
 		}
-		System.out.println("****" + province + nl.size() + "新闻 Max:" + Max
-				+ "currentPage:" + currentPage);
+		System.out.println("****" + province + nl.size() + "新闻 Max:" + Max + "currentPage:" + currentPage);
 		if (currentPage <= Max) {
 			nl = ndao.Hotarea(province, pageSize, currentPage, time);
 
 			request.setAttribute("nl", nl);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("province", province);
-			System.out.println("****" + province + nl.size() + "新闻 Max:" + Max
-					+ "currentPage:" + currentPage);
+			System.out.println("****" + province + nl.size() + "新闻 Max:" + Max + "currentPage:" + currentPage);
 
 		} else {
 			System.out.println("下一页没有新闻了");
@@ -1521,10 +1510,8 @@ System.out.println("进入webHotareafToJson");
 		System.out.println(" -有" + a + "页");
 		System.out.println("每页多少条-" + pageSize);
 		System.out.println("第-" + currentPage + "-页");
-		nl = ndao
-				.Hotarea(area, pageSize, currentPage, OpeFunction.getNowTime());
-		String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a
-				+ ",\"currentPage\":" + currentPage + "}";
+		nl = ndao.Hotarea(area, pageSize, currentPage, OpeFunction.getNowTime());
+		String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a + ",\"currentPage\":" + currentPage + "}";
 
 		if (nl.size() > 0) {
 			util.Out().print(result);
@@ -1564,8 +1551,7 @@ System.out.println("进入webHotareafToJson");
 		System.out.println("每页多少条-" + pageSize);
 		System.out.println("第-" + currentPage + "-页");
 		nl = ndao.cah(pageSize, currentPage);
-		String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a
-				+ ",\"currentPage\":" + currentPage + "}";
+		String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a + ",\"currentPage\":" + currentPage + "}";
 
 		if (nl.size() > 0) {
 			util.Out().print(result);
@@ -1645,11 +1631,9 @@ System.out.println("进入webHotareafToJson");
 			System.out.println(type + " -有" + a + "页");
 			System.out.println("每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
-			nl = ndao.type(0, type, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.type(0, type, pageSize, currentPage, OpeFunction.getNowTime());
 			System.out.println(type);
-			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a
-					+ ",\"currentPage\":" + currentPage + "}";
+			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a + ",\"currentPage\":" + currentPage + "}";
 
 			if (nl.size() > 0) {
 				util.Out().print(result);
@@ -1690,21 +1674,18 @@ System.out.println("进入webHotareafToJson");
 			}
 			boolean b = true;
 			if (n.getImg() != null) {
-				File file = new File(ServletActionContext.getServletContext()
-						.getRealPath(n.getImg()));
+				File file = new File(ServletActionContext.getServletContext().getRealPath(n.getImg()));
 				b = file.delete();
 				System.out.println("新闻小图删除是否成功？" + b);
 			}
 			if (n.getImgmax() != null) {
-				File filemax = new File(ServletActionContext
-						.getServletContext().getRealPath(n.getImgmax()));
+				File filemax = new File(ServletActionContext.getServletContext().getRealPath(n.getImgmax()));
 				b = filemax.delete();
 				System.out.println("新闻大图删除是否成功？" + b);
 			}
 			ndao.rm(n);
 
-			((HttpServletResponse) util.response()).sendRedirect(request
-					.getContextPath() + "/Newsget");
+			((HttpServletResponse) util.response()).sendRedirect(request.getContextPath() + "/Newsget");
 		} else {
 			util.Out().print("删除失败 没有要删除的新闻！");
 
@@ -1833,13 +1814,11 @@ System.out.println("进入webHotareafToJson");
 
 			List<News> n9 = new ArrayList<News>();
 			n9 = ndao.type(1, "社会广角", OpeFunction.getNowTime());
-			System.out.println("全国最新有-" + nt.size() + ",全国最热-" + nh.size()
-					+ "本地新闻-" + n4.size() + "轻松驿站" + n5.size() + "健康导航"
-					+ n8.size() + "社会广角" + n9.size());
-			String result = "{\"Hottime\":" + util.ToJson(nt) + ",\"Hottest\":"
-					+ util.ToJson(nh) + ",\"Hotarea\":" + util.ToJson(n4)
-					+ ",\"typeqs\":" + util.ToJson(n5) + ",\"typejk\":"
-					+ util.ToJson(n8) + ",\"typegj\":" + util.ToJson(n9) + "}";
+			System.out.println("全国最新有-" + nt.size() + ",全国最热-" + nh.size() + "本地新闻-" + n4.size() + "轻松驿站" + n5.size()
+					+ "健康导航" + n8.size() + "社会广角" + n9.size());
+			String result = "{\"Hottime\":" + util.ToJson(nt) + ",\"Hottest\":" + util.ToJson(nh) + ",\"Hotarea\":"
+					+ util.ToJson(n4) + ",\"typeqs\":" + util.ToJson(n5) + ",\"typejk\":" + util.ToJson(n8)
+					+ ",\"typegj\":" + util.ToJson(n9) + "}";
 			util.Out().print(result);
 
 		} catch (Exception e) {
@@ -1861,7 +1840,7 @@ System.out.println("进入webHotareafToJson");
 				session.setAttribute("province", province);
 			}
 
-			String pro = session.getAttribute("province")==null?null:session.getAttribute("province").toString();
+			String pro = session.getAttribute("province") == null ? null : session.getAttribute("province").toString();
 			System.out.println("百度定位 :" + pro);
 			if (pro != null) {
 				area = pro;
@@ -1871,21 +1850,20 @@ System.out.println("进入webHotareafToJson");
 
 				System.out.println("获取到用户信息了" + u.getAddress());
 				if (u.getAddress() != null) {
-					//area = u.getAddress();
-				//	session.setAttribute("province", u.getAddress());
+					// area = u.getAddress();
+					// session.setAttribute("province", u.getAddress());
 				}
-				if (area == null||pro.equals("null")) {
+				if (area == null || pro.equals("null")) {
 					((HttpServletResponse) util.response())
-							.sendRedirect(request.getContextPath()
-									+ "/SimulationApp/byIp.jsp");
-					
+							.sendRedirect(request.getContextPath() + "/SimulationApp/byIp.jsp");
+
 				}
 
-			} else if (OpeFunction.isEmpty(pro)||pro.equals("null")) {
+			} else if (OpeFunction.isEmpty(pro) || pro.equals("null")) {
 				System.out.println("12222222222222222222");
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/SimulationApp/byIp.jsp");
-				
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/SimulationApp/byIp.jsp");
+
 			}
 
 			System.out.println("时间是" + util.getNowTime());
@@ -1899,8 +1877,7 @@ System.out.println("进入webHotareafToJson");
 			nt = ndao.Hottime(num, OpeFunction.getNowTime());
 
 			for (int i = 0; i < nt.size(); i++) {
-				System.out.println("新闻时间" + nt.get(i).getTime() + "现在时间"
-						+ OpeFunction.getNowTime());
+				System.out.println("新闻时间" + nt.get(i).getTime() + "现在时间" + OpeFunction.getNowTime());
 			}
 			List<News> nh = new ArrayList<News>();
 			num = 3;
@@ -1950,8 +1927,7 @@ System.out.println("进入webHotareafToJson");
 			System.out.println("省：" + area);
 			System.out.println("市：" + areas);
 
-			System.out.println("全国最新有-" + nt.size() + ",全国最热-" + nh.size()
-					+ "本地新闻-" + n4.size());
+			System.out.println("全国最新有-" + nt.size() + ",全国最热-" + nh.size() + "本地新闻-" + n4.size());
 			ndao.type(1, "健康导航", OpeFunction.getNowTime());
 			ndao.type(1, "轻松驿站", OpeFunction.getNowTime());
 			List<News> n5 = new ArrayList<News>();
@@ -1960,9 +1936,8 @@ System.out.println("进入webHotareafToJson");
 			List<News> n8 = new ArrayList<News>();
 			n8 = ndao.type(1, "健康导航", OpeFunction.getNowTime());
 
-			System.out.println("时间排序" + nt.size() + "热门新闻" + nh.size() + "本地新闻"
-					+ n4.size() + "轻松导航是1--" + n5.get(0).getType()
-					+ "--健康导航是1---" + n8.get(0).getType());
+			System.out.println("时间排序" + nt.size() + "热门新闻" + nh.size() + "本地新闻" + n4.size() + "轻松导航是1--"
+					+ n5.get(0).getType() + "--健康导航是1---" + n8.get(0).getType());
 
 			request.setAttribute("Hottime", nt);
 
@@ -2072,14 +2047,12 @@ System.out.println("进入webHotareafToJson");
 			System.out.println("省：" + area);
 			System.out.println("市：" + areas);
 
-			System.out.println("全国最新有-" + nt.size() + ",全国最热-" + nh.size()
-					+ "本地新闻-" + n4.size());
+			System.out.println("全国最新有-" + nt.size() + ",全国最热-" + nh.size() + "本地新闻-" + n4.size());
 			// 1是全国最热
-			String result = "{\"Hottime\":" + util.ToJson(nt) + ",\"Hottest\":"
-					+ util.ToJson(nh) + ",\"Hotarea\":" + util.ToJson(n4) + "}";
+			String result = "{\"Hottime\":" + util.ToJson(nt) + ",\"Hottest\":" + util.ToJson(nh) + ",\"Hotarea\":"
+					+ util.ToJson(n4) + "}";
 			util.Out().print(result);
-			System.out.println("时间排序" + nt.size() + "热门新闻" + nh.size() + "本地新闻"
-					+ n4.size());
+			System.out.println("时间排序" + nt.size() + "热门新闻" + nh.size() + "本地新闻" + n4.size());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			// TODO: handle exception
@@ -2230,11 +2203,9 @@ System.out.println("进入webHotareafToJson");
 			System.out.println(type + " -有" + a + "页");
 			System.out.println("每页多少条-" + pageSize);
 			System.out.println("第-" + currentPage + "-页");
-			nl = ndao.types(type, pageSize, currentPage,
-					OpeFunction.getNowTime());
+			nl = ndao.types(type, pageSize, currentPage, OpeFunction.getNowTime());
 			System.out.println(type);
-			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a
-					+ ",\"currentPage\":" + currentPage + "}";
+			String result = "{\"nl\":" + util.ToJson(nl) + ",\"cpe\":" + a + ",\"currentPage\":" + currentPage + "}";
 
 			if (nl.size() > 0) {
 				util.Out().print(result);
@@ -2288,16 +2259,13 @@ System.out.println("进入webHotareafToJson");
 				return null;
 			}
 
-			BufferedImage sourceImg = ImageIO
-					.read(new FileInputStream(imgFile));
-			BufferedImage sourceImgmax = ImageIO.read(new FileInputStream(
-					imgFilemax));
+			BufferedImage sourceImg = ImageIO.read(new FileInputStream(imgFile));
+			BufferedImage sourceImgmax = ImageIO.read(new FileInputStream(imgFilemax));
 
 			float fimg = util.fileSize(imgFile);
 			float fimgmax = util.fileSize(imgFilemax);
 
-			if (sourceImgmax.getWidth() != 720
-					|| sourceImgmax.getHeight() != 360) {
+			if (sourceImgmax.getWidth() != 720 || sourceImgmax.getHeight() != 360) {
 				util.Out().print("大图尺寸为 720*360 请您重新检查下！请您返回重试！");
 				return null;
 			}
@@ -2317,10 +2285,8 @@ System.out.println("进入webHotareafToJson");
 			System.out.println("宽" + sourceImg.getWidth());
 			System.out.println("高" + sourceImg.getHeight());
 			System.out.println("是否是专家 0不是 1是 :" + expert);
-			String imgmax = util.fileToServer(savePath, imgFilemax,
-					imgFilemaxFileName, imgFilemaxContentType, true);
-			String img = util.fileToServer(savePath, imgFile, imgFileFileName,
-					imgFileContentType, true);
+			String imgmax = util.fileToServer(savePath, imgFilemax, imgFilemaxFileName, imgFilemaxContentType, true);
+			String img = util.fileToServer(savePath, imgFile, imgFileFileName, imgFileContentType, true);
 			News n = new News();
 			n.setTitle(title);
 			n.setSummary(summary);
@@ -2458,11 +2424,10 @@ System.out.println("进入webHotareafToJson");
 			System.out.println("省：" + area);
 			System.out.println("市：" + areas);
 
-			System.out.println("全国最新有-" + nt.size() + ",全国最热-" + nn.size()
-					+ "本地新闻-" + n4.size());
+			System.out.println("全国最新有-" + nt.size() + ",全国最热-" + nn.size() + "本地新闻-" + n4.size());
 
-			String result = "{\"Hottime\":" + util.ToJson(nt) + ",\"Hottest\":"
-					+ util.ToJson(nn) + ",\"Hotarea\":" + util.ToJson(n4) + "}";
+			String result = "{\"Hottime\":" + util.ToJson(nt) + ",\"Hottest\":" + util.ToJson(nn) + ",\"Hotarea\":"
+					+ util.ToJson(n4) + "}";
 			util.Out().print(result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -2495,11 +2460,10 @@ System.out.println("进入webHotareafToJson");
 
 				n = ndao.byid(newsid);
 				// 收藏数
-				n.setCollectnum((n.getCollectnum() == null ? 0 : n
-						.getCollectnum()) + 1);
+				n.setCollectnum((n.getCollectnum() == null ? 0 : n.getCollectnum()) + 1);
 				// 收藏数*2+点击数
-				n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum())
-						* 2 + (n.getHits() == null ? 0 : n.getHits()));
+				n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum()) * 2
+						+ (n.getHits() == null ? 0 : n.getHits()));
 				ndao.Upnews(n);
 				System.out.println("收藏成功!");
 				util.Out().print(true);
@@ -2541,11 +2505,9 @@ System.out.println("进入webHotareafToJson");
 		// 收藏数
 		n.setCollectnum((n.getCollectnum() == null ? 0 : n.getCollectnum()) + 1);
 		// 收藏数*2+点击数
-		n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum()) * 2
-				+ (n.getHits() == null ? 0 : n.getHits()));
+		n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum()) * 2 + (n.getHits() == null ? 0 : n.getHits()));
 
-		System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah()
-				+ "收藏数:" + n.getCollectnum());
+		System.out.println("点击数:" + n.getHits() + "收藏数+点击数:" + n.getCah() + "收藏数:" + n.getCollectnum());
 
 		ndao.Upnews(n);
 		request.setAttribute("n", n);
@@ -2571,11 +2533,10 @@ System.out.println("进入webHotareafToJson");
 				cdao.remove(cdao.unid(userid, newsid));
 				n = ndao.byid(newsid);
 				// 收藏数
-				n.setCollectnum((n.getCollectnum() == null ? 0 : n
-						.getCollectnum()) - 1);
+				n.setCollectnum((n.getCollectnum() == null ? 0 : n.getCollectnum()) - 1);
 				// 收藏数*2+点击数
-				n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum())
-						* 2 + (n.getHits() == null ? 0 : n.getHits()));
+				n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum()) * 2
+						+ (n.getHits() == null ? 0 : n.getHits()));
 				ndao.Upnews(n);
 				util.Out().print(true);
 			} else {
@@ -2597,8 +2558,8 @@ System.out.println("进入webHotareafToJson");
 			if (u == null) {
 
 				System.out.println("请重新登入!");
-				((HttpServletResponse) util.response()).sendRedirect(request
-						.getContextPath() + "/sample_lihu/htm/login.html");
+				((HttpServletResponse) util.response())
+						.sendRedirect(request.getContextPath() + "/sample_lihu/htm/login.html");
 
 				return;
 			}
@@ -2615,11 +2576,10 @@ System.out.println("进入webHotareafToJson");
 					cdao.remove(cdao.unid(userid, newsid));
 					n = ndao.byid(newsid);
 					// 收藏数
-					n.setCollectnum((n.getCollectnum() == null ? 0 : n
-							.getCollectnum()) - 1);
+					n.setCollectnum((n.getCollectnum() == null ? 0 : n.getCollectnum()) - 1);
 					// 收藏数*2+点击数
-					n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum())
-							* 2 + (n.getHits() == null ? 0 : n.getHits()));
+					n.setCah((n.getCollectnum() == null ? 0 : n.getCollectnum()) * 2
+							+ (n.getHits() == null ? 0 : n.getHits()));
 					ndao.Upnews(n);
 					util.Out().print(true);
 				} else {
@@ -2666,8 +2626,7 @@ System.out.println("进入webHotareafToJson");
 				}
 
 			}
-			System.out.println("用户" + u.getUsername() + "收藏了" + nl.size()
-					+ "个文章");
+			System.out.println("用户" + u.getUsername() + "收藏了" + nl.size() + "个文章");
 			if (nl.size() == 0) {
 				util.Out().print("null");
 			} else {
@@ -2811,14 +2770,12 @@ System.out.println("进入webHotareafToJson");
 		if (rl.size() > 0) {
 			System.out.println("有评论");
 			for (int i = 0; i < rl.size(); i++) {
-				User u1 = userdao.byUsernameAccnumnoPhone(rl.get(i)
-						.getUsername());
+				User u1 = userdao.byUsernameAccnumnoPhone(rl.get(i).getUsername());
 
 				ul.add(u1);
 			}
 			System.out.println("有评论");
-			String result = "{\"rl\":" + util.ToJson(rl) + ",\"ul\":"
-					+ util.ToJson(ul) + "}";
+			String result = "{\"rl\":" + util.ToJson(rl) + ",\"ul\":" + util.ToJson(ul) + "}";
 			util.Out().print(result);
 
 		} else {
@@ -2852,8 +2809,7 @@ System.out.println("进入webHotareafToJson");
 				}
 
 				if (b) {
-					System.out.println("我评论过的新闻  用户名和新闻id" + username + "+"
-							+ r1.getNewsid() + "时间是：" + r1.getTime());
+					System.out.println("我评论过的新闻  用户名和新闻id" + username + "+" + r1.getNewsid() + "时间是：" + r1.getTime());
 					rl.add(rdao.unid(username, r1.getNewsid()).get(0));
 					nl.add(ndao.byid(r1.getNewsid()));
 
@@ -2861,8 +2817,7 @@ System.out.println("进入webHotareafToJson");
 				}
 
 			}
-			String result = "{\"news\":" + util.ToJson(nl) + ",\"review\":"
-					+ util.ToJson(rl) + "}";
+			String result = "{\"news\":" + util.ToJson(nl) + ",\"review\":" + util.ToJson(rl) + "}";
 			if (nl.size() > 0 && rl.size() > 0) {
 				util.Out().print(result);
 
@@ -2892,8 +2847,7 @@ System.out.println("进入webHotareafToJson");
 		}
 	}
 
-	public NewsAction(UserDAO userdao, NewsDAO ndao, CollectDAO cdao,
-			ReviewDAO rdao) {
+	public NewsAction(UserDAO userdao, NewsDAO ndao, CollectDAO cdao, ReviewDAO rdao) {
 		super();
 		this.userdao = userdao;
 		this.ndao = ndao;
