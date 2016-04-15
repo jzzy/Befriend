@@ -31,6 +31,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -771,6 +773,61 @@ public class OpeFunction {
 	}
 
 	public static void main(String[] args) throws Exception {
+		
+		
+		
+		
+	
+			
+		Hashtable hash=new Hashtable(2,(float)0.8);
+	//创建了一个哈希表的对象hash，初始容量为2，装载因子为0.8
+
+	hash.put("Jiangsu","Nanjing");
+	//将字符串对象“Jiangsu”给定一关键字“Nanjing”,并将它加入hash
+	hash.put("Beijing","Beijing");
+	hash.put("Zhejiang","Hangzhou");
+
+	System.out.println("The hashtable hash1 is: "+hash);
+	System.out.println("The size of this hash table is "+hash.size());
+	//打印hash的内容和大小
+
+	Enumeration enum1=hash.elements();
+	System.out.print("The element of hash is: ");
+	while(enum1.hasMoreElements())
+	System.out.print(enum1.nextElement()+" ");
+	System.out.println();
+	//依次打印hash中的内容
+	if(hash.containsKey("Jiangsu"))
+	System.out.println("The capatial of Jiangsu is "+hash.get("Jiangsu"));
+	hash.remove("Beijing");
+	//删除关键字Beijing对应对象
+	System.out.println("The hashtable hash2 is: "+hash);
+	System.out.println("The size of this hash table is "+hash.size());
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		// testOne();
 		// imgNarrow();
 		// File file=new
