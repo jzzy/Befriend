@@ -15,7 +15,7 @@ int cpe=(Integer)request.getAttribute("cpe");
 Object area=request.getAttribute("area");
 //获取类型
 int id=(Integer)request.getAttribute("id");
-id=0;
+//id=0;
 String type="全国论坛";
 //获取当前页数
 int currentPage=(Integer)request.getAttribute("currentPage");

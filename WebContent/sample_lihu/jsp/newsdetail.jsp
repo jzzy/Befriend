@@ -83,7 +83,7 @@ for(int i=0;i<rl.size();i++){
 					<li>
 						<div class="leftArea"><img src="<%=request.getContextPath()+(ul.get(i).getImg()==null?"/SimulationApp/images/logod.png":ul.get(i).getImg() )%>" alt="sampleuser" /></div>
 						<div class="rightArea">
-							<p class="name"><%=ul.get(i).getUsername() %></p>
+							<p class="name"><%=ul.get(i).getNickname() %></p>
 							<p class="time"><%=rl.get(i).getTime() %></p>
 							<p class="info"><%=rl.get(i).getReview() %></p>
 						</div>

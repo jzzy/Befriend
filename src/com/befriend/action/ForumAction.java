@@ -973,7 +973,7 @@ public class ForumAction {
 
 		String result = "{\"fones\":" + util.ToJson(fones) + ",\"ftwos\":" + util.ToJson(ftwosa) + ",\"us\":"
 				+ util.ToJson(us) + ",\"cpe\":" + cpe + "" + ",\"currentPage\":" + currentPage + "}";
-		util.Out().print(result);
+		//util.Out().print(result);
 		return Action.SUCCESS;
 
 	}
