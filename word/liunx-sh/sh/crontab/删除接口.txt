@@ -1,0 +1,4 @@
+﻿cd /var/spool/cron/
+/api/xxx/index?utype=4 class文件
+/api/xxx/index?utype=3 图片
+/api/xxx/index?utype=1 数据+图片

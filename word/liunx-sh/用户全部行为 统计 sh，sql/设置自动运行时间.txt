@@ -1,0 +1,3 @@
+Ã¿Ìì17:30Ö´ÐÐ    
+39  17  *  *  *  /bin/sh /root/dstj.sh  >> /root/mysqldata/dstj.log 2>&1
+

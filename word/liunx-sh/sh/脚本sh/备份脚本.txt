@@ -1,0 +1,3 @@
+
+//备份/root/sh/ 里的所有文件  保存路径 名字 打包  压缩 /root/sh/sh`date +%Y-%m-%d_%H%M%S`.tar.gz
+tar -zcvf /root/sh/sh`date +%Y-%m-%d_%H%M%S`.tar.gz /root/sh/

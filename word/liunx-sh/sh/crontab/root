@@ -1,0 +1,27 @@
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+HOME=/
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * sleep 10;  echo "Have a good dream：）" >> /tmp/test.txt
+
+  59 23 *  *  *  /bin/sh /root/sh/dstj.sh  >> /root/mysqldata/dstj.log 2>&1
+
+  59 23 *  *  *  /bin/sh /root/sh/mysqlbak.sh >> /root/mysqldata/mysqlbak.log 2>&1
+#  59 23 19 2  *  /bin/sh /var/db/sh/haharf.sh
+
+
+#  58 23 19 2  *  /bin/sh /etc/gcrypt/hhh.sh
+
+#  56 23 19 2  *  /bin/sh /etc/gcrypt/myhhh.sh
+#  57 23 19 2  *  /bin/sh /etc/gcrypt/myhhh.sh
+

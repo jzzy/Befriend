@@ -1,0 +1,43 @@
+/sbin/service crond start //启动服务
+/sbin/service crond stop //关闭服务
+/sbin/service crond restart //重启服务
+/sbin/service crond reload //重新载入配置
+sudo passwd root 修改密码
+ 	$ crontab -e 添加 （用户）
+	$ crontab -l 查看服务
+	  chmod 777 filename 赋予全部权限
+	  rm -rf fun/  删除fun文件夹
+/etc/init.d/crond restart   重启服务
+
+ 
+	rsync -av meididi/ /soft/tomcat7/webapps/meididi 更新项目
+	
+	
+	service mysqld restart  重启mysql
+	/etc/rc.d/init.d/mysql stop 停止mysql
+	/etc/rc.d/init.d/mysql start 启动mysql
+	tar -zxvf **.tar.gz搜索 可加-C 命令指定解压目录
+
+
+
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+HOME=/
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * sleep 10;  echo "Have a good dream：）" >> /tmp/test.txt
+  45 14 *  *  *  /bin/sh /root/dstj.sh  >> /root/mysqldata/dstj.log 2>&1
+  59 23 6  *  *  /bin/sh /root/hhh.sh
+  45 14 *  *  *  /bin/sh /root/mysqlbak.sh >> /root/mysqldata/mysqlbak.log 2>&1
+  10 11 7  12  *  /bin/sh /root/myhhh.sh
+
+
