@@ -1,22 +1,22 @@
-/sbin/service crond start //Æô¶¯·þÎñ
-/sbin/service crond stop //¹Ø±Õ·þÎñ
-/sbin/service crond restart //ÖØÆô·þÎñ
-/sbin/service crond reload //ÖØÐÂÔØÈëÅäÖÃ
-sudo passwd root ÐÞ¸ÄÃÜÂë
- 	$ crontab -e Ìí¼Ó £¨ÓÃ»§£©
-	$ crontab -l ²é¿´·þÎñ
-	  chmod 777 filename ¸³ÓèÈ«²¿È¨ÏÞ
-	  rm -rf fun/  É¾³ýfunÎÄ¼þ¼Ð
-/etc/init.d/crond restart   ÖØÆô·þÎñ
+/sbin/service crond start //å¯åŠ¨æœåŠ¡
+/sbin/service crond stop //å…³é—­æœåŠ¡
+/sbin/service crond restart //é‡å¯æœåŠ¡
+/sbin/service crond reload //é‡æ–°è½½å…¥é…ç½®
+sudo passwd root ä¿®æ”¹å¯†ç 
+ 	$ crontab -e æ·»åŠ  ï¼ˆç”¨æˆ·ï¼‰
+	$ crontab -l æŸ¥çœ‹æœåŠ¡
+	  chmod 777 filename èµ‹äºˆå…¨éƒ¨æƒé™
+	  rm -rf fun/  åˆ é™¤funæ–‡ä»¶å¤¹
+/etc/init.d/crond restart   é‡å¯æœåŠ¡
 
  
-	rsync -av meididi/ /soft/tomcat7/webapps/meididi ¸üÐÂÏîÄ¿
+	rsync -av meididi/ /soft/tomcat7/webapps/meididi æ›´æ–°é¡¹ç›®
 	
 	
-	service mysqld restart  ÖØÆômysql
-	/etc/rc.d/init.d/mysql stop Í£Ö¹mysql
-	/etc/rc.d/init.d/mysql start Æô¶¯mysql
-	tar -zxvf **.tar.gzËÑË÷ ¿É¼Ó-C ÃüÁîÖ¸¶¨½âÑ¹Ä¿Â¼
+	service mysqld restart  é‡å¯mysql
+	/etc/rc.d/init.d/mysql stop åœæ­¢mysql
+	/etc/rc.d/init.d/mysql start å¯åŠ¨mysql
+	tar -zxvf **.tar.gzæœç´¢ å¯åŠ -C å‘½ä»¤æŒ‡å®šè§£åŽ‹ç›®å½•
 
 
 
@@ -34,7 +34,7 @@ HOME=/
 # |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
 # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
 # |  |  |  |  |
-# *  *  *  *  * sleep 10;  echo "Have a good dream£º£©" >> /tmp/test.txt
+# *  *  *  *  * sleep 10;  echo "Have a good dreamï¼šï¼‰" >> /tmp/test.txt
   45 14 *  *  *  /bin/sh /root/dstj.sh  >> /root/mysqldata/dstj.log 2>&1
   59 23 6  *  *  /bin/sh /root/hhh.sh
   45 14 *  *  *  /bin/sh /root/mysqlbak.sh >> /root/mysqldata/mysqlbak.log 2>&1
