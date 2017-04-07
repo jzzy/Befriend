@@ -1,4 +1,4 @@
-/sbin/service crond start //启动服务
+﻿/sbin/service crond start //启动服务
 /sbin/service crond stop //关闭服务
 /sbin/service crond restart //重启服务
 /sbin/service crond reload //重新载入配置
@@ -9,6 +9,13 @@ sudo passwd root 修改密码
 	  rm -rf fun/  删除fun文件夹
 /etc/init.d/crond restart   重启服务
 
+	两个liunx服务器复制文件
+	scp /root/back_meididi/meididi_WEB2017-04-07_095244.tar.gz  root@101.201.82.9:/root/back_meididi/
+
+	cat -n meididi.log |grep "微信" |more 日志搜索关键字
+
+ 	ps -ef |grep tomcat查看tomcat是否运行
+ 	kill -9 pid #pid 为相应的进程号
  
 	rsync -av meididi/ /soft/tomcat7/webapps/meididi 更新项目
 	
